@@ -6,6 +6,12 @@
       "Id": "384d074b-c60c-41e9-a3ee-91d18c3b8218",
       "Workspaces": [
         {
+          "Id": "2725236a-28e7-4794-8b96-4f7d27c99a6f",
+          "Name": "Development",
+          "Type": "development",
+          "Url": "https://dev-wrau.useast01.umbraco.io"
+        },
+        {
           "Id": "7eed7089-95e3-4d93-aeef-42f6b65dd987",
           "Name": "Live",
           "Type": "live",
