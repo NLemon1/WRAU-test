@@ -1,7 +1,17 @@
 {
   "Deploy": {
     "Project": {
-      "Workspaces": []
+      "Name": "wrau",
+      "Alias": "wrau",
+      "Id": "384d074b-c60c-41e9-a3ee-91d18c3b8218",
+      "Workspaces": [
+        {
+          "Id": "7eed7089-95e3-4d93-aeef-42f6b65dd987",
+          "Name": "Live",
+          "Type": "live",
+          "Url": "https://wrau.useast01.umbraco.io"
+        }
+      ]
     },
     "Settings": {}
   },
