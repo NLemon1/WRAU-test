@@ -12,12 +12,6 @@
           "Url": "https://dev-wrau.useast01.umbraco.io"
         },
         {
-          "Id": "821f5f64-d163-4388-a9a0-dcc02dd01464",
-          "Name": "Staging",
-          "Type": "staging",
-          "Url": "https://stage-wrau.useast01.umbraco.io"
-        },
-        {
           "Id": "7eed7089-95e3-4d93-aeef-42f6b65dd987",
           "Name": "Live",
           "Type": "live",
