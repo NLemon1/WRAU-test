@@ -2,15 +2,13 @@
   "Name": "Product Page",
   "Alias": "ProductPage",
   "File": "umb://template-file/ProductPage.cshtml",
-  "Master": null,
   "Udi": "umb://template/472d765a0e4c434b8ca84fa1d95a227b",
   "Dependencies": [
     {
       "Udi": "umb://template-file/ProductPage.cshtml",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.TemplateArtifact",
-  "__version": "12.0.5"
+  "__version": "13.0.3"
 }

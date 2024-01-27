@@ -2,15 +2,13 @@
   "Name": "Error 404",
   "Alias": "Error404",
   "File": "umb://template-file/Error404.cshtml",
-  "Master": null,
   "Udi": "umb://template/ba4828a4c7c64a58994df7034453b675",
   "Dependencies": [
     {
       "Udi": "umb://template-file/Error404.cshtml",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.TemplateArtifact",
-  "__version": "12.0.5"
+  "__version": "13.0.3"
 }

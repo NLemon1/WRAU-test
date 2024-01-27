@@ -1,21 +1,11 @@
 {
   "Name": "Feature Breaker",
   "Alias": "featureBreaker",
-  "DefaultTemplate": null,
   "AllowedTemplates": [],
-  "HistoryCleanup": {
-    "preventCleanup": false,
-    "keepAllVersionsNewerThanDays": null,
-    "keepLatestVersionPerDayForDays": null
-  },
+  "HistoryCleanup": {},
   "Icon": "icon-layout color-black",
   "Thumbnail": "folder.png",
-  "Description": null,
-  "IsContainer": false,
   "Permissions": {
-    "AllowVaryingByCulture": false,
-    "AllowVaryingBySegment": false,
-    "AllowedAtRoot": false,
     "IsElementType": true,
     "AllowedChildContentTypes": []
   },
@@ -28,8 +18,6 @@
     {
       "Key": "83389d4c-19dd-42aa-ba32-eba0330bea15",
       "Name": "Content",
-      "SortOrder": 0,
-      "Type": 0,
       "Alias": "content",
       "PropertyTypes": [
         {
@@ -37,18 +25,8 @@
           "Alias": "backgroundImage",
           "DataType": "umb://data-type/ad9f0cf2bda245d59ea1a63cfc873fd3",
           "Description": "Image should be a minimum of 1920px and 664px height. Image will auto-center/crop on mobile.",
-          "Mandatory": false,
-          "MandatoryMessage": null,
           "Name": "BackgroundImage",
-          "SortOrder": 1,
-          "Validation": null,
-          "ValidationMessage": null,
-          "VariesByCulture": false,
-          "VariesBySegment": false,
-          "LabelOnTop": false,
-          "MemberCanEdit": false,
-          "ViewOnProfile": false,
-          "IsSensitive": false
+          "SortOrder": 1
         }
       ]
     }
@@ -58,25 +36,21 @@
   "Dependencies": [
     {
       "Udi": "umb://data-type/ad9f0cf2bda245d59ea1a63cfc873fd3",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     },
     {
       "Udi": "umb://document-type-container/37b4b44f0abc4536af8ed684511c2571",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     },
     {
       "Udi": "umb://document-type/60f9d673dad543a09928bdcb457eb7e6",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     },
     {
       "Udi": "umb://document-type/c0aede092c904c27b56c5afbd90068fc",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
-  "__version": "12.0.5"
+  "__version": "13.0.3"
 }

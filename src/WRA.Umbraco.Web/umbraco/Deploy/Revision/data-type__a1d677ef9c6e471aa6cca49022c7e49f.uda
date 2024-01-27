@@ -2,7 +2,6 @@
   "Name": "Block List",
   "Alias": "",
   "EditorAlias": "Umbraco.BlockList",
-  "DatabaseType": 0,
   "Configuration": {
     "blocks": [],
     "validationLimit": {},
@@ -10,9 +9,8 @@
     "useLiveEditing": false,
     "useInlineEditingAsDefault": false
   },
-  "Parent": null,
   "Udi": "umb://data-type/a1d677ef9c6e471aa6cca49022c7e49f",
   "Dependencies": [],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
-  "__version": "12.0.5"
+  "__version": "13.0.3"
 }

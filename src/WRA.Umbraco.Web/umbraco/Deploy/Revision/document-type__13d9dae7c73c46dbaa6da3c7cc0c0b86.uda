@@ -1,21 +1,12 @@
 {
   "Name": "Primary Nav Menu Item",
   "Alias": "primaryNavMenuItem",
-  "DefaultTemplate": null,
   "AllowedTemplates": [],
-  "HistoryCleanup": {
-    "preventCleanup": false,
-    "keepAllVersionsNewerThanDays": null,
-    "keepLatestVersionPerDayForDays": null
-  },
+  "HistoryCleanup": {},
   "Icon": "icon-science",
   "Thumbnail": "folder.png",
   "Description": "This represents the primary cell that can contain a Primary Nav Link, paragraph text, and children Secondary Nav Items.",
-  "IsContainer": false,
   "Permissions": {
-    "AllowVaryingByCulture": false,
-    "AllowVaryingBySegment": false,
-    "AllowedAtRoot": false,
     "IsElementType": true,
     "AllowedChildContentTypes": []
   },
@@ -25,45 +16,20 @@
     {
       "Key": "ccf489fd-f589-44e9-9cd3-cb2479d3cfdf",
       "Name": "Content",
-      "SortOrder": 0,
-      "Type": 0,
       "Alias": "content",
       "PropertyTypes": [
         {
           "Key": "7b4e61e6-ed27-4fa8-9370-1bde95974ce5",
           "Alias": "primaryNavLink",
           "DataType": "umb://data-type/094ea51013be4f358f03687f54bb9ba2",
-          "Description": null,
-          "Mandatory": false,
-          "MandatoryMessage": null,
-          "Name": "Primary Nav Link",
-          "SortOrder": 0,
-          "Validation": null,
-          "ValidationMessage": null,
-          "VariesByCulture": false,
-          "VariesBySegment": false,
-          "LabelOnTop": false,
-          "MemberCanEdit": false,
-          "ViewOnProfile": false,
-          "IsSensitive": false
+          "Name": "Primary Nav Link"
         },
         {
           "Key": "dcaa7462-3274-4cfa-a5d0-14802dfd60c8",
           "Alias": "summaryTextOptional",
           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
-          "Description": null,
-          "Mandatory": false,
-          "MandatoryMessage": null,
           "Name": "Summary Text (optional)",
-          "SortOrder": 1,
-          "Validation": null,
-          "ValidationMessage": null,
-          "VariesByCulture": false,
-          "VariesBySegment": false,
-          "LabelOnTop": false,
-          "MemberCanEdit": false,
-          "ViewOnProfile": false,
-          "IsSensitive": false
+          "SortOrder": 1
         }
       ]
     },
@@ -71,26 +37,13 @@
       "Key": "dc0fc8bc-fde3-4589-831f-45e5f7eeb10e",
       "Name": "Nav Links (optional)",
       "SortOrder": 1,
-      "Type": 0,
       "Alias": "navLinksOptional1",
       "PropertyTypes": [
         {
           "Key": "92bc40f8-bd77-4c02-92c7-dd355f2e771c",
           "Alias": "secondaryNavLinks",
           "DataType": "umb://data-type/b4e3535a175347e28568602cf8cfee6f",
-          "Description": null,
-          "Mandatory": false,
-          "MandatoryMessage": null,
-          "Name": "Secondary Nav Links",
-          "SortOrder": 0,
-          "Validation": null,
-          "ValidationMessage": null,
-          "VariesByCulture": false,
-          "VariesBySegment": false,
-          "LabelOnTop": false,
-          "MemberCanEdit": false,
-          "ViewOnProfile": false,
-          "IsSensitive": false
+          "Name": "Secondary Nav Links"
         }
       ]
     }
@@ -100,25 +53,21 @@
   "Dependencies": [
     {
       "Udi": "umb://data-type/094ea51013be4f358f03687f54bb9ba2",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     },
     {
       "Udi": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     },
     {
       "Udi": "umb://data-type/b4e3535a175347e28568602cf8cfee6f",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     },
     {
       "Udi": "umb://document-type-container/43e69c4d8a4a4b768df18fe2701d9bd9",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
-  "__version": "12.0.5"
+  "__version": "13.0.3"
 }

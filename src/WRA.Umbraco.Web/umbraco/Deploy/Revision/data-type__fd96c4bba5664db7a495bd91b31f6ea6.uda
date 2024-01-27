@@ -2,21 +2,19 @@
   "Name": "News Articles - Featured Article - Content Picker",
   "Alias": "",
   "EditorAlias": "Umbraco.ContentPicker",
-  "DatabaseType": 1,
+  "DatabaseType": "Nvarchar",
   "Configuration": {
     "showOpenButton": true,
     "startNodeId": "umb://document/dea854c3df214ba6b9b95a835b282064",
     "ignoreUserStartNodes": false
   },
-  "Parent": null,
   "Udi": "umb://data-type/fd96c4bba5664db7a495bd91b31f6ea6",
   "Dependencies": [
     {
       "Udi": "umb://document/dea854c3df214ba6b9b95a835b282064",
-      "Ordering": false,
-      "Mode": 1
+      "Mode": "Exist"
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
-  "__version": "12.0.5"
+  "__version": "13.0.3"
 }

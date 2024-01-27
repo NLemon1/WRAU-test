@@ -1,24 +1,13 @@
 {
   "Name": "Categories Page",
   "Alias": "categoriesPage",
-  "DefaultTemplate": null,
   "AllowedTemplates": [
     "umb://template/4c1202d227ea45858a2c5700fd05b87c"
   ],
-  "HistoryCleanup": {
-    "preventCleanup": false,
-    "keepAllVersionsNewerThanDays": null,
-    "keepLatestVersionPerDayForDays": null
-  },
+  "HistoryCleanup": {},
   "Icon": "icon-tags color-red",
   "Thumbnail": "folder.png",
-  "Description": null,
-  "IsContainer": false,
   "Permissions": {
-    "AllowVaryingByCulture": false,
-    "AllowVaryingBySegment": false,
-    "AllowedAtRoot": false,
-    "IsElementType": false,
     "AllowedChildContentTypes": [
       "umb://document-type/59f3371ae76e43bba9a77e381a18be87"
     ]
@@ -36,40 +25,32 @@
   "Dependencies": [
     {
       "Udi": "umb://document-type-container/2443f0d8c7a44e1baa3511778e6789dd",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     },
     {
       "Udi": "umb://document-type/14d24fc815e945d6baa835eae09a1d7f",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     },
     {
-      "Udi": "umb://document-type/59f3371ae76e43bba9a77e381a18be87",
-      "Ordering": false,
-      "Mode": 0
+      "Udi": "umb://document-type/59f3371ae76e43bba9a77e381a18be87"
     },
     {
       "Udi": "umb://document-type/7cc368ff00cb4264ad60f52a76c3a911",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     },
     {
       "Udi": "umb://document-type/887a5a0def444bc09b2f7825ac1ebfba",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     },
     {
       "Udi": "umb://document-type/f0c2133970844a948c095978736296ce",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     },
     {
       "Udi": "umb://template/4c1202d227ea45858a2c5700fd05b87c",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
-  "__version": "12.0.5"
+  "__version": "13.0.3"
 }

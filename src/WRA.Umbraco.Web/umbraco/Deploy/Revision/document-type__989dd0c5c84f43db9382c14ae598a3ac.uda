@@ -5,20 +5,10 @@
   "AllowedTemplates": [
     "umb://template/a93a5fb65de24d0082af2fce535b288c"
   ],
-  "HistoryCleanup": {
-    "preventCleanup": false,
-    "keepAllVersionsNewerThanDays": null,
-    "keepLatestVersionPerDayForDays": null
-  },
+  "HistoryCleanup": {},
   "Icon": "icon-document",
   "Thumbnail": "folder.png",
-  "Description": null,
-  "IsContainer": false,
   "Permissions": {
-    "AllowVaryingByCulture": false,
-    "AllowVaryingBySegment": false,
-    "AllowedAtRoot": false,
-    "IsElementType": false,
     "AllowedChildContentTypes": [
       "umb://document-type/7bdd1b428519495ca0adfb5968e648d9"
     ]
@@ -33,27 +23,13 @@
     {
       "Key": "0fc37348-cdc6-4e10-ac9c-b1d659117292",
       "Name": "Content",
-      "SortOrder": 0,
-      "Type": 0,
       "Alias": "content",
       "PropertyTypes": [
         {
           "Key": "57ddbbd0-266b-4a21-8262-fc255d756bc2",
           "Alias": "gridSection",
           "DataType": "umb://data-type/5aa12b11cd24491f94da21e6399ddc33",
-          "Description": null,
-          "Mandatory": false,
-          "MandatoryMessage": null,
-          "Name": "Grid Section",
-          "SortOrder": 0,
-          "Validation": null,
-          "ValidationMessage": null,
-          "VariesByCulture": false,
-          "VariesBySegment": false,
-          "LabelOnTop": false,
-          "MemberCanEdit": false,
-          "ViewOnProfile": false,
-          "IsSensitive": false
+          "Name": "Grid Section"
         }
       ]
     }
@@ -63,40 +39,32 @@
   "Dependencies": [
     {
       "Udi": "umb://data-type/5aa12b11cd24491f94da21e6399ddc33",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     },
     {
       "Udi": "umb://document-type-container/8cacfbb1be7e47339707ec783af9070c",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     },
     {
       "Udi": "umb://document-type/14d24fc815e945d6baa835eae09a1d7f",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     },
     {
-      "Udi": "umb://document-type/7bdd1b428519495ca0adfb5968e648d9",
-      "Ordering": false,
-      "Mode": 0
+      "Udi": "umb://document-type/7bdd1b428519495ca0adfb5968e648d9"
     },
     {
       "Udi": "umb://document-type/7cc368ff00cb4264ad60f52a76c3a911",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     },
     {
       "Udi": "umb://document-type/f0c2133970844a948c095978736296ce",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     },
     {
       "Udi": "umb://template/a93a5fb65de24d0082af2fce535b288c",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
-  "__version": "12.0.5"
+  "__version": "13.0.3"
 }

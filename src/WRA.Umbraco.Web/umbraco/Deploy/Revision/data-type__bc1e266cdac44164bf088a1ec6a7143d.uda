@@ -2,7 +2,7 @@
   "Name": "Upload Article",
   "Alias": "",
   "EditorAlias": "Umbraco.UploadField",
-  "DatabaseType": 1,
+  "DatabaseType": "Nvarchar",
   "Configuration": {
     "fileExtensions": [
       {
@@ -19,9 +19,8 @@
       }
     ]
   },
-  "Parent": null,
   "Udi": "umb://data-type/bc1e266cdac44164bf088a1ec6a7143d",
   "Dependencies": [],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
-  "__version": "12.0.5"
+  "__version": "13.0.3"
 }

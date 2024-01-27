@@ -1,24 +1,13 @@
 {
   "Name": "Magazine",
   "Alias": "magazine",
-  "DefaultTemplate": null,
   "AllowedTemplates": [
     "umb://template/6915c45096c3468dbcffb47a8dc39a18"
   ],
-  "HistoryCleanup": {
-    "preventCleanup": false,
-    "keepAllVersionsNewerThanDays": null,
-    "keepLatestVersionPerDayForDays": null
-  },
+  "HistoryCleanup": {},
   "Icon": "icon-forms-file-pdf color-black",
   "Thumbnail": "folder.png",
-  "Description": null,
-  "IsContainer": false,
   "Permissions": {
-    "AllowVaryingByCulture": false,
-    "AllowVaryingBySegment": false,
-    "AllowedAtRoot": false,
-    "IsElementType": false,
     "AllowedChildContentTypes": []
   },
   "Parent": "umb://document-type-container/8cacfbb1be7e47339707ec783af9070c",
@@ -39,91 +28,37 @@
           "Key": "0fcb27ee-f876-4c90-8e4d-49baf2d1a597",
           "Alias": "pdf",
           "DataType": "umb://data-type/c44d0bf2cc3445ae9e319d8a058c0c33",
-          "Description": null,
-          "Mandatory": false,
-          "MandatoryMessage": null,
           "Name": "Pdf",
-          "SortOrder": 1,
-          "Validation": null,
-          "ValidationMessage": null,
-          "VariesByCulture": false,
-          "VariesBySegment": false,
-          "LabelOnTop": false,
-          "MemberCanEdit": false,
-          "ViewOnProfile": false,
-          "IsSensitive": false
+          "SortOrder": 1
         },
         {
           "Key": "43c21ca9-7677-4b41-b80a-101f406db758",
           "Alias": "monthYearTitle",
           "DataType": "umb://data-type/48c0fdf8edf54f92a36fed57da2bc329",
-          "Description": null,
-          "Mandatory": false,
-          "MandatoryMessage": null,
-          "Name": "Month/Year Title",
-          "SortOrder": 0,
-          "Validation": null,
-          "ValidationMessage": null,
-          "VariesByCulture": false,
-          "VariesBySegment": false,
-          "LabelOnTop": false,
-          "MemberCanEdit": false,
-          "ViewOnProfile": false,
-          "IsSensitive": false
+          "Name": "Month/Year Title"
         },
         {
           "Key": "50b7d7db-2086-49c9-8c0c-d2c135b29b71",
           "Alias": "excerpt",
           "DataType": "umb://data-type/c6bac0dd4ab945b18e30e4b619ee5da3",
-          "Description": null,
-          "Mandatory": false,
-          "MandatoryMessage": null,
           "Name": "Excerpt",
-          "SortOrder": 3,
-          "Validation": null,
-          "ValidationMessage": null,
-          "VariesByCulture": false,
-          "VariesBySegment": false,
-          "LabelOnTop": false,
-          "MemberCanEdit": false,
-          "ViewOnProfile": false,
-          "IsSensitive": false
+          "SortOrder": 3
         },
         {
           "Key": "9466a06d-e419-4d59-a325-1e881ad2fa76",
           "Alias": "featuredOnlineArticles",
           "DataType": "umb://data-type/bd7768baf6bb4721ad06353749be5b7e",
           "Description": "Links to online articles in News & Updates. First 3 items will appear in \"featured\" column.",
-          "Mandatory": false,
-          "MandatoryMessage": null,
           "Name": "Featured Online Articles",
-          "SortOrder": 4,
-          "Validation": null,
-          "ValidationMessage": null,
-          "VariesByCulture": false,
-          "VariesBySegment": false,
-          "LabelOnTop": false,
-          "MemberCanEdit": false,
-          "ViewOnProfile": false,
-          "IsSensitive": false
+          "SortOrder": 4
         },
         {
           "Key": "9a4bdace-4d92-410d-868d-7c064b3cb475",
           "Alias": "image",
           "DataType": "umb://data-type/ad9f0cf2bda245d59ea1a63cfc873fd3",
           "Description": "640px x 824",
-          "Mandatory": false,
-          "MandatoryMessage": null,
           "Name": "Thumbnail Image",
-          "SortOrder": 2,
-          "Validation": null,
-          "ValidationMessage": null,
-          "VariesByCulture": false,
-          "VariesBySegment": false,
-          "LabelOnTop": false,
-          "MemberCanEdit": false,
-          "ViewOnProfile": false,
-          "IsSensitive": false
+          "SortOrder": 2
         }
       ]
     }
@@ -133,55 +68,45 @@
   "Dependencies": [
     {
       "Udi": "umb://data-type/48c0fdf8edf54f92a36fed57da2bc329",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     },
     {
       "Udi": "umb://data-type/ad9f0cf2bda245d59ea1a63cfc873fd3",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     },
     {
       "Udi": "umb://data-type/bd7768baf6bb4721ad06353749be5b7e",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     },
     {
       "Udi": "umb://data-type/c44d0bf2cc3445ae9e319d8a058c0c33",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     },
     {
       "Udi": "umb://data-type/c6bac0dd4ab945b18e30e4b619ee5da3",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     },
     {
       "Udi": "umb://document-type-container/8cacfbb1be7e47339707ec783af9070c",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     },
     {
       "Udi": "umb://document-type/14d24fc815e945d6baa835eae09a1d7f",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     },
     {
       "Udi": "umb://document-type/7cc368ff00cb4264ad60f52a76c3a911",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     },
     {
       "Udi": "umb://document-type/f0c2133970844a948c095978736296ce",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     },
     {
       "Udi": "umb://template/6915c45096c3468dbcffb47a8dc39a18",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
-  "__version": "12.0.5"
+  "__version": "13.0.3"
 }
