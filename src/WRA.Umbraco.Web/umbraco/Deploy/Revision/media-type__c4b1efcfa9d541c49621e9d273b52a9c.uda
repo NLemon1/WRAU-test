@@ -3,47 +3,96 @@
   "Alias": "umbracoMediaVectorGraphics",
   "Icon": "icon-picture",
   "Thumbnail": "icon-picture",
+  "Description": null,
+  "IsContainer": false,
   "Permissions": {
+    "AllowVaryingByCulture": false,
+    "AllowVaryingBySegment": false,
     "AllowedAtRoot": true,
+    "IsElementType": false,
     "AllowedChildContentTypes": []
   },
+  "Parent": null,
   "CompositionContentTypes": [],
   "PropertyGroups": [
     {
       "Key": "f199b4d7-9e84-439f-8531-f87d9af37711",
       "Name": "Vector Graphics",
       "SortOrder": 1,
+      "Type": 0,
       "Alias": "vectorGraphics",
       "PropertyTypes": [
         {
           "Key": "00000031-0000-0000-0000-000000000000",
           "Alias": "umbracoFile",
           "DataType": "umb://data-type/215cb418215344299aef8c0f0041191b",
+          "Description": null,
           "Mandatory": true,
-          "Name": "Vector Graphics"
+          "MandatoryMessage": null,
+          "Name": "Vector Graphics",
+          "SortOrder": 0,
+          "Validation": null,
+          "ValidationMessage": null,
+          "VariesByCulture": false,
+          "VariesBySegment": false,
+          "LabelOnTop": false,
+          "MemberCanEdit": false,
+          "ViewOnProfile": false,
+          "IsSensitive": false
         },
         {
           "Key": "00000032-0000-0000-0000-000000000000",
           "Alias": "umbracoExtension",
           "DataType": "umb://data-type/f0bc4bfbb49940d6ba86058885a5178c",
+          "Description": null,
+          "Mandatory": false,
+          "MandatoryMessage": null,
           "Name": "Type",
-          "SortOrder": 1
+          "SortOrder": 1,
+          "Validation": null,
+          "ValidationMessage": null,
+          "VariesByCulture": false,
+          "VariesBySegment": false,
+          "LabelOnTop": false,
+          "MemberCanEdit": false,
+          "ViewOnProfile": false,
+          "IsSensitive": false
         },
         {
           "Key": "00000033-0000-0000-0000-000000000000",
           "Alias": "umbracoBytes",
           "DataType": "umb://data-type/930861bfe2624eada704f99453565708",
           "Description": "in bytes",
+          "Mandatory": false,
+          "MandatoryMessage": null,
           "Name": "Size",
-          "SortOrder": 2
+          "SortOrder": 2,
+          "Validation": null,
+          "ValidationMessage": null,
+          "VariesByCulture": false,
+          "VariesBySegment": false,
+          "LabelOnTop": false,
+          "MemberCanEdit": false,
+          "ViewOnProfile": false,
+          "IsSensitive": false
         },
         {
           "Key": "6381d397-c6d8-4f4d-8f3c-3e9ee910f785",
           "Alias": "altText",
           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
           "Description": "Descriptive text",
+          "Mandatory": false,
+          "MandatoryMessage": null,
           "Name": "Alt Text",
-          "SortOrder": 3
+          "SortOrder": 3,
+          "Validation": null,
+          "ValidationMessage": null,
+          "VariesByCulture": false,
+          "VariesBySegment": false,
+          "LabelOnTop": false,
+          "MemberCanEdit": false,
+          "ViewOnProfile": false,
+          "IsSensitive": false
         }
       ]
     }
@@ -53,21 +102,25 @@
   "Dependencies": [
     {
       "Udi": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
-      "Ordering": true
+      "Ordering": true,
+      "Mode": 0
     },
     {
       "Udi": "umb://data-type/215cb418215344299aef8c0f0041191b",
-      "Ordering": true
+      "Ordering": true,
+      "Mode": 0
     },
     {
       "Udi": "umb://data-type/930861bfe2624eada704f99453565708",
-      "Ordering": true
+      "Ordering": true,
+      "Mode": 0
     },
     {
       "Udi": "umb://data-type/f0bc4bfbb49940d6ba86058885a5178c",
-      "Ordering": true
+      "Ordering": true,
+      "Mode": 0
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.MediaTypeArtifact",
-  "__version": "13.0.3"
+  "__version": "12.0.5"
 }

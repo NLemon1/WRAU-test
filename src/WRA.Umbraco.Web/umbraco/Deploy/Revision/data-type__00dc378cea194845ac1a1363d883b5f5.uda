@@ -2,6 +2,7 @@
   "Name": "Image - Media Picker",
   "Alias": "",
   "EditorAlias": "Umbraco.MediaPicker3",
+  "DatabaseType": 0,
   "Configuration": {
     "multiple": false,
     "validationLimit": {},
@@ -9,8 +10,9 @@
     "crops": [],
     "ignoreUserStartNodes": false
   },
+  "Parent": null,
   "Udi": "umb://data-type/00dc378cea194845ac1a1363d883b5f5",
   "Dependencies": [],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
-  "__version": "13.0.3"
+  "__version": "12.0.5"
 }

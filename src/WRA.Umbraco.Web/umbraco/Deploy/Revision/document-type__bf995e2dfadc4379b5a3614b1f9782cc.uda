@@ -1,12 +1,21 @@
 {
   "Name": "2-Column Layout",
   "Alias": "twoColumnLayout",
+  "DefaultTemplate": null,
   "AllowedTemplates": [],
-  "HistoryCleanup": {},
+  "HistoryCleanup": {
+    "preventCleanup": false,
+    "keepAllVersionsNewerThanDays": null,
+    "keepLatestVersionPerDayForDays": null
+  },
   "Icon": "icon-layout color-black",
   "Thumbnail": "folder.png",
   "Description": "Generic usage.",
+  "IsContainer": false,
   "Permissions": {
+    "AllowVaryingByCulture": false,
+    "AllowVaryingBySegment": false,
+    "AllowedAtRoot": false,
     "IsElementType": true,
     "AllowedChildContentTypes": []
   },
@@ -20,6 +29,7 @@
       "Key": "370dbfa6-c416-4eb8-99c4-96705f3408e7",
       "Name": "Content",
       "SortOrder": 1,
+      "Type": 0,
       "Alias": "content",
       "PropertyTypes": [
         {
@@ -27,7 +37,18 @@
           "Alias": "stackOnMobile",
           "DataType": "umb://data-type/92897bc6a5f34ffeae27f2e7e33dda49",
           "Description": "Show content in single column for smaller screens.",
-          "Name": "Stack on mobile?"
+          "Mandatory": false,
+          "MandatoryMessage": null,
+          "Name": "Stack on mobile?",
+          "SortOrder": 0,
+          "Validation": null,
+          "ValidationMessage": null,
+          "VariesByCulture": false,
+          "VariesBySegment": false,
+          "LabelOnTop": false,
+          "MemberCanEdit": false,
+          "ViewOnProfile": false,
+          "IsSensitive": false
         }
       ]
     }
@@ -37,21 +58,25 @@
   "Dependencies": [
     {
       "Udi": "umb://data-type/92897bc6a5f34ffeae27f2e7e33dda49",
-      "Ordering": true
+      "Ordering": true,
+      "Mode": 0
     },
     {
       "Udi": "umb://document-type-container/37b4b44f0abc4536af8ed684511c2571",
-      "Ordering": true
+      "Ordering": true,
+      "Mode": 0
     },
     {
       "Udi": "umb://document-type/38e48d076783491993c671f1add73d05",
-      "Ordering": true
+      "Ordering": true,
+      "Mode": 0
     },
     {
       "Udi": "umb://document-type/60f9d673dad543a09928bdcb457eb7e6",
-      "Ordering": true
+      "Ordering": true,
+      "Mode": 0
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
-  "__version": "13.0.3"
+  "__version": "12.0.5"
 }

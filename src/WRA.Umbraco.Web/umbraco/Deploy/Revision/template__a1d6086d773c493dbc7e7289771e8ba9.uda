@@ -2,13 +2,15 @@
   "Name": "Calendar",
   "Alias": "Calendar",
   "File": "umb://template-file/Calendar.cshtml",
+  "Master": null,
   "Udi": "umb://template/a1d6086d773c493dbc7e7289771e8ba9",
   "Dependencies": [
     {
       "Udi": "umb://template-file/Calendar.cshtml",
-      "Ordering": true
+      "Ordering": true,
+      "Mode": 0
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.TemplateArtifact",
-  "__version": "13.0.3"
+  "__version": "12.0.5"
 }

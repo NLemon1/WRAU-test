@@ -1,11 +1,21 @@
 {
   "Name": "Background Color",
   "Alias": "backgroundColor",
+  "DefaultTemplate": null,
   "AllowedTemplates": [],
-  "HistoryCleanup": {},
+  "HistoryCleanup": {
+    "preventCleanup": false,
+    "keepAllVersionsNewerThanDays": null,
+    "keepLatestVersionPerDayForDays": null
+  },
   "Icon": "icon-science",
   "Thumbnail": "folder.png",
+  "Description": null,
+  "IsContainer": false,
   "Permissions": {
+    "AllowVaryingByCulture": false,
+    "AllowVaryingBySegment": false,
+    "AllowedAtRoot": false,
     "IsElementType": true,
     "AllowedChildContentTypes": []
   },
@@ -15,6 +25,8 @@
     {
       "Key": "6cb75291-acf0-4f86-a8ca-d43899bf81b9",
       "Name": "Content",
+      "SortOrder": 0,
+      "Type": 0,
       "Alias": "content",
       "PropertyTypes": [
         {
@@ -22,7 +34,18 @@
           "Alias": "color",
           "DataType": "umb://data-type/0225af17b30249cb9176b9f35cab9c17",
           "Description": "Choose a background color.",
-          "Name": "Background Color"
+          "Mandatory": false,
+          "MandatoryMessage": null,
+          "Name": "Background Color",
+          "SortOrder": 0,
+          "Validation": null,
+          "ValidationMessage": null,
+          "VariesByCulture": false,
+          "VariesBySegment": false,
+          "LabelOnTop": false,
+          "MemberCanEdit": false,
+          "ViewOnProfile": false,
+          "IsSensitive": false
         }
       ]
     }
@@ -32,13 +55,15 @@
   "Dependencies": [
     {
       "Udi": "umb://data-type/0225af17b30249cb9176b9f35cab9c17",
-      "Ordering": true
+      "Ordering": true,
+      "Mode": 0
     },
     {
       "Udi": "umb://document-type-container/5864cb46bf904ac59123e7875843a82a",
-      "Ordering": true
+      "Ordering": true,
+      "Mode": 0
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
-  "__version": "13.0.3"
+  "__version": "12.0.5"
 }

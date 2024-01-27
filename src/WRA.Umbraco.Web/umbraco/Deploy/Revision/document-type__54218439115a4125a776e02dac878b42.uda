@@ -1,14 +1,24 @@
 {
   "Name": "Products Page",
   "Alias": "productsPage",
+  "DefaultTemplate": null,
   "AllowedTemplates": [
     "umb://template/05c59d3439f5448e8ae904bdc31df492"
   ],
-  "HistoryCleanup": {},
+  "HistoryCleanup": {
+    "preventCleanup": false,
+    "keepAllVersionsNewerThanDays": null,
+    "keepLatestVersionPerDayForDays": null
+  },
   "Icon": "icon-paper-bag color-light-blue",
   "Thumbnail": "folder.png",
+  "Description": null,
   "IsContainer": true,
   "Permissions": {
+    "AllowVaryingByCulture": false,
+    "AllowVaryingBySegment": false,
+    "AllowedAtRoot": false,
+    "IsElementType": false,
     "AllowedChildContentTypes": [
       "umb://document-type/5174d612830f4eb29679d333061f6cdf"
     ]
@@ -26,32 +36,40 @@
   "Dependencies": [
     {
       "Udi": "umb://document-type-container/2443f0d8c7a44e1baa3511778e6789dd",
-      "Ordering": true
+      "Ordering": true,
+      "Mode": 0
     },
     {
       "Udi": "umb://document-type/14d24fc815e945d6baa835eae09a1d7f",
-      "Ordering": true
+      "Ordering": true,
+      "Mode": 0
     },
     {
-      "Udi": "umb://document-type/5174d612830f4eb29679d333061f6cdf"
+      "Udi": "umb://document-type/5174d612830f4eb29679d333061f6cdf",
+      "Ordering": false,
+      "Mode": 0
     },
     {
       "Udi": "umb://document-type/7cc368ff00cb4264ad60f52a76c3a911",
-      "Ordering": true
+      "Ordering": true,
+      "Mode": 0
     },
     {
       "Udi": "umb://document-type/887a5a0def444bc09b2f7825ac1ebfba",
-      "Ordering": true
+      "Ordering": true,
+      "Mode": 0
     },
     {
       "Udi": "umb://document-type/f0c2133970844a948c095978736296ce",
-      "Ordering": true
+      "Ordering": true,
+      "Mode": 0
     },
     {
       "Udi": "umb://template/05c59d3439f5448e8ae904bdc31df492",
-      "Ordering": true
+      "Ordering": true,
+      "Mode": 0
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
-  "__version": "13.0.3"
+  "__version": "12.0.5"
 }

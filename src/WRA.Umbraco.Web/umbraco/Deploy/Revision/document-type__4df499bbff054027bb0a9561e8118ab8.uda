@@ -1,11 +1,22 @@
 {
   "Name": "Hot Tip Entry",
   "Alias": "hotTipEntry",
+  "DefaultTemplate": null,
   "AllowedTemplates": [],
-  "HistoryCleanup": {},
+  "HistoryCleanup": {
+    "preventCleanup": false,
+    "keepAllVersionsNewerThanDays": null,
+    "keepLatestVersionPerDayForDays": null
+  },
   "Icon": "icon-document color-black",
   "Thumbnail": "folder.png",
+  "Description": null,
+  "IsContainer": false,
   "Permissions": {
+    "AllowVaryingByCulture": false,
+    "AllowVaryingBySegment": false,
+    "AllowedAtRoot": false,
+    "IsElementType": false,
     "AllowedChildContentTypes": []
   },
   "Parent": "umb://document-type-container/811495c9ae7b467da08ce40db9f6c9ca",
@@ -14,37 +25,81 @@
     {
       "Key": "4d6b4b8c-3aee-49da-a46e-21a0ffa267f4",
       "Name": "Content",
+      "SortOrder": 0,
+      "Type": 0,
       "Alias": "content",
       "PropertyTypes": [
         {
           "Key": "17c47ccf-7605-453a-ab12-50cbbca2d0e6",
           "Alias": "question",
           "DataType": "umb://data-type/9001e1a4d3d940178577caf42c500db5",
+          "Description": null,
           "Mandatory": true,
-          "Name": "Question"
+          "MandatoryMessage": null,
+          "Name": "Question",
+          "SortOrder": 0,
+          "Validation": null,
+          "ValidationMessage": null,
+          "VariesByCulture": false,
+          "VariesBySegment": false,
+          "LabelOnTop": false,
+          "MemberCanEdit": false,
+          "ViewOnProfile": false,
+          "IsSensitive": false
         },
         {
           "Key": "47fe1827-0062-4db7-8c00-379d6b816194",
           "Alias": "answer",
           "DataType": "umb://data-type/9001e1a4d3d940178577caf42c500db5",
+          "Description": null,
           "Mandatory": true,
+          "MandatoryMessage": null,
           "Name": "Answer",
-          "SortOrder": 1
+          "SortOrder": 1,
+          "Validation": null,
+          "ValidationMessage": null,
+          "VariesByCulture": false,
+          "VariesBySegment": false,
+          "LabelOnTop": false,
+          "MemberCanEdit": false,
+          "ViewOnProfile": false,
+          "IsSensitive": false
         },
         {
           "Key": "7b2825ce-5226-4bd0-8ae7-8b92cba6ede1",
           "Alias": "category",
           "DataType": "umb://data-type/d1a945834ee241fab4969b6ec8f86915",
+          "Description": null,
           "Mandatory": true,
+          "MandatoryMessage": null,
           "Name": "Category",
-          "SortOrder": 2
+          "SortOrder": 2,
+          "Validation": null,
+          "ValidationMessage": null,
+          "VariesByCulture": false,
+          "VariesBySegment": false,
+          "LabelOnTop": false,
+          "MemberCanEdit": false,
+          "ViewOnProfile": false,
+          "IsSensitive": false
         },
         {
           "Key": "b41375b8-8729-448a-998f-c6be0d83ab80",
           "Alias": "subcategories",
           "DataType": "umb://data-type/4a0ed2335b1541f297e06ef94bda3af4",
+          "Description": null,
+          "Mandatory": false,
+          "MandatoryMessage": null,
           "Name": "Subcategories",
-          "SortOrder": 3
+          "SortOrder": 3,
+          "Validation": null,
+          "ValidationMessage": null,
+          "VariesByCulture": false,
+          "VariesBySegment": false,
+          "LabelOnTop": false,
+          "MemberCanEdit": false,
+          "ViewOnProfile": false,
+          "IsSensitive": false
         }
       ]
     }
@@ -54,21 +109,25 @@
   "Dependencies": [
     {
       "Udi": "umb://data-type/4a0ed2335b1541f297e06ef94bda3af4",
-      "Ordering": true
+      "Ordering": true,
+      "Mode": 0
     },
     {
       "Udi": "umb://data-type/9001e1a4d3d940178577caf42c500db5",
-      "Ordering": true
+      "Ordering": true,
+      "Mode": 0
     },
     {
       "Udi": "umb://data-type/d1a945834ee241fab4969b6ec8f86915",
-      "Ordering": true
+      "Ordering": true,
+      "Mode": 0
     },
     {
       "Udi": "umb://document-type-container/811495c9ae7b467da08ce40db9f6c9ca",
-      "Ordering": true
+      "Ordering": true,
+      "Mode": 0
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
-  "__version": "13.0.3"
+  "__version": "12.0.5"
 }

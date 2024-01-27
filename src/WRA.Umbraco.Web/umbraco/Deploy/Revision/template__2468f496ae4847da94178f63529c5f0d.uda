@@ -2,13 +2,15 @@
   "Name": "Multimedia Landing",
   "Alias": "MultimediaLanding",
   "File": "umb://template-file/MultimediaLanding.cshtml",
+  "Master": null,
   "Udi": "umb://template/2468f496ae4847da94178f63529c5f0d",
   "Dependencies": [
     {
       "Udi": "umb://template-file/MultimediaLanding.cshtml",
-      "Ordering": true
+      "Ordering": true,
+      "Mode": 0
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.TemplateArtifact",
-  "__version": "13.0.3"
+  "__version": "12.0.5"
 }

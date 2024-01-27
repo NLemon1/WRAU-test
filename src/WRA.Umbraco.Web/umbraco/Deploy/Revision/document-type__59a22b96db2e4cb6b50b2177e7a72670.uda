@@ -5,10 +5,20 @@
   "AllowedTemplates": [
     "umb://template/b4822ab7b13a45f68bc1a1bfdec4894c"
   ],
-  "HistoryCleanup": {},
+  "HistoryCleanup": {
+    "preventCleanup": false,
+    "keepAllVersionsNewerThanDays": null,
+    "keepLatestVersionPerDayForDays": null
+  },
   "Icon": "icon-barcode color-light-blue",
   "Thumbnail": "folder.png",
+  "Description": null,
+  "IsContainer": false,
   "Permissions": {
+    "AllowVaryingByCulture": false,
+    "AllowVaryingBySegment": false,
+    "AllowedAtRoot": false,
+    "IsElementType": false,
     "AllowedChildContentTypes": []
   },
   "Parent": "umb://document-type/6ed103f65d4e47759105d341370c1690",
@@ -19,13 +29,27 @@
     {
       "Key": "01cb579e-e060-4d98-9dea-b6202a7305c4",
       "Name": "Content",
+      "SortOrder": 0,
+      "Type": 0,
       "Alias": "content",
       "PropertyTypes": [
         {
           "Key": "65bcec47-b0ca-45f9-a0da-f4b783fe6bc1",
           "Alias": "variants",
           "DataType": "umb://data-type/df97ff0adad341819f97970fc7221665",
-          "Name": "Variants"
+          "Description": null,
+          "Mandatory": false,
+          "MandatoryMessage": null,
+          "Name": "Variants",
+          "SortOrder": 0,
+          "Validation": null,
+          "ValidationMessage": null,
+          "VariesByCulture": false,
+          "VariesBySegment": false,
+          "LabelOnTop": false,
+          "MemberCanEdit": false,
+          "ViewOnProfile": false,
+          "IsSensitive": false
         }
       ]
     }
@@ -35,17 +59,20 @@
   "Dependencies": [
     {
       "Udi": "umb://data-type/df97ff0adad341819f97970fc7221665",
-      "Ordering": true
+      "Ordering": true,
+      "Mode": 0
     },
     {
       "Udi": "umb://document-type/6ed103f65d4e47759105d341370c1690",
-      "Ordering": true
+      "Ordering": true,
+      "Mode": 0
     },
     {
       "Udi": "umb://template/b4822ab7b13a45f68bc1a1bfdec4894c",
-      "Ordering": true
+      "Ordering": true,
+      "Mode": 0
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
-  "__version": "13.0.3"
+  "__version": "12.0.5"
 }

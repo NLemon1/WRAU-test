@@ -2,19 +2,21 @@
   "Name": "Multimedia Landing - Featured Audio - Content Picker",
   "Alias": "",
   "EditorAlias": "Umbraco.ContentPicker",
-  "DatabaseType": "Nvarchar",
+  "DatabaseType": 1,
   "Configuration": {
     "showOpenButton": false,
     "startNodeId": "umb://document/c50e10be1e8a4ab3a6b8119e1626ba0e",
     "ignoreUserStartNodes": false
   },
+  "Parent": null,
   "Udi": "umb://data-type/34524d32cfdc4cf8ae977be87b88d60e",
   "Dependencies": [
     {
       "Udi": "umb://document/c50e10be1e8a4ab3a6b8119e1626ba0e",
-      "Mode": "Exist"
+      "Ordering": false,
+      "Mode": 1
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
-  "__version": "13.0.3"
+  "__version": "12.0.5"
 }

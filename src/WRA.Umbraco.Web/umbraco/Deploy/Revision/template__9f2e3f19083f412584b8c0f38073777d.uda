@@ -2,13 +2,15 @@
   "Name": "Search Results",
   "Alias": "SearchResults",
   "File": "umb://template-file/SearchResults.cshtml",
+  "Master": null,
   "Udi": "umb://template/9f2e3f19083f412584b8c0f38073777d",
   "Dependencies": [
     {
       "Udi": "umb://template-file/SearchResults.cshtml",
-      "Ordering": true
+      "Ordering": true,
+      "Mode": 0
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.TemplateArtifact",
-  "__version": "13.0.3"
+  "__version": "12.0.5"
 }

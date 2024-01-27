@@ -1,12 +1,22 @@
 {
   "Name": "Article Categories",
   "Alias": "articleCategories",
+  "DefaultTemplate": null,
   "AllowedTemplates": [],
-  "HistoryCleanup": {},
+  "HistoryCleanup": {
+    "preventCleanup": false,
+    "keepAllVersionsNewerThanDays": null,
+    "keepLatestVersionPerDayForDays": null
+  },
   "Icon": "icon-tags color-black",
   "Thumbnail": "folder.png",
+  "Description": null,
+  "IsContainer": false,
   "Permissions": {
+    "AllowVaryingByCulture": false,
+    "AllowVaryingBySegment": false,
     "AllowedAtRoot": true,
+    "IsElementType": false,
     "AllowedChildContentTypes": [
       "umb://document-type/963807729d5a4e53b789476eb486066c"
     ]
@@ -19,12 +29,15 @@
   "Dependencies": [
     {
       "Udi": "umb://document-type-container/3767e51e2a094bce91970e131b9932f8",
-      "Ordering": true
+      "Ordering": true,
+      "Mode": 0
     },
     {
-      "Udi": "umb://document-type/963807729d5a4e53b789476eb486066c"
+      "Udi": "umb://document-type/963807729d5a4e53b789476eb486066c",
+      "Ordering": false,
+      "Mode": 0
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
-  "__version": "13.0.3"
+  "__version": "12.0.5"
 }

@@ -2,13 +2,15 @@
   "Name": "Magazine",
   "Alias": "Magazine",
   "File": "umb://template-file/Magazine.cshtml",
+  "Master": null,
   "Udi": "umb://template/6915c45096c3468dbcffb47a8dc39a18",
   "Dependencies": [
     {
       "Udi": "umb://template-file/Magazine.cshtml",
-      "Ordering": true
+      "Ordering": true,
+      "Mode": 0
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.TemplateArtifact",
-  "__version": "13.0.3"
+  "__version": "12.0.5"
 }
