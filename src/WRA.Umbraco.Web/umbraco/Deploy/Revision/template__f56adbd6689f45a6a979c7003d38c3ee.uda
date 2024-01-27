@@ -2,15 +2,13 @@
   "Name": "Blank",
   "Alias": "Blank",
   "File": "umb://template-file/Blank.cshtml",
-  "Master": null,
   "Udi": "umb://template/f56adbd6689f45a6a979c7003d38c3ee",
   "Dependencies": [
     {
       "Udi": "umb://template-file/Blank.cshtml",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.TemplateArtifact",
-  "__version": "12.0.5"
+  "__version": "13.0.3"
 }
