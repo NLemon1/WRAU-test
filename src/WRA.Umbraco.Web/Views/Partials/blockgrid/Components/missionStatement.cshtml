@@ -1,0 +1,19 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>;
+@using ContentModels = WRA.Umbraco.Models;
+
+@{
+    var content = (ContentModels.MissionStatement)Model.Content;
+
+    var backgroundImage = content.Value<MediaWithCrops>("backgroundImage");
+}
+
+<div class="mission-statement py-6">
+    <div class="container container--sm">
+        @await Html.GetBlockGridItemAreaHtmlAsync(Model, "mission-statement-area")
+        <picture>
+            <source srcset="@backgroundImage.GetCropUrl(width: 768)" media="(max-width: 768px)" />
+            <source srcset="@backgroundImage.GetCropUrl(width: 1280)" media="(max-width: 1280px)" />
+            <img class="mission-statement__image" src="@backgroundImage.MediaUrl()" alt="@backgroundImage.Value("altText")" />
+        </picture>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+
+<div ng-controller="homeHeroController" class="{{className}} block-home-hero">
+
+    <div class="block-home-hero__media">
+        <!--<video webkit-playsinline="" playsinline="" autoplay="" loop="" muted="" class="block-home-hero__media__video" poster="{{imageDesktop.mediaLink}}">
+            <source src="{{videoMobile.mediaLink}}" type="video/mp4" media="screen and (max-device-width:767px)">
+            <source src="{{videoDesktop.mediaLink}}" type="video/mp4" media="screen and (min-device-width:768px)">
+        </video>-->
+        <img src="{{imageMobile.mediaLink}}" class="block-home-hero__media__img d-none d-lg-block" alt="" />
+        <img src="{{imageDesktop.mediaLink}}" class="block-home-hero__media__img d-lg-none" alt="" />
+    </div>
+
+    <div class="block-home-hero__content d-flex align-items-center">
+        <div class="container">
+            <div class="block-home-hero__content-inner-container">
+                <p class="overline-alt fs-sm fs-lg-md">{{ block.data.overline }}</p>
+                <h1 class="display-1">{{ block.data.headline }}</h1>
+            </div>
+        </div>
+    </div>
+    
+    <div class="block-home-hero__events d-flex flex-column align-items-start p-0 px-lg-5 py-lg-5 pt-lg-6 g-4 mt-auto mt-lg-0">
+        <h2 class="mobile-calendar-tab h4 mb-0 mb-lg-4 p-4 p-lg-0" role="button" aria-hidden="true">Upcoming Events</h2>
+        <div class="block-home-hero__events-inner d-none d-lg-flex flex-column align-items-start w-100 mt-auto">
+            <a href="/events" class="btn btn-link-arrow btn-light ms-n2 mt-auto">
+                More Events
+                <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0.820801 8L12.0314 8" stroke="#050F1E" stroke-width="1.37143" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M8.51733 4L12.5173 8L8.51733 12" stroke="#050F1E" stroke-width="1.37143" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </a>
+        </div>
+    </div>
+
+</div>

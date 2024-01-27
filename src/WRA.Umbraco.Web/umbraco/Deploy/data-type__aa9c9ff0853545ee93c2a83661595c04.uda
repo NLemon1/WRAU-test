@@ -1,0 +1,28 @@
+{
+  "Name": "Text Color - Dropdown",
+  "Alias": "",
+  "EditorAlias": "Umbraco.DropDown.Flexible",
+  "DatabaseType": 1,
+  "Configuration": {
+    "multiple": false,
+    "items": [
+      {
+        "id": 1,
+        "value": "050F1E"
+      },
+      {
+        "id": 2,
+        "value": "FFFFFF"
+      },
+      {
+        "id": 3,
+        "value": "2560B9"
+      }
+    ]
+  },
+  "Parent": null,
+  "Udi": "umb://data-type/aa9c9ff0853545ee93c2a83661595c04",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
+  "__version": "12.0.4"
+}

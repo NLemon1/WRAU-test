@@ -1,0 +1,6 @@
+* text=auto
+eol=lf
+
+# Declare files that will always have CRLF line endings on checkout.
+*.sln text eol=crlf
+/src/WRA.Umbraco.Models/Generated/*.cs text eol=lf

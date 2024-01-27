@@ -1,0 +1,328 @@
+﻿@using Umbraco.Commerce.Core.Models;
+@using Umbraco.Commerce;
+@using Umbraco.Commerce.Extensions;
+@using Umbraco.Cms.Core.Models.PublishedContent;
+@using WRA.Umbraco;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ProductPage>
+
+@{
+    var multiVariantProductPage = Model as MultiVariantProductPage;//Will need variants for member vs. non-member price?
+
+    var store = Model.Value<StoreReadOnly>("store", fallback: Fallback.ToAncestors);
+    var addedProductReference = TempData["addedProductReference"]?.ToString();
+
+    bool isBundled = true;//TO DO: need to flag if the product is a bundle
+}
+
+@if (multiVariantProductPage != null && multiVariantProductPage.Variants != null && multiVariantProductPage.Variants.Count > 0)
+{
+    <script>
+
+        // Create JS function to update variant info dynamically
+        var updateProductVariantInfo = function () {
+
+            // Convert selected values into a key value collection
+            var attributeValues = Array.from($("select[data-attribute]")).reduce(function (accumulator, currentValue) {
+                accumulator[currentValue.dataset.attribute] = currentValue.value;
+                return accumulator;
+            }, { });
+
+            // Construct the post data to pass to the API controller
+            var postData = {
+                productNodeId: @Model.Id,
+                attributes: attributeValues
+            }
+
+            // Disable the add to cart button while loading
+            $("#add-to-cart").prop('disabled', true).css({ opacity: 0.2 });
+
+            // Fetch the variant data for the given attribute combination and update the UI accordingly
+            $.ajax({
+                url: "/umbraco/api/productapi/getproductvariant",
+                type: "POST",
+                data: JSON.stringify(postData),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    if (data) {
+                        $("[data-variant-price]").text(data.priceFormatted);
+                        $("[name=productVariantReference]").val(data.productVariantReference);
+                        $(".product-image").attr("src", data.imageUrl);
+                        $("#add-to-cart").prop('disabled', false).css({ opacity: 1 });
+                    } else {
+                        $("[data-variant-price]").text("Unavailable");
+                        $("[name=productVariantReference]").val("");
+                        $(".product-image").attr("src", $(".product-image").data("defaultUrl"));
+                    }
+                }
+            });
+
+            return false;
+        }
+
+        // Update variant info on load
+        updateProductVariantInfo();
+
+    </script>
+}
+
+<div class="py-3">
+    @Html.Partial("Breadcrumbs")
+</div>
+
+<div class="container">
+    <div class="row gx-lg-12">
+        <div class="col-12 col-lg-6 mb-6 mb-lg-0">
+            <img class="img-fluid img-curved img-curved--large" src="https://placehold.it/552" alt="" />
+        </div>
+        <div class="col-12 col-lg-6">
+
+            @* //TO DO: need bundle hours *@
+            @if (isBundled)
+            {
+                <p class="mb-4 fs-xs">Bundle <span class="ms-3 fw-semibold">Credit Hours: 18</span></p>
+            }
+
+            <p class="d-inline-block mb-2 px-2 py-1 bg-light fw-semibold text-uppercase">On Demand</p>
+            
+            <h1 class="h3 mb-4">@Model.Name</h1>
+
+            <div class="d-flex flex-row align-items-end">
+                <div class="h3 mb-0">
+                    <h1> form start here</h1>
+                    @using (Html.BeginUmbracoForm("AddToCart", "CartSurface"))
+                    {
+                        RenderVariants(store, Model, addedProductReference);
+                    }
+                </div>
+                <div class="fs-sm mb-3" style="color: var(--bs-gray-30)">
+                    &nbsp;member pricing
+                </div>
+            </div>
+            <div class="mt-n2 mb-2 d-flex flex-row align-items-end fs-sm mb-0" style="color: var(--bs-gray-30)">
+                    @using (Html.BeginUmbracoForm("AddToCart", "CartSurface"))
+                    {
+                        RenderVariants(store, Model, addedProductReference);
+                        <button id="add-to-cart" class="btn btn-primary mb-6 border-0" type="submit">Add to Cart</button>
+                    }
+                <div class="mb-3">&nbsp;non-member pricing</div>
+            </div>
+                
+
+            @if (Model.HasProperty("LongDescription"))
+            {
+                <div class="rich-text">@Model.GetProperty("LongDescription").GetValue()</div>
+            }
+
+        </div>
+    </div>
+
+    <div style="height: 64px;"></div>
+
+    <div class="tabs tabs--mobile-dropdown tabs--vertical js-tabs">
+        <div class="">
+            <ul role="tablist" class="tabs__tabs-list">
+                @if (isBundled)
+                {
+                    <li role="presentation">
+                        <a id="tab-1" class="tabs__trigger js-tabs-trigger" href="#tab-section-1" role="tab" aria-controls="tab-section-1" aria-selected="false">Program Curriculum</a>
+                    </li>
+                    <li role="presentation">
+                        <a id="tab-2" class="tabs__trigger js-tabs-trigger" href="#tab-section-2" role="tab" aria-controls="tab-section-2" aria-selected="false">Required Courses</a>
+                    </li>
+                    <li role="presentation">
+                        <a id="tab-3" class="tabs__trigger js-tabs-trigger" href="#tab-section-3" role="tab" aria-controls="tab-section-3" aria-selected="false">Elective Courses</a>
+                    </li>
+                }
+                <li role="presentation">
+                    <a id="tab-4" class="tabs__trigger js-tabs-trigger" href="#tab-section-4" role="tab" aria-controls="tab-section-4" aria-selected="false">Licensing Requirements</a>
+                </li>
+                <li role="presentation">
+                    <a id="tab-5" class="tabs__trigger js-tabs-trigger" href="#tab-section-5" role="tab" aria-controls="tab-section-5" aria-selected="false">Pricing</a>
+                </li>
+                <li role="presentation">
+                    <a id="tab-6" class="tabs__trigger js-tabs-trigger" href="#tab-section-6" role="tab" aria-controls="tab-section-6" aria-selected="false">FAQs</a>
+                </li>
+            </ul>
+        </div>
+        <select class="tabs__dropdown js-tabs-dropdown" aria-label="Select a tab">
+            @if (isBundled)
+            {
+                <option value="#tab-section-1">Program Curriculum</option>
+                <option value="#tab-section-2">Required Courses</option>
+                <option value="#tab-section-3">Elective Courses</option>
+            }
+            <option value="#tab-section-4">Licensing Requirements</option>
+            <option value="#tab-section-5">Pricing</option>
+            <option value="#tab-section-6">FAQs</option>
+        </select>
+
+        @if (isBundled)
+        {
+            <section id="tab-section-1" class="tabs__panel px-4 js-tabs-panel" role="tabpanel" aria-labelledby="tab-1" tabindex="0">
+                <div class="tabs__accordion-trigger js-accordion-trigger" aria-controls="tab-section-1" aria-expanded="false" tabindex="0"></div>
+                <div class="content" aria-hidden="true">
+
+                    @* TO DO: Need load program courses *@
+                    <div class="accordions-wrapper">
+                        @for (var i = 1; i < 10; i++)
+                        {
+                            <details class="accordion">
+                                <summary class="accordion__toggle">
+                                    Course #: Course Title
+                                    <div class="accordion__toggle-icon">
+                                        <i class="fa-solid fa-chevron-down"></i>
+                                        <i class="fa-solid fa-chevron-up"></i>
+                                    </div>
+                                </summary>
+                                <div class="accordion__content">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                </div>
+                            </details>
+                        }
+                    </div>
+
+                </div>
+            </section>
+            <section id="tab-section-2" class="tabs__panel px-4 js-tabs-panel" role="tabpanel" aria-labelledby="tab-2" tabindex="0">
+                <div class="tabs__accordion-trigger js-accordion-trigger" aria-controls="tab-section-2" aria-expanded="false" tabindex="0"></div>
+                <div class="content" aria-hidden="true">
+
+                    @* TO DO: Need load required courses *@
+                    <div class="accordions-wrapper">
+                        @for (var i = 1; i < 7; i++)
+                        {
+                            <details class="accordion">
+                                <summary class="accordion__toggle">
+                                    Course #: Course Title
+                                    <div class="accordion__toggle-icon">
+                                        <i class="fa-solid fa-chevron-down"></i>
+                                        <i class="fa-solid fa-chevron-up"></i>
+                                    </div>
+                                </summary>
+                                <div class="accordion__content">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                </div>
+                            </details>
+                        }
+                    </div>
+
+                </div>
+            </section>
+            <section id="tab-section-3" class="tabs__panel px-4 js-tabs-panel" role="tabpanel" aria-labelledby="tab-3" tabindex="0">
+                <div class="tabs__accordion-trigger js-accordion-trigger" aria-controls="tab-section-3" aria-expanded="false" tabindex="0"></div>
+                <div class="content" aria-hidden="true">
+                   
+                    @* TO DO: Need load elective courses *@
+                    <div class="accordions-wrapper">
+                        @for (var i = 1; i < 5; i++)
+                        {
+                            <details class="accordion">
+                                <summary class="accordion__toggle">
+                                    Course #: Course Title
+                                    <div class="accordion__toggle-icon">
+                                        <i class="fa-solid fa-chevron-down"></i>
+                                        <i class="fa-solid fa-chevron-up"></i>
+                                    </div>
+                                </summary>
+                                <div class="accordion__content">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                </div>
+                            </details>
+                        }
+                    </div>
+
+                </div>
+            </section>
+        }
+
+        <section id="tab-section-4" class="tabs__panel px-4 js-tabs-panel" role="tabpanel" aria-labelledby="tab-4" tabindex="0">
+            <div class="tabs__accordion-trigger js-accordion-trigger" aria-controls="tab-section-4" aria-expanded="false" tabindex="0"></div>
+            <div class="content" aria-hidden="true">
+                tab 4 content
+            </div>
+        </section>
+        <section id="tab-section-5" class="tabs__panel px-4 js-tabs-panel" role="tabpanel" aria-labelledby="tab-5" tabindex="0">
+            <div class="tabs__accordion-trigger js-accordion-trigger" aria-controls="tab-section-5" aria-expanded="false" tabindex="0"></div>
+            <div class="content" aria-hidden="true">
+                tab 5 content
+            </div>
+        </section>
+        <section id="tab-section-6" class="tabs__panel js-tabs-panel" role="tabpanel" aria-labelledby="tab-6" tabindex="0">
+            <div class="tabs__accordion-trigger js-accordion-trigger" aria-controls="tab-section-6" aria-expanded="false" tabindex="0"></div>
+            <div class="content" aria-hidden="true">
+
+                @* TO DO: Need load FAQs *@
+                <div class="accordions-wrapper">
+                    @for (var i = 1; i < 5; i++)
+                    {
+                        <details class="accordion">
+                            <summary class="accordion__toggle">
+                                Question: Lorem Ipsum
+                                <div class="accordion__toggle-icon">
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                    <i class="fa-solid fa-chevron-up"></i>
+                                </div>
+                            </summary>
+                            <div class="accordion__content">
+                                Answer: <br>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                        </details>
+                    }
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+    <div style="height: 96px;"></div>
+</div>
+
+
+@{
+    void RenderVariants(StoreReadOnly store, ProductPage product, string addedProductReference)
+    {
+        var multiVariantProductPage = Model as MultiVariantProductPage;
+
+        if (multiVariantProductPage != null && multiVariantProductPage.Variants != null && multiVariantProductPage.Variants.Count > 0)
+        {
+            @Html.Hidden("productReference", Model.GetProductReference())
+            @Html.Hidden("productVariantReference", "")
+
+            var attrs = multiVariantProductPage.Variants.GetInUseProductAttributes();
+
+            foreach (var attr in attrs)
+            {
+                <p class="mt-4">@(attr.Name)</p>
+                <select class="w-full border border-gray-300 p-2 mt-1" data-attribute="@(attr.Alias)" data-attribute-name="@(attr.Name)" onchange="updateProductVariantInfo()">
+                    @foreach (var val in attr.Values)
+                    {
+                        <!option value="@val.Alias">@(val.Name)</!option>
+                    }
+                </select>
+            }
+
+            <p class="mt-4" data-variant-price></p>
+        }
+        else if (product.ChildVariants.Any())
+        {
+         
+            <select name="productReference" class="w-full border border-gray-300 p-2 mt-1">
+                @foreach (var variant in product.ChildVariants)
+                {
+                    var productReference = variant.GetProductReference();
+
+                    <!option value="@productReference" @Html.Raw(addedProductReference == productReference ? "selected=\" selected\"" : "" )>@(variant.Name) - @(variant.CalculatePrice()?.Formatted())</!option>
+                }
+            </select>
+        }
+        else
+        {
+              @Html.Hidden("productReference", product.GetProductReference())
+
+            <p>@(product.MemberPricing?.Formatted())</p>
+            <p> @(product.NonMemberPricing.Formatted())</p>
+            // first lets get the product snapshot
+        }
+    }
+}

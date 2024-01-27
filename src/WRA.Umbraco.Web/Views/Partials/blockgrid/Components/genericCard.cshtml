@@ -1,0 +1,72 @@
+﻿@using Umbraco.Extensions
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+@using Umbraco.Cms.Core.Models.Blocks;
+@using ContentModels = WRA.Umbraco.Models;
+
+@{
+    var content = (ContentModels.GenericCard)Model.Content;
+    string props = "";
+    string className = "block-generic-card h-100 d-flex flex-column ";
+    string style = "";
+
+    if (content.HasValue("additionalCssClasses"))
+    {
+        className += $" {content.AdditionalCssClasses}";
+    }
+
+    if (content.HasValue("yPadding"))
+    {
+        style += $"padding-bottom:{content.YPadding};";
+        style += $"padding-top:{content.YPadding};";
+    }
+
+    if (content.HasValue("xPadding"))
+    {
+        style += $"padding-left:{content.XPadding};";
+        style += $"padding-right:{content.XPadding};";
+        className += $" px-xs-0";
+    }
+
+    if (content.HasValue("verticalAlignment"))
+    {
+        switch (content.VerticalAlignment)
+        {
+            case "top":
+                className += " justify-content-start";
+                break;
+            case "center":
+                className += " justify-content-center";
+                break;
+            case "bottom":
+                className += " justify-content-end";
+                break;
+        }
+    } else
+    {
+        className += $" justify-content-start";
+    }
+
+    if (content.HasValue("color"))
+    {
+        style += $"background-color:#{content.Color};";
+    }
+
+    if (content.HasValue("additionalCssClasses"))
+    {
+        className += $" {content.AdditionalCssClasses}";
+    }
+
+    if (!String.IsNullOrEmpty(className))
+    {
+        props += $"class=\"{className.Trim()}\"";
+    }
+
+    if (!String.IsNullOrEmpty(style))
+    {
+        props += $" style=\"{style}\"";
+    }
+
+}
+<div @Html.Raw(props.Trim())>
+    @await Html.GetBlockGridItemAreaHtmlAsync(Model, "generic-card-area")
+</div>

@@ -1,0 +1,56 @@
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>;
+@using Umbraco.Cms.Core.Models.Blocks;
+@using ContentModels = WRA.Umbraco.Models;
+@{
+    var content = (ContentModels.Buttons)Model.Content;
+
+    string className = "block-btns d-flex flex-column";
+    string style = "";
+    string props = "";
+
+    if (content.HasValue("horizontalAlignment"))
+    {
+        string horizontalAlignment = content.HorizontalAlignment.ToString().ToLower();
+
+        if (horizontalAlignment == "left")
+        {
+            horizontalAlignment = "start";
+        }
+        else if (horizontalAlignment == "right")
+        {
+            horizontalAlignment = "end";
+        }
+
+        className += $" justify-content-{horizontalAlignment} align-items-{horizontalAlignment}";
+    } 
+    else
+    {
+        className += " align-items-center";
+    }
+
+    if (!content.StackButtonsVertically)
+    {
+        className += $" flex-md-row gap-3 gap-lg-5";
+    }
+
+    if (content.HasValue("additionalCssClasses"))
+    {
+        className += $" {content.AdditionalCssClasses}";
+    }
+
+    props += $"class=\"{className.Trim()}\"";
+
+    if (content.HasValue("bottomMargin"))
+    {
+        style += $"margin-bottom:{content.BottomMargin} !important;";
+    }
+
+    if (!String.IsNullOrEmpty(style))
+    {
+        props += $" style=\"{style}\"";
+    }
+}
+
+<div @Html.Raw(props.Trim())>
+    @await Html.GetBlockGridItemAreasHtmlAsync(Model, "areas")
+</div>

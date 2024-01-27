@@ -1,0 +1,28 @@
+﻿<style>
+
+    .icon-example {
+        border: solid 2px #2560B9;
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        font-size: 10px;
+        margin: 0 auto;
+        vertical-align: middle;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-family: sans-serif;
+    }
+ 
+</style>
+
+<div ng-controller="childPageCardController" class="block-child-card child-card d-flex text-center">
+    <div class="child-card__inner d-flex flex-column align-items-center align-content-center text-decoration-none text-black">
+        <span aria-hidden="true" class="child-card__inner__icon icon-example">{{ block.data.icon }}</span>
+        <h3 class="child-card__headline fw-bold fs-lg">{{ block.data.headline }}</h3>
+        <div class="child-card__inner__content d-none d-lg-flex fs-sm px-4">
+            <p>{{ block.data.subheadline }}</p>
+        </div>
+    </div>
+</div>

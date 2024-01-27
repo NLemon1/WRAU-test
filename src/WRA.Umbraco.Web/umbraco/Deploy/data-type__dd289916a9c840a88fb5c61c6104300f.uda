@@ -1,0 +1,24 @@
+{
+  "Name": "Buttons - blocks - Block List",
+  "Alias": "",
+  "EditorAlias": "Umbraco.BlockList",
+  "DatabaseType": 0,
+  "Configuration": {
+    "blocks": [
+      {
+        "contentElementTypeKey": "864f593e-ef23-4580-8c2d-e4a5f4da025e",
+        "editorSize": "medium",
+        "forceHideContentEditorInOverlay": false
+      }
+    ],
+    "validationLimit": {},
+    "useSingleBlockMode": false,
+    "useLiveEditing": true,
+    "useInlineEditingAsDefault": true
+  },
+  "Parent": null,
+  "Udi": "umb://data-type/dd289916a9c840a88fb5c61c6104300f",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
+  "__version": "12.0.4"
+}

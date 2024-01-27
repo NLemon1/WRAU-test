@@ -1,0 +1,36 @@
+{
+  "Name": "Font Size - Dropdown",
+  "Alias": "",
+  "EditorAlias": "Umbraco.DropDown.Flexible",
+  "DatabaseType": 1,
+  "Configuration": {
+    "multiple": false,
+    "items": [
+      {
+        "id": 1,
+        "value": "12px"
+      },
+      {
+        "id": 2,
+        "value": "14px"
+      },
+      {
+        "id": 3,
+        "value": "16px"
+      },
+      {
+        "id": 4,
+        "value": "18px"
+      },
+      {
+        "id": 5,
+        "value": "20px"
+      }
+    ]
+  },
+  "Parent": null,
+  "Udi": "umb://data-type/f392dc5ebf8946ebb9e29c01c2bb5ddf",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
+  "__version": "12.0.4"
+}

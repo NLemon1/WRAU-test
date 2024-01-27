@@ -1,0 +1,16 @@
+{
+  "Name": "SubCategory Page",
+  "Alias": "SubCategoryPage",
+  "File": "umb://template-file/SubCategoryPage.cshtml",
+  "Master": null,
+  "Udi": "umb://template/98556b4367654b4698fdc098502d4443",
+  "Dependencies": [
+    {
+      "Udi": "umb://template-file/SubCategoryPage.cshtml",
+      "Ordering": true,
+      "Mode": 0
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.TemplateArtifact",
+  "__version": "12.0.5"
+}

@@ -1,0 +1,84 @@
+{
+  "Name": "Spacing - Dropdown",
+  "Alias": "",
+  "EditorAlias": "Umbraco.DropDown.Flexible",
+  "DatabaseType": 1,
+  "Configuration": {
+    "multiple": false,
+    "items": [
+      {
+        "id": 1,
+        "value": "0rem"
+      },
+      {
+        "id": 2,
+        "value": "0.25rem"
+      },
+      {
+        "id": 3,
+        "value": "0.5rem"
+      },
+      {
+        "id": 4,
+        "value": "1rem"
+      },
+      {
+        "id": 5,
+        "value": "1.5rem"
+      },
+      {
+        "id": 6,
+        "value": "2rem"
+      },
+      {
+        "id": 7,
+        "value": "3rem"
+      },
+      {
+        "id": 8,
+        "value": "3.5rem"
+      },
+      {
+        "id": 9,
+        "value": "4rem"
+      },
+      {
+        "id": 10,
+        "value": "5rem"
+      },
+      {
+        "id": 11,
+        "value": "6rem"
+      },
+      {
+        "id": 12,
+        "value": "7rem"
+      },
+      {
+        "id": 13,
+        "value": "8rem"
+      },
+      {
+        "id": 14,
+        "value": "9rem"
+      },
+      {
+        "id": 15,
+        "value": "10rem"
+      },
+      {
+        "id": 16,
+        "value": "11rem"
+      },
+      {
+        "id": 17,
+        "value": "12rem"
+      }
+    ]
+  },
+  "Parent": null,
+  "Udi": "umb://data-type/0770a1fb65ac42618d9f77c1a75e5b62",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
+  "__version": "12.0.5"
+}

@@ -1,0 +1,23 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using ContentModels = WRA.Umbraco.Models;
+
+@{
+    var parentsPages = Umbraco.AssignedContentItem.Ancestors().OrderBy(x => x.Level);
+
+    if (parentsPages.Any())
+    {
+        <nav class="container py-4" aria-label="breadcrumbs">
+            <ul class="list-unstyled mb-0 breadcrumbs">
+                @foreach (var parentPage in parentsPages)
+                {
+                    <li>
+                        <a href="@parentPage.Url()">@parentPage.Name</a>
+                    </li>
+                }
+                <li>
+                    <span>@Umbraco.AssignedContentItem.Name</span>
+                </li>
+            </ul>
+        </nav>
+    }
+}

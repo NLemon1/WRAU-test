@@ -1,0 +1,175 @@
+﻿@using Umbraco.Extensions
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+@using Umbraco.Cms.Core.Models.Blocks
+@using ContentModels = WRA.Umbraco.Models;
+
+
+@{
+    var content = (ContentModels.InteriorHero)Model.Content;
+    var imageDesktop = content.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("imageDesktop");
+    var imageMobile = content.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("imageMobile");
+
+    string className = "block-interior-hero";
+    string style = $"--mobileImage: url({imageMobile.MediaUrl()}); --desktopImage:  url({imageDesktop.MediaUrl()});";
+    string props = "";
+
+    //check if has content in area
+    bool hasAreaContent = Model.Areas.FirstOrDefault().Any();
+
+    if (content.Overlay)
+    {
+        className += " is-style-overlay";
+    }
+
+    if (hasAreaContent && !content.ShowEventCalendar)
+    {
+        className += " block-interior-hero--has-area";
+    }
+
+    if (content.HasValue("additionalCssClasses"))
+    {
+        className += $" {content.AdditionalCssClasses}";
+    }
+
+    if (!String.IsNullOrEmpty(className))
+    {
+        props += $"class=\"{className.Trim()}\"";
+    }
+
+    if (!String.IsNullOrEmpty(style))
+    {
+        props += $" style=\"{style}\"";
+    }
+
+
+}
+
+<div @Html.Raw(props.Trim())>
+        
+    @if (!String.IsNullOrEmpty(content.Headline) || !String.IsNullOrEmpty(content.Subhead))
+    {
+        <div class="block-interior-hero__content d-flex align-items-center">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <div class="block-interior-hero__content-inner-container pt-4 pt-lg-0">
+                            @if (!String.IsNullOrEmpty(content.Headline))
+                            {
+                                <h1 class="display-1 mb-3">@Html.Raw(content.Headline)</h1>
+                            }
+                            @if (!String.IsNullOrEmpty(content.Subhead))
+                            {
+                                <p class="subhead m-0">@Html.Raw(content.Subhead)</p>
+                            }
+                        </div>
+
+                        @if (content.ShowCourseSearch)
+                        {
+                            <div class="col-xl-8 mt-4">
+                                <form id="course-search" method="get" action="/">
+                                    <fieldset class="d-flex flex-column gap-3 bg-transparent">
+                                        <legend class="fw-bold fs-md mb-0">Course Search</legend>
+                                        <label class="visually-hidden" for="category">Category</label>
+                                        <select id="category" class="form-control">
+                                            <option>Select course category</option>
+                                        </select>
+                                        <label class="visually-hidden" for="subcategory">Subcategory</label>
+                                        <select id="subcategory" class="form-control">
+                                            <option>Select course subcategory</option>
+                                        </select>
+                                        <button type="submit" class="btn btn-primary w-100 border-0 outline-0">Find Courses</button>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        }
+
+                    </div>
+
+                    @if (Model.Areas.FirstOrDefault().Any() || !content.ShowEventCalendar)
+                    {
+                        <div class="col-lg-5 ms-lg-auto interior-hero-col-2">
+                            @if (!content.ShowEventCalendar)
+                            {
+                                @await Html.GetBlockGridItemAreaHtmlAsync(Model, "interior-hero-area")
+                            }
+
+                        </div>
+                    }
+                </div>
+
+            </div>
+        </div>
+    }
+    
+    @if (content.ShowEventCalendar)
+    {
+        <div class="block-interior-hero__events d-flex flex-column align-items-start p-0 px-lg-5 py-lg-5 pt-lg-6 g-4 mt-auto mt-lg-0">
+            <h2 class="js-calendar-tab mobile-calendar-tab h4 mb-0 mb-lg-4 p-4 p-lg-0" role="button" aria-hidden="true">Upcoming Events</h2>
+            <div class="block-interior-hero__events-inner d-none d-lg-flex flex-column align-items-start w-100 mt-auto">
+
+                <!-- TO DO: Pull in Events -->
+                <ol class="list-unstyled">
+                    <li class="mb-3">
+                        <a href="/" class="btn btn-link btn-light ms-n2">Lorem Ipsim</a>
+                        <p class="mb-0 fs-sm">October 1</p>
+                        <p class="mb-0 fs-sm">Wisconsin Dells</p>
+                    </li>
+                    <li class="mb-3">
+                        <a href="/" class="btn btn-link btn-light ms-n2">Lorem Ipsim</a>
+                        <p class="mb-0 fs-sm">October 1</p>
+                        <p class="mb-0 fs-sm">Wisconsin Dells</p>
+                    </li>
+                    <li class="mb-3">
+                        <a href="/" class="btn btn-link btn-light ms-n2">Lorem Ipsim</a>
+                        <p class="mb-0 fs-sm">October 1</p>
+                        <p class="mb-0 fs-sm">Wisconsin Dells</p>
+                    </li>
+                </ol>
+
+                <a href="/events" class="btn btn-link-arrow btn-light ms-n2 mt-auto">
+                    More Events
+                    <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0.820801 8L12.0314 8" stroke="#050F1E" stroke-width="1.37143" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M8.51733 4L12.5173 8L8.51733 12" stroke="#050F1E" stroke-width="1.37143" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    }
+
+</div>
+
+@if (content.ShowEventCalendar)
+{
+    <div class="js-calendar-panel block-interior-hero__events-mobile d-flex d-lg-none w-100 text-white">
+        <div class="flex-column align-items-start  p-4 pb-5 pt-0">
+            <!-- TO DO: Pull in Events -->
+            <ol class="list-unstyled">
+                <li class="mb-3">
+                    <a href="/" class="btn btn-link btn-light ms-n2">Lorem Ipsim</a>
+                    <p class="mb-0 fs-sm">October 1</p>
+                    <p class="mb-0 fs-sm">Wisconsin Dells</p>
+                </li>
+                <li class="mb-3">
+                    <a href="/" class="btn btn-link btn-light ms-n2">Lorem Ipsim</a>
+                    <p class="mb-0 fs-sm">October 1</p>
+                    <p class="mb-0 fs-sm">Wisconsin Dells</p>
+                </li>
+                <li class="mb-3">
+                    <a href="/" class="btn btn-link btn-light ms-n2">Lorem Ipsim</a>
+                    <p class="mb-0 fs-sm">October 1</p>
+                    <p class="mb-0 fs-sm">Wisconsin Dells</p>
+                </li>
+            </ol>
+
+            <a href="/events" class="btn btn-link-arrow btn-light ms-n2 mt-auto">
+                More Events
+                <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0.820801 8L12.0314 8" stroke="#050F1E" stroke-width="1.37143" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M8.51733 4L12.5173 8L8.51733 12" stroke="#050F1E" stroke-width="1.37143" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </a>
+        </div>
+    </div>
+}
+

@@ -1,0 +1,43 @@
+{
+  "Name": "Authors",
+  "Alias": "authors",
+  "DefaultTemplate": null,
+  "AllowedTemplates": [],
+  "HistoryCleanup": {
+    "preventCleanup": false,
+    "keepAllVersionsNewerThanDays": null,
+    "keepLatestVersionPerDayForDays": null
+  },
+  "Icon": "icon-users color-black",
+  "Thumbnail": "folder.png",
+  "Description": null,
+  "IsContainer": false,
+  "Permissions": {
+    "AllowVaryingByCulture": false,
+    "AllowVaryingBySegment": false,
+    "AllowedAtRoot": true,
+    "IsElementType": false,
+    "AllowedChildContentTypes": [
+      "umb://document-type/a249f436595e4979854169969f0b5d90"
+    ]
+  },
+  "Parent": "umb://document-type-container/3767e51e2a094bce91970e131b9932f8",
+  "CompositionContentTypes": [],
+  "PropertyGroups": [],
+  "PropertyTypes": [],
+  "Udi": "umb://document-type/0a3eb9355406454fbb5edb4446f3c756",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type-container/3767e51e2a094bce91970e131b9932f8",
+      "Ordering": true,
+      "Mode": 0
+    },
+    {
+      "Udi": "umb://document-type/a249f436595e4979854169969f0b5d90",
+      "Ordering": false,
+      "Mode": 0
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
+  "__version": "12.0.4"
+}

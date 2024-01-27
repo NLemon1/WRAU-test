@@ -1,0 +1,70 @@
+﻿@using Umbraco.Cms.Core.Models.Blocks
+@using Umbraco.Cms.Core.Security
+@using WRA.Umbraco.Web.Extensions
+@using WRA.Umbraco.Services
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<IEnumerable<BlockGridItem>>
+@inject GatedContentService _gatedContentService
+@inject IMemberManager _memberManager
+@{
+    if (Model?.Any() != true) { return; }
+    MemberIdentityUser? currentMember = await _memberManager.GetCurrentMemberAsync();
+
+}
+
+@foreach (var item in Model)
+{
+    var content = item.Content;
+    string className = "";
+
+    if (content.HasValue("Width"))
+    {
+        switch (content.Value("Width"))
+        {
+            case "744px":
+                className += "container container--sm";
+                break;
+            case "936px":
+                className += "container container--md";
+                break;
+            case "1128px (standard)":
+                className += "container";
+                break;
+            case "1920px":
+                className += "container container--lg";
+                break;
+            case "Full":
+                className += "w-100";
+                break;
+        }
+    }/* else {
+className += "container";
+}*/
+
+
+    @* <div class="@className"
+data-content-element-type-alias="@item.Content.ContentType.Alias"
+data-content-element-type-key="@item.Content.ContentType.Key"
+data-element-udi="@item.ContentUdi">
+NOT SURE IF NEED THIS
+*@
+
+    var partialViewName = "blockgrid/Components/" + item.Content.ContentType.Alias;
+    try
+    {
+        if (await _gatedContentService.MemberCanViewBlock(item, currentMember))
+        {
+            @await Html.PartialAsync(partialViewName, item)
+        }
+    }
+    catch (InvalidOperationException)
+    {
+        <p>
+            <strong>Could not render component of type: @(item.Content.ContentType.Alias)</strong>
+            <br />
+            This likely happened because the partial view <em>@partialViewName</em> could not be found.
+        </p>
+    }
+
+    @* </div> *@
+
+}

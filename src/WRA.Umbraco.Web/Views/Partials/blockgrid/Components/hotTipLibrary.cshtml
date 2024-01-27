@@ -1,0 +1,94 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>;
+@using ContentModels = WRA.Umbraco.Models;
+
+@{
+    var query = Context.Request.Query;
+    var content = (ContentModels.HotTipLibrary)Model.Content;
+    var categories = UmbracoContext.Content.GetAtRoot().DescendantsOrSelfOfType("hotTipCategory").Where(x => x.IsVisible());
+
+    string selectedCategory = query["category"];
+    string selectedSubcategory = query["subcategory"];
+}
+
+<div class="container">
+    <div class="row">
+        <div class="d-lg-none">
+            <div class="mb-3">
+                <label class="visually-hidden" for="hot-tip-category">Select a category</label>
+                <select id="hot-tip-category" class="form-select js-mobile-hot-tip-category">
+                    <option value="">All Categories</option>
+                    @foreach (var category in categories)
+                    {
+                        <!option value="@category.Name" @(selectedCategory == category.Name ? "selected" : "")>@category.Name</!option>
+                    }
+                </select>
+            </div>
+            @if (!String.IsNullOrEmpty(selectedCategory))
+            {
+                var subcategories = UmbracoContext.Content.GetAtRoot().DescendantsOrSelfOfType("hotTipSubcategory").Where(x => x.Parent.Name == selectedCategory).Where(x => x.IsVisible());
+
+                <div class="mb-3">
+                    <label class="visually-hidden" for="hot-tip-subcategory">Select a subcategory</label>
+                    <select id="hot-tip-subcategory" class="form-select js-mobile-hot-tip-subcategory">
+                        <option value="">All Subcategories</option>
+                        @foreach (var subcategory in subcategories)
+                        {
+                            <!option value="@subcategory.Name" @(selectedSubcategory == subcategory.Name ? "selected" : "")>@subcategory.Name</!option>
+                        }
+                    </select>
+                </div>
+            }
+        </div>
+        <div class="d-none d-lg-block col-12 col-lg-3">
+            @if (String.IsNullOrEmpty(selectedCategory))
+            {
+                <h2 class="h3">All Categories</h2>
+                <ul class="list-unstyled">
+                    @foreach (var category in categories)
+                    {
+                        <li class="border-bottom">
+                            <a href="?category=@category.Name" class="d-block py-2" style="text-decoration: none; font-size: 14px;">@category.Name</a>
+                        </li>
+                    }
+                </ul>
+            }
+            else
+            {
+                var subcategories = UmbracoContext.Content.GetAtRoot().DescendantsOrSelfOfType("hotTipSubcategory").Where(x => x.Parent.Name == selectedCategory).Where(x => x.IsVisible());
+
+                <div class="mb-3">
+                    <a class="d-inline-block mb-3 fs-sm text-body" style="text-decoration: none;" href="@Context.Request.Path">&lt; Clear Filters</a>
+                    <h2 class="h3">@selectedCategory</h2>
+                    @foreach (var subcategory in subcategories)
+                    {
+                        <div class="form-check py-2 border-bottom fs-sm">
+                            <!input id="subcategory-@subcategory.Id" class="form-check-input js-desktop-subcategory-filter" type="radio" name="hot-tip-subcategory" value="@subcategory.Name" @(selectedSubcategory == subcategory.Name ? "checked" : "")>
+                            <label for="subcategory-@subcategory.Id" class="form-check-label">
+                                @subcategory.Name
+                            </label>
+                        </div>
+                    }
+                </div>
+            }
+            <div class="px-4 py-3 bg-tertiary">
+                <a class="btn btn-primary btn-sm w-100" href="@Context.Request.Path/question-form/">Submit a Question</a>
+            </div>
+        </div>
+        <div class="col-12 col-lg-8 offset-lg-1">
+            <div class="js-hot-tip-list">
+                <div class="pb-5 pb-lg-10 text-center">
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            </div>
+            <nav class="d-flex align-items-center justify-content-center" aria-label="Pagination">
+                <ul class="js-hot-tip-list-pagination search-pagination list-unstyled d-inline-flex gap-2 mx-2 mb-0"></ul>
+            </nav>
+            <div class="d-flex flex-column flex-lg-row align-items-center justify-content-between px-4 py-3 px-lg-6 py-lg-5 bg-tertiary fw-semibold">
+                <strong>Can't find what you're looking for?</strong>
+                <a class="btn btn-primary btn-sm mt-3 mt-lg-0" href="@Context.Request.Path/question-form/">Submit a Question</a>
+            </div>
+        </div>
+    </div>
+</div>

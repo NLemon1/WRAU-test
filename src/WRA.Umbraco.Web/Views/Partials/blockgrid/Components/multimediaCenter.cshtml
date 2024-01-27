@@ -1,0 +1,94 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>;
+@using ContentModels = WRA.Umbraco.Models;
+
+@{
+    var content = (ContentModels.MultimediaCenter)Model.Content;
+}
+
+<div class="container">
+    <div class="row align-items-center">
+        <div class="col-12 col-sm-6">
+            <h2 class="mb-0">@content.Value("heading")</h2>
+        </div>
+        <div class="col-12 col-sm-6 d-none d-sm-block text-end">
+            @if (content.HasValue("link"))
+            {
+                var link = content.Value<Link>("link");
+
+                <a class="btn btn-primary" href="@link.Url" target="@link.Target">@link.Name</a>
+            }
+        </div>
+    </div>
+    <div class="row g-4">
+        <div class="col-12 col-sm-6 col-lg-8">
+            <div class="multimedia-card multimedia-card--lg">
+                <div class="multimedia-card__image">
+                    @{
+                        var card1Image = content.Value<MediaWithCrops>("card1Image");
+                    }
+                    <picture>
+                        <source srcset="@card1Image.GetCropUrl(width: 372)" media="(max-width: 768px)" />
+                        <img src="@card1Image.MediaUrl()" width="744" height="430" alt="@card1Image.Value("altText")" />
+                    </picture>
+                </div>
+                <div class="multimedia-card__content">
+                    <h3>@content.Value("card1Heading")</h3>
+                    @if (content.HasValue("card1Content"))
+                    {
+                        <p>@content.Value("card1Content")</p>
+                    }
+                    @{
+                        var card1Link = content.Value<Link>("card1Link");
+                        
+                        <a class="btn btn-link-arrow stretched-link" href="@card1Link.Url" target="@card1Link.Target">
+                            @card1Link.Name
+                            <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0.820801 8L12.0314 8" stroke="#050F1E" stroke-width="1.37143" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M8.51733 4L12.5173 8L8.51733 12" stroke="#050F1E" stroke-width="1.37143" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-4">
+            <div class="multimedia-card">
+                <div class="multimedia-card__image">
+                    @{
+                        var card2Image = content.Value<MediaWithCrops>("card2Image");
+                    }
+                    <picture>
+                        <source srcset="@card2Image.GetCropUrl(width: 372)" media="(max-width: 768px)" />
+                        <img src="@card2Image.MediaUrl()" width="744" height="430" alt="@card2Image.Value("altText")" />
+                    </picture>
+                </div>
+                <div class="multimedia-card__content">
+                    <h3>@content.Value("card2Heading")</h3>
+                    @if (content.HasValue("card2Content"))
+                    {
+                        <p>@content.Value("card2Content")</p>
+                    }
+                    @{
+                        var card2Link = content.Value<Link>("card2Link");
+                        
+                        <a class="btn btn-link-arrow stretched-link" href="@card2Link.Url" target="@card2Link.Target">
+                            @card2Link.Name
+                            <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0.820801 8L12.0314 8" stroke="#050F1E" stroke-width="1.37143" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M8.51733 4L12.5173 8L8.51733 12" stroke="#050F1E" stroke-width="1.37143" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    @if (content.HasValue("link"))
+    {
+        var link = content.Value<Link>("link");
+
+        <div class="d-sm-none">
+            <a class="btn btn-primary w-100 mt-4" href="@link.Url" target="@link.Target">@link.Name</a>
+        </div>
+    }
+</div>

@@ -1,0 +1,21 @@
+{
+  "Name": "Member Login",
+  "Alias": "MemberLogin",
+  "MacroSource": "~/Views/MacroPartials/MemberLogin.cshtml",
+  "UseInEditor": true,
+  "CacheDuration": 0,
+  "CacheByPage": false,
+  "CacheByMember": false,
+  "DontRender": false,
+  "Properties": [],
+  "Udi": "umb://macro/825195dc5b904f848330fe764bbc7dfe",
+  "Dependencies": [
+    {
+      "Udi": "umb://partial-view-macro/MemberLogin.cshtml",
+      "Ordering": true,
+      "Mode": 1
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.MacroArtifact",
+  "__version": "12.0.4"
+}

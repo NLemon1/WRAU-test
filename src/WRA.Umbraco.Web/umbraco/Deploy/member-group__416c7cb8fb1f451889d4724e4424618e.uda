@@ -1,0 +1,8 @@
+{
+  "Name": "Registered Realtors",
+  "Alias": "",
+  "Udi": "umb://member-group/416c7cb8fb1f451889d4724e4424618e",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.MemberGroupArtifact",
+  "__version": "12.0.4"
+}

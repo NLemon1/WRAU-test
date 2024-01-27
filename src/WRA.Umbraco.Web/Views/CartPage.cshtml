@@ -1,0 +1,109 @@
+﻿@using WRA.Umbraco.Models;
+@using Umbraco.Commerce.Extensions;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<CartPage>
+
+@if (Model != null && Model.Order != null && Model.Order.OrderLines.Count > 0)
+{
+    using (Html.BeginUmbracoForm("UpdateCart", "CartSurface"))
+    {
+        <div class="container py-5 py-lg-9">
+            <h1 class="mb-4">Your Cart</h1>
+            <div class="row">
+                <div class="col-12 col-lg-8">
+                    <table class="table">
+                        <thead>
+                            <tr class="text-uppercase font-family-3 fw-bold">
+                                <th class="pt-0 pb-1" style="color: #696f78;" scope="col">Item</th>
+                                <th class="pt-0 pb-1" style="width: 170px; color: #696f78;" scope="col">Quantity</th>
+                                <th class="pt-0 pb-1" style="width: 170px; color: #696f78;" scope="col">Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Order.OrderLines.Select((ol, i) => new { OrderLine = ol, Index = i }))
+                            {
+                                var node = Umbraco.Content(Guid.Parse(item.OrderLine.ProductReference));
+                                var url = node.ContentType.Alias == ProductVariant.ModelTypeAlias ? node.Parent.Url() : node.Url();
+
+                                <tr>
+                                    <td>
+                                        <div class="cart-item mb-4">
+                                            <div class="cart-item__image me-4">
+                                                <img class="align-top" src="https://placehold.it/72" alt="">
+                                            </div>
+                                            <div class="cart-item__content me-4">
+                                                <a class="fs-sm text-decoration-none fw-bold text-body" href="@url">@item.OrderLine.Name</a>
+                                                @if (item.OrderLine.Attributes.Count > 0)
+                                                {
+                                                    foreach (var attr in item.OrderLine.Attributes)
+                                                    {
+                                                        <div class="fs-xs" style="color: #696f78;">@attr.Value</div>
+                                                    }
+                                                }
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="quantity-selector">
+                                            <button type="button" aria-label="Decrease quantity">
+                                                <i class="fa fa-minus"></i>
+                                            </button>
+                                            @Html.Hidden($"orderLines[{item.Index}].Id", item.OrderLine.Id)
+                                            @Html.TextBox($"orderLines[{item.Index}].Quantity", (int)item.OrderLine.Quantity, new { @type = "number", @class = "", @readonly="readonly" })
+                                            <button type="button" aria-label="Increase quantity">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                            <a class="ms-3 text-decoration-none fs-xs" style="color: #696f78;" href="@Url.SurfaceAction("RemoveFromCart",  "CartSurface", new { OrderLineId = item.OrderLine.Id })">
+                                                Remove
+                                            </a>
+                                        </div>
+                                        @*<button class="align-middle font-bold text-xl border-4 border-gray-900 px-6 py-3 hover:bg-teal-400 hover:border-teal-400 hover:text-white" title="Refresh Cart">
+                                            <i class="fa fa-refresh"></i>
+                                        </button>*@
+                                    </td>
+                                    <td class="fw-bold">
+                                        @item.OrderLine.TotalPrice.WithoutAdjustments.Formatted()
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-12 col-lg-4">
+                    <div class="mt-5 p-4" style="border: 1px solid #d7d7dc; border-radius: 0.25rem;">
+                        <table class="w-100">
+                            <tr>
+                                <td class="pb-3">Subtotal</td>
+                                <td class="pb-3 text-end">@Model.Order.SubtotalPrice.WithoutAdjustments.Formatted()</td>
+                            </tr>
+                            <tr>
+                                <td class="pb-3">Estimated Tax</td>
+                                <td class="pb-3 text-end">to do</td>
+                            </tr>
+                            <tr>
+                                <td class="pb-3">Estimated Shipping</td>
+                                <td class="pb-3 text-end">to do</td>
+                            </tr>
+                            <tr>
+                                <td class="pb-3">Discounts</td>
+                                <td class="pb-3 text-end">to do</td>
+                            </tr>
+                            <tr class="fw-bold" style="border-top: 1px solid #d7d7dc;">
+                                <td class="py-3">Total</td>
+                                <td class="py-3 text-end">to do</td>
+                            </tr>
+                        </table>
+                        <p class="fs-xs" style="color: #696f78;">*Disclaimers and fine print here about purchases, returns, exchanges, and cancellations.</p>
+                        <a class="btn btn-primary w-100" href="@Model.CheckoutPage.Url()">Checkout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <div class="container py-5 py-lg-9">
+        <h1 class="mb-4">Your Cart</h1>
+        <p>There are no items in your cart.</p>
+    </div>
+}

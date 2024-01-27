@@ -1,0 +1,34 @@
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+@using Umbraco.Cms.Core.Models.Blocks;
+@using ContentModels = WRA.Umbraco.Models;
+@{
+    var content = (ContentModels.ChildPageCard)Model.Content;
+	string className = "block-child-card child-card d-flex text-center";
+	var link = content.Value<Link>("pageUrl");
+
+}
+
+<div class="@Html.Raw(className.Trim())">
+	<a href="@link.Url" target="@link.Target" title="@link.Name" class="child-card__inner d-flex flex-column align-items-center align-content-center text-decoration-none text-black">
+	
+		@if (content.HasValue("icon"))
+		{
+			<span aria-hidden="true" class="child-card__inner__icon fa-regular fa-@content.Icon"></span>
+		} else
+		{
+			<span aria-hidden="true" class="child-card__inner__icon fa-regular fa-star"></span>
+		}
+
+		@if (content.HasValue("headline"))
+		{
+			<h3 class="child-card__headline fw-bold">@content.Headline</h3>
+		}
+
+		@if (content.HasValue("subheadline"))
+		{
+			<div class="child-card__inner__content d-none d-lg-flex fs-sm px-4">
+				<p>@Html.Raw(content.Subheadline)</p>
+			</div>
+		}
+	</a>
+</div>

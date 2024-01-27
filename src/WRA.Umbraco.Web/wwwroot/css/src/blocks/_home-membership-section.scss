@@ -1,0 +1,134 @@
+.block-home-membership-section {
+    position: relative;
+
+    @include media-breakpoint-up(lg) {
+        margin-bottom: 7rem;
+    }
+
+    @include media-breakpoint-up(xl) {
+        margin-bottom: 237px;//12rem;
+    }
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: $blue-dark;
+        display: block;
+        z-index: 0;
+        height: 70%;
+
+        @include media-breakpoint-up(lg) {
+            height: 100%;
+        }
+    }
+
+    &__top {
+        position: relative;
+
+        @include media-breakpoint-down(lg) {
+            padding-bottom: 172px; //108px;
+        }
+    }
+
+
+    &__testimonial-col {
+        z-index: 1;
+
+        &::after {
+            content: "";
+            display: block;
+            position: absolute;
+            z-index: -1;
+            background-color: $yellow;
+            height: 100%;
+            width: 232px;
+            top: 108px;
+            right: -0.75rem;
+
+            @include media-breakpoint-up(lg) {
+                width: 400px;
+                right: -2vw;
+                top: -4rem;
+            }
+
+            @include media-breakpoint-up(xxl) {
+                right: -10vw;
+            }
+        }
+    }
+
+    &__testimonial-slider {
+        border-radius: 0px 174px 0px 0px;
+
+        @include media-breakpoint-up(lg) {
+            width: 100%;
+            margin: 6rem 0 -6rem 0;
+        }
+
+        @include media-breakpoint-up(xl) {
+            width: calc(100% + 6vw);
+            margin: 10rem 0 -10rem -2rem;
+            max-width: 642px;
+            min-height: 680px;
+            height: 100%;
+        }
+
+        @include media-breakpoint-up(xxl) {
+            width: calc(100% + 8vw);
+        }
+    }
+
+    .swiper-controls {
+        position: absolute;
+        bottom: 0px;
+        z-index: 3;
+
+        @include media-breakpoint-up(lg) {
+            position: absolute;
+            top: calc(100% - 200px);
+            bottom: auto;
+        }
+    }
+}
+
+.slider-testimonials__slide {
+    &__img {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+
+        @include media-breakpoint-down(lg) {
+            width: 132px;
+            height: 132px;
+            margin-top: 98px;
+            margin-bottom: -98px;
+        }
+    }
+
+    &__quote {
+        font-size: 1rem;
+        line-height: 150%; /* 24px */
+
+        @include media-breakpoint-up(lg) {
+            font-size: 1.25rem;
+        }
+    }
+
+    &__icon {
+        position: absolute;
+        top: 0;
+
+        @include media-breakpoint-down(md) {
+            width: 50px;
+        }
+    }
+
+    &__inner {
+        @include media-breakpoint-up(lg) {
+            min-height: 240px;
+        }
+    }
+}

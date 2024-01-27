@@ -1,0 +1,39 @@
+.section {
+    position: relative;
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &--full-height {
+        min-height: calc(100vh - var(--header-height));
+    }
+
+    &__inner-container:where(:not(.container)) {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    &__background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        width: 100%;
+        height: 100%;
+
+        &-media {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        &-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    }
+}

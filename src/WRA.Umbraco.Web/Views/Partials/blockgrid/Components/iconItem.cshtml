@@ -1,0 +1,49 @@
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+@using ContentModels = WRA.Umbraco.Models
+@{
+
+    var content = (ContentModels.IconItem)Model.Content;
+    string className = "block-icon d-block mx-auto";
+    string style = "";
+
+    //CONTRAST
+    if (content.HasValue("contrast"))
+    {
+        switch (content.Contrast)
+        {
+            case "dark":
+                className += "";
+                break;
+            case "light":
+                className += " text-white";
+                break;
+        }
+    }
+
+    if (content.HasValue("bottomMargin"))
+    {
+        style += $"margin-bottom:{content.BottomMargin} !important;";
+    }
+
+    //ICON SIZE
+    if (content.HasValue("iconSize"))
+    {
+        style += $"font-size:{content.IconSize}px;";
+    } 
+    else
+    {
+        style += $"font-size:48px;";
+    }
+
+}
+
+<span class="@className" style="@style">
+    @if (content.HasValue("icon"))
+    {
+        <span aria-hidden="true" class="fa-regular fa-solid fa-@content.Icon"></span>
+    }
+    else
+    {
+        <span aria-hidden="true" class="fa-regular fa-solid fa-star"></span>
+    }
+</span>

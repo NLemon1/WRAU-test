@@ -1,0 +1,45 @@
+{
+  "Name": "Checkout Payment Page",
+  "Alias": "checkoutPaymentPage",
+  "DefaultTemplate": "umb://template/f3bbce8a02104d14a57f06f8b6f53985",
+  "AllowedTemplates": [
+    "umb://template/f3bbce8a02104d14a57f06f8b6f53985"
+  ],
+  "HistoryCleanup": {
+    "preventCleanup": false,
+    "keepAllVersionsNewerThanDays": null,
+    "keepLatestVersionPerDayForDays": null
+  },
+  "Icon": "icon-sync color-light-green",
+  "Thumbnail": "folder.png",
+  "Description": null,
+  "IsContainer": false,
+  "Permissions": {
+    "AllowVaryingByCulture": false,
+    "AllowVaryingBySegment": false,
+    "AllowedAtRoot": false,
+    "IsElementType": false,
+    "AllowedChildContentTypes": []
+  },
+  "Parent": "umb://document-type/bd79af91c3834a54844ca30f568b74d5",
+  "CompositionContentTypes": [
+    "umb://document-type/bd79af91c3834a54844ca30f568b74d5"
+  ],
+  "PropertyGroups": [],
+  "PropertyTypes": [],
+  "Udi": "umb://document-type/6ca5f14f383e4bdcbb5a7f97cf75c768",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type/bd79af91c3834a54844ca30f568b74d5",
+      "Ordering": true,
+      "Mode": 0
+    },
+    {
+      "Udi": "umb://template/f3bbce8a02104d14a57f06f8b6f53985",
+      "Ordering": true,
+      "Mode": 0
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
+  "__version": "12.0.5"
+}

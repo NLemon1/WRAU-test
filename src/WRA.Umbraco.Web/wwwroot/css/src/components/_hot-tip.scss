@@ -1,0 +1,16 @@
+.hot-tip {
+    //
+
+    &__header {
+        padding: 0.5rem 1.5rem;
+        background-color: $secondary;
+        text-transform: uppercase;
+        font-weight: 800;
+        color: white;
+    }
+
+    &__content {
+        padding: 1rem 1.5rem;
+        background-color: $light;
+    }
+}

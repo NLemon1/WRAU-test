@@ -1,0 +1,16 @@
+{
+  "Name": "Checkout Review Page",
+  "Alias": "CheckoutReviewPage",
+  "File": "umb://template-file/CheckoutReviewPage.cshtml",
+  "Master": null,
+  "Udi": "umb://template/6dbbbc08fb7443649b748940a6952834",
+  "Dependencies": [
+    {
+      "Udi": "umb://template-file/CheckoutReviewPage.cshtml",
+      "Ordering": true,
+      "Mode": 0
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.TemplateArtifact",
+  "__version": "12.0.5"
+}

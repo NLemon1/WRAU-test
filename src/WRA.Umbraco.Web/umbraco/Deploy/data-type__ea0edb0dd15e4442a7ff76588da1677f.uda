@@ -1,0 +1,30 @@
+{
+  "Name": "CTA Card - Content - Rich Text Editor",
+  "Alias": "",
+  "EditorAlias": "Umbraco.TinyMCE",
+  "DatabaseType": 0,
+  "Configuration": {
+    "editor": {
+      "toolbar": [
+        "ace",
+        "undo",
+        "redo",
+        "bold",
+        "italic",
+        "link",
+        "unlink"
+      ],
+      "stylesheets": [],
+      "maxImageSize": 500,
+      "mode": "classic"
+    },
+    "overlaySize": "small",
+    "hideLabel": false,
+    "ignoreUserStartNodes": false
+  },
+  "Parent": null,
+  "Udi": "umb://data-type/ea0edb0dd15e4442a7ff76588da1677f",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
+  "__version": "12.0.4"
+}

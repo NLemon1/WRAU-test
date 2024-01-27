@@ -1,0 +1,22 @@
+{
+  "Name": "Reusable Widget - Content Picker",
+  "Alias": "",
+  "EditorAlias": "Umbraco.ContentPicker",
+  "DatabaseType": 1,
+  "Configuration": {
+    "showOpenButton": false,
+    "startNodeId": "umb://document/60be55d77b3149889530df5e080a4b91",
+    "ignoreUserStartNodes": false
+  },
+  "Parent": null,
+  "Udi": "umb://data-type/dc54efa9165b4f3583d7ebe7530d6245",
+  "Dependencies": [
+    {
+      "Udi": "umb://document/60be55d77b3149889530df5e080a4b91",
+      "Ordering": false,
+      "Mode": 1
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
+  "__version": "12.0.4"
+}

@@ -1,0 +1,22 @@
+{
+  "Name": "Article Category - Featured Article - Content Picker",
+  "Alias": "",
+  "EditorAlias": "Umbraco.ContentPicker",
+  "DatabaseType": 1,
+  "Configuration": {
+    "showOpenButton": false,
+    "startNodeId": "umb://document/dea854c3df214ba6b9b95a835b282064",
+    "ignoreUserStartNodes": false
+  },
+  "Parent": null,
+  "Udi": "umb://data-type/9bce1176724648bdaa3749b2b45ec816",
+  "Dependencies": [
+    {
+      "Udi": "umb://document/dea854c3df214ba6b9b95a835b282064",
+      "Ordering": false,
+      "Mode": 1
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
+  "__version": "12.0.5"
+}

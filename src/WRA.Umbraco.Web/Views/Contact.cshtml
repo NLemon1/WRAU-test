@@ -1,0 +1,223 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+
+@{
+    var settings = Umbraco.ContentAtRoot().FirstOrDefault(x => x.ContentType.Alias == "siteSettings");
+}
+
+<header class="page-header">
+    <div class="container">
+        <div class="container--sm">
+            <h1>@Model.Name</h1>
+            <p class="subhead">Lorem ipsum dolor sit amet.</p>
+        </div>
+    </div>
+</header>
+
+<div class="container pt-7 pb-9 pt-lg-9">
+    <div class="row">
+        <div class="col-12 col-lg-5">
+            <p class="fw-semibold">Asking users to find the specific contact they need vs. emailing everything to the general inquiry info.</p>
+
+            <div class="hot-tip mt-6">
+                <div class="hot-tip__header">
+                    Looking for legal help?
+                </div>
+                <div class="hot-tip__content">
+                    <a class="btn btn-link-arrow" href="#">
+                        Contact The Legal Hotline
+                        <svg viewBox="0 0 23 22" width="23" height="22" fill="none">
+                            <path d="M1 11H16.8889" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M12 5.5L17.5 11L12 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="hot-tip mt-3">
+                <div class="hot-tip__header">
+                    Have a complaint?
+                </div>
+                <div class="hot-tip__content">
+                    <a class="btn btn-link-arrow" href="#">
+                        File a complaint
+                        <svg viewBox="0 0 23 22" width="23" height="22" fill="none">
+                            <path d="M1 11H16.8889" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M12 5.5L17.5 11L12 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="d-none d-lg-block">
+                <div class="mt-6">
+                    <h3 class="h4">WRA Headquarters</h3>
+                    <address class="mb-0">
+                        @settings.Value("hqAddress")@(settings.HasValue("hqSuite") ? ", " + settings.Value("hqSuite") : "")<br>
+                        @settings.Value("hqCity"), @settings.Value("hqState") @settings.Value("hqZip")
+                    </address>
+                    @if (settings.HasValue("hqHours"))
+                    {
+                        @settings.Value("hqHours")
+                        <br>
+                    }
+                    @if (settings.HasValue("hqPhone"))
+                    {
+                        <a href="tel:@settings.Value("hqPhone")">@settings.Value("hqPhone")</a>
+                        <br>
+                    }
+                    @if (settings.HasValue("hqPhone2"))
+                    {
+                        <a href="tel:@settings.Value("hqPhone2")">@settings.Value("hqPhone2")</a>
+                        <br>
+                    }
+                    @if (settings.HasValue("hqEmail"))
+                    {
+                        <a href="mailto:@settings.Value("hqEmail")">@settings.Value("hqEmail")</a>
+                    }
+                </div>
+
+                <div class="mt-6">
+                    <h3 class="h4">WRA Public Affairs Office</h3>
+                    <address class="mb-0">
+                        @settings.Value("paAddress")@(settings.HasValue("paSuite") ? ", " + settings.Value("paSuite") : "")<br>
+                        @settings.Value("paCity"), @settings.Value("paState") @settings.Value("paZip")
+                    </address>
+                    @if (settings.HasValue("paHours"))
+                    {
+                        @settings.Value("paHours")
+                        <br>
+                    }
+                    @if (settings.HasValue("paPhone"))
+                    {
+                        <a href="tel:@settings.Value("paPhone")">@settings.Value("paPhone")</a>
+                        <br>
+                    }
+                    @if (settings.HasValue("paPhone2"))
+                    {
+                        <a href="tel:@settings.Value("paPhone2")">@settings.Value("paPhone2")</a>
+                        <br>
+                    }
+                    @if (settings.HasValue("paEmail"))
+                    {
+                        <a href="mailto:@settings.Value("paEmail")">@settings.Value("paEmail")</a>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-lg-6 mt-6 ms-auto mt-lg-0">
+            <form>
+                <div class="mb-3">
+                    <label for="contact-topic" class="visually-hidden">Topic of your inquiry</label>
+                    <select id="contact-topic" class="form-select" required>
+                        <option selected>Topic of your inquiry*</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="contact-subject" class="visually-hidden">Subject</label>
+                    <input id="contact-subject" class="form-control" type="text" required placeholder="Subject*" />
+                </div>
+                <div class="mb-3">
+                    <label for="contact-message" class="visually-hidden">Message</label>
+                    <textarea id="contact-message" class="form-control" style="height: 268px;" required placeholder="Message*"></textarea>
+                </div>
+                <a class="btn btn-primary" href="#">Submit</a>
+            </form>
+
+            <div class="d-lg-none">
+                <div class="mt-6">
+                    <h3 class="h4">WRA Headquarters</h3>
+                    <address class="mb-0">
+                        @settings.Value("hqAddress")@(settings.HasValue("hqSuite") ? ", " + settings.Value("hqSuite") : "")<br>
+                        @settings.Value("hqCity"), @settings.Value("hqState") @settings.Value("hqZip")
+                    </address>
+                    @if (settings.HasValue("hqHours"))
+                    {
+                        @settings.Value("hqHours")
+                        <br>
+                    }
+                    @if (settings.HasValue("hqPhone"))
+                    {
+                        <a href="tel:@settings.Value("hqPhone")">@settings.Value("hqPhone")</a>
+                        <br>
+                    }
+                    @if (settings.HasValue("hqPhone2"))
+                    {
+                        <a href="tel:@settings.Value("hqPhone2")">@settings.Value("hqPhone2")</a>
+                        <br>
+                    }
+                    @if (settings.HasValue("hqEmail"))
+                    {
+                        <a href="mailto:@settings.Value("hqEmail")">@settings.Value("hqEmail")</a>
+                    }
+                </div>
+
+                <div class="mt-6">
+                    <h3 class="h4">WRA Public Affairs Office</h3>
+                    <address class="mb-0">
+                        @settings.Value("paAddress")@(settings.HasValue("paSuite") ? ", " + settings.Value("paSuite") : "")<br>
+                        @settings.Value("paCity"), @settings.Value("paState") @settings.Value("paZip")
+                    </address>
+                    @if (settings.HasValue("paHours"))
+                    {
+                        @settings.Value("paHours")
+                        <br>
+                    }
+                    @if (settings.HasValue("paPhone"))
+                    {
+                        <a href="tel:@settings.Value("paPhone")">@settings.Value("paPhone")</a>
+                        <br>
+                    }
+                    @if (settings.HasValue("paPhone2"))
+                    {
+                        <a href="tel:@settings.Value("paPhone2")">@settings.Value("paPhone2")</a>
+                        <br>
+                    }
+                    @if (settings.HasValue("paEmail"))
+                    {
+                        <a href="mailto:@settings.Value("paEmail")">@settings.Value("paEmail")</a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="py-9 py-lg-10">
+        <h2 class="mb-4 mb-lg-6 text-center">WRA Staff Directory</h2>
+        <div class="tabs tabs--mobile-dropdown tabs--vertical js-tabs">
+            <ul role="tablist" class="tabs__tabs-list">
+                <li role="presentation">
+                    <a id="tab-1" class="tabs__trigger js-tabs-trigger" href="#tab-section-1" role="tab" aria-controls="tab-section-1" aria-selected="true">Executive Committee</a>
+                </li>
+                <li role="presentation">
+                    <a id="tab-2" class="tabs__trigger js-tabs-trigger" href="#tab-section-2" role="tab" aria-controls="tab-section-2">Board of Directors</a>
+                </li>
+                <li role="presentation">
+                    <a id="tab-3" class="tabs__trigger js-tabs-trigger" href="#tab-section-3" role="tab" aria-controls="tab-section-3">Government Affairs Director</a>
+                </li>
+            </ul>
+            <select class="tabs__dropdown js-tabs-dropdown" aria-label="Select a tab">
+                <option value="#tab-section-1">Executive Committee</option>
+                <option value="#tab-section-2">Board of Directors</option>
+                <option value="#tab-section-3">Government Affairs Director</option>
+            </select>
+            <section id="tab-section1" class="tabs__panel js-tabs-panel" role="tabpanel" aria-labelledby="tab-1" tabindex="0">
+                <div class="tabs__accordion-trigger js-accordion-trigger" aria-controls="tab-section-1" aria-expanded="true" tabindex="0">Executive Committee</div>
+                <div class="content" aria-hidden="false">
+                    Panel 1 content goes here.
+                </div>
+            </section>
+            <section id="tab-section-2" class="tabs__panel js-tabs-panel" role="tabpanel" aria-labelledby="tab-2">
+                <div class="tabs__accordion-trigger js-accordion-trigger" aria-controls="tab-section-2" aria-expanded="false" tabindex="0">Board of Directors</div>
+                <div class="content" aria-hidden="true">
+                    Panel 2 content goes here.
+                </div>
+            </section>
+            <section id="tab-section-3" class="tabs__panel js-tabs-panel" role="tabpanel" aria-labelledby="tab-3">
+                <div class="tabs__accordion-trigger js-accordion-trigger" aria-controls="tab-section-3" aria-expanded="false" tabindex="0">Executive Committee</div>
+                <div class="content" aria-hidden="true">
+                    Panel 3 content goes here.
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

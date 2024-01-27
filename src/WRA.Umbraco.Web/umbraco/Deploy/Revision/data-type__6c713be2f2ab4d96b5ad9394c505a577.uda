@@ -1,0 +1,37 @@
+{
+  "Name": "Product Page - Long Description - Rich Text Editor",
+  "Alias": "",
+  "EditorAlias": "Umbraco.TinyMCE",
+  "Configuration": {
+    "editor": {
+      "toolbar": [
+        "ace",
+        "styles",
+        "bold",
+        "italic",
+        "alignleft",
+        "aligncenter",
+        "alignright",
+        "bullist",
+        "numlist",
+        "outdent",
+        "indent",
+        "link",
+        "umbmediapicker",
+        "umbmacro",
+        "umbembeddialog"
+      ],
+      "stylesheets": [],
+      "maxImageSize": 500,
+      "mode": "classic"
+    },
+    "useLiveEditing": false,
+    "overlaySize": "small",
+    "hideLabel": false,
+    "ignoreUserStartNodes": false
+  },
+  "Udi": "umb://data-type/6c713be2f2ab4d96b5ad9394c505a577",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
+  "__version": "13.0.3"
+}

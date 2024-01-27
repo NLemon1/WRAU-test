@@ -1,0 +1,22 @@
+{
+  "Name": "Hot Tip Category - Multinode Treepicker",
+  "Alias": "",
+  "EditorAlias": "Umbraco.MultiNodeTreePicker",
+  "DatabaseType": 0,
+  "Configuration": {
+    "startNode": {
+      "type": "content",
+      "query": "$root/hotTipCategories"
+    },
+    "filter": "hotTipCategory",
+    "minNumber": 0,
+    "maxNumber": 1,
+    "showOpenButton": false,
+    "ignoreUserStartNodes": false
+  },
+  "Parent": null,
+  "Udi": "umb://data-type/d1a945834ee241fab4969b6ec8f86915",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
+  "__version": "12.0.5"
+}

@@ -1,0 +1,16 @@
+{
+  "Name": "Magazine Collection",
+  "Alias": "MagazineCollection",
+  "File": "umb://template-file/MagazineCollection.cshtml",
+  "Master": null,
+  "Udi": "umb://template/f5edfab8e13248f6a08088ce9135f4a2",
+  "Dependencies": [
+    {
+      "Udi": "umb://template-file/MagazineCollection.cshtml",
+      "Ordering": true,
+      "Mode": 0
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.TemplateArtifact",
+  "__version": "12.0.5"
+}

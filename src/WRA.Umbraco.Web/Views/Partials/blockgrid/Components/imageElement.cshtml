@@ -1,0 +1,31 @@
+﻿@using Umbraco.Extensions
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+@using Umbraco.Cms.Core.Models.Blocks;
+@using ContentModels = WRA.Umbraco.Models;
+
+@{
+    var content = (ContentModels.ImageElement)Model.Content;
+    string className = "block-image-element";
+    string props = "";
+    var image = content.Image;
+
+    if (content.CurvedCorner)
+    {
+        className += " img-curved img-curved--large";
+    }
+
+    if (content.YellowDecor)
+    {
+        className += " img-decor";
+    }
+
+    if (!String.IsNullOrEmpty(className))
+    {
+        props += $"class=\"{className.Trim()}\"";
+    }
+
+}
+
+<figure @Html.Raw(props.Trim())>
+    <img loading="lazy" class="img-fluid" src="@image.Url()" width="@image.Value("umbracoWidth")" height="@image.Value("umbracoHeight")" alt="@(image.Value("altText") ?? "")" />
+</figure>

@@ -1,0 +1,16 @@
+{
+  "Name": "Checkout Payment Method Page",
+  "Alias": "CheckoutPaymentMethodPage",
+  "File": "umb://template-file/CheckoutPaymentMethodPage.cshtml",
+  "Master": null,
+  "Udi": "umb://template/c8c6898c489e458db37f658cfcb96028",
+  "Dependencies": [
+    {
+      "Udi": "umb://template-file/CheckoutPaymentMethodPage.cshtml",
+      "Ordering": true,
+      "Mode": 0
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.TemplateArtifact",
+  "__version": "12.0.5"
+}

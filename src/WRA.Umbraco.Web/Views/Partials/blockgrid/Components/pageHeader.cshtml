@@ -1,0 +1,27 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>;
+@using ContentModels = WRA.Umbraco.Models;
+
+@{
+    var content = (ContentModels.PageHeader)Model.Content;
+}
+
+<header class="page-header @(content.Value<Boolean>("hideAccent") ? "page-header--no-accent" : "")">
+    <div class="container">
+        <div class="container--sm">
+            <h1 class="mb-0">
+                @if (content.HasValue("heading"))
+                {
+                    @Html.Raw(content.Value("heading"))
+                }
+                else
+                {
+                    @Umbraco.AssignedContentItem.Name
+                }
+            </h1>
+            @if (content.HasValue("subheading"))
+            {
+                <p class="subhead mt-3">@Html.Raw(content.Value("subheading"))</p>
+            }
+        </div>
+    </div>
+</header>

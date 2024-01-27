@@ -1,0 +1,69 @@
+﻿@using Umbraco.Extensions
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+@using Umbraco.Cms.Core.Models.Blocks;
+@using ContentModels = WRA.Umbraco.Models;
+
+@{
+    var content = (ContentModels.ImageTextRow)Model.Content;
+
+    string col1Bg = "";
+    string col2Bg = "";
+    string col1ClassName = "";
+    string col2ClassName = "";
+
+    if (content.HasValue("col1BackgroundColor"))
+    {
+        col1Bg = $"background-color:#{content.Col1BackgroundColor};";
+        col1ClassName = "py-5 pt-md-8 pb-md-8 pe-5";
+    }
+
+    if (content.HasValue("col2BackgroundColor"))
+    {
+        col2Bg = $"background-color:#{content.Col2BackgroundColor};";
+        col2ClassName = "py-5 pt-md-8 pb-md-8 pe-5";
+
+    }
+
+    string className = "block-image-text-row container";
+    string rowClassName = "";
+    string props = "";
+    string style = "";
+
+    if (content.HasValue("yPadding"))
+    {
+        style += $"padding-bottom:{content.YPadding};";
+        style += $"padding-top:{content.YPadding};";
+    }
+
+    if (content.HasValue("reverseColumns") && content.ReverseColumns == true)
+    {
+        rowClassName = "flex-column-reverse flex-md-row";
+    }
+        
+    if (content.HasValue("additionalCssClasses"))
+    {
+        className += $" {content.AdditionalCssClasses}";
+    }
+
+    if (!String.IsNullOrEmpty(className))
+    {
+        props += $"class=\"{className.Trim()}\"";
+    }
+
+    if (!String.IsNullOrEmpty(style))
+    {
+        props += $" style=\"{style}\"";
+    }
+
+}
+
+<div @Html.Raw(props.Trim())>
+    <div class="row @rowClassName">
+        <div class="col-md-6 image-text-row__col-1 d-flex flex-column justify-content-center @col1ClassName" style="@col1Bg">
+            @await Html.GetBlockGridItemAreaHtmlAsync(Model, "image-text-row-1")
+        </div>
+        <div class="col-md-6 image-text-row__col-2 d-flex flex-column justify-content-center @col2ClassName" style="@col2Bg">
+            @await Html.GetBlockGridItemAreaHtmlAsync(Model, "image-text-row-2")
+        </div>
+    </div>
+</div>

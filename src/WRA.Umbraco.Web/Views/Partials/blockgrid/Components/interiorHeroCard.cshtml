@@ -1,0 +1,35 @@
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+
+@using Umbraco.Cms.Core.Models.Blocks
+@using Umbraco.Extensions
+
+@using ContentModels = WRA.Umbraco.Models;
+@{
+    var content = (ContentModels.InteriorHeroCard)Model.Content;
+    string props = "";
+	string className = "block-interior-hero-card align-items-center text-center p-5 p-lg-8";
+    string style = "";
+
+    if (content.HasValue("color"))
+    {
+        style += $"background-color:#{content.Color};";
+    }
+    if (content.HasValue("additionalCssClasses"))
+    {
+        className += $" {content.AdditionalCssClasses}";
+    }
+
+    if (!String.IsNullOrEmpty(className))
+    {
+        props += $"class=\"{className.Trim()}\"";
+    }
+
+    if (!String.IsNullOrEmpty(style))
+    {
+        props += $" style=\"{style}\"";
+    }
+}
+
+<div @Html.Raw(props.Trim())>
+    @await Html.GetBlockGridItemAreaHtmlAsync(Model, "interior-hero-card-area")
+</div>

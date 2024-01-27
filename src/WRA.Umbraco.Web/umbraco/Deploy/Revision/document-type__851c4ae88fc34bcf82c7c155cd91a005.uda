@@ -1,0 +1,76 @@
+{
+  "Name": "Product Multi Variant",
+  "Alias": "productMultiVariant",
+  "DefaultTemplate": null,
+  "AllowedTemplates": [],
+  "HistoryCleanup": {
+    "preventCleanup": false,
+    "keepAllVersionsNewerThanDays": null,
+    "keepLatestVersionPerDayForDays": null
+  },
+  "Icon": "icon-barcode color-light-green",
+  "Thumbnail": "folder.png",
+  "Description": null,
+  "IsContainer": false,
+  "Permissions": {
+    "AllowVaryingByCulture": false,
+    "AllowVaryingBySegment": false,
+    "AllowedAtRoot": false,
+    "IsElementType": true,
+    "AllowedChildContentTypes": []
+  },
+  "Parent": "umb://document-type-container/f57b14be688942cb849aab5965353f72",
+  "CompositionContentTypes": [
+    "umb://document-type/c7472437951a435c8292440e6396daf2"
+  ],
+  "PropertyGroups": [
+    {
+      "Key": "6c920e53-b445-4423-b17e-4f505d9594e1",
+      "Name": "Content",
+      "SortOrder": 0,
+      "Type": 0,
+      "Alias": "content",
+      "PropertyTypes": [
+        {
+          "Key": "e123597a-8a4a-428a-9114-ee0da63508f5",
+          "Alias": "image",
+          "DataType": "umb://data-type/00dc378cea194845ac1a1363d883b5f5",
+          "Description": null,
+          "Mandatory": false,
+          "MandatoryMessage": null,
+          "Name": "Image",
+          "SortOrder": 0,
+          "Validation": null,
+          "ValidationMessage": null,
+          "VariesByCulture": false,
+          "VariesBySegment": false,
+          "LabelOnTop": false,
+          "MemberCanEdit": false,
+          "ViewOnProfile": false,
+          "IsSensitive": false
+        }
+      ]
+    }
+  ],
+  "PropertyTypes": [],
+  "Udi": "umb://document-type/851c4ae88fc34bcf82c7c155cd91a005",
+  "Dependencies": [
+    {
+      "Udi": "umb://data-type/00dc378cea194845ac1a1363d883b5f5",
+      "Ordering": true,
+      "Mode": 0
+    },
+    {
+      "Udi": "umb://document-type-container/f57b14be688942cb849aab5965353f72",
+      "Ordering": true,
+      "Mode": 0
+    },
+    {
+      "Udi": "umb://document-type/c7472437951a435c8292440e6396daf2",
+      "Ordering": true,
+      "Mode": 0
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
+  "__version": "12.0.5"
+}

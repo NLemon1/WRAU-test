@@ -1,0 +1,88 @@
+{
+  "Name": "Background Container",
+  "Alias": "backgroundContainer",
+  "DefaultTemplate": null,
+  "AllowedTemplates": [],
+  "HistoryCleanup": {
+    "preventCleanup": false,
+    "keepAllVersionsNewerThanDays": null,
+    "keepLatestVersionPerDayForDays": null
+  },
+  "Icon": "icon-science",
+  "Thumbnail": "folder.png",
+  "Description": null,
+  "IsContainer": false,
+  "Permissions": {
+    "AllowVaryingByCulture": false,
+    "AllowVaryingBySegment": false,
+    "AllowedAtRoot": false,
+    "IsElementType": true,
+    "AllowedChildContentTypes": []
+  },
+  "Parent": "umb://document-type-container/7d7bb95bd7634722b04820839c0ae21e",
+  "CompositionContentTypes": [
+    "umb://document-type/38e48d076783491993c671f1add73d05",
+    "umb://document-type/960c0ac2ce454e69a912f801dee7c0b7",
+    "umb://document-type/d34735ed19f440a6babe442a9e096524"
+  ],
+  "PropertyGroups": [
+    {
+      "Key": "e8f3e908-fcc6-4fa3-b579-b4656dcaa68a",
+      "Name": "Content",
+      "SortOrder": 0,
+      "Type": 0,
+      "Alias": "content",
+      "PropertyTypes": [
+        {
+          "Key": "6fec6062-f413-4a0d-923b-a32161232124",
+          "Alias": "backgroundOffset",
+          "DataType": "umb://data-type/9b4c2302171d4d01801d5bb79036d45e",
+          "Description": "Enable light gray background design element.",
+          "Mandatory": false,
+          "MandatoryMessage": null,
+          "Name": "Background Offset",
+          "SortOrder": 0,
+          "Validation": null,
+          "ValidationMessage": null,
+          "VariesByCulture": false,
+          "VariesBySegment": false,
+          "LabelOnTop": false,
+          "MemberCanEdit": false,
+          "ViewOnProfile": false,
+          "IsSensitive": false
+        }
+      ]
+    }
+  ],
+  "PropertyTypes": [],
+  "Udi": "umb://document-type/4bbf8c17c0b04d559e26b53d5feb4794",
+  "Dependencies": [
+    {
+      "Udi": "umb://data-type/9b4c2302171d4d01801d5bb79036d45e",
+      "Ordering": true,
+      "Mode": 0
+    },
+    {
+      "Udi": "umb://document-type-container/7d7bb95bd7634722b04820839c0ae21e",
+      "Ordering": true,
+      "Mode": 0
+    },
+    {
+      "Udi": "umb://document-type/38e48d076783491993c671f1add73d05",
+      "Ordering": true,
+      "Mode": 0
+    },
+    {
+      "Udi": "umb://document-type/960c0ac2ce454e69a912f801dee7c0b7",
+      "Ordering": true,
+      "Mode": 0
+    },
+    {
+      "Udi": "umb://document-type/d34735ed19f440a6babe442a9e096524",
+      "Ordering": true,
+      "Mode": 0
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
+  "__version": "12.0.5"
+}

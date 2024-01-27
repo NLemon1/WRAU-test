@@ -1,0 +1,27 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using Umbraco.Cms.Core.Models.Blocks
+
+@{
+    var sections = Model.Value<IEnumerable<BlockGridItem>>("sections");
+}
+
+@if (Model.HasValue("backgroundOffset") && Model.Value("backgroundOffset").ToString() == "True")
+{
+    ViewBag.MainCss += "bg-offset-decor";
+}
+
+@section styles {
+    @if (Model.HasValue("styles"))
+    {
+        @Html.Raw(Model.Value("styles"));
+    }
+}
+
+@section scripts {
+    @if (Model.HasValue("scripts"))
+    {
+        @Html.Raw(Model.Value("scripts"));
+    }
+}
+
+@await Html.PartialAsync("blockgrid/default", sections)

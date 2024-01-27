@@ -1,0 +1,47 @@
+.block-home-education-section {
+    position: relative;
+
+    &__top {
+        position: relative;
+        @include media-breakpoint-down(lg) {
+            background-color: $blue-dark;
+        }
+
+    }
+    
+    @include media-breakpoint-up(lg) {
+        &::after {
+            content: "";
+            display: block;
+            position: absolute;
+            z-index: -1;
+            background-color: $gray-10;
+            bottom: 0px;
+            right: 0px;
+            width: 80%;
+            height: calc(100% - 160px);
+        }
+    }
+
+    &__img-col {
+
+        @include media-breakpoint-down(lg) {
+            margin-left: -2.5rem;
+        }
+
+        @include media-breakpoint-up(lg) {
+            background-color: #FFFFFF;
+        }
+    }
+
+    &__img {
+        height: 100%;
+        object-fit: cover;
+        width: calc(100% + 5rem);
+
+        @include media-breakpoint-up(lg) {
+            width: calc(100% + 5vw);
+            max-width: 576px;
+        }
+    }
+}

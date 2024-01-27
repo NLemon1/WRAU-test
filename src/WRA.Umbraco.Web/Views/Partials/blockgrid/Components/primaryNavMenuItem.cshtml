@@ -1,0 +1,41 @@
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>;
+@using Umbraco.Cms.Core.Models.Blocks;
+@using ContentModels = WRA.Umbraco.Models;
+
+@{
+    var content = (ContentModels.PrimaryNavMenuItem)Model.Content;
+    var link = content.Value<Link>("primaryNavLink");
+    var secondaryLinks = content.Value<IEnumerable<Link>>("secondaryNavLinks");
+}
+
+<div class="sub-menu__item @(secondaryLinks.Count() == 0 ? "position-relative" : "")">
+    <a href="@link.Url" href="@link.Url" target="@link.Target" class="btn btn-link-arrow btn-link-arrow--primary @(secondaryLinks.Count() == 0 ? "position-static stretched-link" : "")">
+        @link.Name
+        <svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 11H16.8889" stroke="#2560B9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M12 5.5L17.5 11L12 16.5" stroke="#2560B9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+    </a>
+
+    @if (content.HasValue("summaryTextOptional"))
+    {
+        <p>@content.Value("summaryTextOptional")</p>
+    }
+    @if (secondaryLinks.Count() > 0 && ViewBag.MobileConfig != true)
+    {
+        <div class="sub-menu__item__links">
+            @foreach (var secondaryLink in secondaryLinks)
+            {
+                <a href="@secondaryLink.Url" class="btn btn-link-arrow mb-3">
+                    @secondaryLink.Name
+                    <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0.820801 8L12.0314 8" stroke="#050F1E" stroke-width="1.37143" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M8.51733 4L12.5173 8L8.51733 12" stroke="#050F1E" stroke-width="1.37143" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </a>
+            }
+        </div>
+    }
+
+</div>
+

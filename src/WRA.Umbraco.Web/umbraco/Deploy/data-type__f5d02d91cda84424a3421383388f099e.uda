@@ -1,0 +1,31 @@
+{
+  "Name": "Buttons - blocks - Block Grid",
+  "Alias": "",
+  "EditorAlias": "Umbraco.BlockGrid",
+  "DatabaseType": 0,
+  "Configuration": {
+    "blocks": [
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": true,
+        "allowInAreas": true,
+        "areas": [],
+        "contentElementTypeKey": "864f593e-ef23-4580-8c2d-e4a5f4da025e",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false
+      }
+    ],
+    "blockGroups": [],
+    "validationLimit": {},
+    "useLiveEditing": false
+  },
+  "Parent": null,
+  "Udi": "umb://data-type/f5d02d91cda84424a3421383388f099e",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
+  "__version": "12.0.4"
+}

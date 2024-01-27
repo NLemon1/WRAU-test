@@ -1,0 +1,75 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>;
+@using Umbraco.Cms.Core.Models.Blocks;
+@using ContentModels = WRA.Umbraco.Models;
+
+@{
+    var content = (ContentModels.Tabs)Model.Content;
+
+    bool isDarkMode = content.Value<bool>("enableDarkMode");
+    bool isVerticalMode = content.Value<bool>("enableVerticalMode");
+
+    var tabs = Model.Areas.FirstOrDefault();
+}
+
+<div class="py-9 py-lg-11 @(isDarkMode ? "bg-secondary text-white" : "" )">
+    <div class="container">
+        <div class="text-center">
+            @if (content.HasValue("overline"))
+            {
+                <p class="overline mb-4">@content.Value("overline")</p>
+            }
+            @if (content.HasValue("heading"))
+            {
+                <h2 class="h1 mb-6">@content.Value("heading")</h2>
+            }
+        </div>
+        @if (tabs != null)
+        {
+            <div class="tabs tabs--mobile-dropdown @(isDarkMode ? "tabs--dark-mode" : "") @(isVerticalMode ? "tabs--vertical" : "") js-tabs">
+                <div class="@(isVerticalMode ? "" : "mb-6 text-center")">
+                    <ul role="tablist" class="tabs__tabs-list">
+                        @{
+                            int a = 1;
+
+                            foreach (var tab in tabs)
+                            {
+                                <li role="presentation">
+                                    <a id="tab-@a" class="tabs__trigger js-tabs-trigger" href="#tab-section-@a" role="tab" aria-controls="tab-section-@a" aria-selected="false">@tab.Content.Value("label")</a>
+                                </li>
+
+                                a++;
+                            }
+                        }
+                    </ul>
+                </div>
+                <select class="tabs__dropdown js-tabs-dropdown" aria-label="Select a tab">
+                    @{
+                        int b = 1;
+
+                        foreach (var tab in tabs)
+                        {
+                            <option value="#tab-section-@b">@tab.Content.Value("label")</option>
+
+                            b++;
+                        }
+                    }
+                </select>
+                @{
+                    int c = 1;
+
+                    foreach (var tab in tabs)
+                    {
+                        <section id="tab-section-@c" class="tabs__panel js-tabs-panel" role="tabpanel" aria-labelledby="tab-@c" tabindex="0">
+                            <div class="tabs__accordion-trigger js-accordion-trigger" aria-controls="tab-section-@c" aria-expanded="false" tabindex="0">@tab.Content.Value("label")</div>
+                            <div class="content" aria-hidden="true">
+                                @await Html.GetBlockGridItemAreaHtmlAsync(tab, "tab-area")
+                            </div>
+                        </section>
+
+                        c++;
+                    }
+                }
+            </div>
+        }
+    </div>
+</div>

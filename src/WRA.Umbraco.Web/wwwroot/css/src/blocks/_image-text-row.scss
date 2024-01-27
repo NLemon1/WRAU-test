@@ -1,0 +1,41 @@
+.block-image-text-row {
+
+    @include media-breakpoint-down(md) {
+        .row:where(.image-text-row__col-2:has(img)) {
+            flex-direction: row-reverse; // NEED TO FIX
+        }
+    }
+
+    @include media-breakpoint-up(md) {
+
+        div[class*="col"] {
+
+            &.image-text-row__col-1:not(:has(img)) {
+                padding-right: 4.5rem;
+            }
+
+            &.image-text-row__col-2:not(:has(img)) {
+                padding-left: 4.5rem;
+            }
+        }
+
+        div[class*="col"] figure:has(img) {
+            margin-bottom: 40px;
+        }
+    }
+
+
+    @include media-breakpoint-up(lg) {
+
+        div[class*="col"] {
+
+            &.image-text-row__col-1:not(:has(img)) {
+                padding-right: 6.5rem;
+            }
+
+            &.image-text-row__col-2:not(:has(img)) {
+                padding-left: 6.5rem;
+            }
+        }
+    }
+}

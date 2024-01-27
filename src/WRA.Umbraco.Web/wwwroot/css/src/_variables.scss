@@ -1,0 +1,178 @@
+@use 'sass:math';
+
+$enable-negative-margins: true;
+$enable-dark-mode: false;
+$grid-gutter-width: 2.5rem;
+
+$gutters: (
+    0: 0,
+    1: math.div(4,16) * 1rem,
+    2: math.div(8,16) * 1rem,
+    2_5: math.div(12,16) * 1rem,
+    3: math.div(16,16) * 1rem,
+    4: math.div(24,16) * 1rem,
+    5: math.div(32,16) * 1rem,
+    6: math.div(40,16) * 1rem,
+    7: math.div(48,16) * 1rem,
+    8: math.div(56,16) * 1rem,
+    9: math.div(64,16) * 1rem,
+    10: math.div(80,16) * 1rem,
+    11: math.div(96,16) * 1rem,
+    12: math.div(112,16) * 1rem
+);
+
+$spacers: (
+    0: 0,
+    1: math.div(4,16) * 1rem,
+    2: math.div(8,16) * 1rem,
+    2_5: math.div(12,16) * 1rem,
+    3: math.div(16,16) * 1rem,
+    4: math.div(24,16) * 1rem,
+    5: math.div(32,16) * 1rem,
+    6: math.div(40,16) * 1rem,
+    7: math.div(48,16) * 1rem,
+    8: math.div(56,16) * 1rem,
+    9: math.div(64,16) * 1rem,
+    10: math.div(80,16) * 1rem,
+    11: math.div(96,16) * 1rem,
+    12: math.div(112,16) * 1rem
+);
+
+$blue-dark: #1D4674;
+$blue-medium: #2560B9;
+$blue-light: #DEECF2;
+
+$yellow: #FFC672;
+$yellow-10: #FFD79C;
+
+$gray-10: #F4F4F7;
+$gray-20: #D7D7DC;
+$gray-30: #696F78;
+$gray-40: #050F1E;
+
+$primary: $blue-medium;
+$secondary: $blue-dark;
+$tertiary: $blue-light;
+$info: $yellow;
+$light: $gray-10;
+$dark: $gray-40;
+$medium: $gray-20;
+$body-color: $gray-40;
+
+$colors: (
+    'blue-medium': $blue-medium,
+    'blue-dark': $blue-dark,
+    'blue-light': $blue-light
+);
+
+$theme-colors: (
+    'primary': $primary,
+    'secondary': $secondary,
+    'info': $info,
+    'light': $light,
+    'dark': $dark
+);
+
+$grays: (
+    '10': $gray-10,
+    '20': $gray-20,
+    '30': $gray-30,
+    '40': $gray-40
+);
+
+$link-color: $blue-medium;
+$link-hover-color: $blue-medium;
+$link-decoration: underline;
+$link-hover-decoration: underline;
+
+$font-family-sans-serif: Inter, sans-serif;
+$font-family-serif: Roboto Serif, serif;
+$headings-font-family: Poppins, sans-serif;
+$display-font-family: Poppins, sans-serif;
+
+
+//Poppins 400, 500, 600, 800
+//Roboto Serif 500
+//Inter 400, 600
+
+$font-weight-light:           400;
+$font-weight-normal:          500;
+$font-weight-bold:            600;
+$font-weight-bolder:          800;
+
+$line-height-base: 1.66;
+$font-size-base: math.div(16,16) * 1rem;
+$font-weight-base: $font-weight-light;
+
+$font-size-xs: math.div(12,16) * 1rem;
+$font-size-sm: math.div(14,16) * 1rem;
+$font-size-md: math.div(16,16) * 1rem;
+$font-size-lg: math.div(18,16) * 1rem;
+$font-size-xl: math.div(20,16) * 1rem;
+
+$small-font-size: $font-size-sm;
+$lead-font-size: $font-size-xl;
+$lead-font-weight: 300;
+
+$h1-font-size: math.div(44,16) * 1rem;
+$h2-font-size: math.div(32,16) * 1rem;
+$h3-font-size: math.div(24,16) * 1rem;
+$h4-font-size: math.div(16,16) * 1rem;
+$h5-font-size: math.div(24,16) * 1rem;
+$h6-font-size: math.div(16,16) * 1rem;
+$headings-font-weight: 800;
+
+$display1-font-size: math.div(56,16) * 1rem;
+
+$display-font-sizes: (
+    1: $display1-font-size
+);
+$display-font-weight: $headings-font-weight;
+
+$blockquote-footer-font-size: $font-size-lg;
+$blockquote-footer-color: $gray-40;
+
+
+$hr-opacity: 1;
+$hr-color: $gray-10;
+
+$btn-font-family: Poppins, sans-serif;
+
+$btn-font-size: $font-size-md;
+$btn-font-size-sm: $font-size-sm;
+
+$btn-color: $blue-medium;
+$btn-link-color: #FFFFFF;
+$btn-link-hover-color: $gray-40;
+$btn-line-height: normal;
+
+$btn-border-width: 0px;
+$btn-font-weight: 600;
+$btn-transition: color 300ms ease-in-out, background-color 300ms ease-in-out, border-radius 300ms ease-in-out, background-position-x 300ms linear, border-color 300ms ease-in-out;
+
+$btn-padding-y: 1.125rem;
+$btn-padding-x: 1.75rem;
+
+$btn-padding-y-sm: 0.5rem;      
+$btn-padding-x-sm: 1rem;
+
+$btn-border-radius: 4px;
+$btn-hover-border-radius: 40px;
+
+$btn-border-radius-sm: 4px;
+
+$form-label-font-size: 18px;
+$form-label-font-weight: 600;
+
+$input-border-color: $gray-20;
+$input-border-radius: 0.25rem;
+$form-select-padding-y: 0.5625rem;
+
+$list-group-border-color: $gray-20;
+$list-group-border-width: 1px;
+$list-group-item-padding-x: 0px;
+$list-group-item-padding-y: 1rem;
+
+$table-cell-padding-x: 0;
+$table-cell-padding-y: 1.5rem;
+$table-border-color: $gray-20;

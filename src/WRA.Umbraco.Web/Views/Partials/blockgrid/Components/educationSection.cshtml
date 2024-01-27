@@ -1,0 +1,78 @@
+﻿@using Umbraco.Extensions
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+@using Umbraco.Cms.Core.Models.Blocks
+@using ContentModels = WRA.Umbraco.Models;
+
+@{
+    var content = (ContentModels.EducationSection)Model.Content;
+    var image = content.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("image");
+
+    string className = "block-home-education-section pb-lg-12 overflow-hidden";
+    string style = "";
+    string props = "";
+
+
+    if (content.HasValue("additionalCssClasses"))
+    {
+        className += $" {content.AdditionalCssClasses}";
+    }
+
+    if (!String.IsNullOrEmpty(className))
+    {
+        props += $"class=\"{className.Trim()}\"";
+    }
+
+    if (!String.IsNullOrEmpty(style))
+    {
+        props += $" style=\"{style}\"";
+    }
+    
+}
+
+<div @Html.Raw(props.Trim())>
+    <div class="block-home-education-section__top">
+        <div class="position-absolute w-50 h-100 d-none d-lg-block" style="background: var(--bs-blue-dark)"></div>
+        <div class="container position-relative" style="z-index: 1;">
+            <div class="row g-0" style="background: var(--bs-blue-dark)">
+                <div class="col-lg-7 col-xl-6 me-auto text-white pb-lg-8">
+                    <div class="pt-10 pb-5 pt-lg-12">
+                        @if (content.HasValue("overline"))
+                        {
+                            <p class="overline mb-4" style="color: var(--bs-info)">@content.Overline</p>
+                        }
+
+                        @if (content.HasValue("headline"))
+                        {
+                            <h2 class="display-1 mb-4">@content.Headline</h2>
+                        }
+
+                        @if (content.HasValue("content"))
+                        {
+                            <div class="rich-text text-white mb-5 fs-xl font-family-2">
+                                @content.Content
+                            </div>
+                        }
+
+                        @if (content.HasValue("link"))
+                        {
+                            <a href="@content.Link.Url" target="@content.Link.Target" class="btn btn-link-arrow btn-light ms-n2_5">
+                                @content.Link.Name
+                                <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M0.820801 8L12.0314 8" stroke="#050F1E" stroke-width="1.37143" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M8.51733 4L12.5173 8L8.51733 12" stroke="#050F1E" stroke-width="1.37143" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </a>
+                        }
+                    </div>
+                </div>
+                <div class="col-lg-4 position-relative block-home-education-section__img-col mt-0">
+                    <img src="@image.MediaUrl()" alt="@image.Value("altText")" class="block-home-education-section__img img-curved img-curved--large" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container position-relative block-home-education-section__cards mt-n10 mt-lg-n11 pb-7 pb-lg-0" style="z-index: 1;">
+        @await Html.GetBlockGridItemAreaHtmlAsync(Model, "home-education-cards")
+    </div>
+</div>
+

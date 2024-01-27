@@ -1,0 +1,37 @@
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+@using ContentModels = WRA.Umbraco.Models;
+@{
+    var content = (ContentModels.Spacer)Model.Content;
+    string style = "";
+    var className = "spacer ";
+
+    if (content.HasValue("additionalCssClasses"))
+    {
+        className += $" {content.AdditionalCssClasses}";
+    }
+
+    if (content.HasValue("heightSmall"))
+    {
+        style += $"--height-sm:{content.HeightSmall};";
+    } else
+    {
+        style += "--height-sm: 4rem;--height-md: 6rem;"; //defaults
+    }
+
+    if (content.HasValue("heightMedium"))
+    {
+        style += $"--height-md:{content.HeightMedium};";
+    }
+
+    if (content.HasValue("heightLarge"))
+    {
+        style += $"--height-lg:{content.HeightLarge};";
+    }
+
+    if (content.HasValue("heightExtraLarge"))
+    {
+        style += $"--height-xl:{content.HeightExtraLarge};";
+    }
+}
+
+<div class="@className" style="@style"></div>

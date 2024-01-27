@@ -1,0 +1,14 @@
+{
+  "Name": "News Article - Excerpt - Textarea",
+  "Alias": "",
+  "EditorAlias": "Umbraco.TextArea",
+  "DatabaseType": 0,
+  "Configuration": {
+    "maxChars": 135
+  },
+  "Parent": null,
+  "Udi": "umb://data-type/51fd7f92cc5a4c2fb9ca4095a58b41af",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
+  "__version": "12.0.5"
+}

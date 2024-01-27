@@ -1,0 +1,85 @@
+﻿@using Umbraco.Extensions
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+@using Umbraco.Cms.Core.Models.Blocks
+@using ContentModels = WRA.Umbraco.Models;
+
+@{
+    var content = (ContentModels.HeadlineBlock)Model.Content;
+    string className = "mb-3 mb-lg-4";
+    string style = "";
+    string props = "";
+    string headingLevel = content.HeadingLevel.ToLower();
+
+    if (content.HasValue("fontSize"))
+    {
+        switch (content.FontSize)
+        {
+            case "56px":
+                className += " display-1";
+                break;
+            case "44px":
+                className += " h1";
+                break;
+            case "32px":
+                className += " h2";
+                break;
+            case "24px":
+                className += " h3";
+                break;
+            case "16px":
+                className += " h4";
+                break;
+            case "14px":
+                className += " fs-sm";
+                break;
+            case "12px":
+                className += " fs-xs";
+                break;
+        }
+    }
+
+    if (content.HasValue("textAlignment"))
+    {
+        string textAlignment = content.TextAlignment.ToString().ToLower();
+
+        if (textAlignment == "left")
+        {
+            textAlignment = "start";
+        }
+        else if (textAlignment == "right")
+        {
+            textAlignment = "end";
+        }
+
+        className += $" text-{textAlignment}";
+    }
+
+    if (content.HasValue("textColor"))
+    {
+        style += $"color:#{content.TextColor};";
+    }
+
+    if (content.HasValue("bottomMargin"))
+    {
+        style += $"margin-bottom:{content.BottomMargin} !important;";
+    }
+
+    if (content.HasValue("additionalCssClasses"))
+    {
+        className += $" {content.AdditionalCssClasses}";
+    }
+
+    if (!String.IsNullOrEmpty(className))
+    {
+        props += $"class=\"{className.Trim()}\"";
+    }
+
+    if (!String.IsNullOrEmpty(style))
+    {
+        props += $" style=\"{style}\"";
+    }
+}
+
+<@headingLevel @Html.Raw(props.Trim())>
+    @Html.Raw(content.HeadlineText)
+</@headingLevel>

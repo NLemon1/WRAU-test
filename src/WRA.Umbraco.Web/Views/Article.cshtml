@@ -1,0 +1,154 @@
+﻿@using ContentModels = WRA.Umbraco.Models;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<WRA.Umbraco.Models.Article>
+@using Umbraco.Cms.Core.Models.Blocks;
+@using Microsoft.AspNetCore.Http.Extensions;
+@using WRA.Umbraco.Web.Helpers
+
+@{
+    Layout = "~/Views/_Layout.cshtml";
+    var content = (ContentModels.Article)Model;
+    var image = content.Image;
+    var sections = Model.Value<IEnumerable<BlockGridItem>>("sections");
+
+    string articleTitle = !String.IsNullOrEmpty(Model.Title) ? content.Title : content.Name;
+    var articleDateReadable = String.Format("{0:MMMM d, yyyy}", content.Date);
+    var articleDate = String.Format("{0:yyyy-MM-dd}", content.Date);
+    var articleDateISO = String.Format("{0:s}", content.Date) + "+06:00";
+
+    string absUrl = ViewContext.HttpContext.Request.GetEncodedUrl();
+}
+
+@section scripts {
+
+    @if (content.HasValue("Author") && !String.IsNullOrEmpty(content.Author.Value("authorTitle").ToString()) && !String.IsNullOrEmpty(Model.Name))
+    {
+        <script type="application/ld+json">
+            {
+                "@@context": "https://schema.org",
+                "@@type": "Article",
+                "headline": "@articleTitle",
+                "url": "@absUrl",
+                "author": "@content.Author.Value("authorName")",
+                "name": "@articleTitle",
+                @if (content.HasValue("image"))
+                {
+                    <text>"image": "@content.Image.Url()",</text>
+                }
+                "datePublished": "@articleDateISO"
+            }
+        </script>
+    }
+}
+
+<header class="container">
+
+    <a class="d-inline-flex align-items-center gap-1 text-decoration-none mt-4 my-lg-5 fw-bold" href="@content.Parent.Url()">
+        <i class="fa fa-chevron-left" width="16" height="16" aria-hidden="true"></i>
+        @content.Parent.Name
+    </a>
+
+    <div class="row">
+        <div class="col-md-6 d-flex flex-column justify-content-center">
+            @if (content.HasValue("Category"))
+            {
+                <a href="/news-updates?category=@HtmlHelperExtensions.FormatSlug(@content.Category.Name)" class="chip align-self-start mb-3 mb-lg-4">
+                    @content.Category.Name
+                </a>
+            }
+            <h1 class="mb-3 h5 pe-lg-5">
+                @articleTitle
+            </h1>
+            <div>
+                @if (content.HasValue("Author") && !String.IsNullOrEmpty(content.Author.Value("authorTitle").ToString()))
+                {
+                    bool hasTitle = !String.IsNullOrEmpty(content.Author.Value("authorTitle").ToString());
+                    string setSpacer = hasTitle ? ", " : "";
+                    <p>
+                        @if(!String.IsNullOrEmpty(content.Author.Value("authorName").ToString())){
+                            @content.Author.Value("authorName")
+                            @setSpacer
+                        } else
+                        {
+                            @content.Author.Name
+                        }
+                        @if (hasTitle)
+                        {
+                            @content.Author.Value("authorTitle")
+                        }
+                    </p>
+                }
+
+                @if (content.HasValue("magazineLink"))
+                {
+                    <p class="mb-3">
+                        <a href="@content.MagazineLink.Url()">
+                            @content.MagazineLink.Name
+                        </a>
+                    </p>
+                }
+
+                @if (content.HasValue("date"))
+                {
+                    <time class="fs-xs mt-n1" style="color: var(--bs-gray-30)" datetime="@articleDate">
+                        @articleDateReadable
+                    </time>
+                }
+
+            </div>
+
+        </div>
+        @if (content.HasValue("image"))
+        {
+            <div class="col-md-6 d-flex flex-column justify-content-center">
+                <figure class="img-curved img-curved--large">
+                    <img loading="lazy" class="img-fluid" src="@content.Image.Url()?width=550" srcset="@content.Image.Url()?width=1110 2x" width="@content.Image.Value("umbracoWidth")" height="@content.Image.Value("umbracoHeight")" alt="@(content.Image.Value("altText") ?? "")">
+                </figure>
+            </div>
+        }
+    </div>
+
+</header>
+<div class="container my-4 mt-lg-6 mb-lg-9">
+    <div class="row">
+        <div class="col-md-7 col-lg-8">
+            @if (content.HasValue("richTextContent"))
+            {
+                <div class="rich-text rich-text-article">
+                    @Html.Raw(content.RichTextContent)
+                </div>
+            }
+            @await Html.PartialAsync("blockgrid/default", sections)
+        </div>
+        <div class="col-md-5 col-lg-4 ps-lg-5">
+            @{
+                IEnumerable<IPublishedContent> newsArticles = Umbraco.ContentAtRoot().DescendantsOrSelfOfType("article")
+                .Where(p => p.IsVisible() && p.Value<WRA.Umbraco.Models.ArticleCategory>("category").Id == content.Category.Id && p.Id != content.Id)
+                .OrderBy(p => p.GetProperty("date").GetSourceValue()).Reverse()
+                .Take(5);
+            }
+
+            @if (newsArticles.Any())
+            {
+                <h2 class="h5 mb-3">Related Articles</h2>
+                <div class="row g-1 g-lg-3">
+                    @foreach (var child in newsArticles)
+                    {
+                        //var categoryName = child.Value<WRA.Umbraco.Models.ArticleCategory>("category");
+                        var pubDate = child.GetProperty("date").GetValue();
+                        var image2 = child.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("image");
+                      
+                            <div class="col">
+                            <a href="@child.Url()" class="news-card d-flex flex-row align-items-center p-2 text-decoration-none">
+                                <img src="@image2.MediaUrl()" class="object-fit-cover" width="120" height="80" alt="@child.GetProperty("title").GetValue()" />
+                                <div class="w-100 h-100 d-flex flex-column ps-2 py-2">
+                                    <h3 class="h6 news-card__headline">@child.GetProperty("title").GetValue()</h3>
+                                    <p class="mt-auto fw-light fs-xs" style="color: var(--bs-gray-30)">@String.Format("{0:MMMM d, yyyy}", pubDate)</p>
+                                </div>
+                            </a>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>

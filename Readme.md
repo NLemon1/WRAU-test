@@ -1,6 +1,6 @@
 # Welcome to Umbraco Cloud
 
-In order to run Umbraco locally you will need to [install the .NET 8.0 SDK](https://dotnet.microsoft.com/download) (if you do not have this already).
+In order to run Umbraco locally you will need to [install the .NET 7.0 SDK](https://dotnet.microsoft.com/download) (if you do not have this already).
 
 With dotnet installed, run the following commands in your terminal application of choice:
 
@@ -143,7 +143,7 @@ dotnet new sln --name MyAwesomeSolution
 
 If you want to add additional projects to your solution, you can do that from the command line as well using the following `dotnet` commands
 ```
-dotnet new classlib --name MyAwesomeProject.Code --output src/MyAwesomeProject.Code -f net8.0
+dotnet new classlib --name MyAwesomeProject.Code --output src/MyAwesomeProject.Code -f net7.0
 dotnet sln add .\src\MyAwesomeProject.Code\MyAwesomeProject.Code.csproj
 dotnet sln add .\src\MyAwesomeProject.Web\MyAwesomeProject.Web.csproj
 dotnet add .\src\MyAwesomeProject.Web\MyAwesomeProject.Web.csproj reference .\src\MyAwesomeProject.Code\MyAwesomeProject.Code.csproj

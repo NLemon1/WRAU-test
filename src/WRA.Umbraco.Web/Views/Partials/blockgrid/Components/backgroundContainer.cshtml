@@ -1,0 +1,53 @@
+﻿@using Umbraco.Extensions
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+@using Umbraco.Cms.Core.Models.Blocks;
+@using ContentModels = WRA.Umbraco.Models;
+
+@{
+    var content = (ContentModels.BackgroundContainer)Model.Content;
+    string props = "";
+    string className = "block-background-container w-100 d-block ";
+    string style = "";
+
+    if (content.HasValue("additionalCssClasses"))
+    {
+        className += $" {content.AdditionalCssClasses}";
+    }
+    
+    if (content.HasValue("yPadding"))
+    {
+        style += $"padding-bottom:{content.YPadding};";
+        style += $"padding-top:{content.YPadding};";
+    }
+
+    if (content.HasValue("color"))
+    {
+        style += $"background-color:#{content.Color};";
+    }
+
+    @if (content.HasValue("backgroundOffset") && content.Value("backgroundOffset").ToString() == "True")
+    {
+        className += " bg-offset-decor z-0";
+    }
+
+    if (content.HasValue("additionalCssClasses"))
+    {
+        className += $" {content.AdditionalCssClasses}";
+    }
+
+    if (!String.IsNullOrEmpty(className))
+    {
+        props += $"class=\"{className.Trim()}\"";
+    }
+
+    if (!String.IsNullOrEmpty(style))
+    {
+        props += $" style=\"{style}\"";
+    }
+
+
+}
+
+<div @Html.Raw(props.Trim())>
+    @await Html.GetBlockGridItemAreaHtmlAsync(Model, "background-container-area")
+</div>

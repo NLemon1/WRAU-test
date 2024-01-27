@@ -1,0 +1,384 @@
+//General Cards
+
+.card {
+    position: relative;
+    z-index: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: #FFF;
+    box-shadow: 0 0 50px rgba(49, 56, 59, 0.12);
+    gap: calc(12/16 * 1rem) 0;
+    padding: 2.5rem 2rem;
+    height: 100%;
+
+    &__headline {
+        position: relative;
+    }
+
+    &__headline--hairline {
+        padding-bottom: 1rem;
+        margin-bottom: 1.75rem;
+        
+        &::after {
+            content:"";
+            width: 102px;
+            height: 1px;
+            background-color: $yellow;
+            position: absolute;
+            bottom: -10px;
+            top: auto;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+        }
+    }
+
+    //Card Numbered (Education Cards) specific styles
+    &-numbered {
+        padding-left: calc(2rem + 30px);
+
+        &__number {
+            display: block;
+            position: absolute;
+            left: calc(0.75rem + 17px);
+            top: 0;
+            bottom: 0;
+            margin: auto 0;
+            width: 1px;
+            height: calc(100% - 5rem);
+            writing-mode: vertical-lr;
+            text-orientation: mixed;
+            text-align: left;
+            line-height: 0;
+            transform: rotate(180deg);
+            font-family: $display-font-family;
+            font-weight: 600;
+            color: $yellow;
+
+            &::before {
+                content: "";
+                display: block;
+                position: absolute;
+                height: calc(100% - 2rem);
+                width: 1px;
+                bottom: 0;
+                left: 0;
+                border-right: solid 1px $yellow;
+            }
+
+        }
+    }
+
+}
+
+@include media-breakpoint-up(lg) {
+    .row:has(.card-hover-effect:hover) {
+        .card {
+            background-color: $gray-10;
+            box-shadow: 0 0 50px rgba(49, 56, 59, 0.0);
+            transition: box-shadow 300ms ease 0s, transform 300ms ease 0s, background-color 300ms ease 0s;
+        }
+    }
+
+    .row:has(.card-hover-effect:not(:hover)) {
+
+       .card-hover-effect {
+            transition: box-shadow 300ms ease 0s, transform 300ms ease 0s, background-color 300ms ease 0s;
+            box-shadow: 0 0 50px rgba(49, 56, 59, 0.12);
+            transform: scale(1.0);
+
+            &:hover {
+                box-shadow: 0 0 57px rgba(49, 56, 59, 0.2);
+                transform: scale(1.05);
+                background-color: #FFF;
+            }
+       }
+
+    }
+}
+
+//Child grid card
+
+.child-card {
+    min-height: 144px;
+    height: 100%;
+    background-color: #FFF;
+    box-shadow: 0px 0px 18px rgba(0, 75, 122, 0.15);
+    border-bottom: solid 8px $blue-light;
+    transition: border-bottom 250ms ease 0s;
+    position: relative;
+
+    @include media-breakpoint-up(lg) {
+        min-height: 208px;
+    }
+
+    &__headline {
+        font-size: 1rem;
+
+        @include media-breakpoint-up(lg) {
+            font-size: 1.125rem;
+        }
+    }
+
+    &__inner {
+        //position: absolute;
+        //top: 0;
+        //bottom: 0;
+        //left: 0;
+        //right: 0;
+        margin: 1.5rem auto auto;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: calc(100% - 3rem); // fake gutters
+        align-items: center;
+        //justify-content: center;
+
+        &__content {
+            transition: height 225ms ease 0s, opacity 250ms ease 0s, transform 250ms ease 0s;
+            height: 0px;
+            overflow: visible;
+            opacity: 0;
+        }
+
+        &__icon {
+            transition: transform 250ms ease 0s, margin-bottom 250ms ease 0s;
+            transform: scale(1);
+            transform-origin: top center;
+            font-size: 40px;
+            color: $blue-medium;
+            margin-bottom: 1rem;
+
+            @include media-breakpoint-up(lg) {
+                font-size: 64px;
+                margin-bottom: 1.5rem;
+            }
+        }
+    }
+
+    &:hover {
+        border-bottom-color: $blue-medium;
+
+        @include media-breakpoint-up(lg) {
+
+            .child-card__inner__icon {
+                transform: scale(0.65);
+                margin-bottom: 0;
+            }
+
+            .child-card__inner {
+                .child-card__inner__content {
+                    height: 50px;
+                    opacity: 1;
+                }
+            }
+        }
+    }
+
+    &:active {
+        background-color: $gray-10;
+    }
+}
+
+// Mini Card
+
+.mini-card {
+    min-height: 292px;
+    height: 100%;
+    background-color: #FFF;
+    box-shadow: 0px 0px 50px rgba(49, 56, 59, 0.12);
+    position: relative;
+    z-index: 1;
+    transition: box-shadow 250ms ease 0s;
+
+    @include media-breakpoint-up(lg) {
+        &::after {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background-color: $blue-light;
+            transition: background-color 250ms ease 0s, height 250ms ease 0s;
+        }
+    }
+
+    &__link {
+        align-self: center;
+        text-align: center;
+        padding-right: 1.5rem;
+        margin-bottom: 7px;
+
+        @include media-breakpoint-down(lg) {
+            width: 100%;
+            background-color: $gray-10;
+            border-radius: 42px;
+            padding: 0.5rem 1.5rem;
+            background-position: calc(100% - 1rem) center;
+
+            &:active {
+                background-color: $gray-20;
+            }
+        }
+
+        @include media-breakpoint-up(lg) {
+            opacity: 0;
+            transition: opacity 250ms ease 0s;
+            color: #FFF;
+
+            svg path {
+                stroke: #FFF;
+            }
+        }
+    }
+
+    &__headline {
+        transition: color 250ms ease 0s;
+    }
+
+    &:hover {
+        box-shadow: 0px 0px 50px rgba(49, 56, 59, 0.2);
+
+        .mini-card__headline {
+            color: $btn-color;
+        }
+
+        .mini-card__link {
+            opacity: 1;
+        }
+
+        &::after {
+            height: 40px;
+            background: $btn-color;
+        }
+    }
+
+    &:active {
+        box-shadow: none;
+    }
+}
+
+
+// News Card
+
+.news-card {
+    background-color: #FFF;
+    box-shadow: 0px 0px 50px rgba(49, 56, 59, 0.12);
+    position: relative;
+    z-index: 1;
+    transition: box-shadow 250ms ease 0s;
+    height: 100%;
+
+    &__headline {
+        transition: color 250ms ease 0s;
+        color: $body-color;
+    }
+
+    &:hover {
+        box-shadow: 0px 0px 50px rgba(49, 56, 59, 0.2);
+
+        .news-card__headline {
+            color: $btn-color;
+        }
+    }
+}
+
+
+// Results Card
+
+.result-card {
+    background-color: #FFF;
+    box-shadow: 0px 0px 18px rgba(0, 75, 122, 0.11);
+    border-bottom: solid 8px $blue-light;
+    transition: border-bottom 250ms ease 0s;
+    position: relative;
+    text-decoration: none;
+
+    &__excerpt {
+        color: initial;
+    }
+
+    &:not(:hover){
+        .result-card__headline {
+            color: initial;
+        }
+    }
+
+    &:hover {
+        border-bottom-color: $blue-medium;
+        text-decoration: none;
+    }
+
+    &:active {
+        background-color: $gray-10;
+    }
+}
+
+// Testimonial Card
+
+.testimonial-card {
+    background-color: $gray-10;
+    min-height: 320px;
+}
+
+//Multimedia Card
+.card-media {
+    transition: box-shadow 300ms ease 0s, transform 300ms ease 0s, background-color 300ms ease 0s;
+
+    &[aria-selected="true"] {
+        background-color: $gray-20;
+    }
+
+    color: $dark;
+
+    &--playlist {
+        background-color: $dark;
+        color: #FFF;
+    }
+
+    &__img {
+        position: relative;
+
+        &::after {
+            content: "";
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='16' width='18' viewBox='0 0 576 512'%3E%3C!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--%3E%3Cpath fill='%23ff0000' d='M549.7 124.1c-6.3-23.7-24.8-42.3-48.3-48.6C458.8 64 288 64 288 64S117.2 64 74.6 75.5c-23.5 6.3-42 24.9-48.3 48.6-11.4 42.9-11.4 132.3-11.4 132.3s0 89.4 11.4 132.3c6.3 23.7 24.8 41.5 48.3 47.8C117.2 448 288 448 288 448s170.8 0 213.4-11.5c23.5-6.3 42-24.2 48.3-47.8 11.4-42.9 11.4-132.3 11.4-132.3s0-89.4-11.4-132.3zm-317.5 213.5V175.2l142.7 81.2-142.7 81.2z'/%3E%3C/svg%3E");
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: 80px auto;
+            position: absolute;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+    }
+
+    &:hover {
+        box-shadow: none;
+    }
+}
+
+//Multimedia feature
+
+.multimedia-feature {
+    &__img {
+        position: relative;
+
+        &::after {
+            content: "";
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='16' width='18' viewBox='0 0 576 512'%3E%3C!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--%3E%3Cpath fill='%23ff0000' d='M549.7 124.1c-6.3-23.7-24.8-42.3-48.3-48.6C458.8 64 288 64 288 64S117.2 64 74.6 75.5c-23.5 6.3-42 24.9-48.3 48.6-11.4 42.9-11.4 132.3-11.4 132.3s0 89.4 11.4 132.3c6.3 23.7 24.8 41.5 48.3 47.8C117.2 448 288 448 288 448s170.8 0 213.4-11.5c23.5-6.3 42-24.2 48.3-47.8 11.4-42.9 11.4-132.3 11.4-132.3s0-89.4-11.4-132.3zm-317.5 213.5V175.2l142.7 81.2-142.7 81.2z'/%3E%3C/svg%3E");
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: 80px auto;
+            position: absolute;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+    }
+}

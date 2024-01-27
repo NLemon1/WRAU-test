@@ -1,0 +1,120 @@
+html {
+    /*.row {
+        --bs-gutter-y: 1.5rem;
+        margin-top: 0.25rem;
+    }*/
+    /* --header-height: 80px;
+    scroll-padding-top: 80px;
+
+    @include media-breakpoint-up(lg) {        
+        --header-height: 104px;
+    }
+
+    &.has-open-nav {
+        @include media-breakpoint-down(lg) {
+            overflow: hidden;
+        }
+    }*/
+}
+
+html {
+    --header-height: 128px;
+    --utility-nav-height: 64px;
+    --nav-height: 64px;
+    --alert-height: 48px;
+
+    @include media-breakpoint-down(lg) {
+        --header-height: 64px;
+    }
+
+    @include media-breakpoint-down(md) {
+        --alert-height: 96px;
+    }
+}
+
+.bg-tertiary {
+    background-color: $tertiary !important;
+}
+
+//.container:not(.block-2-col-layout):not(.block-3-col-layout):not(.block-4-col-layout) {
+//need to fix nested
+.container {
+    //width: calc(100% - 10vw);
+    width: 100%;
+    max-width: 1128px;
+    margin: 0 auto;
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+
+    @include media-breakpoint-up(lg) {
+        padding-right: 1.5rem;
+        padding-left: 1.5rem;
+        max-width: calc(1128px + 3rem);
+    }
+
+    @include media-breakpoint-up(xl) {
+        padding-right: 2.5rem;
+        padding-left: 2.5rem;
+        max-width: calc(1128px + 5rem);
+    }
+
+    &--xs {
+        max-width: 633px;
+    }
+
+    &--sm {
+        max-width: 824px;
+    }
+    
+    &--md {
+        max-width: 936px;
+    }
+
+    &--lg { //used on large row sections
+        //max-width: 1920px;
+        max-width: 2200px;
+    }
+}
+
+/*.row .container,*/
+.container .container:where(.block-4-col-layout, .block-3-col-layout, .block-2-col-layout) {
+    padding-left: 0;
+    padding-right: 0;
+} 
+
+p, ol, ul, figure {    
+    &:last-child {
+        margin-bottom: 0;
+    }
+} .row.is-stacked-on-mobile .col-auto {
+    &, & > .btn {
+        @include media-breakpoint-down(sm) {
+            width: 100%;
+        }
+    }
+} .ratio > img, .fit-cover {
+    object-fit: cover;
+}
+// helpful when .btn should be full-width for mobile but not for various larger breakpoints
+@include media-breakpoint-up(sm) {
+    .w-sm-auto {
+        width: auto !important;
+    }
+} @include media-breakpoint-up(md) {
+    .w-md-auto {
+        width: auto !important;
+    }
+} @include media-breakpoint-up(lg) {
+    .w-lg-auto {
+        width: auto !important;
+    }
+} @include media-breakpoint-up(xl) {
+    .w-xl-auto {
+        width: auto !important;
+    }
+}
+@include media-breakpoint-down(lg) {
+    .no-border-mobile {
+        border-width: 0px !important;
+    }
+}

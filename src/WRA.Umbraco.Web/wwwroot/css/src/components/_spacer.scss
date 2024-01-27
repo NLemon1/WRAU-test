@@ -1,0 +1,19 @@
+.spacer {
+    height: var(--height-sm, 0rem);
+
+    @include media-breakpoint-up(md) {
+        height: var(--height-md, var(--height-sm, 0rem));
+    }
+
+    @include media-breakpoint-up(lg) {
+        height: var(--height-lg, var(--height-md, var(--height-sm, 0rem)));
+    }
+
+    @include media-breakpoint-up(xl) {
+        height: var(--height-xl, var(--height-lg, var(--height-md, var(--height-sm, 0rem))));
+    }
+
+    &.spacer-bg {
+        background: linear-gradient(90deg, $blue-light 0%, $blue-light 69%, rgba(255,255,255,1) 69%);
+    }
+}

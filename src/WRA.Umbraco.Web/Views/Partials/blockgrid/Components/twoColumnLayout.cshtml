@@ -1,0 +1,28 @@
+﻿@using Umbraco.Extensions
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+@using Umbraco.Cms.Core.Models.Blocks;
+@using ContentModels = WRA.Umbraco.Models;
+
+@{
+    var content = (ContentModels.TwoColumnLayout)Model.Content;
+    string className = "block-2-col-layout container";
+
+    if (content.HasValue("additionalCssClasses"))
+    {
+        className += $" {content.AdditionalCssClasses}";
+    }
+}
+
+<div class="@Html.Raw(className.Trim())">
+    <div class="row g-4 g-lg-6">
+        <div class="@(content.Value<bool>("stackOnMobile") ? "col-12 col-lg-6" : "col-6")">
+            @await Html.GetBlockGridItemAreaHtmlAsync(Model, "two-column-1")
+        </div>
+        <div class="@(content.Value<bool>("stackOnMobile") ? "col-12 col-lg-6" : "col-6")">
+            @await Html.GetBlockGridItemAreaHtmlAsync(Model, "two-column-2")
+        </div>
+    </div>
+</div>
+
+
+

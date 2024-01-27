@@ -1,0 +1,89 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>;
+@using ContentModels = WRA.Umbraco.Models;
+
+@{
+    var content = (ContentModels.MembershipWidget)Model.Content;
+    IPublishedContent membershipWidget = content.Value<IPublishedContent>("selectWidget");
+    
+    @if (membershipWidget != null)
+    {
+        var linkPrimary = membershipWidget.Value<Link>("linkPrimary");
+        var linkSecondary = membershipWidget.Value<Link>("linkSecondary");
+
+        <div class="py-8 bg-secondary text-white">
+            <div class="container">
+                <div class="container container--sm text-center">
+                    <h2 class="accent-heading h3 mb-0 fw-semibold" style="text-transform: none;">@membershipWidget.Value("heading")</h2>
+                    @if (membershipWidget.HasValue("content"))
+                    {
+                        @Html.Raw(membershipWidget.Value("content"))
+                    }
+                </div>
+                <div class="row gy-4 mx-4 mx-lg-0 mt-2 mb-5">
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <div class="d-flex align-items-start">
+                            @if (membershipWidget.HasValue("column1Image"))
+                            {
+                                <img class="flex-shrink-0 me-2" src="@(membershipWidget.Value<IPublishedContent>("column1Image").Url())" alt="@(membershipWidget.Value<IPublishedContent>("column1Image").Value("altText"))">
+                            }
+                            <div class="flex-grow-1">
+                                <strong>@membershipWidget.Value("column1Heading")</strong>
+                                <p class="fs-sm">@membershipWidget.Value("column1Content")</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <div class="d-flex align-items-start">
+                            @if (membershipWidget.HasValue("column2Image"))
+                            {
+                                <img class="flex-shrink-0 me-2" src="@(membershipWidget.Value<IPublishedContent>("column2Image").Url())" alt="@(membershipWidget.Value<IPublishedContent>("column2Image").Value("altText"))">
+                            }
+                            <div class="flex-grow-1">
+                                <strong>@membershipWidget.Value("column2Heading")</strong>
+                                <p class="fs-sm">@membershipWidget.Value("column2Content")</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <div class="d-flex align-items-start">
+                            @if (membershipWidget.HasValue("column3Image"))
+                            {
+                                <img class="flex-shrink-0 me-2" src="@(membershipWidget.Value<IPublishedContent>("column3Image").Url())" alt="@(membershipWidget.Value<IPublishedContent>("column3Image").Value("altText"))">
+                            }
+                            <div class="flex-grow-1">
+                                <strong>@membershipWidget.Value("column3Heading")</strong>
+                                <p class="fs-sm">@membershipWidget.Value("column3Content")</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <div class="d-flex align-items-start">
+                            @if (membershipWidget.HasValue("column4Image"))
+                            {
+                                <img class="flex-shrink-0 me-2" src="@(membershipWidget.Value<IPublishedContent>("column4Image").Url())" alt="@(membershipWidget.Value<IPublishedContent>("column4Image").Value("altText"))">
+                            }
+                            <div class="flex-grow-1">
+                                <strong>@membershipWidget.Value("column4Heading")</strong>
+                                <p class="fs-sm">@membershipWidget.Value("column4Content")</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <a class="btn btn-light w-100 w-sm-auto mb-4" href="@linkPrimary.Url" target="@linkPrimary.Target">@linkPrimary.Name</a>
+                    @if (linkSecondary != null)
+                    {
+                        <br />
+                        <a class="btn btn-link-arrow btn-light" href="@linkSecondary.Url" target="@linkSecondary.Target">
+                            @linkSecondary.Name
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23 22" width="23" height="22" fill="none">
+                                <path d="M1 11H16.8889" stroke="#2560B9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M12 5.5L17.5 11L12 16.5" stroke="#2560B9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+}

@@ -1,0 +1,16 @@
+{
+  "Name": "Site Settings - Expiration Days - Numeric",
+  "Alias": "",
+  "EditorAlias": "Umbraco.Integer",
+  "DatabaseType": 2,
+  "Configuration": {
+    "min": 1,
+    "step": 1,
+    "max": 360
+  },
+  "Parent": null,
+  "Udi": "umb://data-type/09d6a1d6143244668fd366870b7019fe",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
+  "__version": "12.0.5"
+}

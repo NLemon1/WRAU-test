@@ -1,0 +1,16 @@
+{
+  "Name": "Checkout Page",
+  "Alias": "CheckoutPage",
+  "File": "umb://template-file/CheckoutPage.cshtml",
+  "Master": null,
+  "Udi": "umb://template/bcc3f944303e49f295e5b5f3d6b6cd51",
+  "Dependencies": [
+    {
+      "Udi": "umb://template-file/CheckoutPage.cshtml",
+      "Ordering": true,
+      "Mode": 0
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.TemplateArtifact",
+  "__version": "12.0.5"
+}

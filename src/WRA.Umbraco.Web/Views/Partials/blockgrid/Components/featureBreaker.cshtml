@@ -1,0 +1,37 @@
+﻿@using Umbraco.Extensions
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+@using Umbraco.Cms.Core.Models.Blocks;
+@using ContentModels = WRA.Umbraco.Models;
+
+@{
+    var content = (ContentModels.FeatureBreaker)Model.Content;
+
+}
+
+<div class="block block-feature-breaker position-relative">
+    @{
+        var typedMediaPickerSingle = content.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("backgroundImage");
+
+        if (typedMediaPickerSingle != null)
+
+        {
+            <img src="@typedMediaPickerSingle.MediaUrl()" class="block-feature-breaker__img" loading="lazy" />
+        }
+
+        else
+
+        {
+            <p>Missing image</p>
+        }
+    }
+
+
+    <div class="block-feature-breaker__inner">
+        <div class="container h-100 d-flex flex-column justify-content-center">
+            <div class="block-feature-breaker__inner__content d-flex flex-column align-items-center p-5 py-lg-6 px-lg-10">
+                @await Html.GetBlockGridItemAreasHtmlAsync(Model)
+            </div>
+        </div>
+    </div>
+
+</div>

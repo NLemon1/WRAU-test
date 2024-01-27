@@ -1,0 +1,31 @@
+﻿@using Umbraco.Extensions
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+@using Umbraco.Cms.Core.Models.Blocks;
+@using ContentModels = WRA.Umbraco.Models;
+
+@{
+    var content = (ContentModels.ThreeColumnLayout)Model.Content;
+    string className = "block-3-col-layout container";
+
+    if (content.HasValue("additionalCssClasses"))
+    {
+        className += $" {content.AdditionalCssClasses}";
+    }
+}
+
+<div class="@Html.Raw(className.Trim())">
+    <div class="row g-3 g-md-4">
+        <div class="col-lg-4">
+            @await Html.GetBlockGridItemAreaHtmlAsync(Model, "three-column-1")
+        </div>
+        <div class="col-lg-4">
+            @await Html.GetBlockGridItemAreaHtmlAsync(Model, "three-column-2")
+        </div>
+        <div class="col-lg-4">
+            @await Html.GetBlockGridItemAreaHtmlAsync(Model, "three-column-3")
+        </div>
+    </div>
+</div>
+
+
+

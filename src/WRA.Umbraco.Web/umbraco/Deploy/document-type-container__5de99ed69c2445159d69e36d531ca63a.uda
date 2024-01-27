@@ -1,0 +1,10 @@
+{
+  "Name": "Compositions",
+  "Alias": "",
+  "ContainedObjectType": "a2cb7800-f571-4787-9638-bc48539a0efb",
+  "Parent": null,
+  "Udi": "umb://document-type-container/5de99ed69c2445159d69e36d531ca63a",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContainerArtifact",
+  "__version": "12.0.4"
+}

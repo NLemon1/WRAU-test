@@ -1,0 +1,30 @@
+{
+  "Name": "Site Settings - Alert Message - Rich Text Editor",
+  "Alias": "",
+  "EditorAlias": "Umbraco.TinyMCE",
+  "DatabaseType": 0,
+  "Configuration": {
+    "editor": {
+      "toolbar": [
+        "ace",
+        "removeformat",
+        "styles",
+        "bold",
+        "italic",
+        "link",
+        "unlink"
+      ],
+      "stylesheets": [],
+      "maxImageSize": 500,
+      "mode": "classic"
+    },
+    "overlaySize": "small",
+    "hideLabel": false,
+    "ignoreUserStartNodes": false
+  },
+  "Parent": null,
+  "Udi": "umb://data-type/b19a17132ac947418f49a1a83b3d538f",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
+  "__version": "12.0.5"
+}

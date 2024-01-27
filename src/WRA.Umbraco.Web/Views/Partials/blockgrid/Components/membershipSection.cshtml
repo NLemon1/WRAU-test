@@ -1,0 +1,147 @@
+﻿@using Umbraco.Extensions
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+@using Umbraco.Cms.Core.Models.Blocks
+@using ContentModels = WRA.Umbraco.Models;
+@using Umbraco.Cms.Core.Services;
+@using System.Linq;
+
+@{
+    var content = (ContentModels.MembershipSection)Model.Content;
+
+    IEnumerable<IPublishedContent> testimonials = Umbraco.ContentAtRoot()
+                                            .DescendantsOrSelfOfType("testimonial")
+                                            .Take(3);
+
+    string className = "block-home-membership-section";
+    string style = "";
+    string props = "";
+
+    if (content.HasValue("additionalCssClasses"))
+    {
+        className += $" {content.AdditionalCssClasses}";
+    }
+
+    if (!String.IsNullOrEmpty(className))
+    {
+        props += $"class=\"{className.Trim()}\"";
+    }
+
+    if (!String.IsNullOrEmpty(style))
+    {
+        props += $" style=\"{style}\"";
+    }
+
+}
+
+<div @Html.Raw(props.Trim())>
+    <div class="block-home-membership-section__top">
+
+        <div class="container position-relative" style="z-index: 1;">
+            <div class="row g-0">
+                <div class="col-lg-7 m-0 col-xl-6 me-auto text-white">
+                    <div class="py-5 pt-lg-12 pb-lg-10">
+                        @if (content.HasValue("overline"))
+                        {
+                            <p class="overline mb-5" style="color: var(--bs-info)">@content.Overline</p>
+                        }
+
+                        @if (content.HasValue("headline"))
+                        {
+                            <h2 class="mb-5 display-1">@content.Headline</h2>
+                        }
+
+                        @if (content.HasValue("content"))
+                        {
+                            <div class="rich-text text-white mb-5 fs-xl font-family-2">
+                                @content.Content
+                            </div>
+                        }
+
+                        @await Html.GetBlockGridItemAreaHtmlAsync(Model, "membership-area")
+
+                    </div>
+                </div>
+        
+                
+                @if (testimonials.Any())
+                {
+
+                    <div class="col-lg-5 m-0 position-relative block-home-membership-section__testimonial-col">
+                        <div class="block-home-membership-section__testimonial-slider px-4 px-lg-9 pt-5 pt-lg-10 pb-4 pb-lg-6" style="background-color: var(--bs-blue-light);">
+
+
+                            <div class="slider-testimonials swiper js-swiper h-100 overflow-visible pt-5" style="--swiper-slide-transition-duration:800ms" data-options='{
+                                "speed" : 400,
+                                "effect" : "fade",
+                                 "fadeEffect" : {
+                                    "crossFade" : true
+                                 },
+                                "autoplay" : {
+                                    "delay" : 5000,
+                                 },
+                                 "navigation" : {
+                                    "nextEl" : "#swiper-button-next",
+                                    "prevEl" : "#swiper-button-prev"
+                                 }
+                                }'>
+
+                                <svg class="slider-testimonials__slide__icon ms-n1 ms-lg-n3 mt-lg-n2 mb-3" aria-hidden="true" width="75" height="50" viewBox="0 0 75 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M75 36.5471C75 40.284 73.5736 43.4978 70.7207 46.1883C68.018 48.7294 64.6396 50 60.5856 50C55.03 50 50.3754 48.0568 46.6216 44.1704C43.018 40.284 41.2162 35.2765 41.2162 29.148C41.2162 17.9372 45.5706 9.94021 54.2793 5.15695C60.5856 1.71898 65.6907 0 69.5946 0C71.2462 0 72.0721 0.597903 72.0721 1.79372C72.0721 2.84005 71.1712 3.58744 69.3694 4.03587C56.9069 7.32436 50.6757 13.5276 50.6757 22.6457C50.6757 26.6816 51.7267 30.1196 53.8288 32.9596C54.1291 27.8774 57.3574 25.3363 63.5135 25.3363C66.8168 25.3363 69.5195 26.4574 71.6216 28.6996C73.8739 30.7922 75 33.4081 75 36.5471ZM33.5586 36.5471C33.5586 40.284 32.1321 43.4978 29.2793 46.1883C26.5766 48.7294 23.2733 50 19.3694 50C13.6637 50 9.00901 48.0568 5.40541 44.1704C1.8018 40.1345 0 35.0523 0 28.9238C0 17.8625 4.35435 9.94021 13.0631 5.15695C19.3694 1.71898 24.3994 0 28.1532 0C29.8048 0 30.6306 0.597903 30.6306 1.79372C30.6306 2.84005 29.7297 3.58744 27.9279 4.03587C15.6156 7.32436 9.45946 13.6024 9.45946 22.87C9.45946 26.7564 10.5105 30.1196 12.6126 32.9596C12.9129 27.8774 16.0661 25.3363 22.0721 25.3363C25.3754 25.3363 28.0781 26.4574 30.1802 28.6996C32.4324 30.7922 33.5586 33.4081 33.5586 36.5471Z" fill="#2560B9" />
+                                </svg>
+                           
+                                <div class="swiper-wrapper">
+
+                                    <div class="swiper-controls mt-0 justify-content-start ps-lg-3">
+                                        <button id="swiper-button-prev" class="slider-btn slider-btn--prev" title="Previous">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M17 11.0002H9.41002L12.71 7.71019C12.8983 7.52188 13.0041 7.26649 13.0041 7.00019C13.0041 6.73388 12.8983 6.47849 12.71 6.29019C12.5217 6.10188 12.2663 5.99609 12 5.99609C11.7337 5.99609 11.4783 6.10188 11.29 6.29019L6.29002 11.2902C6.19898 11.3853 6.12761 11.4974 6.08002 11.6202C5.98 11.8636 5.98 12.1367 6.08002 12.3802C6.12761 12.5029 6.19898 12.6151 6.29002 12.7102L11.29 17.7102C11.383 17.8039 11.4936 17.8783 11.6154 17.9291C11.7373 17.9798 11.868 18.006 12 18.006C12.132 18.006 12.2627 17.9798 12.3846 17.9291C12.5065 17.8783 12.6171 17.8039 12.71 17.7102C12.8037 17.6172 12.8781 17.5066 12.9289 17.3848C12.9797 17.2629 13.0058 17.1322 13.0058 17.0002C13.0058 16.8682 12.9797 16.7375 12.9289 16.6156C12.8781 16.4937 12.8037 16.3831 12.71 16.2902L9.41002 13.0002H17C17.2652 13.0002 17.5196 12.8948 17.7071 12.7073C17.8947 12.5198 18 12.2654 18 12.0002C18 11.735 17.8947 11.4806 17.7071 11.2931C17.5196 11.1055 17.2652 11.0002 17 11.0002Z" fill="#050F1E" />
+                                            </svg>
+                                        </button>
+                                        <button id="swiper-button-next" class="slider-btn slider-btn--next" title="Next">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M6.99998 11.0002H14.59L11.29 7.71019C11.1017 7.52188 10.9959 7.26649 10.9959 7.00019C10.9959 6.73388 11.1017 6.47849 11.29 6.29019C11.4783 6.10188 11.7337 5.99609 12 5.99609C12.2663 5.99609 12.5217 6.10188 12.71 6.29019L17.71 11.2902C17.801 11.3853 17.8724 11.4974 17.92 11.6202C18.02 11.8636 18.02 12.1367 17.92 12.3802C17.8724 12.5029 17.801 12.6151 17.71 12.7102L12.71 17.7102C12.617 17.8039 12.5064 17.8783 12.3846 17.9291C12.2627 17.9798 12.132 18.006 12 18.006C11.868 18.006 11.7373 17.9798 11.6154 17.9291C11.4935 17.8783 11.3829 17.8039 11.29 17.7102C11.1963 17.6172 11.1219 17.5066 11.0711 17.3848C11.0203 17.2629 10.9942 17.1322 10.9942 17.0002C10.9942 16.8682 11.0203 16.7375 11.0711 16.6156C11.1219 16.4937 11.1963 16.3831 11.29 16.2902L14.59 13.0002H6.99998C6.73477 13.0002 6.48041 12.8948 6.29287 12.7073C6.10534 12.5198 5.99998 12.2654 5.99998 12.0002C5.99998 11.735 6.10534 11.4806 6.29287 11.2931C6.48041 11.1055 6.73477 11.0002 6.99998 11.0002Z" fill="#050F1E" />
+                                            </svg>
+                                        </button>
+                                    </div>
+
+                                    @foreach (var testimonial in testimonials)
+                                    {
+                                        var image = testimonial.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("image");
+
+                                        <div class="swiper-slide slider-testimonials__slide d-flex flex-column justify-content-between pb-6 pb-lg-0">
+                                            <div class="slider-testimonials__slide__inner d-flex flex-column align-items-start justify-content-between pt-4">
+                                                <p class="slider-testimonials__slide__quote font-family-3 mb-lg-5 pe-2 pe-lg-4 ps-3">
+                                                    @Html.Raw(testimonial.GetProperty("quote").GetValue())
+                                                </p>
+                                                <p class="mb-lg-5 ps-3">
+                                                    <span class="font-family-3 fw-bolder d-block mb-2 ">
+                                                        @Html.Raw(testimonial.GetProperty("affiliation").GetValue())
+                                                    </span>
+                                                    <span class="d-block mb-2">
+                                                        @testimonial.GetProperty("fullName").GetValue()
+                                                    </span>
+                                                    <span class="d-block">
+                                                        @testimonial.GetProperty("locale").GetValue()
+                                                    </span>
+                                                </p>
+                                            </div>
+                                           
+                                            <img class="slider-testimonials__slide__img align-self-end border-rounded mt-auto me-n4" src="@image.MediaUrl()" alt="@image.Value("altText")" />
+                                        </div>
+
+                                    }
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+

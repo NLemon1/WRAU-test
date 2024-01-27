@@ -1,0 +1,191 @@
+{
+  "Name": "Rich Text",
+  "Alias": "richText",
+  "DefaultTemplate": null,
+  "AllowedTemplates": [],
+  "HistoryCleanup": {
+    "preventCleanup": false,
+    "keepAllVersionsNewerThanDays": null,
+    "keepLatestVersionPerDayForDays": null
+  },
+  "Icon": "icon-item-arrangement",
+  "Thumbnail": "folder.png",
+  "Description": null,
+  "IsContainer": false,
+  "Permissions": {
+    "AllowVaryingByCulture": false,
+    "AllowVaryingBySegment": false,
+    "AllowedAtRoot": false,
+    "IsElementType": true,
+    "AllowedChildContentTypes": []
+  },
+  "Parent": "umb://document-type-container/7d7bb95bd7634722b04820839c0ae21e",
+  "CompositionContentTypes": [
+    "umb://document-type/60f9d673dad543a09928bdcb457eb7e6"
+  ],
+  "PropertyGroups": [
+    {
+      "Key": "4f72cbed-db88-4b94-a202-c2717f80853f",
+      "Name": "Content",
+      "SortOrder": 0,
+      "Type": 0,
+      "Alias": "content",
+      "PropertyTypes": [
+        {
+          "Key": "0a9cea19-cdad-4cc6-98a7-266eec6e3ca8",
+          "Alias": "fontFamily",
+          "DataType": "umb://data-type/8bb4c8f4f11f419cbf08e3878524d667",
+          "Description": "(Serif should be used on subhead text)",
+          "Mandatory": false,
+          "MandatoryMessage": null,
+          "Name": "Font Family",
+          "SortOrder": 0,
+          "Validation": null,
+          "ValidationMessage": null,
+          "VariesByCulture": false,
+          "VariesBySegment": false,
+          "LabelOnTop": false,
+          "MemberCanEdit": false,
+          "ViewOnProfile": false,
+          "IsSensitive": false
+        },
+        {
+          "Key": "5965eca0-70e0-4453-b60b-0b13e5c22f5a",
+          "Alias": "fontSize",
+          "DataType": "umb://data-type/f392dc5ebf8946ebb9e29c01c2bb5ddf",
+          "Description": null,
+          "Mandatory": false,
+          "MandatoryMessage": null,
+          "Name": "Font Size",
+          "SortOrder": 2,
+          "Validation": null,
+          "ValidationMessage": null,
+          "VariesByCulture": false,
+          "VariesBySegment": false,
+          "LabelOnTop": false,
+          "MemberCanEdit": false,
+          "ViewOnProfile": false,
+          "IsSensitive": false
+        },
+        {
+          "Key": "720a5ddf-fe0e-43e1-b7c2-1f3bd4a2fde5",
+          "Alias": "textColor",
+          "DataType": "umb://data-type/6e3c0d18fd014527b3b46819b3947a5d",
+          "Description": null,
+          "Mandatory": false,
+          "MandatoryMessage": null,
+          "Name": "Text Color",
+          "SortOrder": 4,
+          "Validation": null,
+          "ValidationMessage": null,
+          "VariesByCulture": false,
+          "VariesBySegment": false,
+          "LabelOnTop": false,
+          "MemberCanEdit": false,
+          "ViewOnProfile": false,
+          "IsSensitive": false
+        },
+        {
+          "Key": "83140512-8c66-4bfa-aa6a-f60bcef88f3d",
+          "Alias": "bottomMargin",
+          "DataType": "umb://data-type/0770a1fb65ac42618d9f77c1a75e5b62",
+          "Description": null,
+          "Mandatory": false,
+          "MandatoryMessage": null,
+          "Name": "Bottom Margin",
+          "SortOrder": 1,
+          "Validation": null,
+          "ValidationMessage": null,
+          "VariesByCulture": false,
+          "VariesBySegment": false,
+          "LabelOnTop": false,
+          "MemberCanEdit": false,
+          "ViewOnProfile": false,
+          "IsSensitive": false
+        },
+        {
+          "Key": "97e0c5f6-0a42-4e32-96f3-27c89415ab62",
+          "Alias": "fontWeight",
+          "DataType": "umb://data-type/efcd755c1ff141d18c9ecf8062e73c30",
+          "Description": null,
+          "Mandatory": false,
+          "MandatoryMessage": null,
+          "Name": "Font Weight",
+          "SortOrder": 3,
+          "Validation": null,
+          "ValidationMessage": null,
+          "VariesByCulture": false,
+          "VariesBySegment": false,
+          "LabelOnTop": false,
+          "MemberCanEdit": false,
+          "ViewOnProfile": false,
+          "IsSensitive": false
+        },
+        {
+          "Key": "bf05b208-fe16-4945-948f-24e691258377",
+          "Alias": "text",
+          "DataType": "umb://data-type/7438330ab6f749d69be1b8a5606cb6c6",
+          "Description": null,
+          "Mandatory": false,
+          "MandatoryMessage": null,
+          "Name": "Text",
+          "SortOrder": 5,
+          "Validation": null,
+          "ValidationMessage": null,
+          "VariesByCulture": false,
+          "VariesBySegment": false,
+          "LabelOnTop": false,
+          "MemberCanEdit": false,
+          "ViewOnProfile": false,
+          "IsSensitive": false
+        }
+      ]
+    }
+  ],
+  "PropertyTypes": [],
+  "Udi": "umb://document-type/fa444fc12c1e414a9fef276551c06714",
+  "Dependencies": [
+    {
+      "Udi": "umb://data-type/0770a1fb65ac42618d9f77c1a75e5b62",
+      "Ordering": true,
+      "Mode": 0
+    },
+    {
+      "Udi": "umb://data-type/6e3c0d18fd014527b3b46819b3947a5d",
+      "Ordering": true,
+      "Mode": 0
+    },
+    {
+      "Udi": "umb://data-type/7438330ab6f749d69be1b8a5606cb6c6",
+      "Ordering": true,
+      "Mode": 0
+    },
+    {
+      "Udi": "umb://data-type/8bb4c8f4f11f419cbf08e3878524d667",
+      "Ordering": true,
+      "Mode": 0
+    },
+    {
+      "Udi": "umb://data-type/efcd755c1ff141d18c9ecf8062e73c30",
+      "Ordering": true,
+      "Mode": 0
+    },
+    {
+      "Udi": "umb://data-type/f392dc5ebf8946ebb9e29c01c2bb5ddf",
+      "Ordering": true,
+      "Mode": 0
+    },
+    {
+      "Udi": "umb://document-type-container/7d7bb95bd7634722b04820839c0ae21e",
+      "Ordering": true,
+      "Mode": 0
+    },
+    {
+      "Udi": "umb://document-type/60f9d673dad543a09928bdcb457eb7e6",
+      "Ordering": true,
+      "Mode": 0
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
+  "__version": "12.0.5"
+}

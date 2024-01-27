@@ -1,0 +1,15 @@
+
+.umb-block-grid__block {
+    height: auto !important; //forces default block grids to not adhere to height
+    min-height: 50px;
+}
+
+.area-zone {
+    border: dashed 5px rgba(200,200,200, 0.5);
+    padding: 5px;
+    margin: 10px 0;
+}
+
+.block-col {
+    display: block;
+}

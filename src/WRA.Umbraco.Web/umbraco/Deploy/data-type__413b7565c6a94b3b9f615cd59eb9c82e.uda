@@ -1,0 +1,31 @@
+{
+  "Name": "Two Column Layout - Area 2 - Block Grid",
+  "Alias": "",
+  "EditorAlias": "Umbraco.BlockGrid",
+  "DatabaseType": 0,
+  "Configuration": {
+    "blocks": [
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": true,
+        "allowInAreas": true,
+        "areas": [],
+        "contentElementTypeKey": "0d9f259f-dc28-402b-bdd2-e202063a7875",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false
+      }
+    ],
+    "blockGroups": [],
+    "validationLimit": {},
+    "useLiveEditing": false
+  },
+  "Parent": null,
+  "Udi": "umb://data-type/413b7565c6a94b3b9f615cd59eb9c82e",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
+  "__version": "12.0.5"
+}

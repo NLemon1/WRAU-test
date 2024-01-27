@@ -1,0 +1,22 @@
+﻿@using Umbraco.Extensions
+@using Umbraco.Cms.Core.Security;
+@using WRA.Umbraco.Web.Extensions;
+@using WRA.Umbraco.Services;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridModel>
+@inject GatedContentService _gatedContentService
+@inject IMemberManager _memberManager
+@{
+    if (Model?.Any() != true) { return; }
+    @* var currentMember = await _memberManager.GetCurrentMemberAsync();
+var blocks = _gatedContentService.ApplyGatedContentRules(Model, currentMember); *@
+}
+
+@* <div class="umb-block-grid row"
+data-grid-columns="@(Model.GridColumns?.ToString() ?? "12");"
+style="--umb-block-grid--grid-columns: @(Model.GridColumns?.ToString() ?? "12");">
+@await Html.GetBlockGridItemsHtmlAsync(Model)
+</div>
+*@
+
+@* @await Html.GetBlockGridItemsHtmlAsync(Model) *@
+@await Html.GetGatedBlockGridItem(Model)

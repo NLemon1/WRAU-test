@@ -1,0 +1,42 @@
+.bg-offset-decor {
+    position: relative;
+
+    @include media-breakpoint-up(lg) {
+
+        &::before {
+            content: "";
+            display: block;
+            position: absolute;
+            z-index: -1;
+            background-color: $gray-10;
+            bottom: 0;
+            right: 0;
+            left: 50%;
+            top: 0;
+            margin: 0 auto;
+            width: 50%;
+            height: 100%;
+        }
+
+        &::after {
+            content: "";
+            display: block;
+            position: absolute;
+            z-index: -1;
+            background-color: $gray-10;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            top: 0;
+            margin: 0 auto;
+            width: calc(100% - 75px);
+            max-width: 1128px;
+            transform: translateX(75px);
+            height: 100%;
+        }
+    }
+}
+
+.bg-darkness {
+
+}

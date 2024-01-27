@@ -1,0 +1,23 @@
+{
+  "Name": "Rich Text - Font Family - Radio button list",
+  "Alias": "",
+  "EditorAlias": "Umbraco.RadioButtonList",
+  "DatabaseType": 1,
+  "Configuration": {
+    "items": [
+      {
+        "id": 1,
+        "value": "Serif"
+      },
+      {
+        "id": 2,
+        "value": "Sans-Serif"
+      }
+    ]
+  },
+  "Parent": null,
+  "Udi": "umb://data-type/8bb4c8f4f11f419cbf08e3878524d667",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
+  "__version": "12.0.5"
+}

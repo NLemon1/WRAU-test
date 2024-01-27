@@ -1,0 +1,159 @@
+﻿@using Umbraco.Extensions
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+@using Umbraco.Cms.Core.Models.Blocks
+@using ContentModels = WRA.Umbraco.Models;
+@using System.Linq;
+@using System.Text.RegularExpressions;
+@using WRA.Umbraco.Web.Helpers
+
+
+@{
+    var content = (ContentModels.MagazineFeatures)Model.Content;
+
+    IEnumerable<IPublishedContent> magazineCollections = Umbraco.ContentAtRoot()
+         .DescendantsOrSelfOfType("magazineCollection").Where(x => x.IsVisible()).OrderBy(p => p.Name).Reverse();
+
+    var currentCollection = magazineCollections.FirstOrDefault(); //get
+    var currentIssue = currentCollection.Children("newsItems").Where(x => x.IsVisible()).OrderBy(p => p.GetProperty("monthYearTitle").GetSourceValue()).Reverse();
+    var currentIssueContent = currentIssue.FirstOrDefault();
+
+    var imageCurrent = currentIssueContent.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("image");
+    var articles = currentIssueContent.Value<IEnumerable<IPublishedContent>>("FeaturedOnlineArticles");
+
+    string className = "block-magazine-featured";
+    string style = "";
+    string props = "";
+
+
+    if (content.HasValue("additionalCssClasses"))
+    {
+        className += $" {content.AdditionalCssClasses}";
+    }
+
+    if (!String.IsNullOrEmpty(className))
+    {
+        props += $"class=\"{className.Trim()}\"";
+    }
+
+    if (!String.IsNullOrEmpty(style))
+    {
+        props += $" style=\"{style}\"";
+    }
+
+}
+
+<div @Html.Raw(props.Trim())>
+    <div class="container">
+        <div class="row align-items-center flex-column flex-lg-row g-4 py-4 py-lg-6">
+            <div class="col flex-lg-fill w-auto">
+                <h2 class="mb-0">@content.Value("heading")</h2>
+            </div>
+            <div class="col d-none d-lg-block flex-lg-fill w-auto text-end">
+                @if (content.HasValue("link"))
+                {
+                    var link = content.Value<Link>("link");
+
+                    <a class="btn btn-primary" href="@link.Url" target="@link.Target">@link.Name</a>
+                }
+            </div>
+        </div>
+        <div class="row g-lg-4">
+            <div class="col-md-6 col-lg-8 d-md-flex align-items-center">
+                <div class="ratio d-md-none position-relative overflow-hidden bg-black" style="--bs-aspect-ratio: 129%;">
+                    <div class="position-absolute z-2 d-flex flex-column justify-content-end align-items-start pb-2">
+                        <span class="h4 text-white px-3 py-2 z-1 w-100 d-block mb-4" style="background-color: var(--bs-primary)">
+                            Current Issue
+                        </span>
+                        <h3 class="fs-md mb-3 mx-4 text-white">
+                            @currentIssueContent.Name
+                        </h3>
+                        <h4 class="h3 mb-3 mx-4 text-white">What is this title supposed to pull from?</h4>
+                        <a href="@currentIssueContent.Value("Pdf")" class="btn btn-light btn-link-arrow btn-link-arrow--reverse btn-link-arrow--download ms-2 mb-3">
+                            Download PDF
+                            <i class="fa-solid fa-download ms-1"></i>
+                        </a>
+                    </div>
+                    <img src="@imageCurrent.Url()?width=640" class="w-100 top-0 h-100 opacity-50 fit-cover mb-4 position-absolute z-1" width="320" height="412" alt="@(imageCurrent.Value("altText") ?? "")" />
+                </div>
+
+                <div style="flex-basis: 50%" class="pe-0 d-none d-md-block h-100">
+                    <img src="@imageCurrent.Url()?width=640" class="w-100 h-100 fit-cover mb-4" width="320" height="412" alt="@(imageCurrent.Value("altText") ?? "")" />
+                </div>
+
+                <div class="p-4 d-flex flex-column align-items-start justify-content-center d-none d-md-flex h-100" style="flex-basis: 50%; background: var(--bs-gray-10)">
+                    <h3 class="h6 fs-md fw-bolder mb-3" style="color: var(--bs-secondary)">
+                        @currentIssueContent.Name
+                    </h3>
+                    <h4 class="h3 mb-3">What is this title supposed to pull from?</h4>
+                    <a href="@currentIssueContent.Value("Pdf")" class="btn btn-link-arrow btn-link-arrow--download ms-n2_5 mb-3">
+                        Download PDF
+                        <i class="fa-solid fa-download ms-1"></i>
+                    </a>
+                    <a href="@currentIssueContent.Url()" class="btn btn-link-arrow ms-n2_5" ">
+                        Read Online
+                        <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0.820801 8L12.0314 8" stroke="#050F1E" stroke-width="1.37143" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M8.51733 4L12.5173 8L8.51733 12" stroke="#050F1E" stroke-width="1.37143" stroke-linecap="round"
+                                  stroke-linejoin="round" />
+                        </svg>
+                    </a>
+                </div>
+
+            </div>
+            <div class="col-md-6 col-lg-4">
+
+                @if (articles != null)
+                {
+                    <h3 class="h4 text-white px-3 py-2 d-none d-lg-block" style="background-color: var(--bs-blue-dark)">
+                        Featured Articles
+                    </h3>
+
+                    @if (articles.Any())
+                    {
+                        <ul class="list-unstyled d-flex flex-column list-group list-group-flush">
+                            @foreach (var child in articles.Where(x => x.IsVisible()).Take(3))
+                            {
+
+                                var articleTitle = child.HasProperty("Title") ? child.Value("Title") : child.Name;
+                                var articleImage = child.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("image");
+
+                                string cleanContent = "";
+
+                                if (child.HasValue("richTextContent") && !child.HasValue("excerpt"))
+                                {
+                                    cleanContent = HtmlHelperExtensions.ShortenExcerpt(child.Value("richTextContent").ToString(), 135);
+                                }
+
+                                var articleSummary = child.HasValue("excerpt") ? child.Value("excerpt") : cleanContent;
+
+                                <li class="d-flex flex-row position-relative list-group-item">
+                                    <img src="@articleImage.MediaUrl()?width=240&height=160" class="fit-cover" width="120" height="80" alt="@(imageCurrent.Value("altText") ?? "")" />
+                                    <div class="flex-fill ps-3">
+                                        <a href="@child.Url()" class="stretched-link link-hover-inverse">
+                                            <h4 class="fs-md mb-1">@articleTitle</h4>
+                                        </a>
+                                        @if (articleSummary != null)
+                                        {
+                                            <p class="fs-sm d-none d-lg-block">@articleSummary</p>
+                                        }
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                    }
+                }
+            </div>
+        </div>
+
+        <div class="col d-block d-lg-none">
+            @if (content.HasValue("link"))
+            {
+                var link = content.Value<Link>("link");
+
+                <a class="btn btn-primary w-100 w-md-auto mt-4" href="@link.Url" target="@link.Target">@link.Name</a>
+            }
+        </div>
+    </div>
+</div>
+
+

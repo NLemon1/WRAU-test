@@ -1,0 +1,21 @@
+{
+  "Name": "Member Registration",
+  "Alias": "MemberRegistration",
+  "MacroSource": "~/Views/MacroPartials/MemberRegistration.cshtml",
+  "UseInEditor": true,
+  "CacheDuration": 0,
+  "CacheByPage": false,
+  "CacheByMember": false,
+  "DontRender": false,
+  "Properties": [],
+  "Udi": "umb://macro/d96c8321520340c9b6e4c3940f42ccd1",
+  "Dependencies": [
+    {
+      "Udi": "umb://partial-view-macro/MemberRegistration.cshtml",
+      "Ordering": true,
+      "Mode": 1
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.MacroArtifact",
+  "__version": "12.0.5"
+}

@@ -1,0 +1,36 @@
+{
+  "Name": "Gated Content",
+  "Alias": "gatedContent",
+  "DefaultTemplate": null,
+  "AllowedTemplates": [],
+  "HistoryCleanup": {
+    "preventCleanup": false,
+    "keepAllVersionsNewerThanDays": null,
+    "keepLatestVersionPerDayForDays": null
+  },
+  "Icon": "icon-lock color-black",
+  "Thumbnail": "folder.png",
+  "Description": "Nest other blocks to control visibility and restrict content.",
+  "IsContainer": false,
+  "Permissions": {
+    "AllowVaryingByCulture": false,
+    "AllowVaryingBySegment": false,
+    "AllowedAtRoot": false,
+    "IsElementType": true,
+    "AllowedChildContentTypes": []
+  },
+  "Parent": "umb://document-type-container/7d7bb95bd7634722b04820839c0ae21e",
+  "CompositionContentTypes": [],
+  "PropertyGroups": [],
+  "PropertyTypes": [],
+  "Udi": "umb://document-type/8b1136bde6f941b2ba5d94437cb157cc",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type-container/7d7bb95bd7634722b04820839c0ae21e",
+      "Ordering": true,
+      "Mode": 0
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
+  "__version": "12.0.5"
+}

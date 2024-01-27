@@ -1,0 +1,10 @@
+﻿@using WRA.Umbraco.Models;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<CategoriesPage>
+@{
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+@* @await Html.PartialAsync("Intro") *@
+
+<h1>Categories Page</h1>
+@await Html.PartialAsync("ProductGroupList", Model.Children.OfType<IProductGroup>())

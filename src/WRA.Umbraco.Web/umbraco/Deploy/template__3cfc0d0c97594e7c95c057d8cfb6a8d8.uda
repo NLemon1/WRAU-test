@@ -1,0 +1,16 @@
+{
+  "Name": "Collection Page",
+  "Alias": "CollectionPage",
+  "File": "umb://template-file/CollectionPage.cshtml",
+  "Master": null,
+  "Udi": "umb://template/3cfc0d0c97594e7c95c057d8cfb6a8d8",
+  "Dependencies": [
+    {
+      "Udi": "umb://template-file/CollectionPage.cshtml",
+      "Ordering": true,
+      "Mode": 0
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.TemplateArtifact",
+  "__version": "12.0.5"
+}

@@ -1,0 +1,36 @@
+{
+  "Name": "Block Width - Dropdown",
+  "Alias": "",
+  "EditorAlias": "Umbraco.DropDown.Flexible",
+  "DatabaseType": 1,
+  "Configuration": {
+    "multiple": false,
+    "items": [
+      {
+        "id": 6,
+        "value": "744px"
+      },
+      {
+        "id": 7,
+        "value": "936px"
+      },
+      {
+        "id": 3,
+        "value": "1128px (standard)"
+      },
+      {
+        "id": 4,
+        "value": "1920px"
+      },
+      {
+        "id": 5,
+        "value": "Full"
+      }
+    ]
+  },
+  "Parent": null,
+  "Udi": "umb://data-type/9f955c61511d4ac5856468b30efe0622",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
+  "__version": "12.0.5"
+}

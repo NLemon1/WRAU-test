@@ -1,0 +1,28 @@
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+@using Umbraco.Cms.Core.Models.Blocks;
+@using ContentModels = WRA.Umbraco.Models;
+@{
+    var content = (ContentModels.MiniCard)Model.Content;
+	string className = "block-mini-card mini-card p-2 p-md-4 pb-lg-0 d-flex flex-column";
+	var link = content.Value<Link>("pageUrl");
+}
+
+<div class="@Html.Raw(className.Trim())">
+	@if (content.HasValue("headline"))
+	{
+		<h3 class="mini-card__headline h5 mb-4 px-2 px-md-0 pt-4 pt-md-0">@Html.Raw(content.Headline)</h3>
+	}
+
+	@if (content.HasValue("subheadline"))
+	{
+		<p class="px-2 px-md-0">@Html.Raw(content.Subheadline)</p>
+	}
+
+	<a href="@link.Url" target="@link.Target" class="mini-card__link fs-normal mt-auto stretched-link text-decoration-none fw-bold">
+		@link.Name
+		<svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<path d="M0.82077 8L12.0313 8" stroke="#2560B9" stroke-width="1.37143" stroke-linecap="round" stroke-linejoin="round" />
+			<path d="M8.51727 4L12.5173 8L8.51727 12" stroke="#2560B9" stroke-width="1.37143" stroke-linecap="round" stroke-linejoin="round" />
+		</svg>
+	</a>
+</div>

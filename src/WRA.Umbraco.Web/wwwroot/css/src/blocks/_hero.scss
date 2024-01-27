@@ -1,0 +1,181 @@
+.block-home-hero,
+.block-interior-hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    aspect-ratio: 1/1;
+    min-height: 512px;
+    margin: 0 auto;
+    width: 100%;
+
+    @include media-breakpoint-up(lg) {
+        min-height: 600px;
+        aspect-ratio: 1920/600;
+        max-width: 100%;
+    }
+
+    &.block-interior-hero {
+        background-image: var(--mobileImage);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        aspect-ratio: auto;
+
+        @include media-breakpoint-down(lg) {
+            display: block;
+
+            &.block-interior-hero--has-area {
+                margin-bottom: 200px;
+
+                .interior-hero-col-2 {
+                    margin: 100px 0 -200px 0;
+                }
+            }
+        }
+
+        @include media-breakpoint-down(lg) {
+
+            .block-interior-hero__content {
+                min-height: 540px;
+                position: relative;
+            }
+        }
+
+        @include media-breakpoint-up(lg) {
+            background-image: var(--desktopImage);
+            min-height: 540px;
+            aspect-ratio: 1920/540;
+            margin-bottom: 0px;
+        }
+    }
+
+    @include media-breakpoint-up(xl) {
+        max-width: 2200px;
+    }
+
+    .overline-alt {
+        &::before {
+            content: "";
+            display: inline-block;
+            margin-right: 1rem;
+            vertical-align: middle;
+            background-color: $blue-medium;
+            width: calc(32/16 * 1rem);
+            height: 6px;
+
+            @include media-breakpoint-up(lg) {
+                width: calc(80/16 * 1rem);
+            }
+        }
+    }
+
+
+    &.is-style-overlay {
+        color: #FFF;
+
+        &::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            background: rgba(0, 0, 0, 0.51);
+        }
+    }
+
+    &__media {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 0;
+
+        &__video,
+        &__img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    &__content {
+        position: absolute;
+        z-index: 2;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 100%;
+        width: 100%;
+
+        &-inner-container {
+            max-width: 746px;
+
+            @include media-breakpoint-down(xl) {
+                width: calc(100% - 392px);
+            }
+
+            @include media-breakpoint-down(lg) {
+                width: 100%;
+            }
+        }
+    }
+
+    .block-interior-hero__content-inner-container {
+        width: 100%;
+    }
+
+    &__events {
+        width: 100%;
+        background: rgba($blue-medium, .75);
+        z-index: 2;
+        position: relative;
+
+        @include media-breakpoint-up(lg) {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            left: auto;
+            top: auto;
+            width: 392px;
+        }
+
+        .block-home-hero__events-inner {
+            height: 100%;
+        }
+    }
+}
+
+.block-home-hero__events-mobile,
+.block-interior-hero__events-mobile {
+    background-color: $blue-medium;
+    transition: all 200ms ease 0s;
+    height: auto;
+    overflow: hidden;
+
+    &:not(.is-active) {
+        opacity: 0;
+        visibility: hidden;
+        height: 0px;
+    }
+}
+
+@include media-breakpoint-down(lg) {
+
+    .mobile-calendar-tab {
+        width: 100%;
+        background-position: calc(100% - 1.5rem) center;
+        background-repeat: no-repeat;
+        background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 9L12 15L18 9' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
+    
+        &.is-active {
+            background-color: $blue-medium;
+        }    
+    }
+}

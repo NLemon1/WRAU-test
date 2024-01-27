@@ -1,0 +1,123 @@
+{
+  "Name": "Image/Text Row",
+  "Alias": "imageTextRow",
+  "DefaultTemplate": null,
+  "AllowedTemplates": [],
+  "HistoryCleanup": {
+    "preventCleanup": false,
+    "keepAllVersionsNewerThanDays": null,
+    "keepLatestVersionPerDayForDays": null
+  },
+  "Icon": "icon-layout color-black",
+  "Thumbnail": "folder.png",
+  "Description": null,
+  "IsContainer": false,
+  "Permissions": {
+    "AllowVaryingByCulture": false,
+    "AllowVaryingBySegment": false,
+    "AllowedAtRoot": false,
+    "IsElementType": true,
+    "AllowedChildContentTypes": []
+  },
+  "Parent": "umb://document-type-container/37b4b44f0abc4536af8ed684511c2571",
+  "CompositionContentTypes": [
+    "umb://document-type/38e48d076783491993c671f1add73d05",
+    "umb://document-type/d34735ed19f440a6babe442a9e096524"
+  ],
+  "PropertyGroups": [
+    {
+      "Key": "27cf5abf-4471-4bf0-8e8d-48039292904e",
+      "Name": "Content",
+      "SortOrder": 0,
+      "Type": 0,
+      "Alias": "content",
+      "PropertyTypes": [
+        {
+          "Key": "ce9d6e7a-79cb-4f83-8674-180d5a198bc3",
+          "Alias": "reverseColumns",
+          "DataType": "umb://data-type/2c02a6cc172c4f809445e8165ee36197",
+          "Description": "Reverse columns in mobile rather than standard flow. (Helpful if image is used in right column)",
+          "Mandatory": false,
+          "MandatoryMessage": null,
+          "Name": "Reverse Columns",
+          "SortOrder": 2,
+          "Validation": null,
+          "ValidationMessage": null,
+          "VariesByCulture": false,
+          "VariesBySegment": false,
+          "LabelOnTop": false,
+          "MemberCanEdit": false,
+          "ViewOnProfile": false,
+          "IsSensitive": false
+        },
+        {
+          "Key": "e0e27ee0-ac12-4364-8660-a21b93b8cc8c",
+          "Alias": "col2BackgroundColor",
+          "DataType": "umb://data-type/0225af17b30249cb9176b9f35cab9c17",
+          "Description": null,
+          "Mandatory": false,
+          "MandatoryMessage": null,
+          "Name": "Col 2 Background Color",
+          "SortOrder": 1,
+          "Validation": null,
+          "ValidationMessage": null,
+          "VariesByCulture": false,
+          "VariesBySegment": false,
+          "LabelOnTop": false,
+          "MemberCanEdit": false,
+          "ViewOnProfile": false,
+          "IsSensitive": false
+        },
+        {
+          "Key": "e838523d-c69a-4e12-921a-c317135e6150",
+          "Alias": "col1BackgroundColor",
+          "DataType": "umb://data-type/0225af17b30249cb9176b9f35cab9c17",
+          "Description": null,
+          "Mandatory": false,
+          "MandatoryMessage": null,
+          "Name": "Col 1 Background Color",
+          "SortOrder": 0,
+          "Validation": null,
+          "ValidationMessage": null,
+          "VariesByCulture": false,
+          "VariesBySegment": false,
+          "LabelOnTop": false,
+          "MemberCanEdit": false,
+          "ViewOnProfile": false,
+          "IsSensitive": false
+        }
+      ]
+    }
+  ],
+  "PropertyTypes": [],
+  "Udi": "umb://document-type/569c5323b1584a26aedb69618d0db0a9",
+  "Dependencies": [
+    {
+      "Udi": "umb://data-type/0225af17b30249cb9176b9f35cab9c17",
+      "Ordering": true,
+      "Mode": 0
+    },
+    {
+      "Udi": "umb://data-type/2c02a6cc172c4f809445e8165ee36197",
+      "Ordering": true,
+      "Mode": 0
+    },
+    {
+      "Udi": "umb://document-type-container/37b4b44f0abc4536af8ed684511c2571",
+      "Ordering": true,
+      "Mode": 0
+    },
+    {
+      "Udi": "umb://document-type/38e48d076783491993c671f1add73d05",
+      "Ordering": true,
+      "Mode": 0
+    },
+    {
+      "Udi": "umb://document-type/d34735ed19f440a6babe442a9e096524",
+      "Ordering": true,
+      "Mode": 0
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
+  "__version": "12.0.5"
+}

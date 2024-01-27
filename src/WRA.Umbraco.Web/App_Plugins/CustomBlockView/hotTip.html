@@ -1,0 +1,8 @@
+﻿<div ng-controller="hotTipController" class="hot-tip">
+    <div class="hot-tip__header">
+        {{ block.data.title }}
+    </div>
+    <div class="hot-tip__content">
+        <slot name="hot-tip-area" part="hot-tip-area" class="col-12 block-col area-zone"></slot>
+    </div>
+</div>

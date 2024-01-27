@@ -1,0 +1,196 @@
+@use 'sass:math';
+
+.overline {
+    display: inline-block;
+    font-size: $font-size-sm;
+    line-height: 1.5;
+    font-family: $display-font-family;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 6px;
+    word-wrap: break-word;
+    margin: 0;
+
+    @include media-breakpoint-down(md) {
+        font-size: math.div(13,16) * 1rem;
+        letter-spacing: 5.59px;
+    }
+
+    &--strikebehind {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        flex-direction: row;
+        width: 100%;
+        gap: 5%;
+        text-wrap: nowrap;
+
+        &::before,
+        &::after {
+            content: "";
+            width: 100%;
+            border-top: solid 1px #FFF;
+            display: inline-block;
+        }
+    }
+}
+
+.overline-alt {
+    font-family: $display-font-family;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 115%;
+    letter-spacing: 0.48px;
+    text-transform: uppercase;
+    vertical-align: middle;
+}
+
+.subhead {
+    font-family: $font-family-serif;
+    font-size: $font-size-xl;
+
+    @include media-breakpoint-down(md) {
+        font-size: $font-size-md;
+    }
+}
+
+blockquote {
+    font-weight: 600;
+}
+
+h5, .h5 {
+    font-weight: 600;
+    text-transform: unset;
+}
+
+h6, .h6 {
+    font-weight: 600;
+    text-transform: unset;
+}
+
+@include media-breakpoint-down(xl) {
+    .fs-xl {
+        font-size: math.div(20,16) * 1rem;
+    }
+}
+
+@include media-breakpoint-down(md) {
+    .display-1 {
+        font-size: math.div(36,16) * 1rem;
+    }
+
+    h1 {
+        font-size: math.div(30,16) * 1rem;
+    }
+
+    h2 {
+        font-size: math.div(24,16) * 1rem;
+    }
+
+    h3 {
+        font-size: math.div(20,16) * 1rem;
+    }
+
+    h4 {
+        font-size: math.div(16,16) * 1rem;
+        line-height: 18.40px;
+    }
+
+    h5 {
+        font-size: math.div(18,16) * 1rem;
+        line-height: 20.70px;
+    }
+
+    h6 {
+        font-size: math.div(16,16) * 1rem;
+        line-height: 22.40px;
+    }
+
+    .fs-xl {
+        font-size: $font-size-lg;
+    }
+}
+
+
+h1, h2, h3, h4, .display-1 {
+    text-transform: uppercase;
+    letter-spacing: 0.03rem;
+}
+
+.display-1 {
+    letter-spacing: 1.68px;
+}
+
+.font-family-1 { font-family: $font-family-sans-serif; }//Inter
+.font-family-2 { font-family: $font-family-serif; }//Roboto Serif
+.font-family-3 { font-family: $headings-font-family; }//Poppins
+
+.fs-xs {
+    font-size: $font-size-xs;
+}
+
+.fs-sm {
+    font-size: $font-size-sm;
+}
+
+.fs-md {
+    font-size: $font-size-md;
+}
+
+.fs-lg {
+    font-size: $font-size-lg;
+}
+
+.fs-xl {
+    font-size: $font-size-xl;
+}
+
+.rich-text { //used for articles
+
+    h2 {
+        font-size: math.div(24,16) * 1rem;
+        font-weight: 600;
+    }
+
+    h3, h4, h5 {
+        font-family: $font-family-sans-serif;
+        font-size: math.div(18,16) * 1rem;
+        font-weight: 600;
+    }
+
+
+    h2, h3, h4 {
+        text-transform: revert;
+        margin-bottom: 1rem;
+    }
+
+    &.rich-text-article {
+        @include media-breakpoint-up(md) {
+            font-size: math.div(18,16) * 1rem;
+        }
+    }
+
+}
+
+.accent-heading {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+
+    &:after {
+        content: '';
+        width: 100%;
+        max-width: 118px;
+        height: 2px;
+        margin: 1rem 0;
+        background-color: $yellow;
+    }
+}
+
+a.link-hover-inverse {
+    &:not(:hover) {
+        color: inherit;
+        text-decoration: none;
+    }
+}

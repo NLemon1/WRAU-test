@@ -1,0 +1,46 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+
+<style>
+    .error-page {
+        box-shadow: 0px 0px 50px 0px rgba(49, 56, 59, 0.12),
+                    36px 36px 0px 0px #ffc672;
+    }
+
+    .error-page h1 {
+        font-size: 125px;
+        font-size: clamp(125px, 20vw, 195px);
+    }
+</style>
+
+<div class="bg-light px-4 py-6 pb-10 pb-lg-12">
+    <div class="error-page container py-10 bg-white text-center">
+        <div class="container container--xs">
+            <h1 class="lh-1 fw-bolder text-secondary">@Model.Value("heading")</h1>
+            @if (Model.HasValue("subheading"))
+            {
+                <p class="h3 text-secondary">@Model.Value("subheading")</p>
+            }
+            @if (Model.HasValue("content"))
+            {
+                <p class="mt-5 mb-4">@Model.Value("content")</p>
+            }
+            @if (Model.HasValue("link1") || Model.HasValue("link2"))
+            {
+                <div class="block-btns gap-3 d-flex flex-column justify-content-center align-items-center flex-md-row gap-lg-5">
+                    @if (Model.HasValue("link1"))
+                    {
+                        var link1 = Model.Value<Link>("link1");
+
+                        <a class="btn btn-primary" href="@link1.Url" target="@link1.Target">@link1.Name</a>
+                    }
+                    @if (Model.HasValue("link2"))
+                    {
+                        var link2 = Model.Value<Link>("link2");
+
+                        <a class="btn btn-secondary" href="@link2.Url" target="@link2.Target">@link2.Name</a>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+.page-header {
+    z-index: 1;
+    position: relative;
+    overflow-x: hidden;
+    display: flex;
+    align-items: center;
+    padding: 1rem 0;
+    min-height: 160px;
+    background-color: $gray-10;
+
+    @include media-breakpoint-up(md) {
+        min-height: 240px;
+    }
+
+    &:before {
+        content: '';
+        z-index: -1;
+        position: absolute;
+        top: 0;
+        right: 5vw;
+        bottom: 0;
+        width: 240px;
+        border-top-right-radius: 999rem;
+        background-color: $gray-10;
+
+        @media screen and (min-width: 1254px) {
+            right: calc(50% - 564px); // half of .container
+        }
+    }
+
+    &:after {
+        content: '';
+        z-index: -2;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: calc(5vw + 240px); // right .container margin plus width of :before
+        background-color: $blue-medium;
+
+        @media screen and (min-width: 1254px) {
+            left: calc(50% + 324px); // half of .container minus width of :before
+            width: auto;
+        }
+    }
+
+    &--no-accent {
+        &:before,
+        &:after {
+            display: none;
+        }
+    }
+}

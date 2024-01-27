@@ -1,0 +1,175 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.MultimediaLanding>
+@using ContentModels = WRA.Umbraco.Models;
+@using Umbraco.Cms.Core.Models.Blocks
+@using System.Text.RegularExpressions;
+@using WRA.Umbraco.Web.Helpers;
+@using Microsoft.AspNetCore.Http;
+
+@{
+    Layout = "~/Views/_Layout.cshtml";
+
+    var content = (ContentModels.MultimediaLanding)Model;
+    var sections = Model.Value<IEnumerable<BlockGridItem>>("gridSection");
+    int pageSize = 15;
+
+    IPublishedContent featuredVideo = content.FeaturedVideo;
+    IPublishedContent featuredAudio = content.FeaturedAudio;
+
+
+    var urlQuery = Context.Request.Query;
+    string selectedType = !String.IsNullOrEmpty(urlQuery["type"]) ? System.Uri.EscapeDataString(urlQuery["type"]).ToLower() : null;
+    string searchPhrase = !String.IsNullOrEmpty(urlQuery["search"]) ? System.Uri.EscapeDataString(urlQuery["search"]) : null;
+
+   IEnumerable<IPublishedContent> results = !String.IsNullOrEmpty(selectedType) ?
+       content.Descendants().Where(p => p.IsVisible() && p.Value("mediaType").ToString().ToLower() == selectedType).OrderBy(p => p.GetProperty("date").GetSourceValue()).Reverse()
+      : content.Descendants().OrderBy(p => p.GetProperty("date").GetSourceValue()).Reverse();
+
+    int categorizedResultCount = results.Count();
+    var resultMath = Decimal.Divide(categorizedResultCount, pageSize);//Results / PageSize
+    var totalPages = Decimal.Ceiling(resultMath);
+
+    bool isVideo = selectedType == "video";
+    bool isAudio = selectedType == "audio";
+    bool isSearch = !String.IsNullOrEmpty(urlQuery["search"]);
+
+    var setAll = selectedType == null ? "aria-selected=true" : "aria-selected=false";
+}
+
+@await Html.PartialAsync("blockgrid/default", sections)
+
+<div class="container">
+
+    <div class="row mb-5">
+        <div class="col-md-6 mx-auto d-flex align-items-center gap-2">
+            <form id="multimedia-search" role="search" method="get" action="/" class="flex-grow-1 overflow-hidden w-100">
+                <div class="d-flex flex-row align-items-center form-control py-0">
+                    <label class="visually-hidden" for="multimediaSearch">Search News</label>
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="search" id="multimediaSearch" class="w-100 border-0 bg-transparent ps-2 py-2" name="s" placeholder="Search by topic, keyword, theme" required="">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="tabs tabs--mobile-dropdown tabs--dark-mode">
+        <div class="mb-6 text-center">
+            <ul role="tablist" class="tabs__tabs-list">
+                <li role="presentation">
+                    <button id="tab-all" class="js-multimedia-filter tabs__trigger text-decoration-none border-0" value="" role="tab" aria-controls="multimediaResults" aria-selected="@((!isVideo && !isAudio) || isSearch ? "true" : "false")">All Posts</button>
+                </li>
+                <li role="presentation">
+                    <button id="tab-video" class="js-multimedia-filter tabs__trigger border-0 text-decoration-none" value="video" role="tab" aria-controls="multimediaResults" aria-selected="@(isVideo && !isSearch ? "true" : "false")">Video</button>
+                </li>
+                <li role="presentation">
+                    <button id="tab-audio" class="js-multimedia-filter tabs__trigger border-0 text-decoration-none" value="audio" role="tab" aria-controls="multimediaResults" aria-selected="@(isAudio && !isSearch ? "true" : "false")">Audio</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <select class="js-multimedia-dropdown tabs__dropdown d-block d-sm-none" aria-label="Select a tab">
+
+        @if ((!isVideo && !isAudio) || isSearch)
+        {
+            <option value="" selected>All Posts</option>
+        }
+        else
+        {
+            <option value="">All</option>
+        }
+
+        @if (isVideo)
+        {
+            <option value="video" selected>Video</option>
+        }
+        else
+        {
+            <option value="video">Video</option>
+        }
+
+        @if (isAudio)
+        {
+            <option value="audio" selected>Audio</option>
+        }
+        else
+        {
+            <option value="audio">Audio</option>
+        }
+        
+    </select>
+    
+    @if (featuredVideo != null)
+    {
+        var videoYouTubeId = featuredVideo.Value("youTubeId");
+        var videoTitle = featuredVideo.HasValue("title") ? featuredVideo.Value("title") : featuredVideo.Name;
+        var videoImageOverride = featuredVideo.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("ThumbnailOverride");
+        var videoImage = videoImageOverride != null ? videoImageOverride.Url() : $"https://i3.ytimg.com/vi/{videoYouTubeId}/maxresdefault.jpg";
+
+        <div class="js-featured multimedia-feature row g-0" data-featuredtype="video" @(!isVideo || isSearch ? "hidden" : "")>
+            <div class="col-md-7 col-lg-8 pe-lg-2" style="background-color: var(--bs-gray-10)">
+                <a href="@featuredVideo.Url()" class="multimedia-feature__img h-100 d-block">
+                    <img src="@videoImage" alt="@videoTitle" class="img-fluid" />
+                </a>
+            </div>
+            <div class="col-md-5 col-lg-4 d-flex flex-column align-items-start justify-content-center p-5" style="background-color: var(--bs-gray-10)">
+                <h3 class="mb-3">@videoTitle</h3>
+                @if (featuredVideo.HasValue("description"))
+                {
+                    <p class="mb-3">@featuredVideo.Value("description")</p>
+                }
+                <a href="@featuredVideo.Url()" class="btn btn-link-arrow ms-n2">
+                    Play Video
+                    <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0.820801 8L12.0314 8" stroke="#050F1E" stroke-width="1.37143" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M8.51733 4L12.5173 8L8.51733 12" stroke="#050F1E" stroke-width="1.37143" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    }
+
+    @if (featuredAudio != null)
+    {
+        var videoYouTubeId = featuredAudio.Value("youTubeId");
+        var videoTitle = featuredAudio.HasValue("title") ? featuredAudio.Value("title") : featuredAudio.Name;
+        var videoImageOverride = featuredAudio.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("ThumbnailOverride");
+        var videoImage = videoImageOverride != null ? videoImageOverride.Url() : $"https://i3.ytimg.com/vi/{videoYouTubeId}/maxresdefault.jpg";
+
+        <div class="js-featured row multimedia-feature g-0" data-featuredtype="audio" @(!isAudio || isSearch ? "hidden" : "")>
+            <div class="col-md-7 col-lg-8 pe-lg-2" style="background-color: var(--bs-gray-10)">
+                <a href="@featuredAudio.Url()" class="multimedia-feature__img h-100 d-block">
+                    <img src="@videoImage" alt="" class="img-fluid" />
+                </a>
+            </div>
+            <div class="col-md-5 col-lg-4 d-flex flex-column align-items-start justify-content-center p-5" style="background-color: var(--bs-gray-10)">
+                <h3 class="mb-3">@videoTitle</h3>
+                @if (featuredAudio.HasValue("description"))
+                {
+                    <p class="mb-3">@featuredAudio.Value("description")</p>
+                }
+                <a href="@featuredVideo.Url()" class="btn btn-link-arrow ms-n2">
+                    Listen to Podcast
+                    <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0.820801 8L12.0314 8" stroke="#050F1E" stroke-width="1.37143" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M8.51733 4L12.5173 8L8.51733 12" stroke="#050F1E" stroke-width="1.37143" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </a>
+
+            </div>
+        </div>
+    }
+
+    <div class="position-relative">
+        <div id="multimediaResults" aria-controlledby="" class="js-multimedia-results row my-4 mb-6 g-3 g-lg-6" style="min-height: 500px;" data-cattotal="@totalPages">
+        </div>
+        <div class="js-results-loader search-loading" hidden title="Please wait, loading.">
+            <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+        </div>
+    </div>
+
+    <div class="w-100 d-flex flex-row justify-content-center align-items-center py-5 mb-5">
+        <ol class="js-multimedia-pagination search-pagination list-unstyled d-flex flex-row gap-2 text-center mx-2 mb-0"></ol>
+    </div>
+
+</div>

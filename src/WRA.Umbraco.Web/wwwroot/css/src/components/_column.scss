@@ -1,0 +1,10 @@
+.column {
+    &[style*="--inner-max-width"] {
+        & > * {
+            @include media-breakpoint-up(md) {
+                max-width: var(--inner-max-width);
+                margin-inline: auto;
+            }
+        }
+    }
+}

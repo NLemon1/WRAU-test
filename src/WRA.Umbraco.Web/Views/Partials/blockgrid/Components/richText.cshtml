@@ -1,0 +1,66 @@
+@using Umbraco.Extensions
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+@using ContentModels = WRA.Umbraco.Models;
+@{
+    var content = (ContentModels.RichText)Model.Content;
+    string className = "block-rich-text rich-text mb-3 mb-lg-4";
+    string style = "";
+    string props = "";
+
+    if (content.HasValue("textColor"))
+    {
+        style += $"color:#{content.TextColor};";
+    }
+
+    if (content.HasValue("fontSize"))
+    {
+        switch(content.FontSize)
+        {
+            case "12px":
+                className += " fs-xs";
+                break;
+            case "14px":
+                className += " fs-sm";
+                break;
+            case "16px":
+                className += " fs-md";
+                break;
+            case "18px":
+                className += " fs-lg";
+                break;
+            case "20px":
+                className += " fs-xl";
+                break;
+        }
+    }
+
+    if (content.HasValue("fontWeight"))
+    {
+        style += $"font-weight:{content.FontWeight};";
+    }
+
+    if (content.HasValue("fontFamily"))
+    {
+        if (content.FontFamily == "Serif")
+        {
+            className += " font-family-2";
+        }
+
+    }
+
+    if (content.HasValue("bottomMargin"))
+    {
+        style += $"margin-bottom:{content.BottomMargin} !important;";
+    }
+
+    props += $"class=\"{className.Trim()}\"";
+    
+    if (!String.IsNullOrEmpty(style))
+    {
+        props += $" style=\"{style}\"";
+    }
+}
+
+<div @Html.Raw(props.Trim())>
+    @Html.Raw(content.Text)
+</div>

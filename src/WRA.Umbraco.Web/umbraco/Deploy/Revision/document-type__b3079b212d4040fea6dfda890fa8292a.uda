@@ -1,0 +1,69 @@
+{
+  "Name": "Membership Widget",
+  "Alias": "membershipWidget",
+  "DefaultTemplate": null,
+  "AllowedTemplates": [],
+  "HistoryCleanup": {
+    "preventCleanup": false,
+    "keepAllVersionsNewerThanDays": null,
+    "keepLatestVersionPerDayForDays": null
+  },
+  "Icon": "icon-layout color-black",
+  "Thumbnail": "folder.png",
+  "Description": null,
+  "IsContainer": false,
+  "Permissions": {
+    "AllowVaryingByCulture": false,
+    "AllowVaryingBySegment": false,
+    "AllowedAtRoot": false,
+    "IsElementType": true,
+    "AllowedChildContentTypes": []
+  },
+  "Parent": "umb://document-type-container/37b4b44f0abc4536af8ed684511c2571",
+  "CompositionContentTypes": [],
+  "PropertyGroups": [
+    {
+      "Key": "1f1f88d5-f82e-4bcb-992d-c09ac3efc115",
+      "Name": "Content",
+      "SortOrder": 0,
+      "Type": 0,
+      "Alias": "content",
+      "PropertyTypes": [
+        {
+          "Key": "035f13ca-3fdf-48fc-ad90-22929e71f2b8",
+          "Alias": "selectWidget",
+          "DataType": "umb://data-type/dc54efa9165b4f3583d7ebe7530d6245",
+          "Description": null,
+          "Mandatory": false,
+          "MandatoryMessage": null,
+          "Name": "Select widget",
+          "SortOrder": 0,
+          "Validation": null,
+          "ValidationMessage": null,
+          "VariesByCulture": false,
+          "VariesBySegment": false,
+          "LabelOnTop": false,
+          "MemberCanEdit": false,
+          "ViewOnProfile": false,
+          "IsSensitive": false
+        }
+      ]
+    }
+  ],
+  "PropertyTypes": [],
+  "Udi": "umb://document-type/b3079b212d4040fea6dfda890fa8292a",
+  "Dependencies": [
+    {
+      "Udi": "umb://data-type/dc54efa9165b4f3583d7ebe7530d6245",
+      "Ordering": true,
+      "Mode": 0
+    },
+    {
+      "Udi": "umb://document-type-container/37b4b44f0abc4536af8ed684511c2571",
+      "Ordering": true,
+      "Mode": 0
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
+  "__version": "12.0.5"
+}

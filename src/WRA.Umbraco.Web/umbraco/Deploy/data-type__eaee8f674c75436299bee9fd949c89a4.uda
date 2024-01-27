@@ -1,0 +1,60 @@
+{
+  "Name": "List View - productsPage",
+  "Alias": "",
+  "EditorAlias": "Umbraco.ListView",
+  "DatabaseType": 1,
+  "Configuration": {
+    "pageSize": 10,
+    "orderDirection": "asc",
+    "includeProperties": [
+      {
+        "alias": "sortOrder",
+        "header": "Sort order",
+        "isSystem": 1
+      },
+      {
+        "alias": "updateDate",
+        "header": "Last edited",
+        "isSystem": 1
+      },
+      {
+        "alias": "sku",
+        "header": "Sku",
+        "isSystem": 0
+      }
+    ],
+    "orderBy": "sortOrder",
+    "layouts": [
+      {
+        "name": "List",
+        "path": "views/propertyeditors/listview/layouts/list/list.html",
+        "icon": "icon-list",
+        "isSystem": 1,
+        "selected": true
+      },
+      {
+        "name": "Grid",
+        "path": "views/propertyeditors/listview/layouts/grid/grid.html",
+        "icon": "icon-thumbnails-small",
+        "isSystem": 1,
+        "selected": true
+      }
+    ],
+    "bulkActionPermissions": {
+      "allowBulkPublish": true,
+      "allowBulkUnpublish": true,
+      "allowBulkCopy": true,
+      "allowBulkMove": true,
+      "allowBulkDelete": true
+    },
+    "icon": "icon-list",
+    "tabName": "Products",
+    "showContentFirst": false,
+    "useInfiniteEditor": false
+  },
+  "Parent": null,
+  "Udi": "umb://data-type/eaee8f674c75436299bee9fd949c89a4",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
+  "__version": "12.0.4"
+}

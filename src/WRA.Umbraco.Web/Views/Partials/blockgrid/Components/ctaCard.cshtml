@@ -1,0 +1,27 @@
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+@using Umbraco.Cms.Core.Models.Blocks;
+@using ContentModels = WRA.Umbraco.Models;
+@{
+    var content = (ContentModels.CTacard)Model.Content;
+	string className = "block-cta-card card card-hover-effect align-items-center text-center";
+}
+
+<div class="@Html.Raw(className.Trim())">
+	@if (content.HasValue("overline"))
+	{
+		<p class="overline">@content.Overline</p>
+	}
+	@if (content.HasValue("headline"))
+	{
+		<h2 class="card__headline card__headline--hairline">@content.Headline</h2>
+	}
+	@if (content.HasValue("content"))
+	{
+		<div class="rich-text pb-3 mb-auto">
+			@Html.Raw(content.Content)
+		</div>
+	}
+	
+	@await Html.GetBlockGridItemAreasHtmlAsync(Model, "areas")
+
+</div>

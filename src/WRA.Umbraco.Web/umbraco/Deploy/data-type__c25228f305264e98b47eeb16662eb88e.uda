@@ -1,0 +1,15 @@
+{
+  "Name": "Overline - StrikeBehind - Toggle",
+  "Alias": "",
+  "EditorAlias": "Umbraco.TrueFalse",
+  "DatabaseType": 2,
+  "Configuration": {
+    "default": false,
+    "showLabels": false
+  },
+  "Parent": null,
+  "Udi": "umb://data-type/c25228f305264e98b47eeb16662eb88e",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
+  "__version": "12.0.5"
+}

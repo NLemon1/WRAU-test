@@ -1,0 +1,34 @@
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+@using ContentModels = WRA.Umbraco.Models
+@{
+
+    var content = (ContentModels.IconBullet)Model.Content;
+    string className = "block-bullet-icon d-inline-block py-1";
+
+    //CONTRAST
+    if (content.HasValue("contrast"))
+    {
+        switch (content.Contrast)
+        {
+            case "dark":
+                className += "";
+                break;
+            case "light":
+                className += " text-white";
+                break;
+        }
+    }
+
+}
+
+<span class="@className" >
+    @if (content.HasValue("icon"))
+    {
+        <span aria-hidden="true" class="block-bullet-icon__icon me-1 fa-regular fa-@content.Icon"></span>
+    }
+    else
+    {
+        <span aria-hidden="true" class="block-bullet-icon__icon me-1 fa-regular fa-star"></span>
+    }
+    @content.Text
+</span>

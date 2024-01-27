@@ -1,0 +1,94 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Configurations>Debug;Release;Local</Configurations>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Remove="Views\MagazineCollection.cshtml" />
+    <Content Remove="Views\MultimediaPlaylist.cshtml" />
+    <Content Remove="Views\Partials\blockgrid\areaBlank.cshtml" />
+    <Content Remove="Views\Partials\blockgrid\areaOLD.cshtml" />
+    <Content Remove="Views\Partials\blockgrid\areasBlank.cshtml" />
+    <Content Remove="Views\Partials\blockgrid\areasOLD.cshtml" />
+    <Content Remove="Views\Partials\blockgrid\Components\gatedContent.cshtml" />
+    <Content Remove="Views\Partials\blockgrid\Components\umbBlockGridDemoHeadlineBlock.cshtml" />
+    <Content Remove="Views\Partials\blockgrid\Components\umbBlockGridDemoImageBlock.cshtml" />
+    <Content Remove="Views\Partials\blockgrid\Components\umbBlockGridDemoRichTextBlock.cshtml" />
+    <Content Remove="Views\Partials\blockgrid\defaultOLD.cshtml" />
+    <Content Remove="Views\Partials\blockgrid\itemsOLD.cshtml" />
+    <Content Remove="Views\Partials\RelatedArticles.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="VS.vs.zip" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="App_Plugins\CustomBlockView\button.controller.js" />
+    <None Include="App_Plugins\CustomBlockView\buttons.controller.js" />
+    <None Include="App_Plugins\CustomBlockView\genericSection.controller.js" />
+    <None Include="App_Plugins\CustomBlockView\homeHero.controller.js" />
+    <None Include="App_Plugins\CustomBlockView\twoColumnLayout.controller.js" />
+    <None Include="App_Plugins\CustomBlockView\richText.controller.js" />
+    <None Include="App_Plugins\CustomBlockView\headlineBlock.controller.js" />
+    <None Include="App_Plugins\CustomBlockView\shared.js" />
+    <None Include="App_Plugins\CustomBlockView\package.manifest" />
+    <None Include="App_Plugins\CustomBlockView\featureBreaker.controller.js" />
+    <None Include="App_Plugins\UmbracoId\BackOffice\assets\images\background-login.svg" />
+    <None Include="App_Plugins\UmbracoId\BackOffice\assets\images\logo-horizontal.svg" />
+    <None Include="App_Plugins\UmbracoId\BackOffice\customlogin.controller.js" />
+    <None Include="App_Plugins\UmbracoId\BackOffice\umbidlogin.component.js" />
+    <None Include="App_Plugins\UmbracoId\package.manifest" />
+  </ItemGroup>
+	<ItemGroup>
+		<Content Include="App_Plugins\**" CopyToOutputDirectory="Always" />
+	</ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="4.8.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.8.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.11" />
+    <PackageReference Include="Umbraco.Cloud.Cms.PublicAccess" Version="13.0.0" />
+    <PackageReference Include="Umbraco.Cloud.Identity.Cms" Version="13.0.0" />
+    <PackageReference Include="Umbraco.Cloud.StorageProviders.AzureBlob" Version="13.0.0" />
+    <PackageReference Include="Umbraco.Cms" Version="13.0.3" />
+    <PackageReference Include="Umbraco.Cms.Web.Common" Version="13.0.3" />
+    <PackageReference Include="Umbraco.Cms.Infrastructure" Version="13.1.0" />
+    <PackageReference Include="Umbraco.Deploy.Cloud" Version="13.0.3" />
+    <PackageReference Include="Umbraco.Deploy.Contrib" Version="13.0.0" />
+    <!-- <PackageReference Include="Umbraco.Deploy.Forms" Version="12.1.3" /> -->
+    <PackageReference Include="Umbraco.Forms" Version="13.0.1" />
+    <PackageReference Include="Umbraco.Workflow" Version="13.0.2" />
+    <PackageReference Include="uSync" Version="13.0.0" />
+    <PackageReference Include="Umbraco.Forms.Core.Providers" Version="13.0.1" />
+    <PackageReference Include="Umbraco.Cms.Imaging.ImageSharp" Version="13.0.3" />
+
+  </ItemGroup>
+	
+
+  <ItemGroup>
+    <!-- Opt-in to app-local ICU to ensure consistent globalization APIs across different platforms -->
+    <PackageReference Include="Microsoft.ICU.ICU4C.Runtime" Version="68.2.0.9" />
+    <RuntimeHostConfigurationOption Include="System.Globalization.AppLocalIcu" Value="68.2.0.9" Condition="$(RuntimeIdentifier.StartsWith('linux')) or $(RuntimeIdentifier.StartsWith('win')) or ('$(RuntimeIdentifier)' == '' and !$([MSBuild]::IsOSPlatform('osx')))" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WRA.Umbraco\WRA.Umbraco.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\catalogue-thumbnails\" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <!-- Razor files are needed for the backoffice to work correctly -->
+    <CopyRazorGenerateFilesToPublishDirectory>true</CopyRazorGenerateFilesToPublishDirectory>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!-- Remove RazorCompileOnBuild and RazorCompileOnPublish when not using ModelsMode InMemoryAuto -->
+    <RazorCompileOnBuild>true</RazorCompileOnBuild>
+    <RazorCompileOnPublish>true</RazorCompileOnPublish>
+  </PropertyGroup>
+  
+</Project>

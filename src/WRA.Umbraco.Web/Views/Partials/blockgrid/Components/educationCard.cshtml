@@ -1,0 +1,33 @@
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+@using Umbraco.Cms.Core.Models.Blocks;
+@using ContentModels = WRA.Umbraco.Models;
+
+@{
+	var content = (ContentModels.EducationCard)Model.Content;
+	string className = "block-education-card card card-hover-effect card-numbered align-items-start text-left";
+	var link = content.Value<Link>("pageLink");
+}
+
+<div class="@Html.Raw(className.Trim())">
+
+	@if (content.HasValue("number"))
+	{
+		<span class="card-numbered__number">
+			@content.Number
+		</span>
+	}
+
+	@if (content.HasValue("overline"))
+	{
+		<p class="overline">@content.Overline</p>
+	}
+	@if (content.HasValue("headline"))
+	{
+		<h3 class="h2 card__headline">@content.Headline</h3>
+	}
+	@if (content.HasValue("content"))
+	{
+		<p>@content.Content</p>
+	}
+	<a href="@link.Url" target="@link.Target" class="btn btn-primary mb-1 mt-auto">@link.Name</a>
+</div>

@@ -1,0 +1,22 @@
+﻿@using Umbraco.Extensions
+@using WRA.Umbraco.Services
+@using Umbraco.Cms.Core.Models.Blocks;
+@using Umbraco.Cms.Core.Security;
+
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<BlockGridArea>
+@* @inject VisibilityService _visibilityService
+@inject IMemberManager _memberManager
+@{
+var currentMember = await _memberManager.GetCurrentMemberAsync();
+var blocks = _visibilityService.ApplyVisibilityRules(Model, currentMember);
+} *@
+@* <div class="umb-block-grid__area col"
+data-area-col-span="@Model.ColumnSpan"
+data-area-row-span="@Model.RowSpan"
+data-area-alias="@Model.Alias"
+style="--umb-block-grid--grid-columns: @Model.ColumnSpan;--umb-block-grid--area-column-span: @Model.ColumnSpan;
+--umb-block-grid--area-row-span: @Model.RowSpan;">
+@await Html.GetBlockGridItemsHtmlAsync(Model)
+</div> *@
+
+@await Html.GetBlockGridItemsHtmlAsync(Model)

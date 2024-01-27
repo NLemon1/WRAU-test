@@ -1,0 +1,86 @@
+@use 'sass:math';
+
+.form-control {
+    //border: 1px solid $gray-30; let's inherit from BS
+    min-height: math.div(44,16) * 1rem;
+    padding: 0.5rem 1rem;
+    width: 100%;
+    background-color: $white;
+    color: $body-color;
+    font-family: inherit;
+
+    &:not(.site-header__search-input) {
+        background-color: $gray-10;
+    }
+}
+
+textarea.form-control {
+    padding: 1rem;
+}
+
+select.form-control {
+    appearance: none;
+    background: #fff url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 9L12 15L18 9' stroke='%23545454' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat calc(100% - 0.75rem) center;
+    padding-right: 2.5rem;
+}
+
+/////
+
+.umbraco-forms-page {
+    // generic form styles
+
+    .form-control {
+        background-color: white;
+    }
+
+    .field-validation-error {
+        display: inline-block;
+        margin-top: 0.5rem;
+        color: red;
+    }
+
+    .umbraco-forms-tooltip {
+        display: block;
+        color: $gray-30;
+    }
+
+    .checkbox {
+        position: relative;
+
+        label {
+            position: absolute;
+            left: 1.5em;
+            font-size: 1rem;
+        }
+    }
+
+    .umbraco-forms-field {
+        padding-bottom: 1rem;
+    }
+
+    .umbraco-forms-hidden {
+        display: none;
+    }
+}
+
+.hot-tip-question {
+    // specific form styles
+
+    .responsepreference ~ .umbraco-forms-field:not(.additionalcontent) {
+        padding-left: 1.5rem;
+        border-left: 0.25rem solid $gray-20;
+    }
+
+    .additionalcontent {
+        margin-top: 1rem;
+    }
+
+    .checkbox label {
+        left: 3em;
+    }
+
+    select,
+    input:not([type='radio'], [type='checkbox'], [type='submit']) {
+        max-width: 16.25rem;
+    }
+}

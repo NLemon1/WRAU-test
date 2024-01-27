@@ -1,0 +1,70 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+@using Umbraco.Cms.Core.Models.Blocks
+@using ContentModels = WRA.Umbraco.Models;
+
+@{
+    var content = (ContentModels.SupportSection)Model.Content;
+    var image = content.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("backgroundImage");
+
+    string className = "block-home-support-section position-relative overflow-hidden pb-7 pb-lg-12";
+    string style = "";
+    string props = "";
+
+
+    if (content.HasValue("additionalCssClasses"))
+    {
+        className += $" {content.AdditionalCssClasses}";
+    }
+
+    if (!String.IsNullOrEmpty(className))
+    {
+        props += $"class=\"{className.Trim()}\"";
+    }
+
+    if (!String.IsNullOrEmpty(style))
+    {
+        props += $" style=\"{style}\"";
+    }
+    
+}
+
+<div @Html.Raw(props.Trim())>
+
+    @{
+        var typedMediaPickerSingle = content.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("backgroundImage");
+        if (typedMediaPickerSingle != null)
+        {
+            <img src="@typedMediaPickerSingle.MediaUrl()" class="block-home-support-section__img mb-5" loading="lazy" />
+        }
+        else
+        {
+            <p>Missing image</p>
+        }
+    }
+
+    <div class="block-home-support-section__inner">
+        <div class="container pt-10 pt-lg-11 pb-lg-9">
+            <div class="row justify-content-center align-items-end text-white pb-7 pb-lg-9">
+                <div class="col-md-4">
+                    @if (content.HasValue("overline"))
+                    {
+                        <p class="overline mb-5">@content.Overline</p>
+                    }
+                    @if (content.HasValue("headline"))
+                    {
+                        <h2 class="display-1 mb-0">@Html.Raw(content.Headline)</h2>
+                    }
+                </div>
+                <div class="col-md-4">
+                    @if (content.HasValue("content"))
+                    {
+                        <p class="mb-0">@Html.Raw(content.Content)</p>
+                    }
+                </div>
+            </div>
+            @await Html.GetBlockGridItemAreaHtmlAsync(Model, "home-support-cards")
+        </div>
+    </div>
+
+</div>
+

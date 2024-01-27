@@ -1,0 +1,68 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@using WRA.Umbraco.Models;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ProductsPage>
+
+@* @await Html.PartialAsync("Commerce/ProductGroupList", Model.Children.OfType<IProductGroup>())*@
+
+
+@{
+
+    //TO DO: This needs to be dynamic?
+    List<SelectListItem> StaticClassCollections = new()
+    {
+        new("Broker Pre-Licensing", "Broker"),
+        new("Sales Pre-Licensing", "Sales"),
+        new("Continuing", "Continuing")
+    };
+
+}
+<h1>COLLECTION PAGE</h1>
+
+<header class="page-header page-header--no-accent">
+    <div class="container">
+        <div class="container--sm">
+            <h1 class="mb-0">@Model.Name</h1>
+        </div>
+    </div>
+</header>
+
+<div class="text-bg-secondary pb-5">
+    @Html.Partial("Breadcrumbs")
+
+    <div class="container">
+        <label class="visually-hidden" for="collection-filter">Filter</label>
+        <select id="collection-filter" class="form-select d-inline-block w-auto">
+
+            @* //TO DO: Needs to pull from somewhere? This will act as a jump link to "product page"? ' *@
+            <option value="all">All</option>
+            @foreach (var classCollection in StaticClassCollections)
+            {
+                <option value="@classCollection.Value">@classCollection.Text</option>
+            }
+
+        </select>
+    </div>
+</div>
+
+
+<div class="container my-4 my-lg-6">
+    <div class="row g-4">
+        @* //TO DO: Needs to pull from somewhere? *@
+        @foreach (var classCollection in StaticClassCollections)
+        {
+            <div class="col-md-4">
+                <div class="block-mini-card mini-card p-2 p-md-4 pb-lg-0 d-flex flex-column">
+                    <h3 class="mini-card__headline h5 mb-4 px-2 px-md-0 pt-4 pt-md-0">@classCollection.Text</h3>
+                    <p class="px-2 px-md-0">Morbi ante risus, vehicula eu mi ut, aliquet hendrerit ex. Donec sed varius lorem.</p>
+                    <a href="@classCollection.Value" class="mini-card__link fs-normal mt-auto stretched-link text-decoration-none fw-bold">
+                        Views Offerings
+                        <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0.82077 8L12.0313 8" stroke="#2560B9" stroke-width="1.37143" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M8.51727 4L12.5173 8L8.51727 12" stroke="#2560B9" stroke-width="1.37143" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        }
+    </div>
+</div>

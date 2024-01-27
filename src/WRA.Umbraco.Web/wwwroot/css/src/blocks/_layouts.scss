@@ -1,0 +1,6 @@
+
+.block-2-col-layout + .block-2-col-layout,
+.block-3-col-layout + .block-3-col-layout,
+.block-4-col-layout + .block-4-col-layout {
+    margin-top: 1.5rem;
+}

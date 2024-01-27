@@ -1,0 +1,39 @@
+{
+  "javascript": [
+    "~/App_Plugins/CustomBlockView/shared.js",
+    "~/App_Plugins/CustomBlockView/richText.controller.js",
+    "~/App_Plugins/CustomBlockView/featureBreaker.controller.js",
+    "~/App_Plugins/CustomBlockView/headlineBlock.controller.js?v=22",
+    "~/App_Plugins/CustomBlockView/buttons.controller.js",
+    "~/App_Plugins/CustomBlockView/button.controller.js?v=21321",
+    "~/App_Plugins/CustomBlockView/genericSection.controller.js",
+    "~/App_Plugins/CustomBlockView/homeHero.controller.js",
+    "~/App_Plugins/CustomBlockView/latestNews.controller.js",
+    "~/App_Plugins/CustomBlockView/pageHeader.controller.js",
+    "~/App_Plugins/CustomBlockView/hotTip.controller.js",
+    "~/App_Plugins/CustomBlockView/ctaCard.controller.js",
+    "~/App_Plugins/CustomBlockView/childPageCard.controller.js",
+    "~/App_Plugins/CustomBlockView/membershipSection.controller.js",
+    "~/App_Plugins/CustomBlockView/educationSection.controller.js",
+    "~/App_Plugins/CustomBlockView/supportSection.controller.js",
+    "~/App_Plugins/CustomBlockView/tabs.controller.js",
+    "~/App_Plugins/CustomBlockView/iconBullet.controller.js",
+    "~/App_Plugins/CustomBlockView/ctaQuickLinks.controller.js",
+    "~/App_Plugins/CustomBlockView/overline.controller.js",
+    "~/App_Plugins/CustomBlockView/youtubeEmbed.controller.js",
+    "~/App_Plugins/CustomBlockView/missionStatement.controller.js",
+    "~/App_Plugins/CustomBlockView/imageTextRow.controller.js",
+    "~/App_Plugins/CustomBlockView/imageElement.controller.js",
+    "~/App_Plugins/CustomBlockView/multimediaCenter.controller.js",
+    "~/App_Plugins/CustomBlockView/interiorHero.controller.js",
+    "~/App_Plugins/CustomBlockView/interiorHeroCard.controller.js",
+    "~/App_Plugins/CustomBlockView/iconItem.controller.js",
+    "~/App_Plugins/CustomBlockView/testimonialsSlider.controller.js",
+    "~/App_Plugins/CustomBlockView/breadcrumbs.controller.js",
+    "~/App_Plugins/CustomBlockView/genericCard.controller.js",
+    "~/App_Plugins/CustomBlockView/backggroundContainer.controller.js"
+  ],
+  "css": [
+    "~/App_Plugins/CustomBlockView/override.css"
+  ]
+}

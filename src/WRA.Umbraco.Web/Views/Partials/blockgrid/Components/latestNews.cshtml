@@ -1,0 +1,99 @@
+﻿@using Umbraco.Extensions
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+@using Umbraco.Cms.Core.Models.Blocks
+@using ContentModels = WRA.Umbraco.Models;
+@using Umbraco.Cms.Core.Services;
+@using System.Linq;
+@using WRA.Umbraco.Web.Helpers
+
+@{
+    var content = (ContentModels.LatestNews)Model.Content;
+
+    var articleCategory = content.Category != null ? content.Category : null;
+
+    IEnumerable<IPublishedContent> newsArticles = content.Category != null ? 
+                                                Umbraco.ContentAtRoot()
+                                                .DescendantsOrSelfOfType("article")
+                                                .Where(p => p.IsVisible() && p.Value<WRA.Umbraco.Models.ArticleCategory>("category").Id == articleCategory.Id)
+                                                .OrderBy(p => p.GetProperty("date").GetSourceValue()).Reverse()
+                                                .Take(3)
+                                                : Umbraco.ContentAtRoot()
+                                                .DescendantsOrSelfOfType("article")
+                                                .OrderBy(p => p.GetProperty("date").GetSourceValue()).Reverse()
+                                                .Take(3);
+
+    var moreQuery = articleCategory != null ? $"?category={HtmlHelperExtensions.FormatSlug(articleCategory.Name)}" : "";
+
+    string className = "block-latest-news py-5 g-4";
+    string style = "background: var(--bs-gray-10)";
+    string props = "";
+
+
+    if (content.HasValue("additionalCssClasses"))
+    {
+        className += $" {content.AdditionalCssClasses}";
+    }
+
+    if (!String.IsNullOrEmpty(className))
+    {
+        props += $"class=\"{className.Trim()}\"";
+    }
+
+    if (!String.IsNullOrEmpty(style))
+    {
+        props += $" style=\"{style}\"";
+    }
+    
+}
+
+<div @Html.Raw(props.Trim())>
+    <div class="container">
+        <div class="d-md-flex flex-row justify-content-between align-items-center">
+            <h2 class="h4 mb-0 text-center text-md-start">Latest News</h2>
+            <a href="/news-updates@(moreQuery)" class="d-none d-md-inline btn btn-link-arrow">
+                @if (articleCategory != null)
+                {
+                    <span>All @articleCategory.Name News</span>
+                } 
+                else
+                {
+                    <span>All News</span>
+                }
+                <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0.820801 8L12.0314 8" stroke="#050F1E" stroke-width="1.37143" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M8.51733 4L12.5173 8L8.51733 12" stroke="#050F1E" stroke-width="1.37143" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </a>
+        </div>
+        @if (newsArticles.Any())
+        {
+            <div class="row gx-4 gy-2 mt-3 mt-md-2">
+                @foreach (var child in newsArticles)
+                {
+                    var pubDate = child.GetProperty("date").GetValue();
+                    var image = child.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("image");
+
+                    <div class="col-md-4">
+                        <a href="@child.Url()" class="news-card d-flex flex-row align-items-center p-2 text-decoration-none">
+                            <img src="@image.MediaUrl()" class="object-fit-cover" width="120" height="80" alt="@child.GetProperty("title").GetValue()" />
+                            <div class="w-100 h-100 d-flex flex-column ps-2 py-2">
+                                <h3 class="h6 news-card__headline">@child.GetProperty("title").GetValue()</h3>
+                                <p class="mt-auto fw-light fs-xs" style="color: var(--bs-gray-30)">@String.Format("{0:MMMM d, yyyy}", pubDate)</p>
+                            </div>
+                        </a>
+                    </div>
+                }
+            </div>
+        }
+        <div class="d-md-none mt-4 text-center">
+            <a href="/news-updates" class="btn btn-link-arrow">
+                All News
+                <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0.820801 8L12.0314 8" stroke="#050F1E" stroke-width="1.37143" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M8.51733 4L12.5173 8L8.51733 12" stroke="#050F1E" stroke-width="1.37143" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </a>
+        </div>
+    </div>
+</div>
+

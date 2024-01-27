@@ -1,0 +1,32 @@
+{
+  "Name": "Font Weight - Dropdown",
+  "Alias": "",
+  "EditorAlias": "Umbraco.DropDown.Flexible",
+  "DatabaseType": 1,
+  "Configuration": {
+    "multiple": false,
+    "items": [
+      {
+        "id": 1,
+        "value": "400"
+      },
+      {
+        "id": 2,
+        "value": "500"
+      },
+      {
+        "id": 3,
+        "value": "600"
+      },
+      {
+        "id": 4,
+        "value": "800"
+      }
+    ]
+  },
+  "Parent": null,
+  "Udi": "umb://data-type/efcd755c1ff141d18c9ecf8062e73c30",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
+  "__version": "12.0.5"
+}

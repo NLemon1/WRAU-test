@@ -1,0 +1,24 @@
+﻿<div class="row" ng-controller="testimonialsSliderController">
+    <div class="col-12 col-sm-6 col-lg-3" ng-repeat="testimonial in testimonials">
+        <div class="testimonial-card d-flex flex-column p-4 border">
+            <div ng-if="testimonial.properties[4].value">
+                <span style="display: inline-block; padding: 32px; border-radius: 50%; background-color: #dee2e6; "></span>
+                <!--<img class="align-self-start rounded-circle"  src="" alt="" />-->
+            </div>
+            <div ng-if="testimonial.properties[0].value">
+                <p class="fs-sm my-3">{{ testimonial.properties[0].value }}</p>
+            </div>
+            <div class="mt-auto">
+                <div ng-if="testimonial.properties[3].value">
+                    <span class="d-block text-primary fw-bold">{{ testimonial.properties[3].value }}</span>
+                </div>
+                <div ng-if="testimonial.properties[1].value">
+                    <span class="d-block fs-xs fw-light" style="color: var(--bs-gray-30)">{{ testimonial.properties[1].value }}</span>
+                </div>
+                <div ng-if="testimonial.properties[2].value">
+                    <span class="d-block fs-xs fw-light" style="color: var(--bs-gray-30)">{{ testimonial.properties[2].value }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

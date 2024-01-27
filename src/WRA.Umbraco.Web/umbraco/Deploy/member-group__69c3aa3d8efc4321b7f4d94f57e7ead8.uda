@@ -1,0 +1,8 @@
+{
+  "Name": "Test group",
+  "Alias": "",
+  "Udi": "umb://member-group/69c3aa3d8efc4321b7f4d94f57e7ead8",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.MemberGroupArtifact",
+  "__version": "12.0.4"
+}

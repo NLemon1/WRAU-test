@@ -1,0 +1,228 @@
+﻿@using Azure.Core;
+@using WRA.Umbraco.Models;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.NewsArticles>
+@using ContentModels = WRA.Umbraco.Models;
+@using Umbraco.Cms.Core.Models.Blocks
+@using System.Text.RegularExpressions;
+@using WRA.Umbraco.Web.Helpers;
+@using Microsoft.AspNetCore.Http;
+
+@{
+    Layout = "~/Views/_Layout.cshtml";
+
+    var content = (ContentModels.NewsArticles)Model;
+    var sections = Model.Value<IEnumerable<BlockGridItem>>("gridSection");
+    int pageSize = 15;
+
+    IEnumerable<IPublishedContent> newsCategories = Umbraco.ContentAtRoot().DescendantsOrSelfOfType("articleCategory");
+
+    var urlQuery = Context.Request.Query;
+    string selectedCategory = !String.IsNullOrEmpty(urlQuery["category"]) ? System.Uri.EscapeDataString(urlQuery["category"]) : null;
+    string searchPhrase = !String.IsNullOrEmpty(urlQuery["search"]) ? System.Uri.EscapeDataString(urlQuery["search"]) : null;
+
+    IEnumerable<IPublishedContent> results = !String.IsNullOrEmpty(selectedCategory) ?
+        Model.Children.Where(p => p.IsVisible() && @HtmlHelperExtensions.FormatSlug(p.Value<WRA.Umbraco.Models.ArticleCategory>("category").Name) == selectedCategory).OrderBy(p => p.GetProperty("date").GetSourceValue()).Reverse()
+        : Model.Children.OrderBy(p => p.GetProperty("date").GetSourceValue()).Reverse();
+
+    int categorizedResultCount = results.Count();
+    var resultMath = Decimal.Divide(categorizedResultCount, pageSize);//Results / PageSize
+    var totalPages = Decimal.Ceiling(resultMath);
+
+    var setAll = selectedCategory == null ? "aria-selected=true" : "aria-selected=false";
+    var newsCardFallbackImage = content.FallbackImage;
+
+}
+
+@await Html.PartialAsync("blockgrid/default", sections)
+
+<div class="container">
+
+    <div class="row mb-5">
+        <div class="col-md-6 mx-auto d-flex align-items-center gap-2">
+            <form id="news-search" role="search" method="get" action="/" class="flex-grow-1 overflow-hidden w-100">
+                <div class="d-flex flex-row align-items-center form-control py-0">
+                    <label class="visually-hidden" for="newsSearch">Search News</label>
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="search" id="news-search-input" class="w-100 border-0 bg-transparent ps-2 py-2" name="s" placeholder="Search by topic, keyword, theme" required="">
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    @if (newsCategories.Any())
+    {
+        <div class="mb-6  mb-lg-8">
+            <div class="tabs tabs--mobile-dropdown tabs--dark-mode d-none d-lg-block">
+                <div class="text-center">
+                    <ul role="tablist" class="js-article-filters tabs__tabs-list">
+                        <li role="presentation">
+                            <button id="tab-all" class="js-article-filter tabs__trigger text-decoration-none border-0" value="" role="tab" aria-controls="article-results" @(setAll)>All Posts</button>
+                        </li>
+                        @foreach (var child in newsCategories.Where(x => x.Name != "All"))
+                        {
+                            var setActive = @HtmlHelperExtensions.FormatSlug(child.Name).Equals(selectedCategory) ? "aria-selected=true" : "aria-selected=false";
+                            <li role="presentation" aria-controls="article-results">
+                                <button id="tab-@HtmlHelperExtensions.FormatSlug(@child.Name)" @(setActive) class="js-article-filter tabs__trigger border-0 text-decoration-none" value="@HtmlHelperExtensions.FormatSlug(@child.Name)" role="tab" aria-controls="tab-section-1">@child.Name</button>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+
+            <select class="js-article-dropdown tabs__dropdown d-block d-lg-none" aria-label="Select a tab">
+
+                @if (selectedCategory == null)
+                {
+                    <option value="" selected>All</option>
+                } 
+                else
+                {
+                    <option value="">All</option>
+                }
+
+                @foreach (var child in newsCategories.Where(x => x.Name != "All"))
+                {
+                    if (HtmlHelperExtensions.FormatSlug(child.Name).Equals(selectedCategory))
+                    {
+                        <option value="@HtmlHelperExtensions.FormatSlug(@child.Name)" selected>@child.Name</option>
+
+                    } 
+                    else
+                    {
+                        <option value="@HtmlHelperExtensions.FormatSlug(@child.Name)">@child.Name</option>
+                    }
+                }
+            </select>
+        </div>
+    }
+
+    @if (newsCategories.Any())
+    {
+        @foreach (var newsCategory in newsCategories)
+        {
+           
+            IPublishedContent featuredArticleObject = newsCategory.Value<IPublishedContent>("featuredArticle");
+
+            if (featuredArticleObject != null)
+            {
+                var articleTitle = featuredArticleObject.HasProperty("title") ? featuredArticleObject.Value("title") : featuredArticleObject.Name;
+                string cleanContent = "";
+
+                if (featuredArticleObject.HasValue("richTextContent") && !featuredArticleObject.HasValue("excerpt"))
+                {
+                    cleanContent = HtmlHelperExtensions.ShortenExcerpt(featuredArticleObject.Value("richTextContent").ToString(), 135);
+                }
+                var articleSummary = featuredArticleObject.HasValue("excerpt") ? featuredArticleObject.Value("excerpt") : cleanContent;
+                var articleCategory = featuredArticleObject.Value<WRA.Umbraco.Models.ArticleCategory>("category");
+
+                var newsCardImage = featuredArticleObject.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("image");
+                var imageSet = !String.IsNullOrEmpty(newsCardImage.MediaUrl()) ? newsCardImage.MediaUrl() : newsCardFallbackImage.MediaUrl();
+
+                var articleDateReadable = String.Format("{0:MMMM d, yyyy}", featuredArticleObject.Value("date"));
+                var articleDate = String.Format("{0:yyyy-MM-dd}", featuredArticleObject.Value("date"));
+
+                var initialActiveTab = selectedCategory == HtmlHelperExtensions.FormatSlug(newsCategory.Name) || (newsCategory.Name == "All" && String.IsNullOrEmpty(selectedCategory));
+                var setTabActive = initialActiveTab != true ? "hidden" : "";
+
+                <div class="js-featured-article featured-article block-image-text-row position-relative" @(setTabActive) data-featuredcat="@HtmlHelperExtensions.FormatSlug(newsCategory.Name)">
+                    <div class="row ">
+                        <div class="col-md-6 image-text-row__col-1 d-flex flex-column justify-content-center">
+                            <figure class="block-image-element img-curved img-curved--large img-decor">
+                                @if (imageSet != null)
+                                {
+                                    <img src="@imageSet?width=660&height=440" loading="lazy" class="img-fluid" width="660" height="330" alt="@(newsCardImage != null ? newsCardImage.Value("altText") : "")" />
+                                }
+                            </figure>
+                        </div>
+                        <div class="col-md-6 image-text-row__col-2 d-flex flex-column justify-content-center">
+                            @if (featuredArticleObject.HasValue("category"))
+                            {
+                                <span class="chip align-self-start mb-3 mb-lg-4">
+                                    @articleCategory.Name
+                                </span>
+                            }
+
+                            <a href="@featuredArticleObject.Url()" class="text-decoration-none stretched-link" style="color: var(--bs-dark);">
+                                <h3 class="mb-3 mb-lg-4 h5 text-start">
+                                    @articleTitle
+                                </h3>
+                            </a>
+                            @if (articleSummary != null)
+                            {
+                                <div class="mb-3 mb-lg-4">
+                                    @articleSummary
+                                </div>
+                            }
+
+                            @if (featuredArticleObject.HasValue("date"))
+                            {
+                                <time class="fs-xs fw-light" datetime="@articleDate" style="color: var(--bs-gray-30)">
+                                    @articleDateReadable
+                                </time>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    }
+    <div class="position-relative">
+        <div id="article-results" class="js-article-results row my-4 mb-6 g-3 g-lg-6" style="min-height: 500px;" data-fallback="@newsCardFallbackImage.MediaUrl()" data-cattotal="@totalPages">
+            @foreach (var item in results.Take(pageSize))
+            {
+                var articleTitle = item.HasProperty("title") ? item.Value("title") : item.Name;
+                var articleDateReadable = String.Format("{0:MMMM d, yyyy}", item.Value("date"));
+                var articleDate = String.Format("{0:yyyy-MM-dd}", item.Value("date"));
+                var articleCategory = item.Value<WRA.Umbraco.Models.ArticleCategory>("category");
+                var newsCardImage = item.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("image");
+                var imageSet = !String.IsNullOrEmpty(newsCardImage.MediaUrl()) ? newsCardImage.MediaUrl() : newsCardFallbackImage.MediaUrl();
+
+                string cleanContent = "";
+
+                if (item.HasValue("richTextContent") && !item.HasValue("excerpt"))
+                {
+                    cleanContent = HtmlHelperExtensions.ShortenExcerpt(item.Value("richTextContent").ToString(), 135);
+                }
+                var articleSummary = item.HasValue("excerpt") ? item.Value("excerpt") : cleanContent;
+
+                <div class="d-block col-md-6 col-lg-4">
+                    <a href="@item.Url()" class="news-card news-card--lg text-decoration-none d-block p-4" style="color: var(--bs-dark);">
+                        <div class="mb-4 ratio ratio-16x9">
+                            @if (imageSet != null)
+                            {
+                                <img src="@imageSet?width=660&height=440" loading="lazy" class="img-fluid" width="660" height="330" alt="@(newsCardImage != null ? newsCardImage.Value("altText") : "")" />
+                            }
+                        </div>
+
+                        <div class="mb-2 d-flex flex-row align-items-center justify-content-between">
+                            @if (item.HasValue("date"))
+                            {
+                                <time class="fs-xs fw-bold" datetime="@articleDate">
+                                    @articleDateReadable
+                                </time>
+                            }
+                            @if (item.HasValue("category"))
+                            {
+                                <span class="chip chip--no-hover align-self-start">
+                                    @articleCategory.Name
+                                </span>
+                            }
+                        </div>
+
+                        <h3 class="h6 mb-2">@articleTitle</h3>
+                        <p class="fs-sm">@articleSummary</p>
+                    </a>
+                </div>
+            }
+        </div>
+
+        <div class="js-results-loader search-loading" hidden title="Please wait, loading.">
+            <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+        </div>
+    </div>
+
+    <div class="w-100 d-flex flex-row justify-content-center align-items-center py-5 mb-5">
+        <ol class="js-articles-pagination search-pagination list-unstyled d-flex flex-row gap-2 text-center mx-2 mb-0"></ol>
+    </div>
+
+</div>

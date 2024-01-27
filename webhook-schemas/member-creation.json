@@ -1,0 +1,53 @@
+{
+    "redirectUrl": "",
+    "email": "raymond@lightburn.co",
+    "memberProperties": [
+        {
+            "alias": "umbracoMemberComments",
+            "value": "it worked!",
+            "name": "Comments"
+        },
+        {
+            "alias": "externalId",
+            "value": "201528",
+            "name": "ExternalId"
+        },
+        {
+            "alias": "companyName",
+            "value": "example company",
+            "name": "Company Name"
+        },
+        {
+            "alias": "address1",
+            "value": "1816 S 13Th Street",
+            "name": "Address1"
+        },
+        {
+            "alias": "city",
+            "value": "Milwaukee",
+            "name": "City"
+        },
+        {
+            "alias": "zipCode",
+            "value": "53204",
+            "name": "zip"
+        },
+        {
+            "alias": "phone",
+            "value": "(414) 248-9308",
+            "name": "Phone"
+        },
+        {
+            "alias": "fax",
+            "value": "",
+            "name": "Fax"
+        }
+    ],
+    "memberTypeAlias": "Member",
+    "name": "Raymond",
+    "password": "testpass12341234",
+    "confirmPassword": "testpass12341234",
+    "username": "raymond",
+    "usernameIsEmail": true,
+    "automaticLogIn": false
+}

@@ -1,0 +1,92 @@
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+@using ContentModels = WRA.Umbraco.Models
+@{
+
+    var content = (ContentModels.Button)Model.Content;
+    string className = "btn mb-2";
+    var link = content.Value<Link>("link");
+
+    //STYLE
+    if (content.HasValue("style"))
+    {
+        switch (content.Style)
+        {
+            case "solid":
+                className += " btn-primary";
+                break;
+            case "outline":
+                className += " btn-secondary";
+                break;
+            case "link":
+                className += " btn-link";
+                break;
+            case "link arrow":
+                className += " btn-link-arrow ms-n2_5 ";
+                break;
+        }
+    }
+    else
+    {
+        className += " btn-primary";
+    }
+
+    //CONTRAST
+    if (content.HasValue("contrast"))
+    {
+        switch (content.Contrast)
+        {
+            case "dark":
+                className += "";
+                break;
+            case "light":
+                className += " btn-light";
+                break;
+        }
+    }
+
+    if (content.HasValue("additionalCssClasses"))
+    {
+        className += $" {content.AdditionalCssClasses}";
+    }
+
+}
+
+
+<a class="@className" href="@link.Url" target="@link.Target">
+    @Html.Raw(link.Name)
+    @if (content.Style.ToLower() == "link arrow")
+    {
+        <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0.820801 8L12.0314 8" stroke="#050F1E" stroke-width="1.37143" stroke-linecap="round"
+                stroke-linejoin="round" />
+            <path d="M8.51733 4L12.5173 8L8.51733 12" stroke="#050F1E" stroke-width="1.37143" stroke-linecap="round"
+                stroke-linejoin="round" />
+        </svg>
+    }
+</a>
+
+@*
+<a href="/" class="btn btn-primary">Test Button</a>
+<a href="/" class="btn btn-primary btn-sm">Test SM Button</a>
+<a href="/" class="btn btn-secondary">Test Button</a>
+<a href="/" class="btn btn-secondary btn-light">Test SM Button</a>
+<a href="/" class="btn btn-link btn-light">Test Button</a>
+<a href="/" class="btn btn-link-arrow">
+Test Button
+<svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0.820801 8L12.0314 8" stroke="#050F1E" stroke-width="1.37143" stroke-linecap="round" stroke-linejoin="round"
+/>
+<path d="M8.51733 4L12.5173 8L8.51733 12" stroke="#050F1E" stroke-width="1.37143" stroke-linecap="round"
+stroke-linejoin="round" />
+</svg>
+</a>
+<a href="/" class="btn btn-link-arrow btn-light">
+Test Button
+<svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0.820801 8L12.0314 8" stroke="#050F1E" stroke-width="1.37143" stroke-linecap="round" stroke-linejoin="round"
+/>
+<path d="M8.51733 4L12.5173 8L8.51733 12" stroke="#050F1E" stroke-width="1.37143" stroke-linecap="round"
+stroke-linejoin="round" />
+</svg>
+</a>
+*@

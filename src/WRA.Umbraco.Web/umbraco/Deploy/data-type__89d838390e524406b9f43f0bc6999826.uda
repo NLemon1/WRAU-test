@@ -1,0 +1,40 @@
+{
+  "Name": "Headline Block - Heading Level - Dropdown",
+  "Alias": "",
+  "EditorAlias": "Umbraco.DropDown.Flexible",
+  "DatabaseType": 1,
+  "Configuration": {
+    "multiple": false,
+    "items": [
+      {
+        "id": 1,
+        "value": "H1"
+      },
+      {
+        "id": 2,
+        "value": "H2"
+      },
+      {
+        "id": 3,
+        "value": "H3"
+      },
+      {
+        "id": 4,
+        "value": "H4"
+      },
+      {
+        "id": 5,
+        "value": "H5"
+      },
+      {
+        "id": 6,
+        "value": "H6"
+      }
+    ]
+  },
+  "Parent": null,
+  "Udi": "umb://data-type/89d838390e524406b9f43f0bc6999826",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
+  "__version": "12.0.4"
+}

@@ -1,0 +1,10 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>;
+@using ContentModels = WRA.Umbraco.Models;
+
+@{
+    var content = (ContentModels.YoutubeEmbed)Model.Content;
+}
+
+<div class="ratio ratio-16x9">
+    <iframe src="https://www.youtube.com/embed/@content.VideoID" title="YouTube video" allowfullscreen></iframe>
+</div>

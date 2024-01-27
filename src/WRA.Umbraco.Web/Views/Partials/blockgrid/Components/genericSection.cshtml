@@ -1,0 +1,90 @@
+﻿@using Umbraco.Extensions
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+@using Umbraco.Cms.Core.Models.Blocks;
+@using ContentModels = WRA.Umbraco.Models;
+
+@{
+    var content = (ContentModels.GenericSection)Model.Content;
+    string props = "";
+    string className = "block-generic-section mx-auto ";
+    string style = "";
+    string styleInner = "";
+
+    if (content.HasValue("Width"))
+    {
+        switch (content.Value("Width"))
+        {
+            case "744px":
+                className += "container container--sm";
+                break;
+            case "936px":
+                className += "container container--md";
+                break;
+            case "1128px (standard)":
+                className += "container";
+                break;
+            case "1920px":
+                className += "container container--lg";
+                break;
+            case "Full":
+                className += "w-100";
+                break;
+        }
+    }
+
+    if (content.HasValue("innerWidth"))
+    {
+        style += $" --inner-max-width:{content.InnerWidth}%;";
+        className += $" block-generic-section--has-inner-width";
+    }
+
+    if (content.HasValue("additionalCssClasses"))
+    {
+        className += $" {content.AdditionalCssClasses}";
+    }
+    
+    if (content.HasValue("yPadding"))
+    {
+        style += $"padding-bottom:{content.YPadding};";
+        style += $"padding-top:{content.YPadding};";
+    }
+    
+    if (content.HasValue("xPadding"))
+    {
+        style += $"padding-left:{content.XPadding};";
+        style += $"padding-right:{content.XPadding};";
+        className += $" px-xs-0";
+    }
+
+    if (content.HasValue("color"))
+    {
+        style += $"background-color:#{content.Color};";
+    }
+
+    if (content.HasValue("additionalCssClasses"))
+    {
+        className += $" {content.AdditionalCssClasses}";
+    }
+
+    if (!String.IsNullOrEmpty(className))
+    {
+        props += $"class=\"{className.Trim()}\"";
+    }
+
+    if (!String.IsNullOrEmpty(style))
+    {
+        props += $" style=\"{style}\"";
+    }
+
+}
+
+<div @Html.Raw(props.Trim())>
+    <div class="row">
+        <div class="col mx-auto block-generic-section__inner">
+            @await Html.GetBlockGridItemAreaHtmlAsync(Model, "generic-section-area")
+        </div>
+    </div>
+</div>
+
+
+

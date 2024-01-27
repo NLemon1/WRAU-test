@@ -1,0 +1,15 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>;
+@using ContentModels = WRA.Umbraco.Models;
+
+@{
+    var content = (ContentModels.HotTip)Model.Content;
+}
+
+<div class="hot-tip">
+    <div class="hot-tip__header">
+        @content.Value("title")
+    </div>
+    <div class="hot-tip__content">
+        @await Html.GetBlockGridItemAreaHtmlAsync(Model, "hot-tip-area")
+    </div>
+</div>

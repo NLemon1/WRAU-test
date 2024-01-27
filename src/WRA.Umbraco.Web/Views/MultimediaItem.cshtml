@@ -1,0 +1,190 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.MultimediaItem>
+@using Umbraco.Cms.Core.Models.Blocks
+@using ContentModels = WRA.Umbraco.Models;
+@{
+    Layout = "~/Views/_Layout.cshtml";
+    var content = (ContentModels.MultimediaItem)Model;
+    var image = content.ThumbnailOverride;
+    var sections = Model.Value<IEnumerable<BlockGridItem>>("sections");
+
+    bool isPlayList = content.Children.Any();//determines if treated as a playlist or single video experience
+
+    var getType = content.MediaType == "Video" ? "Videos" : "Audio";
+
+    string mediaItemTitle = !String.IsNullOrEmpty(Model.Title) ? content.Title : content.Name;
+    var mediaItemDateReadable = String.Format("{0:MMMM d, yyyy}", content.Date);
+    var mediaItemDate = String.Format("{0:yyyy-MM-dd}", content.Date);
+    var mediaItemThumb = content.ThumbnailOverride != null ? image.Url() : $"https://i3.ytimg.com/vi/{content.YouTubeId}/maxresdefault.jpg";
+    var mediaItemDateISO = String.Format("{0:s}", content.Date) + "+06:00";
+}
+
+@section scripts {
+    @if (!String.IsNullOrEmpty(Model.Title))
+    {
+        <script type="application/ld+json">
+            {
+              "@@context": "https://schema.org",
+              "@@type": "VideoObject",
+              "name": "@mediaItemTitle",
+              "description": "@content.Description",
+              "thumbnailUrl": [
+                "@mediaItemThumb"
+               ],
+              "uploadDate": "@mediaItemDateISO",
+              "contentUrl": "@($"https://www.youtube.com/watch?v={content.YouTubeId}")",
+              "embedUrl": "@($"https://www.youtube.com/watch?v={content.YouTubeId}")"
+            }
+        </script>
+    }
+}
+
+<header class="text-white w-100" style="background-color: rgba(var(--bs-black-rgb))">
+    <div class="container">
+        <a class="d-inline-flex align-items-center gap-1 text-decoration-none mt-4 my-lg-5 fw-bold text-white" title="Back to Multimedia Landing Page" href="@( content.Parent.GetTemplateAlias() == "MultimediaItem" ? content.Parent.Parent.Url() + "?type=" + content.MediaType.ToLower() : content.Parent.Url() + "?type=" + content.MediaType.ToLower())">
+            <i class="fa fa-chevron-left" width="16" height="16" aria-hidden="true"></i>
+            All @getType
+        </a>
+    </div>
+</header>
+
+@if (isPlayList)
+{
+    @* PLAYLIST VIDEO EXPERIENCE *@
+
+    //Playlist Items
+    IEnumerable<IPublishedContent> playlistItems = content.Children()
+    .DescendantsOrSelfOfType("multimediaItem")
+    .OrderBy(p => p.GetProperty("date").GetSourceValue()).Reverse();
+
+    //First Item
+    var firstItem = playlistItems.FirstOrDefault();
+    var firstTitle = firstItem.GetProperty("title").GetValue() != null ? firstItem.GetProperty("title").GetValue() : firstItem.Name;
+    var firstDescription = firstItem.GetProperty("description").GetValue() != null ? firstItem.GetProperty("description").GetValue() : "";
+    var firstDateReadable = String.Format("{0:MMMM d, yyyy}", firstItem.GetProperty("date").GetValue());
+    var firstDate = String.Format("{0:yyyy-MM-dd}", firstItem.GetProperty("date").GetValue());
+    var firstYouTubeId = firstItem.GetProperty("youTubeId").GetValue() != null ? firstItem.GetProperty("youTubeId").GetValue() : "";
+
+    <div id="video" name="video" class="w-100 overflow-hidden" style="background-color: rgba(var(--bs-black-rgb))">
+        <div class="container">
+            <div class="ratio ratio-16x9">
+                <iframe src="https://www.youtube.com/embed/@firstYouTubeId" id="js-playlist-player" title="YouTube video" role="region" aria-live="polite" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+    <div style="background-color: var(--bs-gray-10)" class="py-6 pb-lg-11">
+        <div class="container">
+            <div class="row mb-2">
+                <div class="col">
+                    <div class="pb-5 pb-lg-8 border-bottom mb-4" style="border-bottom-color: var(--bs-gray-20)">
+                        <time class="js-playlist-date fs-sm mb-2 d-block" datetime="@firstDate">
+                            @firstDateReadable
+                        </time>
+                        <h1 class="js-playlist-title h5 mb-3">@firstTitle</h1>
+                        <p class="js-playlist-description">@firstDescription</p>
+                    </div>
+                </div>
+            </div>
+
+            @if (playlistItems.Any())
+            {
+                <h2 class="h3 mb-2">Playlist</h2>
+                <div class="row">
+                    @foreach (var child in playlistItems)
+                    {
+                        var itemTitle = child.GetProperty("title").GetValue() != null ? child.GetProperty("title").GetValue() : child.Name;
+                        var pubDate = String.Format("{0:yyyy-MM-dd}", child.GetProperty("date").GetValue());
+
+                        var imageRelated = child.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("ThumbnailOverride");
+                        var imageYouTubeId = child.GetProperty("youTubeId").GetValue();
+                        var imageRelatedThumb = imageRelated != null ? imageRelated.Url() : $"https://i3.ytimg.com/vi/{imageYouTubeId}/maxresdefault.jpg";
+                        var isFirstAria = child.Id == firstItem.Id  ? "true" : "false";
+
+                        <div class="col-md-6 col-lg-4">
+                            <a href="#video" data-yt="@imageYouTubeId" data-date="@pubDate" data-title="@itemTitle" data-description="@child.GetProperty("description").GetValue()" class="js-playlist-item card card-media p-4 flex-md-column align-items-start text-decoration-none text-dark" aria-controls="js-playlist-player" aria-selected="@isFirstAria">
+                                <div class="ratio ratio-16x9 mb-3 card-media__img">
+                                    <img src="@imageRelatedThumb" alt="@itemTitle" class="img-fluid" />
+                                </div>
+                                <time class="fs-xs mb-2 d-block">
+                                    @String.Format("{0:MMMM d, yyyy}", pubDate)
+                                </time>
+                                <h3 class="h6 mb-2">
+                                    @child.GetProperty("title").GetValue()
+                                </h3>
+                                <p>@child.GetProperty("description").GetValue()</p>
+                            </a>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+} 
+else
+{
+
+    @* SINGLE VIDEO EXPERIENCE *@
+
+    <div class="w-100 overflow-hidden" style="background-color: rgba(var(--bs-black-rgb))">
+        <div class="container">
+            <div class="ratio ratio-16x9">
+                <iframe src="https://www.youtube.com/embed/@content.YouTubeId" title="YouTube video" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <div style="background-color: var(--bs-gray-10)" class="py-6 pb-lg-11">
+        <div class="container">
+            <div class="row mb-2">
+                <div class="col">
+                    <div class="pb-5 pb-lg-8 border-bottom mb-4" style="border-bottom-color: var(--bs-gray-20)">
+                        <time class="fs-sm mb-2 d-block" datetime="@mediaItemDate">
+                            @mediaItemDateReadable
+                        </time>
+                        <h1 class="h5 mb-3">@mediaItemTitle</h1>
+                        <p>@content.Description</p>
+                    </div>
+                </div>
+            </div>
+        
+            @{
+                IEnumerable<IPublishedContent> multimediaItems = Umbraco.ContentAtRoot()
+                .DescendantsOrSelfOfType("multimediaItem")
+                .Where(p => p.Id != content.Id)
+                .SkipWhile(p => p.Value<WRA.Umbraco.Models.MultimediaCategory>("category") == null || p.Value<WRA.Umbraco.Models.MultimediaCategory>("category").Id != content.Category.Id)
+                .OrderBy(p => p.GetProperty("date").GetSourceValue()).Reverse()
+                .Take(3);
+            }
+            @if (multimediaItems.Any())
+            {
+                <h2 class="h3 mb-2">Related Videos</h2>
+                <div class="row">
+                    @foreach (var child in multimediaItems.WhereNotNull())
+                    {
+                        var itemTitle = child.GetProperty("title").GetValue() != null ? child.GetProperty("title").GetValue() : child.Name;
+                        var pubDate = child.GetProperty("date").GetValue();
+                        var imageRelated = child.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("ThumbnailOverride");
+                        var imageYouTubeId = child.GetProperty("youTubeId").GetValue();
+                        var imageRelatedThumb = imageRelated != null ? imageRelated.Url() : $"https://i3.ytimg.com/vi/{imageYouTubeId}/maxresdefault.jpg";
+
+                        <div class="col-md-6 col-lg-4">
+                            <a href="@child.Url()" class="card card-media p-4 flex-md-column align-items-start text-decoration-none text-dark">
+                                <div class="ratio ratio-16x9 mb-3 card-media__img">
+                                    <img src="@imageRelatedThumb" alt="@itemTitle" class="img-fluid" />
+                                </div>
+                                <time class="fs-xs mb-2 d-block">
+                                    @String.Format("{0:MMMM d, yyyy}", pubDate)
+                                </time>
+                                <h3 class="h6 mb-2">
+                                    @itemTitle
+                                </h3>
+                                <p>@child.GetProperty("description").GetValue()</p>
+                            </a>
+                        </div>
+                    }
+                </div>
+            }
+
+        </div>
+    </div>
+}
