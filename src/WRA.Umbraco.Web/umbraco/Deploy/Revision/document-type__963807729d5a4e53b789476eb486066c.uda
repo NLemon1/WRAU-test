@@ -1,22 +1,11 @@
 {
   "Name": "Article Category",
   "Alias": "articleCategory",
-  "DefaultTemplate": null,
   "AllowedTemplates": [],
-  "HistoryCleanup": {
-    "preventCleanup": false,
-    "keepAllVersionsNewerThanDays": null,
-    "keepLatestVersionPerDayForDays": null
-  },
+  "HistoryCleanup": {},
   "Icon": "icon-tag color-black",
   "Thumbnail": "folder.png",
-  "Description": null,
-  "IsContainer": false,
   "Permissions": {
-    "AllowVaryingByCulture": false,
-    "AllowVaryingBySegment": false,
-    "AllowedAtRoot": false,
-    "IsElementType": false,
     "AllowedChildContentTypes": []
   },
   "Parent": "umb://document-type-container/3767e51e2a094bce91970e131b9932f8",
@@ -25,8 +14,6 @@
     {
       "Key": "1d17397c-82af-4eb5-aada-77c922c18056",
       "Name": "Content",
-      "SortOrder": 0,
-      "Type": 0,
       "Alias": "content",
       "PropertyTypes": [
         {
@@ -34,18 +21,7 @@
           "Alias": "featuredArticle",
           "DataType": "umb://data-type/9bce1176724648bdaa3749b2b45ec816",
           "Description": "Select an article to be featured with this category.",
-          "Mandatory": false,
-          "MandatoryMessage": null,
-          "Name": "Featured Article",
-          "SortOrder": 0,
-          "Validation": null,
-          "ValidationMessage": null,
-          "VariesByCulture": false,
-          "VariesBySegment": false,
-          "LabelOnTop": false,
-          "MemberCanEdit": false,
-          "ViewOnProfile": false,
-          "IsSensitive": false
+          "Name": "Featured Article"
         }
       ]
     }
@@ -55,15 +31,13 @@
   "Dependencies": [
     {
       "Udi": "umb://data-type/9bce1176724648bdaa3749b2b45ec816",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     },
     {
       "Udi": "umb://document-type-container/3767e51e2a094bce91970e131b9932f8",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
-  "__version": "12.0.5"
+  "__version": "13.0.3"
 }

@@ -1,21 +1,11 @@
 {
   "Name": "Latest News",
   "Alias": "latestNews",
-  "DefaultTemplate": null,
   "AllowedTemplates": [],
-  "HistoryCleanup": {
-    "preventCleanup": false,
-    "keepAllVersionsNewerThanDays": null,
-    "keepLatestVersionPerDayForDays": null
-  },
+  "HistoryCleanup": {},
   "Icon": "icon-layout color-black",
   "Thumbnail": "folder.png",
-  "Description": null,
-  "IsContainer": false,
   "Permissions": {
-    "AllowVaryingByCulture": false,
-    "AllowVaryingBySegment": false,
-    "AllowedAtRoot": false,
     "IsElementType": true,
     "AllowedChildContentTypes": []
   },
@@ -28,7 +18,6 @@
       "Key": "c905528c-277e-4d51-a8a3-688187f7de4a",
       "Name": "Content",
       "SortOrder": 1,
-      "Type": 0,
       "Alias": "advanced/content",
       "PropertyTypes": [
         {
@@ -36,18 +25,7 @@
           "Alias": "category",
           "DataType": "umb://data-type/ec5b7f18f4c1484e8d7fd2cac6341d18",
           "Description": "Defaults to \"all news\" if no category is selected.",
-          "Mandatory": false,
-          "MandatoryMessage": null,
-          "Name": "Category",
-          "SortOrder": 0,
-          "Validation": null,
-          "ValidationMessage": null,
-          "VariesByCulture": false,
-          "VariesBySegment": false,
-          "LabelOnTop": false,
-          "MemberCanEdit": false,
-          "ViewOnProfile": false,
-          "IsSensitive": false
+          "Name": "Category"
         }
       ]
     }
@@ -57,20 +35,17 @@
   "Dependencies": [
     {
       "Udi": "umb://data-type/ec5b7f18f4c1484e8d7fd2cac6341d18",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     },
     {
       "Udi": "umb://document-type-container/37b4b44f0abc4536af8ed684511c2571",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     },
     {
       "Udi": "umb://document-type/38e48d076783491993c671f1add73d05",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
-  "__version": "12.0.5"
+  "__version": "13.0.3"
 }

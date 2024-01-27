@@ -1,21 +1,11 @@
 {
   "Name": "Interior Hero Card",
   "Alias": "interiorHeroCard",
-  "DefaultTemplate": null,
   "AllowedTemplates": [],
-  "HistoryCleanup": {
-    "preventCleanup": false,
-    "keepAllVersionsNewerThanDays": null,
-    "keepLatestVersionPerDayForDays": null
-  },
+  "HistoryCleanup": {},
   "Icon": "icon-playing-cards color-black",
   "Thumbnail": "folder.png",
-  "Description": null,
-  "IsContainer": false,
   "Permissions": {
-    "AllowVaryingByCulture": false,
-    "AllowVaryingBySegment": false,
-    "AllowedAtRoot": false,
     "IsElementType": true,
     "AllowedChildContentTypes": []
   },
@@ -30,20 +20,17 @@
   "Dependencies": [
     {
       "Udi": "umb://document-type-container/7d7bb95bd7634722b04820839c0ae21e",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     },
     {
       "Udi": "umb://document-type/38e48d076783491993c671f1add73d05",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     },
     {
       "Udi": "umb://document-type/960c0ac2ce454e69a912f801dee7c0b7",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
-  "__version": "12.0.5"
+  "__version": "13.0.3"
 }

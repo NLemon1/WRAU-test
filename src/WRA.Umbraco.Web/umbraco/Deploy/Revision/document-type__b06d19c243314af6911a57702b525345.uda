@@ -5,20 +5,10 @@
   "AllowedTemplates": [
     "umb://template/3ed7d218589e404ea2c18f8e1f320e0d"
   ],
-  "HistoryCleanup": {
-    "preventCleanup": false,
-    "keepAllVersionsNewerThanDays": null,
-    "keepLatestVersionPerDayForDays": null
-  },
+  "HistoryCleanup": {},
   "Icon": "icon-video color-black",
   "Thumbnail": "folder.png",
-  "Description": null,
-  "IsContainer": false,
   "Permissions": {
-    "AllowVaryingByCulture": false,
-    "AllowVaryingBySegment": false,
-    "AllowedAtRoot": false,
-    "IsElementType": false,
     "AllowedChildContentTypes": [
       "umb://document-type/b06d19c243314af6911a57702b525345"
     ]
@@ -29,8 +19,6 @@
     {
       "Key": "f3925ec5-02c2-4018-98e5-dc59c965d56e",
       "Name": "Content",
-      "SortOrder": 0,
-      "Type": 0,
       "Alias": "content",
       "PropertyTypes": [
         {
@@ -39,71 +27,30 @@
           "DataType": "umb://data-type/5046194e4237453ca54715db3a07c4e1",
           "Description": "Publish Date",
           "Mandatory": true,
-          "MandatoryMessage": null,
           "Name": "Date",
-          "SortOrder": 2,
-          "Validation": null,
-          "ValidationMessage": null,
-          "VariesByCulture": false,
-          "VariesBySegment": false,
-          "LabelOnTop": false,
-          "MemberCanEdit": false,
-          "ViewOnProfile": false,
-          "IsSensitive": false
+          "SortOrder": 2
         },
         {
           "Key": "3e1dd820-cd6b-4fcc-a81b-b4d455d01dee",
           "Alias": "title",
           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
-          "Description": null,
-          "Mandatory": false,
-          "MandatoryMessage": null,
-          "Name": "Title",
-          "SortOrder": 0,
-          "Validation": null,
-          "ValidationMessage": null,
-          "VariesByCulture": false,
-          "VariesBySegment": false,
-          "LabelOnTop": false,
-          "MemberCanEdit": false,
-          "ViewOnProfile": false,
-          "IsSensitive": false
+          "Name": "Title"
         },
         {
           "Key": "572e1e49-3603-4093-84b4-dcf261123761",
           "Alias": "youTubeId",
           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
           "Description": "*Not required for playlist (parent item).\n\nExample ID: NcdxHU4bVmg  \n(Used from browser url: https://youtube.com/watch?v=NcdxHU4bVmg)",
-          "Mandatory": false,
-          "MandatoryMessage": null,
           "Name": "YouTube Id",
-          "SortOrder": 4,
-          "Validation": null,
-          "ValidationMessage": null,
-          "VariesByCulture": false,
-          "VariesBySegment": false,
-          "LabelOnTop": false,
-          "MemberCanEdit": false,
-          "ViewOnProfile": false,
-          "IsSensitive": false
+          "SortOrder": 4
         },
         {
           "Key": "5c53bfa6-eeff-4e05-847d-2536aef50e4c",
           "Alias": "thumbnailOverride",
           "DataType": "umb://data-type/ad9f0cf2bda245d59ea1a63cfc873fd3",
           "Description": "Defaults to YouTube thumb.",
-          "Mandatory": false,
-          "MandatoryMessage": null,
           "Name": "Thumbnail Override",
-          "SortOrder": 6,
-          "Validation": null,
-          "ValidationMessage": null,
-          "VariesByCulture": false,
-          "VariesBySegment": false,
-          "LabelOnTop": false,
-          "MemberCanEdit": false,
-          "ViewOnProfile": false,
-          "IsSensitive": false
+          "SortOrder": 6
         },
         {
           "Key": "6fa5c751-3a68-4808-a889-2e76ce5d317a",
@@ -111,53 +58,24 @@
           "DataType": "umb://data-type/b29361b2460b446e9ea665e4668f81a2",
           "Description": "Audio or Video",
           "Mandatory": true,
-          "MandatoryMessage": null,
           "Name": "Media Type",
-          "SortOrder": 1,
-          "Validation": null,
-          "ValidationMessage": null,
-          "VariesByCulture": false,
-          "VariesBySegment": false,
-          "LabelOnTop": false,
-          "MemberCanEdit": false,
-          "ViewOnProfile": false,
-          "IsSensitive": false
+          "SortOrder": 1
         },
         {
           "Key": "da056d5c-70ce-4099-9fe5-d5c9ed8004f8",
           "Alias": "category",
           "DataType": "umb://data-type/0d3f612bff7b4adf8edc5da8cbfa3d11",
           "Description": "*Not required for playlist (parent item).",
-          "Mandatory": false,
-          "MandatoryMessage": null,
           "Name": "Category",
-          "SortOrder": 5,
-          "Validation": null,
-          "ValidationMessage": null,
-          "VariesByCulture": false,
-          "VariesBySegment": false,
-          "LabelOnTop": false,
-          "MemberCanEdit": false,
-          "ViewOnProfile": false,
-          "IsSensitive": false
+          "SortOrder": 5
         },
         {
           "Key": "e840b057-ab27-4d31-81b5-3738e6d92aa1",
           "Alias": "description",
           "DataType": "umb://data-type/c6bac0dd4ab945b18e30e4b619ee5da3",
-          "Description": null,
           "Mandatory": true,
-          "MandatoryMessage": null,
           "Name": "Description",
-          "SortOrder": 3,
-          "Validation": null,
-          "ValidationMessage": null,
-          "VariesByCulture": false,
-          "VariesBySegment": false,
-          "LabelOnTop": false,
-          "MemberCanEdit": false,
-          "ViewOnProfile": false,
-          "IsSensitive": false
+          "SortOrder": 3
         }
       ]
     }
@@ -167,50 +85,40 @@
   "Dependencies": [
     {
       "Udi": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     },
     {
       "Udi": "umb://data-type/0d3f612bff7b4adf8edc5da8cbfa3d11",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     },
     {
       "Udi": "umb://data-type/5046194e4237453ca54715db3a07c4e1",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     },
     {
       "Udi": "umb://data-type/ad9f0cf2bda245d59ea1a63cfc873fd3",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     },
     {
       "Udi": "umb://data-type/b29361b2460b446e9ea665e4668f81a2",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     },
     {
       "Udi": "umb://data-type/c6bac0dd4ab945b18e30e4b619ee5da3",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     },
     {
       "Udi": "umb://document-type-container/8cacfbb1be7e47339707ec783af9070c",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     },
     {
-      "Udi": "umb://document-type/b06d19c243314af6911a57702b525345",
-      "Ordering": false,
-      "Mode": 0
+      "Udi": "umb://document-type/b06d19c243314af6911a57702b525345"
     },
     {
       "Udi": "umb://template/3ed7d218589e404ea2c18f8e1f320e0d",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
-  "__version": "12.0.5"
+  "__version": "13.0.3"
 }

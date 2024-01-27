@@ -1,21 +1,11 @@
 {
   "Name": "Interior Hero",
   "Alias": "interiorHero",
-  "DefaultTemplate": null,
   "AllowedTemplates": [],
-  "HistoryCleanup": {
-    "preventCleanup": false,
-    "keepAllVersionsNewerThanDays": null,
-    "keepLatestVersionPerDayForDays": null
-  },
+  "HistoryCleanup": {},
   "Icon": "icon-layout color-black",
   "Thumbnail": "folder.png",
-  "Description": null,
-  "IsContainer": false,
   "Permissions": {
-    "AllowVaryingByCulture": false,
-    "AllowVaryingBySegment": false,
-    "AllowedAtRoot": false,
     "IsElementType": true,
     "AllowedChildContentTypes": []
   },
@@ -27,99 +17,43 @@
     {
       "Key": "f3bc5bb1-cce3-4a0d-958e-4160159b7509",
       "Name": "Content",
-      "SortOrder": 0,
-      "Type": 0,
       "Alias": "content",
       "PropertyTypes": [
         {
           "Key": "01b14ea4-8c59-468e-bc9e-57f618d3934d",
           "Alias": "headline",
           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
-          "Description": null,
-          "Mandatory": false,
-          "MandatoryMessage": null,
-          "Name": "Headline",
-          "SortOrder": 0,
-          "Validation": null,
-          "ValidationMessage": null,
-          "VariesByCulture": false,
-          "VariesBySegment": false,
-          "LabelOnTop": false,
-          "MemberCanEdit": false,
-          "ViewOnProfile": false,
-          "IsSensitive": false
+          "Name": "Headline"
         },
         {
           "Key": "332e7646-382c-4c8c-b232-79d40cbedc53",
           "Alias": "showCourseSearch",
           "DataType": "umb://data-type/6667a08f14d24c49aed8a7d4fd8a28f0",
           "Description": "Used for Education pages.",
-          "Mandatory": false,
-          "MandatoryMessage": null,
           "Name": "Show Course Search",
-          "SortOrder": 4,
-          "Validation": null,
-          "ValidationMessage": null,
-          "VariesByCulture": false,
-          "VariesBySegment": false,
-          "LabelOnTop": false,
-          "MemberCanEdit": false,
-          "ViewOnProfile": false,
-          "IsSensitive": false
+          "SortOrder": 4
         },
         {
           "Key": "4e389d2b-a8bd-413d-9b9d-8ea46fd14099",
           "Alias": "overlay",
           "DataType": "umb://data-type/92897bc6a5f34ffeae27f2e7e33dda49",
-          "Description": null,
-          "Mandatory": false,
-          "MandatoryMessage": null,
           "Name": "Overlay",
-          "SortOrder": 2,
-          "Validation": null,
-          "ValidationMessage": null,
-          "VariesByCulture": false,
-          "VariesBySegment": false,
-          "LabelOnTop": false,
-          "MemberCanEdit": false,
-          "ViewOnProfile": false,
-          "IsSensitive": false
+          "SortOrder": 2
         },
         {
           "Key": "5b5689a1-c30d-4931-96d4-b6cfc9b7d1af",
           "Alias": "subhead",
           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
-          "Description": null,
-          "Mandatory": false,
-          "MandatoryMessage": null,
           "Name": "Subhead",
-          "SortOrder": 1,
-          "Validation": null,
-          "ValidationMessage": null,
-          "VariesByCulture": false,
-          "VariesBySegment": false,
-          "LabelOnTop": false,
-          "MemberCanEdit": false,
-          "ViewOnProfile": false,
-          "IsSensitive": false
+          "SortOrder": 1
         },
         {
           "Key": "760ea177-ed28-4577-af1b-ce8d4bab3067",
           "Alias": "showEventCalendar",
           "DataType": "umb://data-type/526e6c6360fd43f396db2db94ec9f0b9",
           "Description": "Will appear in right side of hero banner.",
-          "Mandatory": false,
-          "MandatoryMessage": null,
           "Name": "Show Event Calendar",
-          "SortOrder": 3,
-          "Validation": null,
-          "ValidationMessage": null,
-          "VariesByCulture": false,
-          "VariesBySegment": false,
-          "LabelOnTop": false,
-          "MemberCanEdit": false,
-          "ViewOnProfile": false,
-          "IsSensitive": false
+          "SortOrder": 3
         },
         {
           "Key": "823eddcd-b142-4afb-b77a-43e648ae1e8e",
@@ -127,17 +61,8 @@
           "DataType": "umb://data-type/ad9f0cf2bda245d59ea1a63cfc873fd3",
           "Description": "Image should be ~ 540 x 540px (@ 1x)",
           "Mandatory": true,
-          "MandatoryMessage": null,
           "Name": "Image (mobile)",
-          "SortOrder": 5,
-          "Validation": null,
-          "ValidationMessage": null,
-          "VariesByCulture": false,
-          "VariesBySegment": false,
-          "LabelOnTop": false,
-          "MemberCanEdit": false,
-          "ViewOnProfile": false,
-          "IsSensitive": false
+          "SortOrder": 5
         },
         {
           "Key": "b03cad4f-2fc4-498d-abfd-0ff63a630371",
@@ -145,17 +70,8 @@
           "DataType": "umb://data-type/ad9f0cf2bda245d59ea1a63cfc873fd3",
           "Description": "Image should be ~ 1920 x 540px (@1x)",
           "Mandatory": true,
-          "MandatoryMessage": null,
           "Name": "Image (desktop)",
-          "SortOrder": 6,
-          "Validation": null,
-          "ValidationMessage": null,
-          "VariesByCulture": false,
-          "VariesBySegment": false,
-          "LabelOnTop": false,
-          "MemberCanEdit": false,
-          "ViewOnProfile": false,
-          "IsSensitive": false
+          "SortOrder": 6
         }
       ]
     }
@@ -165,40 +81,33 @@
   "Dependencies": [
     {
       "Udi": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     },
     {
       "Udi": "umb://data-type/526e6c6360fd43f396db2db94ec9f0b9",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     },
     {
       "Udi": "umb://data-type/6667a08f14d24c49aed8a7d4fd8a28f0",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     },
     {
       "Udi": "umb://data-type/92897bc6a5f34ffeae27f2e7e33dda49",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     },
     {
       "Udi": "umb://data-type/ad9f0cf2bda245d59ea1a63cfc873fd3",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     },
     {
       "Udi": "umb://document-type-container/37b4b44f0abc4536af8ed684511c2571",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     },
     {
       "Udi": "umb://document-type/38e48d076783491993c671f1add73d05",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
-  "__version": "12.0.5"
+  "__version": "13.0.3"
 }

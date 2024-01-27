@@ -1,22 +1,11 @@
 {
   "Name": "Checkout Step Page",
   "Alias": "checkoutStepPage",
-  "DefaultTemplate": null,
   "AllowedTemplates": [],
-  "HistoryCleanup": {
-    "preventCleanup": false,
-    "keepAllVersionsNewerThanDays": null,
-    "keepLatestVersionPerDayForDays": null
-  },
+  "HistoryCleanup": {},
   "Icon": "icon-ordered-list color-light-green",
   "Thumbnail": "folder.png",
-  "Description": null,
-  "IsContainer": false,
   "Permissions": {
-    "AllowVaryingByCulture": false,
-    "AllowVaryingBySegment": false,
-    "AllowedAtRoot": false,
-    "IsElementType": false,
     "AllowedChildContentTypes": []
   },
   "Parent": "umb://document-type-container/2443f0d8c7a44e1baa3511778e6789dd",
@@ -29,44 +18,20 @@
       "Key": "01c508d8-bd21-48b3-aeb7-3ed86296c0ed",
       "Name": "Options",
       "SortOrder": 999,
-      "Type": 0,
       "Alias": "options",
       "PropertyTypes": [
         {
           "Key": "29542530-fe2d-40e3-8823-e96c4f888027",
           "Alias": "canGoBack",
           "DataType": "umb://data-type/92897bc6a5f34ffeae27f2e7e33dda49",
-          "Description": null,
-          "Mandatory": false,
-          "MandatoryMessage": null,
           "Name": "Can Go Back",
-          "SortOrder": 1,
-          "Validation": null,
-          "ValidationMessage": null,
-          "VariesByCulture": false,
-          "VariesBySegment": false,
-          "LabelOnTop": false,
-          "MemberCanEdit": false,
-          "ViewOnProfile": false,
-          "IsSensitive": false
+          "SortOrder": 1
         },
         {
           "Key": "407e32ec-b25e-404f-bb53-2d83b63516f5",
           "Alias": "shortStepName",
           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
-          "Description": null,
-          "Mandatory": false,
-          "MandatoryMessage": null,
-          "Name": "Short Step Name",
-          "SortOrder": 0,
-          "Validation": null,
-          "ValidationMessage": null,
-          "VariesByCulture": false,
-          "VariesBySegment": false,
-          "LabelOnTop": false,
-          "MemberCanEdit": false,
-          "ViewOnProfile": false,
-          "IsSensitive": false
+          "Name": "Short Step Name"
         }
       ]
     }
@@ -76,30 +41,25 @@
   "Dependencies": [
     {
       "Udi": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     },
     {
       "Udi": "umb://data-type/92897bc6a5f34ffeae27f2e7e33dda49",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     },
     {
       "Udi": "umb://document-type-container/2443f0d8c7a44e1baa3511778e6789dd",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     },
     {
       "Udi": "umb://document-type/7cc368ff00cb4264ad60f52a76c3a911",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     },
     {
       "Udi": "umb://document-type/f0c2133970844a948c095978736296ce",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
-  "__version": "12.0.5"
+  "__version": "13.0.3"
 }
