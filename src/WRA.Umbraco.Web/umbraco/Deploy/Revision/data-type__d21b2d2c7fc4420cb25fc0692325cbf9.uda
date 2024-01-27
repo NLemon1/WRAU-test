@@ -2,11 +2,10 @@
   "Name": "Home - Store - Umbraco Commerce: Store Picker",
   "Alias": "",
   "EditorAlias": "Umbraco.Commerce.StorePicker",
-  "DatabaseType": 1,
+  "DatabaseType": "Nvarchar",
   "Configuration": {},
-  "Parent": null,
   "Udi": "umb://data-type/d21b2d2c7fc4420cb25fc0692325cbf9",
   "Dependencies": [],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
-  "__version": "12.0.5"
+  "__version": "13.0.3"
 }

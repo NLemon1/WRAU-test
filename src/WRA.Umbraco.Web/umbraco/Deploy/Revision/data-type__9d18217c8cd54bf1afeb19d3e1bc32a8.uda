@@ -2,21 +2,19 @@
   "Name": "Testimonials Slider - Content Picker",
   "Alias": "",
   "EditorAlias": "Umbraco.ContentPicker",
-  "DatabaseType": 1,
+  "DatabaseType": "Nvarchar",
   "Configuration": {
     "showOpenButton": false,
     "startNodeId": "umb://document/6a4cdc8df0654dd18211877877ede80f",
     "ignoreUserStartNodes": false
   },
-  "Parent": null,
   "Udi": "umb://data-type/9d18217c8cd54bf1afeb19d3e1bc32a8",
   "Dependencies": [
     {
       "Udi": "umb://document/6a4cdc8df0654dd18211877877ede80f",
-      "Ordering": false,
-      "Mode": 1
+      "Mode": "Exist"
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
-  "__version": "12.0.5"
+  "__version": "13.0.3"
 }

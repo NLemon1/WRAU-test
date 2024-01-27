@@ -2,14 +2,13 @@
   "Name": "Interior Hero - Show Event Calendar - Toggle",
   "Alias": "",
   "EditorAlias": "Umbraco.TrueFalse",
-  "DatabaseType": 2,
+  "DatabaseType": "Integer",
   "Configuration": {
     "default": false,
     "showLabels": false
   },
-  "Parent": null,
   "Udi": "umb://data-type/526e6c6360fd43f396db2db94ec9f0b9",
   "Dependencies": [],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
-  "__version": "12.0.5"
+  "__version": "13.0.3"
 }
