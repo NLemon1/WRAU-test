@@ -2,11 +2,13 @@
   "Name": "Product Comp - Umbraco Commerce: Price",
   "Alias": "",
   "EditorAlias": "Umbraco.Commerce.Price",
+  "DatabaseType": 0,
   "Configuration": {
     "fraction": 0
   },
+  "Parent": null,
   "Udi": "umb://data-type/ba1bf6e7ffe54f19bf768f20423fe607",
   "Dependencies": [],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
-  "__version": "13.0.3"
+  "__version": "12.0.5"
 }

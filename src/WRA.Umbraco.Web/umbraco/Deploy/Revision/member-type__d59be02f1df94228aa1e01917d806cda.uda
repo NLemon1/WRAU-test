@@ -3,22 +3,42 @@
   "Alias": "Member",
   "Icon": "icon-user",
   "Thumbnail": "icon-user",
+  "Description": null,
+  "IsContainer": false,
   "Permissions": {
+    "AllowVaryingByCulture": false,
+    "AllowVaryingBySegment": false,
+    "AllowedAtRoot": false,
+    "IsElementType": false,
     "AllowedChildContentTypes": []
   },
+  "Parent": null,
   "CompositionContentTypes": [],
   "PropertyGroups": [
     {
       "Key": "0756729d-d665-46e3-b84a-37aceaa614f8",
       "Name": "Membership",
       "SortOrder": 1,
+      "Type": 0,
       "Alias": "membership",
       "PropertyTypes": [
         {
           "Key": "0000001c-0000-0000-0000-000000000000",
           "Alias": "umbracoMemberComments",
           "DataType": "umb://data-type/c6bac0dd4ab945b18e30e4b619ee5da3",
-          "Name": "Comments"
+          "Description": null,
+          "Mandatory": false,
+          "MandatoryMessage": null,
+          "Name": "Comments",
+          "SortOrder": 0,
+          "Validation": null,
+          "ValidationMessage": null,
+          "VariesByCulture": false,
+          "VariesBySegment": false,
+          "LabelOnTop": false,
+          "MemberCanEdit": false,
+          "ViewOnProfile": false,
+          "IsSensitive": false
         }
       ]
     },
@@ -26,6 +46,7 @@
       "Key": "2bbdc18c-9198-4f29-93a5-f614dc9eb84e",
       "Name": "WRA Specific Fields",
       "SortOrder": 2,
+      "Type": 0,
       "Alias": "wraSpecificFields",
       "PropertyTypes": [
         {
@@ -33,56 +54,144 @@
           "Alias": "address1",
           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
           "Description": "",
+          "Mandatory": false,
+          "MandatoryMessage": null,
           "Name": "Address1",
-          "SortOrder": 2
+          "SortOrder": 2,
+          "Validation": null,
+          "ValidationMessage": null,
+          "VariesByCulture": false,
+          "VariesBySegment": false,
+          "LabelOnTop": false,
+          "MemberCanEdit": false,
+          "ViewOnProfile": false,
+          "IsSensitive": false
         },
         {
           "Key": "1b9dffe2-aeee-4c31-b4e1-1dd139f16eb2",
           "Alias": "companyName",
           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Description": null,
+          "Mandatory": false,
+          "MandatoryMessage": null,
           "Name": "Company Name",
-          "SortOrder": 1
+          "SortOrder": 1,
+          "Validation": null,
+          "ValidationMessage": null,
+          "VariesByCulture": false,
+          "VariesBySegment": false,
+          "LabelOnTop": false,
+          "MemberCanEdit": false,
+          "ViewOnProfile": false,
+          "IsSensitive": false
         },
         {
           "Key": "6cc3c242-e68e-4d70-ab6d-f55332756f8b",
           "Alias": "city",
           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Description": null,
+          "Mandatory": false,
+          "MandatoryMessage": null,
           "Name": "City",
-          "SortOrder": 4
+          "SortOrder": 4,
+          "Validation": null,
+          "ValidationMessage": null,
+          "VariesByCulture": false,
+          "VariesBySegment": false,
+          "LabelOnTop": false,
+          "MemberCanEdit": false,
+          "ViewOnProfile": false,
+          "IsSensitive": false
         },
         {
           "Key": "7cb38f64-03a9-4852-b597-7dfd5153f874",
           "Alias": "zipCode",
           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Description": null,
+          "Mandatory": false,
+          "MandatoryMessage": null,
           "Name": "Zip Code",
-          "SortOrder": 5
+          "SortOrder": 5,
+          "Validation": null,
+          "ValidationMessage": null,
+          "VariesByCulture": false,
+          "VariesBySegment": false,
+          "LabelOnTop": false,
+          "MemberCanEdit": false,
+          "ViewOnProfile": false,
+          "IsSensitive": false
         },
         {
           "Key": "8dd51546-1906-4324-b426-a597c6198540",
           "Alias": "phone",
           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Description": null,
+          "Mandatory": false,
+          "MandatoryMessage": null,
           "Name": "Phone",
-          "SortOrder": 6
+          "SortOrder": 6,
+          "Validation": null,
+          "ValidationMessage": null,
+          "VariesByCulture": false,
+          "VariesBySegment": false,
+          "LabelOnTop": false,
+          "MemberCanEdit": false,
+          "ViewOnProfile": false,
+          "IsSensitive": false
         },
         {
           "Key": "c01fe88a-fde4-4272-91bb-820c18e9461e",
           "Alias": "fax",
           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Description": null,
+          "Mandatory": false,
+          "MandatoryMessage": null,
           "Name": "Fax",
-          "SortOrder": 7
+          "SortOrder": 7,
+          "Validation": null,
+          "ValidationMessage": null,
+          "VariesByCulture": false,
+          "VariesBySegment": false,
+          "LabelOnTop": false,
+          "MemberCanEdit": false,
+          "ViewOnProfile": false,
+          "IsSensitive": false
         },
         {
           "Key": "ef7d56f7-1a7e-4c11-b51a-589069f690fc",
           "Alias": "externalId",
           "DataType": "umb://data-type/f0bc4bfbb49940d6ba86058885a5178c",
-          "Name": "ExternalId"
+          "Description": null,
+          "Mandatory": false,
+          "MandatoryMessage": null,
+          "Name": "ExternalId",
+          "SortOrder": 0,
+          "Validation": null,
+          "ValidationMessage": null,
+          "VariesByCulture": false,
+          "VariesBySegment": false,
+          "LabelOnTop": false,
+          "MemberCanEdit": false,
+          "ViewOnProfile": false,
+          "IsSensitive": false
         },
         {
           "Key": "f024a527-2877-4558-94ae-4981de684de5",
           "Alias": "address2",
           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Description": null,
+          "Mandatory": false,
+          "MandatoryMessage": null,
           "Name": "Address2",
-          "SortOrder": 3
+          "SortOrder": 3,
+          "Validation": null,
+          "ValidationMessage": null,
+          "VariesByCulture": false,
+          "VariesBySegment": false,
+          "LabelOnTop": false,
+          "MemberCanEdit": false,
+          "ViewOnProfile": false,
+          "IsSensitive": false
         }
       ]
     }
@@ -92,17 +201,20 @@
   "Dependencies": [
     {
       "Udi": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
-      "Ordering": true
+      "Ordering": true,
+      "Mode": 0
     },
     {
       "Udi": "umb://data-type/c6bac0dd4ab945b18e30e4b619ee5da3",
-      "Ordering": true
+      "Ordering": true,
+      "Mode": 0
     },
     {
       "Udi": "umb://data-type/f0bc4bfbb49940d6ba86058885a5178c",
-      "Ordering": true
+      "Ordering": true,
+      "Mode": 0
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.MemberTypeArtifact",
-  "__version": "13.0.3"
+  "__version": "12.0.5"
 }

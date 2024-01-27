@@ -2,7 +2,7 @@
   "Name": "Headline Block - Text Alignment - Dropdown",
   "Alias": "",
   "EditorAlias": "Umbraco.DropDown.Flexible",
-  "DatabaseType": "Nvarchar",
+  "DatabaseType": 1,
   "Configuration": {
     "multiple": false,
     "items": [
@@ -20,8 +20,9 @@
       }
     ]
   },
+  "Parent": null,
   "Udi": "umb://data-type/a775628831bb4a81980de0e4830a3269",
   "Dependencies": [],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
-  "__version": "13.0.3"
+  "__version": "12.0.5"
 }

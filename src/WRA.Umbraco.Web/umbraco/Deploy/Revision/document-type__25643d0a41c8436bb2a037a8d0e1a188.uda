@@ -1,11 +1,21 @@
 {
   "Name": "Routing",
   "Alias": "routing",
+  "DefaultTemplate": null,
   "AllowedTemplates": [],
-  "HistoryCleanup": {},
+  "HistoryCleanup": {
+    "preventCleanup": false,
+    "keepAllVersionsNewerThanDays": null,
+    "keepLatestVersionPerDayForDays": null
+  },
   "Icon": "icon-traffic color-black",
   "Thumbnail": "folder.png",
+  "Description": null,
+  "IsContainer": false,
   "Permissions": {
+    "AllowVaryingByCulture": false,
+    "AllowVaryingBySegment": false,
+    "AllowedAtRoot": false,
     "IsElementType": true,
     "AllowedChildContentTypes": []
   },
@@ -15,27 +25,63 @@
     {
       "Key": "a19e3e40-55b3-489b-8934-056df10f1bfc",
       "Name": "Advanced",
+      "SortOrder": 0,
+      "Type": 0,
       "Alias": "advanced",
       "PropertyTypes": [
         {
           "Key": "182b9404-4e27-4d84-93c9-8ce28b619446",
           "Alias": "umbracoUrlAlias",
           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Description": null,
+          "Mandatory": false,
+          "MandatoryMessage": null,
           "Name": "umbracoUrlAlias",
-          "SortOrder": 1
+          "SortOrder": 1,
+          "Validation": null,
+          "ValidationMessage": null,
+          "VariesByCulture": false,
+          "VariesBySegment": false,
+          "LabelOnTop": false,
+          "MemberCanEdit": false,
+          "ViewOnProfile": false,
+          "IsSensitive": false
         },
         {
           "Key": "6dc1f46d-c945-4d46-8cbc-55282c4be252",
           "Alias": "umbracoRedirect",
           "DataType": "umb://data-type/fd1e0da556064862b6795d0cf3a52a59",
+          "Description": null,
+          "Mandatory": false,
+          "MandatoryMessage": null,
           "Name": "umbracoRedirect",
-          "SortOrder": 2
+          "SortOrder": 2,
+          "Validation": null,
+          "ValidationMessage": null,
+          "VariesByCulture": false,
+          "VariesBySegment": false,
+          "LabelOnTop": false,
+          "MemberCanEdit": false,
+          "ViewOnProfile": false,
+          "IsSensitive": false
         },
         {
           "Key": "ab9e5347-48ec-401f-873a-8d29526e7d8a",
           "Alias": "umbracoUrlName",
           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
-          "Name": "umbracoUrlName"
+          "Description": null,
+          "Mandatory": false,
+          "MandatoryMessage": null,
+          "Name": "umbracoUrlName",
+          "SortOrder": 0,
+          "Validation": null,
+          "ValidationMessage": null,
+          "VariesByCulture": false,
+          "VariesBySegment": false,
+          "LabelOnTop": false,
+          "MemberCanEdit": false,
+          "ViewOnProfile": false,
+          "IsSensitive": false
         }
       ]
     }
@@ -45,17 +91,20 @@
   "Dependencies": [
     {
       "Udi": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
-      "Ordering": true
+      "Ordering": true,
+      "Mode": 0
     },
     {
       "Udi": "umb://data-type/fd1e0da556064862b6795d0cf3a52a59",
-      "Ordering": true
+      "Ordering": true,
+      "Mode": 0
     },
     {
       "Udi": "umb://document-type-container/5de99ed69c2445159d69e36d531ca63a",
-      "Ordering": true
+      "Ordering": true,
+      "Mode": 0
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
-  "__version": "13.0.3"
+  "__version": "12.0.5"
 }

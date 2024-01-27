@@ -2,13 +2,15 @@
   "Name": "Checkout Shipping Method Page",
   "Alias": "CheckoutShippingMethodPage",
   "File": "umb://template-file/CheckoutShippingMethodPage.cshtml",
+  "Master": null,
   "Udi": "umb://template/6133189e15754be69ed799854711a698",
   "Dependencies": [
     {
       "Udi": "umb://template-file/CheckoutShippingMethodPage.cshtml",
-      "Ordering": true
+      "Ordering": true,
+      "Mode": 0
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.TemplateArtifact",
-  "__version": "13.0.3"
+  "__version": "12.0.5"
 }

@@ -2,7 +2,7 @@
   "Name": "Upload Video",
   "Alias": "",
   "EditorAlias": "Umbraco.UploadField",
-  "DatabaseType": "Nvarchar",
+  "DatabaseType": 1,
   "Configuration": {
     "fileExtensions": [
       {
@@ -19,8 +19,9 @@
       }
     ]
   },
+  "Parent": null,
   "Udi": "umb://data-type/70575fe798124396bbe1c81a76db71b5",
   "Dependencies": [],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
-  "__version": "13.0.3"
+  "__version": "12.0.5"
 }

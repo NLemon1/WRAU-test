@@ -2,13 +2,14 @@
   "Name": "ImageText Row - Reverse Columns - Toggle",
   "Alias": "",
   "EditorAlias": "Umbraco.TrueFalse",
-  "DatabaseType": "Integer",
+  "DatabaseType": 2,
   "Configuration": {
     "default": false,
     "showLabels": false
   },
+  "Parent": null,
   "Udi": "umb://data-type/2c02a6cc172c4f809445e8165ee36197",
   "Dependencies": [],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
-  "__version": "13.0.3"
+  "__version": "12.0.5"
 }

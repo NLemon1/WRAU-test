@@ -1,12 +1,21 @@
 {
   "Name": "Education Card",
   "Alias": "educationCard",
+  "DefaultTemplate": null,
   "AllowedTemplates": [],
-  "HistoryCleanup": {},
+  "HistoryCleanup": {
+    "preventCleanup": false,
+    "keepAllVersionsNewerThanDays": null,
+    "keepLatestVersionPerDayForDays": null
+  },
   "Icon": "icon-playing-cards color-black",
   "Thumbnail": "folder.png",
   "Description": "(use on homepage only)",
+  "IsContainer": false,
   "Permissions": {
+    "AllowVaryingByCulture": false,
+    "AllowVaryingBySegment": false,
+    "AllowedAtRoot": false,
     "IsElementType": true,
     "AllowedChildContentTypes": []
   },
@@ -16,41 +25,99 @@
     {
       "Key": "ea528140-ca00-4015-884b-a602164755e7",
       "Name": "Group",
+      "SortOrder": 0,
+      "Type": 0,
       "Alias": "group",
       "PropertyTypes": [
         {
           "Key": "26164ef6-faf8-42ff-b9d5-b512b3fb084b",
           "Alias": "pageLink",
           "DataType": "umb://data-type/094ea51013be4f358f03687f54bb9ba2",
+          "Description": null,
+          "Mandatory": false,
+          "MandatoryMessage": null,
           "Name": "PageLink",
-          "SortOrder": 4
+          "SortOrder": 4,
+          "Validation": null,
+          "ValidationMessage": null,
+          "VariesByCulture": false,
+          "VariesBySegment": false,
+          "LabelOnTop": false,
+          "MemberCanEdit": false,
+          "ViewOnProfile": false,
+          "IsSensitive": false
         },
         {
           "Key": "497c3bad-b82f-4e3a-b7ae-9f95c6c624b2",
           "Alias": "headline",
           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Description": null,
+          "Mandatory": false,
+          "MandatoryMessage": null,
           "Name": "Headline",
-          "SortOrder": 2
+          "SortOrder": 2,
+          "Validation": null,
+          "ValidationMessage": null,
+          "VariesByCulture": false,
+          "VariesBySegment": false,
+          "LabelOnTop": false,
+          "MemberCanEdit": false,
+          "ViewOnProfile": false,
+          "IsSensitive": false
         },
         {
           "Key": "65d58148-5c5a-4768-b698-dea1821ca1de",
           "Alias": "number",
           "DataType": "umb://data-type/2e6d3631066e44b8aec496f09099b2b5",
-          "Name": "Number"
+          "Description": null,
+          "Mandatory": false,
+          "MandatoryMessage": null,
+          "Name": "Number",
+          "SortOrder": 0,
+          "Validation": null,
+          "ValidationMessage": null,
+          "VariesByCulture": false,
+          "VariesBySegment": false,
+          "LabelOnTop": false,
+          "MemberCanEdit": false,
+          "ViewOnProfile": false,
+          "IsSensitive": false
         },
         {
           "Key": "b5bee64a-f921-4481-b2b0-6c2e5ef2aed4",
           "Alias": "content",
           "DataType": "umb://data-type/c6bac0dd4ab945b18e30e4b619ee5da3",
+          "Description": null,
+          "Mandatory": false,
+          "MandatoryMessage": null,
           "Name": "Content",
-          "SortOrder": 3
+          "SortOrder": 3,
+          "Validation": null,
+          "ValidationMessage": null,
+          "VariesByCulture": false,
+          "VariesBySegment": false,
+          "LabelOnTop": false,
+          "MemberCanEdit": false,
+          "ViewOnProfile": false,
+          "IsSensitive": false
         },
         {
           "Key": "e88af5ed-ecfb-49bd-a439-129f4a47c97f",
           "Alias": "overline",
           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Description": null,
+          "Mandatory": false,
+          "MandatoryMessage": null,
           "Name": "Overline",
-          "SortOrder": 1
+          "SortOrder": 1,
+          "Validation": null,
+          "ValidationMessage": null,
+          "VariesByCulture": false,
+          "VariesBySegment": false,
+          "LabelOnTop": false,
+          "MemberCanEdit": false,
+          "ViewOnProfile": false,
+          "IsSensitive": false
         }
       ]
     }
@@ -60,25 +127,30 @@
   "Dependencies": [
     {
       "Udi": "umb://data-type/094ea51013be4f358f03687f54bb9ba2",
-      "Ordering": true
+      "Ordering": true,
+      "Mode": 0
     },
     {
       "Udi": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
-      "Ordering": true
+      "Ordering": true,
+      "Mode": 0
     },
     {
       "Udi": "umb://data-type/2e6d3631066e44b8aec496f09099b2b5",
-      "Ordering": true
+      "Ordering": true,
+      "Mode": 0
     },
     {
       "Udi": "umb://data-type/c6bac0dd4ab945b18e30e4b619ee5da3",
-      "Ordering": true
+      "Ordering": true,
+      "Mode": 0
     },
     {
       "Udi": "umb://document-type-container/7d7bb95bd7634722b04820839c0ae21e",
-      "Ordering": true
+      "Ordering": true,
+      "Mode": 0
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
-  "__version": "13.0.3"
+  "__version": "12.0.5"
 }

@@ -2,7 +2,7 @@
   "Name": "Color Scheme - Dropdown",
   "Alias": "",
   "EditorAlias": "Umbraco.DropDown.Flexible",
-  "DatabaseType": "Nvarchar",
+  "DatabaseType": 1,
   "Configuration": {
     "multiple": false,
     "items": [
@@ -16,8 +16,9 @@
       }
     ]
   },
+  "Parent": null,
   "Udi": "umb://data-type/b814687c3bff410ead61e323ad725113",
   "Dependencies": [],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
-  "__version": "13.0.3"
+  "__version": "12.0.5"
 }

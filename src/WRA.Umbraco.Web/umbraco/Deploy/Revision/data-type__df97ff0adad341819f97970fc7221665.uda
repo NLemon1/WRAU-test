@@ -2,11 +2,13 @@
   "Name": "Multi-Variant Product Page - Umbraco Commerce: Variants Editor",
   "Alias": "",
   "EditorAlias": "Umbraco.Commerce.VariantsEditor",
+  "DatabaseType": 0,
   "Configuration": {
     "variantElementType": "851c4ae8-8fc3-4bcf-82c7-c155cd91a005"
   },
+  "Parent": null,
   "Udi": "umb://data-type/df97ff0adad341819f97970fc7221665",
   "Dependencies": [],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
-  "__version": "13.0.3"
+  "__version": "12.0.5"
 }

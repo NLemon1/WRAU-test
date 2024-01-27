@@ -2,13 +2,14 @@
   "Name": "True/false",
   "Alias": "",
   "EditorAlias": "Umbraco.TrueFalse",
-  "DatabaseType": "Integer",
+  "DatabaseType": 2,
   "Configuration": {
     "default": false,
     "showLabels": false
   },
+  "Parent": null,
   "Udi": "umb://data-type/92897bc6a5f34ffeae27f2e7e33dda49",
   "Dependencies": [],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
-  "__version": "13.0.3"
+  "__version": "12.0.5"
 }

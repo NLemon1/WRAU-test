@@ -1,11 +1,21 @@
 {
   "Name": "Icon Item",
   "Alias": "iconItem",
+  "DefaultTemplate": null,
   "AllowedTemplates": [],
-  "HistoryCleanup": {},
+  "HistoryCleanup": {
+    "preventCleanup": false,
+    "keepAllVersionsNewerThanDays": null,
+    "keepLatestVersionPerDayForDays": null
+  },
   "Icon": "icon-bug color-black",
   "Thumbnail": "folder.png",
+  "Description": null,
+  "IsContainer": false,
   "Permissions": {
+    "AllowVaryingByCulture": false,
+    "AllowVaryingBySegment": false,
+    "AllowedAtRoot": false,
     "IsElementType": true,
     "AllowedChildContentTypes": []
   },
@@ -15,6 +25,8 @@
     {
       "Key": "4393496e-5e2e-4a66-a667-a0358d7c3427",
       "Name": "Content",
+      "SortOrder": 0,
+      "Type": 0,
       "Alias": "content",
       "PropertyTypes": [
         {
@@ -22,28 +34,72 @@
           "Alias": "icon",
           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
           "Description": "Enter the Regukar Icon name from https://fontawesome.com/search?q=star&o=r&s=regular",
-          "Name": "Icon"
+          "Mandatory": false,
+          "MandatoryMessage": null,
+          "Name": "Icon",
+          "SortOrder": 0,
+          "Validation": null,
+          "ValidationMessage": null,
+          "VariesByCulture": false,
+          "VariesBySegment": false,
+          "LabelOnTop": false,
+          "MemberCanEdit": false,
+          "ViewOnProfile": false,
+          "IsSensitive": false
         },
         {
           "Key": "5202f431-51ac-495d-a1ec-b48282cbe10d",
           "Alias": "contrast",
           "DataType": "umb://data-type/5cfc7c6b29bb4b16a3976a6ffa2e630b",
+          "Description": null,
+          "Mandatory": false,
+          "MandatoryMessage": null,
           "Name": "Contrast",
-          "SortOrder": 2
+          "SortOrder": 2,
+          "Validation": null,
+          "ValidationMessage": null,
+          "VariesByCulture": false,
+          "VariesBySegment": false,
+          "LabelOnTop": false,
+          "MemberCanEdit": false,
+          "ViewOnProfile": false,
+          "IsSensitive": false
         },
         {
           "Key": "8cb98f81-15e9-47cc-87f7-2a7c7a836d9c",
           "Alias": "bottomMargin",
           "DataType": "umb://data-type/0770a1fb65ac42618d9f77c1a75e5b62",
+          "Description": null,
+          "Mandatory": false,
+          "MandatoryMessage": null,
           "Name": "Bottom Margin",
-          "SortOrder": 3
+          "SortOrder": 3,
+          "Validation": null,
+          "ValidationMessage": null,
+          "VariesByCulture": false,
+          "VariesBySegment": false,
+          "LabelOnTop": false,
+          "MemberCanEdit": false,
+          "ViewOnProfile": false,
+          "IsSensitive": false
         },
         {
           "Key": "a5e59c74-7cff-400e-8708-609279675f3a",
           "Alias": "iconSize",
           "DataType": "umb://data-type/5987d4630a39441c9c1da386a4d51a8b",
+          "Description": null,
+          "Mandatory": false,
+          "MandatoryMessage": null,
           "Name": "Icon Size",
-          "SortOrder": 1
+          "SortOrder": 1,
+          "Validation": null,
+          "ValidationMessage": null,
+          "VariesByCulture": false,
+          "VariesBySegment": false,
+          "LabelOnTop": false,
+          "MemberCanEdit": false,
+          "ViewOnProfile": false,
+          "IsSensitive": false
         }
       ]
     }
@@ -53,25 +109,30 @@
   "Dependencies": [
     {
       "Udi": "umb://data-type/0770a1fb65ac42618d9f77c1a75e5b62",
-      "Ordering": true
+      "Ordering": true,
+      "Mode": 0
     },
     {
       "Udi": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
-      "Ordering": true
+      "Ordering": true,
+      "Mode": 0
     },
     {
       "Udi": "umb://data-type/5987d4630a39441c9c1da386a4d51a8b",
-      "Ordering": true
+      "Ordering": true,
+      "Mode": 0
     },
     {
       "Udi": "umb://data-type/5cfc7c6b29bb4b16a3976a6ffa2e630b",
-      "Ordering": true
+      "Ordering": true,
+      "Mode": 0
     },
     {
       "Udi": "umb://document-type-container/7d7bb95bd7634722b04820839c0ae21e",
-      "Ordering": true
+      "Ordering": true,
+      "Mode": 0
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
-  "__version": "13.0.3"
+  "__version": "12.0.5"
 }

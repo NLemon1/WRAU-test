@@ -1,11 +1,21 @@
 {
   "Name": "Buttons",
   "Alias": "buttons",
+  "DefaultTemplate": null,
   "AllowedTemplates": [],
-  "HistoryCleanup": {},
+  "HistoryCleanup": {
+    "preventCleanup": false,
+    "keepAllVersionsNewerThanDays": null,
+    "keepLatestVersionPerDayForDays": null
+  },
   "Icon": "icon-science",
   "Thumbnail": "folder.png",
+  "Description": null,
+  "IsContainer": false,
   "Permissions": {
+    "AllowVaryingByCulture": false,
+    "AllowVaryingBySegment": false,
+    "AllowedAtRoot": false,
     "IsElementType": true,
     "AllowedChildContentTypes": []
   },
@@ -17,27 +27,63 @@
     {
       "Key": "85e8ee57-13d4-420a-8d18-e15948d5b847",
       "Name": "Content",
+      "SortOrder": 0,
+      "Type": 0,
       "Alias": "content",
       "PropertyTypes": [
         {
           "Key": "3c67a82c-c5ca-4b68-8a86-d03bee6d2860",
           "Alias": "stackButtonsVertically",
           "DataType": "umb://data-type/92897bc6a5f34ffeae27f2e7e33dda49",
+          "Description": null,
+          "Mandatory": false,
+          "MandatoryMessage": null,
           "Name": "Stack buttons vertically?",
-          "SortOrder": 2
+          "SortOrder": 2,
+          "Validation": null,
+          "ValidationMessage": null,
+          "VariesByCulture": false,
+          "VariesBySegment": false,
+          "LabelOnTop": false,
+          "MemberCanEdit": false,
+          "ViewOnProfile": false,
+          "IsSensitive": false
         },
         {
           "Key": "690bdd79-ffd3-4a3f-b380-54f5b559332c",
           "Alias": "bottomMargin",
           "DataType": "umb://data-type/0770a1fb65ac42618d9f77c1a75e5b62",
-          "Name": "Bottom Margin"
+          "Description": null,
+          "Mandatory": false,
+          "MandatoryMessage": null,
+          "Name": "Bottom Margin",
+          "SortOrder": 0,
+          "Validation": null,
+          "ValidationMessage": null,
+          "VariesByCulture": false,
+          "VariesBySegment": false,
+          "LabelOnTop": false,
+          "MemberCanEdit": false,
+          "ViewOnProfile": false,
+          "IsSensitive": false
         },
         {
           "Key": "ce86be70-9027-48b1-9e12-30b91c02d0dc",
           "Alias": "horizontalAlignment",
           "DataType": "umb://data-type/a775628831bb4a81980de0e4830a3269",
+          "Description": null,
+          "Mandatory": false,
+          "MandatoryMessage": null,
           "Name": "Horizontal Alignment",
-          "SortOrder": 1
+          "SortOrder": 1,
+          "Validation": null,
+          "ValidationMessage": null,
+          "VariesByCulture": false,
+          "VariesBySegment": false,
+          "LabelOnTop": false,
+          "MemberCanEdit": false,
+          "ViewOnProfile": false,
+          "IsSensitive": false
         }
       ]
     }
@@ -47,25 +93,30 @@
   "Dependencies": [
     {
       "Udi": "umb://data-type/0770a1fb65ac42618d9f77c1a75e5b62",
-      "Ordering": true
+      "Ordering": true,
+      "Mode": 0
     },
     {
       "Udi": "umb://data-type/92897bc6a5f34ffeae27f2e7e33dda49",
-      "Ordering": true
+      "Ordering": true,
+      "Mode": 0
     },
     {
       "Udi": "umb://data-type/a775628831bb4a81980de0e4830a3269",
-      "Ordering": true
+      "Ordering": true,
+      "Mode": 0
     },
     {
       "Udi": "umb://document-type-container/7d7bb95bd7634722b04820839c0ae21e",
-      "Ordering": true
+      "Ordering": true,
+      "Mode": 0
     },
     {
       "Udi": "umb://document-type/38e48d076783491993c671f1add73d05",
-      "Ordering": true
+      "Ordering": true,
+      "Mode": 0
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
-  "__version": "13.0.3"
+  "__version": "12.0.5"
 }

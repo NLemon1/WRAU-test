@@ -2,13 +2,15 @@
   "Name": "Magazine Landing",
   "Alias": "MagazineLanding",
   "File": "umb://template-file/MagazineLanding.cshtml",
+  "Master": null,
   "Udi": "umb://template/a93a5fb65de24d0082af2fce535b288c",
   "Dependencies": [
     {
       "Udi": "umb://template-file/MagazineLanding.cshtml",
-      "Ordering": true
+      "Ordering": true,
+      "Mode": 0
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.TemplateArtifact",
-  "__version": "13.0.3"
+  "__version": "12.0.5"
 }
