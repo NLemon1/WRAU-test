@@ -8,7 +8,7 @@ using Umbraco.Cms.Infrastructure.Persistence;
 using Umbraco.Cms.Web.Website.Controllers;
 using Umbraco.Commerce.Common.Validation;
 using Umbraco.Commerce.Core.Api;
-using WRA.Umbraco.Web.Dtos;
+using WRA.Umbraco.Dtos;
 using Umbraco.Commerce.Extensions;
 
 namespace WRA.Umbraco.Controllers
@@ -66,65 +66,65 @@ namespace WRA.Umbraco.Controllers
             return RedirectToCurrentUmbracoPage();
         }
 
-        // [HttpPost]
-        // public IActionResult UpdateCart(UpdateCartDto postModel)
-        // {
-        //     try
-        //     {
-        //         _commerceApi.Uow.Execute(uow =>
-        //         {
-        //             var store = CurrentPage.GetStore();
-        //             var order = _commerceApi.GetOrCreateCurrentOrder(store.Id)
-        //                 .AsWritable(uow);
+        [HttpPost]
+        public IActionResult UpdateCart(UpdateCartDto postModel)
+        {
+            try
+            {
+                _commerceApi.Uow.Execute(uow =>
+                {
+                    var store = CurrentPage.GetStore();
+                    var order = _commerceApi.GetOrCreateCurrentOrder(store.Id)
+                        .AsWritable(uow);
 
-        //             foreach (var orderLine in postModel.OrderLines)
-        //             {
-        //                 order.WithOrderLine(orderLine.Id)
-        //                     .SetQuantity(orderLine.Quantity);
-        //             }
+                    foreach (var orderLine in postModel.OrderLines)
+                    {
+                        order.WithOrderLine(orderLine.Id)
+                            .SetQuantity(orderLine.Quantity);
+                    }
 
-        //             _commerceApi.SaveOrder(order);
+                    _commerceApi.SaveOrder(order);
 
-        //             uow.Complete();
-        //         });
-        //     }
-        //     catch (ValidationException ex)
-        //     {
-        //         ModelState.AddModelError("productReference", "Failed to update cart");
+                    uow.Complete();
+                });
+            }
+            catch (ValidationException ex)
+            {
+                ModelState.AddModelError("productReference", "Failed to update cart");
 
-        //         return CurrentUmbracoPage();
-        //     }
+                return CurrentUmbracoPage();
+            }
 
-        //     TempData["cartUpdated"] = "true";
+            TempData["cartUpdated"] = "true";
 
-        //     return RedirectToCurrentUmbracoPage();
-        // }
+            return RedirectToCurrentUmbracoPage();
+        }
 
-        // [HttpGet]
-        // public IActionResult RemoveFromCart(RemoveFromCartDto postModel)
-        // {
-        //     try
-        //     {
-        //         _commerceApi.Uow.Execute(uow =>
-        //         {
-        //             var store = CurrentPage.GetStore();
-        //             var order = _commerceApi.GetOrCreateCurrentOrder(store.Id)
-        //                 .AsWritable(uow)
-        //                 .RemoveOrderLine(postModel.OrderLineId);
+        [HttpGet]
+        public IActionResult RemoveFromCart(RemoveFromCartDto postModel)
+        {
+            try
+            {
+                _commerceApi.Uow.Execute(uow =>
+                {
+                    var store = CurrentPage.GetStore();
+                    var order = _commerceApi.GetOrCreateCurrentOrder(store.Id)
+                        .AsWritable(uow)
+                        .RemoveOrderLine(postModel.OrderLineId);
 
-        //             _commerceApi.SaveOrder(order);
+                    _commerceApi.SaveOrder(order);
 
-        //             uow.Complete();
-        //         });
-        //     }
-        //     catch (ValidationException ex)
-        //     {
-        //         ModelState.AddModelError("productReference", "Failed to remove cart item");
+                    uow.Complete();
+                });
+            }
+            catch (ValidationException ex)
+            {
+                ModelState.AddModelError("productReference", "Failed to remove cart item");
 
-        //         return CurrentUmbracoPage();
-        //     }
+                return CurrentUmbracoPage();
+            }
 
-        //     return RedirectToCurrentUmbracoPage();
-        // }
+            return RedirectToCurrentUmbracoPage();
+        }
     }
 }

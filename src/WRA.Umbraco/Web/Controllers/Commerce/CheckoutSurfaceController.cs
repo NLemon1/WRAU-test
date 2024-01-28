@@ -12,6 +12,8 @@ using Umbraco.Commerce.Core;
 using Umbraco.Commerce.Core.Api;
 using WRA.Umbraco.Dtos;
 using Umbraco.Commerce.Extensions;
+using GlobalPayments.Api.Services;
+using GlobalPayments.Api;
 
 namespace WRA.Umbraco.Controllers;
 
@@ -27,6 +29,17 @@ public class CheckoutSurfaceController : SurfaceController
         _commerceApi = commerceApi;
     }
 
+
+    // public IActionResult CaptureCreditCartPayment(object model)
+    // {
+    //     ServicesContainer.ConfigureService(new PorticoConfig
+    //     {
+    //         SecretApiKey = "skapi_cert_MTyMAQBiHVEAewvIzXVFcmUd2UcyBge_eCpaASUp0A",
+    //         DeveloperId = "000000",
+    //         VersionNumber = "0000",
+    //         ServiceUrl = "https://cert.api2.heartlandportico.com"
+    //     });
+    // }
     public IActionResult ApplyDiscountOrGiftCardCode(DiscountOrGiftCardCodeDto model)
     {
         try
@@ -95,7 +108,7 @@ public class CheckoutSurfaceController : SurfaceController
 
                         // { Constants.Properties.Customer.FirstNamePropertyAlias, model.BillingAddress.FirstName },
                         // { Constants.Properties.Customer.LastNamePropertyAlias, model.BillingAddress.LastName },
-                        // { "billingAddressLine1", model.BillingAddress.Line1 },
+                        { "billingAddressLine1", model.BillingAddress.Line1 },
                         // { "billingAddressLine2", model.BillingAddress.Line2 },
                         // { "billingCity", model.BillingAddress.City },
                         // { "billingZipCode", model.BillingAddress.ZipCode },

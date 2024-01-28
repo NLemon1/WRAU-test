@@ -29,14 +29,17 @@ public class CustomProductSnapshot : UmbracoProductSnapshot
         UmbracoProductSnapshot snapshot = new UmbracoProductSnapshot(
             content, variantContent, languageIsoCode, productReference, productVariantReference, storeId);
 
+        // get the default snapshot from the base class to start..
         _snapshot = snapshot;
         memberPricing = new List<ProductPrice>();
 
+        // If the product adapter requests member pricing...
         if (memberPrice)
         {
+            // cast as our product composition..
             var product = content as IProductComp;
-
-
+            // for all pricing pairs (currencyid : amount), 
+            // remove and replace with the MemberPrice field that exists on product compositions
             foreach (ProductPrice productPrice in snapshot.Prices)
             {
                 if (product.MemberPrice != null && product.MemberPrice.Any() && memberPrice)

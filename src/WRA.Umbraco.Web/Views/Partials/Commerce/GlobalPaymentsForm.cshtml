@@ -1,0 +1,64 @@
+@using WRA.Umbraco.Models;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<CheckoutStepPage>
+    
+@{
+    Layout = "CheckoutStepPage.cshtml";
+    var billingInfo = Model.Order.Properties[""].Value;
+    var paymentMethodSettings = Model.PaymentMethod.PaymentProviderSettings;
+    string testPublicKey = paymentMethodSettings["TestPublicKey"];
+}
+
+@section scripts {
+    <script src="https://js.globalpay.com/v1/globalpayments.js"></script>
+    <script type="text/javascript">
+        // Configure account
+        GlobalPayments.configure({
+                        publicApiKey: @testPublicKey
+        });
+
+        // Create Form
+        const cardForm = GlobalPayments.creditCard.form("#credit-card");
+
+        cardForm.on("token-success", (resp) => {
+                        // add payment token to form as a hidden input
+                        const token = document.createElement("input");
+                        token.type = "hidden";
+                        token.name = "payment_token";
+                        token.value = resp.paymentReference;
+
+                        // Submit data to the integration's backend for processing
+                        const form = document.getElementById("payment-form");
+                        form.appendChild(token);
+                        form.submit();
+        });
+
+        cardForm.on("token-error", (resp) => {
+                        // show error to the consumer
+        });
+    </script>
+}
+
+@using (Html.BeginUmbracoForm(
+    "UpdateOrderPaymentMethod",
+    "CheckoutSurface",
+    null,
+    htmlAttributes: new { @id = "payment-form" },
+    FormMethod.Get)){
+
+        <!-- Other input fields to capture relevant data -->
+        <label for="billing_zip">Billing Zip Code</label>
+        <input id="billing_zip" name="billingAddress.Zip" value="@(Model.Order.Properties["shippingZipCode"] ?? "") type="tel" />
+
+        <!-- Target for the credit card form -->
+        <div id="credit-card"></div>
+
+
+}
+@* <form id="payment-form" action="/Payment/Charge" method="get">
+                <!-- Other input fields to capture relevant data -->
+                <label for="billing_zip">Billing Zip Code</label>
+                <input id="billing_zip" name="billing_zip" value="47150" type="tel" />
+
+                <!-- Target for the credit card form -->
+                <div id="credit-card"></div>
+</form> *@

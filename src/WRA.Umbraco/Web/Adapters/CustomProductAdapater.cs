@@ -22,12 +22,6 @@ using WRA.Umbraco.Services;
 
 public class CustomProductAdapater : UmbracoProductAdapter
 {
-    // protected readonly IUmbracoContextFactory _umbracoContextFactory;
-    // private readonly IPublishedContentQuery _publishedContentQuery;
-    // private readonly SearchService _searchService;
-    // protected readonly IExamineManager _examineManager;
-    // protected readonly PublishedContentWrapperFactory _publishedContentWrapperFactory;
-    // protected readonly IContentService _contentService;
     private readonly IServiceScopeFactory _scopeFactory;
 
 
@@ -50,27 +44,28 @@ public class CustomProductAdapater : UmbracoProductAdapter
             return null;
         }
 
-
+        // you cannot inject scoped services into a singleton (which this class is)..
+        // so lets get the services via the base scope provider!
         using var scope = _scopeFactory.CreateScope();
         IMemberService memberService = scope.ServiceProvider.GetRequiredService<IMemberService>();
         IMemberManager mm = scope.ServiceProvider.GetRequiredService<IMemberManager>();
 
-
-
+        // get the current member (customer/visitor) logged in...
         var member = mm.GetCurrentMemberAsync().GetAwaiter().GetResult();
-        // var member = memberService.GetCurrentMemberAsync().GetAwaiter().GetResult();
         bool useMemberPricing = false;
 
         if (member != null)
         {
+            // get all member groups (roles) tied to the request user.
             var memberRoles = mm.GetRolesAsync(member).GetAwaiter().GetResult();
-
+            // if they are part of the "member pricing" group, then pass the idicator.
             if (memberRoles.Any(r => r.Equals("Member Pricing", StringComparison.OrdinalIgnoreCase)))
             {
                 useMemberPricing = true;
             }
 
         }
+        // now generate the snapshow based on our custom implementation..
         return new CustomProductSnapshot(
             productNode,
             productVariantNode,
