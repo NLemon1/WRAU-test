@@ -45,7 +45,6 @@
 		<Content Include="App_Plugins\**" CopyToOutputDirectory="Always" />
 	</ItemGroup>
   <ItemGroup>
-    <!-- <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.0" /> -->
     <PackageReference Include="Umbraco.Cloud.Cms.PublicAccess" Version="13.0.0" />
     <PackageReference Include="Umbraco.Cloud.Identity.Cms" Version="13.0.0" />
     <PackageReference Include="Umbraco.Cloud.StorageProviders.AzureBlob" Version="13.0.0" />
@@ -54,10 +53,8 @@
     <PackageReference Include="Umbraco.Cms.Infrastructure" Version="13.1.0" />
     <PackageReference Include="Umbraco.Deploy.Cloud" Version="13.0.3" />
     <PackageReference Include="Umbraco.Deploy.Contrib" Version="13.0.0" />
-    <!-- <PackageReference Include="Umbraco.Deploy.Forms" Version="12.1.3" /> -->
     <PackageReference Include="Umbraco.Forms" Version="13.0.1" />
     <PackageReference Include="Umbraco.Workflow" Version="13.0.2" />
-    <PackageReference Include="uSync" Version="13.0.0" />
     <PackageReference Include="Umbraco.Forms.Core.Providers" Version="13.0.1" />
     <PackageReference Include="Umbraco.Cms.Imaging.ImageSharp" Version="13.1.0" />
 
