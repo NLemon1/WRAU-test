@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -8,10 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GlobalPayments.Api" Version="8.0.3" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="RestSharp" Version="110.2.0" />
-    <PackageReference Include="Umbraco.Cms" Version="13.0.3" />
+    <PackageReference Include="Umbraco.Cms" Version="13.1.0" />
     <PackageReference Include="Umbraco.Commerce" Version="13.0.0" />
     <PackageReference Include="Umbraco.Commerce.Cms" Version=" 13.0.0" />
     <PackageReference Include="Umbraco.Commerce.Cms.Startup" Version=" 13.0.0" />

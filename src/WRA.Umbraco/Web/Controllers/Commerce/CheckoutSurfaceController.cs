@@ -12,8 +12,8 @@ using Umbraco.Commerce.Core;
 using Umbraco.Commerce.Core.Api;
 using WRA.Umbraco.Dtos;
 using Umbraco.Commerce.Extensions;
-using GlobalPayments.Api.Services;
-using GlobalPayments.Api;
+//using GlobalPayments.Api.Services;
+//using GlobalPayments.Api;
 
 namespace WRA.Umbraco.Controllers;
 
