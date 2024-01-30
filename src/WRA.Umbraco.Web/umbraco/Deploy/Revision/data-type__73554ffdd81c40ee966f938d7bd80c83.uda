@@ -2,7 +2,7 @@
   "Name": "Vertical Alignment - Dropdown",
   "Alias": "",
   "EditorAlias": "Umbraco.DropDown.Flexible",
-  "DatabaseType": 1,
+  "DatabaseType": "Nvarchar",
   "Configuration": {
     "multiple": false,
     "items": [
@@ -20,9 +20,8 @@
       }
     ]
   },
-  "Parent": null,
   "Udi": "umb://data-type/73554ffdd81c40ee966f938d7bd80c83",
   "Dependencies": [],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
-  "__version": "12.0.5"
+  "__version": "13.0.3"
 }

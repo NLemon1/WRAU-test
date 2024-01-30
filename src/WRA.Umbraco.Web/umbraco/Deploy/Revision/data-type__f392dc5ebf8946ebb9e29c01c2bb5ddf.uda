@@ -2,7 +2,7 @@
   "Name": "Font Size - Dropdown",
   "Alias": "",
   "EditorAlias": "Umbraco.DropDown.Flexible",
-  "DatabaseType": 1,
+  "DatabaseType": "Nvarchar",
   "Configuration": {
     "multiple": false,
     "items": [
@@ -28,9 +28,8 @@
       }
     ]
   },
-  "Parent": null,
   "Udi": "umb://data-type/f392dc5ebf8946ebb9e29c01c2bb5ddf",
   "Dependencies": [],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
-  "__version": "12.0.5"
+  "__version": "13.0.3"
 }

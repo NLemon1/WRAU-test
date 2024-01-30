@@ -2,7 +2,7 @@
   "Name": "List View - productsPage",
   "Alias": "",
   "EditorAlias": "Umbraco.ListView",
-  "DatabaseType": 1,
+  "DatabaseType": "Nvarchar",
   "Configuration": {
     "pageSize": 10,
     "orderDirection": "asc",
@@ -52,9 +52,8 @@
     "showContentFirst": false,
     "useInfiniteEditor": false
   },
-  "Parent": null,
   "Udi": "umb://data-type/eaee8f674c75436299bee9fd949c89a4",
   "Dependencies": [],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
-  "__version": "12.0.5"
+  "__version": "13.0.3"
 }
