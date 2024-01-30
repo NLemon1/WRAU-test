@@ -2,15 +2,13 @@
   "Name": "Basic Content",
   "Alias": "BasicContent",
   "File": "umb://template-file/BasicContent.cshtml",
-  "Master": null,
   "Udi": "umb://template/ec480a40125744e1aa99c0db63f17e55",
   "Dependencies": [
     {
       "Udi": "umb://template-file/BasicContent.cshtml",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.TemplateArtifact",
-  "__version": "12.0.5"
+  "__version": "13.0.3"
 }

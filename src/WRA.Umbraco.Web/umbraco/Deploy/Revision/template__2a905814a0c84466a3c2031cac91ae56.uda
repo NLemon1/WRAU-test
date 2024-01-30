@@ -2,15 +2,13 @@
   "Name": "Checkout Confirmation Page",
   "Alias": "CheckoutConfirmationPage",
   "File": "umb://template-file/CheckoutConfirmationPage.cshtml",
-  "Master": null,
   "Udi": "umb://template/2a905814a0c84466a3c2031cac91ae56",
   "Dependencies": [
     {
       "Udi": "umb://template-file/CheckoutConfirmationPage.cshtml",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.TemplateArtifact",
-  "__version": "12.0.5"
+  "__version": "13.0.3"
 }
