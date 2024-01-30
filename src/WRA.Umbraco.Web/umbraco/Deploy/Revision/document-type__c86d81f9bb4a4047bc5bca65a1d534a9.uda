@@ -1,21 +1,12 @@
 {
   "Name": "Spacer",
   "Alias": "spacer",
-  "DefaultTemplate": null,
   "AllowedTemplates": [],
-  "HistoryCleanup": {
-    "preventCleanup": false,
-    "keepAllVersionsNewerThanDays": null,
-    "keepLatestVersionPerDayForDays": null
-  },
+  "HistoryCleanup": {},
   "Icon": "icon-navigation-vertical color-black",
   "Thumbnail": "folder.png",
   "Description": "Use in between sections.",
-  "IsContainer": false,
   "Permissions": {
-    "AllowVaryingByCulture": false,
-    "AllowVaryingBySegment": false,
-    "AllowedAtRoot": false,
     "IsElementType": true,
     "AllowedChildContentTypes": []
   },
@@ -27,8 +18,6 @@
     {
       "Key": "af182249-bca3-4875-9de0-5a6acbc2d204",
       "Name": "Content (defaults to small: 4rem / medium: 6rem)",
-      "SortOrder": 0,
-      "Type": 0,
       "Alias": "contentDefaultsToSmall4remMedium6rem",
       "PropertyTypes": [
         {
@@ -36,72 +25,31 @@
           "Alias": "heightExtraLarge",
           "DataType": "umb://data-type/0770a1fb65ac42618d9f77c1a75e5b62",
           "Description": ">= 1200px",
-          "Mandatory": false,
-          "MandatoryMessage": null,
           "Name": "Height - Extra Large",
-          "SortOrder": 3,
-          "Validation": null,
-          "ValidationMessage": null,
-          "VariesByCulture": false,
-          "VariesBySegment": false,
-          "LabelOnTop": false,
-          "MemberCanEdit": false,
-          "ViewOnProfile": false,
-          "IsSensitive": false
+          "SortOrder": 3
         },
         {
           "Key": "5644ace8-8c28-4389-b812-4df1c84da66d",
           "Alias": "heightMedium",
           "DataType": "umb://data-type/0770a1fb65ac42618d9f77c1a75e5b62",
           "Description": ">= 768px",
-          "Mandatory": false,
-          "MandatoryMessage": null,
           "Name": "Height - Medium",
-          "SortOrder": 1,
-          "Validation": null,
-          "ValidationMessage": null,
-          "VariesByCulture": false,
-          "VariesBySegment": false,
-          "LabelOnTop": false,
-          "MemberCanEdit": false,
-          "ViewOnProfile": false,
-          "IsSensitive": false
+          "SortOrder": 1
         },
         {
           "Key": "79600948-1161-4fa9-a627-4434d3285602",
           "Alias": "heightSmall",
           "DataType": "umb://data-type/0770a1fb65ac42618d9f77c1a75e5b62",
           "Description": ">= 0px",
-          "Mandatory": false,
-          "MandatoryMessage": null,
-          "Name": "Height - Small",
-          "SortOrder": 0,
-          "Validation": null,
-          "ValidationMessage": null,
-          "VariesByCulture": false,
-          "VariesBySegment": false,
-          "LabelOnTop": false,
-          "MemberCanEdit": false,
-          "ViewOnProfile": false,
-          "IsSensitive": false
+          "Name": "Height - Small"
         },
         {
           "Key": "f496c7c9-d382-44d2-8da0-ab1228e0399f",
           "Alias": "heightLarge",
           "DataType": "umb://data-type/0770a1fb65ac42618d9f77c1a75e5b62",
           "Description": ">= 992px",
-          "Mandatory": false,
-          "MandatoryMessage": null,
           "Name": "Height - Large",
-          "SortOrder": 2,
-          "Validation": null,
-          "ValidationMessage": null,
-          "VariesByCulture": false,
-          "VariesBySegment": false,
-          "LabelOnTop": false,
-          "MemberCanEdit": false,
-          "ViewOnProfile": false,
-          "IsSensitive": false
+          "SortOrder": 2
         }
       ]
     }
@@ -111,20 +59,17 @@
   "Dependencies": [
     {
       "Udi": "umb://data-type/0770a1fb65ac42618d9f77c1a75e5b62",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     },
     {
       "Udi": "umb://document-type-container/7d7bb95bd7634722b04820839c0ae21e",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     },
     {
       "Udi": "umb://document-type/38e48d076783491993c671f1add73d05",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
-  "__version": "12.0.5"
+  "__version": "13.0.3"
 }

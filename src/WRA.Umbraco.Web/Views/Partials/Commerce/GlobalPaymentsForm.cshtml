@@ -4,8 +4,8 @@
 @{
     Layout = "CheckoutStepPage.cshtml";
     var billingInfo = Model.Order.Properties[""].Value;
-    var paymentMethodSettings = Model.PaymentMethod.PaymentProviderSettings;
-    string testPublicKey = paymentMethodSettings["TestPublicKey"];
+    var paymentMethodSettings = Model?.PaymentMethod?.PaymentProviderSettings;
+    string testPublicKey = paymentMethodSettings?["TestPublicKey"] ?? string.Empty;
 }
 
 @section scripts {
@@ -47,7 +47,7 @@
 
         <!-- Other input fields to capture relevant data -->
         <label for="billing_zip">Billing Zip Code</label>
-        <input id="billing_zip" name="billingAddress.Zip" value="@(Model.Order.Properties["shippingZipCode"] ?? "") type="tel" />
+        <input id="billing_zip" name="billingAddress.Zip" value="@(Model?.Order.Properties["shippingZipCode"] ?? "") type="tel" />
 
         <!-- Target for the credit card form -->
         <div id="credit-card"></div>

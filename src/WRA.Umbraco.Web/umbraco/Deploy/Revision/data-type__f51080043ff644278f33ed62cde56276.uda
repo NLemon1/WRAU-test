@@ -2,7 +2,6 @@
   "Name": "Product Page - Categories - Multinode Treepicker",
   "Alias": "",
   "EditorAlias": "Umbraco.MultiNodeTreePicker",
-  "DatabaseType": 0,
   "Configuration": {
     "startNode": {
       "type": "content"
@@ -12,9 +11,8 @@
     "showOpenButton": false,
     "ignoreUserStartNodes": false
   },
-  "Parent": null,
   "Udi": "umb://data-type/f51080043ff644278f33ed62cde56276",
   "Dependencies": [],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
-  "__version": "12.0.5"
+  "__version": "13.0.3"
 }

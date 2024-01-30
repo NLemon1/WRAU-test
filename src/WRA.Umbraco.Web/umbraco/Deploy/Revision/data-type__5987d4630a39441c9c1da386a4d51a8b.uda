@@ -2,15 +2,14 @@
   "Name": "Icon Item - Icon Size - Numeric",
   "Alias": "",
   "EditorAlias": "Umbraco.Integer",
-  "DatabaseType": 2,
+  "DatabaseType": "Integer",
   "Configuration": {
     "min": 14,
     "step": 2,
     "max": 64
   },
-  "Parent": null,
   "Udi": "umb://data-type/5987d4630a39441c9c1da386a4d51a8b",
   "Dependencies": [],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
-  "__version": "12.0.5"
+  "__version": "13.0.3"
 }

@@ -1,18 +1,9 @@
-using System.Threading;
 using Umbraco.Cms.Core.Models.PublishedContent;
-using Umbraco.Extensions;
 using Umbraco.Commerce.Core.Api;
 using Umbraco.Commerce.Core.Models;
 using WRA.Umbraco.Models;
 using Umbraco.Commerce.Extensions;
 using WRA.Umbraco.Dtos;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using static Umbraco.Cms.Core.Constants.HttpContext;
-using WRA.Umbraco.Controllers;
-using System.Linq;
-using Umbraco.Commerce.Cms.Web.Api.Storefront.Models;
-using Umbraco.Cms.Core.Models;
-using Umbraco.Commerce.Cms.Adapters;
 
 namespace WRA.Umbraco
 {
@@ -47,12 +38,12 @@ namespace WRA.Umbraco
         public static NewsRecordDto AsDto(this Article content)
         {
             return new NewsRecordDto(
-                content.UrlSegment,
-                content.Name,
-                content?.Category?.Name,
-                content?.Image?.MediaUrl().ToString() ?? string.Empty,
-                content?.Excerpt ?? string.Empty,
-                content.Title ?? content.Name,
+                content?.UrlSegment?.SafeString()!,
+                content!.Name,
+                content?.Category?.Name.SafeString()!,
+                content?.Image?.MediaUrl().SafeString()!,
+                content?.Excerpt?.SafeString()!,
+                content?.Title ?? content!.Name,
                 System.String.Format("{0:yyyy-MM-dd}", content.Date),
                 System.String.Format("{0:MMMM d, yyyy}", content.Date)
             );
@@ -62,11 +53,11 @@ namespace WRA.Umbraco
         {
             return new HotTipDto(
                 content.Name,
-                content.Category?.Name,
-                content.Subcategories.Select(cat => cat.Name),
+                content?.Category?.Name ?? string.Empty,
+                content?.Subcategories == null ? [] : content.Subcategories!.Select(cat => cat.Name),
                 content?.Question?.ToString() ?? string.Empty,
                 content?.Answer?.ToString() ?? string.Empty,
-                content.CreateDate.ToString()
+                content?.CreateDate == null ? string.Empty : content.CreateDate.ToString()
             );
         }
 
@@ -81,8 +72,8 @@ namespace WRA.Umbraco
                 content.YouTubeId ?? string.Empty,
                 content.Description ?? string.Empty,
                 content?.ThumbnailOverride?.MediaUrl().ToString() ?? string.Empty,
-                System.String.Format("{0:yyyy-MM-dd}", content.Date),
-                System.String.Format("{0:MMMM d, yyyy}", content.Date),
+                System.String.Format("{0:yyyy-MM-dd}", content!.Date),
+                System.String.Format("{0:MMMM d, yyyy}", content!.Date),
                 content.Children.Any(),
                 children ?? new List<MultimediaDto>()
             );
@@ -96,28 +87,12 @@ namespace WRA.Umbraco
                 productType,
                 p?.Categories?.First().Name ?? string.Empty,
                 p?.SubCategories?.First().Name ?? string.Empty,
-                p.Price.GetPriceFor(currency).Value,
+                p!.Price!.GetPriceFor(currency).Value,
                 p.StartDate.ToString(),
                 p.EndDate.ToString(),
                 p.Url()
             );
         }
-        /*        public static PlaylistDto AsDto(this MultimediaPlaylist playlist)
-                {
-                    var playlistItems = playlist.Children();
-                    IEnumerable<MultimediaDto> playlistMediaItems = playlistItems
-                        .Select(pmi => new MultimediaItem(pmi, new NoopPublishedValueFallback())
-                        .AsDto());
-                    PlaylistDto playlistResponse = new(
-                        playlistMediaItems,
-                        playlist.Date,
-                        playlist.Description ?? string.Empty,
-                        playlist.MediaType ?? string.Empty,
-                        playlist.Title ?? string.Empty
-                    );
-
-                    return playlistResponse;
-                }*/
 
         /// <summary>
         /// Commerce Specific Extensions
@@ -142,7 +117,7 @@ namespace WRA.Umbraco
 
 
 
-        public static IProductSnapshot AsProduct(this IProductComp content)
+        public static IProductSnapshot? AsProduct(this IProductComp content)
         {
             var page = content as IPublishedContent;
             if (page == null)
@@ -153,7 +128,7 @@ namespace WRA.Umbraco
             // var y = new UmbracoProductAdapter()
         }
 
-        public static IProductSnapshot AsProduct(this IProductComp variant, IProductComp parent)
+        public static IProductSnapshot? AsProduct(this IProductComp variant, IProductComp parent)
         {
             var page = parent as IPublishedContent;
             if (page == null)
@@ -179,22 +154,27 @@ namespace WRA.Umbraco
 
         public static Price CalculatePrice(this IProductComp content)
         {
-            return content.AsProduct()?.CalculatePrice();
+            return content!.AsProduct()!.CalculatePrice();
         }
 
-        public static Price CalculatePrice(this IProductComp variant, IProductComp parent)
+        public static Price? CalculatePrice(this IProductComp variant, IProductComp parent)
         {
-            return variant.AsProduct(parent)?.CalculatePrice();
+            return variant?.AsProduct(parent)?.CalculatePrice();
         }
 
-        public static CheckoutPage GetCheckoutPage(this CheckoutStepPage content)
+        public static CheckoutPage? GetCheckoutPage(this CheckoutStepPage content)
         {
-            return content.AncestorOrSelf<CheckoutPage>();
+            return content!.AncestorOrSelf<CheckoutPage>();
         }
 
-        public static Home GetHome(this IPublishedContent checkoutStepPage)
+        public static Home? GetHome(this IPublishedContent checkoutStepPage)
         {
             return checkoutStepPage.Ancestor<Home>();
+        }
+
+        public static string SafeString(this object item)
+        {
+            return item?.ToString() ?? string.Empty;
         }
     }
 }

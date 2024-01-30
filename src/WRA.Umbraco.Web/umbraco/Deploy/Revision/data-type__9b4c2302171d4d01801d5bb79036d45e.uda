@@ -2,14 +2,13 @@
   "Name": "Basic Content - BackgroundOffset - Toggle",
   "Alias": "",
   "EditorAlias": "Umbraco.TrueFalse",
-  "DatabaseType": 2,
+  "DatabaseType": "Integer",
   "Configuration": {
     "default": false,
     "showLabels": false
   },
-  "Parent": null,
   "Udi": "umb://data-type/9b4c2302171d4d01801d5bb79036d45e",
   "Dependencies": [],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
-  "__version": "12.0.5"
+  "__version": "13.0.3"
 }

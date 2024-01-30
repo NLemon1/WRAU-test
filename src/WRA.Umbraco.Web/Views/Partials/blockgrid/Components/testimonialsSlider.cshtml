@@ -2,9 +2,9 @@
 @using ContentModels = WRA.Umbraco.Models;
 
 @{
-    var testimonials = UmbracoContext.Content.GetAtRoot().DescendantsOrSelfOfType("testimonial").Where(x => x.IsVisible()).OrderByDescending(x => x.CreateDate).Take(4);
+    var testimonials = UmbracoContext?.Content?.GetAtRoot().DescendantsOrSelfOfType("testimonial").Where(x => x.IsVisible()).OrderByDescending(x => x.CreateDate).Take(4);
 
-    if (testimonials.Any())
+    if (testimonials?.Any() ?? false)
     {
         <div class="swiper js-swiper mx-n4 px-4" data-options='{
             "slidesPerView": 1.3,
@@ -34,7 +34,7 @@
                             {
                                 var image = testimonial.Value<MediaWithCrops>("image");
 
-                                <img class="align-self-start rounded-circle"  src="@image.GetCropUrl(width: 64)" alt="@image.Value("altText")" />
+                                <img class="align-self-start rounded-circle"  src="@image?.GetCropUrl(width: 64)" alt="@image?.Value("altText")" />
                             }
                             @if (testimonial.HasValue("quote"))
                             {

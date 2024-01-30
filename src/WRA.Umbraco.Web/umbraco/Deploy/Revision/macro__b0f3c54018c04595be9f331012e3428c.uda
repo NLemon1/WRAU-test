@@ -3,19 +3,15 @@
   "Alias": "Register",
   "MacroSource": "~/Views/MacroPartials/MemberRegistration.cshtml",
   "UseInEditor": true,
-  "CacheDuration": 0,
-  "CacheByPage": false,
-  "CacheByMember": false,
-  "DontRender": false,
   "Properties": [],
   "Udi": "umb://macro/b0f3c54018c04595be9f331012e3428c",
   "Dependencies": [
     {
       "Udi": "umb://partial-view-macro/MemberRegistration.cshtml",
       "Ordering": true,
-      "Mode": 1
+      "Mode": "Exist"
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.MacroArtifact",
-  "__version": "12.0.5"
+  "__version": "13.0.3"
 }

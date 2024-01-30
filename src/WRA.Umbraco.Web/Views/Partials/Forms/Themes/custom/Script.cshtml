@@ -13,7 +13,7 @@
      data-serialized-page-button-conditions="@JsonConvert.SerializeObject(Model.PageButtonConditions, FormsJsonSerializerSettings.Default)"
      data-serialized-fieldset-conditions="@JsonConvert.SerializeObject(Model.FieldsetConditions, FormsJsonSerializerSettings.Default)"
      data-serialized-field-conditions="@JsonConvert.SerializeObject(Model.FieldConditions, FormsJsonSerializerSettings.Default)"
-     data-serialized-fields-not-displayed="@JsonConvert.SerializeObject(Model.GetFieldsNotDisplayed(), FormsJsonSerializerSettings.Default)"
+     @* data-serialized-fields-not-displayed="@JsonConvert.SerializeObject(Model!.GetFieldsNotDisplayed(), FormsJsonSerializerSettings.Default)" *@
      data-trigger-conditions-check-on="@Model.TriggerConditionsCheckOn"
      data-form-element-html-id-prefix="@Model.FormElementHtmlIdPrefix"></div>
 
@@ -22,7 +22,7 @@ If the current page of the form has any Partial view files attached to render
 Likely used by events and third parties adding tracking or other 3rd party functionality to a form
 *@
 @{
-    if (Model.CurrentPage.PartialViewFiles.Any())
+    if (Model?.CurrentPage?.PartialViewFiles?.Any() ?? false)
     {
         foreach (var partial in Model.CurrentPage.PartialViewFiles)
         {
@@ -32,5 +32,5 @@ Likely used by events and third parties adding tracking or other 3rd party funct
 }
 
 @* Render references to javascript files needed by fields on the current page*@
-@Html.RenderFormsScripts(Url, Model, Model.JavaScriptTagAttributes)
+@Html.RenderFormsScripts(Url, Model!, Model.JavaScriptTagAttributes)
 @Html.RenderFormsStylesheets(Url, Model)

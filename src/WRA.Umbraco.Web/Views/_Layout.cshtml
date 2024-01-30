@@ -530,13 +530,13 @@
                 </div>
                 <div class="site-footer__bottom mt-5 pt-3 text-white">
                     <a class="site-footer__logo mb-3 mb-lg-0" href="/">
-                        <img src="@(settings.Value<IPublishedContent>("footerLogo").Url())" class="w-100" alt="@(settings.Value<IPublishedContent>("footerLogo").Value("altText"))" />
+                        <img src="@(settings?.Value<IPublishedContent>("footerLogo")?.Url() ?? string.Empty)" class="w-100" alt="@(settings?.Value<IPublishedContent>("footerLogo")?.Value("altText") ?? string.Empty)" />
                     </a>
-                    <p class="mb-lg-0">&copy; @DateTime.Now.Year @settings.Value("siteName"). All Rights Reserved.</p>
+                    <p class="mb-lg-0">&copy; @DateTime.Now.Year @settings?.Value("siteName"). All Rights Reserved.</p>
                     @{
-                        var footerUtilityLinks = settings.Value<IEnumerable<Link>>("footerUtilityNavigation");
+                        var footerUtilityLinks = settings?.Value<IEnumerable<Link>>("footerUtilityNavigation") ?? [];
 
-                        if (footerUtilityLinks.Any())
+                        if (footerUtilityLinks != null && footerUtilityLinks.Any())
                         {
                             <nav aria-label="Site footer utility navigation">
                                 <ul class="site-footer__utility-links list-unstyled mb-0">
@@ -558,6 +558,6 @@
     @RenderSection("scriptsPre", required: false)
     <script src="/js/dist/global.js" asp-append-version="true"></script>
     @RenderSection("scripts", required: false)
-    @Html.Raw(settings.Value("bodyCloseScripts"))
+    @Html.Raw(settings?.Value("bodyCloseScripts"))
 </body>
 </html>

@@ -42,7 +42,7 @@ public class CustomProductSnapshot : UmbracoProductSnapshot
             // remove and replace with the MemberPrice field that exists on product compositions
             foreach (ProductPrice productPrice in snapshot.Prices)
             {
-                if (product.MemberPrice != null && product.MemberPrice.Any() && memberPrice)
+                if (product?.MemberPrice != null && product.MemberPrice.Any() && memberPrice)
                 {
                     memberPricing.Add(product.MemberPrice.GetPriceFor(productPrice.CurrencyId));
                 }
