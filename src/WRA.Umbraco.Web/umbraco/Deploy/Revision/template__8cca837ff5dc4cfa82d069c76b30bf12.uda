@@ -1,8 +1,14 @@
 {
   "Name": "Multimedia Playlist",
   "Alias": "MultimediaPlaylist",
+  "File": "umb://template-file/MultimediaPlaylist.cshtml",
   "Udi": "umb://template/8cca837ff5dc4cfa82d069c76b30bf12",
-  "Dependencies": [],
+  "Dependencies": [
+    {
+      "Udi": "umb://template-file/MultimediaPlaylist.cshtml",
+      "Ordering": true
+    }
+  ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.TemplateArtifact",
   "__version": "13.0.3"
 }
