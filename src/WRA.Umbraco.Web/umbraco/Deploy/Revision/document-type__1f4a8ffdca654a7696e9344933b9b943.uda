@@ -1,22 +1,12 @@
 {
   "Name": "Hot Tips",
   "Alias": "hotTips",
-  "DefaultTemplate": null,
   "AllowedTemplates": [],
-  "HistoryCleanup": {
-    "preventCleanup": false,
-    "keepAllVersionsNewerThanDays": null,
-    "keepLatestVersionPerDayForDays": null
-  },
+  "HistoryCleanup": {},
   "Icon": "icon-folder-outline color-black",
   "Thumbnail": "folder.png",
-  "Description": null,
-  "IsContainer": false,
   "Permissions": {
-    "AllowVaryingByCulture": false,
-    "AllowVaryingBySegment": false,
     "AllowedAtRoot": true,
-    "IsElementType": false,
     "AllowedChildContentTypes": [
       "umb://document-type/4df499bbff054027bb0a9561e8118ab8"
     ]
@@ -29,15 +19,12 @@
   "Dependencies": [
     {
       "Udi": "umb://document-type-container/811495c9ae7b467da08ce40db9f6c9ca",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     },
     {
-      "Udi": "umb://document-type/4df499bbff054027bb0a9561e8118ab8",
-      "Ordering": false,
-      "Mode": 0
+      "Udi": "umb://document-type/4df499bbff054027bb0a9561e8118ab8"
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
-  "__version": "12.0.5"
+  "__version": "13.0.3"
 }

@@ -1,21 +1,11 @@
 {
   "Name": "Multimedia Center",
   "Alias": "multimediaCenter",
-  "DefaultTemplate": null,
   "AllowedTemplates": [],
-  "HistoryCleanup": {
-    "preventCleanup": false,
-    "keepAllVersionsNewerThanDays": null,
-    "keepLatestVersionPerDayForDays": null
-  },
+  "HistoryCleanup": {},
   "Icon": "icon-layout color-black",
   "Thumbnail": "folder.png",
-  "Description": null,
-  "IsContainer": false,
   "Permissions": {
-    "AllowVaryingByCulture": false,
-    "AllowVaryingBySegment": false,
-    "AllowedAtRoot": false,
     "IsElementType": true,
     "AllowedChildContentTypes": []
   },
@@ -26,44 +16,22 @@
       "Key": "4966be1b-be94-4468-a6b6-345252d2106c",
       "Name": "Card 1",
       "SortOrder": 1,
-      "Type": 0,
       "Alias": "card1",
       "PropertyTypes": [
         {
           "Key": "3ecaec48-427b-4c01-b553-6767bff28ba3",
           "Alias": "card1Content",
           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
-          "Description": null,
-          "Mandatory": false,
-          "MandatoryMessage": null,
           "Name": "Content",
-          "SortOrder": 2,
-          "Validation": null,
-          "ValidationMessage": null,
-          "VariesByCulture": false,
-          "VariesBySegment": false,
-          "LabelOnTop": false,
-          "MemberCanEdit": false,
-          "ViewOnProfile": false,
-          "IsSensitive": false
+          "SortOrder": 2
         },
         {
           "Key": "4c9715b3-83c8-4872-ad0e-8f1476652474",
           "Alias": "card1Link",
           "DataType": "umb://data-type/094ea51013be4f358f03687f54bb9ba2",
-          "Description": null,
           "Mandatory": true,
-          "MandatoryMessage": null,
           "Name": "Link",
-          "SortOrder": 3,
-          "Validation": null,
-          "ValidationMessage": null,
-          "VariesByCulture": false,
-          "VariesBySegment": false,
-          "LabelOnTop": false,
-          "MemberCanEdit": false,
-          "ViewOnProfile": false,
-          "IsSensitive": false
+          "SortOrder": 3
         },
         {
           "Key": "63f826cc-f38a-472e-be96-8be423d87183",
@@ -71,80 +39,36 @@
           "DataType": "umb://data-type/ad9f0cf2bda245d59ea1a63cfc873fd3",
           "Description": "744 x 430",
           "Mandatory": true,
-          "MandatoryMessage": null,
-          "Name": "Image",
-          "SortOrder": 0,
-          "Validation": null,
-          "ValidationMessage": null,
-          "VariesByCulture": false,
-          "VariesBySegment": false,
-          "LabelOnTop": false,
-          "MemberCanEdit": false,
-          "ViewOnProfile": false,
-          "IsSensitive": false
+          "Name": "Image"
         },
         {
           "Key": "7e20a736-ff0e-46f5-97f4-200ec36ef107",
           "Alias": "card1Heading",
           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
-          "Description": null,
           "Mandatory": true,
-          "MandatoryMessage": null,
           "Name": "Heading",
-          "SortOrder": 1,
-          "Validation": null,
-          "ValidationMessage": null,
-          "VariesByCulture": false,
-          "VariesBySegment": false,
-          "LabelOnTop": false,
-          "MemberCanEdit": false,
-          "ViewOnProfile": false,
-          "IsSensitive": false
+          "SortOrder": 1
         }
       ]
     },
     {
       "Key": "72f6a8db-efaa-40c4-9daf-45a637d217cb",
       "Name": "Content",
-      "SortOrder": 0,
-      "Type": 0,
       "Alias": "content",
       "PropertyTypes": [
         {
           "Key": "9487d0c5-294f-473c-877d-9c6dcecd29c5",
           "Alias": "heading",
           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
-          "Description": null,
           "Mandatory": true,
-          "MandatoryMessage": null,
-          "Name": "Heading",
-          "SortOrder": 0,
-          "Validation": null,
-          "ValidationMessage": null,
-          "VariesByCulture": false,
-          "VariesBySegment": false,
-          "LabelOnTop": false,
-          "MemberCanEdit": false,
-          "ViewOnProfile": false,
-          "IsSensitive": false
+          "Name": "Heading"
         },
         {
           "Key": "e14a9fe7-4985-45aa-b502-f91c9e3dc84d",
           "Alias": "link",
           "DataType": "umb://data-type/094ea51013be4f358f03687f54bb9ba2",
-          "Description": null,
-          "Mandatory": false,
-          "MandatoryMessage": null,
           "Name": "Link",
-          "SortOrder": 1,
-          "Validation": null,
-          "ValidationMessage": null,
-          "VariesByCulture": false,
-          "VariesBySegment": false,
-          "LabelOnTop": false,
-          "MemberCanEdit": false,
-          "ViewOnProfile": false,
-          "IsSensitive": false
+          "SortOrder": 1
         }
       ]
     },
@@ -152,44 +76,22 @@
       "Key": "dd27c9ea-4e6d-4b89-830f-60bd26470567",
       "Name": "Card 2",
       "SortOrder": 2,
-      "Type": 0,
       "Alias": "card2",
       "PropertyTypes": [
         {
           "Key": "1f8969fd-73b1-4076-8032-765ad72716ff",
           "Alias": "card2Heading",
           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
-          "Description": null,
           "Mandatory": true,
-          "MandatoryMessage": null,
           "Name": "Heading",
-          "SortOrder": 1,
-          "Validation": null,
-          "ValidationMessage": null,
-          "VariesByCulture": false,
-          "VariesBySegment": false,
-          "LabelOnTop": false,
-          "MemberCanEdit": false,
-          "ViewOnProfile": false,
-          "IsSensitive": false
+          "SortOrder": 1
         },
         {
           "Key": "d22f8f2f-6e26-4c6a-9a5d-8aa62e19637a",
           "Alias": "card2Content",
           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
-          "Description": null,
-          "Mandatory": false,
-          "MandatoryMessage": null,
           "Name": "Content",
-          "SortOrder": 2,
-          "Validation": null,
-          "ValidationMessage": null,
-          "VariesByCulture": false,
-          "VariesBySegment": false,
-          "LabelOnTop": false,
-          "MemberCanEdit": false,
-          "ViewOnProfile": false,
-          "IsSensitive": false
+          "SortOrder": 2
         },
         {
           "Key": "d4cce2b4-ca47-42ed-93b1-93b124fd42b4",
@@ -197,35 +99,15 @@
           "DataType": "umb://data-type/ad9f0cf2bda245d59ea1a63cfc873fd3",
           "Description": "744 x 430",
           "Mandatory": true,
-          "MandatoryMessage": null,
-          "Name": "Image",
-          "SortOrder": 0,
-          "Validation": null,
-          "ValidationMessage": null,
-          "VariesByCulture": false,
-          "VariesBySegment": false,
-          "LabelOnTop": false,
-          "MemberCanEdit": false,
-          "ViewOnProfile": false,
-          "IsSensitive": false
+          "Name": "Image"
         },
         {
           "Key": "db3c6555-d1d4-4dce-bea1-6d618b34c115",
           "Alias": "card2Link",
           "DataType": "umb://data-type/094ea51013be4f358f03687f54bb9ba2",
-          "Description": null,
           "Mandatory": true,
-          "MandatoryMessage": null,
           "Name": "Link",
-          "SortOrder": 3,
-          "Validation": null,
-          "ValidationMessage": null,
-          "VariesByCulture": false,
-          "VariesBySegment": false,
-          "LabelOnTop": false,
-          "MemberCanEdit": false,
-          "ViewOnProfile": false,
-          "IsSensitive": false
+          "SortOrder": 3
         }
       ]
     }
@@ -235,25 +117,21 @@
   "Dependencies": [
     {
       "Udi": "umb://data-type/094ea51013be4f358f03687f54bb9ba2",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     },
     {
       "Udi": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     },
     {
       "Udi": "umb://data-type/ad9f0cf2bda245d59ea1a63cfc873fd3",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     },
     {
       "Udi": "umb://document-type-container/37b4b44f0abc4536af8ed684511c2571",
-      "Ordering": true,
-      "Mode": 0
+      "Ordering": true
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
-  "__version": "12.0.5"
+  "__version": "13.0.3"
 }
