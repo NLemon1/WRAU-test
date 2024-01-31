@@ -10,6 +10,7 @@ import alert from './components/alert';
 import articleFilters from './components/article-filters';
 import multimediaFilters from './components/multimedia-filters';
 import calendar from './components/calendar';
+import quantitySelector from './components/quantity-selector';
 
 expandableTextCards();
 header();
@@ -22,6 +23,7 @@ hotTipLibrary();
 alert();
 articleFilters();
 multimediaFilters();
+quantitySelector();
 
 if (document.getElementById("ec")) {
     calendar();

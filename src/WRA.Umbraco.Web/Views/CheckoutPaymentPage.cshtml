@@ -1,9 +1,9 @@
 ﻿@using Umbraco.Commerce.Extensions;
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<CheckoutPaymentMethodPage>
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<CheckoutPaymentPage>
 @{
     Layout = "CheckoutStepPage.cshtml";
 
-    var zeroValuePaymentMethod = Model.PaymentMethods.FirstOrDefault(x => x.Alias == "zeroValue");
+    @* var zeroValuePaymentMethod = Model.PaymentMethods.FirstOrDefault(x => x.Alias == "zeroValue"); *@
     
 }
 
@@ -42,10 +42,11 @@
     } 
  } *@
 
-    // maybe move to a partial view or view component?
-    @if(Model.PaymentMethod.Alias == "GlobalPayments"){
+    @* // maybe move to a partial view or view component?
+    @if(Model.PaymentMethod.Alias == "creditCard"){
 
-        @await Html.PartialAsync("GlobalPaymentsForm")
+        @await Html.PartialAsync("Commerce/GlobalPaymentsForm")
 
-    }
-    @await Html.PartialAsync("CheckoutPrevNext")
+    } *@
+
+   

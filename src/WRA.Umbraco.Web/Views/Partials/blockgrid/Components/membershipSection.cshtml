@@ -10,7 +10,8 @@
 
     IEnumerable<IPublishedContent> testimonials = Umbraco.ContentAtRoot()
                                             .DescendantsOrSelfOfType("testimonial")
-                                            .Take(3);
+                                            .OrderBy(n => Guid.NewGuid()) //randomizes
+                                            .Take(5);
 
     string className = "block-home-membership-section";
     string style = "";

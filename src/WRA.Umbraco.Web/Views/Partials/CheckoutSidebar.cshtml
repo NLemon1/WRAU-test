@@ -1,0 +1,56 @@
+@using WRA.Umbraco.Models;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<CheckoutStepPage>
+
+@foreach (var item in Model.Order.OrderLines.Select((ol, i) => new { OrderLine = ol, Index = i }))
+{
+    var node = Umbraco.Content(Guid.Parse(item.OrderLine.ProductReference));
+    var url = node.ContentType.Alias == ProductVariant.ModelTypeAlias ? node.Parent.Url() : node.Url();
+
+    <div class="cart-item mb-4">
+        <div class="cart-item__image me-4">
+            <img class="align-top" src="https://placehold.it/56" width="56" height="56" alt="">
+            <span class="cart-item__image-quantity">
+                <span class="visually-hidden">Quantity: </span> @((int)item.OrderLine.Quantity)
+            </span>
+        </div>
+        <div class="cart-item__content me-4">
+            <a class="fs-sm text-decoration-none fw-bold text-body" href="@url">@item.OrderLine.Name</a>
+            @if (item.OrderLine.Attributes.Count > 0)
+            {
+                foreach (var attr in item.OrderLine.Attributes)
+                {
+                    <div class="fs-xs" style="color: #696f78;">@attr.Value</div>
+                }
+            }
+        </div>
+        <div class="cart-item__price">
+            $000.00
+        </div>
+    </div>
+}        
+<table class="w-100">
+    <tr style="border-top: 1px solid #d7d7dc;">
+        <td class="py-3">Subtotal</td>
+        <td class="py-3 text-end">$000.00</td>
+    </tr>
+    <tr>
+        <td class="pb-3">Tax</td>
+        <td class="pb-3 text-end">
+            <span class="fs-xs">Calculated at next step</span>
+        </td>
+    </tr>
+    <tr>
+        <td class="pb-3">Shipping</td>
+        <td class="pb-3 text-end">
+            <span class="fs-xs">Calculated at next step</span>
+        </td>
+    </tr>
+    <tr>
+        <td class="pb-3">Discounts</td>
+        <td class="pb-3 text-end">-$0.00</td>
+    </tr>
+    <tr class="fw-bold" style="border-top: 1px solid #d7d7dc;">
+        <td class="py-3">Total</td>
+        <td class="py-3 text-end">$000.00</td>
+    </tr>
+</table>

@@ -3,9 +3,9 @@
     "~/App_Plugins/CustomBlockView/shared.js",
     "~/App_Plugins/CustomBlockView/richText.controller.js",
     "~/App_Plugins/CustomBlockView/featureBreaker.controller.js",
-    "~/App_Plugins/CustomBlockView/headlineBlock.controller.js?v=22",
+    "~/App_Plugins/CustomBlockView/headlineBlock.controller.js",
     "~/App_Plugins/CustomBlockView/buttons.controller.js",
-    "~/App_Plugins/CustomBlockView/button.controller.js?v=21321",
+    "~/App_Plugins/CustomBlockView/button.controller.js",
     "~/App_Plugins/CustomBlockView/genericSection.controller.js",
     "~/App_Plugins/CustomBlockView/homeHero.controller.js",
     "~/App_Plugins/CustomBlockView/latestNews.controller.js",
@@ -31,7 +31,7 @@
     "~/App_Plugins/CustomBlockView/testimonialsSlider.controller.js",
     "~/App_Plugins/CustomBlockView/breadcrumbs.controller.js",
     "~/App_Plugins/CustomBlockView/genericCard.controller.js",
-    "~/App_Plugins/CustomBlockView/backggroundContainer.controller.js"
+    "~/App_Plugins/CustomBlockView/backgroundContainer.controller.js"
   ],
   "css": [
     "~/App_Plugins/CustomBlockView/override.css"

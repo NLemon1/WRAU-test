@@ -1,9 +1,22 @@
+using System.Security.Policy;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Umbraco.Commerce.Core.Api;
 using Umbraco.Commerce.Core.PaymentProviders;
+using GlobalPayments.Api.Services;
+using GlobalPayments.Api;
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json.Linq;
+using GlobalPayments.Api.PaymentMethods;
+using GlobalPayments.Api.Entities;
+using Umbraco.Commerce.Core.Models;
 
 [PaymentProvider("GlobalPayments", "Global Payments", "GlobalPayments. it is what it is..")]
 public class MyPaymentProvider : PaymentProviderBase<GlobalPaymentsSettings>
 {
+    // Don't finalize at continue as we will finalize async via webhook
+    public override bool FinalizeAtContinueUrl => false;
+    public override bool CanCapturePayments => true;
     public MyPaymentProvider(UmbracoCommerceContext umbracoCommerce)
         : base(umbracoCommerce)
     { }
@@ -22,14 +35,60 @@ public class MyPaymentProvider : PaymentProviderBase<GlobalPaymentsSettings>
         return context.Settings.ErrorUrl;
     }
 
-    public override Task<CallbackResult> ProcessCallbackAsync(PaymentProviderContext<GlobalPaymentsSettings> context, CancellationToken token)
+    public async override Task<CallbackResult> ProcessCallbackAsync(PaymentProviderContext<GlobalPaymentsSettings> context, CancellationToken token)
     {
-        throw new NotImplementedException();
+        var content = context.Request.Content;
+        string jsonContent = content.ReadAsStringAsync().Result;
+        var paymentToken = jsonContent.Substring(jsonContent.IndexOf("=") + 1);
+
+        var secretKey = context.Settings.TestSecretKey;
+        ServicesContainer.ConfigureService(new PorticoConfig
+        {
+            SecretApiKey = secretKey,
+            DeveloperId = "000000",
+            VersionNumber = "0000",
+            ServiceUrl = "https://cert.api2.heartlandportico.com"
+        });
+
+        var card = new CreditCardData
+        {
+            Token = paymentToken
+        };
+
+        var address = new Address
+        {
+            PostalCode = "12345"
+        };
+
+        var response = card.Charge(context.Order.TotalPrice.Value.WithTax)
+                .WithCurrency("USD")
+                .WithAddress(address)
+                .Execute();
+
+        var x = context.Order.PaymentInfo.TotalPrice;
+        long y = Convert.ToInt64(response.AuthorizedAmount);
+        return new CallbackResult
+        {
+            TransactionInfo = new TransactionInfo
+            {
+                AmountAuthorized = AmountFromMinorUnits(y),
+                TransactionId = response.TransactionId,
+                PaymentStatus = PaymentStatus.Captured,
+            }
+        };
     }
 
-    public override Task<PaymentFormResult> GenerateFormAsync(PaymentProviderContext<GlobalPaymentsSettings> context, CancellationToken token)
+
+    public override async Task<PaymentFormResult> GenerateFormAsync(PaymentProviderContext<GlobalPaymentsSettings> context, CancellationToken token)
     {
-        return GenerateFormAsync(context, token);
+
+        var form = new PaymentForm(context.Urls.ContinueUrl, PaymentFormMethod.Post);
+
+        return new PaymentFormResult()
+        {
+            Form = form
+        };
+
     }
 }
 

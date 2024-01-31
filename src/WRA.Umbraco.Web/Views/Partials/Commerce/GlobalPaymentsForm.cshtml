@@ -2,63 +2,105 @@
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<CheckoutStepPage>
     
 @{
-    Layout = "CheckoutStepPage.cshtml";
-    var billingInfo = Model.Order.Properties[""].Value;
     var paymentMethodSettings = Model?.PaymentMethod?.PaymentProviderSettings;
-    string testPublicKey = paymentMethodSettings?["TestPublicKey"] ?? string.Empty;
+    string testPublicKey = "pkapi_cert_bMg2WpUw7FzvNMaZZF";
+
+    
 }
 
-@section scripts {
-    <script src="https://js.globalpay.com/v1/globalpayments.js"></script>
-    <script type="text/javascript">
-        // Configure account
-        GlobalPayments.configure({
-                        publicApiKey: @testPublicKey
+
+
+@* 
+<div class="mb-5">
+    <div class="row g-2">
+        <div class="col-12">
+            <label for="payment-card-name" class="visually-hidden">Name on card</label>
+            <input id="payment-card-name" class="form-control" type="text" required placeholder="Name on card" />
+        </div>
+        <div class="col-12">
+            <label for="payment-card-number" class="visually-hidden">Card Number</label>
+            <input id="payment-card-numbe1r" class="form-control" type="text" required placeholder="Card Number" />
+        </div>
+        <div class="col-12 col-md-6">
+            <label for="payment-card-expiration" class="visually-hidden">Expiration date</label>
+            <input id="payment-card-expiration" class="form-control" type="text" required placeholder="Expiration date (MM / YY)" />
+        </div>
+        <div class="col-12 col-md-6">
+            <label for="payment-card-code" class="visually-hidden">Security code</label>
+            <input id="payment-card-code" class="form-control" type="text" required placeholder="Security code" />
+        </div>
+    </div>
+</div> *@
+    <div id="payment-card-name"></div>
+    <div id="payment-card-number"></div>
+    <div id="payment-card-code"></div>
+    <div id="payment-card-expiration"></div>
+    <div id="credit-card-submit"></div>
+
+<script src="https://js.globalpay.com/v1/globalpayments.js"></script>
+<script type="text/javascript">
+    // Configure account
+     GlobalPayments.configure({
+                        publicApiKey: "pkapi_cert_bMg2WpUw7FzvNMaZZF"
         });
 
-        // Create Form
-        const cardForm = GlobalPayments.creditCard.form("#credit-card");
+    // Create Form
+    const cardForm = GlobalPayments.ui.form({
+    fields: {
+        "card-holder-name": {
+        placeholder: "Jane Smith",
+        target: "#payment-card-name"
+        },
+        "card-number": {
+        placeholder: "•••• •••• •••• ••••",
+        target: "#payment-card-number"
+        },
+        "card-expiration": {
+        placeholder: "MM / YYYY",
+        target: "#payment-card-expiration"
+        },
+        "card-cvv": {
+        placeholder: "•••",
+        target: "#payment-card-code"
+        },
+        "submit": {
+        value: "Submit",
+        target: "#credit-card-submit"
+        }
+    },
+    styles: {
+        // Your styles
+    }
+});
 
-        cardForm.on("token-success", (resp) => {
-                        // add payment token to form as a hidden input
-                        const token = document.createElement("input");
-                        token.type = "hidden";
-                        token.name = "payment_token";
-                        token.value = resp.paymentReference;
+    cardForm.on("token-error", (resp) => {
+                    // show error to the consumer
+    });
 
-                        // Submit data to the integration's backend for processing
-                        const form = document.getElementById("payment-form");
-                        form.appendChild(token);
-                        form.submit();
-        });
+    // form-level event handlers. examples:
+    cardForm.ready(() => {
+        console.log("Registration of all credit card fields occurred");
+    });
+    cardForm.on("token-success", (resp) => {
+    // add payment token to form as a hidden input
+    //const token = document.createElement("input");
+    const token = document.getElementById("token");
+    //token.type = "hidden";
+    //token.name = "paymentToken";
+    token.value = resp.paymentReference;
+    alert('Here is a single-use token: ' + token.value);
+    // submit data to the integration's backend for processing
+    const form = document.getElementById("payment-form");
+    //form.submit();
+    });
+    cardForm.on("token-error", (resp) => {
+    // show error to the consumer
+        alert('There was an error: ' + resp.error.message);
+    });
 
-        cardForm.on("token-error", (resp) => {
-                        // show error to the consumer
-        });
-    </script>
-}
+    // field-level event handlers. example:
+    cardForm.on("card-number", "register", () => {
+    console.log("Registration of Card Number occurred");
+    });
+</script>
 
-@using (Html.BeginUmbracoForm(
-    "UpdateOrderPaymentMethod",
-    "CheckoutSurface",
-    null,
-    htmlAttributes: new { @id = "payment-form" },
-    FormMethod.Get)){
-
-        <!-- Other input fields to capture relevant data -->
-        <label for="billing_zip">Billing Zip Code</label>
-        <input id="billing_zip" name="billingAddress.Zip" value="@(Model?.Order.Properties["shippingZipCode"] ?? "") type="tel" />
-
-        <!-- Target for the credit card form -->
-        <div id="credit-card"></div>
-
-
-}
-@* <form id="payment-form" action="/Payment/Charge" method="get">
-                <!-- Other input fields to capture relevant data -->
-                <label for="billing_zip">Billing Zip Code</label>
-                <input id="billing_zip" name="billing_zip" value="47150" type="tel" />
-
-                <!-- Target for the credit card form -->
-                <div id="credit-card"></div>
-</form> *@

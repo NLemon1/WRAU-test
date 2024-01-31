@@ -1,0 +1,10 @@
+{
+  "Name": "umb://dictionary-item/5f175ae10df74d5aac3a7bd039068824",
+  "Alias": "",
+  "ItemKey": "Umbraco Commerce",
+  "Translations": [],
+  "Udi": "umb://dictionary-item/5f175ae10df74d5aac3a7bd039068824",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DictionaryItemArtifact",
+  "__version": "13.0.3"
+}

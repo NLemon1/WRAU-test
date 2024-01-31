@@ -6,50 +6,7 @@
 }
 
 @section aside {
-    @for (var i = 1; i <= 3; i++)
-    {
-        <div class="cart-item mb-4">
-            <div class="cart-item__image me-4">
-                <img class="align-top" src="https://placehold.it/56" alt="">
-                <span class="cart-item__image-quantity">
-                    <span class="visually-hidden">Quantity: </span> 1
-                </span>
-            </div>
-            <div class="cart-item__content me-4">
-                <a class="fs-sm text-decoration-none fw-bold text-body" href="#">2023-2024 Real Estate Continuing Education</a>
-                <div class="fs-xs" style="color: #696f78;">On Demand</div>
-            </div>
-            <div class="cart-item__price">
-                $000.00
-            </div>
-        </div>
-    }        
-    <table class="w-100">
-        <tr style="border-top: 1px solid #d7d7dc;">
-            <td class="py-3">Subtotal</td>
-            <td class="py-3 text-end">$000.00</td>
-        </tr>
-        <tr>
-            <td class="pb-3">Tax</td>
-            <td class="pb-3 text-end">
-                <span class="fs-xs">Calculated at next step</span>
-            </td>
-        </tr>
-        <tr>
-            <td class="pb-3">Shipping</td>
-            <td class="pb-3 text-end">
-                <span class="fs-xs">Calculated at next step</span>
-            </td>
-        </tr>
-        <tr>
-            <td class="pb-3">Discounts</td>
-            <td class="pb-3 text-end">-$0.00</td>
-        </tr>
-        <tr class="fw-bold" style="border-top: 1px solid #d7d7dc;">
-            <td class="py-3">Total</td>
-            <td class="py-3 text-end">$000.00</td>
-        </tr>
-    </table>
+    @Html.Partial("CheckoutSidebar")
 }
 
 <div class="mb-10">

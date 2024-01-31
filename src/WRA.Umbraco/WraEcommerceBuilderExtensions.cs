@@ -18,6 +18,7 @@ public static class WraEcommerceBuilderExtensions
         {
             // Enable SQLite support
             v.AddSQLite();
+            v.AddStorefrontApi();
             v.Services.AddUnique<IProductAdapter, CustomProductAdapater>();
 
             // v.Services.AddUnique<ProductAdapterBase, CustomProductAdapater>();

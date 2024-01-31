@@ -8,7 +8,7 @@
         {
             <a class="btn btn-light px-0" href="@Model.PreviousStep.Url()">
                 <i class="fa fa-chevron-left me-2" width="16" height="16" aria-hidden="true"></i>
-                Return to @Model.PreviousStep.Name
+                Return to @Model.PreviousStep.ShortStepName
             </a>
         }
         else
@@ -21,6 +21,6 @@
     }
     @if (Model.NextStep != null)
     {
-        <button class="btn btn-primary" type="submit">Continue to @Model.NextStep.Name</button>
+        <button class="btn btn-primary" type="submit">Continue to @Model.NextStep.ShortStepName</button>
     }
 </div>

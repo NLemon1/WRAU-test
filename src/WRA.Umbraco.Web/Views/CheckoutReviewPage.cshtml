@@ -8,6 +8,7 @@
 
 @using (await Html.BeginPaymentFormAsync(Model.Order)) 
 {
+
     <div class="border border-gray-300 rounded">
         <label class="flex items-center py-4 px-4 cursor-pointer hover:bg-gray-100">
             <input id="acceptTerms" type="checkbox" value="1" class="mr-3" />
@@ -29,4 +30,5 @@
             <button id="continue" class=" text-white px-4 py-4 w-full rounded hover:bg-gray-900" type="submit" @*style="display: none;"*@>Continue to @(Model.NextStep.Name)</button>
         </div>
     </div>
+
 }

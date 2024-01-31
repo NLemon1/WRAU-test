@@ -28,7 +28,7 @@
                                     <td>
                                         <div class="cart-item mb-4">
                                             <div class="cart-item__image me-4">
-                                                <img class="align-top" src="https://placehold.it/72" alt="">
+                                                <img class="align-top" src="https://placehold.it/72" width="72" height="72" alt="">
                                             </div>
                                             <div class="cart-item__content me-4">
                                                 <a class="fs-sm text-decoration-none fw-bold text-body" href="@url">@item.OrderLine.Name</a>
@@ -43,22 +43,19 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="quantity-selector">
-                                            <button type="button" aria-label="Decrease quantity">
+                                        <div class="quantity-selector js-quantity-selector">
+                                            <button class="js-quantity-selector-decrement" type="button" aria-label="Decrease quantity">
                                                 <i class="fa fa-minus"></i>
                                             </button>
                                             @Html.Hidden($"orderLines[{item.Index}].Id", item.OrderLine.Id)
-                                            @Html.TextBox($"orderLines[{item.Index}].Quantity", (int)item.OrderLine.Quantity, new { @type = "number", @class = "", @readonly="readonly" })
-                                            <button type="button" aria-label="Increase quantity">
+                                            @Html.TextBox($"orderLines[{item.Index}].Quantity", (int)item.OrderLine.Quantity, new { @type = "number", @class = "js-quantity-selector-input", @min="1", @readonly="readonly" })
+                                            <button class="js-quantity-selector-increment" type="button" aria-label="Increase quantity">
                                                 <i class="fa fa-plus"></i>
                                             </button>
                                             <a class="ms-3 text-decoration-none fs-xs" style="color: #696f78;" href="@Url.SurfaceAction("RemoveFromCart",  "CartSurface", new { OrderLineId = item.OrderLine.Id })">
                                                 Remove
                                             </a>
                                         </div>
-                                        <button class="align-middle font-bold text-xl border-4 border-gray-900 px-6 py-3 hover:bg-teal-400 hover:border-teal-400 hover:text-white" title="Refresh Cart">
-                                            <i class="fa fa-refresh"></i>
-                                        </button>
                                     </td>
                                     <td class="fw-bold">
                                         @item.OrderLine.TotalPrice.WithoutAdjustments.Formatted()
@@ -67,6 +64,9 @@
                             }
                         </tbody>
                     </table>
+                    <button type="submit" title="Refresh Cart">
+                        <i class="fa fa-refresh"></i>
+                    </button>
                 </div>
                 <div class="col-12 col-lg-4">
                     <div class="mt-5 p-4" style="border: 1px solid #d7d7dc; border-radius: 0.25rem;">

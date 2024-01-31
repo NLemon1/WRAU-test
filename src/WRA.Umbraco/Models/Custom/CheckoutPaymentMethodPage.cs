@@ -6,7 +6,7 @@ namespace WRA.Umbraco.Models
 {
     public partial class CheckoutPaymentMethodPage
     {
-        public CountryReadOnly PaymentCountry => Order.PaymentInfo.CountryId.HasValue
+        public CountryReadOnly? PaymentCountry => Order.PaymentInfo.CountryId.HasValue
             ? UmbracoCommerceApi.Instance.GetCountry(Order.PaymentInfo.CountryId.Value)
             : null;
 
