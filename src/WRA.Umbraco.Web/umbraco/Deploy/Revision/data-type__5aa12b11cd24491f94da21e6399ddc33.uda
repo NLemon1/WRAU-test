@@ -1157,6 +1157,19 @@
         "inlineEditing": false,
         "forceHideContentEditorInOverlay": false,
         "groupKey": "61e5b4ab-de54-46b2-9862-ccd8301a2b8e"
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": true,
+        "allowInAreas": true,
+        "areas": [],
+        "contentElementTypeKey": "b6d70662-ffa7-438a-83b7-3a648ba8544b",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false
       }
     ],
     "blockGroups": [
@@ -1275,6 +1288,9 @@
     },
     {
       "Udi": "umb://document-type/b65e28c8ab2748dd88ccc6dc27c40f4b"
+    },
+    {
+      "Udi": "umb://document-type/b6d70662ffa7438a83b73a648ba8544b"
     },
     {
       "Udi": "umb://document-type/bf995e2dfadc4379b5a3614b1f9782cc"
