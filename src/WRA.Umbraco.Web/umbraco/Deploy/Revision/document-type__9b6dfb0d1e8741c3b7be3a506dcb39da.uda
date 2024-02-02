@@ -88,6 +88,30 @@
       ]
     },
     {
+      "Key": "23368d90-cce4-4b07-8a53-b2357801836f",
+      "Name": "Access Forms Library",
+      "SortOrder": 4,
+      "Type": 1,
+      "Alias": "accessFormsLibrary",
+      "PropertyTypes": [
+        {
+          "Key": "37be9ee3-d333-46b1-9dcf-131850c9e217",
+          "Alias": "dialogHeading",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Mandatory": true,
+          "Name": "Heading"
+        },
+        {
+          "Key": "5ceafaf3-ad87-40ab-a207-d235030f2fad",
+          "Alias": "dialogContent",
+          "DataType": "umb://data-type/9001e1a4d3d940178577caf42c500db5",
+          "Mandatory": true,
+          "Name": "Content",
+          "SortOrder": 1
+        }
+      ]
+    },
+    {
       "Key": "2af96e1a-296f-4160-b6ef-d11ee2c66370",
       "Name": "Nav Menu 1",
       "Alias": "header/navMenu1",
@@ -677,6 +701,10 @@
     },
     {
       "Udi": "umb://data-type/2e6d3631066e44b8aec496f09099b2b5",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/9001e1a4d3d940178577caf42c500db5",
       "Ordering": true
     },
     {

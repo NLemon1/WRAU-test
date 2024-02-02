@@ -2,6 +2,7 @@
 @using Umbraco.Cms.Core.Models.Blocks
 
 @{
+    var settings = Umbraco.ContentAtRoot().FirstOrDefault(x => x.ContentType.Alias == "siteSettings");
     var sections = Model.Value<IEnumerable<BlockGridItem>>("sections");
 }
 
@@ -25,3 +26,40 @@
 }
 
 @await Html.PartialAsync("blockgrid/default", sections)
+
+@if (Model.Name == "Access Forms Library")
+{
+    <button class="d-none" type="button" data-a11y-dialog-show="forms-library-dialog">
+        Open the dialog
+    </button>
+    <div id="forms-library-dialog" class="js-dialog dialog-container" aria-hidden="true">
+        <div class="dialog-overlay" data-a11y-dialog-hide></div>
+        <div class="dialog-content-wrapper" role="document">
+            <div class="dialog-content-header">
+                <h2 class="h4 mb-0">@settings.Value("dialogHeading")</h2>
+                <button type="button" data-a11y-dialog-hide aria-label="Close dialog">
+                    &times;
+                </button>
+            </div>
+            <div class="dialog-content fs-sm">
+                @Html.Raw(settings.Value("dialogContent"))
+            </div>
+            <div class="dialog-content-footer">
+                <div class="dialog-content-footer__left">
+                    <div class="form-check">
+                        <input id="forms-library-dialog-checkbox" class="form-check-input" type="checkbox">
+                        <label for="forms-library-dialog-checkbox" class="form-check-label">I have read and agree to the above.</label>
+                    </div>
+                </div>
+                <div class="dialog-content-footer__right">
+                    <a class="btn btn-light btn-sm" href="/">
+                        Cancel
+                    </a>
+                    <button class="btn btn-primary btn-sm" type="button" disabled>
+                        Continue
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
