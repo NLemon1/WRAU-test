@@ -12,6 +12,8 @@ public partial class CheckoutStepPage
 
     public virtual OrderReadOnly Order => this.GetCurrentOrder();
 
+    public CheckoutStepPage CurrentStep => CheckoutPage.Steps.Where(x => x.Id == this.Id).FirstOrDefault();
+
     public CheckoutStepPage PreviousStep => CheckoutPage.Steps.TakeWhile(x => !x.Id.Equals(this.Id)).LastOrDefault();
 
     public CheckoutStepPage NextStep => CheckoutPage.Steps.SkipWhile(x => !x.Id.Equals(this.Id)).Skip(1).FirstOrDefault();

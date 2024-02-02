@@ -1,25 +1,26 @@
 @using WRA.Umbraco.Models;
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<CheckoutStepPage>
+@{
+    var steps = Model.CheckoutPage.Steps;
+}
+
 
 <nav class="mb-7" aria-label="breadcrumbs">
     <ul class="list-unstyled mb-0 breadcrumbs">
-        <li>
-            <a href="/cart/">Cart</a>
-        </li>
-        <li>
-            <a href="#">Account</a>
-        </li>
-        <li>
-            <strong>Information</strong>
-        </li>
-        <li>
-            <span>Shipping</span>
-        </li>
-        <li>
-            <span>Payment</span>
-        </li>
-        <li>
-            <span>Review</span>
-        </li>
+        @foreach( var step in steps)
+        {
+            if(step.Id == Model.CurrentStep.Id)
+            {
+                <li>
+                    <strong>@step.ShortStepName</strong>
+                </li>
+            }
+            else
+            {
+                <li>
+                    <a href="@step.Url()">@step.ShortStepName</a>
+                </li>
+            }
+        }
     </ul>
 </nav>

@@ -12,6 +12,7 @@ using Umbraco.Commerce.Core;
 using Umbraco.Commerce.Core.Api;
 using WRA.Umbraco.Dtos;
 using Umbraco.Commerce.Extensions;
+using Umbraco.Cms.Core.Events;
 //using GlobalPayments.Api.Services;
 //using GlobalPayments.Api;
 
@@ -94,40 +95,30 @@ public class CheckoutSurfaceController : SurfaceController
 
     public IActionResult UpdateOrderInformation(UpdateOrderInformationDto model)
     {
+        bool shippingSameAsBilling = model.ShippingSameAsBilling;
         try
         {
             _commerceApi.Uow.Execute(uow =>
             {
                 var store = CurrentPage.GetStore();
                 var order = _commerceApi.GetOrCreateCurrentOrder(store.Id)
-                .AsWritable(uow)
-                .SetProperties(new Dictionary<string, string>
+                .AsWritable(uow);
+
+                if (model.ShippingAddress != null)
                 {
-                        // { Constants.Properties.Customer.EmailPropertyAlias, model.Email },
-                        // { "marketingOptIn", model.MarketingOptIn ? "1" : "0" },
+                    // set shipping info
+                    order.SetProperties(CreateShippingInfo(model.ShippingAddress));
+                }
 
-                        // { Constants.Properties.Customer.FirstNamePropertyAlias, model.BillingAddress.FirstName },
-                        // { Constants.Properties.Customer.LastNamePropertyAlias, model.BillingAddress.LastName },
-                        { "billingAddressLine1", model.BillingAddress.Line1 },
-                        // { "billingAddressLine2", model.BillingAddress.Line2 },
-                        // { "billingCity", model.BillingAddress.City },
-                        // { "billingZipCode", model.BillingAddress.ZipCode },
-                        // { "billingTelephone", model.BillingAddress.Telephone },
+                if (shippingSameAsBilling)
+                {
+                    // set billing info
+                    order.SetProperties(CreateBillingInfo(model.BillingAddress));
+                }
 
-                        // { "shippingSameAsBilling", model.ShippingSameAsBilling ? "1" : "0" },
-                        // { "shippingFirstName", model.ShippingSameAsBilling ? model.BillingAddress.FirstName : model.ShippingAddress.FirstName },
-                        // { "shippingLastName", model.ShippingSameAsBilling ? model.BillingAddress.LastName : model.ShippingAddress.LastName },
-                        // { "shippingAddressLine1", model.ShippingSameAsBilling ? model.BillingAddress.Line1 : model.ShippingAddress.Line1 },
-                        // { "shippingAddressLine2", model.ShippingSameAsBilling ? model.BillingAddress.Line2 : model.ShippingAddress.Line2 },
-                        // { "shippingCity", model.ShippingSameAsBilling ? model.BillingAddress.City : model.ShippingAddress.City },
-                        // { "shippingZipCode", model.ShippingSameAsBilling ? model.BillingAddress.ZipCode : model.ShippingAddress.ZipCode },
-                        // { "shippingTelephone", model.ShippingSameAsBilling ? model.BillingAddress.Telephone : model.ShippingAddress.Telephone },
-
-                        // { "comments", model.Comments }
-                });
                 if (model?.BillingAddress?.Country != Guid.Empty)
                 {
-                    // order.SetPaymentCountryRegion(model.BillingAddress.Country, null);
+                    order.SetPaymentCountryRegion(model.ShippingAddress.Country, null);
                 }
                 // order.SetShippingCountryRegion(model.ShippingSameAsBilling ? model.BillingAddress.Country : model.ShippingAddress.Country, null);
 
@@ -147,6 +138,45 @@ public class CheckoutSurfaceController : SurfaceController
             return RedirectToUmbracoPage(model.NextStep.Value);
 
         return RedirectToCurrentUmbracoPage();
+    }
+
+    private Dictionary<string, string> CreateShippingInfo(OrderAddressDto address)
+    {
+        return new Dictionary<string, string>
+            {
+                    // { Constants.Properties.Customer.EmailPropertyAlias, model.Email },
+                    // { "marketingOptIn", model.MarketingOptIn ? "1" : "0" },
+
+                    { Constants.Properties.Customer.FirstNamePropertyAlias, address.FirstName },
+                    { Constants.Properties.Customer.LastNamePropertyAlias, address.LastName },
+                    { "shippingAddressLine1", address.Line1 },
+                    { "shippingAddressLine2", address.Line2 },
+                    { "shippingCity", address.City },
+                    { "shippingState", address.State },
+                    { "shippingZipCode", address.ZipCode },
+                    { "shippingFirstName", address.FirstName },
+                    { "shippingLastName", address.LastName },
+                    //{ "billingTelephone", model.BillingAddress.Telephone },
+            };
+
+    }
+    private Dictionary<string, string> CreateBillingInfo(OrderAddressDto address)
+    {
+        return new Dictionary<string, string>
+            {
+                    // { Constants.Properties.Customer.EmailPropertyAlias, model.Email },
+                    // { "marketingOptIn", model.MarketingOptIn ? "1" : "0" },
+
+                    { "billingAddressLine1", address.Line1 },
+                    { "billingAddressLine2", address.Line2 },
+                    { "billingCity", address.City },
+                    { "billingState", address.State },
+                    { "billingZipCode", address.ZipCode },
+                    { "billingFirstName", address.FirstName },
+                    { "billingLastName", address.LastName },
+                    //{ "billingTelephone", model.BillingAddress.Telephone },
+            };
+
     }
 
     public IActionResult UpdateOrderShippingMethod(UpdateOrderShippingMethodDto model)

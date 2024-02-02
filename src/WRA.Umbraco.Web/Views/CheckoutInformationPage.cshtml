@@ -9,10 +9,13 @@
     @Html.Partial("CheckoutSidebar")
 }
 
-<div class="mb-10">
-    <h2 class="h4" style="text-transform: none;">Account Information</h2>
-    <a href="mailto:email@email.com">email@email.com</a>
-</div>
+@if(Model.Order.CustomerInfo.Email != null)
+{
+    <div class="mb-10">
+        <h2 class="h4" style="text-transform: none;">Account Information</h2>
+        <a href="">@Model.Order.CustomerInfo.Email</a>
+    </div>
+}
 
 <h2 class="h4" style="text-transform: none;">Shipping Address</h2>
 @using (Html.BeginUmbracoForm("UpdateOrderInformation", "CheckoutSurface"))
@@ -22,46 +25,46 @@
     <div class="row g-2">
         <div class="col-12 col-md-6">
             <label for="customer-information-fname" class="visually-hidden">First name</label>
-            <input id="customer-information-fname" class="form-control" type="text" required name="billingAddress.Firstname" value="@(Model.Order.CustomerInfo.FirstName)" placeholder="First name" />
+            <input id="customer-information-fname" class="form-control" type="text" required name="shippingAddress.Firstname" value="@(Model.Order.CustomerInfo.FirstName)" placeholder="First name" />
         </div>
         <div class="col-12 col-md-6">
             <label for="customer-information-lname" class="visually-hidden">Last name</label>
-            <input id="customer-information-lname" class="form-control" type="text" required name="billingAddress.Lastname" value="@(Model.Order.CustomerInfo.LastName)" placeholder="Last name" />
+            <input id="customer-information-lname" class="form-control" type="text" required name="shippingAddress.Lastname" value="@(Model.Order.CustomerInfo.LastName)" placeholder="Last name" />
         </div>
         <div class="col-12">
             <label for="customer-information-company" class="visually-hidden">Company</label>
-            <input id="customer-information-company" class="form-control" type="text" placeholder="Company (optional)" />
+            <input id="customer-information-company" class="form-control" type="text" name="shippingAddress.Company" placeholder="Company (optional)" />
         </div>
         <div class="col-12">
             <label for="customer-information-address-1" class="visually-hidden">Address Line 1</label>
-            <input id="customer-information-address-1" class="form-control" type="text" required name="billingAddress.Line1" value="@(Model.Order.Properties["billingAddressLine1"])" placeholder="Address Line 1" />
+            <input id="customer-information-address-1" class="form-control" type="text" required name="shippingAddress.Line1" value="@(Model.Order.Properties["shippingAddressLine1"])" placeholder="Address Line 1" />
         </div>
         <div class="col-12">
             <label for="customer-information-address-line-2" class="visually-hidden">Address Line 2</label>
-            <input id="customer-information-address-line-2" class="form-control" type="text" name="billingAddress.Line2" value="@(Model.Order.Properties["billingAddressLine2"])" placeholder="Address Line 2" />
+            <input id="customer-information-address-line-2" class="form-control" type="text" name="shippingAddress.Line2" value="@(Model.Order.Properties["shippingAddressLine2"])" placeholder="Address Line 2" />
         </div>
         <div class="col-12 col-md-4">
             <label for="customer-information-city" class="visually-hidden">City</label>
-            <input id="customer-information-city" class="form-control" type="text" required name="billingAddress.City" value="@(Model.Order.Properties["billingCity"])" placeholder="City" />
+            <input id="customer-information-city" class="form-control" type="text" required name="shippingAddress.City" value="@(Model.Order.Properties["billingCity"])" placeholder="City" />
         </div>
         <div class="col-12 col-md-4">
             <label for="customer-information-state" class="visually-hidden">State</label>
-            <select id="customer-information-state" class="form-select" required>
+            <select name="shippingAddress.State" id="customer-information-state" class="form-select" required>
                 <option value="">State</option>
                 <option value="WI">Wisconsin</option> @* temp *@
             </select>
         </div>
         <div class="col-12 col-md-4">
             <label for="customer-information-zip" class="visually-hidden">Zipcode</label>
-            <input id="customer-information-zip" class="form-control" type="text" required name="billingAddress.ZipCode" value="@(Model.Order.Properties["shippingZipCode"])" placeholder="Zipcode" />
+            <input id="customer-information-zip" class="form-control" type="text" required name="shippingAddress.ZipCode" value="@(Model.Order.Properties["shippingZipCode"])" placeholder="Zipcode" />
         </div>
         <div class="col-12">
             <label for="customer-information-address-county" class="visually-hidden">County (WI only)</label>
-            <input id="customer-information-address-county" class="form-control" type="text" name="billingAddress.County" value="@(Model.Order.Properties["shippingCounty"])" placeholder="County (WI only)" />
+            <input id="customer-information-address-county" class="form-control" type="text" name="shippingAddress.County" value="@(Model.Order.Properties["shippingCounty"])" placeholder="County (WI only)" />
         </div>
         <div class="col-12">
             <label for="customer-information-country" class="visually-hidden">Country</label>
-            <select id="customer-information-country" class="form-select" required name="billingAddress.Country">
+            <select id="customer-information-country" class="form-select" required name="shippingAddress.Country">
                 <option value="">Country</option>
                 @foreach (var country in Model.Countries)
                 {

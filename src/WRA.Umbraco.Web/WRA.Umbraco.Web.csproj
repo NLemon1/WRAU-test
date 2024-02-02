@@ -5,45 +5,17 @@
     <Nullable>enable</Nullable>
     <Configurations>Debug;Release;Local</Configurations>
   </PropertyGroup>
-  <ItemGroup>
-    <Content Remove="Views\MagazineCollection.cshtml" />
-    <Content Remove="Views\MultimediaPlaylist.cshtml" />
-    <Content Remove="Views\Partials\blockgrid\areaBlank.cshtml" />
-    <Content Remove="Views\Partials\blockgrid\areaOLD.cshtml" />
-    <Content Remove="Views\Partials\blockgrid\areasBlank.cshtml" />
-    <Content Remove="Views\Partials\blockgrid\areasOLD.cshtml" />
-    <Content Remove="Views\Partials\blockgrid\Components\gatedContent.cshtml" />
-    <Content Remove="Views\Partials\blockgrid\Components\umbBlockGridDemoHeadlineBlock.cshtml" />
-    <Content Remove="Views\Partials\blockgrid\Components\umbBlockGridDemoImageBlock.cshtml" />
-    <Content Remove="Views\Partials\blockgrid\Components\umbBlockGridDemoRichTextBlock.cshtml" />
-    <Content Remove="Views\Partials\blockgrid\defaultOLD.cshtml" />
-    <Content Remove="Views\Partials\blockgrid\itemsOLD.cshtml" />
-    <Content Remove="Views\Partials\RelatedArticles.cshtml" />
-  </ItemGroup>
+ 
   <ItemGroup>
     <None Remove="VS.vs.zip" />
   </ItemGroup>
-
+  
   <ItemGroup>
-    <None Include="App_Plugins\CustomBlockView\button.controller.js" />
-    <None Include="App_Plugins\CustomBlockView\buttons.controller.js" />
-    <None Include="App_Plugins\CustomBlockView\genericSection.controller.js" />
-    <None Include="App_Plugins\CustomBlockView\homeHero.controller.js" />
-    <None Include="App_Plugins\CustomBlockView\twoColumnLayout.controller.js" />
-    <None Include="App_Plugins\CustomBlockView\richText.controller.js" />
-    <None Include="App_Plugins\CustomBlockView\headlineBlock.controller.js" />
-    <None Include="App_Plugins\CustomBlockView\shared.js" />
-    <None Include="App_Plugins\CustomBlockView\package.manifest" />
-    <None Include="App_Plugins\CustomBlockView\featureBreaker.controller.js" />
-    <None Include="App_Plugins\UmbracoId\BackOffice\assets\images\background-login.svg" />
-    <None Include="App_Plugins\UmbracoId\BackOffice\assets\images\logo-horizontal.svg" />
-    <None Include="App_Plugins\UmbracoId\BackOffice\customlogin.controller.js" />
-    <None Include="App_Plugins\UmbracoId\BackOffice\umbidlogin.component.js" />
-    <None Include="App_Plugins\UmbracoId\package.manifest" />
+    <Content Include="App_Plugins\CustomBlockView\*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
-	<ItemGroup>
-		<Content Include="App_Plugins\**" CopyToOutputDirectory="Always" />
-	</ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="Umbraco.Cloud.Cms.PublicAccess" Version="13.0.0" />
     <PackageReference Include="Umbraco.Cloud.Identity.Cms" Version="13.0.0" />

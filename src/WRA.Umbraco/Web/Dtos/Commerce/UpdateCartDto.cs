@@ -1,13 +1,14 @@
 
 namespace WRA.Umbraco.Dtos;
 
-public record UpdateCartDto(
-    ORderLineQuantityDto[] OrderLines
-);
-
-
-public record ORderLineQuantityDto()
+public class UpdateCartDto
 {
-    public Guid Id;
-    public decimal Quantity;
+    public OrderLineQuantityDto[] OrderLines { get; set; }
+}
+
+public class OrderLineQuantityDto
+{
+    public Guid Id { get; set; }
+
+    public decimal Quantity { get; set; }
 }

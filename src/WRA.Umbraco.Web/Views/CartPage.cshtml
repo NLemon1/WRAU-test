@@ -1,5 +1,7 @@
 ﻿@using WRA.Umbraco.Models;
 @using Umbraco.Commerce.Extensions;
+@using Umbraco.Commerce.Core.Models;
+
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<CartPage>
 
 @if (Model != null && Model.Order != null && Model.Order.OrderLines.Count > 0)
@@ -58,7 +60,7 @@
                                         </div>
                                     </td>
                                     <td class="fw-bold">
-                                        @item.OrderLine.TotalPrice.WithoutAdjustments.Formatted()
+                                        @item.OrderLine.TotalPrice.WithoutAdjustments.Formatted().WithoutTax
                                     </td>
                                 </tr>
                             }
@@ -73,23 +75,25 @@
                         <table class="w-100">
                             <tr>
                                 <td class="pb-3">Subtotal</td>
-                                <td class="pb-3 text-end">@Model.Order.SubtotalPrice.WithoutAdjustments.Formatted()</td>
+                                <td class="pb-3 text-end">@Model.Order.SubtotalPrice.WithoutAdjustments.Formatted().WithoutTax</td>
                             </tr>
                             <tr>
                                 <td class="pb-3">Estimated Tax</td>
-                                <td class="pb-3 text-end">to do</td>
+                                <td class="pb-3 text-end">@Model.Order.TotalPrice.Value.Formatted().Tax</td>
                             </tr>
-                            <tr>
-                                <td class="pb-3">Estimated Shipping</td>
-                                <td class="pb-3 text-end">to do</td>
-                            </tr>
-                            <tr>
-                                <td class="pb-3">Discounts</td>
-                                <td class="pb-3 text-end">to do</td>
-                            </tr>
+                            @{
+                                var totalDiscount = Model.Order.GetTotalPriceAdjustmentByType<DiscountAdjustment>();
+                                if (totalDiscount != 0)
+                                {
+                                    <tr>
+                                        <td class="pb-3">Discounts</td>
+                                        <td class="pb-3 text-end">@(totalDiscount.Formatted().WithoutTax)</td>
+                                    </tr>
+                                }
+                            }
                             <tr class="fw-bold" style="border-top: 1px solid #d7d7dc;">
                                 <td class="py-3">Total</td>
-                                <td class="py-3 text-end">to do</td>
+                                <td class="py-3 text-end">@Model.Order.TotalPrice.Value.Formatted()</td>
                             </tr>
                         </table>
                         <p class="fs-xs" style="color: #696f78;">*Disclaimers and fine print here about purchases, returns, exchanges, and cancellations.</p>

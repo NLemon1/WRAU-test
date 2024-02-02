@@ -1,4 +1,7 @@
 @using WRA.Umbraco.Models;
+@using Umbraco.Commerce.Core.Models;
+@using Umbraco.Commerce.Extensions;
+
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<CheckoutStepPage>
 
 @foreach (var item in Model.Order.OrderLines.Select((ol, i) => new { OrderLine = ol, Index = i }))
@@ -24,33 +27,51 @@
             }
         </div>
         <div class="cart-item__price">
-            $000.00
+            @item.OrderLine.TotalPrice.WithoutAdjustments.Formatted().WithoutTax
         </div>
     </div>
 }        
 <table class="w-100">
     <tr style="border-top: 1px solid #d7d7dc;">
         <td class="py-3">Subtotal</td>
-        <td class="py-3 text-end">$000.00</td>
+        <td class="py-3 text-end">@Model.Order.SubtotalPrice.WithoutAdjustments.Formatted().WithoutTax</td>
     </tr>
     <tr>
         <td class="pb-3">Tax</td>
         <td class="pb-3 text-end">
-            <span class="fs-xs">Calculated at next step</span>
+            <span class="fs-xs">@Model.Order.TotalPrice.Value.Formatted().Tax</span>
         </td>
     </tr>
-    <tr>
-        <td class="pb-3">Shipping</td>
-        <td class="pb-3 text-end">
-            <span class="fs-xs">Calculated at next step</span>
-        </td>
-    </tr>
-    <tr>
-        <td class="pb-3">Discounts</td>
-        <td class="pb-3 text-end">-$0.00</td>
-    </tr>
+    @if(@Model.ShippingMethod != null)
+    {
+        var shippingAmount = @Model.Order.ShippingInfo.TotalPrice.Value;
+        <tr>
+            <td class="pb-3">Shipping</td>
+            <td class="pb-3 text-end">
+                <span class="fs-xs">@Html.Raw(Convert.ToDouble(shippingAmount.WithTax) > 0.00 ? shippingAmount.Formatted() : "FREE")</span>
+            </td>
+        </tr>
+    }
+
+    @{
+        var totalDiscount = Model.Order.GetTotalPriceAdjustmentByType<DiscountAdjustment>();
+        if (totalDiscount != 0)
+        {
+            <div class="flex w-full justify-between items-center mt-2 ">
+                <div class="">Discounts</div>
+                <div class="font-medium">@(totalDiscount.Formatted().WithoutTax)</div>
+            </div>
+        }
+    }
+    @foreach (var giftCardAdjustment in Model.Order.TransactionAmount.Adjustments.OfType<GiftCardAdjustment>())
+    {
+        <div class="flex w-full justify-between items-center mt-2">
+            <div class="">Gift Card (@(giftCardAdjustment.GiftCardCode))</div>
+            <div class="font-medium">@(giftCardAdjustment.Amount.Formatted())</div>
+        </div>
+    }
     <tr class="fw-bold" style="border-top: 1px solid #d7d7dc;">
         <td class="py-3">Total</td>
-        <td class="py-3 text-end">$000.00</td>
+        <td class="py-3 text-end">@Model.Order.TotalPrice.Value.Formatted()</td>
     </tr>
 </table>
