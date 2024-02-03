@@ -456,7 +456,7 @@ $RECYCLE.BIN/
 ##
 ## Umbraco CMS
 ##
-
+appsettings.Local.json
 # JSON schema files for appsettings.json
 appsettings-schema.json
 appsettings-schema.*.json
@@ -479,3 +479,4 @@ appsettings-schema.*.json
 /wwwroot/media/
 
 /Smidge
+

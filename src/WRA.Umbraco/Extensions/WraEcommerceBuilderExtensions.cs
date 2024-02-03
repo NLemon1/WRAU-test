@@ -7,6 +7,7 @@ using Umbraco.Cms.Core.Notifications;
 using Umbraco.Commerce.Core.Adapters;
 using Umbraco.Commerce.Cms.Adapters;
 using WRA.Umbraco.Services;
+using WRA.Umbraco.Events;
 
 namespace WRA.Umbraco;
 
@@ -20,9 +21,6 @@ public static class WraEcommerceBuilderExtensions
             v.AddSQLite();
             v.AddStorefrontApi();
             v.Services.AddUnique<IProductAdapter, CustomProductAdapater>();
-
-            // v.Services.AddUnique<ProductAdapterBase, CustomProductAdapater>();
-            // v.Services.AddUnique<UmbracoProductSnapshot, CustomProductSnapshot>();
 
 
             // Replace the umbraco product name extractor with one that supports child variants
@@ -49,7 +47,7 @@ public static class WraEcommerceBuilderExtensions
 
         });
 
-        // umbracoBuilder.AddNotificationHandler<UmbracoApplicationStartingNotification, TransformExamineValues>();
+        umbracoBuilder.AddNotificationHandler<UmbracoApplicationStartingNotification, TransformExamineValues>();
 
         return umbracoBuilder;
     }

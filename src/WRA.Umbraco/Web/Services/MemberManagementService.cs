@@ -1,4 +1,5 @@
 
+using K4os.Compression.LZ4.Internal;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore.Metadata;
@@ -8,7 +9,9 @@ using Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Core.Scoping;
 using Umbraco.Cms.Core.Security;
 using Umbraco.Cms.Core.Services;
+using Umbraco.Cms.Web.Common.Security;
 using Umbraco.Cms.Web.Website.Models;
+using WRA.Umbraco.Dtos;
 
 namespace WRA.Umbraco.Services;
 
@@ -67,6 +70,26 @@ public class MemberManagementService
 
         return (identityResult, identityUser);
     }
+
+    public async Task CreateMember(MemberDto member)
+    {
+        var newMember = _memberService.CreateMember(
+            member.Email,
+            member.Email,
+            $"{member.FirstName} {member.LastName}",
+            "Member");
+
+        // updates all the fields on the user
+        newMember.UpdateMemberProperties(member);
+
+    }
+
+    private async Task AssignMemberToMemberGroup(IMember member, MemberDto mdto)
+    {
+        _memberService.AssignRole(member.Id, "");
+    }
+
+
 
     public async Task UpdateMemberInfo(RegisterModel model, string memberGroup = "")
     {

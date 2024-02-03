@@ -4,6 +4,7 @@ using Umbraco.Commerce.Core.Models;
 using WRA.Umbraco.Models;
 using Umbraco.Commerce.Extensions;
 using WRA.Umbraco.Dtos;
+using Umbraco.Cms.Core.Models;
 
 namespace WRA.Umbraco
 {
@@ -92,6 +93,47 @@ namespace WRA.Umbraco
                 p.EndDate.ToString(),
                 p.Url()
             );
+        }
+
+        /// <summary>
+        /// Member Specific Extensions
+        /// </summary>
+        /// <param name="member"></param>
+        /// <param name="mdto"></param>
+        /// <returns></returns>
+        public static IMember? UpdateMemberProperties(this IMember member, MemberDto mdto)
+        {
+            member.SetValue("brokerFullName", mdto.BrokerFullName);
+            member.SetValue("brokerEmail", mdto.BrokerEmail);
+            member.SetValue("address1", mdto.Address1);
+            member.SetValue("address2", mdto.Address2);
+            member.SetValue("address3", mdto.Address3);
+            member.SetValue("city", mdto.City);
+            member.SetValue("cellPhone", mdto.CellPhone);
+            member.SetValue("canUseHotline", mdto.CanUseHotline);
+            member.SetValue("companyLogoUrl", mdto.CompanyLogoUrl);
+            member.SetValue("companyId", mdto.CompanyId);
+            member.SetValue("companyName", mdto.CompanyName);
+            //member.SetValue("companySubscriptions", mdto.CompanySubscriptions);
+            member.SetValue("fax", mdto.Fax);
+            member.SetValue("firsName", mdto.FirstName);
+            member.SetValue("LastName", mdto.LastName);
+            member.SetValue("Gender", mdto.Gender);
+            member.SetValue("homePhone", mdto.HomePhone);
+            member.SetValue("externalId", mdto.Id);
+            member.SetValue("imageUrl", mdto.ImageUrl);
+            member.SetValue("joinDate", mdto.JoinDate);
+            member.SetValue("mandatoryHotlineLetter", mdto.MandatoryHotlineLetter);
+            member.SetValue("nrdsId", mdto.NrdsId);
+            member.SetValue("paidThruDate", mdto.PaidThruDate);
+            member.SetValue("prefix", mdto.Prefix);
+            member.SetValue("suffix", mdto.Suffix);
+            member.SetValue("stateProvince", mdto.StateProvince);
+            member.SetValue("zip", mdto.Zip);
+
+
+
+            return member;
         }
 
         /// <summary>

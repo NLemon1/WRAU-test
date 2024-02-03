@@ -66,12 +66,59 @@ namespace WRA.Umbraco.Models
 		public virtual string Address2 => this.Value<string>(_publishedValueFallback, "address2");
 
 		///<summary>
+		/// Address 3
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.0+802e5a8")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("address3")]
+		public virtual string Address3 => this.Value<string>(_publishedValueFallback, "address3");
+
+		///<summary>
+		/// Broker Email
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.0+802e5a8")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("brokerEmail")]
+		public virtual string BrokerEmail => this.Value<string>(_publishedValueFallback, "brokerEmail");
+
+		///<summary>
+		/// Broker Full Name
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.0+802e5a8")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("brokerFullName")]
+		public virtual string BrokerFullName => this.Value<string>(_publishedValueFallback, "brokerFullName");
+
+		///<summary>
+		/// Can Use Hotline
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.0+802e5a8")]
+		[ImplementPropertyType("canUseHotline")]
+		public virtual bool CanUseHotline => this.Value<bool>(_publishedValueFallback, "canUseHotline");
+
+		///<summary>
+		/// Cell Phone
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.0+802e5a8")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("cellPhone")]
+		public virtual string CellPhone => this.Value<string>(_publishedValueFallback, "cellPhone");
+
+		///<summary>
 		/// City
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.0+802e5a8")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("city")]
 		public virtual string City => this.Value<string>(_publishedValueFallback, "city");
+
+		///<summary>
+		/// Comany Logo Url
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.0+802e5a8")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("comanyLogoUrl")]
+		public virtual string ComanyLogoUrl => this.Value<string>(_publishedValueFallback, "comanyLogoUrl");
 
 		///<summary>
 		/// Company Name
@@ -98,12 +145,81 @@ namespace WRA.Umbraco.Models
 		public virtual string Fax => this.Value<string>(_publishedValueFallback, "fax");
 
 		///<summary>
-		/// Phone
+		/// First Name
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.0+802e5a8")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("phone")]
-		public virtual string Phone => this.Value<string>(_publishedValueFallback, "phone");
+		[ImplementPropertyType("firstName")]
+		public virtual string FirstName => this.Value<string>(_publishedValueFallback, "firstName");
+
+		///<summary>
+		/// Full Name
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.0+802e5a8")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("fullName")]
+		public virtual string FullName => this.Value<string>(_publishedValueFallback, "fullName");
+
+		///<summary>
+		/// Gender
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.0+802e5a8")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("gender")]
+		public virtual string Gender => this.Value<string>(_publishedValueFallback, "gender");
+
+		///<summary>
+		/// Home Phone
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.0+802e5a8")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("homePhone")]
+		public virtual string HomePhone => this.Value<string>(_publishedValueFallback, "homePhone");
+
+		///<summary>
+		/// JoinDate
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.0+802e5a8")]
+		[ImplementPropertyType("joinDate")]
+		public virtual global::System.DateTime JoinDate => this.Value<global::System.DateTime>(_publishedValueFallback, "joinDate");
+
+		///<summary>
+		/// Mandatory Hotline Letter
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.0+802e5a8")]
+		[ImplementPropertyType("mandatoryHotlineLetter")]
+		public virtual bool MandatoryHotlineLetter => this.Value<bool>(_publishedValueFallback, "mandatoryHotlineLetter");
+
+		///<summary>
+		/// NrdsId
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.0+802e5a8")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("nrdsId")]
+		public virtual string NrdsId => this.Value<string>(_publishedValueFallback, "nrdsId");
+
+		///<summary>
+		/// Paid Thru Date
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.0+802e5a8")]
+		[ImplementPropertyType("paidThruDate")]
+		public virtual global::System.DateTime PaidThruDate => this.Value<global::System.DateTime>(_publishedValueFallback, "paidThruDate");
+
+		///<summary>
+		/// Prefix
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.0+802e5a8")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("prefix")]
+		public virtual string Prefix => this.Value<string>(_publishedValueFallback, "prefix");
+
+		///<summary>
+		/// State Province
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.0+802e5a8")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("stateProvince")]
+		public virtual string StateProvince => this.Value<string>(_publishedValueFallback, "stateProvince");
 
 		///<summary>
 		/// Comments
@@ -114,11 +230,19 @@ namespace WRA.Umbraco.Models
 		public virtual string UmbracoMemberComments => this.Value<string>(_publishedValueFallback, "umbracoMemberComments");
 
 		///<summary>
-		/// Zip Code
+		/// Work Phone
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.0+802e5a8")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("zipCode")]
-		public virtual string ZipCode => this.Value<string>(_publishedValueFallback, "zipCode");
+		[ImplementPropertyType("workPhone")]
+		public virtual string WorkPhone => this.Value<string>(_publishedValueFallback, "workPhone");
+
+		///<summary>
+		/// Zip
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.0+802e5a8")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("zip")]
+		public virtual string Zip => this.Value<string>(_publishedValueFallback, "zip");
 	}
 }

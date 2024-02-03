@@ -66,6 +66,22 @@ namespace WRA.Umbraco.Models
 		public virtual string BodyOpenScripts => this.Value<string>(_publishedValueFallback, "bodyOpenScripts");
 
 		///<summary>
+		/// Content
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.0+802e5a8")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("dialogContent")]
+		public virtual global::Umbraco.Cms.Core.Strings.IHtmlEncodedString DialogContent => this.Value<global::Umbraco.Cms.Core.Strings.IHtmlEncodedString>(_publishedValueFallback, "dialogContent");
+
+		///<summary>
+		/// Heading
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.0+802e5a8")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("dialogHeading")]
+		public virtual string DialogHeading => this.Value<string>(_publishedValueFallback, "dialogHeading");
+
+		///<summary>
 		/// Enable Alert Banner
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.0+802e5a8")]
