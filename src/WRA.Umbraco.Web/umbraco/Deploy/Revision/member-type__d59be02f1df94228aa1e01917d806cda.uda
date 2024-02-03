@@ -44,6 +44,13 @@
           "SortOrder": 9
         },
         {
+          "Key": "2c1578a3-b7e9-4cbd-9ccd-00e82ee5d313",
+          "Alias": "companyLogoUrl",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Company Logo Url",
+          "SortOrder": 25
+        },
+        {
           "Key": "36b3b8fa-3205-4e83-a76c-bb35a3b00a45",
           "Alias": "firstName",
           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
@@ -63,6 +70,13 @@
           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
           "Name": "Address 3",
           "SortOrder": 4
+        },
+        {
+          "Key": "55d63fa2-3f2f-4dfc-9df5-67f9cdd66613",
+          "Alias": "companyId",
+          "DataType": "umb://data-type/f0bc4bfbb49940d6ba86058885a5178c",
+          "Name": "Company Id",
+          "SortOrder": 26
         },
         {
           "Key": "664928a2-8bee-44f7-9032-e5349bb2c86b",
@@ -107,6 +121,13 @@
           "SortOrder": 15
         },
         {
+          "Key": "710a63c5-fab6-4c7e-8b29-12cc9a80310e",
+          "Alias": "lastName",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Last Name",
+          "SortOrder": 27
+        },
+        {
           "Key": "73da9f52-0919-43a3-820d-ef99f0a92fa0",
           "Alias": "cellPhone",
           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
@@ -133,6 +154,13 @@
           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
           "Name": "State Province",
           "SortOrder": 6
+        },
+        {
+          "Key": "999768ab-2ced-4a54-b137-aaae83ac31cd",
+          "Alias": "imageUrl",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Image Url",
+          "SortOrder": 28
         },
         {
           "Key": "a0355d70-cdf3-4472-8cde-c7617cef3daa",
@@ -182,13 +210,6 @@
           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
           "Name": "Work Phone",
           "SortOrder": 11
-        },
-        {
-          "Key": "eba8e2f4-d59d-4039-ad62-118f318f78c9",
-          "Alias": "comanyLogoUrl",
-          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
-          "Name": "Comany Logo Url",
-          "SortOrder": 16
         },
         {
           "Key": "ef7d56f7-1a7e-4c11-b51a-589069f690fc",

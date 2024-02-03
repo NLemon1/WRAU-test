@@ -10,6 +10,7 @@ using Umbraco.Cms.Core.Scoping;
 using Umbraco.Cms.Core.Security;
 using Umbraco.Cms.Core.Services;
 using Umbraco.Cms.Web.Website.Models;
+using WRA.Umbraco.Dtos;
 using WRA.Umbraco.Services;
 
 namespace WRA.Umbraco.Controllers;
@@ -25,29 +26,26 @@ public class MemberSyncController : ApiController
 
 
     public MemberSyncController(
-        IMemberService memberService,
-        IMemberManager memberManager,
         MemberManagementService memberManagementService,
         ICoreScopeProvider coreScopeProvider
     )
     {
-        _memberService = memberService;
-        _memberManager = memberManager;
         _memberManagementService = memberManagementService;
         _coreScopeProvider = coreScopeProvider;
     }
 
 
     [HttpPost]
-    [Route("CreateMember")]
-    public async Task<IActionResult> CreateMember(RegisterModel model, string memberGroup)
+    [Route("Create")]
+    public async Task<IActionResult> Create(MemberDto newMemberRequest)
     {
-        var (result, member) = await _memberManagementService.AddMember(model, memberGroup);
-        if (result == null || result.Errors.Any())
+
+        var result = _memberManagementService.Create(newMemberRequest);
+        if (result == null)
         {
-            return StatusCode(System.Net.HttpStatusCode.BadRequest);
+            return StatusCode(System.Net.HttpStatusCode.InternalServerError);
         }
-        return Ok(member.Id);
+        return Ok(result.Id);
     }
 
     [HttpPost]

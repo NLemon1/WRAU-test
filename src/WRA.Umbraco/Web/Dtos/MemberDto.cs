@@ -1,41 +1,41 @@
 using Newtonsoft.Json;
 
 namespace WRA.Umbraco.Dtos;
-public class LocalBoard
-{
-    [JsonProperty("chapter")]
-    public string Chapter { get; set; }
+// public class LocalBoard
+// {
+//     [JsonProperty("chapter")]
+//     public string Chapter { get; set; }
 
-    [JsonProperty("id")]
-    public string Id { get; set; }
+//     [JsonProperty("id")]
+//     public string Id { get; set; }
 
-    [JsonProperty("localBoardName")]
-    public string LocalBoardName { get; set; }
+//     [JsonProperty("localBoardName")]
+//     public string LocalBoardName { get; set; }
 
-    [JsonProperty("rosterOptIn")]
-    public bool RosterOptIn { get; set; }
+//     [JsonProperty("rosterOptIn")]
+//     public bool RosterOptIn { get; set; }
 
-    [JsonProperty("rosterOptInDate")]
-    public DateTime RosterOptInDate { get; set; }
-}
+//     [JsonProperty("rosterOptInDate")]
+//     public DateTime RosterOptInDate { get; set; }
+// }
 
-public class MyLocalBoard
-{
-    [JsonProperty("chapter")]
-    public string Chapter { get; set; }
+// public class MyLocalBoard
+// {
+//     [JsonProperty("chapter")]
+//     public string Chapter { get; set; }
 
-    [JsonProperty("id")]
-    public string Id { get; set; }
+//     [JsonProperty("id")]
+//     public string Id { get; set; }
 
-    [JsonProperty("localBoardName")]
-    public string LocalBoardName { get; set; }
+//     [JsonProperty("localBoardName")]
+//     public string LocalBoardName { get; set; }
 
-    [JsonProperty("rosterOptIn")]
-    public bool RosterOptIn { get; set; }
+//     [JsonProperty("rosterOptIn")]
+//     public bool RosterOptIn { get; set; }
 
-    [JsonProperty("rosterOptInDate")]
-    public DateTime RosterOptInDate { get; set; }
-}
+//     [JsonProperty("rosterOptInDate")]
+//     public DateTime RosterOptInDate { get; set; }
+// }
 public class MemberDto
 {
     [JsonProperty("address1")]
@@ -110,8 +110,8 @@ public class MemberDto
     [JsonProperty("lastName")]
     public string LastName { get; set; }
 
-    [JsonProperty("localBoards")]
-    public List<LocalBoard> LocalBoards { get; set; }
+    //[JsonProperty("localBoards")]
+    // public List<LocalBoard> LocalBoards { get; set; }
 
     [JsonProperty("mandatoryHotlineLetter")]
     public bool MandatoryHotlineLetter { get; set; }
@@ -122,8 +122,8 @@ public class MemberDto
     [JsonProperty("minnesotaLicense")]
     public object MinnesotaLicense { get; set; }
 
-    [JsonProperty("myLocalBoard")]
-    public MyLocalBoard MyLocalBoard { get; set; }
+    // [JsonProperty("myLocalBoard")]
+    // public MyLocalBoard MyLocalBoard { get; set; }
 
     [JsonProperty("nrdsId")]
     public string NrdsId { get; set; }

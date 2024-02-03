@@ -9,6 +9,7 @@ using Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Core.Scoping;
 using Umbraco.Cms.Core.Security;
 using Umbraco.Cms.Core.Services;
+using Umbraco.Cms.Infrastructure.Examine;
 using Umbraco.Cms.Web.Common.Security;
 using Umbraco.Cms.Web.Website.Models;
 using WRA.Umbraco.Dtos;
@@ -31,6 +32,37 @@ public class MemberManagementService
         _memberManager = memberManager;
         _coreScopeProvider = coreScopeProvider;
     }
+
+
+    /// <summary>
+    /// CRUD Operations for Webhooks
+    /// </summary>
+    /// <param name="member"></param>
+    public IMember Create(MemberDto member)
+    {
+        var newMember = _memberService.CreateMember(
+            member.Email,
+            member.Email,
+            $"{member.FirstName} {member.LastName}",
+            "Member");
+
+
+        // updates all the fields on the user
+        newMember.UpdateMemberProperties(member);
+
+        _memberService.Save(newMember);
+        _memberService.GetByEmail(member.Email);
+        AssignMemberToMemberGroup(newMember, member);
+        return newMember;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="model"></param>
+    /// <param name="memberGroup"></param>
+    /// <returns></returns>
+    /// <exception cref="InvalidOperationException"></exception>
     public async Task<(IdentityResult, MemberIdentityUser)> AddMember(RegisterModel model, string memberGroup = "Visitor")
     {
         using ICoreScope scope = _coreScopeProvider.CreateCoreScope(autoComplete: true);
@@ -71,19 +103,7 @@ public class MemberManagementService
         return (identityResult, identityUser);
     }
 
-    public async Task CreateMember(MemberDto member)
-    {
-        var newMember = _memberService.CreateMember(
-            member.Email,
-            member.Email,
-            $"{member.FirstName} {member.LastName}",
-            "Member");
 
-        // updates all the fields on the user
-        newMember.UpdateMemberProperties(member);
-        AssignMemberToMemberGroup(newMember, member);
-
-    }
 
     private void AssignMemberToMemberGroup(IMember member, MemberDto mdto)
     {

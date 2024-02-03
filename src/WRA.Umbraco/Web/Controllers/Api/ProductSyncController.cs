@@ -41,6 +41,7 @@ public class ProductSyncController : ApiController
 
     }
 
+
     [HttpPost]
     [Route("SyncProductCategories")]
     public async Task SyncProductCategories()
@@ -93,7 +94,7 @@ public class ProductSyncController : ApiController
     }
 
     [HttpPost]
-    [Route("SyncProducts")]
+    [Route("SyncAllProducts")]
     public async Task SyncAllProducts()
     {
         // Get all products from WRA's ERP

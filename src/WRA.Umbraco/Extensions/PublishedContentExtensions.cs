@@ -116,9 +116,9 @@ namespace WRA.Umbraco
             member.SetValue("companyName", mdto.CompanyName);
             //member.SetValue("companySubscriptions", mdto.CompanySubscriptions);
             member.SetValue("fax", mdto.Fax);
-            member.SetValue("firsName", mdto.FirstName);
-            member.SetValue("LastName", mdto.LastName);
-            member.SetValue("Gender", mdto.Gender);
+            member.SetValue("firstName", mdto.FirstName);
+            member.SetValue("lastName", mdto.LastName);
+            member.SetValue("gender", mdto.Gender);
             member.SetValue("homePhone", mdto.HomePhone);
             member.SetValue("externalId", mdto.Id);
             member.SetValue("imageUrl", mdto.ImageUrl);
