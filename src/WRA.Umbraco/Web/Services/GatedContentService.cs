@@ -47,14 +47,14 @@ namespace WRA.Umbraco.Services
             // If "Visible to all" isn't
             if (member != null && blockHasGatedContent)
             {
-                var userGroups = await _memberManager.GetRolesAsync(member);
+                var memberGroups = await _memberManager.GetRolesAsync(member);
                 var authorizedMemberGroups = block.Content.Value<string[]>(_gatedMemberGroups)?.ToList();
-                if (userGroups.Any() && (authorizedMemberGroups != null && authorizedMemberGroups.Any()))
+                if (memberGroups.Any() && (authorizedMemberGroups != null && authorizedMemberGroups.Any()))
                 {
 
-                    foreach (var userGroup in userGroups)
+                    foreach (var memberGroupName in memberGroups)
                     {
-                        IMemberGroup? memberGroup = _memberGroupService.GetByName(userGroup);
+                        IMemberGroup? memberGroup = _memberGroupService.GetByName(memberGroupName);
                         var memberGroupID = memberGroup?.Id.ToString();
                         if (memberGroupID != null && authorizedMemberGroups.Contains(memberGroupID))
                         {

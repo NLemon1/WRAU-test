@@ -81,12 +81,20 @@ public class MemberManagementService
 
         // updates all the fields on the user
         newMember.UpdateMemberProperties(member);
+        AssignMemberToMemberGroup(newMember, member);
 
     }
 
-    private async Task AssignMemberToMemberGroup(IMember member, MemberDto mdto)
+    private void AssignMemberToMemberGroup(IMember member, MemberDto mdto)
     {
-        _memberService.AssignRole(member.Id, "");
+        var memberGroup = mdto.MemberType switch
+        {
+            "MDR" => "DesignatedRealtor",
+            "ST" => "WRA Member",
+            "A" => "Affiliate",
+            _ => "Visitor"
+        };
+        _memberService.AssignRole(member.Id, memberGroup);
     }
 
 
