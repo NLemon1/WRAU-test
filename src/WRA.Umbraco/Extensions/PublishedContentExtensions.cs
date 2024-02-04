@@ -101,7 +101,7 @@ namespace WRA.Umbraco
         /// <param name="member"></param>
         /// <param name="mdto"></param>
         /// <returns></returns>
-        public static IMember? UpdateMemberProperties(this IMember member, MemberDto mdto)
+        public static IMember? UpdateWRAMemberProperties(this IMember member, MemberDto mdto)
         {
             member.SetValue("brokerFullName", mdto.BrokerFullName);
             member.SetValue("brokerEmail", mdto.BrokerEmail);

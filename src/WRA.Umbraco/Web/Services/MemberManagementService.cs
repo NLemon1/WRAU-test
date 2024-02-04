@@ -43,17 +43,61 @@ public class MemberManagementService
         var newMember = _memberService.CreateMember(
             member.Email,
             member.Email,
-            $"{member.FirstName} {member.LastName}",
+            member.FullName,
             "Member");
 
 
         // updates all the fields on the user
-        newMember.UpdateMemberProperties(member);
-
+        newMember.UpdateWRAMemberProperties(member);
+        // Must save here so an ID is assigned to the new member.
+        // We need the memberId to create a link to member and memberGroups (roles).
         _memberService.Save(newMember);
-        _memberService.GetByEmail(member.Email);
-        AssignMemberToMemberGroup(newMember, member);
+
+        //generate an identity user based off our new member...
+        var identityUser =
+            new MemberIdentityUser(newMember.Id);
+
+        // assign to relvevant memberGroup...
+        AssignMemberToMemberGroup(identityUser, member);
         return newMember;
+    }
+
+    public IMember? Update(MemberDto reqMember)
+    {
+        // Since we assume the user already exists, get the identity user right away.
+        var identityUser =
+           MemberIdentityUser.CreateNew(reqMember.Email, reqMember.Email, "Member", true, reqMember.FullName);
+
+        // take the identity user returned and get generate an Imember instance
+        // Imember updates don't save until the save() function is called. Helpful for avoiding DB locks.
+        IMember? existingMember = _memberService.GetByKey(identityUser.Key);
+        if (existingMember == null) { return null; }
+
+        existingMember.UpdateWRAMemberProperties(reqMember);
+        _memberService.Save(existingMember);
+        return existingMember;
+    }
+
+    private void AssignMemberToMemberGroup(MemberIdentityUser member, MemberDto mdto)
+    {
+
+        // TODO: make membergroups an array for one to many relationship.
+        var memberGroup = mdto.MemberType switch
+        {
+            "MDR" => "DesignatedRealtor",
+            "ST" => "WRA Member",
+            "A" => "Affiliate",
+            _ => "Visitor"
+        };
+        // get current member roles
+        var memberRoles = _memberService.GetAllRoles(member.Id);
+        // if current member role is not part of the incoming update/create, remove them from said role.
+        var unmatchedRoles = memberRoles.Where(mr => memberGroup != mr);
+        if (unmatchedRoles.Any())
+        {
+            _memberManager.RemoveFromRolesAsync(member, unmatchedRoles);
+        }
+        _memberService.AssignRole(member.Id, memberGroup);
     }
 
     /// <summary>
@@ -104,18 +148,6 @@ public class MemberManagementService
     }
 
 
-
-    private void AssignMemberToMemberGroup(IMember member, MemberDto mdto)
-    {
-        var memberGroup = mdto.MemberType switch
-        {
-            "MDR" => "DesignatedRealtor",
-            "ST" => "WRA Member",
-            "A" => "Affiliate",
-            _ => "Visitor"
-        };
-        _memberService.AssignRole(member.Id, memberGroup);
-    }
 
 
 
