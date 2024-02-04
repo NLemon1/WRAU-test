@@ -38,47 +38,63 @@ public class MemberManagementService
     /// CRUD Operations for Webhooks
     /// </summary>
     /// <param name="member"></param>
-    public IMember Create(MemberDto member)
+    public async Task<IMember?> Create(MemberDto member)
     {
+        using ICoreScope scope = _coreScopeProvider.CreateCoreScope(autoComplete: true);
+
+        // spin up an Imember rather than memberIdentity to avoid db locks.
         var newMember = _memberService.CreateMember(
             member.Email,
             member.Email,
             member.FullName,
             "Member");
 
-
         // updates all the fields on the user
         newMember.UpdateWRAMemberProperties(member);
+        // since a new member could potentially not exist in WRA's 
+        newMember.IsApproved = false;
+
         // Must save here so an ID is assigned to the new member.
         // We need the memberId to create a link to member and memberGroups (roles).
         _memberService.Save(newMember);
 
-        //generate an identity user based off our new member...
-        var identityUser =
-            new MemberIdentityUser(newMember.Id);
-
         // assign to relvevant memberGroup...
-        AssignMemberToMemberGroup(identityUser, member);
+        await AssignMemberToMemberGroup(newMember, member);
         return newMember;
     }
 
-    public IMember? Update(MemberDto reqMember)
+    public async Task<IMember?> Update(MemberDto reqMember)
     {
-        // Since we assume the user already exists, get the identity user right away.
-        var identityUser =
-           MemberIdentityUser.CreateNew(reqMember.Email, reqMember.Email, "Member", true, reqMember.FullName);
+        using ICoreScope scope = _coreScopeProvider.CreateCoreScope(autoComplete: true);
 
-        // take the identity user returned and get generate an Imember instance
-        // Imember updates don't save until the save() function is called. Helpful for avoiding DB locks.
-        IMember? existingMember = _memberService.GetByKey(identityUser.Key);
+        // Query by email as they are unique in this site and in WRA's records.
+        var existingMember = _memberService.GetByEmail(reqMember.Email);
         if (existingMember == null) { return null; }
 
+
         existingMember.UpdateWRAMemberProperties(reqMember);
+        await AssignMemberToMemberGroup(existingMember, reqMember);
+
         _memberService.Save(existingMember);
         return existingMember;
     }
 
-    private void AssignMemberToMemberGroup(MemberIdentityUser member, MemberDto mdto)
+    public async Task Delete(MemberDto reqMember)
+    {
+        using ICoreScope scope = _coreScopeProvider.CreateCoreScope(autoComplete: true);
+        var existingMember = _memberService.GetByEmail(reqMember.Email);
+        if (existingMember == null) { return; }
+        _memberService.Delete(existingMember);
+    }
+
+    /// <summary>
+    /// Assigned a given member to a member group. 
+    /// This does not SAVE the changes. Saving must be done outise of this method.
+    /// </summary>
+    /// <param name="member"></param>
+    /// <param name="mdto"></param>
+
+    private async Task AssignMemberToMemberGroup(IMember member, MemberDto mdto)
     {
 
         // TODO: make membergroups an array for one to many relationship.
@@ -89,13 +105,15 @@ public class MemberManagementService
             "A" => "Affiliate",
             _ => "Visitor"
         };
+
         // get current member roles
         var memberRoles = _memberService.GetAllRoles(member.Id);
         // if current member role is not part of the incoming update/create, remove them from said role.
         var unmatchedRoles = memberRoles.Where(mr => memberGroup != mr);
         if (unmatchedRoles.Any())
         {
-            _memberManager.RemoveFromRolesAsync(member, unmatchedRoles);
+            var identityUser = new MemberIdentityUser(member.Id);
+            _memberService.DissociateRoles([member.Id], unmatchedRoles.ToArray());
         }
         _memberService.AssignRole(member.Id, memberGroup);
     }

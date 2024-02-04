@@ -49,6 +49,30 @@ public class MemberSyncController : ApiController
     }
 
     [HttpPost]
+    [Route("Update")]
+    public async Task<IActionResult> Update(MemberDto updateMemberRequest)
+    {
+        var result = _memberManagementService.Update(updateMemberRequest);
+        if (result == null)
+        {
+            return StatusCode(System.Net.HttpStatusCode.InternalServerError);
+        }
+        return Ok(result.Id);
+    }
+
+    [HttpPost]
+    [Route("Delete")]
+    public async Task<IActionResult> Delete(MemberDto updateMemberRequest)
+    {
+        var result = _memberManagementService.Delete(updateMemberRequest);
+        if (result == null)
+        {
+            return StatusCode(System.Net.HttpStatusCode.InternalServerError);
+        }
+        return Ok(result.IsCompletedSuccessfully);
+    }
+
+    [HttpPost]
     [Route("CreateMemberGroup")]
     public IActionResult CreateMemberGroup(string RoleName)
     {
