@@ -12,6 +12,7 @@ import articleFilters from './components/article-filters';
 import multimediaFilters from './components/multimedia-filters';
 import calendar from './components/calendar';
 import quantitySelector from './components/quantity-selector';
+import checkout from './components/checkout';
 
 expandableTextCards();
 header();
@@ -27,6 +28,7 @@ alert();
 articleFilters();
 multimediaFilters();
 quantitySelector();
+checkout();
 
 if (document.getElementById("ec")) {
     calendar();
