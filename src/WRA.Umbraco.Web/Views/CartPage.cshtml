@@ -25,12 +25,23 @@
                             {
                                 var node = Umbraco.Content(Guid.Parse(item.OrderLine.ProductReference));
                                 var url = node.ContentType.Alias == ProductVariant.ModelTypeAlias ? node.Parent.Url() : node.Url();
+                                var images = node.Value<IEnumerable<MediaWithCrops>>("images");
 
                                 <tr>
                                     <td>
                                         <div class="cart-item mb-4">
                                             <div class="cart-item__image me-4">
-                                                <img class="align-top" src="https://placehold.it/72" width="72" height="72" alt="">
+                                                @{
+                                                    var thumbnail = images?.FirstOrDefault();
+
+                                                    if (thumbnail != null)
+                                                    {
+                                                        <img class="align-top" src="@thumbnail.GetCropUrl(width: 72, height: 72)" width="72" height="72" alt="@thumbnail.Value("altText")" />
+                                                    } else
+                                                    {
+                                                        <img class="align-top" src="https://placehold.it/72" width="72" height="72" alt="">
+                                                    }
+                                                }
                                             </div>
                                             <div class="cart-item__content me-4">
                                                 <a class="fs-sm text-decoration-none fw-bold text-body" href="@url">@item.OrderLine.Name</a>
