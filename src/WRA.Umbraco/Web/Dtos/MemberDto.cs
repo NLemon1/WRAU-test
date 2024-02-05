@@ -1,151 +1,155 @@
+using System.Text.Json.Serialization;
 using Newtonsoft.Json;
 
 namespace WRA.Umbraco.Dtos;
 // public class LocalBoard
 // {
-//     [JsonProperty("chapter")]
+//     [JsonPropertyName("chapter")]
 //     public string Chapter { get; set; }
 
-//     [JsonProperty("id")]
+//     [JsonPropertyName("id")]
 //     public string Id { get; set; }
 
-//     [JsonProperty("localBoardName")]
+//     [JsonPropertyName("localBoardName")]
 //     public string LocalBoardName { get; set; }
 
-//     [JsonProperty("rosterOptIn")]
+//     [JsonPropertyName("rosterOptIn")]
 //     public bool RosterOptIn { get; set; }
 
-//     [JsonProperty("rosterOptInDate")]
+//     [JsonPropertyName("rosterOptInDate")]
 //     public DateTime RosterOptInDate { get; set; }
 // }
 
 // public class MyLocalBoard
 // {
-//     [JsonProperty("chapter")]
+//     [JsonPropertyName("chapter")]
 //     public string Chapter { get; set; }
 
-//     [JsonProperty("id")]
+//     [JsonPropertyName("id")]
 //     public string Id { get; set; }
 
-//     [JsonProperty("localBoardName")]
+//     [JsonPropertyName("localBoardName")]
 //     public string LocalBoardName { get; set; }
 
-//     [JsonProperty("rosterOptIn")]
+//     [JsonPropertyName("rosterOptIn")]
 //     public bool RosterOptIn { get; set; }
 
-//     [JsonProperty("rosterOptInDate")]
+//     [JsonPropertyName("rosterOptInDate")]
 //     public DateTime RosterOptInDate { get; set; }
 // }
 public class MemberDto
 {
-    [JsonProperty("address1")]
+    [JsonProperty("securityHash")]
+    public string? SecurtyHash { get; set; }
+
+    [JsonPropertyName("address1")]
     public string Address1 { get; set; }
 
-    [JsonProperty("address2")]
+    [JsonPropertyName("address2")]
     public string Address2 { get; set; }
 
-    [JsonProperty("address3")]
+    [JsonPropertyName("address3")]
     public string Address3 { get; set; }
 
-    [JsonProperty("brokerEmail")]
+    [JsonPropertyName("brokerEmail")]
     public string BrokerEmail { get; set; }
 
-    [JsonProperty("brokerFullName")]
+    [JsonPropertyName("brokerFullName")]
     public string BrokerFullName { get; set; }
 
-    [JsonProperty("canUseHotline")]
+    [JsonPropertyName("canUseHotline")]
     public bool CanUseHotline { get; set; }
 
-    [JsonProperty("cellPhone")]
+    [JsonPropertyName("cellPhone")]
     public string CellPhone { get; set; }
 
-    [JsonProperty("city")]
+    [JsonPropertyName("city")]
     public string City { get; set; }
 
-    [JsonProperty("companyId")]
+    [JsonPropertyName("companyId")]
     public int CompanyId { get; set; }
 
-    [JsonProperty("companyLogoUrl")]
+    [JsonPropertyName("companyLogoUrl")]
     public string CompanyLogoUrl { get; set; }
 
-    [JsonProperty("companyName")]
+    [JsonPropertyName("companyName")]
     public string CompanyName { get; set; }
 
-    [JsonProperty("companySubscriptions")]
+    [JsonPropertyName("companySubscriptions")]
     public List<object> CompanySubscriptions { get; set; }
 
-    [JsonProperty("email")]
+    [JsonPropertyName("email")]
     public string Email { get; set; }
 
-    [JsonProperty("fairhavenDate")]
+    [JsonPropertyName("fairhavenDate")]
     public object FairhavenDate { get; set; }
 
-    [JsonProperty("fax")]
+    [JsonPropertyName("fax")]
     public string Fax { get; set; }
 
-    [JsonProperty("firstName")]
+    [JsonPropertyName("firstName")]
     public string FirstName { get; set; }
 
-    [JsonProperty("fullName")]
+    [JsonPropertyName("fullName")]
     public string FullName { get; set; }
 
-    [JsonProperty("gender")]
+    [JsonPropertyName("gender")]
     public string Gender { get; set; }
 
-    [JsonProperty("homePhone")]
+    [JsonPropertyName("homePhone")]
     public string HomePhone { get; set; }
 
-    [JsonProperty("id")]
+    [JsonPropertyName("id")]
     public int Id { get; set; }
 
-    [JsonProperty("imageUrl")]
+    [JsonPropertyName("imageUrl")]
     public string ImageUrl { get; set; }
 
-    [JsonProperty("joinDate")]
+    [JsonPropertyName("joinDate")]
     public DateTime JoinDate { get; set; }
 
-    [JsonProperty("lastFirst")]
+    [JsonPropertyName("lastFirst")]
     public string LastFirst { get; set; }
 
-    [JsonProperty("lastName")]
+    [JsonPropertyName("lastName")]
     public string LastName { get; set; }
 
-    //[JsonProperty("localBoards")]
+    //[JsonPropertyName("localBoards")]
     // public List<LocalBoard> LocalBoards { get; set; }
 
-    [JsonProperty("mandatoryHotlineLetter")]
+    [JsonPropertyName("mandatoryHotlineLetter")]
     public bool MandatoryHotlineLetter { get; set; }
 
-    [JsonProperty("memberType")]
+    [JsonPropertyName("memberType")]
     public string MemberType { get; set; }
 
-    [JsonProperty("minnesotaLicense")]
+    [JsonPropertyName("minnesotaLicense")]
     public object MinnesotaLicense { get; set; }
 
-    // [JsonProperty("myLocalBoard")]
+    // [JsonPropertyName("myLocalBoard")]
     // public MyLocalBoard MyLocalBoard { get; set; }
 
-    [JsonProperty("nrdsId")]
+    [JsonPropertyName("nrdsId")]
     public string NrdsId { get; set; }
 
-    [JsonProperty("paidThruDate")]
+    [JsonPropertyName("paidThruDate")]
     public DateTime PaidThruDate { get; set; }
 
-    [JsonProperty("prefix")]
+    [JsonPropertyName("prefix")]
     public string Prefix { get; set; }
 
-    [JsonProperty("stateProvince")]
+    [JsonPropertyName("stateProvince")]
     public string StateProvince { get; set; }
 
-    [JsonProperty("subscriptions")]
+    [JsonPropertyName("subscriptions")]
     public List<object> Subscriptions { get; set; }
 
-    [JsonProperty("suffix")]
+    [JsonPropertyName("suffix")]
     public string Suffix { get; set; }
 
-    [JsonProperty("workPhone")]
+    [JsonPropertyName("workPhone")]
     public string WorkPhone { get; set; }
 
-    [JsonProperty("zip")]
+    [JsonPropertyName("zip")]
     public string Zip { get; set; }
 }

@@ -40,7 +40,10 @@ public class MemberManagementService
     /// <param name="member"></param>
     public async Task<IMember?> Create(MemberDto member)
     {
+        // crate a scope
         using ICoreScope scope = _coreScopeProvider.CreateCoreScope(autoComplete: true);
+        // supress any notification to prevent our listener from firing an "updated member" webhook back at the queue
+        using var _ = scope.Notifications.Suppress();
 
         // spin up an Imember rather than memberIdentity to avoid db locks.
         var newMember = _memberService.CreateMember(
@@ -65,7 +68,10 @@ public class MemberManagementService
 
     public async Task<IMember?> Update(MemberDto reqMember)
     {
+        // crate a scope
         using ICoreScope scope = _coreScopeProvider.CreateCoreScope(autoComplete: true);
+        // supress any notification to prevent our listener from firing an "updated member" webhook back at the queue
+        using var _ = scope.Notifications.Suppress();
 
         // Query by email as they are unique in this site and in WRA's records.
         var existingMember = _memberService.GetByEmail(reqMember.Email);
@@ -81,7 +87,12 @@ public class MemberManagementService
 
     public async Task Delete(MemberDto reqMember)
     {
+        // crate a scope
         using ICoreScope scope = _coreScopeProvider.CreateCoreScope(autoComplete: true);
+        // supress any notification to prevent our listener from firing an "updated member" webhook back at the queue
+
+        using var _ = scope.Notifications.Suppress();
+
         var existingMember = _memberService.GetByEmail(reqMember.Email);
         if (existingMember == null) { return; }
         _memberService.Delete(existingMember);

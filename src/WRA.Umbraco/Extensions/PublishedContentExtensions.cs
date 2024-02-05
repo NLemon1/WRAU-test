@@ -95,6 +95,42 @@ namespace WRA.Umbraco
             );
         }
 
+        public static MemberDto AsDto(this IMember m)
+        {
+            MemberDto mdto = new MemberDto
+            {
+                BrokerFullName = m.GetValue<string>("brokerFullName")!.SafeString(),
+                BrokerEmail = m.GetValue<string>("brokerEmail")!.SafeString(),
+                Address1 = m.GetValue<string>("address1")!.SafeString(),
+                Address2 = m.GetValue<string>("address2")!.SafeString(),
+                Address3 = m.GetValue<string>("address3")!.SafeString(),
+                City = m.GetValue<string>("city")!.SafeString(),
+                CellPhone = m.GetValue<string>("cellPhone")!.SafeString(),
+                CanUseHotline = m.GetValue<bool>("canUseHotline"),
+                CompanyLogoUrl = m.GetValue<string>("companyLogoUrl")!.SafeString(),
+                CompanyId = m.GetValue<int>("companyId"),
+                CompanyName = m.GetValue<string>("companyName")!.SafeString(),
+                //Getber.SetValue("companySubscriptions", mdto.CompanySubscriptions);
+                Fax = m.GetValue<string>("fax")!.SafeString(),
+                FirstName = m.GetValue<string>("firstName")!.SafeString(),
+                LastName = m.GetValue<string>("lastName")!.SafeString(),
+                Gender = m.GetValue<string>("gender")!.SafeString(),
+                HomePhone = m.GetValue<string>("homePhone")!.SafeString(),
+                Id = m.GetValue<int>("externalId"),
+                ImageUrl = m.GetValue<string>("imageUrl")!.SafeString(),
+                JoinDate = m.GetValue<DateTime>("joinDate"),
+                MandatoryHotlineLetter = m.GetValue<bool>("mandatoryHotlineLetter"),
+                NrdsId = m.GetValue<string>("nrdsId")!.SafeString(),
+                PaidThruDate = m.GetValue<DateTime>("paidThruDate"),
+                Prefix = m.GetValue<string>("prefix")!.SafeString(),
+                Suffix = m.GetValue<string>("suffix")!.SafeString(),
+                StateProvince = m.GetValue<string>("stateProvince")!.SafeString(),
+                Zip = m.GetValue<string>("zip")!.SafeString()
+            };
+
+            return mdto;
+        }
+
         /// <summary>
         /// Member Specific Extensions
         /// </summary>
