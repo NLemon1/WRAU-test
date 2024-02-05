@@ -4,14 +4,9 @@
 @{
     var paymentMethodSettings = Model?.PaymentMethod?.PaymentProviderSettings;
     string testPublicKey = "pkapi_cert_bMg2WpUw7FzvNMaZZF";
-
-    
 }
 
-
-
-@* 
-<div class="mb-5">
+@* <div class="mb-5">
     <div class="row g-2">
         <div class="col-12">
             <label for="payment-card-name" class="visually-hidden">Name on card</label>
@@ -31,76 +26,92 @@
         </div>
     </div>
 </div> *@
-    <div id="payment-card-name"></div>
-    <div id="payment-card-number"></div>
-    <div id="payment-card-code"></div>
-    <div id="payment-card-expiration"></div>
-    <div id="credit-card-submit"></div>
+
+<div id="payment-card-number"       class="w-100 px-1"></div>
+<div id="payment-card-name"         class="w-100 px-1"></div>
+<div id="payment-card-expiration"   class="w-50  px-1"></div>
+<div id="payment-card-code"         class="w-50  px-1"></div>
+<div id="credit-card-submit"        class="w-100 px-1"></div>
+
+<style>
+    #payment-form iframe {
+        width: 100%;
+    }
+</style>
 
 <script src="https://js.globalpay.com/v1/globalpayments.js"></script>
 <script type="text/javascript">
     // Configure account
-     GlobalPayments.configure({
-                        publicApiKey: "pkapi_cert_bMg2WpUw7FzvNMaZZF"
-        });
+    GlobalPayments.configure({
+        publicApiKey: "pkapi_cert_bMg2WpUw7FzvNMaZZF"
+    });
 
     // Create Form
     const cardForm = GlobalPayments.ui.form({
-    fields: {
-        "card-holder-name": {
-        placeholder: "Jane Smith",
-        target: "#payment-card-name"
+        fields: {
+            "card-holder-name": {
+                placeholder: "Name on card",
+                target: "#payment-card-name"
+            },
+            "card-number": {
+                placeholder: "Card number",
+                target: "#payment-card-number"
+            },
+            "card-expiration": {
+                placeholder: "Expiration date (MM / YYYY)",
+                target: "#payment-card-expiration"
+            },
+            "card-cvv": {
+                placeholder: "Security code",
+                target: "#payment-card-code"
+            },
+            "submit": {
+                value: "Submit",
+                target: "#credit-card-submit"
+            }
         },
-        "card-number": {
-        placeholder: "•••• •••• •••• ••••",
-        target: "#payment-card-number"
-        },
-        "card-expiration": {
-        placeholder: "MM / YYYY",
-        target: "#payment-card-expiration"
-        },
-        "card-cvv": {
-        placeholder: "•••",
-        target: "#payment-card-code"
-        },
-        "submit": {
-        value: "Submit",
-        target: "#credit-card-submit"
+        styles: {
+            'input': {
+                'padding': '0 1rem',
+                'border': '1px solid #d7d7dc',
+                'border-radius': '0.25rem',
+                'line-height': '42px',
+                'font-family': 'Inter, sans-serif',
+                'font-size': '16px',
+                'color': '#050f1e'
+            }
         }
-    },
-    styles: {
-        // Your styles
-    }
-});
+    });
 
     cardForm.on("token-error", (resp) => {
-                    // show error to the consumer
+        // show error to the consumer
     });
 
     // form-level event handlers. examples:
     cardForm.ready(() => {
         console.log("Registration of all credit card fields occurred");
     });
+
     cardForm.on("token-success", (resp) => {
-    // add payment token to form as a hidden input
-    //const token = document.createElement("input");
-    const token = document.getElementById("token");
-    //token.type = "hidden";
-    //token.name = "paymentToken";
-    token.value = resp.paymentReference;
-    alert('Here is a single-use token: ' + token.value);
-    // submit data to the integration's backend for processing
-    const form = document.getElementById("payment-form");
-    //form.submit();
+        // add payment token to form as a hidden input
+        //const token = document.createElement("input");
+        const token = document.getElementById("token");
+        //token.type = "hidden";
+        //token.name = "paymentToken";
+        token.value = resp.paymentReference;
+        alert('Here is a single-use token: ' + token.value);
+        // submit data to the integration's backend for processing
+        const form = document.getElementById("payment-form");
+        //form.submit();
     });
     cardForm.on("token-error", (resp) => {
-    // show error to the consumer
+        // show error to the consumer
         alert('There was an error: ' + resp.error.message);
     });
 
     // field-level event handlers. example:
     cardForm.on("card-number", "register", () => {
-    console.log("Registration of Card Number occurred");
+        console.log("Registration of Card Number occurred");
     });
 </script>
 
