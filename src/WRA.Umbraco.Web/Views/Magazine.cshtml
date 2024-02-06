@@ -155,13 +155,16 @@
                     <select id="magazineCollection" class="js-magazine-year form-control bg-white" onchange="if (this.value) window.location.href=this.value">
                         @foreach (var child in magazineCollections)
                         {
-                            if (child.Name == currentCollectionYear)
+                            if (child.Children.Any())
                             {
-                                <option value="@child.Children.FirstOrDefault().Url()" selected>@child.Name</option>
-                            }
-                            else
-                            {
-                                <option value="@child.Children.FirstOrDefault().Url()">@child.Name</option>
+                                if (child.Name == currentCollectionYear)
+                                {
+                                    <option value="@child.Children.FirstOrDefault().Url()" selected>@child.Name</option>
+                                }
+                                else
+                                {
+                                    <option value="@child.Children.FirstOrDefault().Url()">@child.Name</option>
+                                }
                             }
                         }
                     </select>

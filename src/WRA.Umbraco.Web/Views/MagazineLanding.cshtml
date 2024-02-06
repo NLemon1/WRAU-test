@@ -16,106 +16,124 @@
     var currentCollection = magazineCollections.FirstOrDefault(); //get 
     var currentIssue = currentCollection.Children("newsItems").Where(x => x.IsVisible()).OrderBy(p => p.GetProperty("monthYearTitle").GetSourceValue()).Reverse();
     var content = currentIssue.FirstOrDefault();
-
-    var imageCurrent = content.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("image");
-    var articles = content.Value<IEnumerable<IPublishedContent>>("FeaturedOnlineArticles");
-
 }
 
 @await Html.PartialAsync("blockgrid/default", sections)
+
 
 <div class="w-100 bg-white mt-6 mt-lg-8 pb-6 pb-lg-8">
 
     <div class="mb-5">
         @await Html.PartialAsync("_breadcrumbs")
     </div>
-    <div class="container">
-        <h1 class="h1 mb-5">@content.Name</h1>
-        <div class="row">
-            <div class="col-lg-4 d-flex flex-column align-items-center pb-6 pb-lg-0">
-                <img src="@imageCurrent.Url()?width=640" class="img-fluid fit-cover mb-4" width="320" height="412" alt="@(imageCurrent.Value("altText") ?? "")" />
-                <a href="@content.Value("Pdf")" class="btn btn-primary">Download PDF</a>
-            </div>
-            <div class="col-lg-8">
-                <div class="d-flex flex-row align-items-center justify-content-between mb-3">
-                    <h2 class="h3 mb-0">Read in News & Updates</h2>
-                    <a href="/news-updates/" class="btn btn-primary btn-sm d-none d-lg-block">See All</a>
-                </div>
-                <div class="row">
-                    <div class="col-lg-7 pe-lg-4">
-                        <h3 class="h4 text-white px-3 py-2" style="background-color: var(--bs-blue-dark)">
-                            Featured Articles
-                        </h3>
+    
+    @if (content != null)
+    {
+        <div class="container">
 
-                        @if (articles != null)
-                        {
-                            @if (articles.Any())
-                            {
-                                <ul class="list-unstyled d-flex flex-column list-group list-group-flush">
-                                    @foreach (var child in articles.Where(x => x.IsVisible()).Take(3))
-                                    {
+            <h1 class="h1 mb-5">@content.Name
+            </h1>
 
-                                        var articleTitle = child.HasProperty("Title") ? child.Value("Title") : child.Name;
-                                        var articleImage = child.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("image");
-
-                                        string cleanContent = "";
-
-                                        if (child.HasValue("richTextContent") && !child.HasValue("excerpt"))
-                                        {
-                                            cleanContent = HtmlHelperExtensions.ShortenExcerpt(child.Value("richTextContent").ToString(), 135);
-                                        }
-
-                                        var articleSummary = child.HasValue("excerpt") ? child.Value("excerpt") : cleanContent;
-
-                                        <li class="d-flex flex-row position-relative list-group-item">
-                                            <img src="@articleImage.MediaUrl()?width=240&height=160" class="img-fluid fit-cover" width="120" height="80" alt="@(imageCurrent.Value("altText") ?? "")" />
-                                            <div class="flex-fill ps-3">
-                                                <a href="@child.Url()" class="stretched-link link-hover-inverse">
-                                                    <h4 class="fs-md mb-1">@articleTitle</h4>
-                                                </a>
-                                                @if (articleSummary != null)
-                                                {
-                                                    <p class="fs-sm">@articleSummary</p>
-                                                }
-                                            </div>
-                                        </li>
-                                    }
-                                </ul>
-                            }
-                        }
-
-                    </div>
-                    @if (articles != null)
+            <div class="row">
+                <div class="col-lg-4 d-flex flex-column align-items-center pb-6 pb-lg-0">
+                    @if (content.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("image") != null)
                     {
-                        @if (articles.Any() && articles.Count() > 3)
-                        {
-                            var totalArticles = articles.Count() - 3;
-                            var articlesMore = articles.Where(x => x.IsVisible()).TakeLast(totalArticles);
+                        var imageCurrent = content.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("image");
 
-                            <div class="col-lg-5 ps-lg-1 ms-lg-auto">
-                                <div class="ps-lg-4 border-medium border-start no-border-mobile h-100">
-                                    <h3 class="h4 text-white px-3 py-2" style="background-color: var(--bs-blue-dark)">
-                                        More News
-                                    </h3>
-                                    <ul class="list-unstyled gap-2 d-flex flex-column pt-2">
-                                        @foreach (var child in articlesMore)
+                        <img src="@imageCurrent.Url()?width=640" class="img-fluid fit-cover mb-4" width="320" height="412" alt="@(imageCurrent.Value("altText") ?? "")" />
+                    }
+                    <a href="@content.Value("Pdf")" class="btn btn-primary">Download PDF</a>
+                </div>
+                <div class="col-lg-8">
+                    <div class="d-flex flex-row align-items-center justify-content-between mb-3">
+                        <h2 class="h3 mb-0">Read in News & Updates</h2>
+                        <a href="/news-updates/" class="btn btn-primary btn-sm d-none d-lg-block">See All</a>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-7 pe-lg-4">
+                            <h3 class="h4 text-white px-3 py-2" style="background-color: var(--bs-blue-dark)">
+                                Featured Articles
+                            </h3>
+
+                            @if (content.Value<IEnumerable<IPublishedContent>>("FeaturedOnlineArticles") != null)
+                            {
+                                var articles = content.Value<IEnumerable<IPublishedContent>>("FeaturedOnlineArticles");
+
+                                @if (articles.Any())
+                                {
+                                    <ul class="list-unstyled d-flex flex-column list-group list-group-flush">
+                                        @foreach (var child in articles.Where(x => x.IsVisible()).Take(3))
                                         {
-                                            var articleMoreTitle = child.HasProperty("Title") ? child.Value("Title") : child.Name;
 
-                                            <li>
-                                                <a href="@child.Url()" class="fw-bold fs-sm" style="color: inherit">@articleMoreTitle</a>
+                                            var articleTitle = child.HasProperty("Title") ? child.Value("Title") : child.Name;
+                                            var articleImage = child.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("image");
+
+                                            string cleanContent = "";
+
+                                            if (child.HasValue("richTextContent") && !child.HasValue("excerpt"))
+                                            {
+                                                cleanContent = HtmlHelperExtensions.ShortenExcerpt(child.Value("richTextContent").ToString(), 135);
+                                            }
+
+                                            var articleSummary = child.HasValue("excerpt") ? child.Value("excerpt") : cleanContent;
+
+                                            <li class="d-flex flex-row position-relative list-group-item">
+                                                <img src="@articleImage.MediaUrl()?width=240&height=160" class="img-fluid fit-cover" width="120" height="80" alt="@(articleImage.Value("altText") ?? "")" />
+                                                <div class="flex-fill ps-3">
+                                                    <a href="@child.Url()" class="stretched-link link-hover-inverse">
+                                                        <h4 class="fs-md mb-1">@articleTitle</h4>
+                                                    </a>
+                                                    @if (articleSummary != null)
+                                                    {
+                                                        <p class="fs-sm">@articleSummary</p>
+                                                    }
+                                                </div>
                                             </li>
                                         }
                                     </ul>
+                                }
+                            }
+
+                        </div>
+                        @if (content.Value<IEnumerable<IPublishedContent>>("FeaturedOnlineArticles") != null)
+                        {
+                            var articles = content.Value<IEnumerable<IPublishedContent>>("FeaturedOnlineArticles");
+
+                            @if (articles.Any() && articles.Count() > 3)
+                            {
+                                var totalArticles = articles.Count() - 3;
+                                var articlesMore = articles.Where(x => x.IsVisible()).TakeLast(totalArticles);
+
+                                <div class="col-lg-5 ps-lg-1 ms-lg-auto">
+                                    <div class="ps-lg-4 border-medium border-start no-border-mobile h-100">
+                                        <h3 class="h4 text-white px-3 py-2" style="background-color: var(--bs-blue-dark)">
+                                            More News
+                                        </h3>
+                                        <ul class="list-unstyled gap-2 d-flex flex-column pt-2">
+                                            @foreach (var child in articlesMore)
+                                            {
+                                                var articleMoreTitle = child.HasProperty("Title") ? child.Value("Title") : child.Name;
+
+                                                <li>
+                                                    <a href="@child.Url()" class="fw-bold fs-sm" style="color: inherit">@articleMoreTitle</a>
+                                                </li>
+                                            }
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
+                            }
                         }
-                    }
-                </div> 
-                <a href="/news-updates/" class="btn btn-primary btn-sm d-lg-none w-100 mt-4">See All</a>
+                    </div> 
+                    <a href="/news-updates/" class="btn btn-primary btn-sm d-lg-none w-100 mt-4">See All</a>
+                </div>
             </div>
         </div>
-    </div>
+
+    }
+
+
+
+
 </div>
 <div class="w-100 py-7 py-lg-10" style="background-color: var(--bs-gray-10)">
     <div class="container">
@@ -127,13 +145,15 @@
                     <select id="magazineCollection" class="js-magazine-year form-control bg-white" onchange="if (this.value) window.location.href=this.value">
                         @foreach (var child in magazineCollections.OrderBy(x => Int32.Parse(x.Name)).Reverse())
                         {
+                            if(child.Children.Any()){
                             if (child == child.FirstChild())
-                            {
-                                <option value="@child.Children.FirstOrDefault().Url()" selected>@child.Name</option>
-                            }
-                            else
-                            {
-                                <option value="@child.Children.FirstOrDefault().Url()">@child.Name</option>
+                                {
+                                    <option value="@child.Children.FirstOrDefault().Url()" selected>@child.Name</option>
+                                }
+                                else
+                                {
+                                    <option value="@child.Children.FirstOrDefault().Url()">@child.Name</option>
+                                }
                             }
                         }
                     </select>
@@ -142,20 +162,23 @@
         </div>
 
         <div class="row my-4 mb-6 gy-4">
-            @foreach (var item in magazineCollections.FirstOrDefault().Children)
+            @if (magazineCollections.FirstOrDefault().Children.Any())
             {
-                var image = item.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("image");
+                @foreach (var item in magazineCollections.FirstOrDefault().Children)
+                {
+                    var image = item.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("image");
 
-                <div class="col-6 col-md-4 col-lg-3">
-                    <a href="@item.Url()" class="text-decoration-none d-block link-hover-inverse">
-                        <img src="@image.Url()" class="w-100 h-auto mb-3" style="max-width:234px;" width="@image.Value("umbracoWidth")" height="@image.Value("umbracoHeight")" alt="@(image.Value("altText") ?? "")" />
-                        <h3 class="h4 mb-2">@item.Name</h3>
-                        @if (item.HasValue("excerpt"))
-                        {
-                            <p class="fs-sm" style="color: var(--bs-gray-30)">@item.Value("excerpt")</p>
-                        }
-                    </a>
-                </div>
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <a href="@item.Url()" class="text-decoration-none d-block link-hover-inverse">
+                            <img src="@image.Url()" class="w-100 h-auto mb-3" style="max-width:234px;" width="@image.Value("umbracoWidth")" height="@image.Value("umbracoHeight")" alt="@(image.Value("altText") ?? "")" />
+                            <h3 class="h4 mb-2">@item.Name</h3>
+                            @if (item.HasValue("excerpt"))
+                            {
+                                <p class="fs-sm" style="color: var(--bs-gray-30)">@item.Value("excerpt")</p>
+                            }
+                        </a>
+                    </div>
+                }
             }
         </div>
 
