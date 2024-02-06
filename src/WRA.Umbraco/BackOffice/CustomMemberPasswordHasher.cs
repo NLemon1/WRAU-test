@@ -2,6 +2,7 @@ using System.Security.Cryptography;
 using System.Text;
 using GlobalPayments.Api.Entities;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -12,7 +13,7 @@ using Umbraco.Cms.Core.Serialization;
 using Umbraco.Extensions;
 
 
-public class CustomMemberPasswordHasher<Tuser> : UmbracoPasswordHasher<Tuser> where Tuser : BackOfficeIdentityUser
+public class CustomMemberPasswordHasher<Tuser> : UmbracoPasswordHasher<Tuser> where Tuser : MemberIdentityUser
 {
 
     public CustomMemberPasswordHasher(LegacyPasswordSecurity legacyPasswordSecurity, IJsonSerializer jsonSerializer)

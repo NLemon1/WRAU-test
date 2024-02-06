@@ -9,7 +9,7 @@ using Umbraco.Commerce.Cms.Adapters;
 using WRA.Umbraco.Services;
 using WRA.Umbraco.Events;
 
-namespace WRA.Umbraco;
+namespace WRA.Umbraco.Extensions;
 
 public static class WraEcommerceBuilderExtensions
 {

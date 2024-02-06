@@ -8,6 +8,7 @@ using Umbraco.Cms.Core.Services;
 using Umbraco.Cms.Core.Sync;
 using Umbraco.Cms.Core.Webhooks;
 using WRA.Umbraco.Dtos;
+using WRA.Umbraco.Services;
 
 namespace WRA.Umbraco.Webhooks;
 
@@ -15,15 +16,18 @@ namespace WRA.Umbraco.Webhooks;
 public class WraMemberWebhook : WebhookEventContentBase<MemberSavedNotification, IMember>
 {
     private readonly ILogger<WraMemberWebhook> _logger;
+    private readonly QueueService _queueService;
     public WraMemberWebhook(
         IWebhookFiringService webhookFiringService,
         IWebhookService webhookService,
         IOptionsMonitor<WebhookSettings> webhookSettings,
         IServerRoleAccessor serverRoleAccessor,
-        ILogger<WraMemberWebhook> logger)
+        ILogger<WraMemberWebhook> logger,
+        QueueService queueService)
         : base(webhookFiringService, webhookService, webhookSettings, serverRoleAccessor)
     {
         _logger = logger;
+        _queueService = queueService;
     }
 
     public override string Alias => "WraMemberUpdate";
@@ -73,8 +77,10 @@ public class WraMemberWebhook : WebhookEventContentBase<MemberSavedNotification,
                 {
                     continue;
                 }
+                var payload = ConvertEntityToRequestPayload(entity);
+                await _queueService.SendMessage(payload, "website-prod-member");
+                await WebhookFiringService.FireAsync(webhook, Alias, payload, cancellationToken);
 
-                await WebhookFiringService.FireAsync(webhook, Alias, ConvertEntityToRequestPayload(entity), cancellationToken);
             }
         }
     }

@@ -1,12 +1,6 @@
-using Microsoft.AspNetCore.Identity;
 using My.Custom.Swagger;
-using Umbraco.Cloud.Identity.Cms;
-using Umbraco.Cms.Core.Models;
-using Umbraco.Cms.Core.Security;
-using Umbraco.Commerce.Cms.Adapters;
-using Umbraco.Commerce.Core.Adapters;
-using Umbraco.Commerce.Extensions;
 using WRA.Umbraco.Services;
+using WRA.Umbraco.Extensions;
 
 namespace WRA.Umbraco.Web
 {
@@ -44,12 +38,13 @@ namespace WRA.Umbraco.Web
             services.AddScoped<SearchService>();
             services.AddScoped<WRAExternalApiService>();
             services.AddScoped<MemberManagementService>();
+            services.AddTransient<QueueService>();
             // services.AddScoped<IPasswordHasher<BackOfficeIdentityUser>, CustomMemberPasswordHasher<BackOfficeIdentityUser>>();
 
             // umbraco services
             services.AddUmbraco(_env, _config)
                 .AddBackOffice()
-                // .SetBackOfficeUserManager<CustomBackOfficeUserManager>()
+                .AddWraPasswordHashing()
                 .AddWebsite()
                 .AddWraStore()
                 .AddDeliveryApi()

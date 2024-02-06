@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <!-- CoreCompat is deprecated and unmaintained but is require for the Global Payments SDK /shrug -->
+    <PackageReference Include="Azure.Messaging.ServiceBus" Version="7.17.2" />
     <PackageReference Include="CoreCompat.System.Drawing" Version="1.0.0-beta006" />
     <PackageReference Include="GlobalPayments.Api" Version="8.0.4" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
