@@ -48,9 +48,9 @@
     {
         <meta property="og:image" content="@(Model.Value<IPublishedContent>("openGraphImage").Url(mode:UrlMode.Absolute))">
     }
-    else
+    else if (settings.HasValue("oGImageFallback"))
     {
-        <meta property="og:image" content="~/WRA-OpenGraph.png">
+        <meta property="og:image" content="@(settings.Value<IPublishedContent>("oGImageFallback").Url(mode:UrlMode.Absolute))">
     }
     <link rel="icon" href="~/favicon.ico" sizes="32x32" />
     <link rel="icon" href="~/icon.svg" type="image/svg+xml" />

@@ -22,15 +22,15 @@ public class MemberSyncController : ApiController
     private readonly IMemberService _memberService;
     private readonly IMemberManager _memberManager;
     private readonly ICoreScopeProvider _coreScopeProvider;
-    private readonly MemberManagementService _memberManagementService;
+    private readonly WRAMemberService _WRAMemberService;
 
 
     public MemberSyncController(
-        MemberManagementService memberManagementService,
+        WRAMemberService WRAMemberService,
         ICoreScopeProvider coreScopeProvider
     )
     {
-        _memberManagementService = memberManagementService;
+        _WRAMemberService = WRAMemberService;
         _coreScopeProvider = coreScopeProvider;
     }
 
@@ -40,7 +40,7 @@ public class MemberSyncController : ApiController
     public async Task<IActionResult> Create(MemberDto newMemberRequest)
     {
 
-        var result = _memberManagementService.Create(newMemberRequest);
+        var result = _WRAMemberService.Create(newMemberRequest);
         if (result == null)
         {
             return StatusCode(System.Net.HttpStatusCode.InternalServerError);
@@ -52,7 +52,7 @@ public class MemberSyncController : ApiController
     [Route("Update")]
     public async Task<IActionResult> Update(MemberDto updateMemberRequest)
     {
-        var result = _memberManagementService.Update(updateMemberRequest);
+        var result = _WRAMemberService.Update(updateMemberRequest);
         if (result == null)
         {
             return StatusCode(System.Net.HttpStatusCode.InternalServerError);
@@ -64,7 +64,7 @@ public class MemberSyncController : ApiController
     [Route("Delete")]
     public async Task<IActionResult> Delete(MemberDto updateMemberRequest)
     {
-        var result = _memberManagementService.Delete(updateMemberRequest);
+        var result = _WRAMemberService.Delete(updateMemberRequest);
         if (result == null)
         {
             return StatusCode(System.Net.HttpStatusCode.InternalServerError);

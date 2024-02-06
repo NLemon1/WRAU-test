@@ -16,13 +16,13 @@ using WRA.Umbraco.Dtos;
 
 namespace WRA.Umbraco.Services;
 
-public class MemberManagementService
+public class WRAMemberService
 {
     private readonly IMemberService _memberService;
     private readonly IMemberManager _memberManager;
     private readonly ICoreScopeProvider _coreScopeProvider;
 
-    public MemberManagementService(
+    public WRAMemberService(
         IMemberService memberService,
         IMemberManager memberManager,
         ICoreScopeProvider coreScopeProvider

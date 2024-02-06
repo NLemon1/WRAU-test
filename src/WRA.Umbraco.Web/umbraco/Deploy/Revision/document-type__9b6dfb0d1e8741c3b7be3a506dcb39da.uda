@@ -442,7 +442,7 @@
           "Alias": "bodyCloseScripts",
           "DataType": "umb://data-type/c6bac0dd4ab945b18e30e4b619ee5da3",
           "Name": "Body Close Scripts",
-          "SortOrder": 3
+          "SortOrder": 4
         },
         {
           "Key": "807d16de-ec29-431f-a24e-42abc66b82a8",
@@ -456,14 +456,21 @@
           "Alias": "headScripts",
           "DataType": "umb://data-type/c6bac0dd4ab945b18e30e4b619ee5da3",
           "Name": "Head Scripts",
-          "SortOrder": 1
+          "SortOrder": 2
         },
         {
           "Key": "9ec85ef7-a2ba-475d-9fee-faeb437371c2",
           "Alias": "bodyOpenScripts",
           "DataType": "umb://data-type/c6bac0dd4ab945b18e30e4b619ee5da3",
           "Name": "Body Open Scripts",
-          "SortOrder": 2
+          "SortOrder": 3
+        },
+        {
+          "Key": "d53eeec1-774e-4ace-b412-acae286ac4ea",
+          "Alias": "oGImageFallback",
+          "DataType": "umb://data-type/00dc378cea194845ac1a1363d883b5f5",
+          "Name": "OG Image Fallback",
+          "SortOrder": 1
         }
       ]
     },
@@ -687,6 +694,10 @@
   "PropertyTypes": [],
   "Udi": "umb://document-type/9b6dfb0d1e8741c3b7be3a506dcb39da",
   "Dependencies": [
+    {
+      "Udi": "umb://data-type/00dc378cea194845ac1a1363d883b5f5",
+      "Ordering": true
+    },
     {
       "Udi": "umb://data-type/094ea51013be4f358f03687f54bb9ba2",
       "Ordering": true

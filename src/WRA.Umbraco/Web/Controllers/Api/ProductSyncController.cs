@@ -103,7 +103,7 @@ public class ProductSyncController : ApiController
 
         //first lets deserialize:
         //lets just grab the first 50 for testing
-        var externalProducts = JsonConvert.DeserializeObject<List<WraExternalProducctDto>>(content).Take(50);
+        var externalProducts = JsonConvert.DeserializeObject<List<WraProductDto>>(content).Take(50);
 
         // now we need the "products" parent node to place these products under...
         var productCollectionPageQuery = _searchService.Search(CollectionPage.ModelTypeAlias);
@@ -111,9 +111,9 @@ public class ProductSyncController : ApiController
            .Select(result => new CollectionPage(result.Content, new NoopPublishedValueFallback()));
 
         // now that we have the products, lets translate it to a product page content type...
-        foreach (WraExternalProducctDto ep in externalProducts)
+        foreach (WraProductDto p in externalProducts)
         {
-            var productType = ep.ProductType;
+            var productType = p.ProductType;
 
             // get collection that matches product Type
             var collectionPage = productCollections.Where(c => c.Name == productType)
@@ -125,11 +125,11 @@ public class ProductSyncController : ApiController
 
             // We have our colleciton page, so now lets see if it contains a record that already exists...
             // if it returns nothing (no page exists matching the ID from WRA), we create one.
-            var productPage = GetExistingProductPage(ep.Sku) ??
-                            _contentService.Create(ep.Name, collectionPage.Id, ProductPage.ModelTypeAlias);
+            var productPage = GetExistingProductPage(p.Sku) ??
+                            _contentService.Create(p.Name, collectionPage.Id, ProductPage.ModelTypeAlias);
 
             //set properties on our product
-            SetProductProperties(productPage, ep, store);
+            SetProductProperties(productPage, p, store);
 
             // save and publish the product! Wow! 
             _contentService.SaveAndPublish(productPage);
@@ -163,7 +163,7 @@ public class ProductSyncController : ApiController
         return null;
     }
 
-    private void SetProductProperties(IContent content, WraExternalProducctDto productDto, StoreReadOnly? store)
+    private void SetProductProperties(IContent content, WraProductDto productDto, StoreReadOnly? store)
     {
 
         var (categories, subCategories) = GetCategories(productDto.Category, productDto.SubCategory);
@@ -184,15 +184,15 @@ public class ProductSyncController : ApiController
         CurrencyReadOnly currency = _currencyService.GetCurrencies(store.Id).Where(c => c.Name == "USD").First();
         // decimal price = Convert.ToDecimal(productDto.Price);
         var curencyUpdateRequest = JsonConvert.SerializeObject(new Dictionary<string, string> {
-            { currency.Id.ToString(), productDto.Price }
+            { currency.Id.ToString(), productDto.Price.ToString() }
         });
 
-        content.SetValue("productId", productDto.ExternalId);
+        content.SetValue("productId", productDto.Id);
         content.SetValue("sku", productDto.Sku);
         content.SetValue("taxonomy", productDto.Taxonomy);
         content.SetValue("price", curencyUpdateRequest);
-        content.SetValue("startDate", DateTime.Parse(productDto.StartDate));
-        content.SetValue("endDate", DateTime.Parse(productDto.EndDate));
+        content.SetValue("startDate", productDto.StartDate);
+        content.SetValue("endDate", productDto.EndDate);
     }
 
     private (IPublishedContent?, IPublishedContent?) GetCategories(

@@ -146,7 +146,7 @@
                         @foreach (var child in magazineCollections.OrderBy(x => Int32.Parse(x.Name)).Reverse())
                         {
                             if(child.Children.Any()){
-                            if (child == child.FirstChild())
+                                if (child == child.FirstChild())
                                 {
                                     <option value="@child.Children.FirstOrDefault().Url()" selected>@child.Name</option>
                                 }

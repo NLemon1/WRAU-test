@@ -4,8 +4,7 @@
   "EditorAlias": "Umbraco.MultiNodeTreePicker",
   "Configuration": {
     "startNode": {
-      "type": "content",
-      "id": "umb://document/591bd037a0d345c18fa4207a264e7485"
+      "type": "content"
     },
     "filter": "article",
     "minNumber": 0,
