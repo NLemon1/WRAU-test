@@ -11,6 +11,7 @@ public partial class CheckoutStepPage
     public CheckoutPage CheckoutPage => this.GetCheckoutPage();
 
     public virtual OrderReadOnly Order => this.GetCurrentOrder();
+    public string ReadableAddress => $"{Order.Properties["shippingAddressLine1"]}, {Order.Properties["shippingAddressLine2"]}, {Order.Properties["city"]}, {Order.Properties["shippingState"]}, {Order.Properties["shippingZipCode"]}, {Order.Properties["shippingAddress.Country"]} ";
 
     public CheckoutStepPage CurrentStep => CheckoutPage.Steps.Where(x => x.Id == this.Id).FirstOrDefault();
 
@@ -24,4 +25,6 @@ public partial class CheckoutStepPage
     public ShippingMethodReadOnly? ShippingMethod => Order?.ShippingInfo.ShippingMethodId != null
         ? UmbracoCommerceApi.Instance.GetShippingMethod(Order.ShippingInfo.ShippingMethodId.Value)
         : null;
+
+
 }

@@ -54,10 +54,10 @@ public class WraProductDto
     public string Taxonomy { get; set; }
 
     [JsonPropertyName("memberPrice")]
-    public int MemberPrice { get; set; }
+    public decimal MemberPrice { get; set; }
 
     [JsonPropertyName("nonMemberPrice")]
-    public int Price { get; set; }
+    public decimal Price { get; set; }
 
     [JsonPropertyName("imageUrl")]
     public string ImageUrl { get; set; }

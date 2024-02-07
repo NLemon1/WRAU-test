@@ -58,7 +58,7 @@ public class SearchService
 
         }
     }
-    public IEnumerable<PublishedSearchResult> SearchProductsByCategory(int? collectionId, string category, int page, int pageSize)
+    public IEnumerable<PublishedSearchResult> SearchProductsByCategory(int? collectionId, string category)
     {
 
         if (_examineManager.TryGetIndex("ExternalIndex", out var index))

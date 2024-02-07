@@ -156,7 +156,7 @@ public class CheckoutSurfaceController : SurfaceController
                     { "shippingZipCode", address.ZipCode },
                     { "shippingFirstName", address.FirstName },
                     { "shippingLastName", address.LastName },
-                    //{ "billingTelephone", model.BillingAddress.Telephone },
+                    // { "shippingCountry", address.Country },
             };
 
     }

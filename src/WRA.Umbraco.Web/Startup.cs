@@ -38,6 +38,7 @@ namespace WRA.Umbraco.Web
             services.AddScoped<SearchService>();
             services.AddScoped<WRAExternalApiService>();
             services.AddScoped<WRAMemberService>();
+            services.AddScoped<WRAProductService>();
             services.AddTransient<QueueService>();
             // services.AddScoped<IPasswordHasher<BackOfficeIdentityUser>, CustomMemberPasswordHasher<BackOfficeIdentityUser>>();
 

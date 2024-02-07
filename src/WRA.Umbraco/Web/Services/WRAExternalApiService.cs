@@ -23,6 +23,16 @@ public class WRAExternalApiService
 
         return response;
     }
+    public async Task<RestResponse> GetProductSubCategories()
+    {
+        var options = new RestClientOptions("https://app2.wra.org/umbraco/api/v1");
+        var client = new RestClient(options);
+        var request = new RestRequest("productSubcategory");
+        request.AddHeader("X-API-KEY", _token);
+        var response = await client.GetAsync(request);
+
+        return response;
+    }
     public async Task<RestResponse> GetProducts()
     {
         var options = new RestClientOptions("https://app2.wra.org/umbraco/api/v1");

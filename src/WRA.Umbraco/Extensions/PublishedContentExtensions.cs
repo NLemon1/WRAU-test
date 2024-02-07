@@ -5,6 +5,7 @@ using WRA.Umbraco.Models;
 using Umbraco.Commerce.Extensions;
 using WRA.Umbraco.Dtos;
 using Umbraco.Cms.Core.Models;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace WRA.Umbraco
 {
@@ -99,37 +100,63 @@ namespace WRA.Umbraco
         {
             MemberDto mdto = new MemberDto
             {
-                BrokerFullName = m.GetValue<string>("brokerFullName")!.SafeString(),
-                BrokerEmail = m.GetValue<string>("brokerEmail")!.SafeString(),
-                Address1 = m.GetValue<string>("address1")!.SafeString(),
-                Address2 = m.GetValue<string>("address2")!.SafeString(),
-                Address3 = m.GetValue<string>("address3")!.SafeString(),
-                City = m.GetValue<string>("city")!.SafeString(),
-                CellPhone = m.GetValue<string>("cellPhone")!.SafeString(),
+                BrokerFullName = m.GetValue<string>("brokerFullName").SafeString(),
+                BrokerEmail = m.GetValue<string>("brokerEmail").SafeString(),
+                Address1 = m.GetValue<string>("address1").SafeString(),
+                Address2 = m.GetValue<string>("address2").SafeString(),
+                Address3 = m.GetValue<string>("address3").SafeString(),
+                City = m.GetValue<string>("city").SafeString(),
+                CellPhone = m.GetValue<string>("cellPhone").SafeString(),
                 CanUseHotline = m.GetValue<bool>("canUseHotline"),
-                CompanyLogoUrl = m.GetValue<string>("companyLogoUrl")!.SafeString(),
+                CompanyLogoUrl = m.GetValue<string>("companyLogoUrl").SafeString(),
                 CompanyId = m.GetValue<int>("companyId"),
-                CompanyName = m.GetValue<string>("companyName")!.SafeString(),
+                CompanyName = m.GetValue<string>("companyName").SafeString(),
                 //Getber.SetValue("companySubscriptions", mdto.CompanySubscriptions);
-                Fax = m.GetValue<string>("fax")!.SafeString(),
-                FirstName = m.GetValue<string>("firstName")!.SafeString(),
-                LastName = m.GetValue<string>("lastName")!.SafeString(),
-                Gender = m.GetValue<string>("gender")!.SafeString(),
-                HomePhone = m.GetValue<string>("homePhone")!.SafeString(),
+                Fax = m.GetValue<string>("fax").SafeString(),
+                FirstName = m.GetValue<string>("firstName").SafeString(),
+                LastName = m.GetValue<string>("lastName").SafeString(),
+                Gender = m.GetValue<string>("gender").SafeString(),
+                HomePhone = m.GetValue<string>("homePhone").SafeString(),
                 Id = m.GetValue<int>("externalId"),
-                ImageUrl = m.GetValue<string>("imageUrl")!.SafeString(),
+                ImageUrl = m.GetValue<string>("imageUrl").SafeString(),
                 JoinDate = m.GetValue<DateTime>("joinDate"),
                 MandatoryHotlineLetter = m.GetValue<bool>("mandatoryHotlineLetter"),
-                NrdsId = m.GetValue<string>("nrdsId")!.SafeString(),
+                NrdsId = m.GetValue<string>("nrdsId").SafeString(),
                 PaidThruDate = m.GetValue<DateTime>("paidThruDate"),
-                Prefix = m.GetValue<string>("prefix")!.SafeString(),
-                Suffix = m.GetValue<string>("suffix")!.SafeString(),
-                StateProvince = m.GetValue<string>("stateProvince")!.SafeString(),
-                Zip = m.GetValue<string>("zip")!.SafeString()
+                Prefix = m.GetValue<string>("prefix").SafeString(),
+                Suffix = m.GetValue<string>("suffix").SafeString(),
+                StateProvince = m.GetValue<string>("stateProvince").SafeString(),
+                Zip = m.GetValue<string>("zip").SafeString()
             };
 
             return mdto;
         }
+
+        // public static WraProductDto AsWraProductDto(this IContent c)
+        // {
+        //     WraProductDto pdto = new WraProductDto
+        //     {
+        //         Id = c.GetValue<string>("productId").SafeString(),
+        //         Name = c.Name!,
+        //         Sku = c.GetValue<string>("sku").SafeString(),
+        //         Taxonomy = c.GetValue<string>("taxonomy").SafeString()
+        //         Id = c.GetValue<string>("id").SafeString()
+        //         Id = c.GetValue<string>("id").SafeString()
+        //         Id = c.GetValue<string>("id").SafeString()
+        //         Id = c.GetValue<string>("id").SafeString()
+        //         Id = c.GetValue<string>("id").SafeString()
+        //         Id = c.GetValue<string>("id").SafeString()
+        //         Id = c.GetValue<string>("id").SafeString()
+        //         Id = c.GetValue<string>("id").SafeString()
+        //         Id = c.GetValue<string>("id").SafeString()
+        //         Id = c.GetValue<string>("id").SafeString()
+        //         Id = c.GetValue<string>("id").SafeString()
+        //         Id = c.GetValue<string>("id").SafeString()
+        //         Id = c.GetValue<string>("id").SafeString()
+        //     };
+
+        //     return pdto;
+        // }
 
         /// <summary>
         /// Member Specific Extensions
@@ -250,7 +277,7 @@ namespace WRA.Umbraco
             return checkoutStepPage.Ancestor<Home>();
         }
 
-        public static string SafeString(this object item)
+        public static string SafeString(this object? item)
         {
             return item?.ToString() ?? string.Empty;
         }

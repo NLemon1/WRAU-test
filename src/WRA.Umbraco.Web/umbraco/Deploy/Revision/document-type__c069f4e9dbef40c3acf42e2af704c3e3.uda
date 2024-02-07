@@ -25,10 +25,28 @@
       "Alias": "properties",
       "PropertyTypes": [
         {
+          "Key": "2e86f46d-e5e8-41d1-8493-0941e42984d9",
+          "Alias": "description",
+          "DataType": "umb://data-type/442345c1f60841edb869331f823a3242",
+          "Name": "Description"
+        },
+        {
           "Key": "3e8de877-a091-45bc-b0d5-258df7c8c7fd",
           "Alias": "displayName",
           "DataType": "umb://data-type/f0bc4bfbb49940d6ba86058885a5178c",
           "Name": "Display Name"
+        },
+        {
+          "Key": "5ec3c10b-150d-4b2e-837a-29aeff3013e2",
+          "Alias": "externalCategoryId",
+          "DataType": "umb://data-type/f0bc4bfbb49940d6ba86058885a5178c",
+          "Name": "External Category Id"
+        },
+        {
+          "Key": "f4e980b7-4a61-4f3f-9246-6ca6223407c3",
+          "Alias": "externalId",
+          "DataType": "umb://data-type/f0bc4bfbb49940d6ba86058885a5178c",
+          "Name": "External Id"
         }
       ]
     }
@@ -36,6 +54,10 @@
   "PropertyTypes": [],
   "Udi": "umb://document-type/c069f4e9dbef40c3acf42e2af704c3e3",
   "Dependencies": [
+    {
+      "Udi": "umb://data-type/442345c1f60841edb869331f823a3242",
+      "Ordering": true
+    },
     {
       "Udi": "umb://data-type/f0bc4bfbb49940d6ba86058885a5178c",
       "Ordering": true
