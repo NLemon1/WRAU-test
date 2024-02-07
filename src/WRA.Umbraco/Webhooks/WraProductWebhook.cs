@@ -19,20 +19,21 @@ public class WraProductWebhook : WebhookEventContentBase<ContentPublishedNotific
 {
     private readonly ILogger<WraProductWebhook> _logger;
     private readonly QueueService _queueService;
-    private readonly WRAProductService _wraProductService;
+    // private readonly WRAProductService _wraProductService;
     public WraProductWebhook(
         IWebhookFiringService webhookFiringService,
         IWebhookService webhookService,
         IOptionsMonitor<WebhookSettings> webhookSettings,
         IServerRoleAccessor serverRoleAccessor,
         ILogger<WraProductWebhook> logger,
-        QueueService queueService,
-        WRAProductService wraProdService)
+        QueueService queueService
+        // WRAProductService wraProdService
+        )
         : base(webhookFiringService, webhookService, webhookSettings, serverRoleAccessor)
     {
         _logger = logger;
         _queueService = queueService;
-        _wraProductService = wraProdService;
+        // _wraProductService = wraProdService;
     }
 
     public override string Alias => "WraProductUpdate";
@@ -57,12 +58,13 @@ public class WraProductWebhook : WebhookEventContentBase<ContentPublishedNotific
         // Write to the logs every time a member is saved.
         _logger.LogInformation($"Product {contentNotif.Id} has been saved and notification published! name: {contentNotif.Name} WraID: {contentNotif.Id}");
         string sku = contentNotif.GetValue<string>("sku") ?? string.Empty;
-        var product = _wraProductService.GetWraProduct(sku);
+        return string.Empty;
+        // var product = _wraProductService.GetWraProduct(sku);
 
-        //TODO: create static options class
-        var options = new JsonSerializerOptions { WriteIndented = false };
-        string jsonResponse = JsonSerializer.Serialize(product, options);
-        return jsonResponse;
+        // //TODO: create static options class
+        // var options = new JsonSerializerOptions { WriteIndented = false };
+        // string jsonResponse = JsonSerializer.Serialize(product, options);
+        // return jsonResponse;
 
     }
     public override async Task ProcessWebhooks(ContentPublishedNotification notification, IEnumerable<IWebhook> webhooks, CancellationToken cancellationToken)
