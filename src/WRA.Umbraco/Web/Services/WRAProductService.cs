@@ -26,7 +26,7 @@ public class WRAProductService
     public WRAProductService(
 
         SearchService searchService,
-        CurrencyService currencyService,
+        ICurrencyService currencyService,
         IContentService contentService,
         ILogger<WRAProductService> logger
     )
