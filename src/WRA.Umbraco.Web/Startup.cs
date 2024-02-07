@@ -1,6 +1,8 @@
 using My.Custom.Swagger;
 using WRA.Umbraco.Services;
 using WRA.Umbraco.Extensions;
+using Umbraco.Cms.Core.Notifications;
+using WRA.Umbraco.Events;
 
 namespace WRA.Umbraco.Web
 {
@@ -50,6 +52,7 @@ namespace WRA.Umbraco.Web
                 .AddWraStore()
                 .AddDeliveryApi()
                 .AddComposers()
+                .AddNotificationHandler<ContentPublishedNotification, ProductNofitication>()
                 .ConfigureMySwaggerGen()
                 .Build();
 
