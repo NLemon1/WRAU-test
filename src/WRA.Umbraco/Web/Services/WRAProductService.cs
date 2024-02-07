@@ -15,8 +15,7 @@ using WRA.Umbraco.Models;
 namespace WRA.Umbraco.Services;
 public class WRAProductService
 {
-    readonly IProductService _umbracoProductService;
-    readonly IPublishedContentQuery _publishedContentQuery;
+
     readonly SearchService _searchService;
     readonly ILogger<WRAProductService> _logger;
     readonly IContentService _contentService;
@@ -25,16 +24,17 @@ public class WRAProductService
 
 
     public WRAProductService(
-        IProductService umbracoProductService,
-        IPublishedContentQuery publishedContentQuery,
+
         SearchService searchService,
         CurrencyService currencyService,
+        IContentService contentService,
         ILogger<WRAProductService> logger
     )
     {
-        _publishedContentQuery = publishedContentQuery;
         _logger = logger;
         _currencyService = currencyService;
+        _searchService = searchService;
+        _contentService = contentService;
     }
 
     private CurrencyReadOnly GetCurrency(Guid storeId) => _currencyService.GetCurrencies(storeId).Where(c => c.Name == "USD").First();
