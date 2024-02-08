@@ -1165,6 +1165,7 @@
         "allowAtRoot": true,
         "allowInAreas": true,
         "areas": [],
+        "thumbnail": "~/catalogue-thumbnails/calendar.png",
         "contentElementTypeKey": "5f061be2-5b63-4452-99b5-d026a8e6af17",
         "label": "",
         "editorSize": "medium",

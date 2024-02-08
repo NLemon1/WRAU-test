@@ -34,22 +34,19 @@
           "Key": "3e8de877-a091-45bc-b0d5-258df7c8c7fd",
           "Alias": "displayName",
           "DataType": "umb://data-type/f0bc4bfbb49940d6ba86058885a5178c",
-          "Name": "Display Name",
-          "SortOrder": 1
+          "Name": "Display Name"
         },
         {
           "Key": "5ec3c10b-150d-4b2e-837a-29aeff3013e2",
           "Alias": "externalCategoryId",
           "DataType": "umb://data-type/f0bc4bfbb49940d6ba86058885a5178c",
-          "Name": "External Category Id",
-          "SortOrder": 2
+          "Name": "External Category Id"
         },
         {
           "Key": "f4e980b7-4a61-4f3f-9246-6ca6223407c3",
           "Alias": "externalId",
           "DataType": "umb://data-type/f0bc4bfbb49940d6ba86058885a5178c",
-          "Name": "External Id",
-          "SortOrder": 3
+          "Name": "External Id"
         }
       ]
     }
