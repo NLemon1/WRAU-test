@@ -71,7 +71,7 @@
                 </div>
             }
             <div class="px-4 py-3 bg-tertiary">
-                <a class="btn btn-primary btn-sm w-100" href="@Context.Request.Path/question-form/">Submit a Question</a>
+                <a class="btn btn-primary btn-sm w-100" href="@(Context.Request.Path + "question-form/")">Submit a Question</a>
             </div>
         </div>
         <div class="col-12 col-lg-8 offset-lg-1">
@@ -87,7 +87,7 @@
             </nav>
             <div class="d-flex flex-column flex-lg-row align-items-center justify-content-between px-4 py-3 px-lg-6 py-lg-5 bg-tertiary fw-semibold">
                 <strong>Can't find what you're looking for?</strong>
-                <a class="btn btn-primary btn-sm mt-3 mt-lg-0" href="@Context.Request.Path/question-form/">Submit a Question</a>
+                <a class="btn btn-primary btn-sm mt-3 mt-lg-0" href="@(Context.Request.Path + "question-form/")">Submit a Question</a>
             </div>
         </div>
     </div>

@@ -43,7 +43,8 @@
           "Key": "a0c6e1b8-5b1e-47e1-be28-ddaf0aa29a89",
           "Alias": "publishDate",
           "DataType": "umb://data-type/5046194e4237453ca54715db3a07c4e1",
-          "Description": "Optional. Defaults to the date this page is published in the admin.",
+          "Description": "",
+          "Mandatory": true,
           "Name": "Publish Date",
           "SortOrder": 4
         },
