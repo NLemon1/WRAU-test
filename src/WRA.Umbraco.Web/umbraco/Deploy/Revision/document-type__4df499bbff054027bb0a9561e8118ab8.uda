@@ -40,6 +40,14 @@
           "SortOrder": 2
         },
         {
+          "Key": "a0c6e1b8-5b1e-47e1-be28-ddaf0aa29a89",
+          "Alias": "publishDate",
+          "DataType": "umb://data-type/5046194e4237453ca54715db3a07c4e1",
+          "Description": "Optional. Defaults to the date this page is published in the admin.",
+          "Name": "Publish Date",
+          "SortOrder": 4
+        },
+        {
           "Key": "b41375b8-8729-448a-998f-c6be0d83ab80",
           "Alias": "subcategories",
           "DataType": "umb://data-type/4a0ed2335b1541f297e06ef94bda3af4",
@@ -54,6 +62,10 @@
   "Dependencies": [
     {
       "Udi": "umb://data-type/4a0ed2335b1541f297e06ef94bda3af4",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/5046194e4237453ca54715db3a07c4e1",
       "Ordering": true
     },
     {

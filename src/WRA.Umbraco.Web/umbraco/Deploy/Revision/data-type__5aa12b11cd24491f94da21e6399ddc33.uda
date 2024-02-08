@@ -1165,8 +1165,7 @@
         "allowAtRoot": true,
         "allowInAreas": true,
         "areas": [],
-        "thumbnail": "~/catalogue-thumbnails/calendar.png",
-        "contentElementTypeKey": "5f061be2-5b63-4452-99b5-d026a8e6af17",
+        "contentElementTypeKey": "b6d70662-ffa7-438a-83b7-3a648ba8544b",
         "label": "",
         "editorSize": "medium",
         "inlineEditing": false,
@@ -1292,6 +1291,9 @@
     },
     {
       "Udi": "umb://document-type/b65e28c8ab2748dd88ccc6dc27c40f4b"
+    },
+    {
+      "Udi": "umb://document-type/b6d70662ffa7438a83b73a648ba8544b"
     },
     {
       "Udi": "umb://document-type/bf995e2dfadc4379b5a3614b1f9782cc"
