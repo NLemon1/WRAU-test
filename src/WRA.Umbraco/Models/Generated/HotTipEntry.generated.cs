@@ -66,7 +66,7 @@ namespace WRA.Umbraco.Models
 		public virtual global::Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent Category => this.Value<global::Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent>(_publishedValueFallback, "category");
 
 		///<summary>
-		/// Publish Date: Optional. Defaults to the date this page is published in the admin.
+		/// Publish Date
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.0+802e5a8")]
 		[ImplementPropertyType("publishDate")]
