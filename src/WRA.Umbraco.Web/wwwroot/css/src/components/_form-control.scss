@@ -84,3 +84,79 @@ select.form-control {
         max-width: 16.25rem;
     }
 }
+
+.calendar-filter {
+
+    .form-check-label {
+        position: relative;
+        cursor: pointer;
+        padding-left: 29px;
+        font-weight: 600;
+        font-size: 1rem;
+        width: 100%;
+
+        &::before {
+            height: 14px;
+            width: 14px;
+            content: " ";
+            border: 1px solid transparent;
+            border-radius: 1px;
+            position: absolute;
+            left: 3px;
+            top: 3px;
+        }
+
+        &::after {
+            height: 20px;
+            width: 20px;
+            content: " ";
+            border: 2px solid #FFF;
+            border-radius: 1px;
+            position: absolute;
+            left: 0px;
+            top: 2px;
+        }
+    }
+
+    input.form-check-input {
+        display: none;
+        flex: 0 0 13px;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        box-shadow: 0px 0px 0px 1px #0e0e0e;
+        border: solid 2px white;
+        border-radius: 3px;
+        margin: 6px;
+        width: 13px;
+        height: 13px;
+        cursor: pointer;
+
+        &:checked + label:before {
+            content: "";
+            display: block;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3C!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--%3E%3Cpath fill='%23ffffff' d='M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z'/%3E%3C/svg%3E");
+            height: 18px;
+            width: 18px;
+            content: " ";
+            position: absolute;
+            left: 1px;
+            top: 3px;
+            z-index: 1;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 82%;
+        }
+
+        &:checked + label:after {
+            border-color: #FFF;
+            background-color: transparent;
+        }
+
+        &:checked {
+            box-shadow: 0px 0px 0px 1px #CC1433;
+            border-color: #FFF;
+            //background: #CC1433;
+        }
+    }
+}

@@ -15,6 +15,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  
+  <ItemGroup>
+    <Content Remove="Views\Calendar.cshtml" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Umbraco.Cloud.Cms.PublicAccess" Version="13.0.0" />

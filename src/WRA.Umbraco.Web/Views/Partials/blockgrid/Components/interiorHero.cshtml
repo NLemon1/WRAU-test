@@ -82,7 +82,6 @@
                                 </form>
                             </div>
                         }
-
                     </div>
 
                     @if (Model.Areas.FirstOrDefault().Any() || !content.ShowEventCalendar)
@@ -107,24 +106,7 @@
             <h2 class="js-calendar-tab mobile-calendar-tab h4 mb-0 mb-lg-4 p-4 p-lg-0" role="button" aria-hidden="true">Upcoming Events</h2>
             <div class="block-interior-hero__events-inner d-none d-lg-flex flex-column align-items-start w-100 mt-auto">
 
-                <!-- TO DO: Pull in Events -->
-                <ol class="list-unstyled">
-                    <li class="mb-3">
-                        <a href="/" class="btn btn-link btn-light ms-n2">Lorem Ipsim</a>
-                        <p class="mb-0 fs-sm">October 1</p>
-                        <p class="mb-0 fs-sm">Wisconsin Dells</p>
-                    </li>
-                    <li class="mb-3">
-                        <a href="/" class="btn btn-link btn-light ms-n2">Lorem Ipsim</a>
-                        <p class="mb-0 fs-sm">October 1</p>
-                        <p class="mb-0 fs-sm">Wisconsin Dells</p>
-                    </li>
-                    <li class="mb-3">
-                        <a href="/" class="btn btn-link btn-light ms-n2">Lorem Ipsim</a>
-                        <p class="mb-0 fs-sm">October 1</p>
-                        <p class="mb-0 fs-sm">Wisconsin Dells</p>
-                    </li>
-                </ol>
+                @{await Html.RenderPartialAsync("_MiniCalendar");}
 
                 <a href="/events" class="btn btn-link-arrow btn-light ms-n2 mt-auto">
                     More Events
@@ -136,32 +118,15 @@
             </div>
         </div>
     }
-
 </div>
 
 @if (content.ShowEventCalendar)
 {
     <div class="js-calendar-panel block-interior-hero__events-mobile d-flex d-lg-none w-100 text-white">
         <div class="flex-column align-items-start  p-4 pb-5 pt-0">
-            <!-- TO DO: Pull in Events -->
-            <ol class="list-unstyled">
-                <li class="mb-3">
-                    <a href="/" class="btn btn-link btn-light ms-n2">Lorem Ipsim</a>
-                    <p class="mb-0 fs-sm">October 1</p>
-                    <p class="mb-0 fs-sm">Wisconsin Dells</p>
-                </li>
-                <li class="mb-3">
-                    <a href="/" class="btn btn-link btn-light ms-n2">Lorem Ipsim</a>
-                    <p class="mb-0 fs-sm">October 1</p>
-                    <p class="mb-0 fs-sm">Wisconsin Dells</p>
-                </li>
-                <li class="mb-3">
-                    <a href="/" class="btn btn-link btn-light ms-n2">Lorem Ipsim</a>
-                    <p class="mb-0 fs-sm">October 1</p>
-                    <p class="mb-0 fs-sm">Wisconsin Dells</p>
-                </li>
-            </ol>
-
+            @{
+                await Html.RenderPartialAsync("_MiniCalendar");
+            }
             <a href="/events" class="btn btn-link-arrow btn-light ms-n2 mt-auto">
                 More Events
                 <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">

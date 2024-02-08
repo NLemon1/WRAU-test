@@ -14,24 +14,24 @@
   "dependencies": {
     "@babel/core": "^7.21.4",
     "@babel/preset-env": "^7.21.4",
-    "@event-calendar/core": "^2.5.1",
-    "@event-calendar/day-grid": "2.5.1",
-    "@event-calendar/time-grid": "^2.5.1",
     "a11y-accordion-tabs": "^1.0.2",
     "a11y-dialog": "^8.0.4",
     "babelify": "^10.0.0",
     "bootstrap": "^5.3.0",
     "browserify": "^17.0.0",
     "esmify": "^2.1.1",
+    "event-calendar": "^0.8.1",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^8.0.0",
     "gulp-sass": "^5.1.0",
     "gulp-sourcemaps": "^3.0.0",
     "gulplog": "^2.0.0",
-    "masonry-layout": "^4.2.2",
     "sass": "^1.69.1",
     "swiper": "^11.0.3",
     "vinyl-buffer": "^1.0.1",
-    "vinyl-source-stream": "^2.0.0"
+    "vinyl-source-stream": "^2.0.0",
+    "@event-calendar/core": "^2.5.1",
+    "@event-calendar/day-grid": "2.5.1",
+    "@event-calendar/time-grid": "^2.5.1"
   }
 }

@@ -22,6 +22,15 @@
         }
     }
 
+    &.btn-filter:not(.ec-active) {
+        color: $blue-medium !important;
+
+        &:before {
+            border-color: $gray-10 !important;
+            background-color: $gray-10 !important;
+        }
+    }
+
     &:where(:not(.btn-link-arrow):not(.btn-link)) {
         color: #FFFFFF;
         padding: $btn-padding-y $btn-padding-x;
@@ -54,8 +63,7 @@
         padding: $btn-padding-y-sm $btn-padding-x-sm;
     }
 
-    &:hover:where(:not(.btn-link-arrow):not(.btn-link):not(.btn-secondary)),
-    &:active:where(:not(.btn-link-arrow):not(.btn-link):not(.btn-secondary)) {
+    &:hover:where(:not(.btn-link-arrow):not(.btn-link):not(.btn-secondary)), &:active:where(:not(.btn-link-arrow):not(.btn-link):not(.btn-secondary)) {
         text-decoration: none;
         color: $dark;
 
@@ -236,8 +244,7 @@
         }
     }
 
-    &-link-arrow,
-    &-link-arrow--primary {
+    &-link-arrow, &-link-arrow--primary {
         color: $gray-40;
         padding: 0.5rem 0.625rem 0.5rem 0.625rem;
         align-items: center;

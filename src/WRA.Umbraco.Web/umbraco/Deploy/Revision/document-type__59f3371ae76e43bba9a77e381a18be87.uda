@@ -21,6 +21,22 @@
       "Alias": "content",
       "PropertyTypes": [
         {
+          "Key": "09dc6b5d-7905-4b62-9308-57f375cd9d83",
+          "Alias": "showInCalendar",
+          "DataType": "umb://data-type/a135d918eccc468181719380ce19c789",
+          "Description": "Enable calendar category.",
+          "Name": "Show in Calendar",
+          "SortOrder": 3
+        },
+        {
+          "Key": "34a5cec4-7b42-49fb-992d-3024dd232db7",
+          "Alias": "colorCode",
+          "DataType": "umb://data-type/edd63835d0084d4a84585b5703c5a13b",
+          "Description": "Used in Calendar, if type is event.",
+          "Name": "Color Code",
+          "SortOrder": 4
+        },
+        {
           "Key": "cc9361d7-c287-467b-b86d-3d0b3b5599db",
           "Alias": "externalId",
           "DataType": "umb://data-type/f0bc4bfbb49940d6ba86058885a5178c",
@@ -32,6 +48,14 @@
   "PropertyTypes": [],
   "Udi": "umb://document-type/59f3371ae76e43bba9a77e381a18be87",
   "Dependencies": [
+    {
+      "Udi": "umb://data-type/a135d918eccc468181719380ce19c789",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/edd63835d0084d4a84585b5703c5a13b",
+      "Ordering": true
+    },
     {
       "Udi": "umb://data-type/f0bc4bfbb49940d6ba86058885a5178c",
       "Ordering": true

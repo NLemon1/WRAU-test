@@ -1,0 +1,31 @@
+{
+  "Name": "Event Calendar",
+  "Alias": "eventCalendar",
+  "AllowedTemplates": [],
+  "HistoryCleanup": {},
+  "Icon": "icon-calendar-alt color-black",
+  "Thumbnail": "folder.png",
+  "Permissions": {
+    "IsElementType": true,
+    "AllowedChildContentTypes": []
+  },
+  "Parent": "umb://document-type-container/37b4b44f0abc4536af8ed684511c2571",
+  "CompositionContentTypes": [
+    "umb://document-type/38e48d076783491993c671f1add73d05"
+  ],
+  "PropertyGroups": [],
+  "PropertyTypes": [],
+  "Udi": "umb://document-type/5f061be25b63445299b5d026a8e6af17",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type-container/37b4b44f0abc4536af8ed684511c2571",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type/38e48d076783491993c671f1add73d05",
+      "Ordering": true
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
+  "__version": "13.0.3"
+}

@@ -1,0 +1,66 @@
+﻿@using Umbraco.Extensions
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+@using Umbraco.Cms.Core.Models.Blocks;
+@using ContentModels = WRA.Umbraco.Models;
+
+@{
+    var content = (ContentModels.EventCalendar)Model.Content;
+    string className = "mb-3 mb-lg-4 container container--lg";
+    string style = "";
+    string props = "";
+
+    if (content.HasValue("additionalCssClasses"))
+    {
+        className += $" {content.AdditionalCssClasses}";
+    }
+
+    if (!String.IsNullOrEmpty(className))
+    {
+        props += $"class=\"{className.Trim()}\"";
+    }
+
+    if (!String.IsNullOrEmpty(style))
+    {
+        props += $" style=\"{style}\"";
+    }
+
+
+    IEnumerable<IPublishedContent> categoriesProducts = Umbraco.ContentAtRoot()
+                                    .DescendantsOrSelfOfType("categoryPage")
+                                    .Where(p => p.HasValue("showInCalendar"))
+                                    .OrderBy(p => p.Name);
+}
+
+@section scriptsPre {
+    <script src="https://cdn.jsdelivr.net/npm/@@event-calendar/build@2.6.0/event-calendar.min.js"></script>
+}
+
+<script type="text/javascript">
+    window.setResources = [
+        @if (categoriesProducts.Any())
+        {
+        foreach (var category in categoriesProducts)
+        {
+            <text>{</text>
+                <text>id:"</text>@category.Id<text>",</text>
+                <text>title:"</text>@category.Name<text>",</text>
+                <text>eventBackgroundColor:"</text>@category.Value("colorCode")<text>"</text>
+            <text>},</text>
+            }
+        }
+    ];
+</script>
+<style class="js-filter-styles">
+</style>
+
+<div @Html.Raw(props.Trim())>
+    <div class="row">
+        <div class="col-md-4 col-xl-3">
+            <form class="js-calendar-filters list-unstyled">
+            </form>
+        </div>
+        <div class="col-md-8 col-xl-9">
+            <div id="ec"></div>
+        </div>
+    </div>
+</div>

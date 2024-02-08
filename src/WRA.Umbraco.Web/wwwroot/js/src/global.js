@@ -14,6 +14,7 @@ import calendar from './components/calendar';
 import quantitySelector from './components/quantity-selector';
 import checkout from './components/checkout';
 
+
 expandableTextCards();
 header();
 nav();

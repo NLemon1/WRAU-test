@@ -1,0 +1,30 @@
+﻿@using Umbraco.Extensions
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+
+@{
+    IEnumerable<IPublishedContent> eventsList = Umbraco.ContentAtRoot()
+           .DescendantsOrSelfOfType("productPage")
+           .Where(p => p.Parent.Name == "Events" && p.IsVisible())
+           .OrderBy(p => p.GetProperty("startDate").GetSourceValue())
+           .Take(4);
+
+    @if (eventsList.Any())
+    {
+        <ol class="list-unstyled">
+            @foreach (var eventItem in eventsList)
+            {
+                <li class="mb-3">
+                    <a href="@eventItem.Url()" class="btn btn-link btn-light ms-n2">@eventItem.Name</a>
+                    @if (eventItem.HasProperty("startDate"))
+                    {
+                        <p class="mb-0 fs-sm">@String.Format("{0:MMMM d, yyyy}", eventItem.GetProperty("startDate").GetValue())</p>
+                    }
+                    @if (eventItem.HasProperty("location"))
+                    {
+                        <p class="mb-0 fs-sm">@eventItem.GetProperty("location").GetValue()</p>
+                    }
+                </li>
+            }
+        </ol>
+    }
+}
