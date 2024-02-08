@@ -50,12 +50,27 @@ namespace WRA.Umbraco.Models
 		// properties
 
 		///<summary>
+		/// Color Code: Used in Calendar, if type is event.
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.0+802e5a8")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("colorCode")]
+		public virtual string ColorCode => this.Value<string>(_publishedValueFallback, "colorCode");
+
+		///<summary>
 		/// External Id
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.0+802e5a8")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("externalId")]
 		public virtual string ExternalId => this.Value<string>(_publishedValueFallback, "externalId");
+
+		///<summary>
+		/// Show in Calendar: Enable calendar category.
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.0+802e5a8")]
+		[ImplementPropertyType("showInCalendar")]
+		public virtual bool ShowInCalendar => this.Value<bool>(_publishedValueFallback, "showInCalendar");
 
 		///<summary>
 		/// Description

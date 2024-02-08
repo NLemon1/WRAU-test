@@ -50,12 +50,36 @@ namespace WRA.Umbraco.Models
 		// properties
 
 		///<summary>
+		/// Description
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.0+802e5a8")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("description")]
+		public virtual string Description => this.Value<string>(_publishedValueFallback, "description");
+
+		///<summary>
 		/// Display Name
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.0+802e5a8")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("displayName")]
 		public virtual string DisplayName => this.Value<string>(_publishedValueFallback, "displayName");
+
+		///<summary>
+		/// External Category Id
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.0+802e5a8")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("externalCategoryId")]
+		public virtual string ExternalCategoryId => this.Value<string>(_publishedValueFallback, "externalCategoryId");
+
+		///<summary>
+		/// External Id
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.0+802e5a8")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("externalId")]
+		public virtual string ExternalId => this.Value<string>(_publishedValueFallback, "externalId");
 
 		///<summary>
 		/// Meta Description

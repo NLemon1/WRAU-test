@@ -76,7 +76,7 @@ public class ContentApiController : ApiController
             }
         }
 
-        var paginatedResults = responseResults
+        IEnumerable<HotTipDto> paginatedResults = responseResults
             .Paginate<HotTipEntry>(request.Pagination)
             .Select(r => r.AsDto());
 

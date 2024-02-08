@@ -20,7 +20,7 @@ namespace WRA.Umbraco.Models
 {
 	/// <summary>Event Calendar</summary>
 	[PublishedModel("eventCalendar")]
-	public partial class EventCalendar : PublishedElementModel, IAdditionalCss, IBlockVisibility, IBlockWidth
+	public partial class EventCalendar : PublishedElementModel, IAdditionalCss
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
@@ -56,28 +56,5 @@ namespace WRA.Umbraco.Models
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("additionalCssClasses")]
 		public virtual string AdditionalCssClasses => global::WRA.Umbraco.Models.AdditionalCss.GetAdditionalCssClasses(this, _publishedValueFallback);
-
-		///<summary>
-		/// Visible To All
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.0+802e5a8")]
-		[ImplementPropertyType("visibleToAll")]
-		public virtual bool VisibleToAll => global::WRA.Umbraco.Models.BlockVisibility.GetVisibleToAll(this, _publishedValueFallback);
-
-		///<summary>
-		/// Visible To Member Groups: Member Groups for whom this content is visible
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.0+802e5a8")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("visibleToMemberGroups")]
-		public virtual string VisibleToMemberGroups => global::WRA.Umbraco.Models.BlockVisibility.GetVisibleToMemberGroups(this, _publishedValueFallback);
-
-		///<summary>
-		/// Width
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.0+802e5a8")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("width")]
-		public virtual string Width => global::WRA.Umbraco.Models.BlockWidth.GetWidth(this, _publishedValueFallback);
 	}
 }

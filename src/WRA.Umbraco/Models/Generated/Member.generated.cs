@@ -113,12 +113,20 @@ namespace WRA.Umbraco.Models
 		public virtual string City => this.Value<string>(_publishedValueFallback, "city");
 
 		///<summary>
-		/// Comany Logo Url
+		/// Company Id
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.0+802e5a8")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("comanyLogoUrl")]
-		public virtual string ComanyLogoUrl => this.Value<string>(_publishedValueFallback, "comanyLogoUrl");
+		[ImplementPropertyType("companyId")]
+		public virtual string CompanyId => this.Value<string>(_publishedValueFallback, "companyId");
+
+		///<summary>
+		/// Company Logo Url
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.0+802e5a8")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("companyLogoUrl")]
+		public virtual string CompanyLogoUrl => this.Value<string>(_publishedValueFallback, "companyLogoUrl");
 
 		///<summary>
 		/// Company Name
@@ -177,11 +185,27 @@ namespace WRA.Umbraco.Models
 		public virtual string HomePhone => this.Value<string>(_publishedValueFallback, "homePhone");
 
 		///<summary>
+		/// Image Url
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.0+802e5a8")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("imageUrl")]
+		public virtual string ImageUrl => this.Value<string>(_publishedValueFallback, "imageUrl");
+
+		///<summary>
 		/// JoinDate
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.0+802e5a8")]
 		[ImplementPropertyType("joinDate")]
 		public virtual global::System.DateTime JoinDate => this.Value<global::System.DateTime>(_publishedValueFallback, "joinDate");
+
+		///<summary>
+		/// Last Name
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.0+802e5a8")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("lastName")]
+		public virtual string LastName => this.Value<string>(_publishedValueFallback, "lastName");
 
 		///<summary>
 		/// Mandatory Hotline Letter
@@ -220,6 +244,14 @@ namespace WRA.Umbraco.Models
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("stateProvince")]
 		public virtual string StateProvince => this.Value<string>(_publishedValueFallback, "stateProvince");
+
+		///<summary>
+		/// Suffix
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.0+802e5a8")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("suffix")]
+		public virtual string Suffix => this.Value<string>(_publishedValueFallback, "suffix");
 
 		///<summary>
 		/// Comments

@@ -540,6 +540,14 @@ namespace WRA.Umbraco.Models
 		public virtual string NavMenu5Name => this.Value<string>(_publishedValueFallback, "navMenu5Name");
 
 		///<summary>
+		/// OG Image Fallback
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.0+802e5a8")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("oGImageFallback")]
+		public virtual global::Umbraco.Cms.Core.Models.MediaWithCrops OGimageFallback => this.Value<global::Umbraco.Cms.Core.Models.MediaWithCrops>(_publishedValueFallback, "oGImageFallback");
+
+		///<summary>
 		/// Address
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.0+802e5a8")]

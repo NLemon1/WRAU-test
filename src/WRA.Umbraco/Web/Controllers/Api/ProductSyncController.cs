@@ -158,49 +158,12 @@ public class ProductSyncController : ApiController
         //lets just grab the first 50 for testing
         var externalProducts = JsonSerializer.Deserialize<List<WraProductDto>>(content)?.Take(50);
 
-
-
         foreach (WraProductDto p in externalProducts)
         {
-            //check if page exists
             await _wraProductService.CreatProduct(p);
-            // var productType = p.ProductType;
-
-            // // get collection that matches product Type
-            // var collectionPage = productCollections.Where(c => c.Name == productType)
-            //    .FirstOrDefault();
-            // if (collectionPage == null) { continue; }
-
-            // // while we have the relvent info, lets grab the store ID for when we need it for currency stuff...
-            // var store = collectionPage.GetStore();
-
-            // // We have our colleciton page, so now lets see if it contains a record that already exists...
-            // // if it returns nothing (no page exists matching the ID from WRA), we create one.
-            // var productPage = GetExistingProductPage(p.Sku) ??
-            //                 _contentService.Create(p.Name, collectionPage.Id, ProductPage.ModelTypeAlias);
-
-            // //set properties on our product
-            // SetProductProperties(productPage, p, store);
-
-            // // save and publish the product! Wow! 
-            // _contentService.SaveAndPublish(productPage);
         }
 
     }
-
-    // private IContent CreateNewProductPage(WraExternalProducctDto ep, int collectionId)
-    // {
-    //     // switch case to build content based on the product type
-    //     var product = ep.ProductType switch
-    //     {
-    //         "Events" => _contentService.Create(ep.Name, collectionId, ProductPage.ModelTypeAlias),
-    //         "Education" => _contentService.Create(ep.Name, collectionId, ProductPage.ModelTypeAlias),
-    //         "Products" => _contentService.Create(ep.Name, collectionId, ProductPage.ModelTypeAlias),
-    //         _ => null
-    //     };
-
-    //     return product;
-    // }
 
 
     private void SetProductProperties(IContent content, WraProductDto productDto, StoreReadOnly? store)
