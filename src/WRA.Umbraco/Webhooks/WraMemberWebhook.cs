@@ -8,6 +8,7 @@ using Umbraco.Cms.Core.Services;
 using Umbraco.Cms.Core.Sync;
 using Umbraco.Cms.Core.Webhooks;
 using WRA.Umbraco.Dtos;
+using WRA.Umbraco.Events;
 using WRA.Umbraco.Services;
 
 namespace WRA.Umbraco.Webhooks;

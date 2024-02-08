@@ -1165,7 +1165,8 @@
         "allowAtRoot": true,
         "allowInAreas": true,
         "areas": [],
-        "contentElementTypeKey": "b6d70662-ffa7-438a-83b7-3a648ba8544b",
+        "thumbnail": "~/catalogue-thumbnails/calendar.png",
+        "contentElementTypeKey": "5f061be2-5b63-4452-99b5-d026a8e6af17",
         "label": "",
         "editorSize": "medium",
         "inlineEditing": false,
@@ -1233,6 +1234,9 @@
       "Udi": "umb://document-type/5ed81857883e4c4997cb639707e50cad"
     },
     {
+      "Udi": "umb://document-type/5f061be25b63445299b5d026a8e6af17"
+    },
+    {
       "Udi": "umb://document-type/5fc677b8a2534579801d26068fab5800"
     },
     {
@@ -1288,9 +1292,6 @@
     },
     {
       "Udi": "umb://document-type/b65e28c8ab2748dd88ccc6dc27c40f4b"
-    },
-    {
-      "Udi": "umb://document-type/b6d70662ffa7438a83b73a648ba8544b"
     },
     {
       "Udi": "umb://document-type/bf995e2dfadc4379b5a3614b1f9782cc"

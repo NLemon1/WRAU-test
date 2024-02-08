@@ -52,7 +52,7 @@ namespace WRA.Umbraco.Web
                 .AddWraStore()
                 .AddDeliveryApi()
                 .AddComposers()
-                .AddNotificationHandler<ContentPublishedNotification, ProductNofitication>()
+                .AddWraNotifications()
                 .ConfigureMySwaggerGen()
                 .Build();
 

@@ -7,8 +7,6 @@ public class CustomWebhookComposer : IComposer
     {
         builder.WebhookEvents()
             .Clear()
-            .Add<WraMemberWebhook>()
-            .Add<WraProductWebhook>()
             .AddCms(cmsBuilder =>
             {
                 // Add your custom events here

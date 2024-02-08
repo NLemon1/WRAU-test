@@ -102,6 +102,7 @@ namespace WRA.Umbraco
         {
             MemberDto mdto = new MemberDto
             {
+                Email = m.Email,
                 BrokerFullName = m.GetValue<string>("brokerFullName").SafeString(),
                 BrokerEmail = m.GetValue<string>("brokerEmail").SafeString(),
                 Address1 = m.GetValue<string>("address1").SafeString(),
