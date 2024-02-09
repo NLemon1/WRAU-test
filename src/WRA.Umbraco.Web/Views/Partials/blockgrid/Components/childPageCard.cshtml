@@ -13,10 +13,10 @@
 	
 		@if (content.HasValue("icon"))
 		{
-			<span aria-hidden="true" class="child-card__inner__icon fa-regular fa-@content.Icon"></span>
+			<span aria-hidden="true" class="child-card__inner__icon @content.Icon"></span>
 		} else
 		{
-			<span aria-hidden="true" class="child-card__inner__icon fa-regular fa-star"></span>
+			<span aria-hidden="true" class="child-card__inner__icon fas fa-star"></span>
 		}
 
 		@if (content.HasValue("headline"))

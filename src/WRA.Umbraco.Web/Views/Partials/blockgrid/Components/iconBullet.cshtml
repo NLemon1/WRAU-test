@@ -24,11 +24,11 @@
 <span class="@className" >
     @if (content.HasValue("icon"))
     {
-        <span aria-hidden="true" class="block-bullet-icon__icon me-1 fa-regular fa-@content.Icon"></span>
+        <span aria-hidden="true" class="block-bullet-icon__icon me-1 @content.Icon"></span>
     }
     else
     {
-        <span aria-hidden="true" class="block-bullet-icon__icon me-1 fa-regular fa-star"></span>
+        <span aria-hidden="true" class="block-bullet-icon__icon me-1 fas fa-star"></span>
     }
     @content.Text
 </span>

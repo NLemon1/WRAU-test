@@ -29,7 +29,7 @@
           "Key": "66af4bb8-32ac-4ed4-a7ed-ddafe1d29f15",
           "Alias": "icon",
           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
-          "Description": "Enter the code name from https://fontawesome.com/search",
+          "Description": "Enter the Regukar Icon name from https://fontawesome.com/search?q=star&o=r&s=regular\n(Example: star OR paper-plane )",
           "Name": "Icon"
         },
         {

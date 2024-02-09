@@ -2,13 +2,13 @@ angular.module("umbraco").controller("richTextController", function ($scope) {
       
     const block = $scope.block.data;
 
-    //console.log(block)
-
     let style = "";
     let className = "";
 
     if (block.textColor) {
         style += `color:#${block.textColor.value};`;
+    } else {
+        style += `color:#000000;`;
     }
 
     if (block.fontSize) {
@@ -39,8 +39,10 @@ angular.module("umbraco").controller("richTextController", function ($scope) {
         style += `margin-bottom:${block.bottomMargin[0]};`;
     }
 
+    const richTextHtml = block.text.markup;
+
     $scope.style = style;
     $scope.className = className;
-
+    $scope.richTextHtml = `<div class="rte">${richTextHtml}</div>`;
 
 });

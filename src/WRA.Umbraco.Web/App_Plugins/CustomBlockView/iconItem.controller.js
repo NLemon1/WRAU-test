@@ -24,6 +24,4 @@ angular.module("umbraco").controller("iconItemController", function ($scope) {
     $scope.className = className;
     $scope.style = style;
 
-    console.log(block)
-
 });

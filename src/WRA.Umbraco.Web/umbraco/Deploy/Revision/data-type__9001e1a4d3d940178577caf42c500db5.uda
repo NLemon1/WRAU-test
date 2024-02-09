@@ -14,14 +14,12 @@
         "bullist",
         "numlist",
         "link",
-        "umbmediapicker",
-        "umbblockpicker"
+        "umbmediapicker"
       ],
       "stylesheets": [],
       "maxImageSize": 500,
       "mode": "classic"
     },
-    "blocks": [],
     "useLiveEditing": false,
     "overlaySize": "small",
     "hideLabel": false,

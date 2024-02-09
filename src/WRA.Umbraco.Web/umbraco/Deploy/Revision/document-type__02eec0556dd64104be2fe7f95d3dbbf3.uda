@@ -59,13 +59,6 @@
           "Description": "640px x 824",
           "Name": "Thumbnail Image",
           "SortOrder": 2
-        },
-        {
-          "Key": "fc99dfc7-d1f2-4db3-9af9-e15a0f9e3a74",
-          "Alias": "moreArticles",
-          "DataType": "umb://data-type/b4e3535a175347e28568602cf8cfee6f",
-          "Name": "More Articles",
-          "SortOrder": 5
         }
       ]
     }
@@ -79,10 +72,6 @@
     },
     {
       "Udi": "umb://data-type/ad9f0cf2bda245d59ea1a63cfc873fd3",
-      "Ordering": true
-    },
-    {
-      "Udi": "umb://data-type/b4e3535a175347e28568602cf8cfee6f",
       "Ordering": true
     },
     {

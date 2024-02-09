@@ -8,5 +8,15 @@
     img {
         max-width: 100%;
         height: auto;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+
+        &[style="float: left;"] {
+            margin-right: 1.25rem;
+        }
+
+        &[style="float: right;"] {
+            margin-left: 1.25rem;
+        }
     }
 }

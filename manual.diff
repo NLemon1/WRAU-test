@@ -1,0 +1,275 @@
+diff --git a/src/WRA.Umbraco.Web/umbraco/Deploy/Revision/data-type__7438330ab6f749d69be1b8a5606cb6c6.uda b/src/WRA.Umbraco.Web/umbraco/Deploy/Revision/data-type__7438330ab6f749d69be1b8a5606cb6c6.uda
+index 994f8fe..84674b9 100644
+--- a/src/WRA.Umbraco.Web/umbraco/Deploy/Revision/data-type__7438330ab6f749d69be1b8a5606cb6c6.uda
++++ b/src/WRA.Umbraco.Web/umbraco/Deploy/Revision/data-type__7438330ab6f749d69be1b8a5606cb6c6.uda
+@@ -6,16 +6,19 @@
+     "editor": {
+       "toolbar": [
+         "ace",
++        "styles",
+         "bold",
+         "italic",
+         "alignleft",
+         "aligncenter",
++        "alignright",
+         "bullist",
+         "numlist",
+         "outdent",
+         "indent",
+         "link",
+         "umbmediapicker",
++        "umbblockpicker",
+         "umbmacro",
+         "hr",
+         "subscript",
+@@ -25,6 +28,7 @@
+       "maxImageSize": 500,
+       "mode": "classic"
+     },
++    "blocks": [],
+     "useLiveEditing": false,
+     "overlaySize": "small",
+     "hideLabel": false,
+diff --git a/src/WRA.Umbraco.Web/umbraco/Deploy/Revision/data-type__9001e1a4d3d940178577caf42c500db5.uda b/src/WRA.Umbraco.Web/umbraco/Deploy/Revision/data-type__9001e1a4d3d940178577caf42c500db5.uda
+index c93d822..6cb2975 100644
+--- a/src/WRA.Umbraco.Web/umbraco/Deploy/Revision/data-type__9001e1a4d3d940178577caf42c500db5.uda
++++ b/src/WRA.Umbraco.Web/umbraco/Deploy/Revision/data-type__9001e1a4d3d940178577caf42c500db5.uda
+@@ -14,12 +14,14 @@
+         "bullist",
+         "numlist",
+         "link",
+-        "umbmediapicker"
++        "umbmediapicker",
++        "umbblockpicker"
+       ],
+       "stylesheets": [],
+       "maxImageSize": 500,
+       "mode": "classic"
+     },
++    "blocks": [],
+     "useLiveEditing": false,
+     "overlaySize": "small",
+     "hideLabel": false,
+diff --git a/src/WRA.Umbraco.Web/umbraco/Deploy/Revision/data-type__b98d2fb3b7b94ffa8024022ff2bf4fa7.uda b/src/WRA.Umbraco.Web/umbraco/Deploy/Revision/data-type__b98d2fb3b7b94ffa8024022ff2bf4fa7.uda
+index d90b5bf..11b2ece 100644
+--- a/src/WRA.Umbraco.Web/umbraco/Deploy/Revision/data-type__b98d2fb3b7b94ffa8024022ff2bf4fa7.uda
++++ b/src/WRA.Umbraco.Web/umbraco/Deploy/Revision/data-type__b98d2fb3b7b94ffa8024022ff2bf4fa7.uda
+@@ -18,6 +18,7 @@
+         "indent",
+         "link",
+         "umbmediapicker",
++        "umbblockpicker",
+         "umbmacro",
+         "umbembeddialog"
+       ],
+@@ -25,6 +26,7 @@
+       "maxImageSize": 500,
+       "mode": "classic"
+     },
++    "blocks": [],
+     "useLiveEditing": false,
+     "overlaySize": "small",
+     "hideLabel": false,
+diff --git a/src/WRA.Umbraco.Web/umbraco/Deploy/Revision/data-type__bd7768baf6bb4721ad06353749be5b7e.uda b/src/WRA.Umbraco.Web/umbraco/Deploy/Revision/data-type__bd7768baf6bb4721ad06353749be5b7e.uda
+index 8b2002d..ee55877 100644
+--- a/src/WRA.Umbraco.Web/umbraco/Deploy/Revision/data-type__bd7768baf6bb4721ad06353749be5b7e.uda
++++ b/src/WRA.Umbraco.Web/umbraco/Deploy/Revision/data-type__bd7768baf6bb4721ad06353749be5b7e.uda
+@@ -9,7 +9,7 @@
+     },
+     "filter": "article",
+     "minNumber": 0,
+-    "maxNumber": 0,
++    "maxNumber": 4,
+     "showOpenButton": false,
+     "ignoreUserStartNodes": false
+   },
+diff --git a/src/WRA.Umbraco.Web/umbraco/Deploy/Revision/data-type__ca90c9500aff4e72b976a30b1ac57dad.uda b/src/WRA.Umbraco.Web/umbraco/Deploy/Revision/data-type__ca90c9500aff4e72b976a30b1ac57dad.uda
+index e569a33..446db40 100644
+--- a/src/WRA.Umbraco.Web/umbraco/Deploy/Revision/data-type__ca90c9500aff4e72b976a30b1ac57dad.uda
++++ b/src/WRA.Umbraco.Web/umbraco/Deploy/Revision/data-type__ca90c9500aff4e72b976a30b1ac57dad.uda
+@@ -3,7 +3,32 @@
+   "Alias": "",
+   "EditorAlias": "Umbraco.TinyMCE",
+   "Configuration": {
++    "editor": {
++      "toolbar": [
++        "ace",
++        "styles",
++        "bold",
++        "italic",
++        "alignleft",
++        "aligncenter",
++        "alignright",
++        "bullist",
++        "numlist",
++        "outdent",
++        "indent",
++        "link",
++        "umbmediapicker",
++        "umbblockpicker",
++        "umbmacro",
++        "umbembeddialog"
++      ],
++      "stylesheets": [],
++      "maxImageSize": 500,
++      "mode": "classic"
++    },
++    "blocks": [],
+     "useLiveEditing": false,
++    "overlaySize": "small",
+     "hideLabel": false,
+     "ignoreUserStartNodes": false
+   },
+diff --git a/src/WRA.Umbraco.Web/umbraco/Deploy/Revision/data-type__ea0edb0dd15e4442a7ff76588da1677f.uda b/src/WRA.Umbraco.Web/umbraco/Deploy/Revision/data-type__ea0edb0dd15e4442a7ff76588da1677f.uda
+index c12795d..ac82128 100644
+--- a/src/WRA.Umbraco.Web/umbraco/Deploy/Revision/data-type__ea0edb0dd15e4442a7ff76588da1677f.uda
++++ b/src/WRA.Umbraco.Web/umbraco/Deploy/Revision/data-type__ea0edb0dd15e4442a7ff76588da1677f.uda
+@@ -10,6 +10,10 @@
+         "redo",
+         "bold",
+         "italic",
++        "alignleft",
++        "aligncenter",
++        "alignright",
++        "alignjustify",
+         "link",
+         "unlink"
+       ],
+@@ -17,6 +21,7 @@
+       "maxImageSize": 500,
+       "mode": "classic"
+     },
++    "blocks": [],
+     "useLiveEditing": false,
+     "overlaySize": "small",
+     "hideLabel": false,
+diff --git a/src/WRA.Umbraco.Web/umbraco/Deploy/Revision/data-type__ec5b7f18f4c1484e8d7fd2cac6341d18.uda b/src/WRA.Umbraco.Web/umbraco/Deploy/Revision/data-type__ec5b7f18f4c1484e8d7fd2cac6341d18.uda
+index 9458032..467459f 100644
+--- a/src/WRA.Umbraco.Web/umbraco/Deploy/Revision/data-type__ec5b7f18f4c1484e8d7fd2cac6341d18.uda
++++ b/src/WRA.Umbraco.Web/umbraco/Deploy/Revision/data-type__ec5b7f18f4c1484e8d7fd2cac6341d18.uda
+@@ -5,7 +5,7 @@
+   "Configuration": {
+     "startNode": {
+       "type": "content",
+-      "id": "umb://document/591bd037a0d345c18fa4207a264e7485"
++      "id": "umb://document/0d430f6ff9cd458587663cf0ef447589"
+     },
+     "minNumber": 0,
+     "maxNumber": 1,
+diff --git a/src/WRA.Umbraco.Web/umbraco/Deploy/Revision/document-type__02eec0556dd64104be2fe7f95d3dbbf3.uda b/src/WRA.Umbraco.Web/umbraco/Deploy/Revision/document-type__02eec0556dd64104be2fe7f95d3dbbf3.uda
+index fb46b7e..27418f3 100644
+--- a/src/WRA.Umbraco.Web/umbraco/Deploy/Revision/document-type__02eec0556dd64104be2fe7f95d3dbbf3.uda
++++ b/src/WRA.Umbraco.Web/umbraco/Deploy/Revision/document-type__02eec0556dd64104be2fe7f95d3dbbf3.uda
+@@ -59,6 +59,13 @@
+           "Description": "640px x 824",
+           "Name": "Thumbnail Image",
+           "SortOrder": 2
++        },
++        {
++          "Key": "fc99dfc7-d1f2-4db3-9af9-e15a0f9e3a74",
++          "Alias": "moreArticles",
++          "DataType": "umb://data-type/b4e3535a175347e28568602cf8cfee6f",
++          "Name": "More Articles",
++          "SortOrder": 5
+         }
+       ]
+     }
+@@ -75,6 +82,10 @@
+       "Ordering": true
+     },
+     {
++      "Udi": "umb://data-type/b4e3535a175347e28568602cf8cfee6f",
++      "Ordering": true
++    },
++    {
+       "Udi": "umb://data-type/bd7768baf6bb4721ad06353749be5b7e",
+       "Ordering": true
+     },
+diff --git a/src/WRA.Umbraco.Web/umbraco/Deploy/Revision/document-type__2451fda36057449899e8a8323eb0f1d1.uda b/src/WRA.Umbraco.Web/umbraco/Deploy/Revision/document-type__2451fda36057449899e8a8323eb0f1d1.uda
+index 8b2580f..b180810 100644
+--- a/src/WRA.Umbraco.Web/umbraco/Deploy/Revision/document-type__2451fda36057449899e8a8323eb0f1d1.uda
++++ b/src/WRA.Umbraco.Web/umbraco/Deploy/Revision/document-type__2451fda36057449899e8a8323eb0f1d1.uda
+@@ -21,7 +21,7 @@
+           "Key": "0ec999c5-65e3-4883-b578-d49fe2809d2e",
+           "Alias": "icon",
+           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+-          "Description": "Enter the Regukar Icon name from https://fontawesome.com/search?q=star&o=r&s=regular",
++          "Description": "Enter the code name from https://fontawesome.com/search",
+           "Name": "Icon"
+         },
+         {
+diff --git a/src/WRA.Umbraco.Web/umbraco/Deploy/Revision/document-type__b6d70662ffa7438a83b73a648ba8544b.uda b/src/WRA.Umbraco.Web/umbraco/Deploy/Revision/document-type__b6d70662ffa7438a83b73a648ba8544b.uda
+new file mode 100644
+index 0000000..23a61b5
+--- /dev/null
++++ b/src/WRA.Umbraco.Web/umbraco/Deploy/Revision/document-type__b6d70662ffa7438a83b73a648ba8544b.uda
+@@ -0,0 +1,42 @@
++{
++  "Name": "Event Calendar",
++  "Alias": "eventCalendar",
++  "AllowedTemplates": [],
++  "HistoryCleanup": {},
++  "Icon": "icon-calendar-alt color-black",
++  "Thumbnail": "folder.png",
++  "Description": "Full width event calendar.",
++  "Permissions": {
++    "IsElementType": true,
++    "AllowedChildContentTypes": []
++  },
++  "Parent": "umb://document-type-container/37b4b44f0abc4536af8ed684511c2571",
++  "CompositionContentTypes": [
++    "umb://document-type/38e48d076783491993c671f1add73d05",
++    "umb://document-type/60f9d673dad543a09928bdcb457eb7e6",
++    "umb://document-type/c0aede092c904c27b56c5afbd90068fc"
++  ],
++  "PropertyGroups": [],
++  "PropertyTypes": [],
++  "Udi": "umb://document-type/b6d70662ffa7438a83b73a648ba8544b",
++  "Dependencies": [
++    {
++      "Udi": "umb://document-type-container/37b4b44f0abc4536af8ed684511c2571",
++      "Ordering": true
++    },
++    {
++      "Udi": "umb://document-type/38e48d076783491993c671f1add73d05",
++      "Ordering": true
++    },
++    {
++      "Udi": "umb://document-type/60f9d673dad543a09928bdcb457eb7e6",
++      "Ordering": true
++    },
++    {
++      "Udi": "umb://document-type/c0aede092c904c27b56c5afbd90068fc",
++      "Ordering": true
++    }
++  ],
++  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
++  "__version": "13.0.3"
++}
+\ No newline at end of file
+diff --git a/src/WRA.Umbraco.Web/umbraco/Deploy/Revision/document-type__c0f91cab47e64e2c84cf846c343a701f.uda b/src/WRA.Umbraco.Web/umbraco/Deploy/Revision/document-type__c0f91cab47e64e2c84cf846c343a701f.uda
+index 83d0218..4c773d9 100644
+--- a/src/WRA.Umbraco.Web/umbraco/Deploy/Revision/document-type__c0f91cab47e64e2c84cf846c343a701f.uda
++++ b/src/WRA.Umbraco.Web/umbraco/Deploy/Revision/document-type__c0f91cab47e64e2c84cf846c343a701f.uda
+@@ -21,7 +21,7 @@
+           "Key": "07138029-8eab-42ab-af48-9d0a255366ce",
+           "Alias": "icon",
+           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+-          "Description": "Enter the Regukar Icon name from https://fontawesome.com/search?q=star&o=r&s=regular",
++          "Description": "Enter the code name from https://fontawesome.com/search",
+           "Name": "Icon"
+         },
+         {
+diff --git a/src/WRA.Umbraco.Web/umbraco/Deploy/Revision/document-type__eb32022d1ca94f5c9f4e7fb9b746a7ba.uda b/src/WRA.Umbraco.Web/umbraco/Deploy/Revision/document-type__eb32022d1ca94f5c9f4e7fb9b746a7ba.uda
+index 7c92d60..50efe58 100644
+--- a/src/WRA.Umbraco.Web/umbraco/Deploy/Revision/document-type__eb32022d1ca94f5c9f4e7fb9b746a7ba.uda
++++ b/src/WRA.Umbraco.Web/umbraco/Deploy/Revision/document-type__eb32022d1ca94f5c9f4e7fb9b746a7ba.uda
+@@ -29,7 +29,7 @@
+           "Key": "66af4bb8-32ac-4ed4-a7ed-ddafe1d29f15",
+           "Alias": "icon",
+           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+-          "Description": "Enter the Regukar Icon name from https://fontawesome.com/search?q=star&o=r&s=regular\n(Example: star OR paper-plane )",
++          "Description": "Enter the code name from https://fontawesome.com/search",
+           "Name": "Icon"
+         },
+         {

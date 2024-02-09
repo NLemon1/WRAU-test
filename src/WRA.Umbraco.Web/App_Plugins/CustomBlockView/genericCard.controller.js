@@ -42,6 +42,4 @@ angular.module("umbraco").controller("genericCardController", function ($scope) 
     $scope.className = className;
     $scope.style = style;
 
-    console.log(style);
-
 });

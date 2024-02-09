@@ -19,6 +19,4 @@ angular.module("umbraco").controller("iconBulletController", function ($scope) {
 
     $scope.className = className;
 
-    console.log(className)
-
 });

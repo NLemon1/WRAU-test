@@ -1,7 +1,5 @@
 angular.module("umbraco").controller("interiorHeroController", function ($scope, mediaResource) {
 
-    console.log($scope.block.data)
-
     //Get/Set Image
     var imageDesktopUdi = $scope.block.data.imageDesktop[0].mediaKey;
     mediaResource.getById(imageDesktopUdi)
