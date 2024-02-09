@@ -22,9 +22,9 @@
                 <div class="row gy-4 mx-4 mx-lg-0 mt-2 mb-5">
                     <div class="col-12 col-sm-6 col-lg-3">
                         <div class="d-flex align-items-start">
-                            @if (membershipWidget.HasValue("column1Image"))
+                            @if (membershipWidget.HasValue("column1Icon"))
                             {
-                                <img class="flex-shrink-0 me-2" src="@(membershipWidget.Value<IPublishedContent>("column1Image").Url())" alt="@(membershipWidget.Value<IPublishedContent>("column1Image").Value("altText"))">
+                                <span aria-hidden="true" class="flex-shrink-0 me-2 @membershipWidget.Value("Column1Icon")" style="font-size: 1.625rem;"></span>
                             }
                             <div class="flex-grow-1">
                                 <strong>@membershipWidget.Value("column1Heading")</strong>
@@ -34,9 +34,9 @@
                     </div>
                     <div class="col-12 col-sm-6 col-lg-3">
                         <div class="d-flex align-items-start">
-                            @if (membershipWidget.HasValue("column2Image"))
+                            @if (membershipWidget.HasValue("column2Icon"))
                             {
-                                <img class="flex-shrink-0 me-2" src="@(membershipWidget.Value<IPublishedContent>("column2Image").Url())" alt="@(membershipWidget.Value<IPublishedContent>("column2Image").Value("altText"))">
+                                <span aria-hidden="true" class="flex-shrink-0 me-2 @membershipWidget.Value("Column2Icon")" style="font-size: 1.625rem;"></span>
                             }
                             <div class="flex-grow-1">
                                 <strong>@membershipWidget.Value("column2Heading")</strong>
@@ -46,9 +46,9 @@
                     </div>
                     <div class="col-12 col-sm-6 col-lg-3">
                         <div class="d-flex align-items-start">
-                            @if (membershipWidget.HasValue("column3Image"))
+                            @if (membershipWidget.HasValue("column3Icon"))
                             {
-                                <img class="flex-shrink-0 me-2" src="@(membershipWidget.Value<IPublishedContent>("column3Image").Url())" alt="@(membershipWidget.Value<IPublishedContent>("column3Image").Value("altText"))">
+                                <span aria-hidden="true" class="flex-shrink-0 me-2 @membershipWidget.Value("Column3Icon")" style="font-size: 1.625rem;"></span>
                             }
                             <div class="flex-grow-1">
                                 <strong>@membershipWidget.Value("column3Heading")</strong>
@@ -58,9 +58,9 @@
                     </div>
                     <div class="col-12 col-sm-6 col-lg-3">
                         <div class="d-flex align-items-start">
-                            @if (membershipWidget.HasValue("column4Image"))
+                            @if (membershipWidget.HasValue("column4Icon"))
                             {
-                                <img class="flex-shrink-0 me-2" src="@(membershipWidget.Value<IPublishedContent>("column4Image").Url())" alt="@(membershipWidget.Value<IPublishedContent>("column4Image").Value("altText"))">
+                                <span aria-hidden="true" class="flex-shrink-0 me-2 @membershipWidget.Value("Column4Icon")" style="font-size: 1.625rem;"></span>
                             }
                             <div class="flex-grow-1">
                                 <strong>@membershipWidget.Value("column4Heading")</strong>
