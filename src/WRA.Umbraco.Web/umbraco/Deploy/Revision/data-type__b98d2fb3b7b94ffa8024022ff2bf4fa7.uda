@@ -18,6 +18,7 @@
         "indent",
         "link",
         "umbmediapicker",
+        "umbblockpicker",
         "umbmacro",
         "umbembeddialog"
       ],
@@ -25,6 +26,7 @@
       "maxImageSize": 500,
       "mode": "classic"
     },
+    "blocks": [],
     "useLiveEditing": false,
     "overlaySize": "small",
     "hideLabel": false,
