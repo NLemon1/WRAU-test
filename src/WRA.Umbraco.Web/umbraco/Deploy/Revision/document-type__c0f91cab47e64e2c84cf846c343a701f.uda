@@ -21,7 +21,7 @@
           "Key": "07138029-8eab-42ab-af48-9d0a255366ce",
           "Alias": "icon",
           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
-          "Description": "Enter the Regukar Icon name from https://fontawesome.com/search?q=star&o=r&s=regular",
+          "Description": "Enter the code name from https://fontawesome.com/search",
           "Name": "Icon"
         },
         {
