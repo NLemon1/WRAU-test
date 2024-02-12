@@ -29,7 +29,8 @@
         &::after {
             content: "";
             width: 100%;
-            border-top: solid 1px #FFF;
+            height: 1px;
+            border-top: solid 1px var(--overline-color);
             display: inline-block;
         }
     }

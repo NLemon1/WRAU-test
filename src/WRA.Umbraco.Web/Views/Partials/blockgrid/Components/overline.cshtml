@@ -36,11 +36,20 @@
     {
         style += $"margin-bottom:{content.BottomMargin} !important;";
     }
-    
+
     if (content.HasValue("strikeBehind") && content.Value<bool>("strikeBehind") == true)
     {
         className += $" overline--strikebehind";
     } 
+
+    if (content.HasValue("textColor") && content.HasValue("strikeBehind"))
+    {
+        style += $"--overline-color: #{content.TextColor};";
+    } 
+    else
+    {
+        style += $"--overline-color: #000000;";
+    }
 
     if (!String.IsNullOrEmpty(className))
     {
