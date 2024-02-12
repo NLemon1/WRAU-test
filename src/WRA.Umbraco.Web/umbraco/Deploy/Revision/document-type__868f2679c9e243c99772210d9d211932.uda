@@ -36,13 +36,6 @@
           "Alias": "overline",
           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
           "Name": "Overline"
-        },
-        {
-          "Key": "fe753472-d906-430b-85e4-677f07630bb5",
-          "Alias": "cTAs",
-          "DataType": "umb://data-type/f5d02d91cda84424a3421383388f099e",
-          "Name": "CTAs",
-          "SortOrder": 3
         }
       ]
     }
@@ -56,10 +49,6 @@
     },
     {
       "Udi": "umb://data-type/ea0edb0dd15e4442a7ff76588da1677f",
-      "Ordering": true
-    },
-    {
-      "Udi": "umb://data-type/f5d02d91cda84424a3421383388f099e",
       "Ordering": true
     },
     {
