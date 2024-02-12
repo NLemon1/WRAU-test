@@ -1,0 +1,14 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>;
+@using ContentModels = WRA.Umbraco.Models;
+
+@{
+    var content = (ContentModels.BasicContentWidget)Model.Content;
+    IPublishedContent basicContentWidget = content.Value<IPublishedContent>("selectWidget");
+
+    @if (basicContentWidget != null)
+    {
+        <div class="container py-5 py-lg-8 border-top">
+            @Html.Raw(basicContentWidget.Value("content"))
+        </div>
+    }
+}

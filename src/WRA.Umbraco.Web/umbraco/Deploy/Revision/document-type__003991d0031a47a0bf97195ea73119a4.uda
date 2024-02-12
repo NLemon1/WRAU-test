@@ -8,6 +8,7 @@
   "Permissions": {
     "AllowedAtRoot": true,
     "AllowedChildContentTypes": [
+      "umb://document-type/5e4314c761294e1c9cc573b37360d9d8",
       "umb://document-type/c640b1c88ca64a8bad513776425ba92b"
     ]
   },
@@ -20,6 +21,9 @@
     {
       "Udi": "umb://document-type-container/811495c9ae7b467da08ce40db9f6c9ca",
       "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type/5e4314c761294e1c9cc573b37360d9d8"
     },
     {
       "Udi": "umb://document-type/c640b1c88ca64a8bad513776425ba92b"

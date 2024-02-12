@@ -1184,6 +1184,20 @@
         "inlineEditing": false,
         "forceHideContentEditorInOverlay": false,
         "groupKey": "61e5b4ab-de54-46b2-9862-ccd8301a2b8e"
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": true,
+        "allowInAreas": false,
+        "areas": [],
+        "contentElementTypeKey": "b4cb87a3-a4f9-4e80-b828-b716cdf37677",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false,
+        "groupKey": "61e5b4ab-de54-46b2-9862-ccd8301a2b8e"
       }
     ],
     "blockGroups": [
@@ -1302,6 +1316,9 @@
     },
     {
       "Udi": "umb://document-type/b3079b212d4040fea6dfda890fa8292a"
+    },
+    {
+      "Udi": "umb://document-type/b4cb87a3a4f94e80b828b716cdf37677"
     },
     {
       "Udi": "umb://document-type/b65e28c8ab2748dd88ccc6dc27c40f4b"
