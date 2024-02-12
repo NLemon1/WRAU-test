@@ -62,7 +62,7 @@
                         {
                             var setActive = @HtmlHelperExtensions.FormatSlug(child.Name).Equals(selectedCategory) ? "aria-selected=true" : "aria-selected=false";
                             <li role="presentation" aria-controls="article-results">
-                                <button id="tab-@HtmlHelperExtensions.FormatSlug(@child.Name)" @(setActive) class="js-article-filter tabs__trigger border-0 text-decoration-none" value="@HtmlHelperExtensions.FormatSlug(@child.Name)" role="tab" aria-controls="tab-section-1">@child.Name</button>
+                                <button id="tab-@HtmlHelperExtensions.FormatSlug(@child.Name)" @(setActive) class="js-article-filter tabs__trigger border-0 h-100 text-decoration-none" value="@HtmlHelperExtensions.FormatSlug(@child.Name)" role="tab" aria-controls="tab-section-1">@child.Name</button>
                             </li>
                         }
                     </ul>

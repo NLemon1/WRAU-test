@@ -58,7 +58,8 @@
             </div>
         </div>
         <div class="row g-lg-4">
-            <div class="col-md-6 col-lg-8 d-md-flex align-items-center">
+            
+            <div class="col-md-6 col-lg-8 d-md-flex align-items-center align-self-start">
                 <div class="ratio d-md-none position-relative overflow-hidden bg-black" style="--bs-aspect-ratio: 129%;">
                     <div class="position-absolute z-2 d-flex flex-column justify-content-end align-items-start pb-2">
                         <span class="h4 text-white px-3 py-2 z-1 w-100 d-block mb-4" style="background-color: var(--bs-primary)">
@@ -70,36 +71,39 @@
                         <h4 class="h3 mb-3 mx-4 text-white">What is this title supposed to pull from?</h4>
                         <a href="@currentIssueContent.Value("Pdf")" class="btn btn-light btn-link-arrow btn-link-arrow--reverse btn-link-arrow--download ms-2 mb-3">
                             Download PDF
-                            <i class="fa-solid fa-download ms-1"></i>
+                            <i class="fas fa-download ms-1"></i>
                         </a>
                     </div>
-                    <img src="@imageCurrent.Url()?width=640" class="w-100 top-0 h-100 opacity-50 fit-cover mb-4 position-absolute z-1" width="320" height="412" alt="@(imageCurrent.Value("altText") ?? "")" />
+                    <img src="@imageCurrent.Url()?width=640" class="w-100 top-0 h-100 opacity-50 fit-cover mb-4 position-absolute z-1" width="320" height="412" alt="@(imageCurrent.Value("altText") ?? string.Empty)" />
                 </div>
 
-                <div style="flex-basis: 50%" class="pe-0 d-none d-md-block h-100">
-                    <img src="@imageCurrent.Url()?width=640" class="w-100 h-100 fit-cover mb-4" width="320" height="412" alt="@(imageCurrent.Value("altText") ?? "")" />
-                </div>
-
-                <div class="p-4 d-flex flex-column align-items-start justify-content-center d-none d-md-flex h-100" style="flex-basis: 50%; background: var(--bs-gray-10)">
-                    <h3 class="h6 fs-md fw-bolder mb-3" style="color: var(--bs-secondary)">
-                        @currentIssueContent.Name
-                    </h3>
-                    <h4 class="h3 mb-3">What is this title supposed to pull from?</h4>
-                    <a href="@currentIssueContent.Value("Pdf")" class="btn btn-link-arrow btn-link-arrow--download ms-n2_5 mb-3">
-                        Download PDF
-                        <i class="fa-solid fa-download ms-1"></i>
-                    </a>
-                    <a href="@currentIssueContent.Url()" class="btn btn-link-arrow ms-n2_5" ">
-                        Read Online
-                        <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M0.820801 8L12.0314 8" stroke="#050F1E" stroke-width="1.37143" stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M8.51733 4L12.5173 8L8.51733 12" stroke="#050F1E" stroke-width="1.37143" stroke-linecap="round"
-                                  stroke-linejoin="round" />
-                        </svg>
-                    </a>
+                <div class="row align-self-stretch g-0 d-none d-md-flex">
+                    <div class="pe-0 col-md-6">
+                        <img style="flex-basis: 50%;object-fit:contain;" src="@imageCurrent.Url()?width=640" class="w-100 h-100 d-md-block" width="320" height="412" alt="@(imageCurrent.Value("altText") ?? string.Empty)" />
+                    </div>
+                    <div class="col-md-6 p-4 d-flex flex-column align-items-start justify-content-center h-100" style="background: var(--bs-gray-10)">
+                        <h3 class="h6 fs-md fw-bolder mb-3" style="color: var(--bs-secondary)">
+                            @currentIssueContent.Name
+                        </h3>
+                        <h4 class="h3 mb-3">What is this title supposed to pull from?</h4>
+                        <a href="@currentIssueContent.Value("Pdf")" class="btn btn-link-arrow btn-link-arrow--download ms-n2_5 mb-3">
+                            Download PDF
+                            <i class="fas fa-download ms-1"></i>
+                        </a>
+                        <a href="@currentIssueContent.Url()" class="btn btn-link-arrow ms-n2_5" ">
+                            Read Online
+                            <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0.820801 8L12.0314 8" stroke="#050F1E" stroke-width="1.37143" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M8.51733 4L12.5173 8L8.51733 12" stroke="#050F1E" stroke-width="1.37143" stroke-linecap="round"
+                                      stroke-linejoin="round" />
+                            </svg>
+                        </a>
+                    </div>
                 </div>
 
             </div>
+
+
             <div class="col-md-6 col-lg-4">
 
                 @if (articles != null)
