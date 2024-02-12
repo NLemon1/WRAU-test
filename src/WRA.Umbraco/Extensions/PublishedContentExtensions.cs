@@ -39,12 +39,15 @@ namespace WRA.Umbraco
         /// <returns></returns>
         public static NewsRecordDto AsDto(this Article content)
         {
+
+            var checkRichText = content!.RichTextContent.SafeString().StripHtml().Length > 135 ? content!.RichTextContent.SafeString().StripHtml().Substring(0, 135) + "..." : "";
+
             return new NewsRecordDto(
                 content?.UrlSegment?.SafeString()!,
                 content!.Name,
                 content?.Category?.Name.SafeString()!,
                 content?.Image?.MediaUrl().SafeString()!,
-                content?.Excerpt?.SafeString()!,
+                content?.Excerpt?.SafeString() ?? checkRichText,
                 content?.Title ?? content!.Name,
                 System.String.Format("{0:yyyy-MM-dd}", content.Date),
                 System.String.Format("{0:MMMM d, yyyy}", content.Date)

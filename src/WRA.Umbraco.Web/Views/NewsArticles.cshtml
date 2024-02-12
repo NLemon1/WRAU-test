@@ -56,7 +56,7 @@
                 <div class="text-center">
                     <ul role="tablist" class="js-article-filters tabs__tabs-list">
                         <li role="presentation">
-                            <button id="tab-all" class="js-article-filter tabs__trigger text-decoration-none border-0" value="" role="tab" aria-controls="article-results" @(setAll)>All Posts</button>
+                            <button id="tab-all" class="js-article-filter tabs__trigger text-decoration-none h-100 border-0" value="" role="tab" aria-controls="article-results" @(setAll)>All Posts</button>
                         </li>
                         @foreach (var child in newsCategories.Where(x => x.Name != "All"))
                         {
