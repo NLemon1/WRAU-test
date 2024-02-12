@@ -59,7 +59,7 @@
                 @articleTitle
             </h1>
             <div>
-                @if (content.HasValue("Author") && !String.IsNullOrEmpty(content.Author.Value("authorTitle").ToString()))
+                @if (content.HasValue("Author"))
                 {
                     bool hasTitle = !String.IsNullOrEmpty(content.Author.Value("authorTitle").ToString());
                     string setSpacer = hasTitle ? ", " : "";
