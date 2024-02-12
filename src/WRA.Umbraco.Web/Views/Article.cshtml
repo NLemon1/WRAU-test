@@ -100,7 +100,7 @@
         @if (content.HasValue("image"))
         {
             <div class="col-md-6 d-flex flex-column justify-content-center">
-                <figure class="img-curved img-curved--large">
+                <figure class="img-curved img-curved--large text-end">
                     <img loading="lazy" class="img-fluid" src="@content.Image.Url()?width=550" srcset="@content.Image.Url()?width=1110 2x" width="@content.Image.Value("umbracoWidth")" height="@content.Image.Value("umbracoHeight")" alt="@(content.Image.Value("altText") ?? "")">
                 </figure>
             </div>
