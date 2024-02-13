@@ -32,7 +32,6 @@
     <PackageReference Include="Umbraco.Forms" Version="13.0.1" />
     <PackageReference Include="Umbraco.Workflow" Version="13.0.2" />
     <PackageReference Include="Umbraco.Forms.Core.Providers" Version="13.0.1" />
-    <PackageReference Include="Umbraco.Cms.Imaging.ImageSharp" Version="13.1.1" />
 
   </ItemGroup>
 
