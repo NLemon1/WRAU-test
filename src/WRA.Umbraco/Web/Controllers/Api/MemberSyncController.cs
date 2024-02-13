@@ -17,6 +17,7 @@ namespace WRA.Umbraco.Controllers;
 
 [ApiController]
 [MapToApi("member-api")]
+[Route("WraMemberApi")]
 public class MemberSyncController : ApiController
 {
     private readonly IMemberService _memberService;

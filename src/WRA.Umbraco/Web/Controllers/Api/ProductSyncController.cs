@@ -19,6 +19,8 @@ namespace WRA.Umbraco.Controllers;
 
 [ApiController]
 [MapToApi("product-api")]
+[Route("WraMemberApi")]
+
 public class ProductSyncController : ApiController
 {
     private readonly SearchService _searchService;

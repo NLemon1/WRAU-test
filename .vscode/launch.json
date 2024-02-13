@@ -20,9 +20,9 @@
         "pattern": "\\bNow listening on:\\s+(https?://\\S+)",
         "uriFormat": "http://localhost:44336"
       },
-      // "env": {
-      //   "ASPNETCORE_ENVIRONMENT": "Local"
-      // },
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "development"
+      },
       "sourceFileMap": {
         "/Views": "${workspaceFolder}/Views"
       },

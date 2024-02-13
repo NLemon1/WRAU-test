@@ -1,8 +1,7 @@
 using My.Custom.Swagger;
 using WRA.Umbraco.Services;
 using WRA.Umbraco.Extensions;
-using Umbraco.Cms.Core.Notifications;
-using WRA.Umbraco.Events;
+using WRA.Umbraco.Events.ServiceBusSubscriptions;
 
 namespace WRA.Umbraco.Web
 {
@@ -39,10 +38,16 @@ namespace WRA.Umbraco.Web
             services.AddScoped<GatedContentService>();
             services.AddScoped<WRAExternalApiService>();
             services.AddScoped<WRAMemberService>();
+
             services.AddTransient<SearchService>();
             services.AddTransient<WRAProductService>();
             services.AddTransient<QueueService>();
-            // services.AddScoped<IPasswordHasher<BackOfficeIdentityUser>, CustomMemberPasswordHasher<BackOfficeIdentityUser>>();
+
+            services.Configure<MemberSubscriptionServiceSettings>(_config.GetSection("SubscriptionServiceSettings:MemberSubscriptionSettings"));
+            services.AddSingleton<IHostedService, WraMemberSubscriptionService>();
+
+            // services.Configure<ProductSubscriptionServiceSettings>(_config.GetSection("SubscriptionServiceSettings:ProductSubscriptionSettings"));
+            // services.AddSingleton<IHostedService, WraProductSubscriptionService>();
 
             // umbraco services
             services.AddUmbraco(_env, _config)

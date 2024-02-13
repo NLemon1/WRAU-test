@@ -39,6 +39,10 @@ namespace WRA.Umbraco.Dtos;
 // }
 public class MemberDto
 {
+
+    [JsonProperty("umbracoMemberId")]
+    public int? MemberId { get; set; }
+
     [JsonProperty("securityHash")]
     public string? SecurtyHash { get; set; }
 
