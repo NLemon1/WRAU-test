@@ -16,6 +16,9 @@
     var currentCollection = magazineCollections.FirstOrDefault(); //get 
     var currentIssue = currentCollection.Children("newsItems").Where(x => x.IsVisible()).OrderBy(p => p.GetProperty("monthYearTitle").GetSourceValue()).Reverse();
     var content = currentIssue.FirstOrDefault();
+
+    var moreArticles = content.Value<IEnumerable<Link>>("moreArticles");
+
 }
 
 @await Html.PartialAsync("blockgrid/default", sections)
@@ -95,7 +98,25 @@
                             }
 
                         </div>
-                        @if (content.Value<IEnumerable<IPublishedContent>>("FeaturedOnlineArticles") != null)
+
+                        @if (moreArticles.Any())
+                        {
+                            <div class="col-lg-5 ps-lg-1 ms-lg-auto">
+                                <div class="ps-lg-4 border-medium border-start no-border-mobile h-100">
+                                    <h3 class="h4 text-white px-3 py-2" style="background-color: var(--bs-blue-dark)">
+                                        More News
+                                    </h3>
+                                    <ul class="list-unstyled gap-2 d-flex flex-column pt-2">
+                                        @foreach (var link in moreArticles)
+                                        {
+                                            <li><a href="@link.Url" class="fw-bold fs-sm" style="color: inherit" target="@link.Target">@link.Name</a></li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        }
+
+                       @*  @if (content.Value<IEnumerable<IPublishedContent>>("FeaturedOnlineArticles") != null)
                         {
                             var articles = content.Value<IEnumerable<IPublishedContent>>("FeaturedOnlineArticles");
 
@@ -122,7 +143,7 @@
                                     </div>
                                 </div>
                             }
-                        }
+                        } *@
                     </div> 
                     <a href="/news-updates/" class="btn btn-primary btn-sm d-lg-none w-100 mt-4">See All</a>
                 </div>
