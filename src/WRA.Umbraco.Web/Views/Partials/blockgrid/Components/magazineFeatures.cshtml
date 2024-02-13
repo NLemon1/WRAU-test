@@ -65,10 +65,7 @@
                         <span class="h4 text-white px-3 py-2 z-1 w-100 d-block mb-4" style="background-color: var(--bs-primary)">
                             Current Issue
                         </span>
-                        <h3 class="fs-md mb-3 mx-4 text-white">
-                            @currentIssueContent.Name
-                        </h3>
-                        <h4 class="h3 mb-3 mx-4 text-white">What is this title supposed to pull from?</h4>
+                        <h3 class="h3 mb-3 mx-4 text-white">@currentIssueContent.Name</h3>
                         <a href="@currentIssueContent.Value("Pdf")" class="btn btn-light btn-link-arrow btn-link-arrow--reverse btn-link-arrow--download ms-2 mb-3">
                             Download PDF
                             <i class="fas fa-download ms-1"></i>
@@ -82,10 +79,7 @@
                         <img style="flex-basis: 50%;object-fit:contain;" src="@imageCurrent.Url()?width=640" class="w-100 h-100 d-md-block" width="320" height="412" alt="@(imageCurrent.Value("altText") ?? string.Empty)" />
                     </div>
                     <div class="col-md-6 p-4 d-flex flex-column align-items-start justify-content-center h-100" style="background: var(--bs-gray-10)">
-                        <h3 class="h6 fs-md fw-bolder mb-3" style="color: var(--bs-secondary)">
-                            @currentIssueContent.Name
-                        </h3>
-                        <h4 class="h3 mb-3">What is this title supposed to pull from?</h4>
+                        <h4 class="h3 mb-3">@currentIssueContent.Name</h4>
                         <a href="@currentIssueContent.Value("Pdf")" class="btn btn-link-arrow btn-link-arrow--download ms-n2_5 mb-3">
                             Download PDF
                             <i class="fas fa-download ms-1"></i>
