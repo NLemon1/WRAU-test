@@ -83,7 +83,7 @@
                 <div class="rich-text">
                     @Html.Raw(settings.Value("message"))
                 </div>
-                <button aria-controls="site-alert" class="js-alert-close btn-close border-0 bg-transparent px-4 h-100 self-end"><span class="visually-hidden">>Close</span><i class="fa fa-xmark text-white"></i></button>
+                <button aria-controls="site-alert" class="js-alert-close btn-close border-0 bg-transparent px-4 h-100 self-end"><span class="visually-hidden">>Close</span><i class="fal fa-times text-white"></i></button>
             </div>
         </div>
     }
@@ -91,7 +91,7 @@
     <header class="site-header js-header site-header--show-on-scroll-up site-header--top">
         <button class="site-header__nav-toggle js-nav-toggle d-lg-none px-2 text-body" aria-controls="mobile-nav" aria-expanded="false" aria-label="Toggle navigation">
             <i class="fa fa-bars"></i>
-            <i class="fa fa-xmark"></i>
+            <i class="fal fa-times"></i>
         </button>
         <div class="site-header__container">
             <div class="site-header__top">
@@ -148,7 +148,7 @@
                                     }
                                     <div id="panel@(safeId)" class="is-hidden js-nav-sub-menu sub-menu py-5 py-lg-7 fs-sm font-family-1" role=tabpanel>
                                         <div class="container position-relative">
-                                                <button class="js-sub-menu-close btn-close border-0">Close <i class="fa fa-xmark"></i></button>
+                                                <button class="js-sub-menu-close btn-close border-0">Close <i class="fal fa-times"></i></button>
                                             <div class="row">
                                                 <div class="col-4 m-0 pt-lg-3">
                                                     <span class="h2 d-block">@settings.Value($"navMenu{i}Name")</span>
