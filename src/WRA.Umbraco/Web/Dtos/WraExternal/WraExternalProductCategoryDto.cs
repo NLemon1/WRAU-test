@@ -1,24 +1,25 @@
+
+
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-
 namespace WRA.Umbraco.Dtos;
-public record WraExternalProductCategoryDto
+public class WraExternalProductCategoryDto
 {
-    public string ExternalId;
-    public string Name;
-    public string Description;
+    [JsonPropertyName("id")]
+    public Guid ExternalId { get; set; }
 
+    [JsonPropertyName("productTypeId")]
+    public string ProductTypeId { get; set; }
 
-    [JsonConstructor]
-    public WraExternalProductCategoryDto(
-        string id,
-        string name,
-        string description)
-    {
-        ExternalId = id;
-        Name = name;
-        Description = description;
+    [JsonPropertyName("productTypeName")]
+    public string ProductTypeName { get; set; }
 
-    }
+    [JsonPropertyName("name")]
+    public string Name { get; set; }
+
+    [JsonPropertyName("description")]
+    public string Description { get; set; }
 }
+
+

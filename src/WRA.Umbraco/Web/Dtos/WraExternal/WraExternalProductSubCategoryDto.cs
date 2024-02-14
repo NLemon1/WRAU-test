@@ -1,25 +1,23 @@
-using Newtonsoft.Json;
-
+using System;
+using System.Text.Json.Serialization;
 
 namespace WRA.Umbraco.Dtos;
-public record WraExternalProductSubCategoryDto
+
+public class WraExternalProductSubCategoryDto
 {
-    public string ExternalId;
-    public string ExternalCategoryId;
-    public string Name;
-    public string Description;
+    [JsonPropertyName("id")]
+    public Guid ExternalId { get; set; }
 
-    [JsonConstructor]
-    public WraExternalProductSubCategoryDto(
-        string id,
-        string productCategoryId,
-        string name,
-        string description)
-    {
-        ExternalId = id;
-        ExternalCategoryId = productCategoryId;
-        Name = name;
-        Description = description;
+    [JsonPropertyName("productCategoryId")]
+    public Guid ExternalCategoryId { get; set; }
 
-    }
+    [JsonPropertyName("productCategoryName")]
+    public string ProductCategoryName { get; set; }
+
+    [JsonPropertyName("name")]
+    public string Name { get; set; }
+
+    [JsonPropertyName("description")]
+    public string Description { get; set; }
 }
+

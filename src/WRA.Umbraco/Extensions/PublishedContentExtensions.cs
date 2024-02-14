@@ -139,31 +139,26 @@ namespace WRA.Umbraco
             return mdto;
         }
 
-        // public static WraProductDto AsWraProductDto(this IContent c)
-        // {
-        //     WraProductDto pdto = new WraProductDto
-        //     {
-        //         Id = c.GetValue<string>("productId").SafeString(),
-        //         Name = c.Name!,
-        //         Sku = c.GetValue<string>("sku").SafeString(),
-        //         Taxonomy = c.GetValue<string>("taxonomy").SafeString()
-        //         Id = c.GetValue<string>("id").SafeString()
-        //         Id = c.GetValue<string>("id").SafeString()
-        //         Id = c.GetValue<string>("id").SafeString()
-        //         Id = c.GetValue<string>("id").SafeString()
-        //         Id = c.GetValue<string>("id").SafeString()
-        //         Id = c.GetValue<string>("id").SafeString()
-        //         Id = c.GetValue<string>("id").SafeString()
-        //         Id = c.GetValue<string>("id").SafeString()
-        //         Id = c.GetValue<string>("id").SafeString()
-        //         Id = c.GetValue<string>("id").SafeString()
-        //         Id = c.GetValue<string>("id").SafeString()
-        //         Id = c.GetValue<string>("id").SafeString()
-        //         Id = c.GetValue<string>("id").SafeString()
-        //     };
+        public static WraProductDto AsWraProductDto(this IContent c)
+        {
+            WraProductDto pdto = new WraProductDto
+            {
+                Id = c.GetValue<string>("productId").SafeString(),
+                Name = c.Name!,
+                Sku = c.GetValue<string>("sku").SafeString(),
+                Taxonomy = c.GetValue<string>("taxonomy").SafeString(),
+                Price = c.GetValue<decimal>("price"),
+                Description = c.GetValue<string>("description").SafeString(),
+                ImageUrl = c.GetValue<string>("imageUrl").SafeString(),
+                Category = c.GetValue<string>("category").SafeString(),
+                SubCategory = c.GetValue<string>("subCategory").SafeString(),
+                StartDate = c.GetValue<DateTime>("startDate"),
+                EndDate = c.GetValue<DateTime>("endDate"),
+                ProductType = c.GetValue<string>("productType").SafeString()
+            };
 
-        //     return pdto;
-        // }
+            return pdto;
+        }
 
         /// <summary>
         /// Member Specific Extensions

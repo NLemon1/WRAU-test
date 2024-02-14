@@ -25,7 +25,7 @@ public class WraProductNotifications : INotificationHandler<ContentPublishedNoti
 
                 var options = new JsonSerializerOptions { WriteIndented = false };
                 string jsonResponse = JsonSerializer.Serialize(product, options);
-                await _queueService.SendMessage(jsonResponse, "website-prod-product");
+                // await _queueService.SendMessage(jsonResponse, "website-prod-product");
             }
         }
     }

@@ -59,8 +59,8 @@ public class ProductSyncController : ApiController
         // lets create a category in umbraco with it...
 
         //first lets deserialize:
-        var categories = JsonSerializer.Deserialize<List<WraExternalProductCategoryDto>>(categoryContent);
-        var subCategories = JsonSerializer.Deserialize<List<WraExternalProductSubCategoryDto>>(subCategoryContent);
+        var categories = JsonSerializer.Deserialize<IEnumerable<WraExternalProductCategoryDto>>(categoryContent);
+        var subCategories = JsonSerializer.Deserialize<IEnumerable<WraExternalProductSubCategoryDto>>(subCategoryContent);
 
 
         //once we have our categories deserialized, lets make some umbraco content items...
@@ -76,10 +76,10 @@ public class ProductSyncController : ApiController
         {
             // check if it extists first
             var existingCategoryPages = _searchService.Search(CategoryPage.ModelTypeAlias)
-                .Where(excat => excat.Content.Value<string>("externalId") == cat.ExternalId);
+                .Where(excat => excat.Content.Value<Guid>("externalId").Equals(cat.ExternalId));
 
             // category added, now lets check to see if it needs any subcategories
-            var releventSubcategories = subCategories.Where(sub => sub.ExternalCategoryId == cat.ExternalId);
+            var releventSubcategories = subCategories.Where(sub => sub.ExternalCategoryId.Equals(cat.ExternalId));
 
             if (existingCategoryPages != null && existingCategoryPages.Any())
             {
@@ -113,7 +113,7 @@ public class ProductSyncController : ApiController
         foreach (var subcat in subCategories)
         {
             var existingSubCategoryPages = _searchService.Search(CategoryPage.ModelTypeAlias)
-                .Where(x => x.Content.Value("externalId") == subcat.ExternalId);
+                .Where(x => x.Content.Value<Guid>("externalId").Equals(subcat.ExternalId));
 
             // check if any existing subcategory pages exist under the requested Id
             bool anyExist = existingSubCategoryPages?.Any() ?? false;

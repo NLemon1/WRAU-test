@@ -1,6 +1,21 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@using WRA.Umbraco.Services;
+@using WRA.Umbraco;
+@using System.Linq;
+@using Umbraco.Commerce.Extensions;
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.SubCategoryPage>
+@inject SearchService _searchService;
 @using ContentModels = WRA.Umbraco.Models;
 @{
-	Layout = null;
+	Layout = "~/Views/_Layout.cshtml";
+	var products = _searchService.SearchProductsBySubCategory(Model.UrlSegment!);
 }
+@foreach (var product in products.Select(x => x.Content as ProductPage))
+{
+	<div>
+		<h2>@product.Name</h2>
+		<p>@(product.MemberPricing?.Formatted())</p>
+    <p>@(product.NonMemberPricing.Formatted())</p>
+	</div>
+}
+ 

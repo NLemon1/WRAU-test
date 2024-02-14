@@ -75,6 +75,36 @@ namespace WRA.Umbraco.Events
                                     values.Add("categoryAliases", new[] { string.Join(" ", categoryAliases) });
                                 }
                             }
+                            if (e.ValueSet.Values.ContainsKey("subCategories"))
+                            {
+                                // Prepare a new collection for category aliases
+                                var subCategoryAliases = new List<string>();
+
+                                // Parse the comma separated list of category UDIs
+                                var subCategoryIds = e.ValueSet.GetValue("subCategories").ToString().Split(',')
+                                    .Select(x => UdiParser.TryParse<GuidUdi>(x, out var id) ? id : null)
+                                    .Where(x => x != null)
+                                    .ToList();
+
+                                // Fetch the category nodes and extract the category alias, adding it to the aliases collection
+                                using (var ctx = _umbracoContextFactory.EnsureUmbracoContext())
+                                {
+                                    foreach (var subCategoryId in subCategoryIds)
+                                    {
+                                        var subCategory = ctx.UmbracoContext.Content.GetById(subCategoryId);
+                                        if (subCategory != null)
+                                        {
+                                            subCategoryAliases.Add(subCategory.UrlSegment);
+                                        }
+                                    }
+                                }
+
+                                // If we have some aliases, add these to the lucene index in a searchable way
+                                if (subCategoryAliases.Count > 0)
+                                {
+                                    values.Add("subCategoryAliases", new[] { string.Join(" ", subCategoryAliases) });
+                                }
+                            }
                         }
 
                         // ================================================================
