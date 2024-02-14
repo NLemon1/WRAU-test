@@ -159,11 +159,12 @@ h1, h2, h3, h4, .display-1 {
         font-size: math.div(20,16) * 1rem;
         font-weight: 700;
     }
-    
+
     h4, h5 {
         font-family: $font-family-sans-serif;
         font-size: math.div(18,16) * 1rem;
         font-weight: 600;
+        color: $blue-medium;
     }
 
 
@@ -178,7 +179,6 @@ h1, h2, h3, h4, .display-1 {
             font-size: math.div(18,16) * 1rem;
         }
     }
-
 }
 
 .accent-heading {

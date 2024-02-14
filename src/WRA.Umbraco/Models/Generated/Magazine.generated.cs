@@ -81,7 +81,7 @@ namespace WRA.Umbraco.Models
 		public virtual global::System.DateTime MonthYearTitle => this.Value<global::System.DateTime>(_publishedValueFallback, "monthYearTitle");
 
 		///<summary>
-		/// moreArticles
+		/// More Articles: Select news & updates or landing pages to populate here.
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
