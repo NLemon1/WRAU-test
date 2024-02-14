@@ -73,11 +73,11 @@
 
                 @if (selectedCategory == null)
                 {
-                    <option value="" selected>All</option>
+                    <option value="" selected>All Posts</option>
                 } 
                 else
                 {
-                    <option value="">All</option>
+                    <option value="">All Posts</option>
                 }
 
                 @foreach (var child in newsCategories.Where(x => x.Name != "All"))

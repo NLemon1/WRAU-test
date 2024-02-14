@@ -58,7 +58,7 @@ namespace WRA.Umbraco.Models
 		public virtual string Excerpt => this.Value<string>(_publishedValueFallback, "excerpt");
 
 		///<summary>
-		/// Featured Online Articles: Links to online articles in News & Updates. First 3 items will appear in "featured" column.
+		/// Featured Online Articles: Select up to 4 featured articles.
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]

@@ -48,7 +48,7 @@
           "Key": "9466a06d-e419-4d59-a325-1e881ad2fa76",
           "Alias": "featuredOnlineArticles",
           "DataType": "umb://data-type/bd7768baf6bb4721ad06353749be5b7e",
-          "Description": "Links to online articles in News & Updates. First 3 items will appear in \"featured\" column.",
+          "Description": "Select up to 4 featured articles.",
           "Name": "Featured Online Articles",
           "SortOrder": 4
         },
