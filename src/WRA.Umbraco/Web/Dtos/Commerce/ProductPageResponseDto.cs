@@ -6,6 +6,7 @@ namespace WRA.Umbraco.Dtos;
 public record ProductPageResponseDto(
     string Title,
     string ProductType,
+    string Taxonomy,
     string Category,
     string SubCategory,
     string Price,

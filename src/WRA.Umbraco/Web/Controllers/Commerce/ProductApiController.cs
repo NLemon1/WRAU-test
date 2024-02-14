@@ -61,7 +61,7 @@ public class ProductApiController : UmbracoApiController
         if (!string.IsNullOrEmpty(request.Taxonomy))
         {
             products = products
-                .Where(p => p.Taxonomy.Contains(request.Taxonomy));
+                .Where(p => p.Taxonomy.Contains(request.Taxonomy, StringComparison.OrdinalIgnoreCase));
         }
 
         var responseItems = products.Select(p => p.AsDto());

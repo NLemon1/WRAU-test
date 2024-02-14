@@ -98,6 +98,9 @@
 
     @if (newsCategories.Any())
     {
+
+        var firstCatSlug = HtmlHelperExtensions.FormatSlug(newsCategories.FirstOrDefault().Name);
+        
         @foreach (var newsCategory in newsCategories)
         {
            
@@ -121,7 +124,7 @@
                 var articleDateReadable = String.Format("{0:MMMM d, yyyy}", featuredArticleObject.Value("date"));
                 var articleDate = String.Format("{0:yyyy-MM-dd}", featuredArticleObject.Value("date"));
 
-                var initialActiveTab = selectedCategory == HtmlHelperExtensions.FormatSlug(newsCategory.Name) || (newsCategory.Name == "All" && String.IsNullOrEmpty(selectedCategory));
+                var initialActiveTab = selectedCategory == HtmlHelperExtensions.FormatSlug(newsCategory.Name) || (String.IsNullOrEmpty(selectedCategory) && HtmlHelperExtensions.FormatSlug(newsCategory.Name) == firstCatSlug);
                 var setTabActive = initialActiveTab != true ? "hidden" : "";
 
                 <div class="js-featured-article featured-article block-image-text-row position-relative" @(setTabActive) data-featuredcat="@HtmlHelperExtensions.FormatSlug(newsCategory.Name)">

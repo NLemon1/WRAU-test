@@ -90,6 +90,7 @@ namespace WRA.Umbraco
             return new ProductPageResponseDto(
                 p.Name,
                 p.Collection.Name,
+                p?.Taxonomy?.SafeString(),
                 p?.Categories?.First().Name ?? string.Empty,
                 p?.SubCategories?.First().Name ?? string.Empty,
                 p!.Price!.GetPriceFor(currency).Formatted().Value,
