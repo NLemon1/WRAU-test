@@ -84,15 +84,16 @@ namespace WRA.Umbraco
             );
         }
 
-        public static ProductPageResponseDto AsDto(this ProductPage p, string productType)
+        public static ProductPageResponseDto AsDto(this ProductPage p)
         {
             var currency = p.GetStore().BaseCurrencyId ?? Guid.Empty;
             return new ProductPageResponseDto(
                 p.Name,
-                productType,
+                p.Collection.Name,
                 p?.Categories?.First().Name ?? string.Empty,
                 p?.SubCategories?.First().Name ?? string.Empty,
-                p!.Price!.GetPriceFor(currency).Value,
+                p!.Price!.GetPriceFor(currency).Formatted().Value,
+                p!.MemberPrice!.GetPriceFor(currency).Formatted().Value,
                 System.String.Format("{0:yyyy-MM-dd H:mm}", p.StartDate),
                 System.String.Format("{0:yyyy-MM-dd H:mm}", p.EndDate),
                 p.Url(),
@@ -253,7 +254,7 @@ namespace WRA.Umbraco
         {
             if (content != null && content.Any())
             {
-                return content.Any(c => c.Name == category);
+                return content.Any(c => c.Name.Equals(category, StringComparison.OrdinalIgnoreCase));
             }
 
             return false;

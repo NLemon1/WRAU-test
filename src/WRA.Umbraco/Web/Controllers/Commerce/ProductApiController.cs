@@ -38,11 +38,14 @@ public class ProductApiController : UmbracoApiController
     [Route("GetProducts")]
     public IEnumerable<ProductPageResponseDto> GetProducts([FromBody] ProductsRequestDto request)
     {
-        string productType = request.ProductType;
         IEnumerable<ProductPage> products = _searchService.Search(ProductPage.ModelTypeAlias)
-            .Select(p => new ProductPage(p.Content, new NoopPublishedValueFallback()))
-            .Where(p => string.Equals(p.Parent.Name, productType, StringComparison.OrdinalIgnoreCase));
+            .Select(p => new ProductPage(p.Content, new NoopPublishedValueFallback()));
 
+        // first, lets apply the product type filter
+        if (!string.IsNullOrEmpty(request.ProductType))
+        {
+            products = products.Where(p => string.Equals(p.Collection.Name, request.ProductType, StringComparison.OrdinalIgnoreCase));
+        }
         // now lets apply category and sub-category filters if they are requested
         if (!string.IsNullOrEmpty(request.Category))
         {
@@ -52,10 +55,16 @@ public class ProductApiController : UmbracoApiController
         if (!string.IsNullOrEmpty(request.SubCategory))
         {
             products = products
-                .Where(p => p.SubCategories.ContainsProductCategory(request.Category));
+                .Where(p => p.SubCategories.ContainsProductCategory(request.SubCategory));
+        }
+        // finally, lets apply a taxonmy filter if it is requested
+        if (!string.IsNullOrEmpty(request.Taxonomy))
+        {
+            products = products
+                .Where(p => p.Taxonomy.Contains(request.Taxonomy));
         }
 
-        var responseItems = products.Select(p => p.AsDto(productType));
+        var responseItems = products.Select(p => p.AsDto());
         return responseItems;
 
     }
