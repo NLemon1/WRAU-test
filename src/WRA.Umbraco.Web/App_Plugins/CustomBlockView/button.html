@@ -1,5 +1,5 @@
 ﻿<div ng-controller="buttonController">
-    <a href="#" class="{{ className }}">
+    <a href="#" class="{{ className }}" title="links to: {{ linkUrlName }}" onclick="return false" ng-click="block.edit()">
         {{ block.data.link[0].name }}
         <svg ng-if="isArrow == true" width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M0.820801 8L12.0314 8" stroke="#050F1E" stroke-width="1.37143" stroke-linecap="round" stroke-linejoin="round" />

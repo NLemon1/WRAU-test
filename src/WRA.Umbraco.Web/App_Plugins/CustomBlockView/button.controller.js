@@ -2,8 +2,6 @@ angular.module("umbraco").controller("buttonController", function ($scope) {
 
     const block = $scope.block.data;
 
-    //console.log(block);
-
     let className = "btn";
 
     //STYLE
@@ -43,5 +41,6 @@ angular.module("umbraco").controller("buttonController", function ($scope) {
 
     $scope.className = className;
     $scope.isArrow = block.style[0] == "link arrow" ? true : false;
+    $scope.linkUrlName = block.link[0] !== undefined ? block.link[0].name : "";
 
 });
