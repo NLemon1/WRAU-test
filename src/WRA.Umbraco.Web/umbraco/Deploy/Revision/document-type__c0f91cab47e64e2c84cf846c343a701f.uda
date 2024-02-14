@@ -21,7 +21,7 @@
           "Key": "07138029-8eab-42ab-af48-9d0a255366ce",
           "Alias": "icon",
           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
-          "Description": "Enter the code name from https://fontawesome.com/search",
+          "Description": "Enter the code name from https://fontawesome.com/v5/search?o=r&s=regular (example: far fa-star )",
           "Name": "Icon"
         },
         {
