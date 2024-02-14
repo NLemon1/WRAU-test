@@ -1158,20 +1158,6 @@
         "rowMinSpan": 1,
         "rowMaxSpan": 1,
         "allowAtRoot": true,
-        "allowInAreas": true,
-        "areas": [],
-        "thumbnail": "~/catalogue-thumbnails/calendar.png",
-        "contentElementTypeKey": "5f061be2-5b63-4452-99b5-d026a8e6af17",
-        "label": "",
-        "editorSize": "medium",
-        "inlineEditing": false,
-        "forceHideContentEditorInOverlay": false
-      },
-      {
-        "columnSpanOptions": [],
-        "rowMinSpan": 1,
-        "rowMaxSpan": 1,
-        "allowAtRoot": true,
         "allowInAreas": false,
         "areas": [],
         "contentElementTypeKey": "b3079b21-2d40-40fe-a6df-da890fa8292a",
@@ -1208,6 +1194,19 @@
         "inlineEditing": false,
         "forceHideContentEditorInOverlay": false,
         "groupKey": "61e5b4ab-de54-46b2-9862-ccd8301a2b8e"
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": true,
+        "allowInAreas": true,
+        "areas": [],
+        "contentElementTypeKey": "d0326835-a867-40fd-a537-86ac5a2cd620",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false
       }
     ],
     "blockGroups": [
@@ -1269,9 +1268,6 @@
     },
     {
       "Udi": "umb://document-type/5ed81857883e4c4997cb639707e50cad"
-    },
-    {
-      "Udi": "umb://document-type/5f061be25b63445299b5d026a8e6af17"
     },
     {
       "Udi": "umb://document-type/5fc677b8a2534579801d26068fab5800"
@@ -1347,6 +1343,9 @@
     },
     {
       "Udi": "umb://document-type/cffca6dfc3f54d9cab916591c86747c7"
+    },
+    {
+      "Udi": "umb://document-type/d0326835a86740fda53786ac5a2cd620"
     },
     {
       "Udi": "umb://document-type/d55381302bb84d8c97329d6bfcd0a24e"
