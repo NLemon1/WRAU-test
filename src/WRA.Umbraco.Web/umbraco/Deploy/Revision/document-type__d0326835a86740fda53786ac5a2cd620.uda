@@ -1,6 +1,6 @@
 {
-  "Name": "Events Calendar",
-  "Alias": "eventCalendar",
+  "Name": "Calendar",
+  "Alias": "calendar",
   "AllowedTemplates": [],
   "HistoryCleanup": {},
   "Icon": "icon-calendar-alt color-black",
@@ -15,7 +15,7 @@
   ],
   "PropertyGroups": [],
   "PropertyTypes": [],
-  "Udi": "umb://document-type/5f061be25b63445299b5d026a8e6af17",
+  "Udi": "umb://document-type/d0326835a86740fda53786ac5a2cd620",
   "Dependencies": [
     {
       "Udi": "umb://document-type-container/37b4b44f0abc4536af8ed684511c2571",
