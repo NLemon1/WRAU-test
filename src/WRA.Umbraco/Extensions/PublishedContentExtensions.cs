@@ -92,13 +92,13 @@ namespace WRA.Umbraco
                 p.Collection.Name,
                 p?.Taxonomy?.SafeString(),
                 p?.Categories?.First().Name ?? string.Empty,
-                p?.SubCategories?.First().Name ?? string.Empty,
+                p?.SubCategories?.First()?.Name ?? string.Empty,
                 p!.Price!.GetPriceFor(currency).Formatted().Value,
-                p!.MemberPrice!.GetPriceFor(currency).Formatted().Value,
+                p!.MemberPrice?.GetPriceFor(currency)?.Formatted()?.Value ?? string.Empty,
                 System.String.Format("{0:yyyy-MM-dd H:mm}", p.StartDate),
                 System.String.Format("{0:yyyy-MM-dd H:mm}", p.EndDate),
                 p.Url(),
-                p?.Categories?.First().Id ?? 0,
+                p?.Categories?.First()?.Id ?? 0,
                 p.Url()
             );
         }

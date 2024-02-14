@@ -19,7 +19,7 @@ namespace WRA.Umbraco.Controllers;
 
 [ApiController]
 [MapToApi("product-api")]
-[Route("WraMemberApi")]
+[Route("WraProductApi")]
 
 public class ProductSyncController : ApiController
 {
