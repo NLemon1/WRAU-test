@@ -11,6 +11,7 @@ const calendar = () => {
         "productType": "Events",
         "category": "",
         "subCategory": "",
+        "taxonomy": "",
         "pagination": {
             "pageNumber": 1,
             "pageSize": 100

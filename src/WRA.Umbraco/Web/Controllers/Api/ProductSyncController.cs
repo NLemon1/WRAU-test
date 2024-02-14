@@ -158,7 +158,7 @@ public class ProductSyncController : ApiController
 
         //first lets deserialize:
         //lets just grab the first 50 for testing
-        var externalProducts = JsonSerializer.Deserialize<List<WraProductDto>>(content)?.Take(50);
+        var externalProducts = JsonSerializer.Deserialize<List<WraProductDto>>(content);
 
         foreach (WraProductDto p in externalProducts)
         {
