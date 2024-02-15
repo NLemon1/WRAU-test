@@ -1,0 +1,44 @@
+{
+  "Name": "Umbraco testform1",
+  "Alias": "umbracoTestform1",
+  "DefaultTemplate": "umb://template/04b45a7387dd4856a17d85d450fc654b",
+  "AllowedTemplates": [
+    "umb://template/04b45a7387dd4856a17d85d450fc654b"
+  ],
+  "HistoryCleanup": {},
+  "Icon": "icon-document",
+  "Thumbnail": "folder.png",
+  "Permissions": {
+    "AllowedChildContentTypes": []
+  },
+  "CompositionContentTypes": [],
+  "PropertyGroups": [
+    {
+      "Key": "b6ffc2d9-9bf0-455b-8b85-7391bdaa1f97",
+      "Name": "form1",
+      "Alias": "form1",
+      "PropertyTypes": [
+        {
+          "Key": "a7318640-308c-455f-9111-1a98059aaa50",
+          "Alias": "form1",
+          "DataType": "umb://data-type/2bff224694e947f6a58cbc8c41d1c784",
+          "Name": "form1"
+        }
+      ]
+    }
+  ],
+  "PropertyTypes": [],
+  "Udi": "umb://document-type/d135b949e0544f7694803581ba3632ac",
+  "Dependencies": [
+    {
+      "Udi": "umb://data-type/2bff224694e947f6a58cbc8c41d1c784",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://template/04b45a7387dd4856a17d85d450fc654b",
+      "Ordering": true
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
+  "__version": "13.0.3"
+}
