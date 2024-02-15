@@ -7,7 +7,9 @@ using Org.BouncyCastle.Asn1.Pkcs;
 using Umbraco.Cms.Core;
 using Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Core.Models.PublishedContent;
+using Umbraco.Cms.Core.Scoping;
 using Umbraco.Cms.Core.Services;
+using Umbraco.Cms.Infrastructure.Examine;
 using Umbraco.Commerce.Core.Models;
 using Umbraco.Commerce.Core.Services;
 using WRA.Umbraco.Models;
@@ -19,8 +21,8 @@ public class WRAProductService
     readonly SearchService _searchService;
     readonly ILogger<WRAProductService> _logger;
     readonly IContentService _contentService;
-    private readonly ICurrencyService _currencyService;
-
+    readonly ICurrencyService _currencyService;
+    readonly ICoreScopeProvider _coreScopeProvider;
 
 
     public WRAProductService(
@@ -28,13 +30,15 @@ public class WRAProductService
         SearchService searchService,
         ICurrencyService currencyService,
         IContentService contentService,
-        ILogger<WRAProductService> logger
+        ILogger<WRAProductService> logger,
+        ICoreScopeProvider coreScopeProvider
     )
     {
         _logger = logger;
         _currencyService = currencyService;
         _searchService = searchService;
         _contentService = contentService;
+        _coreScopeProvider = coreScopeProvider;
     }
 
     private CurrencyReadOnly GetCurrency(Guid storeId) => _currencyService.GetCurrencies(storeId).Where(c => c.Name == "USD").First();
@@ -44,10 +48,17 @@ public class WRAProductService
     /// </summary>
     /// <param name="product">product dto</param>
     /// <returns></returns>
-    public async Task CreatProduct(WraProductDto product)
+    public async Task CreateProduct(WraProductDto product)
     {
+        // crate a scope
+        using ICoreScope scope = _coreScopeProvider.CreateCoreScope(autoComplete: true);
+        // supress any notification to prevent our listener from firing an "updated product" webhook back at the queue
+        // using var _ = scope.Notifications.Suppress();
+
         // now we need the "products" parent node to place these products under...
         var productCollectionPageQuery = _searchService.Search(CollectionPage.ModelTypeAlias);
+        var matchingProduct = _searchService.Search(ProductPage.ModelTypeAlias);
+
         var productCollections = productCollectionPageQuery
            .Select(result => new CollectionPage(result.Content, new NoopPublishedValueFallback()));
 
@@ -63,15 +74,20 @@ public class WRAProductService
         if (collectionPage == null) { _logger.LogError($"No collection match for product{product.Id}"); return; }
 
         // while we have the relvent info, lets grab the store ID for when we need it for currency stuff...
-        var store = collectionPage.GetStore();
+        var store = collectionPage.AncestorOrSelf<Home>()?.Store!;
+
 
         // We have our colleciton page, so now lets see if it contains a record that already exists...
         // if it returns nothing (no page exists matching the ID from WRA), we create one.
-        var productPage = GetExistingProductPage(product.Sku) ??
-                        _contentService.Create(product.Name, collectionPage.Id, ProductPage.ModelTypeAlias);
+        // var productPagetest = GetExistingProductPage(product.Sku);
+        var productPage = GetExistingProductPage(product.Sku);
+        if (productPage == null)
+        {
+            productPage = _contentService.Create(product.Name, collectionPage.Id, ProductPage.ModelTypeAlias);
+        }
 
         //set properties on our product
-        SetProductProperties(productPage, product, store);
+        await SetProductProperties(productPage, product, store);
 
         // save and publish the product! Wow! 
         _contentService.SaveAndPublish(productPage);
@@ -79,6 +95,13 @@ public class WRAProductService
 
     public async Task Update(WraProductDto product)
     {
+        // crate a scope
+        using ICoreScope scope = _coreScopeProvider.CreateCoreScope(autoComplete: true);
+        // supress any notification to prevent our listener from firing an "updated product" webhook back at the queue
+
+        using var _ = scope.Notifications.Suppress();
+
+        // search for product
         var productPage = _searchService.SearchProductBySku(product.Sku)?.FirstOrDefault();
         var store = productPage?.Content.GetStore();
 
@@ -91,6 +114,7 @@ public class WRAProductService
 
     public async Task<WraProductDto> GetWraProduct(string sku)
     {
+        // search products
         var product = _searchService.SearchProductBySku(sku)?.FirstOrDefault();
         if (product == null) { return null; }
 
@@ -104,21 +128,21 @@ public class WRAProductService
         // grab currency
         var store = pdp.GetStore();
         var currency = GetCurrency(store.Id);
-        var basePrice = pdp.Price!.GetPriceFor(currency.Id).Value;
-        var memberPrice = pdp.MemberPrice!.GetPriceFor(currency.Id).Value;
+        var basePrice = pdp.Price?.GetPriceFor(currency.Id).Value;
+        var memberPrice = pdp.MemberPrice?.GetPriceFor(currency.Id).Value;
         // build response Dto
         return new WraProductDto()
         {
             Id = pdp.Id.ToString(),
             Name = pdp.Name,
-            Description = pdp.LongDescription?.ToString() ?? string.Empty,
+            Description = pdp?.LongDescription?.ToString() ?? string.Empty,
             Sku = pdp.Sku!,
             // ProductTypeId = getproductType ??
-            ProductTypeId = categoryPage.ExternalId!,
-            ProductType = categoryPage.Name,
+            ProductTypeId = categoryPage?.ExternalId!,
+            ProductType = categoryPage?.Name ?? string.Empty,
             ProductCategoryId = category!.Value("externalId").SafeString(),
             // ProductSubcategoryId = subCategory!.Value("externalId").SafeString(),
-            SubCategory = subCategory!.Name,
+            SubCategory = subCategory?.Name ?? string.Empty,
             Taxonomy = pdp.Taxonomy.SafeString(),
             MemberPrice = memberPrice,
             Price = basePrice,
@@ -127,7 +151,7 @@ public class WRAProductService
         };
     }
 
-    private void SetProductProperties(IContent content, WraProductDto productDto, StoreReadOnly? store)
+    private async Task SetProductProperties(IContent content, WraProductDto productDto, StoreReadOnly? store)
     {
 
         var (categories, subCategories) = GetCategories(productDto.Category, productDto.SubCategory);
@@ -196,11 +220,16 @@ public class WRAProductService
     {
         // there should never be more than one record with the same external ID, so grab the first one.
         // TODO: if multiple return, run delete process?
-        var existingProduct = _searchService.SearchProductBySku(sku)?.FirstOrDefault().Content as IContent;
-        if (existingProduct != null)
+        // var matchingProduct = _searchService.Search(ProductPage.ModelTypeAlias)
+        //     .Where(cat => cat.Content.Value<string>("sku").Equals(sku, StringComparison.OrdinalIgnoreCase))
+        //     .FirstOrDefault()?
+        //     .Content;
+
+        var matchingProduct = _searchService.SearchProductBySku(sku)?.FirstOrDefault()?.Content;
+        if (matchingProduct == null)
         {
-            return existingProduct;
+            return null;
         }
-        return null;
+        return _contentService.GetById(matchingProduct.Id);
     }
 }

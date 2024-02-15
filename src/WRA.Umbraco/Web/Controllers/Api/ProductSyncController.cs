@@ -14,6 +14,7 @@ using Umbraco.Commerce.Core.Services;
 using WRA.Umbraco.Dtos;
 using WRA.Umbraco.Models;
 using WRA.Umbraco.Services;
+using Umbraco.Cms.Infrastructure.Examine;
 
 namespace WRA.Umbraco.Controllers;
 
@@ -28,6 +29,7 @@ public class ProductSyncController : ApiController
     private readonly IProductService _productService;
     private readonly IContentService _contentService;
     private readonly ICurrencyService _currencyService;
+    readonly IIndexRebuilder _indexbuilder;
     private WRAProductService _wraProductService;
     public ProductSyncController(
         SearchService searchService,
@@ -35,7 +37,8 @@ public class ProductSyncController : ApiController
         IProductService productService,
         IContentService contentService,
         ICurrencyService currencyService,
-        WRAProductService wRAProductService)
+        WRAProductService wRAProductService,
+        IIndexRebuilder indexbuilder)
     {
         _searchService = searchService;
         _wraExternalApiService = wRAExternalApiService;
@@ -43,6 +46,7 @@ public class ProductSyncController : ApiController
         _contentService = contentService;
         _currencyService = currencyService;
         _wraProductService = wRAProductService;
+        _indexbuilder = indexbuilder;
     }
 
 
@@ -112,7 +116,7 @@ public class ProductSyncController : ApiController
         // we have our matching sub categories
         foreach (var subcat in subCategories)
         {
-            var existingSubCategoryPages = _searchService.Search(CategoryPage.ModelTypeAlias)
+            var existingSubCategoryPages = _searchService.Search(SubCategoryPage.ModelTypeAlias)
                 .Where(x => x.Content.Value<Guid>("externalId").Equals(subcat.ExternalId));
 
             // check if any existing subcategory pages exist under the requested Id
@@ -162,9 +166,8 @@ public class ProductSyncController : ApiController
 
         foreach (WraProductDto p in externalProducts)
         {
-            await _wraProductService.CreatProduct(p);
+            await _wraProductService.CreateProduct(p);
         }
-
     }
 
 

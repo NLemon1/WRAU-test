@@ -54,10 +54,10 @@ public class WraProductDto
     public string Taxonomy { get; set; }
 
     [JsonPropertyName("memberPrice")]
-    public decimal MemberPrice { get; set; }
+    public decimal? MemberPrice { get; set; }
 
     [JsonPropertyName("nonMemberPrice")]
-    public decimal Price { get; set; }
+    public decimal? Price { get; set; }
 
     [JsonPropertyName("imageUrl")]
     public string ImageUrl { get; set; }
@@ -72,10 +72,10 @@ public class WraProductDto
     public DateTime EndDate { get; set; }
 
     [JsonPropertyName("eventStartDate")]
-    public DateTime EventStartDate { get; set; }
+    public DateTime? EventStartDate { get; set; }
 
     [JsonPropertyName("eventEndDate")]
-    public DateTime EventEndDate { get; set; }
+    public DateTime? EventEndDate { get; set; }
 
     [JsonPropertyName("location")]
     public string Location { get; set; }

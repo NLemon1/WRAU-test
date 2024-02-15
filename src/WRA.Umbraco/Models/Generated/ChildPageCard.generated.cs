@@ -58,7 +58,7 @@ namespace WRA.Umbraco.Models
 		public virtual string Headline => this.Value<string>(_publishedValueFallback, "headline");
 
 		///<summary>
-		/// Icon: Enter the code name from https://fontawesome.com/v5/search?o=r&s=regular (example: far fa-star )
+		/// Icon: Enter the Regukar Icon name from https://fontawesome.com/search?q=star&o=r&s=regular (Example: star OR paper-plane )
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
