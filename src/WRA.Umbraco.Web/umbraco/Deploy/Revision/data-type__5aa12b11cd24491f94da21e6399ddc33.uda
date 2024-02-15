@@ -1164,7 +1164,7 @@
         "rowMinSpan": 1,
         "rowMaxSpan": 1,
         "allowAtRoot": true,
-        "allowInAreas": false
+        "allowInAreas": false,
         "areas": [],
         "contentElementTypeKey": "d5538130-2bb8-4d8c-9732-9d6bfcd0a24e",
         "label": "",
