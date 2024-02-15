@@ -15,7 +15,7 @@ using Umbraco.Commerce.Core.Models;
 public class MyPaymentProvider : PaymentProviderBase<GlobalPaymentsSettings>
 {
     // Don't finalize at continue as we will finalize async via webhook
-    public override bool FinalizeAtContinueUrl => false;
+    public override bool FinalizeAtContinueUrl => true;
     public override bool CanCapturePayments => true;
     public MyPaymentProvider(UmbracoCommerceContext umbracoCommerce)
         : base(umbracoCommerce)
@@ -37,45 +37,57 @@ public class MyPaymentProvider : PaymentProviderBase<GlobalPaymentsSettings>
 
     public async override Task<CallbackResult> ProcessCallbackAsync(PaymentProviderContext<GlobalPaymentsSettings> context, CancellationToken token)
     {
-        var content = context.Request.Content;
-        string jsonContent = content.ReadAsStringAsync().Result;
-        var paymentToken = jsonContent.Substring(jsonContent.IndexOf("=") + 1);
 
-        var secretKey = context.Settings.TestSecretKey;
-        ServicesContainer.ConfigureService(new PorticoConfig
+        try
         {
-            SecretApiKey = secretKey,
-            DeveloperId = "000000",
-            VersionNumber = "0000",
-            ServiceUrl = "https://cert.api2.heartlandportico.com"
-        });
 
-        var card = new CreditCardData
-        {
-            Token = paymentToken
-        };
 
-        var address = new Address
-        {
-            PostalCode = "12345"
-        };
-
-        var response = card.Charge(context.Order.TotalPrice.Value.WithTax)
-                .WithCurrency("USD")
-                .WithAddress(address)
-                .Execute();
-
-        var x = context.Order.PaymentInfo.TotalPrice;
-        long y = Convert.ToInt64(response.AuthorizedAmount);
-        return new CallbackResult
-        {
-            TransactionInfo = new TransactionInfo
+            ServicesContainer.ConfigureService(new PorticoConfig
             {
-                AmountAuthorized = AmountFromMinorUnits(y),
-                TransactionId = response.TransactionId,
-                PaymentStatus = PaymentStatus.Captured,
-            }
-        };
+                SecretApiKey = context.Settings.TestSecretKey,
+                DeveloperId = "000000",
+                VersionNumber = "0000",
+                ServiceUrl = "https://cert.api2.heartlandportico.com"
+            });
+            var content = context.Request.Content;
+            string jsonContent = content.ReadAsStringAsync().Result;
+            // var paymentToken = jsonContent.Substring(jsonContent.IndexOf("=") + 1);
+            var zip = context.Order.Properties["shippingZipCode"]?.ToString();
+            var paymentToken = context.Order.Properties["paymentReference"]?.ToString();
+
+            var secretKey = context.Settings.TestSecretKey;
+            var card = new CreditCardData
+            {
+                Token = paymentToken
+            };
+
+            var address = new Address
+            {
+                PostalCode = zip
+            };
+
+            var response = card.Charge(context.Order.TotalPrice.Value.WithTax)
+                    .WithCurrency("USD")
+                    .WithAddress(address)
+                    .Execute();
+
+            // var x = context.Order.PaymentInfo.TotalPrice;
+            long authorizedAmount = Convert.ToInt64(response.AuthorizedAmount);
+            return new CallbackResult
+            {
+                TransactionInfo = new TransactionInfo
+                {
+                    AmountAuthorized = AmountFromMinorUnits(authorizedAmount),
+                    TransactionId = response.TransactionId,
+                    PaymentStatus = PaymentStatus.Captured,
+                }
+            };
+        }
+        catch (System.Exception)
+        {
+
+            throw;
+        }
     }
 
 

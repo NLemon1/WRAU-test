@@ -218,7 +218,10 @@ public class CheckoutSurfaceController : SurfaceController
                 var store = CurrentPage.GetStore();
                 var order = _commerceApi.GetOrCreateCurrentOrder(store.Id)
                     .AsWritable(uow)
-                    .SetPaymentMethod(model.PaymentMethod);
+                    .SetPaymentMethod(model.PaymentMethod)
+                    .SetProperties(new Dictionary<string, string>(){
+                        { "paymentReference", model.PaymentReference }
+                    });
 
                 _commerceApi.SaveOrder(order);
 
