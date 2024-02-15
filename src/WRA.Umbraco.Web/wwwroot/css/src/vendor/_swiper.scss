@@ -1,6 +1,6 @@
 ﻿@use 'sass:math';
-@import '../../../node_modules/swiper/swiper.scss';
-@import '../../../../node_modules/swiper/modules/effect-fade.scss';
+@import 'swiper/swiper.scss';
+@import 'swiper/modules/effect-fade.scss';
 
 .swiper-controls {
     display: flex;
