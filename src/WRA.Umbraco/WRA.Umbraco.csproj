@@ -23,6 +23,7 @@
     <PackageReference Include="Umbraco.Commerce.Cms.Web" Version=" 13.0.0" />
     <PackageReference Include="Umbraco.Commerce.Common" Version=" 13.0.1" />
     <PackageReference Include="Umbraco.Commerce.Core" Version=" 13.0.1" />
+    <PackageReference Include="Umbraco.Commerce.Deploy" Version="13.0.0" />
     <PackageReference Include="Umbraco.Commerce.Infrastructure" Version=" 13.0.1" />
     <PackageReference Include="Umbraco.Commerce.Persistence.Sqlite" Version="13.0.0" />
     <PackageReference Include="Umbraco.Commerce.Persistence.SqlServer" Version="13.0.0" />

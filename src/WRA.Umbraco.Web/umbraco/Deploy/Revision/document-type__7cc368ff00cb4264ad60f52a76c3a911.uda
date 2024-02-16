@@ -21,6 +21,7 @@
           "Key": "1c016a12-1595-47a9-b448-586272436843",
           "Alias": "metaDescription",
           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Description": "Enter meta description if desired.",
           "Name": "Meta Description",
           "SortOrder": 1
         },
@@ -28,12 +29,14 @@
           "Key": "6f4f106c-8982-47b7-a2b3-c3338997ce2e",
           "Alias": "metaTitle",
           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Description": "Override inherited meta title.",
           "Name": "Meta Title"
         },
         {
           "Key": "8995a568-12d4-4787-97e8-9d64e5e8505b",
           "Alias": "openGraphImage",
           "DataType": "umb://data-type/ad9f0cf2bda245d59ea1a63cfc873fd3",
+          "Description": "Override inherited OG image.",
           "Name": "Open Graph Image",
           "SortOrder": 2
         }

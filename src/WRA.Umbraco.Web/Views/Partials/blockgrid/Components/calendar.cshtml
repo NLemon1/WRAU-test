@@ -1,5 +1,4 @@
-﻿@using Umbraco.Extensions
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
 @using Umbraco.Cms.Core.Models.Blocks;
 @using ContentModels = WRA.Umbraco.Models;
 
@@ -9,10 +8,10 @@
     string style = "";
     string props = "";
 
-    @* if (content.HasValue("additionalCssClasses"))
+     if (content.HasValue("additionalCssClasses"))
     {
         className += $" {content.AdditionalCssClasses}";
-    } *@
+    }
 
     if (!String.IsNullOrEmpty(className))
     {

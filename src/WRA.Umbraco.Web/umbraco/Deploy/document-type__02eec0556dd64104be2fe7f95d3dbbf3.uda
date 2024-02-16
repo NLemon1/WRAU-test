@@ -60,7 +60,7 @@
           "Description": null,
           "Mandatory": false,
           "MandatoryMessage": null,
-          "Name": "Month/Year Title",
+          "Name": "Year/Month Title",
           "SortOrder": 0,
           "Validation": null,
           "ValidationMessage": null,

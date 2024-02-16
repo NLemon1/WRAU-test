@@ -58,7 +58,7 @@ namespace WRA.Umbraco.Models
 		public virtual string Excerpt => this.Value<string>(_publishedValueFallback, "excerpt");
 
 		///<summary>
-		/// Featured Online Articles: Links to online articles in News & Updates. First 3 items will appear in "featured" column.
+		/// Featured Online Articles: Select up to 4 featured articles.
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
@@ -81,6 +81,14 @@ namespace WRA.Umbraco.Models
 		public virtual global::System.DateTime MonthYearTitle => this.Value<global::System.DateTime>(_publishedValueFallback, "monthYearTitle");
 
 		///<summary>
+		/// More Articles: Select news & updates or landing pages to populate here.
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("moreArticles")]
+		public virtual global::System.Collections.Generic.IEnumerable<global::Umbraco.Cms.Core.Models.Link> MoreArticles => this.Value<global::System.Collections.Generic.IEnumerable<global::Umbraco.Cms.Core.Models.Link>>(_publishedValueFallback, "moreArticles");
+
+		///<summary>
 		/// Pdf
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
@@ -89,7 +97,7 @@ namespace WRA.Umbraco.Models
 		public virtual string Pdf => this.Value<string>(_publishedValueFallback, "pdf");
 
 		///<summary>
-		/// Meta Description
+		/// Meta Description: Enter meta description if desired.
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
@@ -97,7 +105,7 @@ namespace WRA.Umbraco.Models
 		public virtual string MetaDescription => global::WRA.Umbraco.Models.Meta.GetMetaDescription(this, _publishedValueFallback);
 
 		///<summary>
-		/// Meta Title
+		/// Meta Title: Override inherited meta title.
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
@@ -105,7 +113,7 @@ namespace WRA.Umbraco.Models
 		public virtual string MetaTitle => global::WRA.Umbraco.Models.Meta.GetMetaTitle(this, _publishedValueFallback);
 
 		///<summary>
-		/// Open Graph Image
+		/// Open Graph Image: Override inherited OG image.
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]

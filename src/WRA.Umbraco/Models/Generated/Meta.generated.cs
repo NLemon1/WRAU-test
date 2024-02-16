@@ -70,7 +70,7 @@ namespace WRA.Umbraco.Models
 		// properties
 
 		///<summary>
-		/// Meta Description
+		/// Meta Description: Enter meta description if desired.
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
@@ -83,7 +83,7 @@ namespace WRA.Umbraco.Models
 		public static string GetMetaDescription(IMeta that, IPublishedValueFallback publishedValueFallback) => that.Value<string>(publishedValueFallback, "metaDescription");
 
 		///<summary>
-		/// Meta Title
+		/// Meta Title: Override inherited meta title.
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
@@ -96,7 +96,7 @@ namespace WRA.Umbraco.Models
 		public static string GetMetaTitle(IMeta that, IPublishedValueFallback publishedValueFallback) => that.Value<string>(publishedValueFallback, "metaTitle");
 
 		///<summary>
-		/// Open Graph Image
+		/// Open Graph Image: Override inherited OG image.
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
