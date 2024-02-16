@@ -10,10 +10,6 @@
         "redo",
         "bold",
         "italic",
-        "alignleft",
-        "aligncenter",
-        "alignright",
-        "alignjustify",
         "link",
         "unlink"
       ],
@@ -21,7 +17,6 @@
       "maxImageSize": 500,
       "mode": "classic"
     },
-    "blocks": [],
     "useLiveEditing": false,
     "overlaySize": "small",
     "hideLabel": false,

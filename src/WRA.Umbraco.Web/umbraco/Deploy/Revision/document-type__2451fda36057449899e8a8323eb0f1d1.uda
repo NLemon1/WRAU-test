@@ -21,7 +21,7 @@
           "Key": "0ec999c5-65e3-4883-b578-d49fe2809d2e",
           "Alias": "icon",
           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
-          "Description": "Enter the code name from https://fontawesome.com/v5/search?o=r&s=regular (example: far fa-star )",
+          "Description": "Enter the Regukar Icon name from https://fontawesome.com/search?q=star&o=r&s=regular",
           "Name": "Icon"
         },
         {

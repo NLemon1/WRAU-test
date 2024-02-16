@@ -66,12 +66,12 @@ namespace WRA.Umbraco.Models
 		public virtual string Column1Heading => this.Value<string>(_publishedValueFallback, "column1Heading");
 
 		///<summary>
-		/// Column 1 Image
+		/// Column 1 Icon: Enter the Regular Icon name from https://fontawesome.com/search?q=star&o=r&s=regular (Example: star OR paper-plane )
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("column1Image")]
-		public virtual global::Umbraco.Cms.Core.Models.MediaWithCrops Column1Image => this.Value<global::Umbraco.Cms.Core.Models.MediaWithCrops>(_publishedValueFallback, "column1Image");
+		[ImplementPropertyType("column1Icon")]
+		public virtual string Column1Icon => this.Value<string>(_publishedValueFallback, "column1Icon");
 
 		///<summary>
 		/// Column 2 Content
@@ -90,12 +90,12 @@ namespace WRA.Umbraco.Models
 		public virtual string Column2Heading => this.Value<string>(_publishedValueFallback, "column2Heading");
 
 		///<summary>
-		/// Column 2 Image
+		/// Column 2 Icon: Enter the Regular Icon name from https://fontawesome.com/search?q=star&o=r&s=regular (Example: star OR paper-plane )
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("column2Image")]
-		public virtual global::Umbraco.Cms.Core.Models.MediaWithCrops Column2Image => this.Value<global::Umbraco.Cms.Core.Models.MediaWithCrops>(_publishedValueFallback, "column2Image");
+		[ImplementPropertyType("column2Icon")]
+		public virtual string Column2Icon => this.Value<string>(_publishedValueFallback, "column2Icon");
 
 		///<summary>
 		/// Column 3 Content
@@ -114,12 +114,12 @@ namespace WRA.Umbraco.Models
 		public virtual string Column3Heading => this.Value<string>(_publishedValueFallback, "column3Heading");
 
 		///<summary>
-		/// Column 3 Image
+		/// Column 3 Icon: Enter the Regular Icon name from https://fontawesome.com/search?q=star&o=r&s=regular (Example: star OR paper-plane )
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("column3Image")]
-		public virtual global::Umbraco.Cms.Core.Models.MediaWithCrops Column3Image => this.Value<global::Umbraco.Cms.Core.Models.MediaWithCrops>(_publishedValueFallback, "column3Image");
+		[ImplementPropertyType("column3Icon")]
+		public virtual string Column3Icon => this.Value<string>(_publishedValueFallback, "column3Icon");
 
 		///<summary>
 		/// Column 4 Content
@@ -138,12 +138,12 @@ namespace WRA.Umbraco.Models
 		public virtual string Column4Heading => this.Value<string>(_publishedValueFallback, "column4Heading");
 
 		///<summary>
-		/// Column 4 Image
+		/// Column 4 Icon: Enter the Regular Icon name from https://fontawesome.com/search?q=star&o=r&s=regular (Example: star OR paper-plane )
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("column4Image")]
-		public virtual global::Umbraco.Cms.Core.Models.MediaWithCrops Column4Image => this.Value<global::Umbraco.Cms.Core.Models.MediaWithCrops>(_publishedValueFallback, "column4Image");
+		[ImplementPropertyType("column4Icon")]
+		public virtual string Column4Icon => this.Value<string>(_publishedValueFallback, "column4Icon");
 
 		///<summary>
 		/// Content
