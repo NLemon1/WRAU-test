@@ -17,8 +17,7 @@
     "raymond@lightburn.co"
   ],
   "AllowedUserRoles": [
-    "admin",
-    "commerce"
+    "admin"
   ],
   "Udi": "umb://umbraco-commerce-store/64f9a2ebc1884aaca8f0018d62b6009d",
   "Dependencies": [],
