@@ -18,7 +18,7 @@ public class MyPaymentProvider : PaymentProviderBase<GlobalPaymentsSettings>
     public override bool FinalizeAtContinueUrl => true;
     public override bool CanCapturePayments => true;
     public MyPaymentProvider(UmbracoCommerceContext umbracoCommerce)
-        : base(umbracoCommerce)
+    : base(umbracoCommerce)
     { }
 
     public override string GetContinueUrl(PaymentProviderContext<GlobalPaymentsSettings> context)
@@ -34,6 +34,12 @@ public class MyPaymentProvider : PaymentProviderBase<GlobalPaymentsSettings>
     {
         return context.Settings.ErrorUrl;
     }
+    public virtual Task<ApiResult> CapturePaymentAsync(PaymentProviderContext<GlobalPaymentsSettings> context, CancellationToken cancellationToken = default(CancellationToken))
+    {
+        return Task.FromResult<ApiResult>(null);
+    }
+
+
 
     public async override Task<CallbackResult> ProcessCallbackAsync(PaymentProviderContext<GlobalPaymentsSettings> context, CancellationToken token)
     {
@@ -65,23 +71,27 @@ public class MyPaymentProvider : PaymentProviderBase<GlobalPaymentsSettings>
             {
                 PostalCode = zip
             };
+            decimal? transactionAmount = AmountToMinorUnits(context.Order.TransactionAmount.Value);
+            // var x = context.Order.TransactionAmount.Value;
 
-            var response = card.Charge(context.Order.TotalPrice.Value.WithTax)
-                    .WithCurrency("USD")
-                    .WithAddress(address)
-                    .Execute();
+            var authResponse = card.Authorize(transactionAmount)
+                .WithCurrency("USD")
+                .WithAddress(address)
+                .Execute();
+
+            var captureResponse = Transaction.FromId(authResponse.TransactionId)
+                .Capture(transactionAmount)
+                .Execute();
 
             // var x = context.Order.PaymentInfo.TotalPrice;
-            long authorizedAmount = Convert.ToInt64(response.AuthorizedAmount);
-            return new CallbackResult
+            long authorizedAmount = Convert.ToInt64(captureResponse.BalanceAmount);
+            var order = context.Order;
+            return CallbackResult.Ok(new TransactionInfo
             {
-                TransactionInfo = new TransactionInfo
-                {
-                    AmountAuthorized = AmountFromMinorUnits(authorizedAmount),
-                    TransactionId = response.TransactionId,
-                    PaymentStatus = PaymentStatus.Captured,
-                }
-            };
+                TransactionId = captureResponse.TransactionId,
+                AmountAuthorized = AmountFromMinorUnits(Convert.ToInt64(transactionAmount)),
+                PaymentStatus = PaymentStatus.Captured
+            });
         }
         catch (System.Exception)
         {
@@ -91,6 +101,10 @@ public class MyPaymentProvider : PaymentProviderBase<GlobalPaymentsSettings>
     }
 
 
+    // protected void FinalizeOrUpdateOrder(Order order)
+    // {
+    //     _commerceApi.Uow.Execute(uow =>{});
+    // }
     public override async Task<PaymentFormResult> GenerateFormAsync(PaymentProviderContext<GlobalPaymentsSettings> context, CancellationToken token)
     {
 
