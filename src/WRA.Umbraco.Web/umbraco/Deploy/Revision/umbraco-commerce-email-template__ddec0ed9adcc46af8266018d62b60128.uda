@@ -1,0 +1,22 @@
+{
+  "Name": "Order Confirmation",
+  "Alias": "orderConfirmation",
+  "SendToCustomer": true,
+  "Subject": "Order Confirmation",
+  "SenderName": "Umbraco Commerce",
+  "SenderAddress": "noreply@lightburn.co",
+  "ToAddresses": [],
+  "CcAddresses": [],
+  "BccAddresses": [],
+  "TemplateView": "~/Views/UmbracoCommerce/Templates/Email/OrderConfirmationEmail.cshtml",
+  "StoreUdi": "umb://umbraco-commerce-store/64f9a2ebc1884aaca8f0018d62b6009d",
+  "Udi": "umb://umbraco-commerce-email-template/ddec0ed9adcc46af8266018d62b60128",
+  "Dependencies": [
+    {
+      "Udi": "umb://umbraco-commerce-store/64f9a2ebc1884aaca8f0018d62b6009d",
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Commerce.Deploy,Umbraco.Commerce.Deploy.Artifacts.EmailTemplateArtifact",
+  "__version": "13.0.3"
+}

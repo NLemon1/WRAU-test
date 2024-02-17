@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using Umbraco.Cms.Core.Cache;
 using Umbraco.Cms.Core.Logging;
 using Umbraco.Cms.Core.Routing;
@@ -12,7 +11,8 @@ using Umbraco.Commerce.Core;
 using Umbraco.Commerce.Core.Api;
 using WRA.Umbraco.Dtos;
 using Umbraco.Commerce.Extensions;
-using Umbraco.Cms.Core.Events;
+using Umbraco.Commerce.Core.Models;
+using WRA.Umbraco;
 //using GlobalPayments.Api.Services;
 //using GlobalPayments.Api;
 
@@ -30,17 +30,6 @@ public class CheckoutSurfaceController : SurfaceController
         _commerceApi = commerceApi;
     }
 
-
-    // public IActionResult CaptureCreditCartPayment(object model)
-    // {
-    //     ServicesContainer.ConfigureService(new PorticoConfig
-    //     {
-    //         SecretApiKey = "skapi_cert_MTyMAQBiHVEAewvIzXVFcmUd2UcyBge_eCpaASUp0A",
-    //         DeveloperId = "000000",
-    //         VersionNumber = "0000",
-    //         ServiceUrl = "https://cert.api2.heartlandportico.com"
-    //     });
-    // }
     public IActionResult ApplyDiscountOrGiftCardCode(DiscountOrGiftCardCodeDto model)
     {
         try
@@ -95,6 +84,13 @@ public class CheckoutSurfaceController : SurfaceController
 
     public IActionResult UpdateOrderInformation(UpdateOrderInformationDto model)
     {
+        if (model.ShippingAddress == null)
+        {
+            ModelState.AddModelError("", "No shipping information provided.");
+
+            return CurrentUmbracoPage();
+        }
+
         bool shippingSameAsBilling = model.ShippingSameAsBilling;
         try
         {
@@ -102,26 +98,17 @@ public class CheckoutSurfaceController : SurfaceController
             {
                 var store = CurrentPage.GetStore();
                 var order = _commerceApi.GetOrCreateCurrentOrder(store.Id)
-                .AsWritable(uow);
-
+                .AsWritable(uow)
+                .SetProperties(new Dictionary<string, string>
+                {
+                    { Constants.Properties.Customer.EmailPropertyAlias, model.Email }
+                });
                 if (model.ShippingAddress != null)
                 {
                     // set shipping info
                     order.SetProperties(CreateShippingInfo(model.ShippingAddress));
+                    order.SetShippingCountryRegion(model.ShippingAddress.Country, null);
                 }
-
-                if (shippingSameAsBilling)
-                {
-                    // set billing info
-                    order.SetProperties(CreateBillingInfo(model.BillingAddress));
-                }
-
-                if (model?.BillingAddress?.Country != Guid.Empty)
-                {
-                    order.SetPaymentCountryRegion(model.ShippingAddress.Country, null);
-                }
-                // order.SetShippingCountryRegion(model.ShippingSameAsBilling ? model.BillingAddress.Country : model.ShippingAddress.Country, null);
-
                 _commerceApi.SaveOrder(order);
 
                 uow.Complete();
@@ -140,13 +127,43 @@ public class CheckoutSurfaceController : SurfaceController
         return RedirectToCurrentUmbracoPage();
     }
 
+    public IActionResult UpdateOrderBillingAddress(UpdateOrderInformationDto model, bool shippingSameAsBilling = false)
+    {
+        try
+        {
+            var address = shippingSameAsBilling ? model.ShippingAddress : model.BillingAddress;
+            _commerceApi.Uow.Execute(uow =>
+            {
+                var store = CurrentPage.GetStore();
+                var order = _commerceApi.GetOrCreateCurrentOrder(store.Id)
+                    .AsWritable(uow)
+                    .SetProperties(CreateBillingInfo(address));
+
+                order.SetPaymentCountryRegion(address.Country, null);
+
+                _commerceApi.SaveOrder(order);
+
+                uow.Complete();
+            });
+        }
+        catch (ValidationException ex)
+        {
+            ModelState.AddModelError("", "Failed to update billing address");
+
+            return CurrentUmbracoPage();
+        }
+
+        if (model.NextStep.HasValue)
+            return RedirectToUmbracoPage(model.NextStep.Value);
+
+        return RedirectToCurrentUmbracoPage();
+    }
+
     private Dictionary<string, string> CreateShippingInfo(OrderAddressDto address)
     {
         return new Dictionary<string, string>
             {
                     // { Constants.Properties.Customer.EmailPropertyAlias, model.Email },
-                    // { "marketingOptIn", model.MarketingOptIn ? "1" : "0" },
-
                     { Constants.Properties.Customer.FirstNamePropertyAlias, address.FirstName },
                     { Constants.Properties.Customer.LastNamePropertyAlias, address.LastName },
                     { "shippingAddressLine1", address.Line1 },
@@ -155,8 +172,7 @@ public class CheckoutSurfaceController : SurfaceController
                     { "shippingState", address.State },
                     { "shippingZipCode", address.ZipCode },
                     { "shippingFirstName", address.FirstName },
-                    { "shippingLastName", address.LastName },
-                    // { "shippingCountry", address.Country },
+                    { "shippingLastName", address.LastName }
             };
 
     }
@@ -165,8 +181,8 @@ public class CheckoutSurfaceController : SurfaceController
         return new Dictionary<string, string>
             {
                     // { Constants.Properties.Customer.EmailPropertyAlias, model.Email },
-                    // { "marketingOptIn", model.MarketingOptIn ? "1" : "0" },
-
+                    { Constants.Properties.Customer.FirstNamePropertyAlias, address.FirstName },
+                    { Constants.Properties.Customer.LastNamePropertyAlias, address.LastName },
                     { "billingAddressLine1", address.Line1 },
                     { "billingAddressLine2", address.Line2 },
                     { "billingCity", address.City },
@@ -209,7 +225,7 @@ public class CheckoutSurfaceController : SurfaceController
         return RedirectToCurrentUmbracoPage();
     }
 
-    public IActionResult UpdateOrderPaymentMethod(UpdateOrderPaymentMethodDto model)
+    public IActionResult UpdateOrderBillingAndPayment(UpdateOrderPaymentMethodDto model)
     {
         try
         {
@@ -222,6 +238,9 @@ public class CheckoutSurfaceController : SurfaceController
                     .SetProperties(new Dictionary<string, string>(){
                         { "paymentReference", model.PaymentReference }
                     });
+
+                var address = model.ShippingSameAsBilling ? order.ShippingAddressDto() : model.BillingAddress;
+                order.SetProperties(CreateBillingInfo(address));
 
                 _commerceApi.SaveOrder(order);
 
@@ -240,4 +259,5 @@ public class CheckoutSurfaceController : SurfaceController
 
         return RedirectToCurrentUmbracoPage();
     }
+
 }

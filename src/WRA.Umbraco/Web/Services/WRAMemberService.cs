@@ -1,17 +1,13 @@
 
-using K4os.Compression.LZ4.Internal;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using NUglify.Helpers;
 using Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Core.Scoping;
 using Umbraco.Cms.Core.Security;
 using Umbraco.Cms.Core.Services;
-using Umbraco.Cms.Infrastructure.Examine;
-using Umbraco.Cms.Web.Common.Security;
+using Umbraco.Cms.Core.Web;
+using Umbraco.Cms.Web.Common.Controllers;
 using Umbraco.Cms.Web.Website.Models;
+using Umbraco.Commerce.Core.Api;
 using WRA.Umbraco.Dtos;
 
 namespace WRA.Umbraco.Services;
@@ -21,16 +17,22 @@ public class WRAMemberService
     private readonly IMemberService _memberService;
     private readonly IMemberManager _memberManager;
     private readonly ICoreScopeProvider _coreScopeProvider;
+    private readonly IUmbracoCommerceApi _commerceApi;
+    private readonly IUmbracoContextAccessor _umbracoContextAccessor;
 
     public WRAMemberService(
         IMemberService memberService,
         IMemberManager memberManager,
-        ICoreScopeProvider coreScopeProvider
+        ICoreScopeProvider coreScopeProvider,
+        IUmbracoCommerceApi commerceApi,
+        IUmbracoContextAccessor umbracoContextAccessor
     )
     {
         _memberService = memberService;
         _memberManager = memberManager;
         _coreScopeProvider = coreScopeProvider;
+        _commerceApi = commerceApi;
+        _umbracoContextAccessor = umbracoContextAccessor;
     }
 
 
@@ -220,4 +222,21 @@ public class WRAMemberService
             member.Properties[property.Alias]?.SetValue(property.Value);
         }
     }
+
+    // private bool AssignMemberToCustomer(IMember member, Guid storeId)
+    // {
+    //     if (_umbracoContextAccessor.TryGetUmbracoContext(out IUmbracoContext? context) == false)
+    //     {
+    //         return false;
+    //     }
+    //     var currentMember = _memberManager.GetCurrentMemberAsync();
+    //     _commerceApi.Uow.Execute(uow =>
+    //     {
+    //         var order = _commerceApi.GetOrCreateCurrentOrder(storeId)
+    //             .AsWritable(uow);
+    //         _commerceApi.SaveOrder(order);
+
+    //         uow.Complete();
+    //     });
+    // }
 }

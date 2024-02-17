@@ -21,7 +21,7 @@
         "uriFormat": "http://localhost:44336"
       },
       "env": {
-        "ASPNETCORE_ENVIRONMENT": "development"
+        "ASPNETCORE_ENVIRONMENT": "local"
       },
       "sourceFileMap": {
         "/Views": "${workspaceFolder}/Views"

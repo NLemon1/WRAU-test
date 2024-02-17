@@ -1,12 +1,11 @@
 using Umbraco.Cms.Core.Models.PublishedContent;
-using Umbraco.Commerce.Core.Api;
 using Umbraco.Commerce.Core.Models;
+using Umbraco.Commerce.Core.Api;
 using WRA.Umbraco.Models;
 using Umbraco.Commerce.Extensions;
 using WRA.Umbraco.Dtos;
 using Umbraco.Cms.Core.Models;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-
+using System.Text;
 namespace WRA.Umbraco
 {
     public static class PublishedContentExtensions
@@ -162,6 +161,42 @@ namespace WRA.Umbraco
             return pdto;
         }
 
+        public static OrderAddressDto ShippingAddressDto(this Order order)
+        {
+            return new OrderAddressDto
+            {
+                FirstName = order.CustomerInfo.FirstName,
+                LastName = order.CustomerInfo.LastName,
+                Line1 = order.Properties["shippingAddressLine1"].SafeString(),
+                Line2 = order.Properties["shippingAddressLine2"].SafeString(),
+                City = order.Properties["shippingCity"].SafeString(),
+                State = order.Properties["shippingState"].SafeString(),
+                ZipCode = order.Properties["shippingZipCode"].SafeString(),
+                //Country = Guid.Parse(order.Properties["shippingCountry"].SafeString()),
+
+            };
+        }
+
+        public static string ReadableShippingAddress(this OrderReadOnly order)
+        {
+            var address = new StringBuilder();
+
+            var Line1 = order.Properties["shippingAddressLine1"].SafeString();
+            var Line2 = order.Properties["shippingAddressLine2"].SafeString();
+            var City = order.Properties["shippingCity"].SafeString();
+            var State = order.Properties["shippingState"].SafeString();
+            var ZipCode = order.Properties["shippingZipCode"].SafeString();
+
+            address.Append($"{Line1} ");
+            if (!string.IsNullOrEmpty(Line2))
+            {
+                address.Append($"{Line2}, ");
+            }
+            address.Append($"{City} {State} {ZipCode}");
+
+            return address.ToString();
+        }
+
         /// <summary>
         /// Member Specific Extensions
         /// </summary>
@@ -218,6 +253,10 @@ namespace WRA.Umbraco
         {
             return UmbracoCommerceApi.Instance.GetCurrentOrder(content.GetStore().Id);
         }
+        // public static OrderReadOnly GetCurrentCustomer(this IPublishedContent content)
+        // {
+        //     return UmbracoCommerceApi.Instance.custom(content.GetStore().Id);
+        // }
 
         public static string GetProductReference(this IProductComp content)
         {

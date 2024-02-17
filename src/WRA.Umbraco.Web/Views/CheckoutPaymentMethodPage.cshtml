@@ -5,14 +5,13 @@
     Layout = "CheckoutStepPage.cshtml";
 
     var ccMethod = Model.PaymentMethods.FirstOrDefault(x => x.Alias == "creditCard");
-
 }
 
 @section aside {
     @Html.Partial("CheckoutSidebar")
 }
 
-@using (Html.BeginUmbracoForm("UpdateOrderPaymentMethod", "CheckoutSurface", null, htmlAttributes:  new { id = "payment-form" }))
+@using (Html.BeginUmbracoForm("UpdateOrderBillingAndPayment", "CheckoutSurface", null, htmlAttributes:  new { id = "payment-form" }))
 {
     <input type="hidden" name="nextStep" value="@(Model.NextStep?.Key)" />
     <input type="hidden" name="paymentMethod" value="@ccMethod.Id" />
@@ -22,17 +21,17 @@
     <div class="mb-5 px-3 py-1 border rounded">
         <div class="d-flex flex-column flex-sm-row py-2">
             <span style="width: 80px; color: #696f78;">Contact</span>
-            <span class="flex-grow-1">johnsmith@gmail.com</span>
+            <span class="flex-grow-1" name="billingAddress.Email">@Model.Order.CustomerInfo.Email</span>
             <a class="text-decoration-none" href="#">Change</a>
         </div>
         <div class="d-flex flex-column flex-sm-row py-2 border-top">
             <span style="width: 80px; color: #696f78;">Ship to</span>
-            <span class="flex-grow-1">1234 Maple Dr, Town Name, WI, 56789, United States</span>
+            <span class="flex-grow-1">@Model.ReadableShippingAddress</span>
             <a class="text-decoration-none" href="#">Change</a>
         </div>
         <div class="d-flex flex-column flex-sm-row py-2 border-top">
             <span style="width: 80px; color: #696f78;">Shipping method</span>
-            <span class="flex-grow-1">Standard Shipping | Free</span>
+            <span class="flex-grow-1">@Model.ShippingMethod.Name</span>
             <a class="text-decoration-none" href="#">Change</a>
         </div>
     </div>
@@ -60,13 +59,13 @@
     <ul class="list-unstyled mb-0">
         <li class="mb-2 border rounded">
             <label class="d-block px-3 py-2">
-                <input class="form-check-input" type="radio" name="billingAddress" value="same" checked required />
-                <span class="form-check-label ms-2">Use as shipping address</span>
+                <input class="form-check-input" type="radio" name="ShippingSameAsBilling" value="true" checked required />
+                <span class="form-check-label ms-2">Billing same as shipping</span>
             </label>
         </li>
         <li class="mb-2 border rounded">
             <label class="d-block px-3 py-2">
-                <input class="form-check-input js-alt-billing-address" type="radio" name="billingAddress" value="different" required />
+                <input class="form-check-input js-alt-billing-address" type="radio" name="billingAddress" value="different" />
                 <span class="form-check-label ms-2">Use a different billing address</span>
             </label>
 
