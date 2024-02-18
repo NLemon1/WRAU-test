@@ -37,10 +37,10 @@ namespace WRA.Umbraco.Web
             // custom services
             services.AddScoped<GatedContentService>();
             services.AddScoped<WRAExternalApiService>();
-            services.AddScoped<WRAMemberService>();
+            services.AddScoped<WRAMemberManagementService>();
 
             services.AddTransient<SearchService>();
-            services.AddTransient<WRAProductService>();
+            services.AddTransient<WRAProductManagementService>();
             services.AddTransient<QueueService>();
 
             services.Configure<MemberSubscriptionServiceSettings>(_config.GetSection("SubscriptionServiceSettings:MemberSubscriptionSettings"));

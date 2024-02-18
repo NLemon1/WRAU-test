@@ -8,11 +8,11 @@ namespace WRA.Umbraco.Events;
 
 public class WraProductNotifications : INotificationHandler<ContentPublishedNotification>
 {
-    readonly WRAProductService _productService;
+    readonly WRAProductManagementService _productService;
     readonly QueueService _queueService;
-    public WraProductNotifications(WRAProductService wRAProductService) : base()
+    public WraProductNotifications(WRAProductManagementService WRAProductManagementService) : base()
     {
-        _productService = wRAProductService;
+        _productService = WRAProductManagementService;
     }
     public async void Handle(ContentPublishedNotification notification)
     {

@@ -12,17 +12,17 @@ using Umbraco.Commerce.Core.Models;
 using WRA.Umbraco.Services;
 
 namespace WRA.Umbraco.Events;
-public class CartCreatingNotifiction(ILogger<CartCreatingNotifiction> logger, WRAMemberService wraMemberService) : NotificationEventHandlerBase<OrderCreatingNotification>
+public class CartCreatingNotifiction(ILogger<CartCreatingNotifiction> logger, WRAMemberManagementService WRAMemberManagementService) : NotificationEventHandlerBase<OrderCreatingNotification>
 {
     readonly ILogger<CartCreatingNotifiction> _logger = logger;
-    readonly WRAMemberService _wraMemberService = wraMemberService;
+    readonly WRAMemberManagementService _WRAMemberManagementService = WRAMemberManagementService;
 
     public override void Handle(OrderCreatingNotification evt)
     {
         _logger.LogInformation("Order created!");
 
         // attach to member might not be necessary
-        //_wraMemberService.AttachOrderToMember(evt.Order);
+        //_WRAMemberManagementService.AttachOrderToMember(evt.Order);
 
     }
 

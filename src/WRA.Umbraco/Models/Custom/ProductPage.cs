@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
+using Microsoft.Extensions.Logging;
 using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Commerce.Cms.Models;
 using Umbraco.Commerce.Core.Models;
@@ -17,7 +18,6 @@ namespace WRA.Umbraco.Models
         public ProductPrice MemberPricing => this.MemberPrice.GetPriceFor(CurrencyId);
         public ProductPrice NonMemberPricing => this.Price.GetPriceFor(CurrencyId);
         public IEnumerable<ProductVariant> ChildVariants => this.Children.OfType<ProductVariant>();
-
 
     }
 }

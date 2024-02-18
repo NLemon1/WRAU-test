@@ -24,12 +24,12 @@ public class MemberRegisterController : SurfaceController
     private readonly IMemberService _memberService;
     private readonly IMemberSignInManager _memberSignInManager;
     private readonly ICoreScopeProvider _coreScopeProvider;
-    private readonly WRAMemberService _WRAMemberService;
+    private readonly WRAMemberManagementService _WRAMemberManagementService;
 
     public MemberRegisterController(
         IMemberManager memberManager,
         IMemberService memberService,
-        WRAMemberService WRAMemberService,
+        WRAMemberManagementService WRAMemberManagementService,
         IUmbracoContextAccessor umbracoContextAccessor,
         IUmbracoDatabaseFactory databaseFactory,
         ServiceContext services,
@@ -43,7 +43,7 @@ public class MemberRegisterController : SurfaceController
         _memberManager = memberManager;
         _memberService = memberService;
         _memberSignInManager = memberSignInManager;
-        _WRAMemberService = WRAMemberService;
+        _WRAMemberManagementService = WRAMemberManagementService;
         _coreScopeProvider = coreScopeProvider;
     }
 
@@ -135,7 +135,7 @@ public class MemberRegisterController : SurfaceController
 
     private async Task<IdentityResult> RegisterMemberAsync(RegisterModel model, bool logMemberIn = true)
     {
-        var (result, user) = await _WRAMemberService.AddMember(model);
+        var (result, user) = await _WRAMemberManagementService.AddMember(model);
 
         if (logMemberIn)
         {

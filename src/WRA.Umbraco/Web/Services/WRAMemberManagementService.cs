@@ -15,7 +15,7 @@ using WRA.Umbraco.Dtos;
 
 namespace WRA.Umbraco.Services;
 
-public class WRAMemberService
+public class WRAMemberManagementService
 {
     private readonly IMemberService _memberService;
     private readonly IMemberManager _memberManager;
@@ -24,7 +24,7 @@ public class WRAMemberService
     private readonly IUmbracoContextAccessor _umbracoContextAccessor;
     private readonly IOrderService _orderService;
 
-    public WRAMemberService(
+    public WRAMemberManagementService(
         IMemberService memberService,
         IMemberManager memberManager,
         ICoreScopeProvider coreScopeProvider,

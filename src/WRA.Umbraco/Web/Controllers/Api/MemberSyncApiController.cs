@@ -18,20 +18,20 @@ namespace WRA.Umbraco.Controllers;
 [ApiController]
 [MapToApi("member-api")]
 [Route("WraMemberApi")]
-public class MemberSyncController : ApiController
+public class MemberSyncApiController : ApiController
 {
     private readonly IMemberService _memberService;
     private readonly IMemberManager _memberManager;
     private readonly ICoreScopeProvider _coreScopeProvider;
-    private readonly WRAMemberService _WRAMemberService;
+    private readonly WRAMemberManagementService _WRAMemberManagementService;
 
 
-    public MemberSyncController(
-        WRAMemberService WRAMemberService,
+    public MemberSyncApiController(
+        WRAMemberManagementService WRAMemberManagementService,
         ICoreScopeProvider coreScopeProvider
     )
     {
-        _WRAMemberService = WRAMemberService;
+        _WRAMemberManagementService = WRAMemberManagementService;
         _coreScopeProvider = coreScopeProvider;
     }
 
@@ -41,7 +41,7 @@ public class MemberSyncController : ApiController
     public async Task<IActionResult> Create(MemberDto newMemberRequest)
     {
 
-        var result = _WRAMemberService.Create(newMemberRequest);
+        var result = _WRAMemberManagementService.Create(newMemberRequest);
         if (result == null)
         {
             return StatusCode(System.Net.HttpStatusCode.InternalServerError);
@@ -53,7 +53,7 @@ public class MemberSyncController : ApiController
     [Route("Update")]
     public async Task<IActionResult> Update(MemberDto updateMemberRequest)
     {
-        var result = _WRAMemberService.Update(updateMemberRequest);
+        var result = _WRAMemberManagementService.Update(updateMemberRequest);
         if (result == null)
         {
             return StatusCode(System.Net.HttpStatusCode.InternalServerError);
@@ -65,7 +65,7 @@ public class MemberSyncController : ApiController
     [Route("Delete")]
     public async Task<IActionResult> Delete(MemberDto updateMemberRequest)
     {
-        var result = _WRAMemberService.Delete(updateMemberRequest);
+        var result = _WRAMemberManagementService.Delete(updateMemberRequest);
         if (result == null)
         {
             return StatusCode(System.Net.HttpStatusCode.InternalServerError);

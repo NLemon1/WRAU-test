@@ -19,7 +19,7 @@ public class WraProductWebhook : WebhookEventContentBase<ContentPublishedNotific
 {
     private readonly ILogger<WraProductWebhook> _logger;
     private readonly QueueService _queueService;
-    // private readonly WRAProductService _wraProductService;
+    // private readonly WRAProductManagementService _WRAProductManagementService;
     public WraProductWebhook(
         IWebhookFiringService webhookFiringService,
         IWebhookService webhookService,
@@ -27,13 +27,13 @@ public class WraProductWebhook : WebhookEventContentBase<ContentPublishedNotific
         IServerRoleAccessor serverRoleAccessor,
         ILogger<WraProductWebhook> logger,
         QueueService queueService
-        // WRAProductService wraProdService
+        // WRAProductManagementService wraProdService
         )
         : base(webhookFiringService, webhookService, webhookSettings, serverRoleAccessor)
     {
         _logger = logger;
         _queueService = queueService;
-        // _wraProductService = wraProdService;
+        // _WRAProductManagementService = wraProdService;
     }
 
     public override string Alias => "WraProductUpdate";
@@ -59,7 +59,7 @@ public class WraProductWebhook : WebhookEventContentBase<ContentPublishedNotific
         _logger.LogInformation($"Product {contentNotif.Id} has been saved and notification published! name: {contentNotif.Name} WraID: {contentNotif.Id}");
         string sku = contentNotif.GetValue<string>("sku") ?? string.Empty;
         return string.Empty;
-        // var product = _wraProductService.GetWraProduct(sku);
+        // var product = _WRAProductManagementService.GetWraProduct(sku);
 
         // //TODO: create static options class
         // var options = new JsonSerializerOptions { WriteIndented = false };

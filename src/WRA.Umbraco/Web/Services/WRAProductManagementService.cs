@@ -15,22 +15,22 @@ using Umbraco.Commerce.Core.Services;
 using WRA.Umbraco.Models;
 
 namespace WRA.Umbraco.Services;
-public class WRAProductService
+public class WRAProductManagementService
 {
 
     readonly SearchService _searchService;
-    readonly ILogger<WRAProductService> _logger;
+    readonly ILogger<WRAProductManagementService> _logger;
     readonly IContentService _contentService;
     readonly ICurrencyService _currencyService;
     readonly ICoreScopeProvider _coreScopeProvider;
 
 
-    public WRAProductService(
+    public WRAProductManagementService(
 
         SearchService searchService,
         ICurrencyService currencyService,
         IContentService contentService,
-        ILogger<WRAProductService> logger,
+        ILogger<WRAProductManagementService> logger,
         ICoreScopeProvider coreScopeProvider
     )
     {
@@ -232,4 +232,5 @@ public class WRAProductService
         }
         return _contentService.GetById(matchingProduct.Id);
     }
+
 }

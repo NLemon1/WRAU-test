@@ -22,7 +22,7 @@ namespace WRA.Umbraco.Controllers;
 [MapToApi("product-api")]
 [Route("WraProductApi")]
 
-public class ProductSyncController : ApiController
+public class ProductSyncApiController : ApiController
 {
     private readonly SearchService _searchService;
     private readonly WRAExternalApiService _wraExternalApiService;
@@ -30,14 +30,14 @@ public class ProductSyncController : ApiController
     private readonly IContentService _contentService;
     private readonly ICurrencyService _currencyService;
     readonly IIndexRebuilder _indexbuilder;
-    private WRAProductService _wraProductService;
-    public ProductSyncController(
+    private WRAProductManagementService _WRAProductManagementService;
+    public ProductSyncApiController(
         SearchService searchService,
         WRAExternalApiService wRAExternalApiService,
         IProductService productService,
         IContentService contentService,
         ICurrencyService currencyService,
-        WRAProductService wRAProductService,
+        WRAProductManagementService WRAProductManagementService,
         IIndexRebuilder indexbuilder)
     {
         _searchService = searchService;
@@ -45,7 +45,7 @@ public class ProductSyncController : ApiController
         _productService = productService;
         _contentService = contentService;
         _currencyService = currencyService;
-        _wraProductService = wRAProductService;
+        _WRAProductManagementService = WRAProductManagementService;
         _indexbuilder = indexbuilder;
     }
 
@@ -166,7 +166,7 @@ public class ProductSyncController : ApiController
 
         foreach (WraProductDto p in externalProducts)
         {
-            await _wraProductService.CreateProduct(p);
+            await _WRAProductManagementService.CreateProduct(p);
         }
     }
 
