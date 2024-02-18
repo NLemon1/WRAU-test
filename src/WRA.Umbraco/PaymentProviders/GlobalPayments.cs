@@ -10,16 +10,19 @@ using Newtonsoft.Json.Linq;
 using GlobalPayments.Api.PaymentMethods;
 using GlobalPayments.Api.Entities;
 using Umbraco.Commerce.Core.Models;
+using Microsoft.Extensions.Logging;
+
 
 [PaymentProvider("GlobalPayments", "Global Payments", "GlobalPayments. it is what it is..")]
-public class MyPaymentProvider : PaymentProviderBase<GlobalPaymentsSettings>
+public class GlobalPaymentsPaymentProvider : PaymentProviderBase<GlobalPaymentsSettings>
 {
     // Don't finalize at continue as we will finalize async via webhook
     public override bool FinalizeAtContinueUrl => true;
     public override bool CanCapturePayments => true;
-    public MyPaymentProvider(UmbracoCommerceContext umbracoCommerce)
+    readonly ILogger<GlobalPaymentsPaymentProvider> _logger;
+    public GlobalPaymentsPaymentProvider(UmbracoCommerceContext umbracoCommerce, ILogger<GlobalPaymentsPaymentProvider> logger)
     : base(umbracoCommerce)
-    { }
+    { _logger = logger; }
 
     public override string GetContinueUrl(PaymentProviderContext<GlobalPaymentsSettings> context)
     {
@@ -43,25 +46,33 @@ public class MyPaymentProvider : PaymentProviderBase<GlobalPaymentsSettings>
 
     public async override Task<CallbackResult> ProcessCallbackAsync(PaymentProviderContext<GlobalPaymentsSettings> context, CancellationToken token)
     {
-
         try
         {
-
-
-            ServicesContainer.ConfigureService(new PorticoConfig
+            if (context.Settings.TestMode)
             {
-                SecretApiKey = context.Settings.TestSecretKey,
-                DeveloperId = "000000",
-                VersionNumber = "0000",
-                ServiceUrl = "https://cert.api2.heartlandportico.com"
-            });
-            var content = context.Request.Content;
-            string jsonContent = content.ReadAsStringAsync().Result;
-            // var paymentToken = jsonContent.Substring(jsonContent.IndexOf("=") + 1);
-            var zip = context.Order.Properties["shippingZipCode"]?.ToString();
-            var paymentToken = context.Order.Properties["paymentReference"]?.ToString();
 
-            var secretKey = context.Settings.TestSecretKey;
+                ServicesContainer.ConfigureService(new PorticoConfig
+                {
+                    SecretApiKey = context.Settings.TestSecretKey,
+                    DeveloperId = "000000",
+                    VersionNumber = "0000",
+                    ServiceUrl = "https://cert.api2.heartlandportico.com"
+                });
+            }
+            else
+            {
+                ServicesContainer.ConfigureService(new PorticoConfig
+                {
+                    SecretApiKey = context.Settings.LiveSecretKey,
+                    DeveloperId = "000000",
+                    VersionNumber = "0000",
+                    ServiceUrl = "https://api2.heartlandportico.com"
+                });
+            }
+
+            var zip = context.Order.Properties["shippingZipCode"]?.ToString();
+            // this token comes from the Ifram form found on the payment method page. 
+            var paymentToken = context.Order.Properties["paymentReference"]?.ToString();
             var card = new CreditCardData
             {
                 Token = paymentToken
@@ -72,35 +83,71 @@ public class MyPaymentProvider : PaymentProviderBase<GlobalPaymentsSettings>
                 PostalCode = zip
             };
             decimal? transactionAmount = AmountToMinorUnits(context.Order.TransactionAmount.Value);
-            // var x = context.Order.TransactionAmount.Value;
 
-            var authResponse = card.Authorize(transactionAmount)
+
+            // Charge. No auth for now, may change later...
+            Transaction? charge = card.Charge(transactionAmount)
                 .WithCurrency("USD")
                 .WithAddress(address)
                 .Execute();
 
-            var captureResponse = Transaction.FromId(authResponse.TransactionId)
-                .Capture(transactionAmount)
-                .Execute();
-
-            // var x = context.Order.PaymentInfo.TotalPrice;
-            long authorizedAmount = Convert.ToInt64(captureResponse.BalanceAmount);
-            var order = context.Order;
-            return CallbackResult.Ok(new TransactionInfo
+            if (charge.ResponseCode == "00" || charge.ResponseCode == "10")
             {
-                TransactionId = captureResponse.TransactionId,
-                AmountAuthorized = AmountFromMinorUnits(Convert.ToInt64(transactionAmount)),
-                PaymentStatus = PaymentStatus.Captured
-            });
+                return CallbackResult.Ok(new TransactionInfo
+                {
+                    TransactionId = charge.TransactionId,
+                    AmountAuthorized = AmountFromMinorUnits(Convert.ToInt64(transactionAmount)), // Ideally this should be the amount the payment processor returns. Unsure how to get that yet.
+                    PaymentStatus = PaymentStatus.Captured
+                });
+            }
+            // var captureResponse = Transaction.FromId(charge.TransactionId)
+            //     .Capture(transactionAmount)
+            //     .Execute();
+
+            // if (authResponse.Status)
+            // {
+
+            // }
+            // long authorizedAmount = Convert.ToInt64(captureResponse.BalanceAmount);
+            return errorResult();
+
+        }
+        catch (GatewayException e)
+        {
+            _logger.LogError(e, "GatewayException in CreditCardPaymentProvider.ProcessCallbackAsync");
+            return errorResult();
+            // handle error
+        }
+        catch (UnsupportedTransactionException e)
+        {
+            _logger.LogError(e, "UnsupportedTransactionException in CreditCardPaymentProvider.ProcessCallbackAsync");
+            return errorResult();
+            // handle error
+        }
+        catch (ApiException ex)
+        {
+            _logger.LogError(ex, "ApiException in CreditCardPaymentProvider.ProcessCallbackAsync");
+            return errorResult();
+            // handle error
+
         }
         catch (System.Exception)
         {
-
-            throw;
+            _logger.LogError("System.Exception in CreditCardPaymentProvider.ProcessCallbackAsync");
+            return errorResult();
         }
     }
 
-
+    private CallbackResult errorResult()
+    {
+        return new CallbackResult
+        {
+            TransactionInfo = new TransactionInfo
+            {
+                PaymentStatus = PaymentStatus.Error,
+            }
+        };
+    }
     // protected void FinalizeOrUpdateOrder(Order order)
     // {
     //     _commerceApi.Uow.Execute(uow =>{});

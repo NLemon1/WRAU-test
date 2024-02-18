@@ -8,6 +8,9 @@ using Umbraco.Cms.Core.Web;
 using Umbraco.Cms.Web.Common.Controllers;
 using Umbraco.Cms.Web.Website.Models;
 using Umbraco.Commerce.Core.Api;
+using Umbraco.Commerce.Core.Events.Notification;
+using Umbraco.Commerce.Core.Models;
+using Umbraco.Commerce.Core.Services;
 using WRA.Umbraco.Dtos;
 
 namespace WRA.Umbraco.Services;
@@ -19,13 +22,15 @@ public class WRAMemberService
     private readonly ICoreScopeProvider _coreScopeProvider;
     private readonly IUmbracoCommerceApi _commerceApi;
     private readonly IUmbracoContextAccessor _umbracoContextAccessor;
+    private readonly IOrderService _orderService;
 
     public WRAMemberService(
         IMemberService memberService,
         IMemberManager memberManager,
         ICoreScopeProvider coreScopeProvider,
         IUmbracoCommerceApi commerceApi,
-        IUmbracoContextAccessor umbracoContextAccessor
+        IUmbracoContextAccessor umbracoContextAccessor,
+        IOrderService orderService
     )
     {
         _memberService = memberService;
@@ -33,6 +38,7 @@ public class WRAMemberService
         _coreScopeProvider = coreScopeProvider;
         _commerceApi = commerceApi;
         _umbracoContextAccessor = umbracoContextAccessor;
+        _orderService = orderService;
     }
 
 
@@ -223,20 +229,36 @@ public class WRAMemberService
         }
     }
 
-    // private bool AssignMemberToCustomer(IMember member, Guid storeId)
-    // {
-    //     if (_umbracoContextAccessor.TryGetUmbracoContext(out IUmbracoContext? context) == false)
-    //     {
-    //         return false;
-    //     }
-    //     var currentMember = _memberManager.GetCurrentMemberAsync();
-    //     _commerceApi.Uow.Execute(uow =>
-    //     {
-    //         var order = _commerceApi.GetOrCreateCurrentOrder(storeId)
-    //             .AsWritable(uow);
-    //         _commerceApi.SaveOrder(order);
+    public bool AttachOrderToMember(Order currentOrder)
+    {
+        if (_umbracoContextAccessor.TryGetUmbracoContext(out IUmbracoContext? context) == false)
+        {
+            return false;
+        }
+        var currentMember = _memberManager.GetCurrentMemberAsync();
+        if (currentMember != null)
+        {
+            var memberKey = currentMember?.Result?.Key.ToString();
+            _commerceApi.Uow.Execute(uow =>
+            {
+                var order = _commerceApi.GetOrCreateCurrentOrder(currentOrder.StoreId)
+                    .AsWritable(uow)
+                    .AssignToCustomer(memberKey);
+                _commerceApi.SaveOrder(order);
 
-    //         uow.Complete();
-    //     });
+                uow.Complete();
+            });
+            // member sucessfully attached to customer
+            return true;
+        }
+        // no member attached
+        return false;
+    }
+
+
+    // public  IEnumerable<OrderReadOnly> GetAllOrdersForCustomer(IMember member)
+    // {
+    //     _orderService.GetFinalizedOrdersForCustomer()
+
     // }
 }

@@ -15,7 +15,7 @@
 {
     <input type="hidden" name="nextStep" value="@(Model.NextStep?.Key)" />
     <input type="hidden" name="paymentMethod" value="@ccMethod.Id" />
-    <input name="paymentReference" id="token" />
+    <input type="hidden" name="paymentReference" id="token" />
 
     @* checkout summary *@
     <div class="mb-5 px-3 py-1 border rounded">
