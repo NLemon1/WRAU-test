@@ -1,9 +1,18 @@
-﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
-@using Umbraco.Cms.Core.Models.Blocks
+﻿@using Umbraco.Cms.Core.Models.Blocks
+@using WRA.Umbraco.Services
+@using Umbraco.Cms.Core.Security;
+
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@inject GatedContentService _gatedContentService
+@inject IMemberManager _membermanager
+
 
 @{
     var settings = Umbraco.ContentAtRoot().FirstOrDefault(x => x.ContentType.Alias == "siteSettings");
     var sections = Model.Value<IEnumerable<BlockGridItem>>("sections");
+    var currentMember = _membermanager.GetCurrentMemberAsync().Result;
+    bool MemberCanViewPage = await _gatedContentService.MemberCanViewPage(Model, currentMember);
+
 }
 
 @if (Model.HasValue("backgroundOffset") && Model.Value("backgroundOffset").ToString() == "True")
@@ -23,6 +32,9 @@
     {
         @Html.Raw(Model.Value("scripts"));
     }
+}
+@if(MemberCanViewPage){
+    <h1> Can't see this unless you're logged in!!</h1>
 }
 
 @await Html.PartialAsync("blockgrid/default", sections)
