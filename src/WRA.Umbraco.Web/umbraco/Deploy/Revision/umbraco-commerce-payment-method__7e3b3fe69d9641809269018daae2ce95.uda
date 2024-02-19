@@ -2,7 +2,6 @@
   "Name": "Credit Card",
   "Alias": "creditCard",
   "Sku": "Credit Card",
-  "TaxClassUdi": "umb://umbraco-commerce-tax-class/bc9f8435a1214789bf9b018d62b600ff",
   "PaymentProviderAlias": "GlobalPayments",
   "PaymentProviderSettings": {
     "CancelUrl": "/checkout/order-confirmation/",
@@ -13,25 +12,12 @@
     "TestSecretKey": "skapi_cert_MU7SBQAmenIAGxuZsGgGvIZXvDW224Nr4BllXi_Ijg"
   },
   "CanCapturePayments": true,
-  "AllowedCountryRegions": [
-    {
-      "CountryUdi": "umb://umbraco-commerce-country/5384bfcca25742a097bd018d62b6f0b6"
-    }
-  ],
   "SortOrder": 1,
   "StoreUdi": "umb://umbraco-commerce-store/64f9a2ebc1884aaca8f0018d62b6009d",
   "Udi": "umb://umbraco-commerce-payment-method/7e3b3fe69d9641809269018daae2ce95",
   "Dependencies": [
     {
       "Udi": "umb://umbraco-commerce-store/64f9a2ebc1884aaca8f0018d62b6009d",
-      "Mode": "Exist"
-    },
-    {
-      "Udi": "umb://umbraco-commerce-tax-class/bc9f8435a1214789bf9b018d62b600ff",
-      "Mode": "Exist"
-    },
-    {
-      "Udi": "umb://umbraco-commerce-country/5384bfcca25742a097bd018d62b6f0b6",
       "Mode": "Exist"
     }
   ],
