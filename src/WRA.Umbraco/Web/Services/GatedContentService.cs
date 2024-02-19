@@ -1,5 +1,6 @@
 
 
+using System.Collections;
 using K4os.Compression.LZ4.Internal;
 using NUglify.Helpers;
 using Umbraco.Cms.Core.Models;
@@ -47,11 +48,15 @@ namespace WRA.Umbraco.Services
             {
                 return true;
             }
-            var authorizedMemberGroups = page.Value<string[]>(_gatedMemberGroups)?.ToList();
-            bool pageHasGatedContent = authorizedMemberGroups?.Any() ?? false;
-            if (member != null && pageHasGatedContent)
+            var authorizedMemberGroupsField = page.Properties.Where(p => p.Alias.Equals(_gatedMemberGroups, StringComparison.OrdinalIgnoreCase));
+            var authorizedMemberGroupIds = authorizedMemberGroupsField?.FirstOrDefault()?
+                .GetValue(_gatedMemberGroups)?
+                .SafeString()
+                .Split(',')
+                .ToList();
+            if (member != null && (authorizedMemberGroupIds?.Any() ?? false))
             {
-                return await MemberIsInAuthorizedGroup(authorizedMemberGroups, member);
+                return await MemberIsInAuthorizedGroup(authorizedMemberGroupIds, member);
             }
             return false;
 

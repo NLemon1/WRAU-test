@@ -4,7 +4,12 @@
 @using Umbraco.Cms.Core.Models
 @using Microsoft.AspNetCore.Http
 @using Umbraco.Forms.Web
+@using Umbraco.Cms.Core.Security;
+
+@inject IMemberManager _membermanager
+
 @{
+    MemberIdentityUser currentMember = await _membermanager.GetCurrentMemberAsync();
     var settings = Umbraco.ContentAtRoot().FirstOrDefault(x => x.ContentType.Alias == "siteSettings");
     IPublishedContent home = Umbraco.ContentAtRoot().Where(pc => pc.Name == "Home").FirstOrDefault();
     string metaTitle = Model.HasValue("metaTitle") ? Model.Value<string>("metaTitle") : Model.Name + " | " + settings.Value("siteName");
@@ -114,7 +119,8 @@
                                 }
                             </ul>
                         }
-                        <a href="/login" class="btn btn-primary btn-sm d-none d-lg-block">Login</a>
+                        @* <a href="/login" class="btn btn-primary btn-sm d-none d-lg-block">Login</a> *@
+                        <partial name="_loginButton" model=@currentMember />
                         
                         <button class="js-header__search-overlay-toggle site-header__mobile-utility d-lg-none ms-auto" aria-label="Site Search">
                             <i class="fa fa-search"></i>

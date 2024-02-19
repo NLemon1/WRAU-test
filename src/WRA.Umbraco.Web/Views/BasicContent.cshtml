@@ -10,7 +10,8 @@
 @{
     var settings = Umbraco.ContentAtRoot().FirstOrDefault(x => x.ContentType.Alias == "siteSettings");
     var sections = Model.Value<IEnumerable<BlockGridItem>>("sections");
-    var currentMember = _membermanager.GetCurrentMemberAsync().Result;
+        
+    var currentMember = await _membermanager.GetCurrentMemberAsync();
     bool MemberCanViewPage = await _gatedContentService.MemberCanViewPage(Model, currentMember);
 
 }

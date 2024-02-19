@@ -1,0 +1,15 @@
+@model Umbraco.Cms.Core.Security.MemberIdentityUser
+
+@if (Model != null)
+{
+  // member is logged in
+    @* <a href="/logout" class="btn btn-primary btn-sm d-none d-lg-block">Logout</a> *@
+    // my WRA?
+    <a href="/profile" class="btn btn-primary btn-sm d-none d-lg-block">Hello, @Model.Name!</a>
+}
+else
+{
+  <a href="/login" class="btn btn-primary btn-sm d-none d-lg-block">Login</a>
+}
+
+

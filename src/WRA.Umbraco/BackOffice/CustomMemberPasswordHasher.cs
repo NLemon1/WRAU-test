@@ -25,7 +25,16 @@ public class CustomMemberPasswordHasher<Tuser> : UmbracoPasswordHasher<Tuser> wh
     public override string HashPassword(Tuser member, string password)
     {
         // get salt
-        string saltStr = member.Id.ToString().Replace("-", string.Empty);
+        string saltStr;
+        if (member.Id != null)
+        {
+            saltStr = member.Id.ToString().Replace("-", string.Empty);
+        }
+        else
+        {
+            saltStr = Guid.NewGuid().ToString().Replace("-", string.Empty);
+        }
+
         byte[] salt = Encoding.UTF8.GetBytes(saltStr);
 
         //hash password

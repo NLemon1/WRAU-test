@@ -22,7 +22,6 @@ namespace WRA.Umbraco.Events.ServiceBusSubscriptions
     public class SubscriptionServiceSettingsOptions : IConfigureOptions<ISubscriptionServiceSettings>
     {
         private readonly IConfiguration _configuration;
-
         public SubscriptionServiceSettingsOptions(IConfiguration configuration)
         {
             _configuration = configuration;

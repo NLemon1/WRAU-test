@@ -52,7 +52,6 @@ namespace WRA.Umbraco.Web
             // umbraco services
             services.AddUmbraco(_env, _config)
                 .AddBackOffice()
-                .AddWraPasswordHashing()
                 .AddWebsite()
                 .AddWraStore()
                 .AddDeliveryApi()
