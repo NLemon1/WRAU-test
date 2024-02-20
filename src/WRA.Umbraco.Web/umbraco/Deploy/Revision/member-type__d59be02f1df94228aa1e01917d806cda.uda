@@ -264,5 +264,5 @@
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.MemberTypeArtifact",
-  "__version": "13.0.3"
+  "__version": "13.0.4"
 }

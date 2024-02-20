@@ -22,5 +22,5 @@
     }
   ],
   "__type": "Umbraco.Commerce.Deploy,Umbraco.Commerce.Deploy.Artifacts.PaymentMethodArtifact",
-  "__version": "13.0.3"
+  "__version": "13.0.4"
 }

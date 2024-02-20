@@ -12,5 +12,5 @@
   "Udi": "umb://member-type/11dfa14151ae49d398675adb636a346f",
   "Dependencies": [],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.MemberTypeArtifact",
-  "__version": "13.0.3"
+  "__version": "13.0.4"
 }

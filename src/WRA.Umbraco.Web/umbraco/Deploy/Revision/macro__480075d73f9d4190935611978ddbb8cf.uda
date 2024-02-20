@@ -28,5 +28,5 @@
   "Udi": "umb://macro/480075d73f9d4190935611978ddbb8cf",
   "Dependencies": [],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.MacroArtifact",
-  "__version": "13.0.3"
+  "__version": "13.0.4"
 }
