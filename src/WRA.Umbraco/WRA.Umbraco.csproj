@@ -28,7 +28,7 @@
     <PackageReference Include="Umbraco.Commerce.Persistence.Sqlite" Version="13.0.0" />
     <PackageReference Include="Umbraco.Commerce.Persistence.SqlServer" Version="13.0.0" />
     <PackageReference Include="Umbraco.Commerce.Web" Version="13.0.0" />
-    <PackageReference Include="Umbraco.Forms.Core.Providers" Version="13.0.1" />
+    <PackageReference Include="Umbraco.Forms.Core.Providers" Version="13.0.2" />
 
   </ItemGroup>
 
