@@ -81,14 +81,6 @@ namespace WRA.Umbraco.Models
 		public virtual global::System.DateTime MonthYearTitle => this.Value<global::System.DateTime>(_publishedValueFallback, "monthYearTitle");
 
 		///<summary>
-		/// More Articles: Select news & updates or landing pages to populate here.
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("moreArticles")]
-		public virtual global::System.Collections.Generic.IEnumerable<global::Umbraco.Cms.Core.Models.Link> MoreArticles => this.Value<global::System.Collections.Generic.IEnumerable<global::Umbraco.Cms.Core.Models.Link>>(_publishedValueFallback, "moreArticles");
-
-		///<summary>
 		/// Pdf
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
@@ -141,5 +133,20 @@ namespace WRA.Umbraco.Models
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
 		[ImplementPropertyType("hideFromSitemap")]
 		public virtual bool HideFromSitemap => global::WRA.Umbraco.Models.Visibility.GetHideFromSitemap(this, _publishedValueFallback);
+
+		///<summary>
+		/// Visible To All
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
+		[ImplementPropertyType("visibleToAll")]
+		public virtual bool VisibleToAll => global::WRA.Umbraco.Models.Visibility.GetVisibleToAll(this, _publishedValueFallback);
+
+		///<summary>
+		/// Visible To Member Groups: Member Groups for whom this content is visible
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("visibleToMemberGroups")]
+		public virtual string VisibleToMemberGroups => global::WRA.Umbraco.Models.Visibility.GetVisibleToMemberGroups(this, _publishedValueFallback);
 	}
 }

@@ -29,6 +29,15 @@ namespace WRA.Umbraco.Models
 		/// <summary>Hide from Sitemap</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
 		bool HideFromSitemap { get; }
+
+		/// <summary>Visible To All</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
+		bool VisibleToAll { get; }
+
+		/// <summary>Visible To Member Groups</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		string VisibleToMemberGroups { get; }
 	}
 
 	/// <summary>Visibility</summary>
@@ -83,5 +92,29 @@ namespace WRA.Umbraco.Models
 		/// <summary>Static getter for Hide from Sitemap</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
 		public static bool GetHideFromSitemap(IVisibility that, IPublishedValueFallback publishedValueFallback) => that.Value<bool>(publishedValueFallback, "hideFromSitemap");
+
+		///<summary>
+		/// Visible To All
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
+		[ImplementPropertyType("visibleToAll")]
+		public virtual bool VisibleToAll => GetVisibleToAll(this, _publishedValueFallback);
+
+		/// <summary>Static getter for Visible To All</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
+		public static bool GetVisibleToAll(IVisibility that, IPublishedValueFallback publishedValueFallback) => that.Value<bool>(publishedValueFallback, "visibleToAll");
+
+		///<summary>
+		/// Visible To Member Groups: Member Groups for whom this content is visible
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("visibleToMemberGroups")]
+		public virtual string VisibleToMemberGroups => GetVisibleToMemberGroups(this, _publishedValueFallback);
+
+		/// <summary>Static getter for Visible To Member Groups</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
+		[return: global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		public static string GetVisibleToMemberGroups(IVisibility that, IPublishedValueFallback publishedValueFallback) => that.Value<string>(publishedValueFallback, "visibleToMemberGroups");
 	}
 }

@@ -18,14 +18,14 @@ using Umbraco.Extensions;
 
 namespace WRA.Umbraco.Models
 {
-	/// <summary>Reusable Widget</summary>
-	[PublishedModel("reusableWidget")]
-	public partial class ReusableWidget : PublishedElementModel
+	/// <summary>Umbraco testform1</summary>
+	[PublishedModel("umbracoTestform1")]
+	public partial class UmbracoTestform1 : PublishedContentModel
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
-		public new const string ModelTypeAlias = "reusableWidget";
+		public new const string ModelTypeAlias = "umbracoTestform1";
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
 		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
@@ -34,14 +34,14 @@ namespace WRA.Umbraco.Models
 			=> PublishedModelUtility.GetModelContentType(publishedSnapshotAccessor, ModelItemType, ModelTypeAlias);
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
 		[return: global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		public static IPublishedPropertyType GetModelPropertyType<TValue>(IPublishedSnapshotAccessor publishedSnapshotAccessor, Expression<Func<ReusableWidget, TValue>> selector)
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(IPublishedSnapshotAccessor publishedSnapshotAccessor, Expression<Func<UmbracoTestform1, TValue>> selector)
 			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(publishedSnapshotAccessor), selector);
 #pragma warning restore 0109
 
 		private IPublishedValueFallback _publishedValueFallback;
 
 		// ctor
-		public ReusableWidget(IPublishedElement content, IPublishedValueFallback publishedValueFallback)
+		public UmbracoTestform1(IPublishedContent content, IPublishedValueFallback publishedValueFallback)
 			: base(content, publishedValueFallback)
 		{
 			_publishedValueFallback = publishedValueFallback;
@@ -50,11 +50,10 @@ namespace WRA.Umbraco.Models
 		// properties
 
 		///<summary>
-		/// Select widget
+		/// form1
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("selectWidget")]
-		public virtual global::Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent SelectWidget => this.Value<global::Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent>(_publishedValueFallback, "selectWidget");
+		[ImplementPropertyType("form1")]
+		public virtual global::System.Nullable<global::System.Guid> Form1 => this.Value<global::System.Nullable<global::System.Guid>>(_publishedValueFallback, "form1");
 	}
 }
