@@ -1,0 +1,16 @@
+{
+  "Name": "Error",
+  "Alias": "error",
+  "Color": "red",
+  "SortOrder": 3,
+  "StoreUdi": "umb://umbraco-commerce-store/00e6f6055b3c4b99a48f018dcd6d6e9e",
+  "Udi": "umb://umbraco-commerce-order-status/fa83bb33592242a9b40e018dcd6d703d",
+  "Dependencies": [
+    {
+      "Udi": "umb://umbraco-commerce-store/00e6f6055b3c4b99a48f018dcd6d6e9e",
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Commerce.Deploy,Umbraco.Commerce.Deploy.Artifacts.OrderStatusArtifact",
+  "__version": "13.0.4"
+}
