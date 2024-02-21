@@ -1,0 +1,26 @@
+{
+  "Name": "USD",
+  "Alias": "USD",
+  "Code": "USD",
+  "CultureName": "en-US",
+  "AllowedCountries": [
+    {
+      "CountryUdi": "umb://umbraco-commerce-country/6c987b9b37894827b0ef018dcd75bf3d"
+    }
+  ],
+  "SortOrder": 1,
+  "StoreUdi": "umb://umbraco-commerce-store/7dc4bea072f8401c9815018dcd7561e3",
+  "Udi": "umb://umbraco-commerce-currency/b6889190b97943fc8f84018dcd76c6a6",
+  "Dependencies": [
+    {
+      "Udi": "umb://umbraco-commerce-store/7dc4bea072f8401c9815018dcd7561e3",
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://umbraco-commerce-country/6c987b9b37894827b0ef018dcd75bf3d",
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Commerce.Deploy,Umbraco.Commerce.Deploy.Artifacts.CurrencyArtifact",
+  "__version": "13.0.4"
+}

@@ -3,11 +3,11 @@
   "Alias": "error",
   "Color": "red",
   "SortOrder": 3,
-  "StoreUdi": "umb://umbraco-commerce-store/00e6f6055b3c4b99a48f018dcd6d6e9e",
-  "Udi": "umb://umbraco-commerce-order-status/fa83bb33592242a9b40e018dcd6d703d",
+  "StoreUdi": "umb://umbraco-commerce-store/7dc4bea072f8401c9815018dcd7561e3",
+  "Udi": "umb://umbraco-commerce-order-status/098dea269f8944ea9759018dcd756244",
   "Dependencies": [
     {
-      "Udi": "umb://umbraco-commerce-store/00e6f6055b3c4b99a48f018dcd6d6e9e",
+      "Udi": "umb://umbraco-commerce-store/7dc4bea072f8401c9815018dcd7561e3",
       "Mode": "Exist"
     }
   ],

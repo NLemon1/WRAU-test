@@ -11,11 +11,11 @@
   "BccAddresses": [],
   "TemplateView": "~/Views/UmbracoCommerce/Templates/Email/GiftCardEmail.cshtml",
   "SortOrder": 2,
-  "StoreUdi": "umb://umbraco-commerce-store/00e6f6055b3c4b99a48f018dcd6d6e9e",
-  "Udi": "umb://umbraco-commerce-email-template/4a1670f8976546efaf25018dcd6d7076",
+  "StoreUdi": "umb://umbraco-commerce-store/7dc4bea072f8401c9815018dcd7561e3",
+  "Udi": "umb://umbraco-commerce-email-template/c573203d4a0b49089221018dcd756259",
   "Dependencies": [
     {
-      "Udi": "umb://umbraco-commerce-store/00e6f6055b3c4b99a48f018dcd6d6e9e",
+      "Udi": "umb://umbraco-commerce-store/7dc4bea072f8401c9815018dcd7561e3",
       "Mode": "Exist"
     }
   ],

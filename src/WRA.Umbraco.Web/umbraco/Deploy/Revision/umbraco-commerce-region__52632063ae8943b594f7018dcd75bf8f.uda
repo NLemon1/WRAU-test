@@ -1,0 +1,21 @@
+{
+  "Name": "Wyoming",
+  "Alias": "WY",
+  "Code": "WY",
+  "CountryUdi": "umb://umbraco-commerce-country/6c987b9b37894827b0ef018dcd75bf3d",
+  "SortOrder": 50,
+  "StoreUdi": "umb://umbraco-commerce-store/7dc4bea072f8401c9815018dcd7561e3",
+  "Udi": "umb://umbraco-commerce-region/52632063ae8943b594f7018dcd75bf8f",
+  "Dependencies": [
+    {
+      "Udi": "umb://umbraco-commerce-store/7dc4bea072f8401c9815018dcd7561e3",
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://umbraco-commerce-country/6c987b9b37894827b0ef018dcd75bf3d",
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Commerce.Deploy,Umbraco.Commerce.Deploy.Artifacts.RegionArtifact",
+  "__version": "13.0.4"
+}
