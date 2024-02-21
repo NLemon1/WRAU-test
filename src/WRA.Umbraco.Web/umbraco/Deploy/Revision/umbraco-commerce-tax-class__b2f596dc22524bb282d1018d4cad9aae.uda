@@ -3,11 +3,11 @@
   "Alias": "standard",
   "DefaultTaxRate": 0.2,
   "CountryRegionTaxRates": [],
-  "StoreUdi": "umb://umbraco-commerce-store/64f9a2ebc1884aaca8f0018d62b6009d",
-  "Udi": "umb://umbraco-commerce-tax-class/bc9f8435a1214789bf9b018d62b600ff",
+  "StoreUdi": "umb://umbraco-commerce-store/a568c06259364d818f97018d4cad99b6",
+  "Udi": "umb://umbraco-commerce-tax-class/b2f596dc22524bb282d1018d4cad9aae",
   "Dependencies": [
     {
-      "Udi": "umb://umbraco-commerce-store/64f9a2ebc1884aaca8f0018d62b6009d",
+      "Udi": "umb://umbraco-commerce-store/a568c06259364d818f97018d4cad99b6",
       "Mode": "Exist"
     }
   ],
