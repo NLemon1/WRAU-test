@@ -1,0 +1,16 @@
+{
+  "Name": "Standard",
+  "Alias": "standard",
+  "DefaultTaxRate": 0.2,
+  "CountryRegionTaxRates": [],
+  "StoreUdi": "umb://umbraco-commerce-store/00e6f6055b3c4b99a48f018dcd6d6e9e",
+  "Udi": "umb://umbraco-commerce-tax-class/73f49ac2a045495a8ff0018dcd6d6fd1",
+  "Dependencies": [
+    {
+      "Udi": "umb://umbraco-commerce-store/00e6f6055b3c4b99a48f018dcd6d6e9e",
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Commerce.Deploy,Umbraco.Commerce.Deploy.Artifacts.TaxClassArtifact",
+  "__version": "13.0.4"
+}
