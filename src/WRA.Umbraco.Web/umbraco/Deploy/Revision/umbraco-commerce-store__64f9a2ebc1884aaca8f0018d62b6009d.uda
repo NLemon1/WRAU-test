@@ -1,0 +1,37 @@
+{
+  "Name": "WRA",
+  "Alias": "wRA",
+  "DefaultTaxClassUdi": "umb://umbraco-commerce-tax-class/bc9f8435a1214789bf9b018d62b600ff",
+  "CookieTimeout": "365.00:00:00",
+  "CartNumberTemplate": "CART-{0}",
+  "OrderNumberTemplate": "ORDER-{0}",
+  "ProductPropertyAliases": [],
+  "ProductUniquenessPropertyAliases": [],
+  "GiftCardCodeLength": 10,
+  "GiftCardDaysValid": 1095,
+  "GiftCardPropertyAliases": [
+    "giftCardRecipientName",
+    "giftCardRecipientEmail",
+    "giftCardMessage"
+  ],
+  "ConfirmationEmailTemplateUdi": "umb://umbraco-commerce-email-template/ddec0ed9adcc46af8266018d62b60128",
+  "AllowedUsers": [
+    "raymond@lightburn.co"
+  ],
+  "AllowedUserRoles": [
+    "admin"
+  ],
+  "Udi": "umb://umbraco-commerce-store/64f9a2ebc1884aaca8f0018d62b6009d",
+  "Dependencies": [
+    {
+      "Udi": "umb://umbraco-commerce-tax-class/bc9f8435a1214789bf9b018d62b600ff",
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://umbraco-commerce-email-template/ddec0ed9adcc46af8266018d62b60128",
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Commerce.Deploy,Umbraco.Commerce.Deploy.Artifacts.StoreArtifact",
+  "__version": "13.0.4"
+}
