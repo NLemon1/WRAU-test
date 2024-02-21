@@ -1,0 +1,16 @@
+{
+  "Name": "Order Packing Slip",
+  "Alias": "orderPackingSlip",
+  "TemplateView": "~/Views/UmbracoCommerce/Templates/Print/OrderPackingSlip.cshtml",
+  "SortOrder": 1,
+  "StoreUdi": "umb://umbraco-commerce-store/00e6f6055b3c4b99a48f018dcd6d6e9e",
+  "Udi": "umb://umbraco-commerce-print-template/f0f048555f5e4b5a85e8018dcd6d70c0",
+  "Dependencies": [
+    {
+      "Udi": "umb://umbraco-commerce-store/00e6f6055b3c4b99a48f018dcd6d6e9e",
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Commerce.Deploy,Umbraco.Commerce.Deploy.Artifacts.PrintTemplateArtifact",
+  "__version": "13.0.4"
+}
