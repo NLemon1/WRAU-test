@@ -64,13 +64,13 @@
     }
 
     &[open] {
-        .accordion__toggle-icon .fa-solid:first-child {
+        .accordion__toggle-icon .fas:first-child {
             display: none;
         }
     }
 
     &:not([open]) {
-        .accordion__toggle-icon .fa-solid:last-child {
+        .accordion__toggle-icon .fas:last-child {
             display: none;
         }
     }

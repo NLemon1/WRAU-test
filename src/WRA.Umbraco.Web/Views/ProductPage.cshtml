@@ -14,6 +14,7 @@
     bool isBundled = true;//TO DO: need to flag if the product is a bundle
 }
 
+
 @if (multiVariantProductPage != null && multiVariantProductPage.Variants != null && multiVariantProductPage.Variants.Count > 0)
 {
     <script>
@@ -70,10 +71,16 @@
     <partial name="Breadcrumbs" />
 </div>
 
+
 <div class="container">
     <div class="row gx-lg-12">
         <div class="col-12 col-lg-6 mb-6 mb-lg-0">
-            <img class="img-fluid img-curved img-curved--large" src="https://placehold.it/552" alt="" />
+            @if (Model.Images.Count() > 0)
+            {
+                var mainImage = Model.Images.FirstOrDefault();
+
+                <img class="img-fluid img-curved img-curved--large" src="@mainImage.GetCropUrl(552, 552).ToString()" alt="@(mainImage.Value("altText") ?? "")" />
+            }
         </div>
         <div class="col-12 col-lg-6">
 
@@ -84,30 +91,13 @@
             }
 
             <p class="d-inline-block mb-2 px-2 py-1 bg-light fw-semibold text-uppercase">On Demand</p>
-            
             <h1 class="h3 mb-4">@Model.Name</h1>
 
-            <div class="d-flex flex-row align-items-end">
-                <div class="h3 mb-0">
-                    <h1> form start here</h1>
-                    @using (Html.BeginUmbracoForm("AddToCart", "CartSurface"))
-                    {
-                        RenderVariants(store, Model, addedProductReference);
-                    }
-                </div>
-                <div class="fs-sm mb-3" style="color: var(--bs-gray-30)">
-                    &nbsp;member pricing
-                </div>
-            </div>
-            <div class="mt-n2 mb-2 d-flex flex-row align-items-end fs-sm mb-0" style="color: var(--bs-gray-30)">
-                    @using (Html.BeginUmbracoForm("AddToCart", "CartSurface"))
-                    {
-                        RenderVariants(store, Model, addedProductReference);
-                        <button id="add-to-cart" class="btn btn-primary mb-6 border-0" type="submit">Add to Cart</button>
-                    }
-                <div class="mb-3">&nbsp;non-member pricing</div>
-            </div>
-                
+            @using (Html.BeginUmbracoForm("AddToCart", "CartSurface"))
+            {
+                RenderVariants(store, Model, addedProductReference);
+                <button id="add-to-cart" class="btn btn-primary mb-6 border-0" type="submit">Add to Cart</button>
+            }
 
             @if (Model.HasProperty("LongDescription"))
             {
@@ -116,10 +106,7 @@
 
         </div>
     </div>
-
-    <div style="height: 64px;"></div>
-
-    <div class="tabs tabs--mobile-dropdown tabs--vertical js-tabs">
+    <div class="tabs tabs--mobile-dropdown tabs--vertical js-tabs py-4 py-lg-6">
         <div class="">
             <ul role="tablist" class="tabs__tabs-list">
                 @if (isBundled)
@@ -171,8 +158,8 @@
                                 <summary class="accordion__toggle">
                                     Course #: Course Title
                                     <div class="accordion__toggle-icon">
-                                        <i class="fa-solid fa-chevron-down"></i>
-                                        <i class="fa-solid fa-chevron-up"></i>
+                                        <i class="fas fa-chevron-down"></i>
+                                        <i class="fas fa-chevron-up"></i>
                                     </div>
                                 </summary>
                                 <div class="accordion__content">
@@ -196,8 +183,8 @@
                                 <summary class="accordion__toggle">
                                     Course #: Course Title
                                     <div class="accordion__toggle-icon">
-                                        <i class="fa-solid fa-chevron-down"></i>
-                                        <i class="fa-solid fa-chevron-up"></i>
+                                        <i class="fas fa-chevron-down"></i>
+                                        <i class="fas fa-chevron-up"></i>
                                     </div>
                                 </summary>
                                 <div class="accordion__content">
@@ -221,8 +208,8 @@
                                 <summary class="accordion__toggle">
                                     Course #: Course Title
                                     <div class="accordion__toggle-icon">
-                                        <i class="fa-solid fa-chevron-down"></i>
-                                        <i class="fa-solid fa-chevron-up"></i>
+                                        <i class="fas fa-chevron-down"></i>
+                                        <i class="fas fa-chevron-up"></i>
                                     </div>
                                 </summary>
                                 <div class="accordion__content">
@@ -260,8 +247,8 @@
                             <summary class="accordion__toggle">
                                 Question: Lorem Ipsum
                                 <div class="accordion__toggle-icon">
-                                    <i class="fa-solid fa-chevron-down"></i>
-                                    <i class="fa-solid fa-chevron-up"></i>
+                                    <i class="fas fa-chevron-down"></i>
+                                    <i class="fas fa-chevron-up"></i>
                                 </div>
                             </summary>
                             <div class="accordion__content">
@@ -274,10 +261,7 @@
             </div>
         </section>
     </div>
-
-    <div style="height: 96px;"></div>
 </div>
-
 
 @{
     void RenderVariants(StoreReadOnly? store, ProductPage product, string? addedProductReference)
@@ -318,11 +302,20 @@
         }
         else
         {
-              @Html.Hidden("productReference", product.GetProductReference())
+            @Html.Hidden("productReference", product.GetProductReference())
 
-            <p>@(product.MemberPricing?.Formatted())</p>
-            <p> @(product.NonMemberPricing.Formatted())</p>
-            // first lets get the product snapshot
+            <div class="d-flex flex-row align-items-baseline w-100">
+                <div class="h3 mb-0">@(product.MemberPricing?.Formatted())</div>
+                <div class="fs-sm mb-3" style="color: var(--bs-gray-30)">
+                    &nbsp;member pricing
+                </div>
+            </div>
+
+            <div class="mt-n2 mb-2 d-flex flex-row align-items-baseline fs-sm mb-0 w-100" style="color: var(--bs-gray-30)">
+                @(product.NonMemberPricing.Formatted())
+                <div class="mb-3">&nbsp;non-member pricing</div>
+            </div>
+
         }
     }
 }
