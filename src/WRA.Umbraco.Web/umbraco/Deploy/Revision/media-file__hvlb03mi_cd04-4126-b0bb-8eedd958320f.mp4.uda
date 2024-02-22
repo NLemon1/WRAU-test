@@ -1,9 +1,0 @@
-{
-  "Name": "umb://media-file/hvlb03mi/cd04-4126-b0bb-8eedd958320f.mp4",
-  "Alias": "",
-  "ChecksumValue": "4698927F8CCFB0BF1A2D8934C979C7D6034FAA80",
-  "Udi": "umb://media-file/hvlb03mi/cd04-4126-b0bb-8eedd958320f.mp4",
-  "Dependencies": [],
-  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.FileArtifact",
-  "__version": "13.0.4"
-}

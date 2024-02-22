@@ -1,9 +1,0 @@
-{
-  "Name": "umb://media-file/xdlbnyrl/nov-2023.jpg",
-  "Alias": "",
-  "ChecksumValue": "3CB054E6398783A1127B6B9C4E9688257B2140AB",
-  "Udi": "umb://media-file/xdlbnyrl/nov-2023.jpg",
-  "Dependencies": [],
-  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.FileArtifact",
-  "__version": "13.0.4"
-}

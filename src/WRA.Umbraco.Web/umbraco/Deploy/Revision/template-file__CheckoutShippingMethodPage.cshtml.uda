@@ -1,9 +1,0 @@
-{
-  "Name": "umb://template-file/CheckoutShippingMethodPage.cshtml",
-  "Alias": "",
-  "ChecksumValue": "CFD8D54EAF8ABFDA0E81F0D137AB81FD13B52F85",
-  "Udi": "umb://template-file/CheckoutShippingMethodPage.cshtml",
-  "Dependencies": [],
-  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.FileArtifact",
-  "__version": "13.0.4"
-}

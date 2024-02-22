@@ -1,9 +1,0 @@
-{
-  "Name": "umb://media-file/rmghoez4/791-744x430.jpg",
-  "Alias": "",
-  "ChecksumValue": "128DAA0941593E55CFB0A30D4B6879A5EC5F1D2E",
-  "Udi": "umb://media-file/rmghoez4/791-744x430.jpg",
-  "Dependencies": [],
-  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.FileArtifact",
-  "__version": "13.0.4"
-}

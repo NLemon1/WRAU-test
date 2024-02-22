@@ -1,9 +1,0 @@
-{
-  "Name": "Base",
-  "Alias": "",
-  "ContainedObjectType": "30a2a501-1978-4ddb-a57b-f7efed43ba3c",
-  "Udi": "umb://data-type-container/a7516ca6b311426a9f7d0e513d5f4fb5",
-  "Dependencies": [],
-  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContainerArtifact",
-  "__version": "13.0.4"
-}

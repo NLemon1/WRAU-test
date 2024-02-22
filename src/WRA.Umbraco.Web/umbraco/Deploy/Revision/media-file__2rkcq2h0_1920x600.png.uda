@@ -1,9 +1,0 @@
-{
-  "Name": "umb://media-file/2rkcq2h0/1920x600.png",
-  "Alias": "",
-  "ChecksumValue": "6087DC5DF9597DDDD5DD481299DEB72B59AF4050",
-  "Udi": "umb://media-file/2rkcq2h0/1920x600.png",
-  "Dependencies": [],
-  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.FileArtifact",
-  "__version": "13.0.4"
-}

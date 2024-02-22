@@ -1,9 +1,0 @@
-{
-  "Name": "umb://media-file/bnbl3yeb/00958931-black-coffee-in-paper-cup-with-wooden-stirrer.jpg",
-  "Alias": "",
-  "ChecksumValue": "EC8A9AD13D1B0742B9D12E0C2D5DA79088DFBAC7",
-  "Udi": "umb://media-file/bnbl3yeb/00958931-black-coffee-in-paper-cup-with-wooden-stirrer.jpg",
-  "Dependencies": [],
-  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.FileArtifact",
-  "__version": "13.0.4"
-}

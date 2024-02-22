@@ -1,9 +1,0 @@
-{
-  "Name": "umb://template-file/Error404.cshtml",
-  "Alias": "",
-  "ChecksumValue": "BBBCF49CE7FC2FAC8CF87600D3C0EC1EFD3968E9",
-  "Udi": "umb://template-file/Error404.cshtml",
-  "Dependencies": [],
-  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.FileArtifact",
-  "__version": "13.0.4"
-}

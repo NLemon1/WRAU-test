@@ -1,9 +1,0 @@
-{
-  "Name": "umb://template-file/ProductsPage.cshtml",
-  "Alias": "",
-  "ChecksumValue": "423D4BA5944BD74DF5EA72B4A4F0784E7512EB01",
-  "Udi": "umb://template-file/ProductsPage.cshtml",
-  "Dependencies": [],
-  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.FileArtifact",
-  "__version": "13.0.4"
-}

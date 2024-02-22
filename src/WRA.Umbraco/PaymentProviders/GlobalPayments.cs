@@ -78,7 +78,7 @@ public class GlobalPaymentsPaymentProvider : PaymentProviderBase<GlobalPaymentsS
                 Token = paymentToken
             };
 
-            var address = new Address
+            var address = new GlobalPayments.Api.Entities.Address
             {
                 PostalCode = zip
             };

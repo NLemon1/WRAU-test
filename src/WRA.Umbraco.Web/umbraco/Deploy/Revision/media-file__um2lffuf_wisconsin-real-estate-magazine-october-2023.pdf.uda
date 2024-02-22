@@ -1,9 +1,0 @@
-{
-  "Name": "umb://media-file/um2lffuf/wisconsin-real-estate-magazine-october-2023.pdf",
-  "Alias": "",
-  "ChecksumValue": "0B7C9234CBC962C3D177861E361562A094EE54C9",
-  "Udi": "umb://media-file/um2lffuf/wisconsin-real-estate-magazine-october-2023.pdf",
-  "Dependencies": [],
-  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.FileArtifact",
-  "__version": "13.0.4"
-}

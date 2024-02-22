@@ -1,9 +1,0 @@
-{
-  "Name": "umb://media-file/vijdant1/oct-2023.jpg",
-  "Alias": "",
-  "ChecksumValue": "F65A8EF8413879ACBEEBA23C6D0BBA9F6F1B309E",
-  "Udi": "umb://media-file/vijdant1/oct-2023.jpg",
-  "Dependencies": [],
-  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.FileArtifact",
-  "__version": "13.0.4"
-}

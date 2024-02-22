@@ -1,9 +1,0 @@
-{
-  "Name": "umb://template-file/Article.cshtml",
-  "Alias": "",
-  "ChecksumValue": "2277F336224898F80AAD07D8048CAE84DD8F33FA",
-  "Udi": "umb://template-file/Article.cshtml",
-  "Dependencies": [],
-  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.FileArtifact",
-  "__version": "13.0.4"
-}

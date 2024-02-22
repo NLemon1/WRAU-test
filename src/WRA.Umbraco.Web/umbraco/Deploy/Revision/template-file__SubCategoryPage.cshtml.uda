@@ -1,9 +1,0 @@
-{
-  "Name": "umb://template-file/SubCategoryPage.cshtml",
-  "Alias": "",
-  "ChecksumValue": "D42898F04BDFF501D18851986E2FC7AC8FC31E3B",
-  "Udi": "umb://template-file/SubCategoryPage.cshtml",
-  "Dependencies": [],
-  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.FileArtifact",
-  "__version": "13.0.4"
-}

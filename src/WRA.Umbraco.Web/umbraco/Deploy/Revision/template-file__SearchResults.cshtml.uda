@@ -1,9 +1,0 @@
-{
-  "Name": "umb://template-file/SearchResults.cshtml",
-  "Alias": "",
-  "ChecksumValue": "100E974C0B2CEB20391920459F3820EED719BA39",
-  "Udi": "umb://template-file/SearchResults.cshtml",
-  "Dependencies": [],
-  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.FileArtifact",
-  "__version": "13.0.4"
-}

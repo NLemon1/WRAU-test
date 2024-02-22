@@ -1,9 +1,0 @@
-{
-  "Name": "umb://media-file/lnopaebw/376-1920x600.jpg",
-  "Alias": "",
-  "ChecksumValue": "C5017BEF1713E19370600D3676B73CCAC6CB6422",
-  "Udi": "umb://media-file/lnopaebw/376-1920x600.jpg",
-  "Dependencies": [],
-  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.FileArtifact",
-  "__version": "13.0.4"
-}
