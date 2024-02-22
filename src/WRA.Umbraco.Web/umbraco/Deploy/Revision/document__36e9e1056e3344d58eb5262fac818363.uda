@@ -1,0 +1,99 @@
+{
+  "Name": "Investment Analysis for Appraisers",
+  "Alias": "Investment Analysis for Appraisers",
+  "PublishedName": "Investment Analysis for Appraisers",
+  "PublishedVersion": {
+    "Template": "umb://template/472d765a0e4c434b8ca84fa1d95a227b",
+    "Properties": {
+      "siteFooterWidget": {},
+      "metaTitle": {},
+      "metaDescription": {},
+      "openGraphImage": {},
+      "hideFromSitemap": {},
+      "hideFromSearchEngines": {},
+      "visibleToMemberGroups": {},
+      "visibleToAll": {},
+      "sku": "PUB1887",
+      "price": "{\"umb://umbraco-commerce-currency/514fa94e66b24f06a91f018d4cae531c\":32.95}",
+      "memberPrice": "{\"umb://umbraco-commerce-currency/514fa94e66b24f06a91f018d4cae531c\":28.95}",
+      "images": {},
+      "shortDescription": {},
+      "longDescription": "{\"markup\":\"This book provides accurate and authoritative information regarding investment analysis for appraisers and others who want a better understanding of the income potential of investment property. Topics include property valuation, cash flow forecasting, ROI calculations, tax considerations and more. PUB1887, Softcover, Jeff Fisher and Robert Martin, 1995, 142 pages\"}",
+      "categories": "umb://document/8315b8d784a44feb9803ea14a8cac92b",
+      "subCategories": "umb://document/e128b341da694ef8b248e4316397cf33",
+      "taxonomy": "Books",
+      "startDate": "1753-01-01T00:00:00.0000000Z",
+      "endDate": "9999-12-31T00:00:00.0000000Z",
+      "location": {},
+      "productId": "ab827792-a32d-4614-55db-08dbfa99b13d"
+    },
+    "UpdateDate": "2024-02-15T19:06:23.903Z"
+  },
+  "CultureInfos": [],
+  "PublishedCultureInfos": [],
+  "PublishedCultures": [],
+  "Writer": "admin",
+  "PublicAccessRules": [],
+  "Schedule": [],
+  "Domains": [],
+  "Parent": "umb://document/516f905e766042229bc20161f5b32466",
+  "SortOrder": 31,
+  "ContentType": "umb://document-type/6ed103f65d4e47759105d341370c1690",
+  "CreateDate": "2024-02-15T19:06:23.903Z",
+  "Creator": "admin",
+  "PropertyEditorAliases": {
+    "siteFooterWidget": "Umbraco.ContentPicker",
+    "metaTitle": "Umbraco.TextBox",
+    "metaDescription": "Umbraco.TextBox",
+    "openGraphImage": "Umbraco.MediaPicker3",
+    "hideFromSitemap": "Umbraco.TrueFalse",
+    "hideFromSearchEngines": "Umbraco.TrueFalse",
+    "visibleToMemberGroups": "Umbraco.MemberGroupPicker",
+    "visibleToAll": "Umbraco.TrueFalse",
+    "sku": "Umbraco.TextBox",
+    "price": "Umbraco.Commerce.Price",
+    "memberPrice": "Umbraco.Commerce.Price",
+    "images": "Umbraco.MediaPicker3",
+    "shortDescription": "Umbraco.TextArea",
+    "longDescription": "Umbraco.TinyMCE",
+    "categories": "Umbraco.MultiNodeTreePicker",
+    "subCategories": "Umbraco.MultiNodeTreePicker",
+    "taxonomy": "Umbraco.Label",
+    "startDate": "Umbraco.Label",
+    "endDate": "Umbraco.Label",
+    "location": "Umbraco.Label",
+    "productId": "Umbraco.Label"
+  },
+  "Udi": "umb://document/36e9e1056e3344d58eb5262fac818363",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type/6ed103f65d4e47759105d341370c1690",
+      "Ordering": true,
+      "Checksum": "2282ECA93EB320EE31C07F3CA5E1A6BA8C6823F7"
+    },
+    {
+      "Udi": "umb://document/516f905e766042229bc20161f5b32466",
+      "Ordering": true,
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://document/8315b8d784a44feb9803ea14a8cac92b",
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://document/e128b341da694ef8b248e4316397cf33",
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://template/472d765a0e4c434b8ca84fa1d95a227b",
+      "Ordering": true,
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://umbraco-commerce-currency/514fa94e66b24f06a91f018d4cae531c",
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.Content.DocumentArtifact",
+  "__version": "13.0.4"
+}

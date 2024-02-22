@@ -1,0 +1,91 @@
+{
+  "Name": "Test Article 4",
+  "Alias": "Test Article 4",
+  "PublishedName": "Test Article 4",
+  "PublishedVersion": {
+    "Template": "umb://template/277cf1ab9768401ea686247ee1e2b70f",
+    "Properties": {
+      "hideFromSitemap": "0",
+      "hideFromSearchEngines": "0",
+      "visibleToMemberGroups": {},
+      "visibleToAll": {},
+      "metaTitle": {},
+      "metaDescription": {},
+      "openGraphImage": "[]",
+      "siteFooterWidget": {},
+      "title": "Test Article 4",
+      "image": "[{\"key\":\"ac58bd48-de90-4821-8150-d12c1c4d9db0\",\"mediaKey\":\"4b34d7db-a1ec-4c27-b798-a0cc12030aa3\"}]",
+      "date": "2023-11-04T00:00:00.0000000Z",
+      "author": "umb://document/1ae79f6b28f94740ad00e17ac4abce46",
+      "category": "umb://document/067005d30e9a4396b68e6c6151693e6a",
+      "magazineLink": {},
+      "richTextContent": "{\"markup\":\"<p>Inspections can be a crucial part of a real estate transaction. As such, the WRA Legal Hotline fields questions about inspections daily. Consumers and licensees alike wonder which inspections are allowed, when does a party share an inspection report, and who is allowed to share an inspection report, among other inquiries. The following discussion reviews some of the most common questions the WRA receives regarding inspections and the inspection contingency.</p>\\n<h2><br>Types of inspections</h2>\\n<h3><br>What are the different types of inspections?</h3>\\n<p>The three inspections in the WB-11 Residential Offer to Purchase are as follows:</p>\\n<ol>\\n<li>Home Inspection: Lines 194-195 provide the offer is contingent upon a Wisconsin home inspector performing a home inspection of the property that discloses no defects.</li>\\n<li>Component inspections: Lines 196-199 provide: “This Offer is further contingent upon a qualified independent inspector or independent qualified third party performing an inspection of ________ (list any Property component(s) to be separately inspected, e.g., swimming pool, roof, foundation, chimney, etc.) which discloses no defects.” Lines 196-199 provide: “This Offer is further contingent upon a qualified independent inspector or independent qualified third party performing an inspection of ________ (list any Property component(s) to be separately inspected, e.g., swimming pool, roof, foundation, chimney, etc.) which discloses no defects.”</li>\\n</ol>\\n<p>Follow-up inspections: Home inspectors recommend follow-up inspections on a regular basis. Lines 200-202 of the WB-11 accommodate this practice by stating the buyer may have follow-up inspections recommended in a written report resulting from an authorized inspection, provided they occur prior to the deadline. In other words, a buyer may have a follow-up inspection if a written inspection report from the home inspector or a component inspector recommends that additional inspections be performed.</p>\\n<h4>Is a sewer scope considered an inspection or a test? If it is an inspection, is it a part of the home inspection, or does it need to be listed in the offer as a component inspection?</h4>\\n<p>With regard to a sewer scope, most often the argument is made that it is not testing because it’s just sending a camera down to look at the sewer line; in essence, it is a visual inspection. Wisconsin-registered home inspectors can offer to observe more property components, such as the sewer lateral, beyond those components that must be observed per home inspector regulations.<br><br>The WB-11 Residential Offer to Purchase includes authority for three types of inspections: the home inspection, component inspection and authorized follow-up inspections. Although there is nothing explicit about the scope of a sewer lateral, lines 179-184 of the WB-11 Residential Offer to Purchase indicate:<br><br>\\\"An ‘inspection’ is defined as an observation of the Property which does not include an appraisal or testing of the Property, other than testing for leaking carbon monoxide, or testing for leaking LP gas or natural gas used as a fuel source, which are hereby authorized. A ‘test’ is defined as the taking of samples of materials such as soils, water, air or building materials from the Property and the laboratory or other analysis of these materials. Seller agrees to allow Buyer’s inspectors, testers and appraisers reasonable access to the Property upon advance notice, if necessary to satisfy the contingencies in this Offer. Buyer and licensees may be present at all inspections and testing.”<br><br>Arguably, a scope is not a test unless the scope takes samples from the property and there is a laboratory analysis or other analysis of the materials. However, since the WB-11 Residential Offer to Purchase does not definitively provide one way or the other if the scope is permitted under the home inspection, sometimes there is contention between the parties as to whether a sewer scope is permitted. Therefore, the ideal practice is to provide specifically for the scope in the offer when drafting or by amendment.<br><br>If a third-party inspector performs the scope, listing the sewer laterals in the component section will avoid any ambiguity and allow the third-party inspector access to conduct the scope.<br><br>Alternately, the fact the sewer laterals are not listed does not preclude the buyer from asserting that by virtue of the offer language, the sewer scope is an inspection that can be conducted by a Wisconsin-registered home inspector.</p>\\n<p>Learn more about the inspection contingency in the offer to purchase by searching the WRA’s Legal Hottips library by visiting www.wra.org/HottipSearch, selecting “offer to purchase,” and then selecting “inspection contingency.” Also see the inspection contingency information on pages 6-7 of the September 2019 Legal Update, “WB-11 Residential Offer to Purchase — 2020 Edition — Part 1,” at www.wra.org/LU1909.</p>\"}",
+      "sections": {},
+      "excerpt": {}
+    },
+    "UpdateDate": "2023-12-01T15:43:13.043Z"
+  },
+  "CultureInfos": [],
+  "PublishedCultureInfos": [],
+  "PublishedCultures": [],
+  "Writer": "raymond@lightburn.co",
+  "PublicAccessRules": [],
+  "Schedule": [],
+  "Domains": [],
+  "Parent": "umb://document/591bd037a0d345c18fa4207a264e7485",
+  "SortOrder": 3,
+  "ContentType": "umb://document-type/a848d7fc16b145f985c21523107d4c0b",
+  "CreateDate": "2023-12-01T15:42:54.267Z",
+  "Creator": "raymond@lightburn.co",
+  "PropertyEditorAliases": {
+    "hideFromSitemap": "Umbraco.TrueFalse",
+    "hideFromSearchEngines": "Umbraco.TrueFalse",
+    "visibleToMemberGroups": "Umbraco.MemberGroupPicker",
+    "visibleToAll": "Umbraco.TrueFalse",
+    "metaTitle": "Umbraco.TextBox",
+    "metaDescription": "Umbraco.TextBox",
+    "openGraphImage": "Umbraco.MediaPicker3",
+    "siteFooterWidget": "Umbraco.ContentPicker",
+    "title": "Umbraco.TextBox",
+    "image": "Umbraco.MediaPicker3",
+    "date": "Umbraco.DateTime",
+    "author": "Umbraco.ContentPicker",
+    "category": "Umbraco.ContentPicker",
+    "magazineLink": "Umbraco.MultiNodeTreePicker",
+    "richTextContent": "Umbraco.TinyMCE",
+    "sections": "Umbraco.BlockGrid",
+    "excerpt": "Umbraco.TextArea"
+  },
+  "Udi": "umb://document/c6abe44b6622453c8c8513b2b26f8afd",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type/a848d7fc16b145f985c21523107d4c0b",
+      "Ordering": true,
+      "Checksum": "C72EFF951C0FC3260969AD945A54F829F2D11E24"
+    },
+    {
+      "Udi": "umb://document/067005d30e9a4396b68e6c6151693e6a",
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://document/1ae79f6b28f94740ad00e17ac4abce46",
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://document/591bd037a0d345c18fa4207a264e7485",
+      "Ordering": true,
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://media/4b34d7dba1ec4c27b798a0cc12030aa3",
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://template/277cf1ab9768401ea686247ee1e2b70f",
+      "Ordering": true,
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.Content.DocumentArtifact",
+  "__version": "13.0.4"
+}

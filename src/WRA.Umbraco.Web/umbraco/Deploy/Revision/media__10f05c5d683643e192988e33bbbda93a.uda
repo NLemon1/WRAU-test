@@ -1,0 +1,39 @@
+{
+  "Name": "376 1920X600",
+  "Alias": "376 1920X600",
+  "Properties": {
+    "umbracoFile": "{\"src\":\"/media/lnopaebw/376-1920x600.jpg\"}",
+    "umbracoWidth": "1920",
+    "umbracoHeight": "600",
+    "umbracoBytes": "186352",
+    "umbracoExtension": "jpg",
+    "altText": {}
+  },
+  "SortOrder": 10,
+  "ContentType": "umb://media-type/cc07b31308434aa8bbda871c8da728c8",
+  "CreateDate": "2024-01-27T20:05:10.077Z",
+  "Creator": "raymond@lightburn.co",
+  "PropertyEditorAliases": {
+    "umbracoFile": "Umbraco.ImageCropper",
+    "umbracoWidth": "Umbraco.Label",
+    "umbracoHeight": "Umbraco.Label",
+    "umbracoBytes": "Umbraco.Label",
+    "umbracoExtension": "Umbraco.Label",
+    "altText": "Umbraco.TextBox"
+  },
+  "Udi": "umb://media/10f05c5d683643e192988e33bbbda93a",
+  "Dependencies": [
+    {
+      "Udi": "umb://media-file/lnopaebw/376-1920x600.jpg",
+      "Ordering": true,
+      "Checksum": "C5017BEF1713E19370600D3676B73CCAC6CB6422"
+    },
+    {
+      "Udi": "umb://media-type/cc07b31308434aa8bbda871c8da728c8",
+      "Ordering": true,
+      "Checksum": "BCA74AB4EC7B8E7350429C95AC7E37DD7289FFEB"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.Content.MediaArtifact",
+  "__version": "13.0.4"
+}

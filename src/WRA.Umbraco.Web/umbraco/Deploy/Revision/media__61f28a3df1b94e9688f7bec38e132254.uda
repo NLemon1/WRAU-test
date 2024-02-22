@@ -1,0 +1,35 @@
+{
+  "Name": "Wra Logo Reverse",
+  "Alias": "Wra Logo Reverse",
+  "Properties": {
+    "umbracoFile": "/media/bsfpeynz/wra-logo-reverse.svg",
+    "umbracoExtension": "svg",
+    "umbracoBytes": "2389",
+    "altText": {}
+  },
+  "SortOrder": 1,
+  "ContentType": "umb://media-type/c4b1efcfa9d541c49621e9d273b52a9c",
+  "CreateDate": "2024-01-27T20:30:17.817Z",
+  "Creator": "raymond@lightburn.co",
+  "PropertyEditorAliases": {
+    "umbracoFile": "Umbraco.UploadField",
+    "umbracoExtension": "Umbraco.Label",
+    "umbracoBytes": "Umbraco.Label",
+    "altText": "Umbraco.TextBox"
+  },
+  "Udi": "umb://media/61f28a3df1b94e9688f7bec38e132254",
+  "Dependencies": [
+    {
+      "Udi": "umb://media-file/bsfpeynz/wra-logo-reverse.svg",
+      "Ordering": true,
+      "Checksum": "D686E4B14A9536A594EAC9409111AE5C96618F11"
+    },
+    {
+      "Udi": "umb://media-type/c4b1efcfa9d541c49621e9d273b52a9c",
+      "Ordering": true,
+      "Checksum": "8A2E15F887097BC61B5007208E82CA45D3CAA857"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.Content.MediaArtifact",
+  "__version": "13.0.4"
+}

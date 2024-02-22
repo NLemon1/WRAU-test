@@ -1,0 +1,9 @@
+{
+  "Name": "umb://media-file/4i2jygcx/1200x1300.png",
+  "Alias": "",
+  "ChecksumValue": "C6CF1567A4427BC51E410A95A9CADD0388F6BD7A",
+  "Udi": "umb://media-file/4i2jygcx/1200x1300.png",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.FileArtifact",
+  "__version": "13.0.4"
+}

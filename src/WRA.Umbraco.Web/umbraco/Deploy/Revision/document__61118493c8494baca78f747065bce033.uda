@@ -1,0 +1,70 @@
+{
+  "Name": "Membership Widget",
+  "Alias": "Membership Widget",
+  "PublishedName": "Membership Widget",
+  "PublishedVersion": {
+    "Properties": {
+      "heading": "Become a member",
+      "content": "{\"markup\":\"<p>Basic promo that can appear on pages throughout the site, encouraging membership sign-up. Would link to Membership page.</p>\"}",
+      "column1Icon": {},
+      "column1Heading": "Legal Hotline",
+      "column1Content": "Lorem ipsum dolor sit amet consectetur. Ut sagittis sit nibh.",
+      "column2Icon": {},
+      "column2Heading": "ZipForm",
+      "column2Content": "Lorem ipsum dolor sit amet consectetur. Ut sagittis sit nibh.",
+      "column3Icon": {},
+      "column3Heading": "Weekly Newsletters",
+      "column3Content": "Lorem ipsum dolor sit amet consectetur. Ut sagittis sit nibh.",
+      "column4Icon": {},
+      "column4Heading": "MLS Access",
+      "column4Content": "Lorem ipsum dolor sit amet consectetur. Ut sagittis sit nibh.",
+      "linkPrimary": "[{\"name\":\"Become a Member\",\"url\":\"#\"}]",
+      "linkSecondary": "[{\"name\":\"See More Benefits\",\"url\":\"#\"}]"
+    },
+    "UpdateDate": "2023-10-27T21:13:15.97Z"
+  },
+  "CultureInfos": [],
+  "PublishedCultureInfos": [],
+  "PublishedCultures": [],
+  "Writer": "raymond@lightburn.co",
+  "PublicAccessRules": [],
+  "Schedule": [],
+  "Domains": [],
+  "Parent": "umb://document/60be55d77b3149889530df5e080a4b91",
+  "ContentType": "umb://document-type/c640b1c88ca64a8bad513776425ba92b",
+  "CreateDate": "2023-10-27T21:12:45.28Z",
+  "Creator": "raymond@lightburn.co",
+  "PropertyEditorAliases": {
+    "heading": "Umbraco.TextBox",
+    "content": "Umbraco.TinyMCE",
+    "column1Icon": "Umbraco.TextBox",
+    "column1Heading": "Umbraco.TextBox",
+    "column1Content": "Umbraco.TextBox",
+    "column2Icon": "Umbraco.TextBox",
+    "column2Heading": "Umbraco.TextBox",
+    "column2Content": "Umbraco.TextBox",
+    "column3Icon": "Umbraco.TextBox",
+    "column3Heading": "Umbraco.TextBox",
+    "column3Content": "Umbraco.TextBox",
+    "column4Icon": "Umbraco.TextBox",
+    "column4Heading": "Umbraco.TextBox",
+    "column4Content": "Umbraco.TextBox",
+    "linkPrimary": "Umbraco.MultiUrlPicker",
+    "linkSecondary": "Umbraco.MultiUrlPicker"
+  },
+  "Udi": "umb://document/61118493c8494baca78f747065bce033",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type/c640b1c88ca64a8bad513776425ba92b",
+      "Ordering": true,
+      "Checksum": "4EF9FA86A5C35E56B7451A8C59211B4FDF076993"
+    },
+    {
+      "Udi": "umb://document/60be55d77b3149889530df5e080a4b91",
+      "Ordering": true,
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.Content.DocumentArtifact",
+  "__version": "13.0.4"
+}

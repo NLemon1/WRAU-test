@@ -1,0 +1,31 @@
+{
+  "Name": "Site Footer Widgets",
+  "Alias": "Site Footer Widgets",
+  "PublishedName": "Site Footer Widgets",
+  "PublishedVersion": {
+    "Properties": {},
+    "UpdateDate": "2023-10-27T21:10:35.12Z"
+  },
+  "CultureInfos": [],
+  "PublishedCultureInfos": [],
+  "PublishedCultures": [],
+  "Writer": "raymond@lightburn.co",
+  "PublicAccessRules": [],
+  "Schedule": [],
+  "Domains": [],
+  "SortOrder": 2,
+  "ContentType": "umb://document-type/f4bcdba234a04bac82a6562f9f33247f",
+  "CreateDate": "2023-10-24T19:47:13.38Z",
+  "Creator": "raymond@lightburn.co",
+  "PropertyEditorAliases": {},
+  "Udi": "umb://document/a5e6ad3042864e2a99e97eef04ee5cc0",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type/f4bcdba234a04bac82a6562f9f33247f",
+      "Ordering": true,
+      "Checksum": "4B8252E8F7091ECB5C23AB60FD315D86DD2C97C7"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.Content.DocumentArtifact",
+  "__version": "13.0.4"
+}

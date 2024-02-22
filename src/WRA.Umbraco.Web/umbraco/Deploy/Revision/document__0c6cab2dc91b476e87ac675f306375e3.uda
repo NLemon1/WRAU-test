@@ -1,0 +1,36 @@
+{
+  "Name": "Zoning, Building Code, Bedrooms",
+  "Alias": "Zoning, Building Code, Bedrooms",
+  "PublishedName": "Zoning, Building Code, Bedrooms",
+  "PublishedVersion": {
+    "Properties": {},
+    "UpdateDate": "2024-01-25T21:27:52.357Z"
+  },
+  "CultureInfos": [],
+  "PublishedCultureInfos": [],
+  "PublishedCultures": [],
+  "Writer": "raymond@lightburn.co",
+  "PublicAccessRules": [],
+  "Schedule": [],
+  "Domains": [],
+  "Parent": "umb://document/52bc37dc963845e2aa0f5957d50db32d",
+  "ContentType": "umb://document-type/9faf489322424f7896612edc2f655adc",
+  "CreateDate": "2023-11-28T22:55:25.383Z",
+  "Creator": "raymond@lightburn.co",
+  "PropertyEditorAliases": {},
+  "Udi": "umb://document/0c6cab2dc91b476e87ac675f306375e3",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type/9faf489322424f7896612edc2f655adc",
+      "Ordering": true,
+      "Checksum": "45A844D4FF14590849328CC05CCF0CE79E699B4F"
+    },
+    {
+      "Udi": "umb://document/52bc37dc963845e2aa0f5957d50db32d",
+      "Ordering": true,
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.Content.DocumentArtifact",
+  "__version": "13.0.4"
+}

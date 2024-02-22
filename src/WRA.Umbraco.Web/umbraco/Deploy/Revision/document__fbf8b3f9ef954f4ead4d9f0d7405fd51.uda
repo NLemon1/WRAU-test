@@ -1,0 +1,69 @@
+{
+  "Name": "Checkout",
+  "Alias": "Checkout",
+  "PublishedName": "Checkout",
+  "PublishedVersion": {
+    "Template": "umb://template/f56adbd6689f45a6a979c7003d38c3ee",
+    "Properties": {
+      "umbracoUrlName": {},
+      "umbracoUrlAlias": {},
+      "umbracoRedirect": "umb://document/a424ac99607e43db8404e251884ff861",
+      "siteFooterWidget": {},
+      "metaTitle": {},
+      "metaDescription": {},
+      "openGraphImage": "[]",
+      "termsOfService": {},
+      "privacyPolicy": {},
+      "logo": "[]"
+    },
+    "UpdateDate": "2024-01-15T14:48:48.307Z"
+  },
+  "CultureInfos": [],
+  "PublishedCultureInfos": [],
+  "PublishedCultures": [],
+  "Writer": "raymond@lightburn.co",
+  "PublicAccessRules": [],
+  "Schedule": [],
+  "Domains": [],
+  "Parent": "umb://document/c50e10be1e8a4ab3a6b8119e1626ba0e",
+  "SortOrder": 15,
+  "ContentType": "umb://document-type/e35fbae4f35f45d8a4254ee8873b36c5",
+  "CreateDate": "2024-01-14T11:59:18.653Z",
+  "Creator": "raymond@lightburn.co",
+  "PropertyEditorAliases": {
+    "umbracoUrlName": "Umbraco.TextBox",
+    "umbracoUrlAlias": "Umbraco.TextBox",
+    "umbracoRedirect": "Umbraco.ContentPicker",
+    "siteFooterWidget": "Umbraco.ContentPicker",
+    "metaTitle": "Umbraco.TextBox",
+    "metaDescription": "Umbraco.TextBox",
+    "openGraphImage": "Umbraco.MediaPicker3",
+    "termsOfService": "Umbraco.ContentPicker",
+    "privacyPolicy": "Umbraco.ContentPicker",
+    "logo": "Umbraco.MediaPicker3"
+  },
+  "Udi": "umb://document/fbf8b3f9ef954f4ead4d9f0d7405fd51",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type/e35fbae4f35f45d8a4254ee8873b36c5",
+      "Ordering": true,
+      "Checksum": "72E796F63892DF6EF84291DF819E9AA61DFEE37A"
+    },
+    {
+      "Udi": "umb://document/a424ac99607e43db8404e251884ff861",
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://document/c50e10be1e8a4ab3a6b8119e1626ba0e",
+      "Ordering": true,
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://template/f56adbd6689f45a6a979c7003d38c3ee",
+      "Ordering": true,
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.Content.DocumentArtifact",
+  "__version": "13.0.4"
+}

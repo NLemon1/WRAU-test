@@ -1,0 +1,9 @@
+{
+  "Name": "umb://template-file/MultiVariantProductPage.cshtml",
+  "Alias": "",
+  "ChecksumValue": "B8EB312EC5212F765022E8B0390D81952320D852",
+  "Udi": "umb://template-file/MultiVariantProductPage.cshtml",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.FileArtifact",
+  "__version": "13.0.4"
+}

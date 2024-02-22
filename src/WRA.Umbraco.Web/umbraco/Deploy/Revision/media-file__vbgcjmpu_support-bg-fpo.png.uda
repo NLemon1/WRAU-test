@@ -1,0 +1,9 @@
+{
+  "Name": "umb://media-file/vbgcjmpu/support-bg-fpo.png",
+  "Alias": "",
+  "ChecksumValue": "FFEF4A636B18B5676D782068FBE91DA03EFEFED6",
+  "Udi": "umb://media-file/vbgcjmpu/support-bg-fpo.png",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.FileArtifact",
+  "__version": "13.0.4"
+}

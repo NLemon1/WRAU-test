@@ -1,0 +1,39 @@
+{
+  "Name": "791 744X430",
+  "Alias": "791 744X430",
+  "Properties": {
+    "umbracoFile": "{\"src\":\"/media/rmghoez4/791-744x430.jpg\"}",
+    "umbracoWidth": "744",
+    "umbracoHeight": "430",
+    "umbracoBytes": "50717",
+    "umbracoExtension": "jpg",
+    "altText": {}
+  },
+  "SortOrder": 11,
+  "ContentType": "umb://media-type/cc07b31308434aa8bbda871c8da728c8",
+  "CreateDate": "2024-01-27T20:05:10.137Z",
+  "Creator": "raymond@lightburn.co",
+  "PropertyEditorAliases": {
+    "umbracoFile": "Umbraco.ImageCropper",
+    "umbracoWidth": "Umbraco.Label",
+    "umbracoHeight": "Umbraco.Label",
+    "umbracoBytes": "Umbraco.Label",
+    "umbracoExtension": "Umbraco.Label",
+    "altText": "Umbraco.TextBox"
+  },
+  "Udi": "umb://media/13770c8d1d3e4751a3ae956ccacc7138",
+  "Dependencies": [
+    {
+      "Udi": "umb://media-file/rmghoez4/791-744x430.jpg",
+      "Ordering": true,
+      "Checksum": "128DAA0941593E55CFB0A30D4B6879A5EC5F1D2E"
+    },
+    {
+      "Udi": "umb://media-type/cc07b31308434aa8bbda871c8da728c8",
+      "Ordering": true,
+      "Checksum": "BCA74AB4EC7B8E7350429C95AC7E37DD7289FFEB"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.Content.MediaArtifact",
+  "__version": "13.0.4"
+}

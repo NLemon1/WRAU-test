@@ -1,0 +1,59 @@
+{
+  "Name": "Categories",
+  "Alias": "Categories",
+  "PublishedName": "Categories",
+  "PublishedVersion": {
+    "Properties": {
+      "metaTitle": {},
+      "metaDescription": {},
+      "openGraphImage": "[]",
+      "siteFooterWidget": {},
+      "hideFromSitemap": "1",
+      "hideFromSearchEngines": "1",
+      "visibleToMemberGroups": {},
+      "visibleToAll": {},
+      "description": {},
+      "image": "[]"
+    },
+    "UpdateDate": "2024-02-15T17:16:41.837Z"
+  },
+  "CultureInfos": [],
+  "PublishedCultureInfos": [],
+  "PublishedCultures": [],
+  "Writer": "raymond@lightburn.co",
+  "PublicAccessRules": [],
+  "Schedule": [],
+  "Domains": [],
+  "Parent": "umb://document/c50e10be1e8a4ab3a6b8119e1626ba0e",
+  "SortOrder": 16,
+  "ContentType": "umb://document-type/73e001f0299e432b924bd12e203628d2",
+  "CreateDate": "2024-01-17T13:36:01.793Z",
+  "Creator": "raymond@lightburn.co",
+  "PropertyEditorAliases": {
+    "metaTitle": "Umbraco.TextBox",
+    "metaDescription": "Umbraco.TextBox",
+    "openGraphImage": "Umbraco.MediaPicker3",
+    "siteFooterWidget": "Umbraco.ContentPicker",
+    "hideFromSitemap": "Umbraco.TrueFalse",
+    "hideFromSearchEngines": "Umbraco.TrueFalse",
+    "visibleToMemberGroups": "Umbraco.MemberGroupPicker",
+    "visibleToAll": "Umbraco.TrueFalse",
+    "description": "Umbraco.TextArea",
+    "image": "Umbraco.MediaPicker3"
+  },
+  "Udi": "umb://document/cac993c42fe042f1a75b3a14f4597f3f",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type/73e001f0299e432b924bd12e203628d2",
+      "Ordering": true,
+      "Checksum": "BCA4EE457921F8F06D90F6B60E683AF1A2BD130A"
+    },
+    {
+      "Udi": "umb://document/c50e10be1e8a4ab3a6b8119e1626ba0e",
+      "Ordering": true,
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.Content.DocumentArtifact",
+  "__version": "13.0.4"
+}

@@ -1,0 +1,79 @@
+{
+  "Name": "January 2022",
+  "Alias": "January 2022",
+  "PublishedName": "January 2022",
+  "PublishedVersion": {
+    "Template": "umb://template/6915c45096c3468dbcffb47a8dc39a18",
+    "Properties": {
+      "metaTitle": {},
+      "metaDescription": {},
+      "openGraphImage": "[]",
+      "siteFooterWidget": {},
+      "hideFromSitemap": "0",
+      "hideFromSearchEngines": "0",
+      "visibleToMemberGroups": {},
+      "visibleToAll": {},
+      "monthYearTitle": "2022-01-01T00:00:00.0000000Z",
+      "pdf": "/media/r05jgvof/wrem_2022_january_single6-1.pdf",
+      "image": "[{\"key\":\"9358d76e-ab60-4fc4-a5b0-83cc9eaba175\",\"mediaKey\":\"e8a39e94-d978-45a5-bafa-a499e011314c\"}]",
+      "excerpt": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "featuredOnlineArticles": {}
+    },
+    "UpdateDate": "2024-01-27T20:46:28.423Z"
+  },
+  "CultureInfos": [],
+  "PublishedCultureInfos": [],
+  "PublishedCultures": [],
+  "Writer": "raymond@lightburn.co",
+  "PublicAccessRules": [],
+  "Schedule": [],
+  "Domains": [],
+  "Parent": "umb://document/4f5f23e989fa44c98c2927f2fa317cf0",
+  "ContentType": "umb://document-type/02eec0556dd64104be2fe7f95d3dbbf3",
+  "CreateDate": "2023-12-01T02:44:55.083Z",
+  "Creator": "raymond@lightburn.co",
+  "PropertyEditorAliases": {
+    "metaTitle": "Umbraco.TextBox",
+    "metaDescription": "Umbraco.TextBox",
+    "openGraphImage": "Umbraco.MediaPicker3",
+    "siteFooterWidget": "Umbraco.ContentPicker",
+    "hideFromSitemap": "Umbraco.TrueFalse",
+    "hideFromSearchEngines": "Umbraco.TrueFalse",
+    "visibleToMemberGroups": "Umbraco.MemberGroupPicker",
+    "visibleToAll": "Umbraco.TrueFalse",
+    "monthYearTitle": "Umbraco.DateTime",
+    "pdf": "Umbraco.UploadField",
+    "image": "Umbraco.MediaPicker3",
+    "excerpt": "Umbraco.TextArea",
+    "featuredOnlineArticles": "Umbraco.MultiNodeTreePicker"
+  },
+  "Udi": "umb://document/5a589960a1b344878f6f892107dce660",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type/02eec0556dd64104be2fe7f95d3dbbf3",
+      "Ordering": true,
+      "Checksum": "9FCEC36016B9752EEA53BCA1F7D9377B2BE3F569"
+    },
+    {
+      "Udi": "umb://document/4f5f23e989fa44c98c2927f2fa317cf0",
+      "Ordering": true,
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://media-file/r05jgvof/wrem_2022_january_single6-1.pdf",
+      "Ordering": true,
+      "Checksum": "668CA0212408CD26A14BA9B8C4BF65253A35FC4D"
+    },
+    {
+      "Udi": "umb://media/e8a39e94d97845a5bafaa499e011314c",
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://template/6915c45096c3468dbcffb47a8dc39a18",
+      "Ordering": true,
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.Content.DocumentArtifact",
+  "__version": "13.0.4"
+}

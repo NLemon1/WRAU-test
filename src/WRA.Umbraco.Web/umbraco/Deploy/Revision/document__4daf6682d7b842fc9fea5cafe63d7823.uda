@@ -1,0 +1,66 @@
+{
+  "Name": "Winter Convention",
+  "Alias": "Winter Convention",
+  "PublishedName": "Winter Convention",
+  "PublishedVersion": {
+    "Template": "umb://template/98556b4367654b4698fdc098502d4443",
+    "Properties": {
+      "umbracoUrlName": {},
+      "umbracoUrlAlias": {},
+      "umbracoRedirect": {},
+      "siteFooterWidget": {},
+      "metaTitle": {},
+      "metaDescription": {},
+      "openGraphImage": {},
+      "description": "Winter real estate convention featuring industry insights and updates.",
+      "displayName": {},
+      "externalCategoryId": "d59cb4a5-51a5-4307-872c-66880235b6eb",
+      "externalId": "a1ac0fc9-440d-4412-ba9d-4b7496bae262"
+    },
+    "UpdateDate": "2024-02-15T19:04:56.523Z"
+  },
+  "CultureInfos": [],
+  "PublishedCultureInfos": [],
+  "PublishedCultures": [],
+  "Writer": "admin",
+  "PublicAccessRules": [],
+  "Schedule": [],
+  "Domains": [],
+  "Parent": "umb://document/3047c809823f403cac98ae0598a70f78",
+  "ContentType": "umb://document-type/c069f4e9dbef40c3acf42e2af704c3e3",
+  "CreateDate": "2024-02-14T18:14:30.263Z",
+  "Creator": "raymond@lightburn.co",
+  "PropertyEditorAliases": {
+    "umbracoUrlName": "Umbraco.TextBox",
+    "umbracoUrlAlias": "Umbraco.TextBox",
+    "umbracoRedirect": "Umbraco.ContentPicker",
+    "siteFooterWidget": "Umbraco.ContentPicker",
+    "metaTitle": "Umbraco.TextBox",
+    "metaDescription": "Umbraco.TextBox",
+    "openGraphImage": "Umbraco.MediaPicker3",
+    "description": "Umbraco.TextBox",
+    "displayName": "Umbraco.Label",
+    "externalCategoryId": "Umbraco.Label",
+    "externalId": "Umbraco.Label"
+  },
+  "Udi": "umb://document/4daf6682d7b842fc9fea5cafe63d7823",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type/c069f4e9dbef40c3acf42e2af704c3e3",
+      "Ordering": true,
+      "Checksum": "A520FBD4E43F7B18DB3CF5AAB028CF83B51E2AFE"
+    },
+    {
+      "Udi": "umb://document/3047c809823f403cac98ae0598a70f78",
+      "Ordering": true,
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://template/98556b4367654b4698fdc098502d4443",
+      "Ordering": true,
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.Content.DocumentArtifact",
+  "__version": "13.0.4"
+}

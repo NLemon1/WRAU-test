@@ -1,0 +1,9 @@
+{
+  "Name": "umb://template-file/CheckoutInformationPage.cshtml",
+  "Alias": "",
+  "ChecksumValue": "D8FE59D0B37525E53EF0FE2F024003FB12046D2F",
+  "Udi": "umb://template-file/CheckoutInformationPage.cshtml",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.FileArtifact",
+  "__version": "13.0.4"
+}

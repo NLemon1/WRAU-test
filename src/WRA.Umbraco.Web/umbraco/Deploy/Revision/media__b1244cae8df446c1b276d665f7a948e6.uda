@@ -1,0 +1,39 @@
+{
+  "Name": "Support Bg Fpo",
+  "Alias": "Support Bg Fpo",
+  "Properties": {
+    "umbracoFile": "{\"src\":\"/media/vbgcjmpu/support-bg-fpo.png\"}",
+    "umbracoWidth": "1366",
+    "umbracoHeight": "821",
+    "umbracoBytes": "2101235",
+    "umbracoExtension": "png",
+    "altText": {}
+  },
+  "SortOrder": 8,
+  "ContentType": "umb://media-type/cc07b31308434aa8bbda871c8da728c8",
+  "CreateDate": "2024-01-27T20:00:44.567Z",
+  "Creator": "raymond@lightburn.co",
+  "PropertyEditorAliases": {
+    "umbracoFile": "Umbraco.ImageCropper",
+    "umbracoWidth": "Umbraco.Label",
+    "umbracoHeight": "Umbraco.Label",
+    "umbracoBytes": "Umbraco.Label",
+    "umbracoExtension": "Umbraco.Label",
+    "altText": "Umbraco.TextBox"
+  },
+  "Udi": "umb://media/b1244cae8df446c1b276d665f7a948e6",
+  "Dependencies": [
+    {
+      "Udi": "umb://media-file/vbgcjmpu/support-bg-fpo.png",
+      "Ordering": true,
+      "Checksum": "FFEF4A636B18B5676D782068FBE91DA03EFEFED6"
+    },
+    {
+      "Udi": "umb://media-type/cc07b31308434aa8bbda871c8da728c8",
+      "Ordering": true,
+      "Checksum": "BCA74AB4EC7B8E7350429C95AC7E37DD7289FFEB"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.Content.MediaArtifact",
+  "__version": "13.0.4"
+}

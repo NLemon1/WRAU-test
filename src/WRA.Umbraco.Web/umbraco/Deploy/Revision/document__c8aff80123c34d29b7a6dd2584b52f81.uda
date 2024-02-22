@@ -1,0 +1,96 @@
+{
+  "Name": "licensure",
+  "Alias": "licensure",
+  "PublishedName": "licensure",
+  "PublishedVersion": {
+    "Template": "umb://template/b4822ab7b13a45f68bc1a1bfdec4894c",
+    "Properties": {
+      "siteFooterWidget": {},
+      "metaTitle": {},
+      "metaDescription": {},
+      "openGraphImage": "[]",
+      "hideFromSitemap": "0",
+      "hideFromSearchEngines": "0",
+      "visibleToMemberGroups": {},
+      "visibleToAll": {},
+      "sku": "123",
+      "price": "{\"umb://umbraco-commerce-currency/0b9b3b3baf7f47b1aacd018ba1543f04\":60.0,\"umb://umbraco-commerce-currency/3698ee49fe9447568896018c92cebaf5\":70.0}",
+      "memberPrice": {},
+      "images": "[]",
+      "shortDescription": {},
+      "longDescription": {},
+      "categories": {},
+      "subCategories": {},
+      "taxonomy": {},
+      "startDate": {},
+      "endDate": {},
+      "location": {},
+      "productId": {},
+      "variants": {}
+    },
+    "UpdateDate": "2024-01-27T20:46:30.52Z"
+  },
+  "CultureInfos": [],
+  "PublishedCultureInfos": [],
+  "PublishedCultures": [],
+  "Writer": "raymond@lightburn.co",
+  "PublicAccessRules": [],
+  "Schedule": [],
+  "Domains": [],
+  "Parent": "umb://document/1ec5f9dabad9400e9da87b0d778601e7",
+  "ContentType": "umb://document-type/59a22b96db2e4cb6b50b2177e7a72670",
+  "CreateDate": "2023-12-22T17:57:27.297Z",
+  "Creator": "raymond@lightburn.co",
+  "PropertyEditorAliases": {
+    "siteFooterWidget": "Umbraco.ContentPicker",
+    "metaTitle": "Umbraco.TextBox",
+    "metaDescription": "Umbraco.TextBox",
+    "openGraphImage": "Umbraco.MediaPicker3",
+    "hideFromSitemap": "Umbraco.TrueFalse",
+    "hideFromSearchEngines": "Umbraco.TrueFalse",
+    "visibleToMemberGroups": "Umbraco.MemberGroupPicker",
+    "visibleToAll": "Umbraco.TrueFalse",
+    "sku": "Umbraco.TextBox",
+    "price": "Umbraco.Commerce.Price",
+    "memberPrice": "Umbraco.Commerce.Price",
+    "images": "Umbraco.MediaPicker3",
+    "shortDescription": "Umbraco.TextArea",
+    "longDescription": "Umbraco.TinyMCE",
+    "categories": "Umbraco.MultiNodeTreePicker",
+    "subCategories": "Umbraco.MultiNodeTreePicker",
+    "taxonomy": "Umbraco.Label",
+    "startDate": "Umbraco.Label",
+    "endDate": "Umbraco.Label",
+    "location": "Umbraco.Label",
+    "productId": "Umbraco.Label",
+    "variants": "Umbraco.Commerce.VariantsEditor"
+  },
+  "Udi": "umb://document/c8aff80123c34d29b7a6dd2584b52f81",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type/59a22b96db2e4cb6b50b2177e7a72670",
+      "Ordering": true,
+      "Checksum": "736A832BCFFC966DF963F2ACECF24C1F751CCAE6"
+    },
+    {
+      "Udi": "umb://document/1ec5f9dabad9400e9da87b0d778601e7",
+      "Ordering": true,
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://template/b4822ab7b13a45f68bc1a1bfdec4894c",
+      "Ordering": true,
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://umbraco-commerce-currency/0b9b3b3baf7f47b1aacd018ba1543f04",
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://umbraco-commerce-currency/3698ee49fe9447568896018c92cebaf5",
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.Content.DocumentArtifact",
+  "__version": "13.0.4"
+}

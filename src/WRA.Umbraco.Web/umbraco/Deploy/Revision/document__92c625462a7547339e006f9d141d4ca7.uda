@@ -1,0 +1,233 @@
+{
+  "Name": "Membership",
+  "Alias": "Membership",
+  "PublishedName": "Membership",
+  "PublishedVersion": {
+    "Template": "umb://template/ec480a40125744e1aa99c0db63f17e55",
+    "Properties": {
+      "metaTitle": {},
+      "metaDescription": {},
+      "openGraphImage": "[]",
+      "siteFooterWidget": "umb://document/d9c986bf1c7447649fbf2ecac7fc171d",
+      "hideFromSitemap": "0",
+      "hideFromSearchEngines": "0",
+      "visibleToMemberGroups": {},
+      "visibleToAll": {},
+      "sections": "{\"layout\":{\"Umbraco.BlockGrid\":[{\"contentUdi\":\"umb://element/9911f96ec4c8468ca4ef7ff2f71d984e\",\"areas\":[{\"key\":\"ab5d22a8-35f9-45a6-8906-595b4febc4b2\",\"items\":[]},{\"key\":\"f34b7226-358c-4ff5-a458-1f082c51b3b9\",\"items\":[]}],\"columnSpan\":12,\"rowSpan\":1},{\"contentUdi\":\"umb://element/b2d10d30bcc8474389a0e1432df5f401\",\"areas\":[{\"key\":\"4a7162dc-fd49-40a2-858e-aa5e72e71c9d\",\"items\":[{\"contentUdi\":\"umb://element/50ec298d00e548ffbc51be69af1897cc\",\"areas\":[],\"columnSpan\":6,\"rowSpan\":1},{\"contentUdi\":\"umb://element/0ebc5082c9cd489b97bf1413085d1ac1\",\"areas\":[],\"columnSpan\":6,\"rowSpan\":1},{\"contentUdi\":\"umb://element/b05ff8e2005e41ad97715c5a7c300f3b\",\"areas\":[],\"columnSpan\":6,\"rowSpan\":1}]}],\"columnSpan\":12,\"rowSpan\":1},{\"contentUdi\":\"umb://element/71f1b7cb2ce744cc9e0f0ba333273fe7\",\"areas\":[{\"key\":\"730bdb13-56b6-4614-a524-f46499892315\",\"items\":[{\"contentUdi\":\"umb://element/067a64ae7bd546a1be3338e87271bd19\",\"areas\":[],\"columnSpan\":6,\"rowSpan\":1}]},{\"key\":\"de11d1c8-311e-4040-92a5-92cf75755a45\",\"items\":[{\"areas\":[],\"columnSpan\":6,\"rowSpan\":1,\"contentUdi\":\"umb://element/26f3e1d123c04ccc8ee7fc6ce0f12892\"}]},{\"key\":\"fa665ee0-0c0f-43e7-9922-8db6df716a4b\",\"items\":[{\"areas\":[],\"columnSpan\":6,\"rowSpan\":1,\"contentUdi\":\"umb://element/a3affaf02f134c698354d31368fea209\"}]}],\"columnSpan\":12,\"rowSpan\":1},{\"areas\":[{\"key\":\"730bdb13-56b6-4614-a524-f46499892315\",\"items\":[{\"areas\":[],\"columnSpan\":6,\"rowSpan\":1,\"contentUdi\":\"umb://element/fe752e8e2a394870990545d1ef9f4137\"}]},{\"key\":\"de11d1c8-311e-4040-92a5-92cf75755a45\",\"items\":[{\"areas\":[],\"columnSpan\":6,\"rowSpan\":1,\"contentUdi\":\"umb://element/f69423d5aa914da5b162055206679023\"}]},{\"key\":\"fa665ee0-0c0f-43e7-9922-8db6df716a4b\",\"items\":[{\"areas\":[],\"columnSpan\":6,\"rowSpan\":1,\"contentUdi\":\"umb://element/418cf889d8024f0f8fb36fcdbb87557a\"}]}],\"columnSpan\":12,\"rowSpan\":1,\"contentUdi\":\"umb://element/d9260c5b562e41cea5a17f654f722e82\"},{\"areas\":[{\"key\":\"730bdb13-56b6-4614-a524-f46499892315\",\"items\":[{\"areas\":[],\"columnSpan\":6,\"rowSpan\":1,\"contentUdi\":\"umb://element/39729792762840e796ede0ac5e417100\"}]},{\"key\":\"de11d1c8-311e-4040-92a5-92cf75755a45\",\"items\":[{\"areas\":[],\"columnSpan\":6,\"rowSpan\":1,\"contentUdi\":\"umb://element/6562c1552073467fb2e14cfb777a4c49\"}]},{\"key\":\"fa665ee0-0c0f-43e7-9922-8db6df716a4b\",\"items\":[]}],\"columnSpan\":12,\"rowSpan\":1,\"contentUdi\":\"umb://element/96c9e37802dd4f129034820f1119cb0a\"},{\"contentUdi\":\"umb://element/2bcbe97d0e6c414b92efa91ee9be7ff8\",\"areas\":[],\"columnSpan\":12,\"rowSpan\":1},{\"areas\":[{\"key\":\"de08acff-cfbb-4b3a-aefb-84ab9bb2931e\",\"items\":[{\"areas\":[{\"key\":\"0bee1f52-7c57-4aee-ad8c-af26eaa424ff\",\"items\":[{\"contentUdi\":\"umb://element/c4967e4920ba4a64906c23e779c06838\",\"areas\":[{\"key\":\"a8b7402c-5980-42a3-adff-fbcb7281c0b6\",\"items\":[{\"contentUdi\":\"umb://element/cfb6a7214fd6492497513b9562251afb\",\"areas\":[],\"columnSpan\":6,\"rowSpan\":1},{\"contentUdi\":\"umb://element/fd7e695265bd4c70895d25b15753b135\",\"areas\":[],\"columnSpan\":6,\"rowSpan\":1},{\"contentUdi\":\"umb://element/ff74c203410545c6a33e4445c081d1cf\",\"areas\":[{\"key\":\"72a9b655-b2c5-4a33-80f3-73d01f46cbc7\",\"items\":[{\"contentUdi\":\"umb://element/571ec8b037064fb4ba7afe092805aa6e\",\"areas\":[],\"columnSpan\":6,\"rowSpan\":1},{\"contentUdi\":\"umb://element/91677b1dd1364b94a4659cec8beff2c2\",\"areas\":[],\"columnSpan\":6,\"rowSpan\":1}]}],\"columnSpan\":6,\"rowSpan\":1}]},{\"key\":\"93baa978-989b-4859-9585-4988c0593f71\",\"items\":[{\"contentUdi\":\"umb://element/3947533c9e6646488684e974898ad2c1\",\"areas\":[],\"columnSpan\":6,\"rowSpan\":1}]}],\"columnSpan\":6,\"rowSpan\":1},{\"areas\":[],\"columnSpan\":6,\"rowSpan\":1,\"contentUdi\":\"umb://element/01c33dbc2d474bb08bbd6ceb550f4346\"},{\"areas\":[{\"key\":\"8e8355b8-aa7e-4b76-a893-8a7d14f57243\",\"items\":[{\"areas\":[],\"columnSpan\":6,\"rowSpan\":1,\"contentUdi\":\"umb://element/ee4c1832cfc04912b1a2ebd3809d522d\"},{\"areas\":[{\"key\":\"7a627ef6-f73f-49d1-abf2-5fca6e41bbaa\",\"items\":[{\"areas\":[{\"key\":\"03743e08-d818-4fd2-a36a-1fcad441447a\",\"items\":[{\"areas\":[],\"columnSpan\":6,\"rowSpan\":1,\"contentUdi\":\"umb://element/3a55c0ed690a4d9990eaeefa5d38ebc4\"}]}],\"columnSpan\":6,\"rowSpan\":1,\"contentUdi\":\"umb://element/ffd8d0df681a4a31bc249b3d8dd5ebd4\"},{\"areas\":[{\"key\":\"03743e08-d818-4fd2-a36a-1fcad441447a\",\"items\":[{\"areas\":[],\"columnSpan\":6,\"rowSpan\":1,\"contentUdi\":\"umb://element/7cfcfee4dfad485ca87505c80200ab02\"}]}],\"columnSpan\":6,\"rowSpan\":1,\"contentUdi\":\"umb://element/244bc0fea63f47ef8f605f7765912b39\"}]}],\"columnSpan\":6,\"rowSpan\":1,\"contentUdi\":\"umb://element/7ca627758c504a189e1a46f794aa2b50\"}]},{\"key\":\"5a9df9b3-9f2c-4de3-b87c-4e4b4686f49e\",\"items\":[{\"areas\":[],\"columnSpan\":6,\"rowSpan\":1,\"contentUdi\":\"umb://element/cb58e055c76c43fe92b2632a3c65ed80\"},{\"areas\":[{\"key\":\"7a627ef6-f73f-49d1-abf2-5fca6e41bbaa\",\"items\":[{\"areas\":[{\"key\":\"03743e08-d818-4fd2-a36a-1fcad441447a\",\"items\":[{\"areas\":[],\"columnSpan\":6,\"rowSpan\":1,\"contentUdi\":\"umb://element/4fbb9ff31f724609b01717bc27f75f45\"}]}],\"columnSpan\":6,\"rowSpan\":1,\"contentUdi\":\"umb://element/53b13ffebe0146b5990b96f5cfb5cd10\"},{\"areas\":[{\"key\":\"03743e08-d818-4fd2-a36a-1fcad441447a\",\"items\":[{\"areas\":[],\"columnSpan\":6,\"rowSpan\":1,\"contentUdi\":\"umb://element/4f39aca3fa824099a3fb768452f89678\"}]}],\"columnSpan\":6,\"rowSpan\":1,\"contentUdi\":\"umb://element/efdc49a7e5e743b680d5c78c788f9e4f\"}]}],\"columnSpan\":6,\"rowSpan\":1,\"contentUdi\":\"umb://element/dbfbd1ce16334e14ab9079cb1ddbaaa0\"}]}],\"columnSpan\":6,\"rowSpan\":1,\"contentUdi\":\"umb://element/9a3d5a8c466749cb8a6e9dfc17ba07ef\"},{\"contentUdi\":\"umb://element/8fc7bde86aed4c42818964fb66f04843\",\"areas\":[],\"columnSpan\":6,\"rowSpan\":1},{\"areas\":[{\"key\":\"4a7162dc-fd49-40a2-858e-aa5e72e71c9d\",\"items\":[{\"areas\":[],\"columnSpan\":6,\"rowSpan\":1,\"contentUdi\":\"umb://element/390c0b0ba0734ad5b99386524e507b14\"},{\"areas\":[{\"key\":\"8e8355b8-aa7e-4b76-a893-8a7d14f57243\",\"items\":[{\"areas\":[{\"key\":\"c58d0ed1-687f-4d6f-8b71-29e97302d1d4\",\"items\":[{\"areas\":[],\"columnSpan\":6,\"rowSpan\":1,\"contentUdi\":\"umb://element/77269a486fa34714ae8433ef606dffb6\"},{\"areas\":[],\"columnSpan\":6,\"rowSpan\":1,\"contentUdi\":\"umb://element/e970b72be1cd46cf8cc937a1e71001cd\"}]}],\"columnSpan\":6,\"rowSpan\":1,\"contentUdi\":\"umb://element/fe3f278e42e7470f81607447674023e1\"}]},{\"key\":\"5a9df9b3-9f2c-4de3-b87c-4e4b4686f49e\",\"items\":[{\"areas\":[{\"key\":\"c58d0ed1-687f-4d6f-8b71-29e97302d1d4\",\"items\":[{\"areas\":[],\"columnSpan\":6,\"rowSpan\":1,\"contentUdi\":\"umb://element/6940a1450570412b8c488b4c20274008\"},{\"areas\":[],\"columnSpan\":6,\"rowSpan\":1,\"contentUdi\":\"umb://element/4d13a4314a21406aba9a8075fcb0e19c\"}]}],\"columnSpan\":6,\"rowSpan\":1,\"contentUdi\":\"umb://element/a0857cbe049046acb00b94a2263f2a6b\"}]}],\"columnSpan\":6,\"rowSpan\":1,\"contentUdi\":\"umb://element/4eea3f3205e8402bbec7e20bce4ddb5d\"},{\"areas\":[],\"columnSpan\":6,\"rowSpan\":1,\"contentUdi\":\"umb://element/e1e5e667383d4684a48c42ab936cd742\"},{\"areas\":[{\"key\":\"72a9b655-b2c5-4a33-80f3-73d01f46cbc7\",\"items\":[{\"areas\":[],\"columnSpan\":6,\"rowSpan\":1,\"contentUdi\":\"umb://element/6d0d724afac74663914732cf084ba747\"},{\"areas\":[],\"columnSpan\":6,\"rowSpan\":1,\"contentUdi\":\"umb://element/e168a6c5535c49ec931d782970691b7e\"}]}],\"columnSpan\":6,\"rowSpan\":1,\"contentUdi\":\"umb://element/73cc3c878d914d47b0afe627e7349617\"}]}],\"columnSpan\":6,\"rowSpan\":1,\"contentUdi\":\"umb://element/7e1748b5f94b4f33b1f3efcf9eb6c65c\"}]}],\"columnSpan\":6,\"rowSpan\":1,\"contentUdi\":\"umb://element/0be67370f66640c8808781c19d099afa\"},{\"areas\":[{\"key\":\"0bee1f52-7c57-4aee-ad8c-af26eaa424ff\",\"items\":[{\"areas\":[],\"columnSpan\":6,\"rowSpan\":1,\"contentUdi\":\"umb://element/0e9e4d1e9c864ee29d39cfb9d56b2f35\"}]}],\"columnSpan\":6,\"rowSpan\":1,\"contentUdi\":\"umb://element/fc93fc053db7462c848088b52bac87c0\"},{\"areas\":[{\"key\":\"0bee1f52-7c57-4aee-ad8c-af26eaa424ff\",\"items\":[{\"areas\":[],\"columnSpan\":6,\"rowSpan\":1,\"contentUdi\":\"umb://element/7e52da6b430a46fcae9de3e59fb15df4\"}]}],\"columnSpan\":6,\"rowSpan\":1,\"contentUdi\":\"umb://element/05d3c3e0d7994c369d17d15837dc5233\"}]}],\"columnSpan\":12,\"rowSpan\":1,\"contentUdi\":\"umb://element/afe1bb9d528c4be79bf76da1267e947e\"},{\"contentUdi\":\"umb://element/0e53106cc0f048349eee634450b05940\",\"areas\":[{\"key\":\"4a7162dc-fd49-40a2-858e-aa5e72e71c9d\",\"items\":[{\"contentUdi\":\"umb://element/34fef2bd7cde4d13a6f2dbf817cb0cb5\",\"areas\":[],\"columnSpan\":6,\"rowSpan\":1},{\"contentUdi\":\"umb://element/aae90e4ecc4548bd95ce3807d6c9a4b1\",\"areas\":[],\"columnSpan\":6,\"rowSpan\":1},{\"contentUdi\":\"umb://element/cdb5e241c9304b7aa91467b786d84672\",\"areas\":[],\"columnSpan\":6,\"rowSpan\":1},{\"contentUdi\":\"umb://element/db089512f18c449b8861aa1b621e4099\",\"areas\":[],\"columnSpan\":6,\"rowSpan\":1},{\"contentUdi\":\"umb://element/bfb21f8c6e2848daa82d6923269b3d9e\",\"areas\":[],\"columnSpan\":6,\"rowSpan\":1}]}],\"columnSpan\":12,\"rowSpan\":1}]},\"contentData\":[{\"contentTypeKey\":\"cffca6df-c3f5-4d9c-ab91-6591c86747c7\",\"udi\":\"umb://element/9911f96ec4c8468ca4ef7ff2f71d984e\",\"headline\":\"Membership\",\"subhead\":\"Morbi ante risus, vehicula eu mi ut, aliquet hendrerit ex. Donec sed varius lorem.\",\"overlay\":\"1\",\"showEventCalendar\":\"0\",\"imageMobile\":\"[{\\\"key\\\":\\\"04111cf4-3c04-4b5a-b674-7d1a68e9dff1\\\",\\\"mediaKey\\\":\\\"13770c8d-1d3e-4751-a3ae-956ccacc7138\\\"}]\",\"imageDesktop\":\"[{\\\"key\\\":\\\"5105c2a3-a28c-4b06-84bf-3e657fa7b9fd\\\",\\\"mediaKey\\\":\\\"13770c8d-1d3e-4751-a3ae-956ccacc7138\\\"}]\"},{\"contentTypeKey\":\"026bb456-a4e1-458f-aa5a-5a8a73bfdba1\",\"udi\":\"umb://element/b2d10d30bcc8474389a0e1432df5f401\",\"visibleToMemberGroups\":null,\"visibleToAll\":\"1\",\"xPadding\":null,\"width\":\"[\\\"744px\\\"]\",\"yPadding\":\"[\\\"4rem\\\"]\"},{\"contentTypeKey\":\"764f3bd5-6bf5-4409-bbc4-29789af1dfc2\",\"udi\":\"umb://element/50ec298d00e548ffbc51be69af1897cc\",\"overlineText\":\"For Members\",\"textColor\":\"{\\r\\n  \\\"value\\\": \\\"050f1e\\\",\\r\\n  \\\"label\\\": \\\"050f1e\\\",\\r\\n  \\\"sortOrder\\\": 0,\\r\\n  \\\"id\\\": \\\"1\\\"\\r\\n}\",\"alignment\":\"[\\\"Center\\\"]\",\"bottomMargin\":\"[\\\"1rem\\\"]\",\"strikeBehind\":\"0\"},{\"contentTypeKey\":\"0354f600-29e9-458d-abc7-5f659e6325a2\",\"udi\":\"umb://element/0ebc5082c9cd489b97bf1413085d1ac1\",\"headlineText\":\"Benefits Guide\",\"headingLevel\":\"[\\\"H2\\\"]\",\"fontSize\":\"[\\\"44px\\\"]\",\"textAlignment\":\"[\\\"Center\\\"]\",\"textColor\":\"{\\r\\n  \\\"value\\\": \\\"050f1e\\\",\\r\\n  \\\"label\\\": \\\"050f1e\\\",\\r\\n  \\\"sortOrder\\\": 0,\\r\\n  \\\"id\\\": \\\"1\\\"\\r\\n}\",\"bottomMargin\":\"[\\\"1.5rem\\\"]\"},{\"contentTypeKey\":\"fa444fc1-2c1e-414a-9fef-276551c06714\",\"udi\":\"umb://element/b05ff8e2005e41ad97715c5a7c300f3b\",\"visibleToMemberGroups\":null,\"visibleToAll\":\"1\",\"fontFamily\":\"Serif\",\"bottomMargin\":null,\"fontSize\":\"[\\\"20px\\\"]\",\"fontWeight\":\"[\\\"400\\\"]\",\"textColor\":\"{\\r\\n  \\\"value\\\": \\\"050f1e\\\",\\r\\n  \\\"label\\\": \\\"050f1e\\\",\\r\\n  \\\"sortOrder\\\": 0,\\r\\n  \\\"id\\\": \\\"1\\\"\\r\\n}\",\"text\":\"{\\\"markup\\\":\\\"<p style=\\\\\\\"text-align: center;\\\\\\\">Lorem ipsum dolor sit amet consectetur. Ut sagittis sit nibh. Lorem ipsum dolor sit amet consectetur. Ut sagittis sit nibh. Lorem ipsum dolor.</p>\\\"}\"},{\"contentTypeKey\":\"a3638dad-77d4-45ca-9352-32f848e8743a\",\"udi\":\"umb://element/71f1b7cb2ce744cc9e0f0ba333273fe7\"},{\"contentTypeKey\":\"b65e28c8-ab27-48dd-88cc-c6dc27c40f4b\",\"udi\":\"umb://element/067a64ae7bd546a1be3338e87271bd19\",\"pageUrl\":\"[{\\\"name\\\":\\\"test link\\\",\\\"url\\\":\\\"/\\\"}]\",\"headline\":\"Legal Hotline\",\"subheadline\":\"Morbi ante risus, vehicula eu mi ut, aliquet hendrerit ex. Donec sed varius lorem.\"},{\"contentTypeKey\":\"b65e28c8-ab27-48dd-88cc-c6dc27c40f4b\",\"udi\":\"umb://element/26f3e1d123c04ccc8ee7fc6ce0f12892\",\"pageUrl\":\"[{\\\"name\\\":\\\"test link\\\",\\\"url\\\":\\\"/\\\"}]\",\"headline\":\"Legal Services\",\"subheadline\":\"Morbi ante risus, vehicula eu mi ut, aliquet hendrerit ex. Donec sed varius lorem.\"},{\"contentTypeKey\":\"b65e28c8-ab27-48dd-88cc-c6dc27c40f4b\",\"udi\":\"umb://element/a3affaf02f134c698354d31368fea209\",\"pageUrl\":\"[{\\\"name\\\":\\\"test link\\\",\\\"url\\\":\\\"/\\\"}]\",\"headline\":\"Legislative & Public Affairs\",\"subheadline\":\"Morbi ante risus, vehicula eu mi ut, aliquet hendrerit ex. Donec sed varius lorem. Vehicula eu mi ut, aliquet hendrerit ex. Donec sed varius lorem.\"},{\"contentTypeKey\":\"a3638dad-77d4-45ca-9352-32f848e8743a\",\"udi\":\"umb://element/d9260c5b562e41cea5a17f654f722e82\"},{\"contentTypeKey\":\"b65e28c8-ab27-48dd-88cc-c6dc27c40f4b\",\"udi\":\"umb://element/fe752e8e2a394870990545d1ef9f4137\",\"pageUrl\":\"[{\\\"name\\\":\\\"test link\\\",\\\"url\\\":\\\"/\\\"}]\",\"headline\":\"Professional Development\",\"subheadline\":\"Morbi ante risus, vehicula eu mi ut, aliquet hendrerit ex. Donec sed varius lorem.\"},{\"contentTypeKey\":\"b65e28c8-ab27-48dd-88cc-c6dc27c40f4b\",\"udi\":\"umb://element/f69423d5aa914da5b162055206679023\",\"pageUrl\":\"[{\\\"name\\\":\\\"test link\\\",\\\"url\\\":\\\"/\\\"}]\",\"headline\":\"Housing Statistics\",\"subheadline\":\"Morbi ante risus, vehicula eu mi ut, aliquet hendrerit ex. Donec sed varius lorem.\"},{\"contentTypeKey\":\"b65e28c8-ab27-48dd-88cc-c6dc27c40f4b\",\"udi\":\"umb://element/418cf889d8024f0f8fb36fcdbb87557a\",\"pageUrl\":\"[{\\\"name\\\":\\\"test link\\\",\\\"url\\\":\\\"/\\\"}]\",\"headline\":\"Real Estate News\",\"subheadline\":\"Morbi ante risus, vehicula eu mi ut, aliquet hendrerit ex. Donec sed varius lorem. Vehicula eu mi ut, aliquet hendrerit ex. Donec sed varius lorem.\"},{\"contentTypeKey\":\"a3638dad-77d4-45ca-9352-32f848e8743a\",\"udi\":\"umb://element/96c9e37802dd4f129034820f1119cb0a\"},{\"contentTypeKey\":\"b65e28c8-ab27-48dd-88cc-c6dc27c40f4b\",\"udi\":\"umb://element/39729792762840e796ede0ac5e417100\",\"pageUrl\":\"[{\\\"name\\\":\\\"test link\\\",\\\"url\\\":\\\"/\\\"}]\",\"headline\":\"Technology Products\",\"subheadline\":\"Morbi ante risus, vehicula eu mi ut, aliquet hendrerit ex. Donec sed varius lorem.\"},{\"contentTypeKey\":\"b65e28c8-ab27-48dd-88cc-c6dc27c40f4b\",\"udi\":\"umb://element/6562c1552073467fb2e14cfb777a4c49\",\"pageUrl\":\"[{\\\"name\\\":\\\"test link\\\",\\\"url\\\":\\\"/\\\"}]\",\"headline\":\"Member Kit\",\"subheadline\":\"Morbi ante risus, vehicula eu mi ut, aliquet hendrerit ex. Donec sed varius lorem.\"},{\"contentTypeKey\":\"d5b01a10-5426-4f66-a5f6-6a9ed349d4a4\",\"udi\":\"umb://element/afe1bb9d528c4be79bf76da1267e947e\",\"overline\":\"Become A Member\",\"heading\":\"Join The WRA\",\"enableDarkMode\":\"1\",\"enableVerticalMode\":\"0\"},{\"contentTypeKey\":\"ac859905-1e6d-4dc4-90ad-4245c0f7fbce\",\"udi\":\"umb://element/0be67370f66640c8808781c19d099afa\",\"label\":\"REALTOR®\"},{\"contentTypeKey\":\"0354f600-29e9-458d-abc7-5f659e6325a2\",\"udi\":\"umb://element/01c33dbc2d474bb08bbd6ceb550f4346\",\"additionalCssClasses\":\"border-top border-light pt-4\",\"headlineText\":\"REALTOR® Benefits\",\"headingLevel\":\"[\\\"H2\\\"]\",\"fontSize\":\"[\\\"24px\\\"]\",\"textAlignment\":null,\"bottomMargin\":null},{\"contentTypeKey\":\"bf995e2d-fadc-4379-b5a3-614b1f9782cc\",\"udi\":\"umb://element/9a3d5a8c466749cb8a6e9dfc17ba07ef\",\"visibleToMemberGroups\":null,\"visibleToAll\":\"1\"},{\"contentTypeKey\":\"0354f600-29e9-458d-abc7-5f659e6325a2\",\"udi\":\"umb://element/ee4c1832cfc04912b1a2ebd3809d522d\",\"headlineText\":\"Legal Services\",\"headingLevel\":\"[\\\"H3\\\"]\",\"fontSize\":\"[\\\"16px\\\"]\",\"textAlignment\":null,\"bottomMargin\":\"[\\\"1rem\\\"]\"},{\"contentTypeKey\":\"3e07e7c9-5b1c-43a2-a0f4-fe8c977fe8e9\",\"udi\":\"umb://element/7ca627758c504a189e1a46f794aa2b50\",\"enableDarkMode\":\"1\",\"enableOutsideBorder\":\"1\"},{\"contentTypeKey\":\"5115b48a-7826-4912-8936-7c6e6cfd6336\",\"udi\":\"umb://element/ffd8d0df681a4a31bc249b3d8dd5ebd4\",\"label\":\"Toll-free Legal Hotline\"},{\"contentTypeKey\":\"fa444fc1-2c1e-414a-9fef-276551c06714\",\"udi\":\"umb://element/3a55c0ed690a4d9990eaeefa5d38ebc4\",\"visibleToMemberGroups\":null,\"visibleToAll\":\"1\",\"bottomMargin\":null,\"fontSize\":null,\"fontWeight\":null,\"text\":\"{\\\"markup\\\":\\\"<p>blah</p>\\\"}\"},{\"contentTypeKey\":\"5115b48a-7826-4912-8936-7c6e6cfd6336\",\"udi\":\"umb://element/244bc0fea63f47ef8f605f7765912b39\",\"label\":\"Legal Hottips\"},{\"contentTypeKey\":\"fa444fc1-2c1e-414a-9fef-276551c06714\",\"udi\":\"umb://element/7cfcfee4dfad485ca87505c80200ab02\",\"visibleToMemberGroups\":null,\"visibleToAll\":\"1\",\"bottomMargin\":null,\"fontSize\":null,\"fontWeight\":null,\"text\":\"{\\\"markup\\\":\\\"<p>blah</p>\\\"}\"},{\"contentTypeKey\":\"0354f600-29e9-458d-abc7-5f659e6325a2\",\"udi\":\"umb://element/cb58e055c76c43fe92b2632a3c65ed80\",\"headlineText\":\"Real Estate News\",\"headingLevel\":\"[\\\"H3\\\"]\",\"fontSize\":\"[\\\"16px\\\"]\",\"textAlignment\":null,\"bottomMargin\":\"[\\\"1rem\\\"]\"},{\"contentTypeKey\":\"3e07e7c9-5b1c-43a2-a0f4-fe8c977fe8e9\",\"udi\":\"umb://element/dbfbd1ce16334e14ab9079cb1ddbaaa0\",\"enableDarkMode\":\"1\",\"enableOutsideBorder\":\"1\"},{\"contentTypeKey\":\"5115b48a-7826-4912-8936-7c6e6cfd6336\",\"udi\":\"umb://element/53b13ffebe0146b5990b96f5cfb5cd10\",\"label\":\"Weekly Email Updates\"},{\"contentTypeKey\":\"fa444fc1-2c1e-414a-9fef-276551c06714\",\"udi\":\"umb://element/4fbb9ff31f724609b01717bc27f75f45\",\"visibleToMemberGroups\":null,\"visibleToAll\":\"1\",\"bottomMargin\":null,\"fontSize\":null,\"fontWeight\":null,\"text\":\"{\\\"markup\\\":\\\"<p>blah</p>\\\"}\"},{\"contentTypeKey\":\"5115b48a-7826-4912-8936-7c6e6cfd6336\",\"udi\":\"umb://element/efdc49a7e5e743b680d5c78c788f9e4f\",\"label\":\"Wisconsin Real Estate Magazine\"},{\"contentTypeKey\":\"fa444fc1-2c1e-414a-9fef-276551c06714\",\"udi\":\"umb://element/4f39aca3fa824099a3fb768452f89678\",\"visibleToMemberGroups\":null,\"visibleToAll\":\"1\",\"bottomMargin\":null,\"fontSize\":null,\"fontWeight\":null,\"text\":\"{\\\"markup\\\":\\\"<p>blah</p>\\\"}\"},{\"contentTypeKey\":\"ac859905-1e6d-4dc4-90ad-4245c0f7fbce\",\"udi\":\"umb://element/fc93fc053db7462c848088b52bac87c0\",\"label\":\"Affiliate\"},{\"contentTypeKey\":\"fa444fc1-2c1e-414a-9fef-276551c06714\",\"udi\":\"umb://element/0e9e4d1e9c864ee29d39cfb9d56b2f35\",\"visibleToMemberGroups\":null,\"visibleToAll\":\"1\",\"bottomMargin\":null,\"fontSize\":null,\"fontWeight\":null,\"textColor\":\"{\\r\\n  \\\"value\\\": \\\"ffffff\\\",\\r\\n  \\\"label\\\": \\\"ffffff\\\",\\r\\n  \\\"sortOrder\\\": 1,\\r\\n  \\\"id\\\": \\\"2\\\"\\r\\n}\",\"text\":\"{\\\"markup\\\":\\\"<p>bleep</p>\\\"}\"},{\"contentTypeKey\":\"ac859905-1e6d-4dc4-90ad-4245c0f7fbce\",\"udi\":\"umb://element/05d3c3e0d7994c369d17d15837dc5233\",\"label\":\"Legal\"},{\"contentTypeKey\":\"fa444fc1-2c1e-414a-9fef-276551c06714\",\"udi\":\"umb://element/7e52da6b430a46fcae9de3e59fb15df4\",\"visibleToMemberGroups\":null,\"visibleToAll\":\"1\",\"bottomMargin\":null,\"fontSize\":null,\"fontWeight\":null,\"textColor\":\"{\\r\\n  \\\"value\\\": \\\"ffffff\\\",\\r\\n  \\\"label\\\": \\\"ffffff\\\",\\r\\n  \\\"sortOrder\\\": 1,\\r\\n  \\\"id\\\": \\\"2\\\"\\r\\n}\",\"text\":\"{\\\"markup\\\":\\\"<p>bloop</p>\\\"}\"},{\"contentTypeKey\":\"569c5323-b158-4a26-aedb-69618d0db0a9\",\"udi\":\"umb://element/c4967e4920ba4a64906c23e779c06838\",\"yPadding\":null,\"reverseColumns\":\"0\"},{\"contentTypeKey\":\"32586fc3-9223-4549-affb-041bf869f15d\",\"udi\":\"umb://element/3947533c9e6646488684e974898ad2c1\",\"image\":\"[{\\\"key\\\":\\\"fdba4e98-42e5-4bbd-877c-9b65df59a4f5\\\",\\\"mediaKey\\\":\\\"76a3b6d7-e20a-4f71-bf5b-cf737bd7901a\\\"}]\",\"bottomMargin\":null,\"curvedCorner\":\"1\",\"yellowDecor\":\"0\"},{\"contentTypeKey\":\"0354f600-29e9-458d-abc7-5f659e6325a2\",\"udi\":\"umb://element/cfb6a7214fd6492497513b9562251afb\",\"headlineText\":\"Become a Realtor<sup>&reg;</sup>\",\"headingLevel\":\"[\\\"H2\\\"]\",\"fontSize\":null,\"textAlignment\":\"[\\\"Left\\\"]\",\"textColor\":\"{\\r\\n  \\\"value\\\": \\\"ffffff\\\",\\r\\n  \\\"label\\\": \\\"ffffff\\\",\\r\\n  \\\"sortOrder\\\": 1,\\r\\n  \\\"id\\\": \\\"2\\\"\\r\\n}\",\"bottomMargin\":\"[\\\"1.5rem\\\"]\"},{\"contentTypeKey\":\"fa444fc1-2c1e-414a-9fef-276551c06714\",\"udi\":\"umb://element/fd7e695265bd4c70895d25b15753b135\",\"visibleToMemberGroups\":null,\"visibleToAll\":\"1\",\"fontFamily\":\"Serif\",\"bottomMargin\":\"[\\\"1.5rem\\\"]\",\"fontSize\":\"[\\\"20px\\\"]\",\"fontWeight\":\"[\\\"400\\\"]\",\"textColor\":\"{\\r\\n  \\\"value\\\": \\\"ffffff\\\",\\r\\n  \\\"label\\\": \\\"ffffff\\\",\\r\\n  \\\"sortOrder\\\": 1,\\r\\n  \\\"id\\\": \\\"2\\\"\\r\\n}\",\"text\":\"{\\\"markup\\\":\\\"<p>From a legal hotline to exclusive content, a WRA REALTOR® membership is vital to your success.</p>\\\"}\"},{\"contentTypeKey\":\"63a4fa00-9b8c-41f2-8bb3-55374ae83595\",\"udi\":\"umb://element/ff74c203410545c6a33e4445c081d1cf\",\"bottomMargin\":null,\"horizontalAlignment\":\"[\\\"Left\\\"]\",\"stackButtonsVertically\":\"1\"},{\"contentTypeKey\":\"864f593e-ef23-4580-8c2d-e4a5f4da025e\",\"udi\":\"umb://element/571ec8b037064fb4ba7afe092805aa6e\",\"link\":\"[{\\\"name\\\":\\\"Become a Member\\\",\\\"url\\\":\\\"/\\\"}]\",\"style\":\"[\\\"solid\\\"]\",\"contrast\":\"light\"},{\"contentTypeKey\":\"864f593e-ef23-4580-8c2d-e4a5f4da025e\",\"udi\":\"umb://element/91677b1dd1364b94a4659cec8beff2c2\",\"link\":\"[{\\\"name\\\":\\\"Learn More About REALTORS<sup>&reg;</sup>\\\",\\\"url\\\":\\\"/\\\"}]\",\"style\":\"[\\\"link arrow\\\"]\",\"contrast\":\"light\"},{\"contentTypeKey\":\"026bb456-a4e1-458f-aa5a-5a8a73bfdba1\",\"udi\":\"umb://element/7e1748b5f94b4f33b1f3efcf9eb6c65c\",\"visibleToMemberGroups\":null,\"visibleToAll\":\"1\",\"color\":\"{\\r\\n  \\\"value\\\": \\\"deecf2\\\",\\r\\n  \\\"label\\\": \\\"deecf2\\\",\\r\\n  \\\"sortOrder\\\": 1,\\r\\n  \\\"id\\\": \\\"2\\\"\\r\\n}\",\"xPadding\":\"[\\\"0rem\\\"]\",\"width\":\"[\\\"936px\\\"]\",\"yPadding\":\"[\\\"3rem\\\"]\",\"innerWidth\":\"75\"},{\"contentTypeKey\":\"0354f600-29e9-458d-abc7-5f659e6325a2\",\"udi\":\"umb://element/390c0b0ba0734ad5b99386524e507b14\",\"additionalCssClasses\":\"mt-4\",\"headlineText\":\"Your WRA REALTOR<sup>&trade;</sup> Membership Pays For itself!\",\"headingLevel\":\"[\\\"H5\\\"]\",\"fontSize\":\"[\\\"24px\\\"]\",\"textAlignment\":\"[\\\"Center\\\"]\",\"textColor\":\"{\\r\\n  \\\"value\\\": \\\"2560b9\\\",\\r\\n  \\\"label\\\": \\\"2560b9\\\",\\r\\n  \\\"sortOrder\\\": 2,\\r\\n  \\\"id\\\": \\\"3\\\"\\r\\n}\",\"bottomMargin\":\"[\\\"1.5rem\\\"]\"},{\"contentTypeKey\":\"bf995e2d-fadc-4379-b5a3-614b1f9782cc\",\"udi\":\"umb://element/4eea3f3205e8402bbec7e20bce4ddb5d\",\"additionalCssClasses\":\"mb-5\",\"visibleToMemberGroups\":null,\"visibleToAll\":\"1\",\"stackOnMobile\":\"1\"},{\"contentTypeKey\":\"5fc677b8-a253-4579-801d-26068fab5800\",\"udi\":\"umb://element/fe3f278e42e7470f81607447674023e1\",\"yPadding\":\"[\\\"2rem\\\"]\",\"xPadding\":\"[\\\"2rem\\\"]\",\"color\":\"{\\r\\n  \\\"value\\\": \\\"f4f4f7\\\",\\r\\n  \\\"label\\\": \\\"f4f4f7\\\",\\r\\n  \\\"sortOrder\\\": 2,\\r\\n  \\\"id\\\": \\\"3\\\"\\r\\n}\",\"verticalAlignment\":\"[\\\"center\\\"]\"},{\"contentTypeKey\":\"0354f600-29e9-458d-abc7-5f659e6325a2\",\"udi\":\"umb://element/77269a486fa34714ae8433ef606dffb6\",\"headlineText\":\"$433\",\"headingLevel\":\"[\\\"H4\\\"]\",\"fontSize\":\"[\\\"24px\\\"]\",\"textAlignment\":\"[\\\"Center\\\"]\",\"textColor\":\"{\\r\\n  \\\"value\\\": \\\"2560b9\\\",\\r\\n  \\\"label\\\": \\\"2560b9\\\",\\r\\n  \\\"sortOrder\\\": 2,\\r\\n  \\\"id\\\": \\\"3\\\"\\r\\n}\",\"bottomMargin\":\"[\\\"0.25rem\\\"]\"},{\"contentTypeKey\":\"fa444fc1-2c1e-414a-9fef-276551c06714\",\"udi\":\"umb://element/e970b72be1cd46cf8cc937a1e71001cd\",\"visibleToMemberGroups\":null,\"visibleToAll\":\"1\",\"fontFamily\":\"Sans-Serif\",\"bottomMargin\":\"[\\\"0rem\\\"]\",\"fontSize\":\"[\\\"16px\\\"]\",\"fontWeight\":\"[\\\"600\\\"]\",\"textColor\":\"{\\r\\n  \\\"value\\\": \\\"2560b9\\\",\\r\\n  \\\"label\\\": \\\"2560b9\\\",\\r\\n  \\\"sortOrder\\\": 2,\\r\\n  \\\"id\\\": \\\"3\\\"\\r\\n}\",\"text\":\"{\\\"markup\\\":\\\"<p style=\\\\\\\"text-align: center;\\\\\\\">Cost of Membership</p>\\\"}\"},{\"contentTypeKey\":\"5fc677b8-a253-4579-801d-26068fab5800\",\"udi\":\"umb://element/a0857cbe049046acb00b94a2263f2a6b\",\"yPadding\":\"[\\\"2rem\\\"]\",\"xPadding\":\"[\\\"2rem\\\"]\",\"color\":\"{\\r\\n  \\\"value\\\": \\\"f4f4f7\\\",\\r\\n  \\\"label\\\": \\\"f4f4f7\\\",\\r\\n  \\\"sortOrder\\\": 2,\\r\\n  \\\"id\\\": \\\"3\\\"\\r\\n}\",\"verticalAlignment\":\"[\\\"center\\\"]\"},{\"contentTypeKey\":\"0354f600-29e9-458d-abc7-5f659e6325a2\",\"udi\":\"umb://element/6940a1450570412b8c488b4c20274008\",\"headlineText\":\"$1,500\",\"headingLevel\":\"[\\\"H4\\\"]\",\"fontSize\":\"[\\\"24px\\\"]\",\"textAlignment\":\"[\\\"Center\\\"]\",\"textColor\":\"{\\r\\n  \\\"value\\\": \\\"2560b9\\\",\\r\\n  \\\"label\\\": \\\"2560b9\\\",\\r\\n  \\\"sortOrder\\\": 2,\\r\\n  \\\"id\\\": \\\"3\\\"\\r\\n}\",\"bottomMargin\":\"[\\\"0.25rem\\\"]\"},{\"contentTypeKey\":\"fa444fc1-2c1e-414a-9fef-276551c06714\",\"udi\":\"umb://element/4d13a4314a21406aba9a8075fcb0e19c\",\"visibleToMemberGroups\":null,\"visibleToAll\":\"1\",\"fontFamily\":\"Sans-Serif\",\"bottomMargin\":\"[\\\"0rem\\\"]\",\"fontSize\":\"[\\\"16px\\\"]\",\"fontWeight\":\"[\\\"600\\\"]\",\"textColor\":\"{\\r\\n  \\\"value\\\": \\\"2560b9\\\",\\r\\n  \\\"label\\\": \\\"2560b9\\\",\\r\\n  \\\"sortOrder\\\": 2,\\r\\n  \\\"id\\\": \\\"3\\\"\\r\\n}\",\"text\":\"{\\\"markup\\\":\\\"<p style=\\\\\\\"text-align: center;\\\\\\\">Cost without Membership</p>\\\"}\"},{\"contentTypeKey\":\"c86d81f9-bb4a-4047-bc5b-ca65a1d534a9\",\"udi\":\"umb://element/e1e5e667383d4684a48c42ab936cd742\",\"heightSmall\":\"[\\\"1rem\\\"]\",\"heightMedium\":\"[\\\"1.5rem\\\"]\",\"heightLarge\":null,\"heightExtraLarge\":null},{\"contentTypeKey\":\"63a4fa00-9b8c-41f2-8bb3-55374ae83595\",\"udi\":\"umb://element/73cc3c878d914d47b0afe627e7349617\",\"additionalCssClasses\":\"mb-n4\",\"bottomMargin\":\"[\\\"0rem\\\"]\",\"horizontalAlignment\":\"[\\\"Center\\\"]\",\"stackButtonsVertically\":\"1\"},{\"contentTypeKey\":\"864f593e-ef23-4580-8c2d-e4a5f4da025e\",\"udi\":\"umb://element/6d0d724afac74663914732cf084ba747\",\"additionalCssClasses\":\"px-lg-8\",\"link\":\"[{\\\"name\\\":\\\"Become a Member\\\",\\\"url\\\":\\\"/\\\"}]\",\"style\":\"[\\\"solid\\\"]\",\"contrast\":\"dark\"},{\"contentTypeKey\":\"864f593e-ef23-4580-8c2d-e4a5f4da025e\",\"udi\":\"umb://element/e168a6c5535c49ec931d782970691b7e\",\"link\":\"[{\\\"name\\\":\\\"Start Your Real Estate Career\\\",\\\"url\\\":\\\"/\\\"}]\",\"style\":\"[\\\"link arrow\\\"]\",\"contrast\":\"dark\"},{\"contentTypeKey\":\"c86d81f9-bb4a-4047-bc5b-ca65a1d534a9\",\"udi\":\"umb://element/8fc7bde86aed4c42818964fb66f04843\",\"heightSmall\":\"[\\\"3rem\\\"]\",\"heightMedium\":\"[\\\"3rem\\\"]\",\"heightLarge\":null,\"heightExtraLarge\":null},{\"contentTypeKey\":\"026bb456-a4e1-458f-aa5a-5a8a73bfdba1\",\"udi\":\"umb://element/0e53106cc0f048349eee634450b05940\",\"visibleToMemberGroups\":null,\"visibleToAll\":\"1\",\"color\":\"{\\r\\n  \\\"value\\\": \\\"ffffff\\\",\\r\\n  \\\"label\\\": \\\"ffffff\\\",\\r\\n  \\\"sortOrder\\\": 4,\\r\\n  \\\"id\\\": \\\"5\\\"\\r\\n}\",\"xPadding\":null,\"width\":\"[\\\"1128px (standard)\\\"]\",\"yPadding\":null},{\"contentTypeKey\":\"0354f600-29e9-458d-abc7-5f659e6325a2\",\"udi\":\"umb://element/aae90e4ecc4548bd95ce3807d6c9a4b1\",\"headlineText\":\"From WRA Members\",\"headingLevel\":\"[\\\"H2\\\"]\",\"fontSize\":\"[\\\"32px\\\"]\",\"textAlignment\":\"[\\\"Center\\\"]\",\"textColor\":\"{\\r\\n  \\\"value\\\": \\\"050f1e\\\",\\r\\n  \\\"label\\\": \\\"050f1e\\\",\\r\\n  \\\"sortOrder\\\": 0,\\r\\n  \\\"id\\\": \\\"1\\\"\\r\\n}\",\"bottomMargin\":\"[\\\"0rem\\\"]\"},{\"contentTypeKey\":\"9933101d-d525-47bc-8ba3-0a62128b4697\",\"udi\":\"umb://element/db089512f18c449b8861aa1b621e4099\"},{\"contentTypeKey\":\"c86d81f9-bb4a-4047-bc5b-ca65a1d534a9\",\"udi\":\"umb://element/34fef2bd7cde4d13a6f2dbf817cb0cb5\",\"heightSmall\":\"[\\\"4rem\\\"]\",\"heightMedium\":\"[\\\"7rem\\\"]\",\"heightLarge\":\"[\\\"10rem\\\"]\",\"heightExtraLarge\":\"[\\\"10rem\\\"]\"},{\"contentTypeKey\":\"c86d81f9-bb4a-4047-bc5b-ca65a1d534a9\",\"udi\":\"umb://element/bfb21f8c6e2848daa82d6923269b3d9e\",\"heightSmall\":\"[\\\"4rem\\\"]\",\"heightMedium\":\"[\\\"4rem\\\"]\",\"heightLarge\":\"[\\\"6rem\\\"]\",\"heightExtraLarge\":\"[\\\"6rem\\\"]\"},{\"contentTypeKey\":\"c86d81f9-bb4a-4047-bc5b-ca65a1d534a9\",\"udi\":\"umb://element/2bcbe97d0e6c414b92efa91ee9be7ff8\",\"heightSmall\":null,\"heightMedium\":null,\"heightLarge\":null,\"heightExtraLarge\":null},{\"contentTypeKey\":\"c86d81f9-bb4a-4047-bc5b-ca65a1d534a9\",\"udi\":\"umb://element/cdb5e241c9304b7aa91467b786d84672\",\"heightSmall\":\"[\\\"1.5rem\\\"]\",\"heightMedium\":null,\"heightLarge\":\"[\\\"2rem\\\"]\",\"heightExtraLarge\":null}],\"settingsData\":[]}",
+      "backgroundOffset": "1"
+    },
+    "UpdateDate": "2024-01-27T20:46:29.833Z"
+  },
+  "CultureInfos": [],
+  "PublishedCultureInfos": [],
+  "PublishedCultures": [],
+  "Writer": "raymond@lightburn.co",
+  "PublicAccessRules": [],
+  "Schedule": [],
+  "Domains": [],
+  "Parent": "umb://document/c50e10be1e8a4ab3a6b8119e1626ba0e",
+  "SortOrder": 6,
+  "ContentType": "umb://document-type/bfdf851e2c81415e99d69046dd055c21",
+  "CreateDate": "2023-12-07T17:25:34.367Z",
+  "Creator": "raymond@lightburn.co",
+  "PropertyEditorAliases": {
+    "metaTitle": "Umbraco.TextBox",
+    "metaDescription": "Umbraco.TextBox",
+    "openGraphImage": "Umbraco.MediaPicker3",
+    "siteFooterWidget": "Umbraco.ContentPicker",
+    "hideFromSitemap": "Umbraco.TrueFalse",
+    "hideFromSearchEngines": "Umbraco.TrueFalse",
+    "visibleToMemberGroups": "Umbraco.MemberGroupPicker",
+    "visibleToAll": "Umbraco.TrueFalse",
+    "sections": "Umbraco.BlockGrid",
+    "backgroundOffset": "Umbraco.TrueFalse",
+    "genericSection.additionalCssClasses": "Umbraco.TextBox",
+    "genericSection.visibleToMemberGroups": "Umbraco.MemberGroupPicker",
+    "genericSection.visibleToAll": "Umbraco.TrueFalse",
+    "genericSection.color": "Umbraco.ColorPicker",
+    "genericSection.xPadding": "Umbraco.DropDown.Flexible",
+    "genericSection.width": "Umbraco.DropDown.Flexible",
+    "genericSection.yPadding": "Umbraco.DropDown.Flexible",
+    "genericSection.innerWidth": "Umbraco.Decimal",
+    "headlineBlock.additionalCssClasses": "Umbraco.TextBox",
+    "headlineBlock.headlineText": "Umbraco.TextBox",
+    "headlineBlock.headingLevel": "Umbraco.DropDown.Flexible",
+    "headlineBlock.fontSize": "Umbraco.DropDown.Flexible",
+    "headlineBlock.textAlignment": "Umbraco.DropDown.Flexible",
+    "headlineBlock.textColor": "Umbraco.ColorPicker",
+    "headlineBlock.bottomMargin": "Umbraco.DropDown.Flexible",
+    "imageElement.image": "Umbraco.MediaPicker3",
+    "imageElement.bottomMargin": "Umbraco.DropDown.Flexible",
+    "imageElement.curvedCorner": "Umbraco.TrueFalse",
+    "imageElement.yellowDecor": "Umbraco.TrueFalse",
+    "accordions.enableDarkMode": "Umbraco.TrueFalse",
+    "accordions.enableOutsideBorder": "Umbraco.TrueFalse",
+    "accordion.label": "Umbraco.TextBox",
+    "imageTextRow.additionalCssClasses": "Umbraco.TextBox",
+    "imageTextRow.yPadding": "Umbraco.DropDown.Flexible",
+    "imageTextRow.col1BackgroundColor": "Umbraco.ColorPicker",
+    "imageTextRow.col2BackgroundColor": "Umbraco.ColorPicker",
+    "imageTextRow.reverseColumns": "Umbraco.TrueFalse",
+    "genericCard.yPadding": "Umbraco.DropDown.Flexible",
+    "genericCard.xPadding": "Umbraco.DropDown.Flexible",
+    "genericCard.color": "Umbraco.ColorPicker",
+    "genericCard.additionalCssClasses": "Umbraco.TextBox",
+    "genericCard.verticalAlignment": "Umbraco.DropDown.Flexible",
+    "buttons.additionalCssClasses": "Umbraco.TextBox",
+    "buttons.bottomMargin": "Umbraco.DropDown.Flexible",
+    "buttons.horizontalAlignment": "Umbraco.DropDown.Flexible",
+    "buttons.stackButtonsVertically": "Umbraco.TrueFalse",
+    "overline.additionalCssClasses": "Umbraco.TextBox",
+    "overline.overlineText": "Umbraco.TextBox",
+    "overline.textColor": "Umbraco.ColorPicker",
+    "overline.alignment": "Umbraco.DropDown.Flexible",
+    "overline.bottomMargin": "Umbraco.DropDown.Flexible",
+    "overline.strikeBehind": "Umbraco.TrueFalse",
+    "button.additionalCssClasses": "Umbraco.TextBox",
+    "button.link": "Umbraco.MultiUrlPicker",
+    "button.style": "Umbraco.DropDown.Flexible",
+    "button.contrast": "Umbraco.RadioButtonList",
+    "threeColumnLayout.additionalCssClasses": "Umbraco.TextBox",
+    "tab.label": "Umbraco.TextBox",
+    "miniCard.pageUrl": "Umbraco.MultiUrlPicker",
+    "miniCard.headline": "Umbraco.TextBox",
+    "miniCard.subheadline": "Umbraco.TextBox",
+    "twoColumnLayout.additionalCssClasses": "Umbraco.TextBox",
+    "twoColumnLayout.visibleToMemberGroups": "Umbraco.MemberGroupPicker",
+    "twoColumnLayout.visibleToAll": "Umbraco.TrueFalse",
+    "twoColumnLayout.stackOnMobile": "Umbraco.TrueFalse",
+    "spacer.additionalCssClasses": "Umbraco.TextBox",
+    "spacer.heightSmall": "Umbraco.DropDown.Flexible",
+    "spacer.heightMedium": "Umbraco.DropDown.Flexible",
+    "spacer.heightLarge": "Umbraco.DropDown.Flexible",
+    "spacer.heightExtraLarge": "Umbraco.DropDown.Flexible",
+    "interiorHero.additionalCssClasses": "Umbraco.TextBox",
+    "interiorHero.headline": "Umbraco.TextBox",
+    "interiorHero.subhead": "Umbraco.TextBox",
+    "interiorHero.overlay": "Umbraco.TrueFalse",
+    "interiorHero.showEventCalendar": "Umbraco.TrueFalse",
+    "interiorHero.showCourseSearch": "Umbraco.TrueFalse",
+    "interiorHero.imageMobile": "Umbraco.MediaPicker3",
+    "interiorHero.imageDesktop": "Umbraco.MediaPicker3",
+    "tabs.overline": "Umbraco.TextBox",
+    "tabs.heading": "Umbraco.TextBox",
+    "tabs.enableDarkMode": "Umbraco.TrueFalse",
+    "tabs.enableVerticalMode": "Umbraco.TrueFalse",
+    "richText.visibleToMemberGroups": "Umbraco.MemberGroupPicker",
+    "richText.visibleToAll": "Umbraco.TrueFalse",
+    "richText.fontFamily": "Umbraco.RadioButtonList",
+    "richText.bottomMargin": "Umbraco.DropDown.Flexible",
+    "richText.fontSize": "Umbraco.DropDown.Flexible",
+    "richText.fontWeight": "Umbraco.DropDown.Flexible",
+    "richText.textColor": "Umbraco.ColorPicker",
+    "richText.text": "Umbraco.TinyMCE"
+  },
+  "Udi": "umb://document/92c625462a7547339e006f9d141d4ca7",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type/026bb456a4e1458faa5a5a8a73bfdba1",
+      "Checksum": "CDF1F03FD3B6E16EB6C17DDB9F6ED6B1DD973755"
+    },
+    {
+      "Udi": "umb://document-type/0354f60029e9458dabc75f659e6325a2",
+      "Checksum": "B969E004B0886E96FE33E04A4238AFA60C28321D"
+    },
+    {
+      "Udi": "umb://document-type/32586fc392234549affb041bf869f15d",
+      "Checksum": "5DD1800E505E6696CA9205E81CB139DC393ABE86"
+    },
+    {
+      "Udi": "umb://document-type/3e07e7c95b1c43a2a0f4fe8c977fe8e9",
+      "Checksum": "9720E446AD3F7702707ED2614AE701284F476F79"
+    },
+    {
+      "Udi": "umb://document-type/5115b48a7826491289367c6e6cfd6336",
+      "Checksum": "F215E6712FDD4A09D58C04660A158508802EF772"
+    },
+    {
+      "Udi": "umb://document-type/569c5323b1584a26aedb69618d0db0a9",
+      "Checksum": "6331C1E054EA50B7EEFBE15567ABD0F7992AACC8"
+    },
+    {
+      "Udi": "umb://document-type/5fc677b8a2534579801d26068fab5800",
+      "Checksum": "92EED2D4B77BBAE9319171D1EA41D2606ED33EAA"
+    },
+    {
+      "Udi": "umb://document-type/63a4fa009b8c41f28bb355374ae83595",
+      "Checksum": "4ABDDF75826063C5DC41D7C30D0E1CC06818D730"
+    },
+    {
+      "Udi": "umb://document-type/764f3bd56bf54409bbc429789af1dfc2",
+      "Checksum": "64686E5E369F88A36DDCAC4C2CFE3E7D14F1C88E"
+    },
+    {
+      "Udi": "umb://document-type/864f593eef2345808c2de4a5f4da025e",
+      "Checksum": "F8CF3C6B554B71E4C0B3B8D79DF1361FCDAB745A"
+    },
+    {
+      "Udi": "umb://document-type/9933101dd52547bc8ba30a62128b4697",
+      "Checksum": "3C354F621061FBC27D1A011D326093E63EBC4E54"
+    },
+    {
+      "Udi": "umb://document-type/a3638dad77d445ca935232f848e8743a",
+      "Checksum": "16EC21822DA694944F9FCA0F98C966142DA24CF7"
+    },
+    {
+      "Udi": "umb://document-type/ac8599051e6d4dc490ad4245c0f7fbce",
+      "Checksum": "00007CF333036E152570AF3837F59E0D55A052AF"
+    },
+    {
+      "Udi": "umb://document-type/b65e28c8ab2748dd88ccc6dc27c40f4b",
+      "Checksum": "4FCAD4937581B902877B3D74CED741EC11F52715"
+    },
+    {
+      "Udi": "umb://document-type/bf995e2dfadc4379b5a3614b1f9782cc",
+      "Checksum": "862BD828780C02AB55C91DF7F9A9A235EB8C7722"
+    },
+    {
+      "Udi": "umb://document-type/bfdf851e2c81415e99d69046dd055c21",
+      "Ordering": true,
+      "Checksum": "0E6A912BA1F8CCDD7FBBF18571BF96F0187E3F83"
+    },
+    {
+      "Udi": "umb://document-type/c86d81f9bb4a4047bc5bca65a1d534a9",
+      "Checksum": "745290CF54F852A88F9CFE25AEEA36F2A3D4B010"
+    },
+    {
+      "Udi": "umb://document-type/cffca6dfc3f54d9cab916591c86747c7",
+      "Checksum": "029D39959CF29E95B7E10C420ADAECAD67DAE120"
+    },
+    {
+      "Udi": "umb://document-type/d5b01a1054264f66a5f66a9ed349d4a4",
+      "Checksum": "7992D84F4009C107591E6F2282CF41936F6107B5"
+    },
+    {
+      "Udi": "umb://document-type/fa444fc12c1e414a9fef276551c06714",
+      "Checksum": "89B39F34E242182CDF70B7C94E4A5AE38B88C7D9"
+    },
+    {
+      "Udi": "umb://document/c50e10be1e8a4ab3a6b8119e1626ba0e",
+      "Ordering": true,
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://document/d9c986bf1c7447649fbf2ecac7fc171d",
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://media/13770c8d1d3e4751a3ae956ccacc7138",
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://media/76a3b6d7e20a4f71bf5bcf737bd7901a",
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://template/ec480a40125744e1aa99c0db63f17e55",
+      "Ordering": true,
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.Content.DocumentArtifact",
+  "__version": "13.0.4"
+}

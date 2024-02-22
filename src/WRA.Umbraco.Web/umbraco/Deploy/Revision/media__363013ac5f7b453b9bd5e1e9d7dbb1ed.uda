@@ -1,0 +1,45 @@
+{
+  "Name": "Oct 2023",
+  "Alias": "Oct 2023",
+  "Properties": {
+    "umbracoFile": "{\"src\":\"/media/vijdant1/oct-2023.jpg\"}",
+    "umbracoWidth": "186",
+    "umbracoHeight": "238",
+    "umbracoBytes": "40337",
+    "umbracoExtension": "jpg",
+    "altText": {}
+  },
+  "Parent": "umb://media/edec5c1ce1a54323816e626421389984",
+  "SortOrder": 1,
+  "ContentType": "umb://media-type/cc07b31308434aa8bbda871c8da728c8",
+  "CreateDate": "2024-01-27T20:45:08.813Z",
+  "Creator": "raymond@lightburn.co",
+  "PropertyEditorAliases": {
+    "umbracoFile": "Umbraco.ImageCropper",
+    "umbracoWidth": "Umbraco.Label",
+    "umbracoHeight": "Umbraco.Label",
+    "umbracoBytes": "Umbraco.Label",
+    "umbracoExtension": "Umbraco.Label",
+    "altText": "Umbraco.TextBox"
+  },
+  "Udi": "umb://media/363013ac5f7b453b9bd5e1e9d7dbb1ed",
+  "Dependencies": [
+    {
+      "Udi": "umb://media-file/vijdant1/oct-2023.jpg",
+      "Ordering": true,
+      "Checksum": "F65A8EF8413879ACBEEBA23C6D0BBA9F6F1B309E"
+    },
+    {
+      "Udi": "umb://media-type/cc07b31308434aa8bbda871c8da728c8",
+      "Ordering": true,
+      "Checksum": "BCA74AB4EC7B8E7350429C95AC7E37DD7289FFEB"
+    },
+    {
+      "Udi": "umb://media/edec5c1ce1a54323816e626421389984",
+      "Ordering": true,
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.Content.MediaArtifact",
+  "__version": "13.0.4"
+}

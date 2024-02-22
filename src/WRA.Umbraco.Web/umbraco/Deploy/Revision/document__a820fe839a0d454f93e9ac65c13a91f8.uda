@@ -1,0 +1,31 @@
+{
+  "Name": "Multimedia Categories",
+  "Alias": "Multimedia Categories",
+  "PublishedName": "Multimedia Categories",
+  "PublishedVersion": {
+    "Properties": {},
+    "UpdateDate": "2024-01-25T21:27:52.337Z"
+  },
+  "CultureInfos": [],
+  "PublishedCultureInfos": [],
+  "PublishedCultures": [],
+  "Writer": "raymond@lightburn.co",
+  "PublicAccessRules": [],
+  "Schedule": [],
+  "Domains": [],
+  "SortOrder": 7,
+  "ContentType": "umb://document-type/000840dc420144b68f9b7ed8e181507e",
+  "CreateDate": "2023-11-27T17:07:49.357Z",
+  "Creator": "raymond@lightburn.co",
+  "PropertyEditorAliases": {},
+  "Udi": "umb://document/a820fe839a0d454f93e9ac65c13a91f8",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type/000840dc420144b68f9b7ed8e181507e",
+      "Ordering": true,
+      "Checksum": "EAA374B282F8A06835AA953D6F8EAAF0B88BB131"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.Content.DocumentArtifact",
+  "__version": "13.0.4"
+}

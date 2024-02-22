@@ -1,0 +1,9 @@
+{
+  "Name": "umb://template-file/MultimediaLanding.cshtml",
+  "Alias": "",
+  "ChecksumValue": "FB22940551DF1F876A58CF0036A9A82D2C8C4957",
+  "Udi": "umb://template-file/MultimediaLanding.cshtml",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.FileArtifact",
+  "__version": "13.0.4"
+}

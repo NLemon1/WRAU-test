@@ -1,0 +1,99 @@
+{
+  "Name": "Out Of The Box Owl: Not Your Basic Pitch Marketing!",
+  "Alias": "Out Of The Box Owl: Not Your Basic Pitch Marketing!",
+  "PublishedName": "Out Of The Box Owl: Not Your Basic Pitch Marketing!",
+  "PublishedVersion": {
+    "Template": "umb://template/472d765a0e4c434b8ca84fa1d95a227b",
+    "Properties": {
+      "siteFooterWidget": {},
+      "metaTitle": {},
+      "metaDescription": {},
+      "openGraphImage": {},
+      "hideFromSitemap": {},
+      "hideFromSearchEngines": {},
+      "visibleToMemberGroups": {},
+      "visibleToAll": {},
+      "sku": "PUB2396",
+      "price": "{\"umb://umbraco-commerce-currency/514fa94e66b24f06a91f018d4cae531c\":31.99}",
+      "memberPrice": "{\"umb://umbraco-commerce-currency/514fa94e66b24f06a91f018d4cae531c\":29.99}",
+      "images": {},
+      "shortDescription": {},
+      "longDescription": "{\"markup\":\"Out of the Box Owl isn't your average marketing book: Mary Shannon Moore has expertly crafted something that will forever change the way people build and expand their businesses by leveraging the power that social networking provides. After 12 years of dedication and millions of dollars worth of profitable investments, Moore has revealed her proven marketing plan that guided her to becoming one of the leading REALTORS® in southwest Florida. She has fine-tuned the exact strategies she used to build a massively successful brokerage in one of the most competitive markets in the world, and laid them out for you to take full advantage of.  With this book, you'll develop an excellent understanding of online marketing, and you'll have the necessary tools to act on the limitless opportunities that social media provides. You'll learn what it takes in order to build a highly lucrative business that will truly stand the test of time, and how to take advantage of social media to develop profitable win-win relationships. \"}",
+      "categories": "umb://document/8315b8d784a44feb9803ea14a8cac92b",
+      "subCategories": "umb://document/e128b341da694ef8b248e4316397cf33",
+      "taxonomy": "Books",
+      "startDate": "1753-01-01T00:00:00.0000000Z",
+      "endDate": "9999-12-31T00:00:00.0000000Z",
+      "location": {},
+      "productId": "28ed777d-c576-41f1-55ec-08dbfa99b13d"
+    },
+    "UpdateDate": "2024-02-15T19:06:27.653Z"
+  },
+  "CultureInfos": [],
+  "PublishedCultureInfos": [],
+  "PublishedCultures": [],
+  "Writer": "admin",
+  "PublicAccessRules": [],
+  "Schedule": [],
+  "Domains": [],
+  "Parent": "umb://document/516f905e766042229bc20161f5b32466",
+  "SortOrder": 48,
+  "ContentType": "umb://document-type/6ed103f65d4e47759105d341370c1690",
+  "CreateDate": "2024-02-15T19:06:27.653Z",
+  "Creator": "admin",
+  "PropertyEditorAliases": {
+    "siteFooterWidget": "Umbraco.ContentPicker",
+    "metaTitle": "Umbraco.TextBox",
+    "metaDescription": "Umbraco.TextBox",
+    "openGraphImage": "Umbraco.MediaPicker3",
+    "hideFromSitemap": "Umbraco.TrueFalse",
+    "hideFromSearchEngines": "Umbraco.TrueFalse",
+    "visibleToMemberGroups": "Umbraco.MemberGroupPicker",
+    "visibleToAll": "Umbraco.TrueFalse",
+    "sku": "Umbraco.TextBox",
+    "price": "Umbraco.Commerce.Price",
+    "memberPrice": "Umbraco.Commerce.Price",
+    "images": "Umbraco.MediaPicker3",
+    "shortDescription": "Umbraco.TextArea",
+    "longDescription": "Umbraco.TinyMCE",
+    "categories": "Umbraco.MultiNodeTreePicker",
+    "subCategories": "Umbraco.MultiNodeTreePicker",
+    "taxonomy": "Umbraco.Label",
+    "startDate": "Umbraco.Label",
+    "endDate": "Umbraco.Label",
+    "location": "Umbraco.Label",
+    "productId": "Umbraco.Label"
+  },
+  "Udi": "umb://document/c79583a3f4134208a8733bf7f39e5891",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type/6ed103f65d4e47759105d341370c1690",
+      "Ordering": true,
+      "Checksum": "2282ECA93EB320EE31C07F3CA5E1A6BA8C6823F7"
+    },
+    {
+      "Udi": "umb://document/516f905e766042229bc20161f5b32466",
+      "Ordering": true,
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://document/8315b8d784a44feb9803ea14a8cac92b",
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://document/e128b341da694ef8b248e4316397cf33",
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://template/472d765a0e4c434b8ca84fa1d95a227b",
+      "Ordering": true,
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://umbraco-commerce-currency/514fa94e66b24f06a91f018d4cae531c",
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.Content.DocumentArtifact",
+  "__version": "13.0.4"
+}

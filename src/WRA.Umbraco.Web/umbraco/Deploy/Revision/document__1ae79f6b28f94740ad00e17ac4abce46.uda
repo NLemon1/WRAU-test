@@ -1,0 +1,42 @@
+{
+  "Name": "Test Author",
+  "Alias": "Test Author",
+  "PublishedName": "Test Author",
+  "PublishedVersion": {
+    "Properties": {
+      "authorName": "Test Author",
+      "authorTitle": "WRA Senior Member"
+    },
+    "UpdateDate": "2024-01-25T21:27:52.49Z"
+  },
+  "CultureInfos": [],
+  "PublishedCultureInfos": [],
+  "PublishedCultures": [],
+  "Writer": "raymond@lightburn.co",
+  "PublicAccessRules": [],
+  "Schedule": [],
+  "Domains": [],
+  "Parent": "umb://document/6671d0598e5c4daeb606f17e813a8f29",
+  "ContentType": "umb://document-type/a249f436595e4979854169969f0b5d90",
+  "CreateDate": "2023-11-02T15:02:54.477Z",
+  "Creator": "raymond@lightburn.co",
+  "PropertyEditorAliases": {
+    "authorName": "Umbraco.TextBox",
+    "authorTitle": "Umbraco.TextBox"
+  },
+  "Udi": "umb://document/1ae79f6b28f94740ad00e17ac4abce46",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type/a249f436595e4979854169969f0b5d90",
+      "Ordering": true,
+      "Checksum": "02BED49365EA34A5552FDEDFA284F25B584C610D"
+    },
+    {
+      "Udi": "umb://document/6671d0598e5c4daeb606f17e813a8f29",
+      "Ordering": true,
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.Content.DocumentArtifact",
+  "__version": "13.0.4"
+}

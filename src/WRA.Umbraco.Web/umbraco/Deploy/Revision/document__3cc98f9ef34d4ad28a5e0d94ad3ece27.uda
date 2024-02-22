@@ -1,0 +1,98 @@
+{
+  "Name": "REALTOR® & Government Day",
+  "Alias": "REALTOR® & Government Day",
+  "PublishedName": "REALTOR® & Government Day",
+  "PublishedVersion": {
+    "Template": "umb://template/472d765a0e4c434b8ca84fa1d95a227b",
+    "Properties": {
+      "siteFooterWidget": {},
+      "metaTitle": {},
+      "metaDescription": {},
+      "openGraphImage": {},
+      "hideFromSitemap": {},
+      "hideFromSearchEngines": {},
+      "visibleToMemberGroups": {},
+      "visibleToAll": {},
+      "sku": "RGD2024-RGD",
+      "price": "{\"umb://umbraco-commerce-currency/514fa94e66b24f06a91f018d4cae531c\":0.00}",
+      "memberPrice": "{\"umb://umbraco-commerce-currency/514fa94e66b24f06a91f018d4cae531c\":0.00}",
+      "images": {},
+      "shortDescription": {},
+      "longDescription": null,
+      "categories": "umb://document/3047c809823f403cac98ae0598a70f78",
+      "subCategories": "umb://document/0b306b280c144562bff1d970c6f7a4c0",
+      "taxonomy": "Live Event",
+      "startDate": "2024-02-07T13:00:00.0000000Z",
+      "endDate": "2024-02-07T17:30:00.0000000Z",
+      "location": {},
+      "productId": "c031f3b1-df8a-4681-559e-08dbfa99b13d"
+    },
+    "UpdateDate": "2024-02-15T19:06:12.853Z"
+  },
+  "CultureInfos": [],
+  "PublishedCultureInfos": [],
+  "PublishedCultures": [],
+  "Writer": "admin",
+  "PublicAccessRules": [],
+  "Schedule": [],
+  "Domains": [],
+  "Parent": "umb://document/f84b3e1568024a90bb4cdc083d9f3b38",
+  "ContentType": "umb://document-type/6ed103f65d4e47759105d341370c1690",
+  "CreateDate": "2024-01-23T10:31:10Z",
+  "Creator": "raymond@lightburn.co",
+  "PropertyEditorAliases": {
+    "siteFooterWidget": "Umbraco.ContentPicker",
+    "metaTitle": "Umbraco.TextBox",
+    "metaDescription": "Umbraco.TextBox",
+    "openGraphImage": "Umbraco.MediaPicker3",
+    "hideFromSitemap": "Umbraco.TrueFalse",
+    "hideFromSearchEngines": "Umbraco.TrueFalse",
+    "visibleToMemberGroups": "Umbraco.MemberGroupPicker",
+    "visibleToAll": "Umbraco.TrueFalse",
+    "sku": "Umbraco.TextBox",
+    "price": "Umbraco.Commerce.Price",
+    "memberPrice": "Umbraco.Commerce.Price",
+    "images": "Umbraco.MediaPicker3",
+    "shortDescription": "Umbraco.TextArea",
+    "longDescription": "Umbraco.TinyMCE",
+    "categories": "Umbraco.MultiNodeTreePicker",
+    "subCategories": "Umbraco.MultiNodeTreePicker",
+    "taxonomy": "Umbraco.Label",
+    "startDate": "Umbraco.Label",
+    "endDate": "Umbraco.Label",
+    "location": "Umbraco.Label",
+    "productId": "Umbraco.Label"
+  },
+  "Udi": "umb://document/3cc98f9ef34d4ad28a5e0d94ad3ece27",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type/6ed103f65d4e47759105d341370c1690",
+      "Ordering": true,
+      "Checksum": "2282ECA93EB320EE31C07F3CA5E1A6BA8C6823F7"
+    },
+    {
+      "Udi": "umb://document/0b306b280c144562bff1d970c6f7a4c0",
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://document/3047c809823f403cac98ae0598a70f78",
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://document/f84b3e1568024a90bb4cdc083d9f3b38",
+      "Ordering": true,
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://template/472d765a0e4c434b8ca84fa1d95a227b",
+      "Ordering": true,
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://umbraco-commerce-currency/514fa94e66b24f06a91f018d4cae531c",
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.Content.DocumentArtifact",
+  "__version": "13.0.4"
+}

@@ -1,0 +1,64 @@
+{
+  "Name": "Courses",
+  "Alias": "Courses",
+  "PublishedName": "Courses",
+  "PublishedVersion": {
+    "Template": "umb://template/3cfc0d0c97594e7c95c057d8cfb6a8d8",
+    "Properties": {
+      "siteFooterWidget": {},
+      "metaTitle": {},
+      "metaDescription": {},
+      "openGraphImage": "[]",
+      "hideFromSitemap": "0",
+      "hideFromSearchEngines": "0",
+      "visibleToMemberGroups": {},
+      "visibleToAll": {},
+      "description": {},
+      "image": "[]"
+    },
+    "UpdateDate": "2024-01-27T20:46:26.547Z"
+  },
+  "CultureInfos": [],
+  "PublishedCultureInfos": [],
+  "PublishedCultures": [],
+  "Writer": "raymond@lightburn.co",
+  "PublicAccessRules": [],
+  "Schedule": [],
+  "Domains": [],
+  "Parent": "umb://document/a31003807ffc4850aee43de7cfc1e9f0",
+  "ContentType": "umb://document-type/5174d612830f4eb29679d333061f6cdf",
+  "CreateDate": "2023-12-22T17:57:03.633Z",
+  "Creator": "raymond@lightburn.co",
+  "PropertyEditorAliases": {
+    "siteFooterWidget": "Umbraco.ContentPicker",
+    "metaTitle": "Umbraco.TextBox",
+    "metaDescription": "Umbraco.TextBox",
+    "openGraphImage": "Umbraco.MediaPicker3",
+    "hideFromSitemap": "Umbraco.TrueFalse",
+    "hideFromSearchEngines": "Umbraco.TrueFalse",
+    "visibleToMemberGroups": "Umbraco.MemberGroupPicker",
+    "visibleToAll": "Umbraco.TrueFalse",
+    "description": "Umbraco.TextArea",
+    "image": "Umbraco.MediaPicker3"
+  },
+  "Udi": "umb://document/1ec5f9dabad9400e9da87b0d778601e7",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type/5174d612830f4eb29679d333061f6cdf",
+      "Ordering": true,
+      "Checksum": "E5EA33E070C4DEAA065B8BED053CC6811C205F92"
+    },
+    {
+      "Udi": "umb://document/a31003807ffc4850aee43de7cfc1e9f0",
+      "Ordering": true,
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://template/3cfc0d0c97594e7c95c057d8cfb6a8d8",
+      "Ordering": true,
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.Content.DocumentArtifact",
+  "__version": "13.0.4"
+}

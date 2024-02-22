@@ -1,0 +1,56 @@
+{
+  "Name": "Customer Information",
+  "Alias": "Customer Information",
+  "PublishedName": "Customer Information",
+  "PublishedVersion": {
+    "Template": "umb://template/5a8783e8b0c445eab4f6c553b6fe0a35",
+    "Properties": {
+      "siteFooterWidget": {},
+      "metaTitle": {},
+      "metaDescription": {},
+      "openGraphImage": "[]",
+      "shortStepName": "Information",
+      "canGoBack": "1"
+    },
+    "UpdateDate": "2024-01-16T20:06:15.603Z"
+  },
+  "CultureInfos": [],
+  "PublishedCultureInfos": [],
+  "PublishedCultures": [],
+  "Writer": "raymond@lightburn.co",
+  "PublicAccessRules": [],
+  "Schedule": [],
+  "Domains": [],
+  "Parent": "umb://document/fbf8b3f9ef954f4ead4d9f0d7405fd51",
+  "ContentType": "umb://document-type/04b9786f86604f0bb4edece18b89f431",
+  "CreateDate": "2024-01-14T12:01:45.483Z",
+  "Creator": "raymond@lightburn.co",
+  "PropertyEditorAliases": {
+    "siteFooterWidget": "Umbraco.ContentPicker",
+    "metaTitle": "Umbraco.TextBox",
+    "metaDescription": "Umbraco.TextBox",
+    "openGraphImage": "Umbraco.MediaPicker3",
+    "shortStepName": "Umbraco.TextBox",
+    "canGoBack": "Umbraco.TrueFalse"
+  },
+  "Udi": "umb://document/a424ac99607e43db8404e251884ff861",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type/04b9786f86604f0bb4edece18b89f431",
+      "Ordering": true,
+      "Checksum": "A6237F4F6DFBDD063B1ACDDDB851F7620877017C"
+    },
+    {
+      "Udi": "umb://document/fbf8b3f9ef954f4ead4d9f0d7405fd51",
+      "Ordering": true,
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://template/5a8783e8b0c445eab4f6c553b6fe0a35",
+      "Ordering": true,
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.Content.DocumentArtifact",
+  "__version": "13.0.4"
+}

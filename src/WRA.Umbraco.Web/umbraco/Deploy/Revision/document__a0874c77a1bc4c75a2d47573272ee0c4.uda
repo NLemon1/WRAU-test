@@ -1,0 +1,99 @@
+{
+  "Name": "Office Policy Manual ",
+  "Alias": "Office Policy Manual ",
+  "PublishedName": "Office Policy Manual ",
+  "PublishedVersion": {
+    "Template": "umb://template/472d765a0e4c434b8ca84fa1d95a227b",
+    "Properties": {
+      "siteFooterWidget": {},
+      "metaTitle": {},
+      "metaDescription": {},
+      "openGraphImage": {},
+      "hideFromSitemap": {},
+      "hideFromSearchEngines": {},
+      "visibleToMemberGroups": {},
+      "visibleToAll": {},
+      "sku": "PUB239",
+      "price": "{\"umb://umbraco-commerce-currency/514fa94e66b24f06a91f018d4cae531c\":36.00}",
+      "memberPrice": "{\"umb://umbraco-commerce-currency/514fa94e66b24f06a91f018d4cae531c\":33.00}",
+      "images": {},
+      "shortDescription": {},
+      "longDescription": "{\"markup\":\"The 15th edition of the WRA Office Policy Manual provides updated information due to the changes made to Wis. Stat. Chap. 452, which range from terminology being updated to independent practice to the newly created independent contractor safe harbor for real estate licensees. Additional changes to the Office Policy Manual include the new two-year record retention rules in Wis. Admin. Code § REEB 15.04 as well as incorporating numerous updates reflected in the technology portion of the Office Policy Manual impacting the practice and regulation of real estate such as ADA website compliance, drone usage, texting regulation, and wire fraud warnings in email signature lines.\"}",
+      "categories": "umb://document/8315b8d784a44feb9803ea14a8cac92b",
+      "subCategories": "umb://document/e128b341da694ef8b248e4316397cf33",
+      "taxonomy": "Books",
+      "startDate": "1753-01-01T00:00:00.0000000Z",
+      "endDate": "9999-12-31T00:00:00.0000000Z",
+      "location": {},
+      "productId": "54f0130d-8074-44e4-55ea-08dbfa99b13d"
+    },
+    "UpdateDate": "2024-02-15T19:06:27.213Z"
+  },
+  "CultureInfos": [],
+  "PublishedCultureInfos": [],
+  "PublishedCultures": [],
+  "Writer": "admin",
+  "PublicAccessRules": [],
+  "Schedule": [],
+  "Domains": [],
+  "Parent": "umb://document/516f905e766042229bc20161f5b32466",
+  "SortOrder": 46,
+  "ContentType": "umb://document-type/6ed103f65d4e47759105d341370c1690",
+  "CreateDate": "2024-02-15T19:06:27.213Z",
+  "Creator": "admin",
+  "PropertyEditorAliases": {
+    "siteFooterWidget": "Umbraco.ContentPicker",
+    "metaTitle": "Umbraco.TextBox",
+    "metaDescription": "Umbraco.TextBox",
+    "openGraphImage": "Umbraco.MediaPicker3",
+    "hideFromSitemap": "Umbraco.TrueFalse",
+    "hideFromSearchEngines": "Umbraco.TrueFalse",
+    "visibleToMemberGroups": "Umbraco.MemberGroupPicker",
+    "visibleToAll": "Umbraco.TrueFalse",
+    "sku": "Umbraco.TextBox",
+    "price": "Umbraco.Commerce.Price",
+    "memberPrice": "Umbraco.Commerce.Price",
+    "images": "Umbraco.MediaPicker3",
+    "shortDescription": "Umbraco.TextArea",
+    "longDescription": "Umbraco.TinyMCE",
+    "categories": "Umbraco.MultiNodeTreePicker",
+    "subCategories": "Umbraco.MultiNodeTreePicker",
+    "taxonomy": "Umbraco.Label",
+    "startDate": "Umbraco.Label",
+    "endDate": "Umbraco.Label",
+    "location": "Umbraco.Label",
+    "productId": "Umbraco.Label"
+  },
+  "Udi": "umb://document/a0874c77a1bc4c75a2d47573272ee0c4",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type/6ed103f65d4e47759105d341370c1690",
+      "Ordering": true,
+      "Checksum": "2282ECA93EB320EE31C07F3CA5E1A6BA8C6823F7"
+    },
+    {
+      "Udi": "umb://document/516f905e766042229bc20161f5b32466",
+      "Ordering": true,
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://document/8315b8d784a44feb9803ea14a8cac92b",
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://document/e128b341da694ef8b248e4316397cf33",
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://template/472d765a0e4c434b8ca84fa1d95a227b",
+      "Ordering": true,
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://umbraco-commerce-currency/514fa94e66b24f06a91f018d4cae531c",
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.Content.DocumentArtifact",
+  "__version": "13.0.4"
+}

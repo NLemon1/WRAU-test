@@ -1,0 +1,49 @@
+{
+  "Name": "Conferences and Conventions",
+  "Alias": "Conferences and Conventions",
+  "PublishedName": "Conferences and Conventions",
+  "PublishedVersion": {
+    "Properties": {
+      "description": "Industry conferences and conventions for networking and learning in real estate.",
+      "image": "[]",
+      "externalId": "d59cb4a5-51a5-4307-872c-66880235b6eb",
+      "showInCalendar": "1",
+      "colorCode": "#e06666"
+    },
+    "UpdateDate": "2024-02-15T19:04:56.317Z"
+  },
+  "CultureInfos": [],
+  "PublishedCultureInfos": [],
+  "PublishedCultures": [],
+  "Writer": "admin",
+  "PublicAccessRules": [],
+  "Schedule": [],
+  "Domains": [],
+  "Parent": "umb://document/cac993c42fe042f1a75b3a14f4597f3f",
+  "SortOrder": 6,
+  "ContentType": "umb://document-type/59f3371ae76e43bba9a77e381a18be87",
+  "CreateDate": "2024-01-17T14:37:14.503Z",
+  "Creator": "raymond@lightburn.co",
+  "PropertyEditorAliases": {
+    "description": "Umbraco.TextArea",
+    "image": "Umbraco.MediaPicker3",
+    "externalId": "Umbraco.Label",
+    "showInCalendar": "Umbraco.TrueFalse",
+    "colorCode": "Umbraco.ColorPicker.EyeDropper"
+  },
+  "Udi": "umb://document/3047c809823f403cac98ae0598a70f78",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type/59f3371ae76e43bba9a77e381a18be87",
+      "Ordering": true,
+      "Checksum": "F185B37A5B44E7EDDDFED29565162FB86E52DEC1"
+    },
+    {
+      "Udi": "umb://document/cac993c42fe042f1a75b3a14f4597f3f",
+      "Ordering": true,
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.Content.DocumentArtifact",
+  "__version": "13.0.4"
+}

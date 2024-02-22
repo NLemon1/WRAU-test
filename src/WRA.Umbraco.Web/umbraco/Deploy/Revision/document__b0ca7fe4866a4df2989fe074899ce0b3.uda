@@ -1,0 +1,99 @@
+{
+  "Name": "REALTOR® R Window Decal 4\"x3.5\"",
+  "Alias": "REALTOR® R Window Decal 4\"x3.5\"",
+  "PublishedName": "REALTOR® R Window Decal 4\"x3.5\"",
+  "PublishedVersion": {
+    "Template": "umb://template/472d765a0e4c434b8ca84fa1d95a227b",
+    "Properties": {
+      "siteFooterWidget": {},
+      "metaTitle": {},
+      "metaDescription": {},
+      "openGraphImage": {},
+      "hideFromSitemap": {},
+      "hideFromSearchEngines": {},
+      "visibleToMemberGroups": {},
+      "visibleToAll": {},
+      "sku": "OS111",
+      "price": "{\"umb://umbraco-commerce-currency/514fa94e66b24f06a91f018d4cae531c\":null}",
+      "memberPrice": "{\"umb://umbraco-commerce-currency/514fa94e66b24f06a91f018d4cae531c\":1.00}",
+      "images": {},
+      "shortDescription": {},
+      "longDescription": "{\"markup\":\"Display your specialty in your office or car window with this small decal. 4 inches x 3 1/2 inches. OS111 \"}",
+      "categories": "umb://document/4fcb19130bd6458086b55aeb2e7d56a7",
+      "subCategories": "umb://document/922b23563eb54a7aa76f8a56726a4da4",
+      "taxonomy": "Decals",
+      "startDate": "1753-01-01T00:00:00.0000000Z",
+      "endDate": "9999-12-31T00:00:00.0000000Z",
+      "location": {},
+      "productId": "14978bce-92ec-4f65-55be-08dbfa99b13d"
+    },
+    "UpdateDate": "2024-02-15T19:06:16.367Z"
+  },
+  "CultureInfos": [],
+  "PublishedCultureInfos": [],
+  "PublishedCultures": [],
+  "Writer": "admin",
+  "PublicAccessRules": [],
+  "Schedule": [],
+  "Domains": [],
+  "Parent": "umb://document/516f905e766042229bc20161f5b32466",
+  "SortOrder": 2,
+  "ContentType": "umb://document-type/6ed103f65d4e47759105d341370c1690",
+  "CreateDate": "2024-01-23T10:38:51Z",
+  "Creator": "raymond@lightburn.co",
+  "PropertyEditorAliases": {
+    "siteFooterWidget": "Umbraco.ContentPicker",
+    "metaTitle": "Umbraco.TextBox",
+    "metaDescription": "Umbraco.TextBox",
+    "openGraphImage": "Umbraco.MediaPicker3",
+    "hideFromSitemap": "Umbraco.TrueFalse",
+    "hideFromSearchEngines": "Umbraco.TrueFalse",
+    "visibleToMemberGroups": "Umbraco.MemberGroupPicker",
+    "visibleToAll": "Umbraco.TrueFalse",
+    "sku": "Umbraco.TextBox",
+    "price": "Umbraco.Commerce.Price",
+    "memberPrice": "Umbraco.Commerce.Price",
+    "images": "Umbraco.MediaPicker3",
+    "shortDescription": "Umbraco.TextArea",
+    "longDescription": "Umbraco.TinyMCE",
+    "categories": "Umbraco.MultiNodeTreePicker",
+    "subCategories": "Umbraco.MultiNodeTreePicker",
+    "taxonomy": "Umbraco.Label",
+    "startDate": "Umbraco.Label",
+    "endDate": "Umbraco.Label",
+    "location": "Umbraco.Label",
+    "productId": "Umbraco.Label"
+  },
+  "Udi": "umb://document/b0ca7fe4866a4df2989fe074899ce0b3",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type/6ed103f65d4e47759105d341370c1690",
+      "Ordering": true,
+      "Checksum": "2282ECA93EB320EE31C07F3CA5E1A6BA8C6823F7"
+    },
+    {
+      "Udi": "umb://document/4fcb19130bd6458086b55aeb2e7d56a7",
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://document/516f905e766042229bc20161f5b32466",
+      "Ordering": true,
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://document/922b23563eb54a7aa76f8a56726a4da4",
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://template/472d765a0e4c434b8ca84fa1d95a227b",
+      "Ordering": true,
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://umbraco-commerce-currency/514fa94e66b24f06a91f018d4cae531c",
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.Content.DocumentArtifact",
+  "__version": "13.0.4"
+}

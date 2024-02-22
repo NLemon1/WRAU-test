@@ -1,0 +1,49 @@
+{
+  "Name": "Real Estate Sales Licensing",
+  "Alias": "Real Estate Sales Licensing",
+  "PublishedName": "Real Estate Sales Licensing",
+  "PublishedVersion": {
+    "Properties": {
+      "description": "Comprehensive training and courses to obtain a Real Estate Sales License.",
+      "image": {},
+      "externalId": "e5fb36f4-ac18-4d5d-aa8c-5c5e6aec0a3d",
+      "showInCalendar": {},
+      "colorCode": {}
+    },
+    "UpdateDate": "2024-02-15T19:04:55.78Z"
+  },
+  "CultureInfos": [],
+  "PublishedCultureInfos": [],
+  "PublishedCultures": [],
+  "Writer": "admin",
+  "PublicAccessRules": [],
+  "Schedule": [],
+  "Domains": [],
+  "Parent": "umb://document/cac993c42fe042f1a75b3a14f4597f3f",
+  "SortOrder": 5,
+  "ContentType": "umb://document-type/59f3371ae76e43bba9a77e381a18be87",
+  "CreateDate": "2024-01-17T14:37:14.46Z",
+  "Creator": "raymond@lightburn.co",
+  "PropertyEditorAliases": {
+    "description": "Umbraco.TextArea",
+    "image": "Umbraco.MediaPicker3",
+    "externalId": "Umbraco.Label",
+    "showInCalendar": "Umbraco.TrueFalse",
+    "colorCode": "Umbraco.ColorPicker.EyeDropper"
+  },
+  "Udi": "umb://document/00a0ae40555943528b987e8adfce7ca6",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type/59f3371ae76e43bba9a77e381a18be87",
+      "Ordering": true,
+      "Checksum": "F185B37A5B44E7EDDDFED29565162FB86E52DEC1"
+    },
+    {
+      "Udi": "umb://document/cac993c42fe042f1a75b3a14f4597f3f",
+      "Ordering": true,
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.Content.DocumentArtifact",
+  "__version": "13.0.4"
+}

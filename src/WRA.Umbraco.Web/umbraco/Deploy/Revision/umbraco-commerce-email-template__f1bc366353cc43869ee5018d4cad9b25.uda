@@ -1,0 +1,22 @@
+{
+  "Name": "Order Confirmation",
+  "Alias": "orderConfirmation",
+  "SendToCustomer": true,
+  "Subject": "Order Confirmation",
+  "SenderName": "Umbraco Commerce",
+  "SenderAddress": "noreply@umbraco.com",
+  "ToAddresses": [],
+  "CcAddresses": [],
+  "BccAddresses": [],
+  "TemplateView": "~/Views/UmbracoCommerce/Templates/Email/OrderConfirmationEmail.cshtml",
+  "StoreUdi": "umb://umbraco-commerce-store/a568c06259364d818f97018d4cad99b6",
+  "Udi": "umb://umbraco-commerce-email-template/f1bc366353cc43869ee5018d4cad9b25",
+  "Dependencies": [
+    {
+      "Udi": "umb://umbraco-commerce-store/a568c06259364d818f97018d4cad99b6",
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Commerce.Deploy,Umbraco.Commerce.Deploy.Artifacts.EmailTemplateArtifact",
+  "__version": "13.0.4"
+}

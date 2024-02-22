@@ -1,0 +1,66 @@
+{
+  "Name": "Reference Materials",
+  "Alias": "Reference Materials",
+  "PublishedName": "Reference Materials",
+  "PublishedVersion": {
+    "Template": "umb://template/98556b4367654b4698fdc098502d4443",
+    "Properties": {
+      "umbracoUrlName": {},
+      "umbracoUrlAlias": {},
+      "umbracoRedirect": {},
+      "siteFooterWidget": {},
+      "metaTitle": {},
+      "metaDescription": {},
+      "openGraphImage": "[]",
+      "description": {},
+      "displayName": {},
+      "externalCategoryId": {},
+      "externalId": {}
+    },
+    "UpdateDate": "2024-01-23T18:12:54.077Z"
+  },
+  "CultureInfos": [],
+  "PublishedCultureInfos": [],
+  "PublishedCultures": [],
+  "Writer": "raymond@lightburn.co",
+  "PublicAccessRules": [],
+  "Schedule": [],
+  "Domains": [],
+  "Parent": "umb://document/8315b8d784a44feb9803ea14a8cac92b",
+  "ContentType": "umb://document-type/c069f4e9dbef40c3acf42e2af704c3e3",
+  "CreateDate": "2024-01-22T20:29:25.643Z",
+  "Creator": "raymond@lightburn.co",
+  "PropertyEditorAliases": {
+    "umbracoUrlName": "Umbraco.TextBox",
+    "umbracoUrlAlias": "Umbraco.TextBox",
+    "umbracoRedirect": "Umbraco.ContentPicker",
+    "siteFooterWidget": "Umbraco.ContentPicker",
+    "metaTitle": "Umbraco.TextBox",
+    "metaDescription": "Umbraco.TextBox",
+    "openGraphImage": "Umbraco.MediaPicker3",
+    "description": "Umbraco.TextBox",
+    "displayName": "Umbraco.Label",
+    "externalCategoryId": "Umbraco.Label",
+    "externalId": "Umbraco.Label"
+  },
+  "Udi": "umb://document/ddf61452d6b945d0b936b1645c688558",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type/c069f4e9dbef40c3acf42e2af704c3e3",
+      "Ordering": true,
+      "Checksum": "A520FBD4E43F7B18DB3CF5AAB028CF83B51E2AFE"
+    },
+    {
+      "Udi": "umb://document/8315b8d784a44feb9803ea14a8cac92b",
+      "Ordering": true,
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://template/98556b4367654b4698fdc098502d4443",
+      "Ordering": true,
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.Content.DocumentArtifact",
+  "__version": "13.0.4"
+}

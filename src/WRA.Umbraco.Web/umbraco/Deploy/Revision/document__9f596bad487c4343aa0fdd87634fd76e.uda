@@ -1,0 +1,44 @@
+{
+  "Name": "Advocacy",
+  "Alias": "Advocacy",
+  "PublishedName": "Advocacy",
+  "PublishedVersion": {
+    "Properties": {
+      "featuredArticle": "umb://document/30dfe4a682c44aba90ee25751e624c3a"
+    },
+    "UpdateDate": "2024-02-14T15:38:28.027Z"
+  },
+  "CultureInfos": [],
+  "PublishedCultureInfos": [],
+  "PublishedCultures": [],
+  "Writer": "robert@lightburn.co",
+  "PublicAccessRules": [],
+  "Schedule": [],
+  "Domains": [],
+  "Parent": "umb://document/0d430f6ff9cd458587663cf0ef447589",
+  "ContentType": "umb://document-type/963807729d5a4e53b789476eb486066c",
+  "CreateDate": "2023-11-08T21:52:51.72Z",
+  "Creator": "raymond@lightburn.co",
+  "PropertyEditorAliases": {
+    "featuredArticle": "Umbraco.ContentPicker"
+  },
+  "Udi": "umb://document/9f596bad487c4343aa0fdd87634fd76e",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type/963807729d5a4e53b789476eb486066c",
+      "Ordering": true,
+      "Checksum": "C5C7BC6CC145B2173884BD6FE0BB1E1563850B5C"
+    },
+    {
+      "Udi": "umb://document/0d430f6ff9cd458587663cf0ef447589",
+      "Ordering": true,
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://document/30dfe4a682c44aba90ee25751e624c3a",
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.Content.DocumentArtifact",
+  "__version": "13.0.4"
+}

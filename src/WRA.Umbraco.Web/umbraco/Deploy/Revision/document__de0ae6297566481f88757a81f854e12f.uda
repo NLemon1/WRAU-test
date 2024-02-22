@@ -1,0 +1,67 @@
+{
+  "Name": "Digital Publications",
+  "Alias": "Digital Publications",
+  "PublishedName": "Digital Publications",
+  "PublishedVersion": {
+    "Template": "umb://template/98556b4367654b4698fdc098502d4443",
+    "Properties": {
+      "umbracoUrlName": {},
+      "umbracoUrlAlias": {},
+      "umbracoRedirect": {},
+      "siteFooterWidget": {},
+      "metaTitle": {},
+      "metaDescription": {},
+      "openGraphImage": {},
+      "description": "Digital publications and e-books for real estate professionals.",
+      "displayName": {},
+      "externalCategoryId": "9ad00ef6-5b58-439c-a1b4-584d0e327cee",
+      "externalId": "23bd5137-21ea-4b23-96df-8e5715dd829e"
+    },
+    "UpdateDate": "2024-02-15T19:04:55.6Z"
+  },
+  "CultureInfos": [],
+  "PublishedCultureInfos": [],
+  "PublishedCultures": [],
+  "Writer": "admin",
+  "PublicAccessRules": [],
+  "Schedule": [],
+  "Domains": [],
+  "Parent": "umb://document/8315b8d784a44feb9803ea14a8cac92b",
+  "SortOrder": 1,
+  "ContentType": "umb://document-type/c069f4e9dbef40c3acf42e2af704c3e3",
+  "CreateDate": "2024-02-14T18:14:30.133Z",
+  "Creator": "raymond@lightburn.co",
+  "PropertyEditorAliases": {
+    "umbracoUrlName": "Umbraco.TextBox",
+    "umbracoUrlAlias": "Umbraco.TextBox",
+    "umbracoRedirect": "Umbraco.ContentPicker",
+    "siteFooterWidget": "Umbraco.ContentPicker",
+    "metaTitle": "Umbraco.TextBox",
+    "metaDescription": "Umbraco.TextBox",
+    "openGraphImage": "Umbraco.MediaPicker3",
+    "description": "Umbraco.TextBox",
+    "displayName": "Umbraco.Label",
+    "externalCategoryId": "Umbraco.Label",
+    "externalId": "Umbraco.Label"
+  },
+  "Udi": "umb://document/de0ae6297566481f88757a81f854e12f",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type/c069f4e9dbef40c3acf42e2af704c3e3",
+      "Ordering": true,
+      "Checksum": "A520FBD4E43F7B18DB3CF5AAB028CF83B51E2AFE"
+    },
+    {
+      "Udi": "umb://document/8315b8d784a44feb9803ea14a8cac92b",
+      "Ordering": true,
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://template/98556b4367654b4698fdc098502d4443",
+      "Ordering": true,
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.Content.DocumentArtifact",
+  "__version": "13.0.4"
+}

@@ -1,0 +1,9 @@
+{
+  "Name": "umb://template-file/NewsArticles.cshtml",
+  "Alias": "",
+  "ChecksumValue": "C88F2D2A0076C073C4DF3C87FAA8C95E860645CF",
+  "Udi": "umb://template-file/NewsArticles.cshtml",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.FileArtifact",
+  "__version": "13.0.4"
+}

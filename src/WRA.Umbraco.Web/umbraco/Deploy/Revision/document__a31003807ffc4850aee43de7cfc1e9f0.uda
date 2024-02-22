@@ -1,0 +1,65 @@
+{
+  "Name": "Products",
+  "Alias": "Products",
+  "PublishedName": "Products",
+  "PublishedVersion": {
+    "Template": "umb://template/05c59d3439f5448e8ae904bdc31df492",
+    "Properties": {
+      "description": {},
+      "image": "[]",
+      "hideFromSitemap": "0",
+      "hideFromSearchEngines": "0",
+      "visibleToMemberGroups": {},
+      "visibleToAll": {},
+      "metaTitle": {},
+      "metaDescription": {},
+      "openGraphImage": "[]",
+      "siteFooterWidget": {}
+    },
+    "UpdateDate": "2024-01-27T20:46:26.47Z"
+  },
+  "CultureInfos": [],
+  "PublishedCultureInfos": [],
+  "PublishedCultures": [],
+  "Writer": "raymond@lightburn.co",
+  "PublicAccessRules": [],
+  "Schedule": [],
+  "Domains": [],
+  "Parent": "umb://document/c50e10be1e8a4ab3a6b8119e1626ba0e",
+  "SortOrder": 13,
+  "ContentType": "umb://document-type/54218439115a4125a776e02dac878b42",
+  "CreateDate": "2023-12-22T17:56:52.48Z",
+  "Creator": "raymond@lightburn.co",
+  "PropertyEditorAliases": {
+    "description": "Umbraco.TextArea",
+    "image": "Umbraco.MediaPicker3",
+    "hideFromSitemap": "Umbraco.TrueFalse",
+    "hideFromSearchEngines": "Umbraco.TrueFalse",
+    "visibleToMemberGroups": "Umbraco.MemberGroupPicker",
+    "visibleToAll": "Umbraco.TrueFalse",
+    "metaTitle": "Umbraco.TextBox",
+    "metaDescription": "Umbraco.TextBox",
+    "openGraphImage": "Umbraco.MediaPicker3",
+    "siteFooterWidget": "Umbraco.ContentPicker"
+  },
+  "Udi": "umb://document/a31003807ffc4850aee43de7cfc1e9f0",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type/54218439115a4125a776e02dac878b42",
+      "Ordering": true,
+      "Checksum": "DBB98C2F576B1998FE0E744D330887B9160C09B9"
+    },
+    {
+      "Udi": "umb://document/c50e10be1e8a4ab3a6b8119e1626ba0e",
+      "Ordering": true,
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://template/05c59d3439f5448e8ae904bdc31df492",
+      "Ordering": true,
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.Content.DocumentArtifact",
+  "__version": "13.0.4"
+}

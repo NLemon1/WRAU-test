@@ -1,0 +1,57 @@
+{
+  "Name": "Process Payment",
+  "Alias": "Process Payment",
+  "PublishedName": "Process Payment",
+  "PublishedVersion": {
+    "Template": "umb://template/f3bbce8a02104d14a57f06f8b6f53985",
+    "Properties": {
+      "siteFooterWidget": {},
+      "metaTitle": {},
+      "metaDescription": {},
+      "openGraphImage": "[]",
+      "shortStepName": "pay",
+      "canGoBack": "1"
+    },
+    "UpdateDate": "2024-01-16T20:06:15.443Z"
+  },
+  "CultureInfos": [],
+  "PublishedCultureInfos": [],
+  "PublishedCultures": [],
+  "Writer": "raymond@lightburn.co",
+  "PublicAccessRules": [],
+  "Schedule": [],
+  "Domains": [],
+  "Parent": "umb://document/fbf8b3f9ef954f4ead4d9f0d7405fd51",
+  "SortOrder": 4,
+  "ContentType": "umb://document-type/6ca5f14f383e4bdcbb5a7f97cf75c768",
+  "CreateDate": "2024-01-15T10:38:27.847Z",
+  "Creator": "raymond@lightburn.co",
+  "PropertyEditorAliases": {
+    "siteFooterWidget": "Umbraco.ContentPicker",
+    "metaTitle": "Umbraco.TextBox",
+    "metaDescription": "Umbraco.TextBox",
+    "openGraphImage": "Umbraco.MediaPicker3",
+    "shortStepName": "Umbraco.TextBox",
+    "canGoBack": "Umbraco.TrueFalse"
+  },
+  "Udi": "umb://document/3747e0f5b1b4454ea779e1aed7edcc80",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type/6ca5f14f383e4bdcbb5a7f97cf75c768",
+      "Ordering": true,
+      "Checksum": "AB97A11818457B318C4CD73FF637833769FB91A5"
+    },
+    {
+      "Udi": "umb://document/fbf8b3f9ef954f4ead4d9f0d7405fd51",
+      "Ordering": true,
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://template/f3bbce8a02104d14a57f06f8b6f53985",
+      "Ordering": true,
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.Content.DocumentArtifact",
+  "__version": "13.0.4"
+}

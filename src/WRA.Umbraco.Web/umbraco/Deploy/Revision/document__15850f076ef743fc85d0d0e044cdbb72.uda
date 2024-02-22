@@ -1,0 +1,99 @@
+{
+  "Name": "2006 Agency Law Update DVD",
+  "Alias": "2006 Agency Law Update DVD",
+  "PublishedName": "2006 Agency Law Update DVD",
+  "PublishedVersion": {
+    "Template": "umb://template/472d765a0e4c434b8ca84fa1d95a227b",
+    "Properties": {
+      "siteFooterWidget": {},
+      "metaTitle": {},
+      "metaDescription": {},
+      "openGraphImage": {},
+      "hideFromSitemap": {},
+      "hideFromSearchEngines": {},
+      "visibleToMemberGroups": {},
+      "visibleToAll": {},
+      "sku": "VT400",
+      "price": "{\"umb://umbraco-commerce-currency/514fa94e66b24f06a91f018d4cae531c\":14.25}",
+      "memberPrice": "{\"umb://umbraco-commerce-currency/514fa94e66b24f06a91f018d4cae531c\":14.25}",
+      "images": {},
+      "shortDescription": {},
+      "longDescription": "{\"markup\":\"Are you ready for the revised agency law? Effective July 1, 2006, the revised law will change how you do business. There are a number of critical changes you will need to know. For example, you will be required to use a new broker disclosure form with your listing contracts. Do you know the difference between the old form and the new form? The current process and the new process? How will you explain these changes to clients? How will you get the new forms? The WRA's Agency Law Update DVD is the fastest and easiest way to get prepared. It includes a 60-minute video on the changes to the agency law along with a copy of the WRA's April 2006 Legal Update (entitled Chapter 452 Modernization Act), which gives you a detailed explanation of the revised law. What is the new agency law? The WRA's 2006 agency law revisions help to clarify and update Wisconsin's agency law, creating a more transaction-oriented and understandable law. The primary changes in the law include a plain-English agency disclosure, more flexible timing for agency disclosure, the adoption of designated agency, mandatory consumer disclosures by brokers entering into limited services listings, and clarification of sub-agency and brokerage relationships prior to entering into agency relationships.\"}",
+      "categories": "umb://document/8315b8d784a44feb9803ea14a8cac92b",
+      "subCategories": "umb://document/e128b341da694ef8b248e4316397cf33",
+      "taxonomy": "Reference Manuals",
+      "startDate": "1753-01-01T00:00:00.0000000Z",
+      "endDate": "9999-12-31T00:00:00.0000000Z",
+      "location": {},
+      "productId": "978d77a7-5825-4f0d-560e-08dbfa99b13d"
+    },
+    "UpdateDate": "2024-02-15T19:06:36.123Z"
+  },
+  "CultureInfos": [],
+  "PublishedCultureInfos": [],
+  "PublishedCultures": [],
+  "Writer": "admin",
+  "PublicAccessRules": [],
+  "Schedule": [],
+  "Domains": [],
+  "Parent": "umb://document/516f905e766042229bc20161f5b32466",
+  "SortOrder": 81,
+  "ContentType": "umb://document-type/6ed103f65d4e47759105d341370c1690",
+  "CreateDate": "2024-02-15T19:06:36.123Z",
+  "Creator": "admin",
+  "PropertyEditorAliases": {
+    "siteFooterWidget": "Umbraco.ContentPicker",
+    "metaTitle": "Umbraco.TextBox",
+    "metaDescription": "Umbraco.TextBox",
+    "openGraphImage": "Umbraco.MediaPicker3",
+    "hideFromSitemap": "Umbraco.TrueFalse",
+    "hideFromSearchEngines": "Umbraco.TrueFalse",
+    "visibleToMemberGroups": "Umbraco.MemberGroupPicker",
+    "visibleToAll": "Umbraco.TrueFalse",
+    "sku": "Umbraco.TextBox",
+    "price": "Umbraco.Commerce.Price",
+    "memberPrice": "Umbraco.Commerce.Price",
+    "images": "Umbraco.MediaPicker3",
+    "shortDescription": "Umbraco.TextArea",
+    "longDescription": "Umbraco.TinyMCE",
+    "categories": "Umbraco.MultiNodeTreePicker",
+    "subCategories": "Umbraco.MultiNodeTreePicker",
+    "taxonomy": "Umbraco.Label",
+    "startDate": "Umbraco.Label",
+    "endDate": "Umbraco.Label",
+    "location": "Umbraco.Label",
+    "productId": "Umbraco.Label"
+  },
+  "Udi": "umb://document/15850f076ef743fc85d0d0e044cdbb72",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type/6ed103f65d4e47759105d341370c1690",
+      "Ordering": true,
+      "Checksum": "2282ECA93EB320EE31C07F3CA5E1A6BA8C6823F7"
+    },
+    {
+      "Udi": "umb://document/516f905e766042229bc20161f5b32466",
+      "Ordering": true,
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://document/8315b8d784a44feb9803ea14a8cac92b",
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://document/e128b341da694ef8b248e4316397cf33",
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://template/472d765a0e4c434b8ca84fa1d95a227b",
+      "Ordering": true,
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://umbraco-commerce-currency/514fa94e66b24f06a91f018d4cae531c",
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.Content.DocumentArtifact",
+  "__version": "13.0.4"
+}

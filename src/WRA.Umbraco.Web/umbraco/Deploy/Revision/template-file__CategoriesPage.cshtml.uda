@@ -1,0 +1,9 @@
+{
+  "Name": "umb://template-file/CategoriesPage.cshtml",
+  "Alias": "",
+  "ChecksumValue": "2157FF31C0CD42D9831528EB25EC5C9DC963C2AE",
+  "Udi": "umb://template-file/CategoriesPage.cshtml",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.FileArtifact",
+  "__version": "13.0.4"
+}

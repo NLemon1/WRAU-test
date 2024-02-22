@@ -1,0 +1,49 @@
+{
+  "Name": "Publications",
+  "Alias": "Publications",
+  "PublishedName": "Publications",
+  "PublishedVersion": {
+    "Properties": {
+      "description": "Informative publications and literature related to real estate.",
+      "image": {},
+      "externalId": "9ad00ef6-5b58-439c-a1b4-584d0e327cee",
+      "showInCalendar": {},
+      "colorCode": {}
+    },
+    "UpdateDate": "2024-02-15T19:04:55.25Z"
+  },
+  "CultureInfos": [],
+  "PublishedCultureInfos": [],
+  "PublishedCultures": [],
+  "Writer": "admin",
+  "PublicAccessRules": [],
+  "Schedule": [],
+  "Domains": [],
+  "Parent": "umb://document/cac993c42fe042f1a75b3a14f4597f3f",
+  "SortOrder": 4,
+  "ContentType": "umb://document-type/59f3371ae76e43bba9a77e381a18be87",
+  "CreateDate": "2024-01-17T14:37:14.42Z",
+  "Creator": "raymond@lightburn.co",
+  "PropertyEditorAliases": {
+    "description": "Umbraco.TextArea",
+    "image": "Umbraco.MediaPicker3",
+    "externalId": "Umbraco.Label",
+    "showInCalendar": "Umbraco.TrueFalse",
+    "colorCode": "Umbraco.ColorPicker.EyeDropper"
+  },
+  "Udi": "umb://document/8315b8d784a44feb9803ea14a8cac92b",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type/59f3371ae76e43bba9a77e381a18be87",
+      "Ordering": true,
+      "Checksum": "F185B37A5B44E7EDDDFED29565162FB86E52DEC1"
+    },
+    {
+      "Udi": "umb://document/cac993c42fe042f1a75b3a14f4597f3f",
+      "Ordering": true,
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.Content.DocumentArtifact",
+  "__version": "13.0.4"
+}

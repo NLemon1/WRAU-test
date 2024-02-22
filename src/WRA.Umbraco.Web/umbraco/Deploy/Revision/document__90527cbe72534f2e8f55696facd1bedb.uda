@@ -1,0 +1,136 @@
+{
+  "Name": "Question Form",
+  "Alias": "Question Form",
+  "PublishedName": "Question Form",
+  "PublishedVersion": {
+    "Template": "umb://template/ec480a40125744e1aa99c0db63f17e55",
+    "Properties": {
+      "metaTitle": {},
+      "metaDescription": {},
+      "openGraphImage": "[]",
+      "siteFooterWidget": {},
+      "hideFromSitemap": "0",
+      "hideFromSearchEngines": "0",
+      "visibleToMemberGroups": {},
+      "visibleToAll": {},
+      "sections": "{\"layout\":{\"Umbraco.BlockGrid\":[{\"contentUdi\":\"umb://element/1bfd8b5cde294d1b9e8008f46d88dd14\",\"areas\":[],\"columnSpan\":12,\"rowSpan\":1},{\"contentUdi\":\"umb://element/b6eef42e4129476a990f9e760767d80e\",\"areas\":[],\"columnSpan\":12,\"rowSpan\":1},{\"contentUdi\":\"umb://element/541d78a842c44068a17e04fba6dc460e\",\"areas\":[{\"key\":\"8e8355b8-aa7e-4b76-a893-8a7d14f57243\",\"items\":[{\"contentUdi\":\"umb://element/6ed5f2ad622a45fbb7ef24ed9f868680\",\"areas\":[],\"columnSpan\":6,\"rowSpan\":1},{\"contentUdi\":\"umb://element/3b8cbebe1793424db8cf51dc93c0146c\",\"areas\":[{\"key\":\"270196bf-f331-4dd3-894b-d04ae81e4b3f\",\"items\":[{\"contentUdi\":\"umb://element/2e34c9c7bbc9465ca7ac8691fc73db2d\",\"areas\":[{\"key\":\"72a9b655-b2c5-4a33-80f3-73d01f46cbc7\",\"items\":[{\"contentUdi\":\"umb://element/2d2b61b998a546d8af06fdb2cc3a66c5\",\"areas\":[],\"columnSpan\":6,\"rowSpan\":1},{\"contentUdi\":\"umb://element/907dfc0c9e0b491ca7a725cd95462c9c\",\"areas\":[],\"columnSpan\":6,\"rowSpan\":1}]}],\"columnSpan\":6,\"rowSpan\":1}]}],\"columnSpan\":6,\"rowSpan\":1},{\"contentUdi\":\"umb://element/9e3d58bf15e8463dbe0d17f56c413789\",\"areas\":[],\"columnSpan\":6,\"rowSpan\":1},{\"contentUdi\":\"umb://element/438039f42d664ad0927e0bedc4f8026f\",\"areas\":[],\"columnSpan\":6,\"rowSpan\":1},{\"contentUdi\":\"umb://element/689a9480480b47c6b2ff1d3a369b2a72\",\"areas\":[],\"columnSpan\":6,\"rowSpan\":1}]},{\"key\":\"5a9df9b3-9f2c-4de3-b87c-4e4b4686f49e\",\"items\":[{\"contentUdi\":\"umb://element/0bc6fc6275654f8ba479579486d4ab93\",\"areas\":[],\"columnSpan\":6,\"rowSpan\":1}]}],\"columnSpan\":12,\"rowSpan\":1}]},\"contentData\":[{\"contentTypeKey\":\"441d9356-4a38-4ed5-856e-4f4006859e94\",\"udi\":\"umb://element/1bfd8b5cde294d1b9e8008f46d88dd14\",\"heading\":\"Submit a Question\",\"subheading\":\"Still can’t find the answer your looking for? Submit a question to our Legal Hotline.\",\"hideAccent\":\"0\"},{\"contentTypeKey\":\"197639a2-5746-4602-aa7b-95d4852ac298\",\"udi\":\"umb://element/b6eef42e4129476a990f9e760767d80e\"},{\"contentTypeKey\":\"bf995e2d-fadc-4379-b5a3-614b1f9782cc\",\"udi\":\"umb://element/541d78a842c44068a17e04fba6dc460e\",\"visibleToMemberGroups\":null,\"visibleToAll\":\"1\",\"stackOnMobile\":\"0\"},{\"contentTypeKey\":\"fa444fc1-2c1e-414a-9fef-276551c06714\",\"udi\":\"umb://element/6ed5f2ad622a45fbb7ef24ed9f868680\",\"visibleToMemberGroups\":null,\"visibleToAll\":\"1\",\"bottomMargin\":\"[\\\"2rem\\\"]\",\"fontSize\":null,\"fontWeight\":null,\"textColor\":\"{\\r\\n  \\\"value\\\": \\\"050f1e\\\",\\r\\n  \\\"label\\\": \\\"050f1e\\\",\\r\\n  \\\"sortOrder\\\": 0,\\r\\n  \\\"id\\\": \\\"1\\\"\\r\\n}\",\"text\":\"{\\\"markup\\\":\\\"<p>To submit your question, complete the form and click submit. Your question will be automatically forwarded to the attorney response queue. An attorney can respond to you by phone or by email. Identify your preferred response method below. You may also reach the Legal Hotline by phone at <a href=\\\\\\\"#\\\\\\\" data-anchor=\\\\\\\"#\\\\\\\">800-799-4468</a>.</p>\\\",\\\"blocks\\\":{\\\"contentData\\\":[],\\\"settingsData\\\":[]}}\"},{\"contentTypeKey\":\"7b118b8c-dc87-4eb8-97cb-e18647ead8e3\",\"udi\":\"umb://element/3b8cbebe1793424db8cf51dc93c0146c\",\"title\":\"Find Answers\"},{\"contentTypeKey\":\"864f593e-ef23-4580-8c2d-e4a5f4da025e\",\"udi\":\"umb://element/2d2b61b998a546d8af06fdb2cc3a66c5\",\"link\":\"[{\\\"name\\\":\\\"Hot Tip Library\\\",\\\"url\\\":\\\"#\\\"}]\",\"style\":\"[\\\"link arrow\\\"]\",\"contrast\":\"dark\"},{\"contentTypeKey\":\"864f593e-ef23-4580-8c2d-e4a5f4da025e\",\"udi\":\"umb://element/907dfc0c9e0b491ca7a725cd95462c9c\",\"link\":\"[{\\\"name\\\":\\\"Legal Update Library\\\",\\\"url\\\":\\\"#\\\"}]\",\"style\":\"[\\\"link arrow\\\"]\",\"contrast\":\"dark\"},{\"contentTypeKey\":\"fa444fc1-2c1e-414a-9fef-276551c06714\",\"udi\":\"umb://element/689a9480480b47c6b2ff1d3a369b2a72\",\"visibleToMemberGroups\":null,\"visibleToAll\":\"1\",\"bottomMargin\":null,\"fontSize\":\"[\\\"14px\\\"]\",\"fontWeight\":null,\"text\":\"{\\\"markup\\\":\\\"<p><a href=\\\\\\\"#\\\\\\\" data-anchor=\\\\\\\"#\\\\\\\">800-799-4468</a><br>Monday – Friday<br>8:30am – 4:30pm</p>\\\\n<p><strong>2023 Holiday Hours</strong><br>The WRA Legal Hotline will be closed on the following dates in 2023:</p>\\\\n<ul>\\\\n<li>Monday, January 2</li>\\\\n<li>Monday, January 16</li>\\\\n<li>Friday, April 7 (closing at 12:00 p.m.)</li>\\\\n<li>Monday, May 29</li>\\\\n<li>Tuesday, July 4</li>\\\\n<li>Monday, September 4</li>\\\\n<li>Thursday, November 23</li>\\\\n<li>Friday, November 24</li>\\\\n<li>Friday, December 22</li>\\\\n<li>Monday, December 25</li>\\\\n<li>Friday, December 29</li>\\\\n</ul>\\\",\\\"blocks\\\":{\\\"contentData\\\":[],\\\"settingsData\\\":[]}}\"},{\"contentTypeKey\":\"c86d81f9-bb4a-4047-bc5b-ca65a1d534a9\",\"udi\":\"umb://element/9e3d58bf15e8463dbe0d17f56c413789\",\"heightSmall\":\"[\\\"2rem\\\"]\",\"heightMedium\":null,\"heightLarge\":null,\"heightExtraLarge\":null},{\"contentTypeKey\":\"0354f600-29e9-458d-abc7-5f659e6325a2\",\"udi\":\"umb://element/438039f42d664ad0927e0bedc4f8026f\",\"headlineText\":\"WRA Legal Hotline Phone & Hours\",\"headingLevel\":\"[\\\"H2\\\"]\",\"fontSize\":\"[\\\"16px\\\"]\",\"textAlignment\":null,\"textColor\":\"{\\r\\n  \\\"value\\\": \\\"050f1e\\\",\\r\\n  \\\"label\\\": \\\"050f1e\\\",\\r\\n  \\\"sortOrder\\\": 0,\\r\\n  \\\"id\\\": \\\"1\\\"\\r\\n}\",\"bottomMargin\":\"[\\\"0.5rem\\\"]\"},{\"contentTypeKey\":\"63a4fa00-9b8c-41f2-8bb3-55374ae83595\",\"udi\":\"umb://element/2e34c9c7bbc9465ca7ac8691fc73db2d\",\"bottomMargin\":null,\"horizontalAlignment\":\"[\\\"Left\\\"]\",\"stackButtonsVertically\":\"1\"},{\"contentTypeKey\":\"fa444fc1-2c1e-414a-9fef-276551c06714\",\"udi\":\"umb://element/0bc6fc6275654f8ba479579486d4ab93\",\"visibleToMemberGroups\":null,\"visibleToAll\":\"1\",\"bottomMargin\":null,\"fontSize\":null,\"fontWeight\":null,\"text\":null}],\"settingsData\":[]}",
+      "backgroundOffset": "0"
+    },
+    "UpdateDate": "2024-01-27T14:43:43.443Z"
+  },
+  "CultureInfos": [],
+  "PublishedCultureInfos": [],
+  "PublishedCultures": [],
+  "Writer": "raymond@lightburn.co",
+  "PublicAccessRules": [],
+  "Schedule": [],
+  "Domains": [],
+  "Parent": "umb://document/22d94667416a4e22acf2242b291ff9b2",
+  "ContentType": "umb://document-type/bfdf851e2c81415e99d69046dd055c21",
+  "CreateDate": "2023-12-08T21:46:16.873Z",
+  "Creator": "raymond@lightburn.co",
+  "PropertyEditorAliases": {
+    "metaTitle": "Umbraco.TextBox",
+    "metaDescription": "Umbraco.TextBox",
+    "openGraphImage": "Umbraco.MediaPicker3",
+    "siteFooterWidget": "Umbraco.ContentPicker",
+    "hideFromSitemap": "Umbraco.TrueFalse",
+    "hideFromSearchEngines": "Umbraco.TrueFalse",
+    "visibleToMemberGroups": "Umbraco.MemberGroupPicker",
+    "visibleToAll": "Umbraco.TrueFalse",
+    "sections": "Umbraco.BlockGrid",
+    "backgroundOffset": "Umbraco.TrueFalse",
+    "headlineBlock.additionalCssClasses": "Umbraco.TextBox",
+    "headlineBlock.headlineText": "Umbraco.TextBox",
+    "headlineBlock.headingLevel": "Umbraco.DropDown.Flexible",
+    "headlineBlock.fontSize": "Umbraco.DropDown.Flexible",
+    "headlineBlock.textAlignment": "Umbraco.DropDown.Flexible",
+    "headlineBlock.textColor": "Umbraco.ColorPicker",
+    "headlineBlock.bottomMargin": "Umbraco.DropDown.Flexible",
+    "pageHeader.heading": "Umbraco.TextBox",
+    "pageHeader.subheading": "Umbraco.TextBox",
+    "pageHeader.hideAccent": "Umbraco.TrueFalse",
+    "buttons.additionalCssClasses": "Umbraco.TextBox",
+    "buttons.bottomMargin": "Umbraco.DropDown.Flexible",
+    "buttons.horizontalAlignment": "Umbraco.DropDown.Flexible",
+    "buttons.stackButtonsVertically": "Umbraco.TrueFalse",
+    "hotTip.title": "Umbraco.TextBox",
+    "button.additionalCssClasses": "Umbraco.TextBox",
+    "button.link": "Umbraco.MultiUrlPicker",
+    "button.style": "Umbraco.DropDown.Flexible",
+    "button.contrast": "Umbraco.RadioButtonList",
+    "twoColumnLayout.additionalCssClasses": "Umbraco.TextBox",
+    "twoColumnLayout.visibleToMemberGroups": "Umbraco.MemberGroupPicker",
+    "twoColumnLayout.visibleToAll": "Umbraco.TrueFalse",
+    "twoColumnLayout.stackOnMobile": "Umbraco.TrueFalse",
+    "spacer.additionalCssClasses": "Umbraco.TextBox",
+    "spacer.heightSmall": "Umbraco.DropDown.Flexible",
+    "spacer.heightMedium": "Umbraco.DropDown.Flexible",
+    "spacer.heightLarge": "Umbraco.DropDown.Flexible",
+    "spacer.heightExtraLarge": "Umbraco.DropDown.Flexible",
+    "richText.visibleToMemberGroups": "Umbraco.MemberGroupPicker",
+    "richText.visibleToAll": "Umbraco.TrueFalse",
+    "richText.fontFamily": "Umbraco.RadioButtonList",
+    "richText.bottomMargin": "Umbraco.DropDown.Flexible",
+    "richText.fontSize": "Umbraco.DropDown.Flexible",
+    "richText.fontWeight": "Umbraco.DropDown.Flexible",
+    "richText.textColor": "Umbraco.ColorPicker",
+    "richText.text": "Umbraco.TinyMCE"
+  },
+  "Udi": "umb://document/90527cbe72534f2e8f55696facd1bedb",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type/0354f60029e9458dabc75f659e6325a2",
+      "Checksum": "B969E004B0886E96FE33E04A4238AFA60C28321D"
+    },
+    {
+      "Udi": "umb://document-type/197639a257464602aa7b95d4852ac298",
+      "Checksum": "96D3377F650FC5ABB925505DAE9298BDEB76D0D6"
+    },
+    {
+      "Udi": "umb://document-type/441d93564a384ed5856e4f4006859e94",
+      "Checksum": "8B5A30BCA627B00ACB39FF7879515922B4093C1A"
+    },
+    {
+      "Udi": "umb://document-type/63a4fa009b8c41f28bb355374ae83595",
+      "Checksum": "4ABDDF75826063C5DC41D7C30D0E1CC06818D730"
+    },
+    {
+      "Udi": "umb://document-type/7b118b8cdc874eb897cbe18647ead8e3",
+      "Checksum": "1AE7659FBD59A7111D636BB7C4E7ADFFBB1C7553"
+    },
+    {
+      "Udi": "umb://document-type/864f593eef2345808c2de4a5f4da025e",
+      "Checksum": "F8CF3C6B554B71E4C0B3B8D79DF1361FCDAB745A"
+    },
+    {
+      "Udi": "umb://document-type/bf995e2dfadc4379b5a3614b1f9782cc",
+      "Checksum": "862BD828780C02AB55C91DF7F9A9A235EB8C7722"
+    },
+    {
+      "Udi": "umb://document-type/bfdf851e2c81415e99d69046dd055c21",
+      "Ordering": true,
+      "Checksum": "0E6A912BA1F8CCDD7FBBF18571BF96F0187E3F83"
+    },
+    {
+      "Udi": "umb://document-type/c86d81f9bb4a4047bc5bca65a1d534a9",
+      "Checksum": "745290CF54F852A88F9CFE25AEEA36F2A3D4B010"
+    },
+    {
+      "Udi": "umb://document-type/fa444fc12c1e414a9fef276551c06714",
+      "Checksum": "89B39F34E242182CDF70B7C94E4A5AE38B88C7D9"
+    },
+    {
+      "Udi": "umb://document/22d94667416a4e22acf2242b291ff9b2",
+      "Ordering": true,
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://template/ec480a40125744e1aa99c0db63f17e55",
+      "Ordering": true,
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.Content.DocumentArtifact",
+  "__version": "13.0.4"
+}

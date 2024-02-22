@@ -1,0 +1,46 @@
+{
+  "Name": "One Column Example",
+  "Alias": "One Column Example",
+  "PublishedName": "One Column Example",
+  "PublishedVersion": {
+    "Properties": {
+      "colorScheme": "[\"Light\"]",
+      "heading": "Become a member and get the newsletter",
+      "content": "{\"markup\":\"<p>EXTREMELY brief explaining how this great members-only benefit sends so many invaluable things right to your inbox.</p>\"}",
+      "link": "[{\"name\":\"Get the Newsletter\",\"url\":\"#\"}]"
+    },
+    "UpdateDate": "2024-01-25T21:27:55.513Z"
+  },
+  "CultureInfos": [],
+  "PublishedCultureInfos": [],
+  "PublishedCultures": [],
+  "Writer": "raymond@lightburn.co",
+  "PublicAccessRules": [],
+  "Schedule": [],
+  "Domains": [],
+  "Parent": "umb://document/a5e6ad3042864e2a99e97eef04ee5cc0",
+  "ContentType": "umb://document-type/7ea3c6c583d44cfdabbb7fc011a05751",
+  "CreateDate": "2023-10-24T19:48:44.68Z",
+  "Creator": "raymond@lightburn.co",
+  "PropertyEditorAliases": {
+    "colorScheme": "Umbraco.DropDown.Flexible",
+    "heading": "Umbraco.TextBox",
+    "content": "Umbraco.TinyMCE",
+    "link": "Umbraco.MultiUrlPicker"
+  },
+  "Udi": "umb://document/d9c986bf1c7447649fbf2ecac7fc171d",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type/7ea3c6c583d44cfdabbb7fc011a05751",
+      "Ordering": true,
+      "Checksum": "B5D5E94CFA61076A3E49CCEE79EDD8F20991DBE5"
+    },
+    {
+      "Udi": "umb://document/a5e6ad3042864e2a99e97eef04ee5cc0",
+      "Ordering": true,
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.Content.DocumentArtifact",
+  "__version": "13.0.4"
+}

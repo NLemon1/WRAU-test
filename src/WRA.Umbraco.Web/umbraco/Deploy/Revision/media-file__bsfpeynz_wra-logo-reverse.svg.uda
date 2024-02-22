@@ -1,0 +1,9 @@
+{
+  "Name": "umb://media-file/bsfpeynz/wra-logo-reverse.svg",
+  "Alias": "",
+  "ChecksumValue": "D686E4B14A9536A594EAC9409111AE5C96618F11",
+  "Udi": "umb://media-file/bsfpeynz/wra-logo-reverse.svg",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.FileArtifact",
+  "__version": "13.0.4"
+}

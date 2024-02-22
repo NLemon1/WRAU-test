@@ -1,0 +1,9 @@
+{
+  "Name": "umb://template-file/CartPage.cshtml",
+  "Alias": "",
+  "ChecksumValue": "B0F3160CF443345A3F47CE4FC595AE87A8E408E3",
+  "Udi": "umb://template-file/CartPage.cshtml",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.FileArtifact",
+  "__version": "13.0.4"
+}

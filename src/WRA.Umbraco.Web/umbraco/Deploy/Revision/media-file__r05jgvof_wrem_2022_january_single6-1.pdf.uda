@@ -1,0 +1,9 @@
+{
+  "Name": "umb://media-file/r05jgvof/wrem_2022_january_single6-1.pdf",
+  "Alias": "",
+  "ChecksumValue": "668CA0212408CD26A14BA9B8C4BF65253A35FC4D",
+  "Udi": "umb://media-file/r05jgvof/wrem_2022_january_single6-1.pdf",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.FileArtifact",
+  "__version": "13.0.4"
+}

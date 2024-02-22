@@ -1,0 +1,63 @@
+{
+  "Name": "500",
+  "Alias": "500",
+  "PublishedName": "500",
+  "PublishedVersion": {
+    "Template": "umb://template/ba4828a4c7c64a58994df7034453b675",
+    "Properties": {
+      "hideFromSitemap": "1",
+      "hideFromSearchEngines": "1",
+      "visibleToMemberGroups": {},
+      "visibleToAll": {},
+      "heading": "500",
+      "subheading": "Oops! Something unusual happened",
+      "content": "The page you are looking for might have been removed, had it’s name changed, or is temporarily unavailable. ",
+      "link1": "[{\"name\":\"Optional CTA 1\",\"url\":\"#\"}]",
+      "link2": "[{\"name\":\"Optional CTA 2\",\"url\":\"#\"}]"
+    },
+    "UpdateDate": "2023-12-07T19:51:03.873Z"
+  },
+  "CultureInfos": [],
+  "PublishedCultureInfos": [],
+  "PublishedCultures": [],
+  "Writer": "raymond@lightburn.co",
+  "PublicAccessRules": [],
+  "Schedule": [],
+  "Domains": [],
+  "Parent": "umb://document/c50e10be1e8a4ab3a6b8119e1626ba0e",
+  "SortOrder": 8,
+  "ContentType": "umb://document-type/eb6bb11ca6094a7aba31dd2b11d97bad",
+  "CreateDate": "2023-11-27T19:34:33.293Z",
+  "Creator": "raymond@lightburn.co",
+  "PropertyEditorAliases": {
+    "hideFromSitemap": "Umbraco.TrueFalse",
+    "hideFromSearchEngines": "Umbraco.TrueFalse",
+    "visibleToMemberGroups": "Umbraco.MemberGroupPicker",
+    "visibleToAll": "Umbraco.TrueFalse",
+    "heading": "Umbraco.TextBox",
+    "subheading": "Umbraco.TextBox",
+    "content": "Umbraco.TextArea",
+    "link1": "Umbraco.MultiUrlPicker",
+    "link2": "Umbraco.MultiUrlPicker"
+  },
+  "Udi": "umb://document/cef42c060d0045948268abd826f2eedb",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type/eb6bb11ca6094a7aba31dd2b11d97bad",
+      "Ordering": true,
+      "Checksum": "E156EC21565C62969533E7E392DBFE700C8CE497"
+    },
+    {
+      "Udi": "umb://document/c50e10be1e8a4ab3a6b8119e1626ba0e",
+      "Ordering": true,
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://template/ba4828a4c7c64a58994df7034453b675",
+      "Ordering": true,
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.Content.DocumentArtifact",
+  "__version": "13.0.4"
+}

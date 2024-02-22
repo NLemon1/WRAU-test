@@ -1,0 +1,99 @@
+{
+  "Name": "2023-24 Electives 4 - 6",
+  "Alias": "2023-24 Electives 4 - 6",
+  "PublishedName": "2023-24 Electives 4 - 6",
+  "PublishedVersion": {
+    "Template": "umb://template/472d765a0e4c434b8ca84fa1d95a227b",
+    "Properties": {
+      "siteFooterWidget": {},
+      "metaTitle": {},
+      "metaDescription": {},
+      "openGraphImage": {},
+      "hideFromSitemap": {},
+      "hideFromSearchEngines": {},
+      "visibleToMemberGroups": {},
+      "visibleToAll": {},
+      "sku": "CE2324VIRT-CE16-18",
+      "price": "{\"umb://umbraco-commerce-currency/514fa94e66b24f06a91f018d4cae531c\":33.00}",
+      "memberPrice": "{\"umb://umbraco-commerce-currency/514fa94e66b24f06a91f018d4cae531c\":33.00}",
+      "images": {},
+      "shortDescription": {},
+      "longDescription": "{\"markup\":\"Join us for a morning of virtual CE! Registration for this set of three 1 hour courses provides 1 credit each for electives 4, 5 and 6. Classes are offered back-to-back with 5 question exams and stretching/refreshment breaks between sessions. </p>\\r\\rWe will be covering:</p>\\r\\r- Elective 4: Closing of Buyer's Prop Conting, Secondary Offer, and Bump Clause in the WI OTP\\r </p>\\r- Elective 5: Drafting Contracts in Wisconsin Real Estate Transactions\\r </p>\\r- Elective 6: Risk Reduction for Wisconsin Licensees\\r</p>\\r\\rFor full course descriptions <a href=\\\"https://www.wra.org/2023-24CE/Descriptions/\\\" target=\\\"_blank\\\">click here.</a>  </p>\\r</p> \\r\"}",
+      "categories": "umb://document/3608211342fe4d2baf206c107aea4c8b",
+      "subCategories": "umb://document/ee5158e628a9467eac896c21e94567ed",
+      "taxonomy": "Virtual",
+      "startDate": "2024-03-07T08:30:00.0000000Z",
+      "endDate": "2024-03-07T12:00:00.0000000Z",
+      "location": {},
+      "productId": "f12f5976-3eb8-4aca-55a2-08dbfa99b13d"
+    },
+    "UpdateDate": "2024-02-15T19:06:14.763Z"
+  },
+  "CultureInfos": [],
+  "PublishedCultureInfos": [],
+  "PublishedCultures": [],
+  "Writer": "admin",
+  "PublicAccessRules": [],
+  "Schedule": [],
+  "Domains": [],
+  "Parent": "umb://document/f84b3e1568024a90bb4cdc083d9f3b38",
+  "SortOrder": 4,
+  "ContentType": "umb://document-type/6ed103f65d4e47759105d341370c1690",
+  "CreateDate": "2024-01-23T10:31:11Z",
+  "Creator": "raymond@lightburn.co",
+  "PropertyEditorAliases": {
+    "siteFooterWidget": "Umbraco.ContentPicker",
+    "metaTitle": "Umbraco.TextBox",
+    "metaDescription": "Umbraco.TextBox",
+    "openGraphImage": "Umbraco.MediaPicker3",
+    "hideFromSitemap": "Umbraco.TrueFalse",
+    "hideFromSearchEngines": "Umbraco.TrueFalse",
+    "visibleToMemberGroups": "Umbraco.MemberGroupPicker",
+    "visibleToAll": "Umbraco.TrueFalse",
+    "sku": "Umbraco.TextBox",
+    "price": "Umbraco.Commerce.Price",
+    "memberPrice": "Umbraco.Commerce.Price",
+    "images": "Umbraco.MediaPicker3",
+    "shortDescription": "Umbraco.TextArea",
+    "longDescription": "Umbraco.TinyMCE",
+    "categories": "Umbraco.MultiNodeTreePicker",
+    "subCategories": "Umbraco.MultiNodeTreePicker",
+    "taxonomy": "Umbraco.Label",
+    "startDate": "Umbraco.Label",
+    "endDate": "Umbraco.Label",
+    "location": "Umbraco.Label",
+    "productId": "Umbraco.Label"
+  },
+  "Udi": "umb://document/639f343aede649ca82b2ed5743f4faa9",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type/6ed103f65d4e47759105d341370c1690",
+      "Ordering": true,
+      "Checksum": "2282ECA93EB320EE31C07F3CA5E1A6BA8C6823F7"
+    },
+    {
+      "Udi": "umb://document/3608211342fe4d2baf206c107aea4c8b",
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://document/ee5158e628a9467eac896c21e94567ed",
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://document/f84b3e1568024a90bb4cdc083d9f3b38",
+      "Ordering": true,
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://template/472d765a0e4c434b8ca84fa1d95a227b",
+      "Ordering": true,
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://umbraco-commerce-currency/514fa94e66b24f06a91f018d4cae531c",
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.Content.DocumentArtifact",
+  "__version": "13.0.4"
+}

@@ -1,0 +1,31 @@
+{
+  "Name": "News Categories",
+  "Alias": "News Categories",
+  "PublishedName": "News Categories",
+  "PublishedVersion": {
+    "Properties": {},
+    "UpdateDate": "2024-01-25T21:27:51.46Z"
+  },
+  "CultureInfos": [],
+  "PublishedCultureInfos": [],
+  "PublishedCultures": [],
+  "Writer": "raymond@lightburn.co",
+  "PublicAccessRules": [],
+  "Schedule": [],
+  "Domains": [],
+  "SortOrder": 6,
+  "ContentType": "umb://document-type/688f78eb2d964d91b380292f9bb392f1",
+  "CreateDate": "2023-11-08T21:52:30.04Z",
+  "Creator": "raymond@lightburn.co",
+  "PropertyEditorAliases": {},
+  "Udi": "umb://document/0d430f6ff9cd458587663cf0ef447589",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type/688f78eb2d964d91b380292f9bb392f1",
+      "Ordering": true,
+      "Checksum": "DDF14E153F91E33E27478D59168BC651D663B75B"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.Content.DocumentArtifact",
+  "__version": "13.0.4"
+}

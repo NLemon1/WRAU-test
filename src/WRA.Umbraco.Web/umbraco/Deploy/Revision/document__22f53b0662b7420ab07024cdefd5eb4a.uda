@@ -1,0 +1,100 @@
+{
+  "Name": "November 2023",
+  "Alias": "November 2023",
+  "PublishedName": "November 2023",
+  "PublishedVersion": {
+    "Template": "umb://template/6915c45096c3468dbcffb47a8dc39a18",
+    "Properties": {
+      "metaTitle": {},
+      "metaDescription": {},
+      "openGraphImage": "[]",
+      "siteFooterWidget": {},
+      "hideFromSitemap": "0",
+      "hideFromSearchEngines": "0",
+      "visibleToMemberGroups": {},
+      "visibleToAll": {},
+      "monthYearTitle": "2023-11-01T00:00:00.0000000Z",
+      "pdf": "/media/3aod2lob/wisconsin-real-estate-magazine-november-2023-1.pdf",
+      "image": "[{\"key\":\"7807b0d2-b36f-4a6e-8009-4333bed4d953\",\"mediaKey\":\"e206d7be-9c2b-4121-9197-0dec85dcc8eb\"}]",
+      "excerpt": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "featuredOnlineArticles": "umb://document/30dfe4a682c44aba90ee25751e624c3a,umb://document/10346a7cb4c742f7be8598143caf6f1d,umb://document/c6abe44b6622453c8c8513b2b26f8afd,umb://document/4724b3797c444738ae92504717fd5f0a,umb://document/3d16a618d9f54b519e73b5f4d642eb70"
+    },
+    "UpdateDate": "2024-01-27T20:46:26.74Z"
+  },
+  "CultureInfos": [],
+  "PublishedCultureInfos": [],
+  "PublishedCultures": [],
+  "Writer": "raymond@lightburn.co",
+  "PublicAccessRules": [],
+  "Schedule": [],
+  "Domains": [],
+  "Parent": "umb://document/832aadb62d684ba9a33f9a6b5efd50dd",
+  "SortOrder": 1,
+  "ContentType": "umb://document-type/02eec0556dd64104be2fe7f95d3dbbf3",
+  "CreateDate": "2023-12-01T02:36:48.523Z",
+  "Creator": "raymond@lightburn.co",
+  "PropertyEditorAliases": {
+    "metaTitle": "Umbraco.TextBox",
+    "metaDescription": "Umbraco.TextBox",
+    "openGraphImage": "Umbraco.MediaPicker3",
+    "siteFooterWidget": "Umbraco.ContentPicker",
+    "hideFromSitemap": "Umbraco.TrueFalse",
+    "hideFromSearchEngines": "Umbraco.TrueFalse",
+    "visibleToMemberGroups": "Umbraco.MemberGroupPicker",
+    "visibleToAll": "Umbraco.TrueFalse",
+    "monthYearTitle": "Umbraco.DateTime",
+    "pdf": "Umbraco.UploadField",
+    "image": "Umbraco.MediaPicker3",
+    "excerpt": "Umbraco.TextArea",
+    "featuredOnlineArticles": "Umbraco.MultiNodeTreePicker"
+  },
+  "Udi": "umb://document/22f53b0662b7420ab07024cdefd5eb4a",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type/02eec0556dd64104be2fe7f95d3dbbf3",
+      "Ordering": true,
+      "Checksum": "9FCEC36016B9752EEA53BCA1F7D9377B2BE3F569"
+    },
+    {
+      "Udi": "umb://document/10346a7cb4c742f7be8598143caf6f1d",
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://document/30dfe4a682c44aba90ee25751e624c3a",
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://document/3d16a618d9f54b519e73b5f4d642eb70",
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://document/4724b3797c444738ae92504717fd5f0a",
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://document/832aadb62d684ba9a33f9a6b5efd50dd",
+      "Ordering": true,
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://document/c6abe44b6622453c8c8513b2b26f8afd",
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://media-file/3aod2lob/wisconsin-real-estate-magazine-november-2023-1.pdf",
+      "Ordering": true,
+      "Checksum": "23BE4013F89BE0FB80D0FD3F2B976E9FC1D166F6"
+    },
+    {
+      "Udi": "umb://media/e206d7be9c2b412191970dec85dcc8eb",
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://template/6915c45096c3468dbcffb47a8dc39a18",
+      "Ordering": true,
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.Content.DocumentArtifact",
+  "__version": "13.0.4"
+}

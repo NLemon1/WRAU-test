@@ -1,0 +1,70 @@
+{
+  "Name": "Magazine",
+  "Alias": "Magazine",
+  "PublishedName": "Magazine",
+  "PublishedVersion": {
+    "Template": "umb://template/a93a5fb65de24d0082af2fce535b288c",
+    "Properties": {
+      "siteFooterWidget": {},
+      "metaTitle": {},
+      "metaDescription": {},
+      "openGraphImage": {},
+      "hideFromSitemap": {},
+      "hideFromSearchEngines": {},
+      "visibleToMemberGroups": {},
+      "visibleToAll": {},
+      "gridSection": "{\"layout\":{\"Umbraco.BlockGrid\":[{\"contentUdi\":\"umb://element/2fb3851cfe304ad49e612a20da297b0e\",\"areas\":[],\"columnSpan\":12,\"rowSpan\":1}]},\"contentData\":[{\"contentTypeKey\":\"441d9356-4a38-4ed5-856e-4f4006859e94\",\"udi\":\"umb://element/2fb3851cfe304ad49e612a20da297b0e\",\"hideAccent\":\"0\"}],\"settingsData\":[]}"
+    },
+    "UpdateDate": "2023-12-01T02:50:10.527Z"
+  },
+  "CultureInfos": [],
+  "PublishedCultureInfos": [],
+  "PublishedCultures": [],
+  "Writer": "raymond@lightburn.co",
+  "PublicAccessRules": [],
+  "Schedule": [],
+  "Domains": [],
+  "Parent": "umb://document/70b0ef2cecb44c27bed2a39d3deae374",
+  "SortOrder": 1,
+  "ContentType": "umb://document-type/989dd0c5c84f43db9382c14ae598a3ac",
+  "CreateDate": "2023-12-01T01:53:49.57Z",
+  "Creator": "raymond@lightburn.co",
+  "PropertyEditorAliases": {
+    "siteFooterWidget": "Umbraco.ContentPicker",
+    "metaTitle": "Umbraco.TextBox",
+    "metaDescription": "Umbraco.TextBox",
+    "openGraphImage": "Umbraco.MediaPicker3",
+    "hideFromSitemap": "Umbraco.TrueFalse",
+    "hideFromSearchEngines": "Umbraco.TrueFalse",
+    "visibleToMemberGroups": "Umbraco.MemberGroupPicker",
+    "visibleToAll": "Umbraco.TrueFalse",
+    "gridSection": "Umbraco.BlockGrid",
+    "pageHeader.heading": "Umbraco.TextBox",
+    "pageHeader.subheading": "Umbraco.TextBox",
+    "pageHeader.hideAccent": "Umbraco.TrueFalse"
+  },
+  "Udi": "umb://document/5d65b4428bbd47129e0e21df19cc4ce9",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type/441d93564a384ed5856e4f4006859e94",
+      "Checksum": "8B5A30BCA627B00ACB39FF7879515922B4093C1A"
+    },
+    {
+      "Udi": "umb://document-type/989dd0c5c84f43db9382c14ae598a3ac",
+      "Ordering": true,
+      "Checksum": "6BD9C69CA425C7523BAF1736775FAB1F971A769C"
+    },
+    {
+      "Udi": "umb://document/70b0ef2cecb44c27bed2a39d3deae374",
+      "Ordering": true,
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://template/a93a5fb65de24d0082af2fce535b288c",
+      "Ordering": true,
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.Content.DocumentArtifact",
+  "__version": "13.0.4"
+}

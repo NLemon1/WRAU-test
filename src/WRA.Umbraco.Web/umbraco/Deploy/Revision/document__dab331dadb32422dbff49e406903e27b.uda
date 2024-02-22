@@ -1,0 +1,55 @@
+{
+  "Name": "Two Column Example",
+  "Alias": "Two Column Example",
+  "PublishedName": "Two Column Example",
+  "PublishedVersion": {
+    "Properties": {
+      "col1ColorScheme": "[\"Dark Blue\"]",
+      "col1Heading": "Webinars & Forums",
+      "col1Content": "{\"markup\":\"<p>Briefly explaining what users will find on the WEBINARS &amp; FORUMS page</p>\"}",
+      "col1Link": "[{\"name\":\"Sign Up\",\"url\":\"#\"}]",
+      "col2ColorScheme": "[\"Light\"]",
+      "col2Heading": "Resource Library",
+      "col2Content": "{\"markup\":\"<p>Short line summarizing contents of the Resource Library section and how they enrich your experience.</p>\"}",
+      "col2Link": "[{\"name\":\"Browse the Library\",\"url\":\"#\"}]"
+    },
+    "UpdateDate": "2024-01-25T21:27:55.52Z"
+  },
+  "CultureInfos": [],
+  "PublishedCultureInfos": [],
+  "PublishedCultures": [],
+  "Writer": "raymond@lightburn.co",
+  "PublicAccessRules": [],
+  "Schedule": [],
+  "Domains": [],
+  "Parent": "umb://document/a5e6ad3042864e2a99e97eef04ee5cc0",
+  "SortOrder": 1,
+  "ContentType": "umb://document-type/3363f6ac21c94258b0d1f2f7d4602294",
+  "CreateDate": "2023-10-24T19:49:23.91Z",
+  "Creator": "raymond@lightburn.co",
+  "PropertyEditorAliases": {
+    "col1ColorScheme": "Umbraco.DropDown.Flexible",
+    "col1Heading": "Umbraco.TextBox",
+    "col1Content": "Umbraco.TinyMCE",
+    "col1Link": "Umbraco.MultiUrlPicker",
+    "col2ColorScheme": "Umbraco.DropDown.Flexible",
+    "col2Heading": "Umbraco.TextBox",
+    "col2Content": "Umbraco.TinyMCE",
+    "col2Link": "Umbraco.MultiUrlPicker"
+  },
+  "Udi": "umb://document/dab331dadb32422dbff49e406903e27b",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type/3363f6ac21c94258b0d1f2f7d4602294",
+      "Ordering": true,
+      "Checksum": "89DED5A310EF19BA2B0C91867D5D7EC370E190B4"
+    },
+    {
+      "Udi": "umb://document/a5e6ad3042864e2a99e97eef04ee5cc0",
+      "Ordering": true,
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.Content.DocumentArtifact",
+  "__version": "13.0.4"
+}

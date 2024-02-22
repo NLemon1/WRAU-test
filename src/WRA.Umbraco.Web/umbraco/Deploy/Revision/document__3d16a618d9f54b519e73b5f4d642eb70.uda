@@ -1,0 +1,91 @@
+{
+  "Name": "Test Article 5",
+  "Alias": "Test Article 5",
+  "PublishedName": "Test Article 5",
+  "PublishedVersion": {
+    "Template": "umb://template/277cf1ab9768401ea686247ee1e2b70f",
+    "Properties": {
+      "hideFromSitemap": "0",
+      "hideFromSearchEngines": "0",
+      "visibleToMemberGroups": {},
+      "visibleToAll": {},
+      "metaTitle": {},
+      "metaDescription": {},
+      "openGraphImage": "[]",
+      "siteFooterWidget": {},
+      "title": "Test Article 5",
+      "image": "[{\"key\":\"683ef1a7-3273-46dc-8c93-928322eb69fd\",\"mediaKey\":\"13770c8d-1d3e-4751-a3ae-956ccacc7138\"}]",
+      "date": "2023-12-22T00:00:00.0000000Z",
+      "author": "umb://document/1ae79f6b28f94740ad00e17ac4abce46",
+      "category": "umb://document/b2f67aa661854136b6f73019de57a7ce",
+      "magazineLink": {},
+      "richTextContent": "{\"markup\":\"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\"}",
+      "sections": {},
+      "excerpt": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim "
+    },
+    "UpdateDate": "2023-12-01T15:48:01.013Z"
+  },
+  "CultureInfos": [],
+  "PublishedCultureInfos": [],
+  "PublishedCultures": [],
+  "Writer": "raymond@lightburn.co",
+  "PublicAccessRules": [],
+  "Schedule": [],
+  "Domains": [],
+  "Parent": "umb://document/591bd037a0d345c18fa4207a264e7485",
+  "SortOrder": 4,
+  "ContentType": "umb://document-type/a848d7fc16b145f985c21523107d4c0b",
+  "CreateDate": "2023-12-01T15:47:56.5Z",
+  "Creator": "raymond@lightburn.co",
+  "PropertyEditorAliases": {
+    "hideFromSitemap": "Umbraco.TrueFalse",
+    "hideFromSearchEngines": "Umbraco.TrueFalse",
+    "visibleToMemberGroups": "Umbraco.MemberGroupPicker",
+    "visibleToAll": "Umbraco.TrueFalse",
+    "metaTitle": "Umbraco.TextBox",
+    "metaDescription": "Umbraco.TextBox",
+    "openGraphImage": "Umbraco.MediaPicker3",
+    "siteFooterWidget": "Umbraco.ContentPicker",
+    "title": "Umbraco.TextBox",
+    "image": "Umbraco.MediaPicker3",
+    "date": "Umbraco.DateTime",
+    "author": "Umbraco.ContentPicker",
+    "category": "Umbraco.ContentPicker",
+    "magazineLink": "Umbraco.MultiNodeTreePicker",
+    "richTextContent": "Umbraco.TinyMCE",
+    "sections": "Umbraco.BlockGrid",
+    "excerpt": "Umbraco.TextArea"
+  },
+  "Udi": "umb://document/3d16a618d9f54b519e73b5f4d642eb70",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type/a848d7fc16b145f985c21523107d4c0b",
+      "Ordering": true,
+      "Checksum": "C72EFF951C0FC3260969AD945A54F829F2D11E24"
+    },
+    {
+      "Udi": "umb://document/1ae79f6b28f94740ad00e17ac4abce46",
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://document/591bd037a0d345c18fa4207a264e7485",
+      "Ordering": true,
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://document/b2f67aa661854136b6f73019de57a7ce",
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://media/13770c8d1d3e4751a3ae956ccacc7138",
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://template/277cf1ab9768401ea686247ee1e2b70f",
+      "Ordering": true,
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.Content.DocumentArtifact",
+  "__version": "13.0.4"
+}

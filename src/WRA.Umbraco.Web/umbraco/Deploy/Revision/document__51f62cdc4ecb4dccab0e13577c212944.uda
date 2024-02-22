@@ -1,0 +1,48 @@
+{
+  "Name": "Professional Development",
+  "Alias": "Professional Development",
+  "PublishedName": "Professional Development",
+  "PublishedVersion": {
+    "Properties": {
+      "description": "Resources and programs to enhance professional skills and career growth in real estate.",
+      "image": {},
+      "externalId": "910e47b3-4856-4819-baaa-09ce61cd8673",
+      "showInCalendar": {},
+      "colorCode": {}
+    },
+    "UpdateDate": "2024-02-15T19:04:51.223Z"
+  },
+  "CultureInfos": [],
+  "PublishedCultureInfos": [],
+  "PublishedCultures": [],
+  "Writer": "admin",
+  "PublicAccessRules": [],
+  "Schedule": [],
+  "Domains": [],
+  "Parent": "umb://document/cac993c42fe042f1a75b3a14f4597f3f",
+  "ContentType": "umb://document-type/59f3371ae76e43bba9a77e381a18be87",
+  "CreateDate": "2024-01-17T14:37:13.71Z",
+  "Creator": "raymond@lightburn.co",
+  "PropertyEditorAliases": {
+    "description": "Umbraco.TextArea",
+    "image": "Umbraco.MediaPicker3",
+    "externalId": "Umbraco.Label",
+    "showInCalendar": "Umbraco.TrueFalse",
+    "colorCode": "Umbraco.ColorPicker.EyeDropper"
+  },
+  "Udi": "umb://document/51f62cdc4ecb4dccab0e13577c212944",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type/59f3371ae76e43bba9a77e381a18be87",
+      "Ordering": true,
+      "Checksum": "F185B37A5B44E7EDDDFED29565162FB86E52DEC1"
+    },
+    {
+      "Udi": "umb://document/cac993c42fe042f1a75b3a14f4597f3f",
+      "Ordering": true,
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.Content.DocumentArtifact",
+  "__version": "13.0.4"
+}

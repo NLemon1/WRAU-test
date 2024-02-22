@@ -1,0 +1,41 @@
+{
+  "Name": "Law & Ethics",
+  "Alias": "Law & Ethics",
+  "PublishedName": "Law & Ethics",
+  "PublishedVersion": {
+    "Properties": {
+      "featuredArticle": {}
+    },
+    "UpdateDate": "2023-11-20T19:54:40.457Z"
+  },
+  "CultureInfos": [],
+  "PublishedCultureInfos": [],
+  "PublishedCultures": [],
+  "Writer": "raymond@lightburn.co",
+  "PublicAccessRules": [],
+  "Schedule": [],
+  "Domains": [],
+  "Parent": "umb://document/0d430f6ff9cd458587663cf0ef447589",
+  "SortOrder": 1,
+  "ContentType": "umb://document-type/963807729d5a4e53b789476eb486066c",
+  "CreateDate": "2023-11-08T21:53:03.157Z",
+  "Creator": "raymond@lightburn.co",
+  "PropertyEditorAliases": {
+    "featuredArticle": "Umbraco.ContentPicker"
+  },
+  "Udi": "umb://document/b2f67aa661854136b6f73019de57a7ce",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type/963807729d5a4e53b789476eb486066c",
+      "Ordering": true,
+      "Checksum": "C5C7BC6CC145B2173884BD6FE0BB1E1563850B5C"
+    },
+    {
+      "Udi": "umb://document/0d430f6ff9cd458587663cf0ef447589",
+      "Ordering": true,
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.Content.DocumentArtifact",
+  "__version": "13.0.4"
+}

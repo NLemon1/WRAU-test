@@ -1,0 +1,163 @@
+{
+  "Name": "Contact",
+  "Alias": "Contact",
+  "PublishedName": "Contact",
+  "PublishedVersion": {
+    "Template": "umb://template/ec480a40125744e1aa99c0db63f17e55",
+    "Properties": {
+      "metaTitle": {},
+      "metaDescription": {},
+      "openGraphImage": "[]",
+      "siteFooterWidget": {},
+      "hideFromSitemap": "0",
+      "hideFromSearchEngines": "0",
+      "visibleToMemberGroups": {},
+      "visibleToAll": {},
+      "sections": "{\"layout\":{\"Umbraco.BlockGrid\":[{\"contentUdi\":\"umb://element/9fb344063d424c858d8ebc3a76e1ae34\",\"areas\":[],\"columnSpan\":12,\"rowSpan\":1},{\"contentUdi\":\"umb://element/2a01c879f956442fa6433532ea00034f\",\"areas\":[{\"key\":\"4a7162dc-fd49-40a2-858e-aa5e72e71c9d\",\"items\":[{\"contentUdi\":\"umb://element/9c2dccf0709944fd838cbf86917c0690\",\"areas\":[{\"key\":\"8e8355b8-aa7e-4b76-a893-8a7d14f57243\",\"items\":[{\"contentUdi\":\"umb://element/e70f0aad84c742c388c77ab0b8c6c972\",\"areas\":[],\"columnSpan\":6,\"rowSpan\":1},{\"contentUdi\":\"umb://element/78f109187d7c4c82b575467bb2c78d7e\",\"areas\":[],\"columnSpan\":6,\"rowSpan\":1},{\"contentUdi\":\"umb://element/cbfada3443fc4f23a006ec56ae4aa84f\",\"areas\":[{\"key\":\"270196bf-f331-4dd3-894b-d04ae81e4b3f\",\"items\":[{\"contentUdi\":\"umb://element/2edc8060660649c2b373d07a888b8a6f\",\"areas\":[{\"key\":\"72a9b655-b2c5-4a33-80f3-73d01f46cbc7\",\"items\":[{\"contentUdi\":\"umb://element/168d134185264f5596f711328cd1dcf1\",\"areas\":[],\"columnSpan\":6,\"rowSpan\":1}]}],\"columnSpan\":6,\"rowSpan\":1}]}],\"columnSpan\":6,\"rowSpan\":1},{\"contentUdi\":\"umb://element/44b89dfcb7914922a959660432aa6a47\",\"areas\":[],\"columnSpan\":6,\"rowSpan\":1},{\"contentUdi\":\"umb://element/430ddd4fea634ad7882978734c6a4f32\",\"areas\":[{\"key\":\"270196bf-f331-4dd3-894b-d04ae81e4b3f\",\"items\":[{\"contentUdi\":\"umb://element/4d9f50ea4bdd411ea66f09fdf3f13af5\",\"areas\":[{\"key\":\"72a9b655-b2c5-4a33-80f3-73d01f46cbc7\",\"items\":[{\"contentUdi\":\"umb://element/184cd36653de4b83bc5ab891e4b0e197\",\"areas\":[],\"columnSpan\":6,\"rowSpan\":1}]}],\"columnSpan\":6,\"rowSpan\":1}]}],\"columnSpan\":6,\"rowSpan\":1},{\"contentUdi\":\"umb://element/3ca31cdcde724f47b260cc868271d659\",\"areas\":[],\"columnSpan\":6,\"rowSpan\":1},{\"contentUdi\":\"umb://element/eb293c139a964310875aeb66858d2d7b\",\"areas\":[],\"columnSpan\":6,\"rowSpan\":1},{\"contentUdi\":\"umb://element/62083521e3224eb78db56bee62e2b4a6\",\"areas\":[],\"columnSpan\":6,\"rowSpan\":1},{\"contentUdi\":\"umb://element/5e48d98b61914d538c28275d38da1dc1\",\"areas\":[],\"columnSpan\":6,\"rowSpan\":1},{\"contentUdi\":\"umb://element/28e2a420afb14a54b7116a131c5be78c\",\"areas\":[],\"columnSpan\":6,\"rowSpan\":1},{\"contentUdi\":\"umb://element/dd0349be2da14d91b6926de057091965\",\"areas\":[],\"columnSpan\":6,\"rowSpan\":1}]},{\"key\":\"5a9df9b3-9f2c-4de3-b87c-4e4b4686f49e\",\"items\":[{\"contentUdi\":\"umb://element/02914b778a214dd0b8fdd563e748f20b\",\"areas\":[],\"columnSpan\":6,\"rowSpan\":1}]}],\"columnSpan\":6,\"rowSpan\":1}]}],\"columnSpan\":12,\"rowSpan\":1},{\"contentUdi\":\"umb://element/bd17ead457ed4e1692d0a0668f4938a4\",\"areas\":[{\"key\":\"de08acff-cfbb-4b3a-aefb-84ab9bb2931e\",\"items\":[{\"contentUdi\":\"umb://element/a1e5ca66dea54f91b1f59ec8b0924dde\",\"areas\":[{\"key\":\"0bee1f52-7c57-4aee-ad8c-af26eaa424ff\",\"items\":[{\"contentUdi\":\"umb://element/f52c7e53bd7b4bd4b10e2c4bf88e62db\",\"areas\":[{\"key\":\"730bdb13-56b6-4614-a524-f46499892315\",\"items\":[{\"contentUdi\":\"umb://element/0e9eebd2f7bd403099b77b7e5b3bb094\",\"areas\":[],\"columnSpan\":6,\"rowSpan\":1}]},{\"key\":\"de11d1c8-311e-4040-92a5-92cf75755a45\",\"items\":[{\"areas\":[],\"columnSpan\":6,\"rowSpan\":1,\"contentUdi\":\"umb://element/abd0348203cf4051ab458c6fb9cd4c73\"}]},{\"key\":\"fa665ee0-0c0f-43e7-9922-8db6df716a4b\",\"items\":[{\"areas\":[],\"columnSpan\":6,\"rowSpan\":1,\"contentUdi\":\"umb://element/95820831a5aa48b0b7cd6c7032337460\"}]}],\"columnSpan\":6,\"rowSpan\":1},{\"areas\":[{\"key\":\"730bdb13-56b6-4614-a524-f46499892315\",\"items\":[{\"areas\":[],\"columnSpan\":6,\"rowSpan\":1,\"contentUdi\":\"umb://element/e33e377c798b462c9cd83c73fb5396dd\"}]},{\"key\":\"de11d1c8-311e-4040-92a5-92cf75755a45\",\"items\":[{\"areas\":[],\"columnSpan\":6,\"rowSpan\":1,\"contentUdi\":\"umb://element/98b82c99dfc74b5e991b7b74c51647fc\"}]},{\"key\":\"fa665ee0-0c0f-43e7-9922-8db6df716a4b\",\"items\":[{\"areas\":[],\"columnSpan\":6,\"rowSpan\":1,\"contentUdi\":\"umb://element/90f5b33b3a7b408fbf5f8f706b5ab221\"}]}],\"columnSpan\":6,\"rowSpan\":1,\"contentUdi\":\"umb://element/911a17cb9adb44f3a24fa8bcb3d65483\"},{\"areas\":[{\"key\":\"730bdb13-56b6-4614-a524-f46499892315\",\"items\":[{\"areas\":[],\"columnSpan\":6,\"rowSpan\":1,\"contentUdi\":\"umb://element/3429963ab8de426fb48df393bbba7cbc\"}]},{\"key\":\"de11d1c8-311e-4040-92a5-92cf75755a45\",\"items\":[{\"areas\":[],\"columnSpan\":6,\"rowSpan\":1,\"contentUdi\":\"umb://element/6b01a33cdca44d1ea0c94e0d18fbc4ac\"}]},{\"key\":\"fa665ee0-0c0f-43e7-9922-8db6df716a4b\",\"items\":[]}],\"columnSpan\":6,\"rowSpan\":1,\"contentUdi\":\"umb://element/d930821488f248a29409f8b18fa07b8d\"}]}],\"columnSpan\":6,\"rowSpan\":1},{\"contentUdi\":\"umb://element/17b83e531bc649309ae61d8e40221288\",\"areas\":[{\"key\":\"0bee1f52-7c57-4aee-ad8c-af26eaa424ff\",\"items\":[{\"contentUdi\":\"umb://element/ff8fc27a4eeb4dda966ec1aafd731579\",\"areas\":[],\"columnSpan\":6,\"rowSpan\":1}]}],\"columnSpan\":6,\"rowSpan\":1}]}],\"columnSpan\":12,\"rowSpan\":1}]},\"contentData\":[{\"contentTypeKey\":\"441d9356-4a38-4ed5-856e-4f4006859e94\",\"udi\":\"umb://element/9fb344063d424c858d8ebc3a76e1ae34\",\"hideAccent\":\"0\"},{\"contentTypeKey\":\"bf995e2d-fadc-4379-b5a3-614b1f9782cc\",\"udi\":\"umb://element/9c2dccf0709944fd838cbf86917c0690\",\"visibleToMemberGroups\":null,\"visibleToAll\":\"1\",\"stackOnMobile\":\"0\"},{\"contentTypeKey\":\"fa444fc1-2c1e-414a-9fef-276551c06714\",\"udi\":\"umb://element/e70f0aad84c742c388c77ab0b8c6c972\",\"visibleToMemberGroups\":null,\"visibleToAll\":\"1\",\"bottomMargin\":null,\"fontSize\":\"[\\\"18px\\\"]\",\"fontWeight\":\"[\\\"600\\\"]\",\"text\":\"{\\\"markup\\\":\\\"<p><strong>Asking users to find the specific contact they need vs. emailing everything to the general inquiry info.</strong></p>\\\",\\\"blocks\\\":{\\\"contentData\\\":[],\\\"settingsData\\\":[]}}\"},{\"contentTypeKey\":\"026bb456-a4e1-458f-aa5a-5a8a73bfdba1\",\"udi\":\"umb://element/2a01c879f956442fa6433532ea00034f\",\"visibleToMemberGroups\":null,\"visibleToAll\":\"1\",\"xPadding\":null,\"width\":\"[\\\"1128px (standard)\\\"]\",\"yPadding\":\"[\\\"4rem\\\"]\"},{\"contentTypeKey\":\"7b118b8c-dc87-4eb8-97cb-e18647ead8e3\",\"udi\":\"umb://element/cbfada3443fc4f23a006ec56ae4aa84f\",\"title\":\"Looking for legal help?\"},{\"contentTypeKey\":\"63a4fa00-9b8c-41f2-8bb3-55374ae83595\",\"udi\":\"umb://element/2edc8060660649c2b373d07a888b8a6f\",\"bottomMargin\":null,\"horizontalAlignment\":null,\"stackButtonsVertically\":\"0\"},{\"contentTypeKey\":\"864f593e-ef23-4580-8c2d-e4a5f4da025e\",\"udi\":\"umb://element/168d134185264f5596f711328cd1dcf1\",\"link\":\"[{\\\"name\\\":\\\"Contact the Legal Hotline\\\",\\\"url\\\":\\\"#\\\"}]\",\"style\":\"[\\\"link arrow\\\"]\"},{\"contentTypeKey\":\"7b118b8c-dc87-4eb8-97cb-e18647ead8e3\",\"udi\":\"umb://element/430ddd4fea634ad7882978734c6a4f32\",\"title\":\"Have a complaint?\"},{\"contentTypeKey\":\"63a4fa00-9b8c-41f2-8bb3-55374ae83595\",\"udi\":\"umb://element/4d9f50ea4bdd411ea66f09fdf3f13af5\",\"bottomMargin\":null,\"horizontalAlignment\":null,\"stackButtonsVertically\":\"0\"},{\"contentTypeKey\":\"864f593e-ef23-4580-8c2d-e4a5f4da025e\",\"udi\":\"umb://element/184cd36653de4b83bc5ab891e4b0e197\",\"link\":\"[{\\\"name\\\":\\\"File A Complaint\\\",\\\"url\\\":\\\"#\\\"}]\",\"style\":\"[\\\"link arrow\\\"]\"},{\"contentTypeKey\":\"c86d81f9-bb4a-4047-bc5b-ca65a1d534a9\",\"udi\":\"umb://element/44b89dfcb7914922a959660432aa6a47\",\"heightSmall\":\"[\\\"1rem\\\"]\",\"heightMedium\":null,\"heightLarge\":null,\"heightExtraLarge\":null},{\"contentTypeKey\":\"c86d81f9-bb4a-4047-bc5b-ca65a1d534a9\",\"udi\":\"umb://element/78f109187d7c4c82b575467bb2c78d7e\",\"heightSmall\":\"[\\\"1.5rem\\\"]\",\"heightMedium\":null,\"heightLarge\":null,\"heightExtraLarge\":null},{\"contentTypeKey\":\"0354f600-29e9-458d-abc7-5f659e6325a2\",\"udi\":\"umb://element/eb293c139a964310875aeb66858d2d7b\",\"headlineText\":\"WRA Headquarters\",\"headingLevel\":\"[\\\"H2\\\"]\",\"fontSize\":\"[\\\"16px\\\"]\",\"textAlignment\":null,\"bottomMargin\":\"[\\\"0.5rem\\\"]\"},{\"contentTypeKey\":\"fa444fc1-2c1e-414a-9fef-276551c06714\",\"udi\":\"umb://element/62083521e3224eb78db56bee62e2b4a6\",\"visibleToMemberGroups\":null,\"visibleToAll\":\"1\",\"bottomMargin\":null,\"fontSize\":null,\"fontWeight\":null,\"text\":\"{\\\"markup\\\":\\\"<p><a href=\\\\\\\"https://www.google.com/maps/place/Wisconsin+REALTORS+Association/@43.1377898,-89.3007412,17z/data=!4m15!1m8!3m7!1s0x8806565e91fdaf87:0x375088148253da2a!2s4801+Forest+Run+Rd+%23+201,+Madison,+WI+53704!3b1!8m2!3d43.1377898!4d-89.3007412!16s%2Fg%2F11mbqwjt0n!3m5!1s0x8806565e8e443335:0x153da6a184d4d49a!8m2!3d43.1377898!4d-89.3007412!16s%2Fg%2F1tctmc96?entry=ttu\\\\\\\" data-anchor=\\\\\\\"?entry=ttu\\\\\\\">4801 Forest Run Road, Ste. 201<br>Madison, WI 53704-7337</a><br>M-F 8:30am- 5pm<br>608-241-2047<br>800-279-1972</p>\\\",\\\"blocks\\\":{\\\"contentData\\\":[],\\\"settingsData\\\":[]}}\"},{\"contentTypeKey\":\"0354f600-29e9-458d-abc7-5f659e6325a2\",\"udi\":\"umb://element/28e2a420afb14a54b7116a131c5be78c\",\"headlineText\":\"WRA Public Affairs Office\",\"headingLevel\":\"[\\\"H2\\\"]\",\"fontSize\":\"[\\\"16px\\\"]\",\"textAlignment\":null,\"bottomMargin\":\"[\\\"0.5rem\\\"]\"},{\"contentTypeKey\":\"fa444fc1-2c1e-414a-9fef-276551c06714\",\"udi\":\"umb://element/dd0349be2da14d91b6926de057091965\",\"visibleToMemberGroups\":null,\"visibleToAll\":\"1\",\"bottomMargin\":null,\"fontSize\":null,\"fontWeight\":null,\"text\":\"{\\\"markup\\\":\\\"<p><a href=\\\\\\\"https://www.google.com/maps/place/10+E+Doty+St+%23521,+Madison,+WI+53703/@43.0737508,-89.3816999,17z/data=!3m1!4b1!4m6!3m5!1s0x8806533fab68f765:0xc5f893993eee7032!8m2!3d43.0737508!4d-89.3816999!16s%2Fg%2F11nsw677g6?entry=ttu\\\\\\\" data-anchor=\\\\\\\"?entry=ttu\\\\\\\">10 E Doty St #521<br>Madison, WI 53703</a><br>Office Hours<br>Office Email<br>Office Phone Number</p>\\\",\\\"blocks\\\":{\\\"contentData\\\":[],\\\"settingsData\\\":[]}}\"},{\"contentTypeKey\":\"c86d81f9-bb4a-4047-bc5b-ca65a1d534a9\",\"udi\":\"umb://element/5e48d98b61914d538c28275d38da1dc1\",\"heightSmall\":\"[\\\"2rem\\\"]\",\"heightMedium\":null,\"heightLarge\":null,\"heightExtraLarge\":null},{\"contentTypeKey\":\"c86d81f9-bb4a-4047-bc5b-ca65a1d534a9\",\"udi\":\"umb://element/3ca31cdcde724f47b260cc868271d659\",\"heightSmall\":\"[\\\"2rem\\\"]\",\"heightMedium\":null,\"heightLarge\":null,\"heightExtraLarge\":null},{\"contentTypeKey\":\"d5b01a10-5426-4f66-a5f6-6a9ed349d4a4\",\"udi\":\"umb://element/bd17ead457ed4e1692d0a0668f4938a4\",\"heading\":\"WRA Staff Directory\",\"enableDarkMode\":\"0\",\"enableVerticalMode\":\"1\"},{\"contentTypeKey\":\"ac859905-1e6d-4dc4-90ad-4245c0f7fbce\",\"udi\":\"umb://element/a1e5ca66dea54f91b1f59ec8b0924dde\",\"label\":\"Tab 1\"},{\"contentTypeKey\":\"a3638dad-77d4-45ca-9352-32f848e8743a\",\"udi\":\"umb://element/f52c7e53bd7b4bd4b10e2c4bf88e62db\"},{\"contentTypeKey\":\"fa444fc1-2c1e-414a-9fef-276551c06714\",\"udi\":\"umb://element/0e9eebd2f7bd403099b77b7e5b3bb094\",\"visibleToMemberGroups\":null,\"visibleToAll\":\"1\",\"bottomMargin\":null,\"fontSize\":null,\"fontWeight\":null,\"text\":\"{\\\"markup\\\":\\\"<p><strong>Firstname Lastname</strong><br>Role or Title</p>\\\",\\\"blocks\\\":{\\\"contentData\\\":[],\\\"settingsData\\\":[]}}\"},{\"contentTypeKey\":\"ac859905-1e6d-4dc4-90ad-4245c0f7fbce\",\"udi\":\"umb://element/17b83e531bc649309ae61d8e40221288\",\"label\":\"Tab 2\"},{\"contentTypeKey\":\"fa444fc1-2c1e-414a-9fef-276551c06714\",\"udi\":\"umb://element/ff8fc27a4eeb4dda966ec1aafd731579\",\"visibleToMemberGroups\":null,\"visibleToAll\":\"1\",\"bottomMargin\":null,\"fontSize\":null,\"fontWeight\":null,\"text\":\"{\\\"markup\\\":\\\"<p>Content goes here.</p>\\\",\\\"blocks\\\":{\\\"contentData\\\":[],\\\"settingsData\\\":[]}}\"},{\"contentTypeKey\":\"fa444fc1-2c1e-414a-9fef-276551c06714\",\"udi\":\"umb://element/abd0348203cf4051ab458c6fb9cd4c73\",\"visibleToMemberGroups\":null,\"visibleToAll\":\"1\",\"bottomMargin\":null,\"fontSize\":null,\"fontWeight\":null,\"text\":\"{\\\"markup\\\":\\\"<p><strong>Firstname Lastname</strong><br>Role or Title</p>\\\",\\\"blocks\\\":{\\\"contentData\\\":[],\\\"settingsData\\\":[]}}\"},{\"contentTypeKey\":\"fa444fc1-2c1e-414a-9fef-276551c06714\",\"udi\":\"umb://element/95820831a5aa48b0b7cd6c7032337460\",\"visibleToMemberGroups\":null,\"visibleToAll\":\"1\",\"bottomMargin\":null,\"fontSize\":null,\"fontWeight\":null,\"text\":\"{\\\"markup\\\":\\\"<p><strong>Firstname Lastname</strong><br>Role or Title</p>\\\",\\\"blocks\\\":{\\\"contentData\\\":[],\\\"settingsData\\\":[]}}\"},{\"contentTypeKey\":\"a3638dad-77d4-45ca-9352-32f848e8743a\",\"udi\":\"umb://element/911a17cb9adb44f3a24fa8bcb3d65483\"},{\"contentTypeKey\":\"fa444fc1-2c1e-414a-9fef-276551c06714\",\"udi\":\"umb://element/e33e377c798b462c9cd83c73fb5396dd\",\"visibleToMemberGroups\":null,\"visibleToAll\":\"1\",\"bottomMargin\":null,\"fontSize\":null,\"fontWeight\":null,\"text\":\"{\\\"markup\\\":\\\"<p><strong>Firstname Lastname</strong><br>Role or Title</p>\\\",\\\"blocks\\\":{\\\"contentData\\\":[],\\\"settingsData\\\":[]}}\"},{\"contentTypeKey\":\"fa444fc1-2c1e-414a-9fef-276551c06714\",\"udi\":\"umb://element/98b82c99dfc74b5e991b7b74c51647fc\",\"visibleToMemberGroups\":null,\"visibleToAll\":\"1\",\"bottomMargin\":null,\"fontSize\":null,\"fontWeight\":null,\"text\":\"{\\\"markup\\\":\\\"<p><strong>Firstname Lastname</strong><br>Role or Title</p>\\\",\\\"blocks\\\":{\\\"contentData\\\":[],\\\"settingsData\\\":[]}}\"},{\"contentTypeKey\":\"fa444fc1-2c1e-414a-9fef-276551c06714\",\"udi\":\"umb://element/90f5b33b3a7b408fbf5f8f706b5ab221\",\"visibleToMemberGroups\":null,\"visibleToAll\":\"1\",\"bottomMargin\":null,\"fontSize\":null,\"fontWeight\":null,\"text\":\"{\\\"markup\\\":\\\"<p><strong>Firstname Lastname</strong><br>Role or Title</p>\\\",\\\"blocks\\\":{\\\"contentData\\\":[],\\\"settingsData\\\":[]}}\"},{\"contentTypeKey\":\"a3638dad-77d4-45ca-9352-32f848e8743a\",\"udi\":\"umb://element/d930821488f248a29409f8b18fa07b8d\"},{\"contentTypeKey\":\"fa444fc1-2c1e-414a-9fef-276551c06714\",\"udi\":\"umb://element/3429963ab8de426fb48df393bbba7cbc\",\"visibleToMemberGroups\":null,\"visibleToAll\":\"1\",\"bottomMargin\":null,\"fontSize\":null,\"fontWeight\":null,\"text\":\"{\\\"markup\\\":\\\"<p><strong>Firstname Lastname</strong><br>Role or Title</p>\\\",\\\"blocks\\\":{\\\"contentData\\\":[],\\\"settingsData\\\":[]}}\"},{\"contentTypeKey\":\"fa444fc1-2c1e-414a-9fef-276551c06714\",\"udi\":\"umb://element/6b01a33cdca44d1ea0c94e0d18fbc4ac\",\"visibleToMemberGroups\":null,\"visibleToAll\":\"1\",\"bottomMargin\":null,\"fontSize\":null,\"fontWeight\":null,\"text\":\"{\\\"markup\\\":\\\"<p><strong>Firstname Lastname</strong><br>Role or Title</p>\\\",\\\"blocks\\\":{\\\"contentData\\\":[],\\\"settingsData\\\":[]}}\"},{\"contentTypeKey\":\"fa444fc1-2c1e-414a-9fef-276551c06714\",\"udi\":\"umb://element/02914b778a214dd0b8fdd563e748f20b\",\"visibleToMemberGroups\":null,\"visibleToAll\":\"1\",\"bottomMargin\":null,\"fontSize\":null,\"fontWeight\":null,\"text\":null}],\"settingsData\":[]}",
+      "backgroundOffset": "0"
+    },
+    "UpdateDate": "2024-01-27T14:45:54.16Z"
+  },
+  "CultureInfos": [],
+  "PublishedCultureInfos": [],
+  "PublishedCultures": [],
+  "Writer": "raymond@lightburn.co",
+  "PublicAccessRules": [],
+  "Schedule": [],
+  "Domains": [],
+  "Parent": "umb://document/c50e10be1e8a4ab3a6b8119e1626ba0e",
+  "SortOrder": 12,
+  "ContentType": "umb://document-type/bfdf851e2c81415e99d69046dd055c21",
+  "CreateDate": "2023-12-11T17:00:11.107Z",
+  "Creator": "raymond@lightburn.co",
+  "PropertyEditorAliases": {
+    "metaTitle": "Umbraco.TextBox",
+    "metaDescription": "Umbraco.TextBox",
+    "openGraphImage": "Umbraco.MediaPicker3",
+    "siteFooterWidget": "Umbraco.ContentPicker",
+    "hideFromSitemap": "Umbraco.TrueFalse",
+    "hideFromSearchEngines": "Umbraco.TrueFalse",
+    "visibleToMemberGroups": "Umbraco.MemberGroupPicker",
+    "visibleToAll": "Umbraco.TrueFalse",
+    "sections": "Umbraco.BlockGrid",
+    "backgroundOffset": "Umbraco.TrueFalse",
+    "genericSection.additionalCssClasses": "Umbraco.TextBox",
+    "genericSection.visibleToMemberGroups": "Umbraco.MemberGroupPicker",
+    "genericSection.visibleToAll": "Umbraco.TrueFalse",
+    "genericSection.color": "Umbraco.ColorPicker",
+    "genericSection.xPadding": "Umbraco.DropDown.Flexible",
+    "genericSection.width": "Umbraco.DropDown.Flexible",
+    "genericSection.yPadding": "Umbraco.DropDown.Flexible",
+    "genericSection.innerWidth": "Umbraco.Decimal",
+    "headlineBlock.additionalCssClasses": "Umbraco.TextBox",
+    "headlineBlock.headlineText": "Umbraco.TextBox",
+    "headlineBlock.headingLevel": "Umbraco.DropDown.Flexible",
+    "headlineBlock.fontSize": "Umbraco.DropDown.Flexible",
+    "headlineBlock.textAlignment": "Umbraco.DropDown.Flexible",
+    "headlineBlock.textColor": "Umbraco.ColorPicker",
+    "headlineBlock.bottomMargin": "Umbraco.DropDown.Flexible",
+    "pageHeader.heading": "Umbraco.TextBox",
+    "pageHeader.subheading": "Umbraco.TextBox",
+    "pageHeader.hideAccent": "Umbraco.TrueFalse",
+    "buttons.additionalCssClasses": "Umbraco.TextBox",
+    "buttons.bottomMargin": "Umbraco.DropDown.Flexible",
+    "buttons.horizontalAlignment": "Umbraco.DropDown.Flexible",
+    "buttons.stackButtonsVertically": "Umbraco.TrueFalse",
+    "hotTip.title": "Umbraco.TextBox",
+    "button.additionalCssClasses": "Umbraco.TextBox",
+    "button.link": "Umbraco.MultiUrlPicker",
+    "button.style": "Umbraco.DropDown.Flexible",
+    "button.contrast": "Umbraco.RadioButtonList",
+    "threeColumnLayout.additionalCssClasses": "Umbraco.TextBox",
+    "tab.label": "Umbraco.TextBox",
+    "twoColumnLayout.additionalCssClasses": "Umbraco.TextBox",
+    "twoColumnLayout.visibleToMemberGroups": "Umbraco.MemberGroupPicker",
+    "twoColumnLayout.visibleToAll": "Umbraco.TrueFalse",
+    "twoColumnLayout.stackOnMobile": "Umbraco.TrueFalse",
+    "spacer.additionalCssClasses": "Umbraco.TextBox",
+    "spacer.heightSmall": "Umbraco.DropDown.Flexible",
+    "spacer.heightMedium": "Umbraco.DropDown.Flexible",
+    "spacer.heightLarge": "Umbraco.DropDown.Flexible",
+    "spacer.heightExtraLarge": "Umbraco.DropDown.Flexible",
+    "tabs.overline": "Umbraco.TextBox",
+    "tabs.heading": "Umbraco.TextBox",
+    "tabs.enableDarkMode": "Umbraco.TrueFalse",
+    "tabs.enableVerticalMode": "Umbraco.TrueFalse",
+    "richText.visibleToMemberGroups": "Umbraco.MemberGroupPicker",
+    "richText.visibleToAll": "Umbraco.TrueFalse",
+    "richText.fontFamily": "Umbraco.RadioButtonList",
+    "richText.bottomMargin": "Umbraco.DropDown.Flexible",
+    "richText.fontSize": "Umbraco.DropDown.Flexible",
+    "richText.fontWeight": "Umbraco.DropDown.Flexible",
+    "richText.textColor": "Umbraco.ColorPicker",
+    "richText.text": "Umbraco.TinyMCE"
+  },
+  "Udi": "umb://document/d1e162722a9f489fb56787d76f145d37",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type/026bb456a4e1458faa5a5a8a73bfdba1",
+      "Checksum": "CDF1F03FD3B6E16EB6C17DDB9F6ED6B1DD973755"
+    },
+    {
+      "Udi": "umb://document-type/0354f60029e9458dabc75f659e6325a2",
+      "Checksum": "B969E004B0886E96FE33E04A4238AFA60C28321D"
+    },
+    {
+      "Udi": "umb://document-type/441d93564a384ed5856e4f4006859e94",
+      "Checksum": "8B5A30BCA627B00ACB39FF7879515922B4093C1A"
+    },
+    {
+      "Udi": "umb://document-type/63a4fa009b8c41f28bb355374ae83595",
+      "Checksum": "4ABDDF75826063C5DC41D7C30D0E1CC06818D730"
+    },
+    {
+      "Udi": "umb://document-type/7b118b8cdc874eb897cbe18647ead8e3",
+      "Checksum": "1AE7659FBD59A7111D636BB7C4E7ADFFBB1C7553"
+    },
+    {
+      "Udi": "umb://document-type/864f593eef2345808c2de4a5f4da025e",
+      "Checksum": "F8CF3C6B554B71E4C0B3B8D79DF1361FCDAB745A"
+    },
+    {
+      "Udi": "umb://document-type/a3638dad77d445ca935232f848e8743a",
+      "Checksum": "16EC21822DA694944F9FCA0F98C966142DA24CF7"
+    },
+    {
+      "Udi": "umb://document-type/ac8599051e6d4dc490ad4245c0f7fbce",
+      "Checksum": "00007CF333036E152570AF3837F59E0D55A052AF"
+    },
+    {
+      "Udi": "umb://document-type/bf995e2dfadc4379b5a3614b1f9782cc",
+      "Checksum": "862BD828780C02AB55C91DF7F9A9A235EB8C7722"
+    },
+    {
+      "Udi": "umb://document-type/bfdf851e2c81415e99d69046dd055c21",
+      "Ordering": true,
+      "Checksum": "0E6A912BA1F8CCDD7FBBF18571BF96F0187E3F83"
+    },
+    {
+      "Udi": "umb://document-type/c86d81f9bb4a4047bc5bca65a1d534a9",
+      "Checksum": "745290CF54F852A88F9CFE25AEEA36F2A3D4B010"
+    },
+    {
+      "Udi": "umb://document-type/d5b01a1054264f66a5f66a9ed349d4a4",
+      "Checksum": "7992D84F4009C107591E6F2282CF41936F6107B5"
+    },
+    {
+      "Udi": "umb://document-type/fa444fc12c1e414a9fef276551c06714",
+      "Checksum": "89B39F34E242182CDF70B7C94E4A5AE38B88C7D9"
+    },
+    {
+      "Udi": "umb://document/c50e10be1e8a4ab3a6b8119e1626ba0e",
+      "Ordering": true,
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://template/ec480a40125744e1aa99c0db63f17e55",
+      "Ordering": true,
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.Content.DocumentArtifact",
+  "__version": "13.0.4"
+}

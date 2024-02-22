@@ -1,0 +1,31 @@
+{
+  "Name": "Hot Tips",
+  "Alias": "Hot Tips",
+  "PublishedName": "Hot Tips",
+  "PublishedVersion": {
+    "Properties": {},
+    "UpdateDate": "2024-01-25T21:27:52.647Z"
+  },
+  "CultureInfos": [],
+  "PublishedCultureInfos": [],
+  "PublishedCultures": [],
+  "Writer": "raymond@lightburn.co",
+  "PublicAccessRules": [],
+  "Schedule": [],
+  "Domains": [],
+  "SortOrder": 9,
+  "ContentType": "umb://document-type/1f4a8ffdca654a7696e9344933b9b943",
+  "CreateDate": "2023-11-28T22:56:31.717Z",
+  "Creator": "raymond@lightburn.co",
+  "PropertyEditorAliases": {},
+  "Udi": "umb://document/6f078e8bd79f44c0a06c7578fcc5ad75",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type/1f4a8ffdca654a7696e9344933b9b943",
+      "Ordering": true,
+      "Checksum": "8E4BE4BEAADE9113666EEDBBAC655F75121A88DA"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.Content.DocumentArtifact",
+  "__version": "13.0.4"
+}

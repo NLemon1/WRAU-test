@@ -1,0 +1,31 @@
+{
+  "Name": "Testimonials",
+  "Alias": "Testimonials",
+  "PublishedName": "Testimonials",
+  "PublishedVersion": {
+    "Properties": {},
+    "UpdateDate": "2024-01-25T21:27:54.353Z"
+  },
+  "CultureInfos": [],
+  "PublishedCultureInfos": [],
+  "PublishedCultures": [],
+  "Writer": "raymond@lightburn.co",
+  "PublicAccessRules": [],
+  "Schedule": [],
+  "Domains": [],
+  "SortOrder": 5,
+  "ContentType": "umb://document-type/e450f662bbc74619a6999062fee8a47b",
+  "CreateDate": "2023-11-08T20:16:43.827Z",
+  "Creator": "raymond@lightburn.co",
+  "PropertyEditorAliases": {},
+  "Udi": "umb://document/78533529d9f5487783dacd34dc213ba5",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type/e450f662bbc74619a6999062fee8a47b",
+      "Ordering": true,
+      "Checksum": "A791DE24EBD5F052650108D74FD71751C03AF1BC"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.Content.DocumentArtifact",
+  "__version": "13.0.4"
+}
