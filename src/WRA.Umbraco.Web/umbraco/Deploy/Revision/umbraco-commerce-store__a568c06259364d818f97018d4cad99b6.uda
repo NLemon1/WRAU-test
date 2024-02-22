@@ -21,6 +21,9 @@
   "DefaultGiftCardEmailTemplateUdi": "umb://umbraco-commerce-email-template/5a5919a89bd543aaac50018d4cad9b5b",
   "ConfirmationEmailTemplateUdi": "umb://umbraco-commerce-email-template/f1bc366353cc43869ee5018d4cad9b25",
   "ErrorEmailTemplateUdi": "umb://umbraco-commerce-email-template/0a384c2aba2f4dc6af48018d4cad9b56",
+  "AllowedUserRoles": [
+    "commerce"
+  ],
   "Udi": "umb://umbraco-commerce-store/a568c06259364d818f97018d4cad99b6",
   "Dependencies": [
     {
