@@ -1,11 +1,6 @@
 {
   "Name": "WRA Store",
   "Alias": "wRAStore",
-  "BaseCurrencyUdi": "umb://umbraco-commerce-currency/b6889190b97943fc8f84018dcd76c6a6",
-  "DefaultCountryUdi": "umb://umbraco-commerce-country/6c987b9b37894827b0ef018dcd75bf3d",
-  "DefaultTaxClassUdi": "umb://umbraco-commerce-tax-class/79fe6f0bafb3467fbf09018dcd756223",
-  "DefaultOrderStatusUdi": "umb://umbraco-commerce-order-status/c6d362d0d53b4d56be2f018dcd75623a",
-  "ErrorOrderStatusUdi": "umb://umbraco-commerce-order-status/098dea269f8944ea9759018dcd756244",
   "CookieTimeout": "365.00:00:00",
   "CartNumberTemplate": "CART-{0}",
   "OrderNumberTemplate": "ORDER-{0}",
@@ -18,44 +13,8 @@
     "giftCardRecipientEmail",
     "giftCardMessage"
   ],
-  "DefaultGiftCardEmailTemplateUdi": "umb://umbraco-commerce-email-template/c573203d4a0b49089221018dcd756259",
-  "ConfirmationEmailTemplateUdi": "umb://umbraco-commerce-email-template/7ecbc3400b0f4378a381018dcd756248",
-  "ErrorEmailTemplateUdi": "umb://umbraco-commerce-email-template/8870462b32034af1a1c4018dcd756257",
   "Udi": "umb://umbraco-commerce-store/7dc4bea072f8401c9815018dcd7561e3",
-  "Dependencies": [
-    {
-      "Udi": "umb://umbraco-commerce-currency/b6889190b97943fc8f84018dcd76c6a6",
-      "Mode": "Exist"
-    },
-    {
-      "Udi": "umb://umbraco-commerce-country/6c987b9b37894827b0ef018dcd75bf3d",
-      "Mode": "Exist"
-    },
-    {
-      "Udi": "umb://umbraco-commerce-tax-class/79fe6f0bafb3467fbf09018dcd756223",
-      "Mode": "Exist"
-    },
-    {
-      "Udi": "umb://umbraco-commerce-order-status/c6d362d0d53b4d56be2f018dcd75623a",
-      "Mode": "Exist"
-    },
-    {
-      "Udi": "umb://umbraco-commerce-order-status/098dea269f8944ea9759018dcd756244",
-      "Mode": "Exist"
-    },
-    {
-      "Udi": "umb://umbraco-commerce-email-template/c573203d4a0b49089221018dcd756259",
-      "Mode": "Exist"
-    },
-    {
-      "Udi": "umb://umbraco-commerce-email-template/7ecbc3400b0f4378a381018dcd756248",
-      "Mode": "Exist"
-    },
-    {
-      "Udi": "umb://umbraco-commerce-email-template/8870462b32034af1a1c4018dcd756257",
-      "Mode": "Exist"
-    }
-  ],
+  "Dependencies": [],
   "__type": "Umbraco.Commerce.Deploy,Umbraco.Commerce.Deploy.Artifacts.StoreArtifact",
   "__version": "13.0.4"
 }
