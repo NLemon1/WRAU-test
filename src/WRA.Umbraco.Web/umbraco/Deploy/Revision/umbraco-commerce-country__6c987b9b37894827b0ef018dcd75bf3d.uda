@@ -1,0 +1,16 @@
+{
+  "Name": "United States of America",
+  "Alias": "US",
+  "Code": "US",
+  "SortOrder": 1,
+  "StoreUdi": "umb://umbraco-commerce-store/7dc4bea072f8401c9815018dcd7561e3",
+  "Udi": "umb://umbraco-commerce-country/6c987b9b37894827b0ef018dcd75bf3d",
+  "Dependencies": [
+    {
+      "Udi": "umb://umbraco-commerce-store/7dc4bea072f8401c9815018dcd7561e3",
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Commerce.Deploy,Umbraco.Commerce.Deploy.Artifacts.CountryArtifact",
+  "__version": "13.0.4"
+}
