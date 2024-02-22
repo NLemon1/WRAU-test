@@ -1,0 +1,19 @@
+{
+  "Name": "Multimedia Item - Category - Multinode Treepicker",
+  "Alias": "",
+  "EditorAlias": "Umbraco.MultiNodeTreePicker",
+  "Configuration": {
+    "startNode": {
+      "type": "content",
+      "id": "umb://document/a820fe839a0d454f93e9ac65c13a91f8"
+    },
+    "minNumber": 0,
+    "maxNumber": 1,
+    "showOpenButton": false,
+    "ignoreUserStartNodes": false
+  },
+  "Udi": "umb://data-type/0d3f612bff7b4adf8edc5da8cbfa3d11",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
+  "__version": "13.0.4"
+}

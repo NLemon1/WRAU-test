@@ -1,0 +1,42 @@
+{
+  "Name": "Cart Page",
+  "Alias": "cartPage",
+  "DefaultTemplate": "umb://template/f2a968337351456187eeb8c1c4d04343",
+  "AllowedTemplates": [
+    "umb://template/f2a968337351456187eeb8c1c4d04343"
+  ],
+  "HistoryCleanup": {},
+  "Icon": "icon-shopping-basket color-amber",
+  "Thumbnail": "folder.png",
+  "Permissions": {
+    "AllowedChildContentTypes": []
+  },
+  "Parent": "umb://document-type-container/2443f0d8c7a44e1baa3511778e6789dd",
+  "CompositionContentTypes": [
+    "umb://document-type/7cc368ff00cb4264ad60f52a76c3a911",
+    "umb://document-type/f0c2133970844a948c095978736296ce"
+  ],
+  "PropertyGroups": [],
+  "PropertyTypes": [],
+  "Udi": "umb://document-type/1774bff2e3b6437cbe5a0702b0af3204",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type-container/2443f0d8c7a44e1baa3511778e6789dd",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type/7cc368ff00cb4264ad60f52a76c3a911",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type/f0c2133970844a948c095978736296ce",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://template/f2a968337351456187eeb8c1c4d04343",
+      "Ordering": true
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
+  "__version": "13.0.4"
+}

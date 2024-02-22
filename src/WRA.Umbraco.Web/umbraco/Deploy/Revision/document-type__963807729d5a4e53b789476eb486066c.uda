@@ -1,0 +1,43 @@
+{
+  "Name": "Article Category",
+  "Alias": "articleCategory",
+  "AllowedTemplates": [],
+  "HistoryCleanup": {},
+  "Icon": "icon-tag color-black",
+  "Thumbnail": "folder.png",
+  "Permissions": {
+    "AllowedChildContentTypes": []
+  },
+  "Parent": "umb://document-type-container/3767e51e2a094bce91970e131b9932f8",
+  "CompositionContentTypes": [],
+  "PropertyGroups": [
+    {
+      "Key": "1d17397c-82af-4eb5-aada-77c922c18056",
+      "Name": "Content",
+      "Alias": "content",
+      "PropertyTypes": [
+        {
+          "Key": "d5132deb-3fcb-4ee1-89cb-f244bace0137",
+          "Alias": "featuredArticle",
+          "DataType": "umb://data-type/9bce1176724648bdaa3749b2b45ec816",
+          "Description": "Select an article to be featured with this category.",
+          "Name": "Featured Article"
+        }
+      ]
+    }
+  ],
+  "PropertyTypes": [],
+  "Udi": "umb://document-type/963807729d5a4e53b789476eb486066c",
+  "Dependencies": [
+    {
+      "Udi": "umb://data-type/9bce1176724648bdaa3749b2b45ec816",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type-container/3767e51e2a094bce91970e131b9932f8",
+      "Ordering": true
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
+  "__version": "13.0.4"
+}

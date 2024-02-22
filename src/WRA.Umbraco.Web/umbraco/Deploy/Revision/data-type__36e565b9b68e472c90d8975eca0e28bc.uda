@@ -1,0 +1,26 @@
+{
+  "Name": "Tabs - Block List",
+  "Alias": "",
+  "EditorAlias": "Umbraco.BlockList",
+  "Configuration": {
+    "blocks": [
+      {
+        "contentElementTypeKey": "ac859905-1e6d-4dc4-90ad-4245c0f7fbce",
+        "editorSize": "medium",
+        "forceHideContentEditorInOverlay": false
+      }
+    ],
+    "validationLimit": {},
+    "useSingleBlockMode": false,
+    "useLiveEditing": false,
+    "useInlineEditingAsDefault": false
+  },
+  "Udi": "umb://data-type/36e565b9b68e472c90d8975eca0e28bc",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type/ac8599051e6d4dc490ad4245c0f7fbce"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
+  "__version": "13.0.4"
+}

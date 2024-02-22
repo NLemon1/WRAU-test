@@ -1,0 +1,1380 @@
+{
+  "Name": "Basic Content - sections - Block Grid",
+  "Alias": "",
+  "EditorAlias": "Umbraco.BlockGrid",
+  "Configuration": {
+    "blocks": [
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": false,
+        "allowInAreas": true,
+        "areas": [],
+        "thumbnail": "~/catalogue-thumbnails/headline.png",
+        "contentElementTypeKey": "0354f600-29e9-458d-abc7-5f659e6325a2",
+        "view": "~/App_Plugins/CustomBlockView/headlineBlock.html",
+        "stylesheet": "~/css/dist/global.css",
+        "label": "Heading",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": true,
+        "allowInAreas": true,
+        "areas": [],
+        "contentElementTypeKey": "c86d81f9-bb4a-4047-bc5b-ca65a1d534a9",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": true,
+        "allowInAreas": true,
+        "areas": [
+          {
+            "key": "8e8355b8-aa7e-4b76-a893-8a7d14f57243",
+            "alias": "two-column-1",
+            "columnSpan": 6,
+            "rowSpan": 1,
+            "minAllowed": 0,
+            "specifiedAllowance": []
+          },
+          {
+            "key": "5a9df9b3-9f2c-4de3-b87c-4e4b4686f49e",
+            "alias": "two-column-2",
+            "columnSpan": 6,
+            "rowSpan": 1,
+            "minAllowed": 0,
+            "specifiedAllowance": []
+          }
+        ],
+        "backgroundColor": "#d9ead3",
+        "contentElementTypeKey": "bf995e2d-fadc-4379-b5a3-614b1f9782cc",
+        "view": "~/App_Plugins/CustomBlockView/twoColumnLayout.html",
+        "stylesheet": "~/css/dist/global.css",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false,
+        "groupKey": "61e5b4ab-de54-46b2-9862-ccd8301a2b8e"
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": true,
+        "allowInAreas": true,
+        "areas": [
+          {
+            "key": "c3a220f6-1a27-427e-b284-176f1c26c6c9",
+            "alias": "two-column-1",
+            "columnSpan": 6,
+            "rowSpan": 1,
+            "minAllowed": 0,
+            "specifiedAllowance": []
+          },
+          {
+            "key": "1f048100-6d78-419b-ad95-cb78a2a59755",
+            "alias": "two-column-2",
+            "columnSpan": 6,
+            "rowSpan": 1,
+            "minAllowed": 0,
+            "specifiedAllowance": []
+          }
+        ],
+        "backgroundColor": "#d9ead3",
+        "contentElementTypeKey": "39640da4-948a-486a-ae44-401389df8bb5",
+        "view": "~/App_Plugins/CustomBlockView/twoColumn48Layout.html",
+        "stylesheet": "~/css/dist/global.css",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false,
+        "groupKey": "61e5b4ab-de54-46b2-9862-ccd8301a2b8e"
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": true,
+        "allowInAreas": true,
+        "areas": [
+          {
+            "key": "730bdb13-56b6-4614-a524-f46499892315",
+            "alias": "three-column-1",
+            "columnSpan": 6,
+            "rowSpan": 1,
+            "minAllowed": 0,
+            "specifiedAllowance": []
+          },
+          {
+            "key": "de11d1c8-311e-4040-92a5-92cf75755a45",
+            "alias": "three-column-2",
+            "columnSpan": 6,
+            "rowSpan": 1,
+            "minAllowed": 0,
+            "specifiedAllowance": []
+          },
+          {
+            "key": "fa665ee0-0c0f-43e7-9922-8db6df716a4b",
+            "alias": "three-column-3",
+            "columnSpan": 6,
+            "rowSpan": 1,
+            "minAllowed": 0,
+            "specifiedAllowance": []
+          }
+        ],
+        "backgroundColor": "#d9ead3",
+        "contentElementTypeKey": "a3638dad-77d4-45ca-9352-32f848e8743a",
+        "view": "~/App_Plugins/CustomBlockView/threeColumnLayout.html",
+        "stylesheet": "~/css/dist/global.css",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false,
+        "groupKey": "61e5b4ab-de54-46b2-9862-ccd8301a2b8e"
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": true,
+        "allowInAreas": false,
+        "areas": [
+          {
+            "key": "8cccccd7-1a93-40ec-833b-cec08b808e32",
+            "alias": "four-column-1",
+            "columnSpan": 6,
+            "rowSpan": 1,
+            "minAllowed": 0,
+            "specifiedAllowance": []
+          },
+          {
+            "key": "08786a14-40e1-4c76-bf9a-b108a28f4d3b",
+            "alias": "four-column-2",
+            "columnSpan": 6,
+            "rowSpan": 1,
+            "minAllowed": 0,
+            "specifiedAllowance": []
+          },
+          {
+            "key": "3a9b5b17-4a89-4f7e-b0db-815249240baa",
+            "alias": "four-column-3",
+            "columnSpan": 6,
+            "rowSpan": 1,
+            "minAllowed": 0,
+            "specifiedAllowance": []
+          },
+          {
+            "key": "566d76a6-2678-4b2b-a2f9-cc86f291e2ab",
+            "alias": "four-column-4",
+            "columnSpan": 6,
+            "rowSpan": 1,
+            "minAllowed": 0,
+            "specifiedAllowance": []
+          }
+        ],
+        "backgroundColor": "#d9ead3",
+        "contentElementTypeKey": "db57a8e1-18c2-47a5-9854-0997ec40654f",
+        "view": "~/App_Plugins/CustomBlockView/fourColumnLayout.html",
+        "stylesheet": "~/css/dist/global.css",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false,
+        "groupKey": "61e5b4ab-de54-46b2-9862-ccd8301a2b8e"
+      },
+      {
+        "columnSpanOptions": [
+          {
+            "columnSpan": 8
+          }
+        ],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": true,
+        "allowInAreas": false,
+        "areaGridColumns": 1,
+        "areas": [
+          {
+            "key": "a31a5b7e-df1c-4ee4-a6d9-f9ce22554af5",
+            "alias": "areaBlank",
+            "columnSpan": 1,
+            "rowSpan": 1,
+            "minAllowed": 0,
+            "specifiedAllowance": [
+              {
+                "elementTypeKey": "0354f600-29e9-458d-abc7-5f659e6325a2"
+              },
+              {
+                "elementTypeKey": "fa444fc1-2c1e-414a-9fef-276551c06714"
+              },
+              {
+                "elementTypeKey": "63a4fa00-9b8c-41f2-8bb3-55374ae83595"
+              }
+            ]
+          }
+        ],
+        "backgroundColor": "#d9ead3",
+        "thumbnail": "~/catalogue-thumbnails/feature-breaker.png",
+        "contentElementTypeKey": "77590995-88fc-4504-87e7-5b320c98ab8c",
+        "view": "~/App_Plugins/CustomBlockView/featureBreaker.html",
+        "stylesheet": "~/css/dist/global.css",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false,
+        "groupKey": "61e5b4ab-de54-46b2-9862-ccd8301a2b8e"
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": true,
+        "allowInAreas": true,
+        "areas": [],
+        "thumbnail": "~/catalogue-thumbnails/richtext.png",
+        "contentElementTypeKey": "fa444fc1-2c1e-414a-9fef-276551c06714",
+        "view": "~/App_Plugins/CustomBlockView/richText.html",
+        "stylesheet": "~/css/dist/global.css",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": false,
+        "allowInAreas": true,
+        "areas": [
+          {
+            "key": "72a9b655-b2c5-4a33-80f3-73d01f46cbc7",
+            "alias": "area-buttons",
+            "createLabel": "Add a Button",
+            "columnSpan": 6,
+            "rowSpan": 1,
+            "minAllowed": 0,
+            "specifiedAllowance": [
+              {
+                "elementTypeKey": "864f593e-ef23-4580-8c2d-e4a5f4da025e"
+              }
+            ]
+          }
+        ],
+        "thumbnail": "~/catalogue-thumbnails/button.png",
+        "contentElementTypeKey": "63a4fa00-9b8c-41f2-8bb3-55374ae83595",
+        "view": "~/App_Plugins/CustomBlockView/buttons.html",
+        "stylesheet": "~/css/dist/global.css",
+        "label": "Button Group",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": false,
+        "allowInAreas": true,
+        "areas": [],
+        "thumbnail": "~/catalogue-thumbnails/button.png",
+        "contentElementTypeKey": "864f593e-ef23-4580-8c2d-e4a5f4da025e",
+        "view": "~/App_Plugins/CustomBlockView/button.html",
+        "stylesheet": "~/css/dist/global.css",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": true,
+        "allowInAreas": false,
+        "areas": [
+          {
+            "key": "4a7162dc-fd49-40a2-858e-aa5e72e71c9d",
+            "alias": "generic-section-area",
+            "columnSpan": 6,
+            "rowSpan": 1,
+            "minAllowed": 0,
+            "specifiedAllowance": []
+          }
+        ],
+        "backgroundColor": "#d9ead3",
+        "contentElementTypeKey": "026bb456-a4e1-458f-aa5a-5a8a73bfdba1",
+        "view": "~/App_Plugins/CustomBlockView/genericSection.html",
+        "stylesheet": "~/css/dist/global.css",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false,
+        "groupKey": "61e5b4ab-de54-46b2-9862-ccd8301a2b8e"
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": true,
+        "allowInAreas": false,
+        "areas": [],
+        "backgroundColor": "#d9ead3",
+        "contentElementTypeKey": "d9c27326-98e8-416e-a33b-85c2932a811d",
+        "view": "~/App_Plugins/CustomBlockView/homeHero.html",
+        "stylesheet": "~/css/dist/global.css",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false,
+        "groupKey": "61e5b4ab-de54-46b2-9862-ccd8301a2b8e"
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": true,
+        "allowInAreas": false,
+        "areas": [],
+        "thumbnail": "~/catalogue-thumbnails/latest-news.png",
+        "contentElementTypeKey": "741adb46-a9cd-48d8-8f44-a5fc6fe6b1ca",
+        "view": "~/App_Plugins/CustomBlockView/latestNews.html",
+        "stylesheet": "~/css/dist/global.css",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false,
+        "groupKey": "fe43698d-c8d5-4b72-bc6c-17e4a1144fee"
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": true,
+        "allowInAreas": false,
+        "areas": [],
+        "backgroundColor": "#d9ead3",
+        "contentElementTypeKey": "441d9356-4a38-4ed5-856e-4f4006859e94",
+        "view": "~/App_Plugins/CustomBlockView/pageHeader.html",
+        "stylesheet": "~/css/dist/global.css",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false,
+        "groupKey": "61e5b4ab-de54-46b2-9862-ccd8301a2b8e"
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": false,
+        "allowInAreas": true,
+        "areas": [
+          {
+            "key": "270196bf-f331-4dd3-894b-d04ae81e4b3f",
+            "alias": "hot-tip-area",
+            "columnSpan": 6,
+            "rowSpan": 1,
+            "minAllowed": 0,
+            "specifiedAllowance": [
+              {
+                "elementTypeKey": "fa444fc1-2c1e-414a-9fef-276551c06714"
+              },
+              {
+                "elementTypeKey": "63a4fa00-9b8c-41f2-8bb3-55374ae83595"
+              }
+            ]
+          }
+        ],
+        "contentElementTypeKey": "7b118b8c-dc87-4eb8-97cb-e18647ead8e3",
+        "view": "~/App_Plugins/CustomBlockView/hotTip.html",
+        "stylesheet": "~/css/dist/global.css",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": false,
+        "allowInAreas": true,
+        "areas": [
+          {
+            "key": "d042ead6-1049-4032-8b2d-ebefb5fac659",
+            "alias": "area-buttons",
+            "columnSpan": 6,
+            "rowSpan": 1,
+            "minAllowed": 0,
+            "specifiedAllowance": [
+              {
+                "elementTypeKey": "864f593e-ef23-4580-8c2d-e4a5f4da025e",
+                "maxAllowed": 2
+              }
+            ]
+          }
+        ],
+        "thumbnail": "~/catalogue-thumbnails/cta-card.png",
+        "contentElementTypeKey": "868f2679-c9e2-43c9-9772-210d9d211932",
+        "view": "~/App_Plugins/CustomBlockView/ctaCard.html",
+        "stylesheet": "~/css/dist/global.css",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": false,
+        "allowInAreas": true,
+        "areas": [],
+        "thumbnail": "~/catalogue-thumbnails/child-page-card.png",
+        "contentElementTypeKey": "eb32022d-1ca9-4f5c-9f4e-7fb9b746a7ba",
+        "view": "~/App_Plugins/CustomBlockView/childPageCard.html",
+        "stylesheet": "~/css/dist/global.css",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": false,
+        "allowInAreas": true,
+        "areas": [],
+        "thumbnail": "~/catalogue-thumbnails/mini-card.png",
+        "contentElementTypeKey": "b65e28c8-ab27-48dd-88cc-c6dc27c40f4b",
+        "view": "~/App_Plugins/CustomBlockView/miniCard.html",
+        "stylesheet": "~/css/dist/global.css",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": true,
+        "allowInAreas": true,
+        "areas": [],
+        "thumbnail": "~/catalogue-thumbnails/education-card.png",
+        "contentElementTypeKey": "f3713466-337d-4f63-ae93-d61ad6608d0a",
+        "view": "~/App_Plugins/CustomBlockView/educationCard.html",
+        "stylesheet": "~/css/dist/global.css",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": false,
+        "allowInAreas": true,
+        "areas": [],
+        "thumbnail": "~/catalogue-thumbnails/Overline.png",
+        "contentElementTypeKey": "764f3bd5-6bf5-4409-bbc4-29789af1dfc2",
+        "view": "~/App_Plugins/CustomBlockView/overline.html",
+        "stylesheet": "~/css/dist/global.css",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": false,
+        "allowInAreas": true,
+        "areas": [],
+        "contentElementTypeKey": "2451fda3-6057-4498-99e8-a8323eb0f1d1",
+        "view": "~/App_Plugins/CustomBlockView/iconBullet.html",
+        "stylesheet": "~/css/dist/global.css",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": true,
+        "allowInAreas": true,
+        "areas": [
+          {
+            "key": "74243f7f-002f-4119-a598-00ae491d8e8b",
+            "alias": "gated-area",
+            "columnSpan": 6,
+            "rowSpan": 1,
+            "minAllowed": 0,
+            "specifiedAllowance": []
+          }
+        ],
+        "contentElementTypeKey": "8b1136bd-e6f9-41b2-ba5d-94437cb157cc",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": true,
+        "allowInAreas": false,
+        "areas": [
+          {
+            "key": "de08acff-cfbb-4b3a-aefb-84ab9bb2931e",
+            "alias": "tabs-area",
+            "columnSpan": 6,
+            "rowSpan": 1,
+            "minAllowed": 0,
+            "specifiedAllowance": []
+          }
+        ],
+        "contentElementTypeKey": "d5b01a10-5426-4f66-a5f6-6a9ed349d4a4",
+        "view": "~/App_Plugins/CustomBlockView/tabs.html",
+        "stylesheet": "~/css/dist/global.css",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false,
+        "groupKey": "61e5b4ab-de54-46b2-9862-ccd8301a2b8e"
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": false,
+        "allowInAreas": true,
+        "areas": [
+          {
+            "key": "0bee1f52-7c57-4aee-ad8c-af26eaa424ff",
+            "alias": "tab-area",
+            "columnSpan": 6,
+            "rowSpan": 1,
+            "minAllowed": 0,
+            "specifiedAllowance": []
+          }
+        ],
+        "contentElementTypeKey": "ac859905-1e6d-4dc4-90ad-4245c0f7fbce",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": true,
+        "allowInAreas": false,
+        "areas": [
+          {
+            "key": "7737c8c6-f98e-46ca-90f4-62552b8d52c5",
+            "alias": "home-education-cards",
+            "createLabel": "Add Card Layout",
+            "columnSpan": 6,
+            "rowSpan": 1,
+            "minAllowed": 0,
+            "maxAllowed": 1,
+            "specifiedAllowance": [
+              {
+                "elementTypeKey": "bf995e2d-fadc-4379-b5a3-614b1f9782cc",
+                "maxAllowed": 1
+              },
+              {
+                "elementTypeKey": "a3638dad-77d4-45ca-9352-32f848e8743a",
+                "maxAllowed": 1
+              }
+            ]
+          }
+        ],
+        "contentElementTypeKey": "7ce4d21e-3e16-41dd-8731-8cacc7a775e4",
+        "view": "~/App_Plugins/CustomBlockView/educationSection.html",
+        "stylesheet": "~/css/dist/global.css",
+        "label": "Home Education Section",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false,
+        "groupKey": "28120fd8-c007-4019-8e8f-353f68339fd4"
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": true,
+        "allowInAreas": false,
+        "areas": [
+          {
+            "key": "204a4752-e5ad-47fb-a541-d7311cc10305",
+            "alias": "membership-area",
+            "columnSpan": 6,
+            "rowSpan": 1,
+            "minAllowed": 0,
+            "specifiedAllowance": [
+              {
+                "elementTypeKey": "bf995e2d-fadc-4379-b5a3-614b1f9782cc"
+              }
+            ]
+          }
+        ],
+        "contentElementTypeKey": "9baeef91-2e06-4d35-8add-c19e0116191e",
+        "view": "~/App_Plugins/CustomBlockView/membershipSection.html",
+        "stylesheet": "~/css/dist/global.css",
+        "label": "Home Membership Section",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false,
+        "groupKey": "28120fd8-c007-4019-8e8f-353f68339fd4"
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": true,
+        "allowInAreas": false,
+        "areas": [
+          {
+            "key": "520e6c26-066b-4eef-9e3e-98ac4c904f34",
+            "alias": "home-support-cards",
+            "createLabel": "Add Card Columns",
+            "columnSpan": 6,
+            "rowSpan": 1,
+            "minAllowed": 0,
+            "maxAllowed": 1,
+            "specifiedAllowance": [
+              {
+                "elementTypeKey": "bf995e2d-fadc-4379-b5a3-614b1f9782cc",
+                "minAllowed": 0,
+                "maxAllowed": 1
+              },
+              {
+                "elementTypeKey": "a3638dad-77d4-45ca-9352-32f848e8743a",
+                "minAllowed": 0,
+                "maxAllowed": 1
+              }
+            ]
+          }
+        ],
+        "contentElementTypeKey": "700abd2d-9eed-4fdc-bd39-e5c52670fca7",
+        "view": "~/App_Plugins/CustomBlockView/supportSection.html",
+        "stylesheet": "~/css/dist/global.css",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false,
+        "groupKey": "28120fd8-c007-4019-8e8f-353f68339fd4"
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": true,
+        "allowInAreas": false,
+        "areas": [
+          {
+            "key": "a8b7402c-5980-42a3-adff-fbcb7281c0b6",
+            "alias": "image-text-row-1",
+            "columnSpan": 6,
+            "rowSpan": 1,
+            "minAllowed": 0,
+            "specifiedAllowance": [
+              {
+                "elementTypeKey": "0354f600-29e9-458d-abc7-5f659e6325a2"
+              },
+              {
+                "elementTypeKey": "fa444fc1-2c1e-414a-9fef-276551c06714"
+              },
+              {
+                "elementTypeKey": "63a4fa00-9b8c-41f2-8bb3-55374ae83595"
+              },
+              {
+                "elementTypeKey": "864f593e-ef23-4580-8c2d-e4a5f4da025e"
+              },
+              {
+                "elementTypeKey": "764f3bd5-6bf5-4409-bbc4-29789af1dfc2"
+              },
+              {
+                "elementTypeKey": "32586fc3-9223-4549-affb-041bf869f15d"
+              }
+            ]
+          },
+          {
+            "key": "93baa978-989b-4859-9585-4988c0593f71",
+            "alias": "image-text-row-2",
+            "columnSpan": 6,
+            "rowSpan": 1,
+            "minAllowed": 0,
+            "specifiedAllowance": [
+              {
+                "elementTypeKey": "0354f600-29e9-458d-abc7-5f659e6325a2"
+              },
+              {
+                "elementTypeKey": "c86d81f9-bb4a-4047-bc5b-ca65a1d534a9"
+              },
+              {
+                "elementTypeKey": "fa444fc1-2c1e-414a-9fef-276551c06714"
+              },
+              {
+                "elementTypeKey": "63a4fa00-9b8c-41f2-8bb3-55374ae83595"
+              },
+              {
+                "elementTypeKey": "864f593e-ef23-4580-8c2d-e4a5f4da025e"
+              },
+              {
+                "elementTypeKey": "764f3bd5-6bf5-4409-bbc4-29789af1dfc2"
+              },
+              {
+                "elementTypeKey": "32586fc3-9223-4549-affb-041bf869f15d"
+              }
+            ]
+          }
+        ],
+        "backgroundColor": "#d9ead3",
+        "thumbnail": "~/catalogue-thumbnails/image-text-row.png",
+        "contentElementTypeKey": "569c5323-b158-4a26-aedb-69618d0db0a9",
+        "view": "~/App_Plugins/CustomBlockView/imageTextRow.html",
+        "stylesheet": "~/css/dist/global.css",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false,
+        "groupKey": "61e5b4ab-de54-46b2-9862-ccd8301a2b8e"
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": false,
+        "allowInAreas": true,
+        "areas": [],
+        "thumbnail": "~/catalogue-thumbnails/image-element.png",
+        "contentElementTypeKey": "32586fc3-9223-4549-affb-041bf869f15d",
+        "view": "~/App_Plugins/CustomBlockView/imageElement.html",
+        "stylesheet": "~/css/dist/global.css",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": false,
+        "allowInAreas": true,
+        "areas": [],
+        "contentElementTypeKey": "5ed81857-883e-4c49-97cb-639707e50cad",
+        "view": "~/App_Plugins/CustomBlockView/youtubeEmbed.html",
+        "stylesheet": "~/css/dist/global.css",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": true,
+        "allowInAreas": false,
+        "areas": [
+          {
+            "key": "e00b23f5-ea27-4a9b-bc63-e87f3e5e9844",
+            "alias": "mission-statement-area",
+            "columnSpan": 6,
+            "rowSpan": 1,
+            "minAllowed": 0,
+            "specifiedAllowance": [
+              {
+                "elementTypeKey": "0354f600-29e9-458d-abc7-5f659e6325a2"
+              },
+              {
+                "elementTypeKey": "fa444fc1-2c1e-414a-9fef-276551c06714"
+              }
+            ]
+          }
+        ],
+        "thumbnail": "~/catalogue-thumbnails/mission.png",
+        "contentElementTypeKey": "6244e672-95f2-468e-9791-4892f7efdcc7",
+        "view": "~/App_Plugins/CustomBlockView/missionStatement.html",
+        "stylesheet": "~/css/dist/global.css",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false,
+        "groupKey": "61e5b4ab-de54-46b2-9862-ccd8301a2b8e"
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": true,
+        "allowInAreas": false,
+        "areas": [
+          {
+            "key": "ab5d22a8-35f9-45a6-8906-595b4febc4b2",
+            "alias": "interior-hero-area",
+            "columnSpan": 6,
+            "rowSpan": 1,
+            "minAllowed": 0,
+            "maxAllowed": 1,
+            "specifiedAllowance": [
+              {
+                "elementTypeKey": "f85e05f9-f8b7-471a-bd9c-da4c4c0bdcb9",
+                "maxAllowed": 1
+              }
+            ]
+          },
+          {
+            "key": "f34b7226-358c-4ff5-a458-1f082c51b3b9",
+            "alias": "",
+            "columnSpan": 6,
+            "rowSpan": 1,
+            "minAllowed": 0,
+            "specifiedAllowance": []
+          }
+        ],
+        "backgroundColor": "#d9ead3",
+        "thumbnail": "~/catalogue-thumbnails/interio-hero.png",
+        "contentElementTypeKey": "cffca6df-c3f5-4d9c-ab91-6591c86747c7",
+        "view": "~/App_Plugins/CustomBlockView/interiorHero.html",
+        "stylesheet": "~/css/dist/global.css",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": true,
+        "forceHideContentEditorInOverlay": false,
+        "groupKey": "61e5b4ab-de54-46b2-9862-ccd8301a2b8e"
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": false,
+        "allowInAreas": true,
+        "areas": [
+          {
+            "key": "ffd13657-2646-4e69-b102-1073c5d9e1c5",
+            "alias": "interior-hero-card-area",
+            "columnSpan": 6,
+            "rowSpan": 1,
+            "minAllowed": 0,
+            "specifiedAllowance": [
+              {
+                "elementTypeKey": "0354f600-29e9-458d-abc7-5f659e6325a2"
+              },
+              {
+                "elementTypeKey": "c86d81f9-bb4a-4047-bc5b-ca65a1d534a9"
+              },
+              {
+                "elementTypeKey": "fa444fc1-2c1e-414a-9fef-276551c06714"
+              },
+              {
+                "elementTypeKey": "63a4fa00-9b8c-41f2-8bb3-55374ae83595"
+              },
+              {
+                "elementTypeKey": "864f593e-ef23-4580-8c2d-e4a5f4da025e"
+              },
+              {
+                "elementTypeKey": "764f3bd5-6bf5-4409-bbc4-29789af1dfc2"
+              },
+              {
+                "elementTypeKey": "c0f91cab-47e6-4e2c-84cf-846c343a701f"
+              }
+            ]
+          }
+        ],
+        "thumbnail": "~/catalogue-thumbnails/interior-hero-card.png",
+        "contentElementTypeKey": "f85e05f9-f8b7-471a-bd9c-da4c4c0bdcb9",
+        "view": "~/App_Plugins/CustomBlockView/interiorHeroCard.html",
+        "stylesheet": "~/css/dist/global.css",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": false,
+        "allowInAreas": true,
+        "areas": [],
+        "contentElementTypeKey": "c0f91cab-47e6-4e2c-84cf-846c343a701f",
+        "view": "~/App_Plugins/CustomBlockView/iconItem.html",
+        "stylesheet": "~/css/dist/global.css",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": false,
+        "allowInAreas": true,
+        "areas": [],
+        "thumbnail": "~/catalogue-thumbnails/testimonial-slider.png",
+        "contentElementTypeKey": "9933101d-d525-47bc-8ba3-0a62128b4697",
+        "view": "~/App_Plugins/CustomBlockView/testimonialsSlider.html",
+        "stylesheet": "~/css/dist/global.css",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": true,
+        "allowInAreas": false,
+        "areas": [],
+        "thumbnail": "~/catalogue-thumbnails/CTA-with-quick-links.png",
+        "contentElementTypeKey": "5c919249-f62a-4697-be2f-54451c2e787b",
+        "view": "~/App_Plugins/CustomBlockView/ctaQuickLinks.html",
+        "stylesheet": "~/css/dist/global.css",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false,
+        "groupKey": "61e5b4ab-de54-46b2-9862-ccd8301a2b8e"
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": true,
+        "allowInAreas": false,
+        "areas": [],
+        "contentElementTypeKey": "d94fb28b-3293-4c62-83e3-bcf06e3d7f63",
+        "view": "~/App_Plugins/CustomBlockView/multimediaCenter.html",
+        "stylesheet": "~/css/dist/global.css",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false,
+        "groupKey": "61e5b4ab-de54-46b2-9862-ccd8301a2b8e"
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": false,
+        "allowInAreas": true,
+        "areas": [
+          {
+            "key": "7a627ef6-f73f-49d1-abf2-5fca6e41bbaa",
+            "alias": "accordions-area",
+            "columnSpan": 6,
+            "rowSpan": 1,
+            "minAllowed": 0,
+            "specifiedAllowance": [
+              {
+                "elementTypeKey": "5115b48a-7826-4912-8936-7c6e6cfd6336"
+              }
+            ]
+          }
+        ],
+        "contentElementTypeKey": "3e07e7c9-5b1c-43a2-a0f4-fe8c977fe8e9",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": false,
+        "allowInAreas": true,
+        "areas": [
+          {
+            "key": "03743e08-d818-4fd2-a36a-1fcad441447a",
+            "alias": "accordion-area",
+            "columnSpan": 6,
+            "rowSpan": 1,
+            "minAllowed": 0,
+            "specifiedAllowance": [
+              {
+                "elementTypeKey": "fa444fc1-2c1e-414a-9fef-276551c06714"
+              },
+              {
+                "elementTypeKey": "864f593e-ef23-4580-8c2d-e4a5f4da025e"
+              },
+              {
+                "elementTypeKey": "c86d81f9-bb4a-4047-bc5b-ca65a1d534a9"
+              }
+            ]
+          }
+        ],
+        "thumbnail": "~/catalogue-thumbnails/accordion.png",
+        "contentElementTypeKey": "5115b48a-7826-4912-8936-7c6e6cfd6336",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": true,
+        "allowInAreas": true,
+        "areas": [],
+        "thumbnail": "~/catalogue-thumbnails/breadcrumbs.png",
+        "contentElementTypeKey": "197639a2-5746-4602-aa7b-95d4852ac298",
+        "view": "~/App_Plugins/CustomBlockView/breadcrumbs.html",
+        "stylesheet": "~/css/dist/global.css",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": true,
+        "allowInAreas": true,
+        "areas": [],
+        "contentElementTypeKey": "9755c6ec-23d9-4993-81cf-26541fb17bfb",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": false,
+        "allowInAreas": true,
+        "areas": [
+          {
+            "key": "c58d0ed1-687f-4d6f-8b71-29e97302d1d4",
+            "alias": "generic-card-area",
+            "columnSpan": 6,
+            "rowSpan": 1,
+            "minAllowed": 0,
+            "specifiedAllowance": [
+              {
+                "elementTypeKey": "0354f600-29e9-458d-abc7-5f659e6325a2"
+              },
+              {
+                "elementTypeKey": "c86d81f9-bb4a-4047-bc5b-ca65a1d534a9"
+              },
+              {
+                "elementTypeKey": "fa444fc1-2c1e-414a-9fef-276551c06714"
+              },
+              {
+                "elementTypeKey": "63a4fa00-9b8c-41f2-8bb3-55374ae83595"
+              },
+              {
+                "elementTypeKey": "864f593e-ef23-4580-8c2d-e4a5f4da025e"
+              },
+              {
+                "elementTypeKey": "764f3bd5-6bf5-4409-bbc4-29789af1dfc2"
+              },
+              {
+                "elementTypeKey": "c0f91cab-47e6-4e2c-84cf-846c343a701f"
+              },
+              {
+                "elementTypeKey": "32586fc3-9223-4549-affb-041bf869f15d"
+              }
+            ]
+          }
+        ],
+        "contentElementTypeKey": "5fc677b8-a253-4579-801d-26068fab5800",
+        "view": "~/App_Plugins/CustomBlockView/genericCard.html",
+        "stylesheet": "~/css/dist/global.css",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": true,
+        "allowInAreas": true,
+        "areas": [
+          {
+            "key": "b3df212d-fdc7-46cb-bc6d-c4ea66a69fce",
+            "alias": "background-container-area",
+            "columnSpan": 6,
+            "rowSpan": 1,
+            "minAllowed": 0,
+            "specifiedAllowance": []
+          }
+        ],
+        "contentElementTypeKey": "4bbf8c17-c0b0-4d55-9e26-b53d5feb4794",
+        "view": "~/App_Plugins/CustomBlockView/backgroundContainer.html",
+        "stylesheet": "~/css/dist/global.css",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": true,
+        "allowInAreas": true,
+        "areas": [],
+        "contentElementTypeKey": "9a9c4dae-4b63-4366-9f50-56b0b78a1029",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false,
+        "groupKey": "61e5b4ab-de54-46b2-9862-ccd8301a2b8e"
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": true,
+        "allowInAreas": true,
+        "areas": [],
+        "contentElementTypeKey": "b6d70662-ffa7-438a-83b7-3a648ba8544b",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": true,
+        "allowInAreas": false,
+        "areas": [],
+        "contentElementTypeKey": "b3079b21-2d40-40fe-a6df-da890fa8292a",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false,
+        "groupKey": "61e5b4ab-de54-46b2-9862-ccd8301a2b8e"
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": true,
+        "allowInAreas": false,
+        "areas": [],
+        "contentElementTypeKey": "b4cb87a3-a4f9-4e80-b828-b716cdf37677",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false,
+        "groupKey": "61e5b4ab-de54-46b2-9862-ccd8301a2b8e"
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": true,
+        "allowInAreas": false,
+        "areas": [],
+        "contentElementTypeKey": "d5538130-2bb8-4d8c-9732-9d6bfcd0a24e",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false,
+        "groupKey": "61e5b4ab-de54-46b2-9862-ccd8301a2b8e"
+      }
+    ],
+    "blockGroups": [
+      {
+        "key": "61e5b4ab-de54-46b2-9862-ccd8301a2b8e",
+        "name": "Layout Sections"
+      },
+      {
+        "key": "fe43698d-c8d5-4b72-bc6c-17e4a1144fee",
+        "name": "Dynamic Sections"
+      },
+      {
+        "key": "28120fd8-c007-4019-8e8f-353f68339fd4",
+        "name": "Home page Sections"
+      }
+    ],
+    "validationLimit": {},
+    "useLiveEditing": true,
+    "layoutStylesheet": "~/css/dist/global.css",
+    "createLabel": "Add Section"
+  },
+  "Udi": "umb://data-type/5aa12b11cd24491f94da21e6399ddc33",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type/026bb456a4e1458faa5a5a8a73bfdba1"
+    },
+    {
+      "Udi": "umb://document-type/0354f60029e9458dabc75f659e6325a2"
+    },
+    {
+      "Udi": "umb://document-type/197639a257464602aa7b95d4852ac298"
+    },
+    {
+      "Udi": "umb://document-type/2451fda36057449899e8a8323eb0f1d1"
+    },
+    {
+      "Udi": "umb://document-type/32586fc392234549affb041bf869f15d"
+    },
+    {
+      "Udi": "umb://document-type/39640da4948a486aae44401389df8bb5"
+    },
+    {
+      "Udi": "umb://document-type/3e07e7c95b1c43a2a0f4fe8c977fe8e9"
+    },
+    {
+      "Udi": "umb://document-type/441d93564a384ed5856e4f4006859e94"
+    },
+    {
+      "Udi": "umb://document-type/4bbf8c17c0b04d559e26b53d5feb4794"
+    },
+    {
+      "Udi": "umb://document-type/5115b48a7826491289367c6e6cfd6336"
+    },
+    {
+      "Udi": "umb://document-type/569c5323b1584a26aedb69618d0db0a9"
+    },
+    {
+      "Udi": "umb://document-type/5c919249f62a4697be2f54451c2e787b"
+    },
+    {
+      "Udi": "umb://document-type/5ed81857883e4c4997cb639707e50cad"
+    },
+    {
+      "Udi": "umb://document-type/5fc677b8a2534579801d26068fab5800"
+    },
+    {
+      "Udi": "umb://document-type/6244e67295f2468e97914892f7efdcc7"
+    },
+    {
+      "Udi": "umb://document-type/63a4fa009b8c41f28bb355374ae83595"
+    },
+    {
+      "Udi": "umb://document-type/700abd2d9eed4fdcbd39e5c52670fca7"
+    },
+    {
+      "Udi": "umb://document-type/741adb46a9cd48d88f44a5fc6fe6b1ca"
+    },
+    {
+      "Udi": "umb://document-type/764f3bd56bf54409bbc429789af1dfc2"
+    },
+    {
+      "Udi": "umb://document-type/7759099588fc450487e75b320c98ab8c"
+    },
+    {
+      "Udi": "umb://document-type/7b118b8cdc874eb897cbe18647ead8e3"
+    },
+    {
+      "Udi": "umb://document-type/7ce4d21e3e1641dd87318cacc7a775e4"
+    },
+    {
+      "Udi": "umb://document-type/864f593eef2345808c2de4a5f4da025e"
+    },
+    {
+      "Udi": "umb://document-type/868f2679c9e243c99772210d9d211932"
+    },
+    {
+      "Udi": "umb://document-type/8b1136bde6f941b2ba5d94437cb157cc"
+    },
+    {
+      "Udi": "umb://document-type/9755c6ec23d9499381cf26541fb17bfb"
+    },
+    {
+      "Udi": "umb://document-type/9933101dd52547bc8ba30a62128b4697"
+    },
+    {
+      "Udi": "umb://document-type/9a9c4dae4b6343669f5056b0b78a1029"
+    },
+    {
+      "Udi": "umb://document-type/9baeef912e064d358addc19e0116191e"
+    },
+    {
+      "Udi": "umb://document-type/a3638dad77d445ca935232f848e8743a"
+    },
+    {
+      "Udi": "umb://document-type/ac8599051e6d4dc490ad4245c0f7fbce"
+    },
+    {
+      "Udi": "umb://document-type/b3079b212d4040fea6dfda890fa8292a"
+    },
+    {
+      "Udi": "umb://document-type/b4cb87a3a4f94e80b828b716cdf37677"
+    },
+    {
+      "Udi": "umb://document-type/b65e28c8ab2748dd88ccc6dc27c40f4b"
+    },
+    {
+      "Udi": "umb://document-type/b6d70662ffa7438a83b73a648ba8544b"
+    },
+    {
+      "Udi": "umb://document-type/bf995e2dfadc4379b5a3614b1f9782cc"
+    },
+    {
+      "Udi": "umb://document-type/c0f91cab47e64e2c84cf846c343a701f"
+    },
+    {
+      "Udi": "umb://document-type/c86d81f9bb4a4047bc5bca65a1d534a9"
+    },
+    {
+      "Udi": "umb://document-type/cffca6dfc3f54d9cab916591c86747c7"
+    },
+    {
+      "Udi": "umb://document-type/d55381302bb84d8c97329d6bfcd0a24e"
+    },
+    {
+      "Udi": "umb://document-type/d5b01a1054264f66a5f66a9ed349d4a4"
+    },
+    {
+      "Udi": "umb://document-type/d94fb28b32934c6283e3bcf06e3d7f63"
+    },
+    {
+      "Udi": "umb://document-type/d9c2732698e8416ea33b85c2932a811d"
+    },
+    {
+      "Udi": "umb://document-type/db57a8e118c247a598540997ec40654f"
+    },
+    {
+      "Udi": "umb://document-type/eb32022d1ca94f5c9f4e7fb9b746a7ba"
+    },
+    {
+      "Udi": "umb://document-type/f3713466337d4f63ae93d61ad6608d0a"
+    },
+    {
+      "Udi": "umb://document-type/f85e05f9f8b7471abd9cda4c4c0bdcb9"
+    },
+    {
+      "Udi": "umb://document-type/fa444fc12c1e414a9fef276551c06714"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
+  "__version": "13.0.4"
+}

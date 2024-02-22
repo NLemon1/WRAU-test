@@ -1,0 +1,16 @@
+{
+  "Name": "Block Visibility - Visible To All - Toggle",
+  "Alias": "",
+  "EditorAlias": "Umbraco.TrueFalse",
+  "DatabaseType": "Integer",
+  "Configuration": {
+    "default": true,
+    "showLabels": false,
+    "labelOn": "ALL visitors will be able to view this block.",
+    "labelOff": "Only those in member groups specified above can view this block."
+  },
+  "Udi": "umb://data-type/1160bd09605d48609182197356537f66",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
+  "__version": "13.0.4"
+}

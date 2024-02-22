@@ -1,0 +1,14 @@
+{
+  "Name": "Image Element - Yellow Decor - Toggle",
+  "Alias": "",
+  "EditorAlias": "Umbraco.TrueFalse",
+  "DatabaseType": "Integer",
+  "Configuration": {
+    "default": false,
+    "showLabels": false
+  },
+  "Udi": "umb://data-type/ae6608bc22324f4b83976f98f86bbb3d",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
+  "__version": "13.0.4"
+}

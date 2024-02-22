@@ -1,0 +1,43 @@
+{
+  "Name": "Reusable Widget - Basic Content",
+  "Alias": "reusableWidgetBasicContent",
+  "AllowedTemplates": [],
+  "HistoryCleanup": {},
+  "Icon": "icon-document color-black",
+  "Thumbnail": "folder.png",
+  "Permissions": {
+    "AllowedChildContentTypes": []
+  },
+  "Parent": "umb://document-type-container/811495c9ae7b467da08ce40db9f6c9ca",
+  "CompositionContentTypes": [],
+  "PropertyGroups": [
+    {
+      "Key": "33e7331d-828d-47d3-bdb4-89825e14bf87",
+      "Name": "Content",
+      "Alias": "content",
+      "PropertyTypes": [
+        {
+          "Key": "46a8fe2d-0c24-43d2-9979-faf53ae6060d",
+          "Alias": "content",
+          "DataType": "umb://data-type/9001e1a4d3d940178577caf42c500db5",
+          "Mandatory": true,
+          "Name": "Content"
+        }
+      ]
+    }
+  ],
+  "PropertyTypes": [],
+  "Udi": "umb://document-type/5e4314c761294e1c9cc573b37360d9d8",
+  "Dependencies": [
+    {
+      "Udi": "umb://data-type/9001e1a4d3d940178577caf42c500db5",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type-container/811495c9ae7b467da08ce40db9f6c9ca",
+      "Ordering": true
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
+  "__version": "13.0.4"
+}

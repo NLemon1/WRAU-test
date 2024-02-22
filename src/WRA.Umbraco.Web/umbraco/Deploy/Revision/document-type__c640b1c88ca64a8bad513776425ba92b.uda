@@ -1,0 +1,159 @@
+{
+  "Name": "Reusable Widget - Membership",
+  "Alias": "reusableWidgetMembership",
+  "AllowedTemplates": [],
+  "HistoryCleanup": {},
+  "Icon": "icon-document color-black",
+  "Thumbnail": "folder.png",
+  "Permissions": {
+    "AllowedChildContentTypes": []
+  },
+  "Parent": "umb://document-type-container/811495c9ae7b467da08ce40db9f6c9ca",
+  "CompositionContentTypes": [],
+  "PropertyGroups": [
+    {
+      "Key": "aaa6b4a3-1c91-4f4c-8725-313deddbb1ff",
+      "Name": "Content",
+      "Alias": "content",
+      "PropertyTypes": [
+        {
+          "Key": "098e3086-2818-4a72-97d0-e85bb2e395e3",
+          "Alias": "column4Icon",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Description": "Enter the Regular Icon name from https://fontawesome.com/search?q=star&o=r&s=regular\n(Example: star OR paper-plane )",
+          "Name": "Column 4 Icon",
+          "SortOrder": 15
+        },
+        {
+          "Key": "124ebbf0-41c6-4d09-8d18-632e033f5481",
+          "Alias": "heading",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Heading"
+        },
+        {
+          "Key": "23ebd892-beb8-4f7d-8552-0a3abd791b9b",
+          "Alias": "column1Content",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Column 1 Content",
+          "SortOrder": 5
+        },
+        {
+          "Key": "68ebd6d2-a95e-4b88-9e9d-950b6ec61825",
+          "Alias": "content",
+          "DataType": "umb://data-type/9001e1a4d3d940178577caf42c500db5",
+          "Name": "Content",
+          "SortOrder": 1
+        },
+        {
+          "Key": "96a25b06-fe49-4489-87d7-5b2176867b9d",
+          "Alias": "linkPrimary",
+          "DataType": "umb://data-type/094ea51013be4f358f03687f54bb9ba2",
+          "Name": "Link (Primary)",
+          "SortOrder": 18
+        },
+        {
+          "Key": "a653bf0a-6ba6-4c3a-bf39-c26ec8bb6569",
+          "Alias": "column2Heading",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Column 2 Heading",
+          "SortOrder": 8
+        },
+        {
+          "Key": "a6e7a3c4-4af9-441d-b08b-7bc42907ca94",
+          "Alias": "column1Icon",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Description": "Enter the Regular Icon name from https://fontawesome.com/search?q=star&o=r&s=regular\n(Example: star OR paper-plane )",
+          "Name": "Column 1 Icon",
+          "SortOrder": 3
+        },
+        {
+          "Key": "a8d98c9f-283c-496b-b944-0147cb53ad6c",
+          "Alias": "column3Heading",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Column 3 Heading",
+          "SortOrder": 12
+        },
+        {
+          "Key": "b3557ca8-23f3-4eb5-9f02-b82c900d75e8",
+          "Alias": "column3Content",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Column 3 Content",
+          "SortOrder": 13
+        },
+        {
+          "Key": "b461eca1-f174-4973-9708-6f35a5380491",
+          "Alias": "column4Heading",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Column 4 Heading",
+          "SortOrder": 16
+        },
+        {
+          "Key": "b84b827d-368a-48bb-bed0-87c877b3e400",
+          "Alias": "column2Icon",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Description": "Enter the Regular Icon name from https://fontawesome.com/search?q=star&o=r&s=regular\n(Example: star OR paper-plane )",
+          "Name": "Column 2 Icon",
+          "SortOrder": 7
+        },
+        {
+          "Key": "ba4a6e48-6aeb-4909-8ecc-8f1ef099f4c2",
+          "Alias": "linkSecondary",
+          "DataType": "umb://data-type/094ea51013be4f358f03687f54bb9ba2",
+          "Name": "Link (Secondary)",
+          "SortOrder": 19
+        },
+        {
+          "Key": "cc2aaa2f-2040-4579-acbf-1dbc43c62eb8",
+          "Alias": "column2Content",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Column 2 Content",
+          "SortOrder": 9
+        },
+        {
+          "Key": "e63fcbeb-ec87-4aaa-a0bb-5057bc5c8ab8",
+          "Alias": "column1Heading",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Column 1 Heading",
+          "SortOrder": 4
+        },
+        {
+          "Key": "f83d0656-4676-426e-902e-a1b7a6cd9ee3",
+          "Alias": "column4Content",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Column 4 Content",
+          "SortOrder": 17
+        },
+        {
+          "Key": "fccbe538-2018-4b89-af63-6ac8b954ca26",
+          "Alias": "column3Icon",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Description": "Enter the Regular Icon name from https://fontawesome.com/search?q=star&o=r&s=regular\n(Example: star OR paper-plane )",
+          "Name": "Column 3 Icon",
+          "SortOrder": 11
+        }
+      ]
+    }
+  ],
+  "PropertyTypes": [],
+  "Udi": "umb://document-type/c640b1c88ca64a8bad513776425ba92b",
+  "Dependencies": [
+    {
+      "Udi": "umb://data-type/094ea51013be4f358f03687f54bb9ba2",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/9001e1a4d3d940178577caf42c500db5",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type-container/811495c9ae7b467da08ce40db9f6c9ca",
+      "Ordering": true
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
+  "__version": "13.0.4"
+}

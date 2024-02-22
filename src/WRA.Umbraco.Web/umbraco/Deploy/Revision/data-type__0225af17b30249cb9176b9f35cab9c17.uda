@@ -1,0 +1,35 @@
+{
+  "Name": "Approved Color",
+  "Alias": "",
+  "EditorAlias": "Umbraco.ColorPicker",
+  "DatabaseType": "Nvarchar",
+  "Configuration": {
+    "useLabel": false,
+    "items": [
+      {
+        "id": 1,
+        "value": "{\"value\":\"1d4674\",\"label\":\"1d4674\"}"
+      },
+      {
+        "id": 2,
+        "value": "{\"value\":\"deecf2\",\"label\":\"deecf2\"}"
+      },
+      {
+        "id": 3,
+        "value": "{\"value\":\"f4f4f7\",\"label\":\"f4f4f7\"}"
+      },
+      {
+        "id": 4,
+        "value": "{\"value\":\"2560b9\",\"label\":\"2560b9\"}"
+      },
+      {
+        "id": 5,
+        "value": "{\"value\":\"ffffff\",\"label\":\"ffffff\"}"
+      }
+    ]
+  },
+  "Udi": "umb://data-type/0225af17b30249cb9176b9f35cab9c17",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
+  "__version": "13.0.4"
+}

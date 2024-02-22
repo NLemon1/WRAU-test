@@ -1,0 +1,64 @@
+{
+  "Name": "Generic Card",
+  "Alias": "genericCard",
+  "AllowedTemplates": [],
+  "HistoryCleanup": {},
+  "Icon": "icon-science",
+  "Thumbnail": "folder.png",
+  "Permissions": {
+    "IsElementType": true,
+    "AllowedChildContentTypes": []
+  },
+  "Parent": "umb://document-type-container/7d7bb95bd7634722b04820839c0ae21e",
+  "CompositionContentTypes": [
+    "umb://document-type/0abae81534064d8398a5115d90ddd177",
+    "umb://document-type/38e48d076783491993c671f1add73d05",
+    "umb://document-type/960c0ac2ce454e69a912f801dee7c0b7",
+    "umb://document-type/d34735ed19f440a6babe442a9e096524"
+  ],
+  "PropertyGroups": [
+    {
+      "Key": "fc1c9b38-f320-4e77-a0fc-b5cc384bc2ab",
+      "Name": "Content",
+      "Alias": "content",
+      "PropertyTypes": [
+        {
+          "Key": "1aba9130-4480-4504-ade1-9d28e21dfd3f",
+          "Alias": "verticalAlignment",
+          "DataType": "umb://data-type/73554ffdd81c40ee966f938d7bd80c83",
+          "Name": "Vertical Alignment"
+        }
+      ]
+    }
+  ],
+  "PropertyTypes": [],
+  "Udi": "umb://document-type/5fc677b8a2534579801d26068fab5800",
+  "Dependencies": [
+    {
+      "Udi": "umb://data-type/73554ffdd81c40ee966f938d7bd80c83",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type-container/7d7bb95bd7634722b04820839c0ae21e",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type/0abae81534064d8398a5115d90ddd177",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type/38e48d076783491993c671f1add73d05",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type/960c0ac2ce454e69a912f801dee7c0b7",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type/d34735ed19f440a6babe442a9e096524",
+      "Ordering": true
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
+  "__version": "13.0.4"
+}

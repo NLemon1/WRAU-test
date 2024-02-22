@@ -1,0 +1,268 @@
+{
+  "Name": "Member",
+  "Alias": "Member",
+  "Icon": "icon-user",
+  "Thumbnail": "icon-user",
+  "Permissions": {
+    "AllowedChildContentTypes": []
+  },
+  "CompositionContentTypes": [],
+  "PropertyGroups": [
+    {
+      "Key": "0756729d-d665-46e3-b84a-37aceaa614f8",
+      "Name": "Membership",
+      "SortOrder": 1,
+      "Alias": "membership",
+      "PropertyTypes": [
+        {
+          "Key": "0000001c-0000-0000-0000-000000000000",
+          "Alias": "umbracoMemberComments",
+          "DataType": "umb://data-type/c6bac0dd4ab945b18e30e4b619ee5da3",
+          "Name": "Comments"
+        }
+      ]
+    },
+    {
+      "Key": "2bbdc18c-9198-4f29-93a5-f614dc9eb84e",
+      "Name": "WRA Specific Fields",
+      "SortOrder": 2,
+      "Alias": "wraSpecificFields",
+      "PropertyTypes": [
+        {
+          "Key": "065f3fe9-c875-4f11-ac61-ee1ca971982a",
+          "Alias": "address1",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Description": "",
+          "Name": "Address1",
+          "SortOrder": 2
+        },
+        {
+          "Key": "1b9dffe2-aeee-4c31-b4e1-1dd139f16eb2",
+          "Alias": "companyName",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Company Name",
+          "SortOrder": 9
+        },
+        {
+          "Key": "2c1578a3-b7e9-4cbd-9ccd-00e82ee5d313",
+          "Alias": "companyLogoUrl",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Company Logo Url",
+          "SortOrder": 25
+        },
+        {
+          "Key": "36b3b8fa-3205-4e83-a76c-bb35a3b00a45",
+          "Alias": "firstName",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "First Name",
+          "SortOrder": 19
+        },
+        {
+          "Key": "39aadaee-458b-44e6-81c1-63431399ea84",
+          "Alias": "homePhone",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Home Phone",
+          "SortOrder": 10
+        },
+        {
+          "Key": "3baf9000-0cd8-4f85-99cc-83ac598055b0",
+          "Alias": "address3",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Address 3",
+          "SortOrder": 4
+        },
+        {
+          "Key": "55d63fa2-3f2f-4dfc-9df5-67f9cdd66613",
+          "Alias": "companyId",
+          "DataType": "umb://data-type/f0bc4bfbb49940d6ba86058885a5178c",
+          "Name": "Company Id",
+          "SortOrder": 26
+        },
+        {
+          "Key": "664928a2-8bee-44f7-9032-e5349bb2c86b",
+          "Alias": "suffix",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Suffix",
+          "SortOrder": 24
+        },
+        {
+          "Key": "67bc9e0f-686c-4d71-ad3a-22d72c88d452",
+          "Alias": "paidThruDate",
+          "DataType": "umb://data-type/21d9555ffa684cad80cbad6a3570fbe7",
+          "Name": "Paid Thru Date",
+          "SortOrder": 22
+        },
+        {
+          "Key": "686c9ec5-06e0-45ef-9ddf-d9b503735e95",
+          "Alias": "fullName",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Full Name",
+          "SortOrder": 1
+        },
+        {
+          "Key": "69237c6d-0d5f-44ab-a520-2dcfcdc869f5",
+          "Alias": "gender",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Gender",
+          "SortOrder": 17
+        },
+        {
+          "Key": "6cc3c242-e68e-4d70-ab6d-f55332756f8b",
+          "Alias": "city",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "City",
+          "SortOrder": 5
+        },
+        {
+          "Key": "6f3cbf3e-ef1a-4155-bafe-30aa92e68797",
+          "Alias": "canUseHotline",
+          "DataType": "umb://data-type/c4fb7478f9f04c45a4a2e79661dc612e",
+          "Name": "Can Use Hotline",
+          "SortOrder": 15
+        },
+        {
+          "Key": "710a63c5-fab6-4c7e-8b29-12cc9a80310e",
+          "Alias": "lastName",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Last Name",
+          "SortOrder": 27
+        },
+        {
+          "Key": "73da9f52-0919-43a3-820d-ef99f0a92fa0",
+          "Alias": "cellPhone",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Cell Phone",
+          "SortOrder": 12
+        },
+        {
+          "Key": "76abcf4b-64fe-4985-92c3-63aec276c76e",
+          "Alias": "joinDate",
+          "DataType": "umb://data-type/14c67ec6c1534d4a9e6ecd923c49c5ad",
+          "Name": "JoinDate",
+          "SortOrder": 18
+        },
+        {
+          "Key": "7bd7de69-e018-4cc3-9bba-10cee7662dc5",
+          "Alias": "brokerEmail",
+          "DataType": "umb://data-type/9a34b3cc127442a4826f000c304e0287",
+          "Name": "Broker Email",
+          "SortOrder": 13
+        },
+        {
+          "Key": "96a2455e-b75b-409c-a8a9-0647d3af6656",
+          "Alias": "stateProvince",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "State Province",
+          "SortOrder": 6
+        },
+        {
+          "Key": "999768ab-2ced-4a54-b137-aaae83ac31cd",
+          "Alias": "imageUrl",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Image Url",
+          "SortOrder": 28
+        },
+        {
+          "Key": "a0355d70-cdf3-4472-8cde-c7617cef3daa",
+          "Alias": "mandatoryHotlineLetter",
+          "DataType": "umb://data-type/92897bc6a5f34ffeae27f2e7e33dda49",
+          "Name": "Mandatory Hotline Letter",
+          "SortOrder": 20
+        },
+        {
+          "Key": "a2b853f7-0769-40cd-9474-818c390f0ec9",
+          "Alias": "nrdsId",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "NrdsId",
+          "SortOrder": 21
+        },
+        {
+          "Key": "b45ecb11-7286-4e0d-b121-83a776e9351d",
+          "Alias": "zip",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Zip",
+          "SortOrder": 8
+        },
+        {
+          "Key": "c01fe88a-fde4-4272-91bb-820c18e9461e",
+          "Alias": "fax",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Fax",
+          "SortOrder": 7
+        },
+        {
+          "Key": "c705e91c-db5c-42d8-be38-2cbe99e0c21b",
+          "Alias": "prefix",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Prefix",
+          "SortOrder": 23
+        },
+        {
+          "Key": "ddb0fb5e-2cd0-4b24-bcec-047632cd3d60",
+          "Alias": "brokerFullName",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Broker Full Name",
+          "SortOrder": 14
+        },
+        {
+          "Key": "e87119ab-5dea-4e27-acb1-6a2dc7d2e925",
+          "Alias": "workPhone",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Work Phone",
+          "SortOrder": 11
+        },
+        {
+          "Key": "ef7d56f7-1a7e-4c11-b51a-589069f690fc",
+          "Alias": "externalId",
+          "DataType": "umb://data-type/f0bc4bfbb49940d6ba86058885a5178c",
+          "Name": "ExternalId"
+        },
+        {
+          "Key": "f024a527-2877-4558-94ae-4981de684de5",
+          "Alias": "address2",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Address2",
+          "SortOrder": 3
+        }
+      ]
+    }
+  ],
+  "PropertyTypes": [],
+  "Udi": "umb://member-type/d59be02f1df94228aa1e01917d806cda",
+  "Dependencies": [
+    {
+      "Udi": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/14c67ec6c1534d4a9e6ecd923c49c5ad",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/21d9555ffa684cad80cbad6a3570fbe7",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/92897bc6a5f34ffeae27f2e7e33dda49",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/9a34b3cc127442a4826f000c304e0287",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/c4fb7478f9f04c45a4a2e79661dc612e",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/c6bac0dd4ab945b18e30e4b619ee5da3",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/f0bc4bfbb49940d6ba86058885a5178c",
+      "Ordering": true
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.MemberTypeArtifact",
+  "__version": "13.0.4"
+}

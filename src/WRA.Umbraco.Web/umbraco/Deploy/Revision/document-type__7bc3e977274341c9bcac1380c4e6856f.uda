@@ -1,0 +1,30 @@
+{
+  "Name": "Hot Tip Subcategories",
+  "Alias": "hotTipSubcategories",
+  "AllowedTemplates": [],
+  "HistoryCleanup": {},
+  "Icon": "icon-folders color-amber",
+  "Thumbnail": "folder.png",
+  "Permissions": {
+    "AllowedAtRoot": true,
+    "AllowedChildContentTypes": [
+      "umb://document-type/9faf489322424f7896612edc2f655adc"
+    ]
+  },
+  "Parent": "umb://document-type-container/3767e51e2a094bce91970e131b9932f8",
+  "CompositionContentTypes": [],
+  "PropertyGroups": [],
+  "PropertyTypes": [],
+  "Udi": "umb://document-type/7bc3e977274341c9bcac1380c4e6856f",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type-container/3767e51e2a094bce91970e131b9932f8",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type/9faf489322424f7896612edc2f655adc"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
+  "__version": "13.0.4"
+}

@@ -1,0 +1,30 @@
+{
+  "Name": "Testimonials",
+  "Alias": "testimonials",
+  "AllowedTemplates": [],
+  "HistoryCleanup": {},
+  "Icon": "icon-folder-outline color-black",
+  "Thumbnail": "folder.png",
+  "Permissions": {
+    "AllowedAtRoot": true,
+    "AllowedChildContentTypes": [
+      "umb://document-type/a9699e4a384947f2bccb6b1faa284fe5"
+    ]
+  },
+  "Parent": "umb://document-type-container/3767e51e2a094bce91970e131b9932f8",
+  "CompositionContentTypes": [],
+  "PropertyGroups": [],
+  "PropertyTypes": [],
+  "Udi": "umb://document-type/e450f662bbc74619a6999062fee8a47b",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type-container/3767e51e2a094bce91970e131b9932f8",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type/a9699e4a384947f2bccb6b1faa284fe5"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
+  "__version": "13.0.4"
+}

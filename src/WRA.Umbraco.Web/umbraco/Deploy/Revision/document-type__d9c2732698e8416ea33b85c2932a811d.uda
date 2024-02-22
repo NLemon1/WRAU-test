@@ -1,0 +1,109 @@
+{
+  "Name": "Home Hero",
+  "Alias": "homeHero",
+  "AllowedTemplates": [],
+  "HistoryCleanup": {},
+  "Icon": "icon-layout color-black",
+  "Thumbnail": "folder.png",
+  "Permissions": {
+    "IsElementType": true,
+    "AllowedChildContentTypes": []
+  },
+  "Parent": "umb://document-type-container/bd519c787b08489db0782b38f6ef62bb",
+  "CompositionContentTypes": [
+    "umb://document-type/38e48d076783491993c671f1add73d05"
+  ],
+  "PropertyGroups": [
+    {
+      "Key": "aed34c3e-8e04-4347-a29e-e8219cfec93b",
+      "Name": "Content",
+      "Alias": "content",
+      "PropertyTypes": [
+        {
+          "Key": "3aed6866-26bd-4219-9a5f-b1f9fde4535d",
+          "Alias": "videoDesktop",
+          "DataType": "umb://data-type/4309a3ea0d784329a06cc80b036af19a",
+          "Description": "1080p (1920 x 1080 pixels)",
+          "Name": "Video (desktop)",
+          "SortOrder": 5
+        },
+        {
+          "Key": "75c00e00-7400-46bd-bd5c-3841df2e1354",
+          "Alias": "imageMobile",
+          "DataType": "umb://data-type/ad9f0cf2bda245d59ea1a63cfc873fd3",
+          "Description": "Image should be ~ 540 x 540px (@ 1x)",
+          "Mandatory": true,
+          "Name": "Image (mobile)",
+          "SortOrder": 4
+        },
+        {
+          "Key": "83da803c-fda2-42a0-9bf8-90f14c30041b",
+          "Alias": "headline",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Headline",
+          "SortOrder": 1
+        },
+        {
+          "Key": "b3d67425-651c-47ba-b81d-21f7ca68437a",
+          "Alias": "imageDesktop",
+          "DataType": "umb://data-type/ad9f0cf2bda245d59ea1a63cfc873fd3",
+          "Description": "Image should be ~ 1920 x 600px (@1x)",
+          "Mandatory": true,
+          "Name": "Image (desktop)",
+          "SortOrder": 3
+        },
+        {
+          "Key": "ea68577b-642b-4de3-97ac-e91c5ef6d868",
+          "Alias": "overline",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Overline"
+        },
+        {
+          "Key": "f3bdd362-35c7-4ca7-939d-e35be2977bab",
+          "Alias": "overlay",
+          "DataType": "umb://data-type/92897bc6a5f34ffeae27f2e7e33dda49",
+          "Name": "Overlay",
+          "SortOrder": 2
+        },
+        {
+          "Key": "fbf1ef98-ec8b-4bcf-bca7-56cef8187995",
+          "Alias": "videoMobile",
+          "DataType": "umb://data-type/4309a3ea0d784329a06cc80b036af19a",
+          "Description": "720p (1280 x 720 pixels)",
+          "Name": "Video (mobile)",
+          "SortOrder": 6
+        }
+      ]
+    }
+  ],
+  "PropertyTypes": [],
+  "Udi": "umb://document-type/d9c2732698e8416ea33b85c2932a811d",
+  "Dependencies": [
+    {
+      "Udi": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/4309a3ea0d784329a06cc80b036af19a",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/92897bc6a5f34ffeae27f2e7e33dda49",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/ad9f0cf2bda245d59ea1a63cfc873fd3",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type-container/bd519c787b08489db0782b38f6ef62bb",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type/38e48d076783491993c671f1add73d05",
+      "Ordering": true
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
+  "__version": "13.0.4"
+}

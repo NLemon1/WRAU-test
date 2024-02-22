@@ -1,0 +1,14 @@
+{
+  "Name": "Multimedia Item",
+  "Alias": "MultimediaItem",
+  "File": "umb://template-file/MultimediaItem.cshtml",
+  "Udi": "umb://template/3ed7d218589e404ea2c18f8e1f320e0d",
+  "Dependencies": [
+    {
+      "Udi": "umb://template-file/MultimediaItem.cshtml",
+      "Ordering": true
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.TemplateArtifact",
+  "__version": "13.0.4"
+}

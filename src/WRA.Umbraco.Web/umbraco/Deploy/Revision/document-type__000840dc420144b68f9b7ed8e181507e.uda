@@ -1,0 +1,30 @@
+{
+  "Name": "Multimedia Categories",
+  "Alias": "multimediaCategories",
+  "AllowedTemplates": [],
+  "HistoryCleanup": {},
+  "Icon": "icon-tags color-black",
+  "Thumbnail": "folder.png",
+  "Permissions": {
+    "AllowedAtRoot": true,
+    "AllowedChildContentTypes": [
+      "umb://document-type/2683b47ffb8544b8b1701d905f6b8709"
+    ]
+  },
+  "Parent": "umb://document-type-container/3767e51e2a094bce91970e131b9932f8",
+  "CompositionContentTypes": [],
+  "PropertyGroups": [],
+  "PropertyTypes": [],
+  "Udi": "umb://document-type/000840dc420144b68f9b7ed8e181507e",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type-container/3767e51e2a094bce91970e131b9932f8",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type/2683b47ffb8544b8b1701d905f6b8709"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
+  "__version": "13.0.4"
+}

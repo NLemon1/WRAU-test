@@ -1,0 +1,33 @@
+{
+  "Name": "Checkout Payment Method Page",
+  "Alias": "checkoutPaymentMethodPage",
+  "DefaultTemplate": "umb://template/c8c6898c489e458db37f658cfcb96028",
+  "AllowedTemplates": [
+    "umb://template/c8c6898c489e458db37f658cfcb96028"
+  ],
+  "HistoryCleanup": {},
+  "Icon": "icon-credit-card-alt color-light-green",
+  "Thumbnail": "folder.png",
+  "Permissions": {
+    "AllowedChildContentTypes": []
+  },
+  "Parent": "umb://document-type/bd79af91c3834a54844ca30f568b74d5",
+  "CompositionContentTypes": [
+    "umb://document-type/bd79af91c3834a54844ca30f568b74d5"
+  ],
+  "PropertyGroups": [],
+  "PropertyTypes": [],
+  "Udi": "umb://document-type/d08c12833c76430cb1fb576b775d831f",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type/bd79af91c3834a54844ca30f568b74d5",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://template/c8c6898c489e458db37f658cfcb96028",
+      "Ordering": true
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
+  "__version": "13.0.4"
+}

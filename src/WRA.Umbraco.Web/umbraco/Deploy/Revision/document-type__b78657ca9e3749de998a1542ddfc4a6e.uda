@@ -1,0 +1,84 @@
+{
+  "Name": "News Articles",
+  "Alias": "newsArticles",
+  "DefaultTemplate": "umb://template/5819f23c63054f3387c0a93b9f557825",
+  "AllowedTemplates": [
+    "umb://template/5819f23c63054f3387c0a93b9f557825"
+  ],
+  "HistoryCleanup": {},
+  "Icon": "icon-newspaper-alt color-black",
+  "Thumbnail": "folder.png",
+  "Permissions": {
+    "AllowedChildContentTypes": [
+      "umb://document-type/a848d7fc16b145f985c21523107d4c0b"
+    ]
+  },
+  "Parent": "umb://document-type-container/8cacfbb1be7e47339707ec783af9070c",
+  "CompositionContentTypes": [
+    "umb://document-type/14d24fc815e945d6baa835eae09a1d7f",
+    "umb://document-type/7cc368ff00cb4264ad60f52a76c3a911",
+    "umb://document-type/f0c2133970844a948c095978736296ce"
+  ],
+  "PropertyGroups": [
+    {
+      "Key": "0324b1ff-bfac-4fe2-beda-87d553396a4e",
+      "Name": "Content",
+      "Type": 1,
+      "Alias": "content",
+      "PropertyTypes": [
+        {
+          "Key": "147e6e3a-cd68-4149-b2ea-49660fc48d63",
+          "Alias": "gridSection",
+          "DataType": "umb://data-type/5aa12b11cd24491f94da21e6399ddc33",
+          "Description": "Drop section blocks",
+          "Name": "Grid Section"
+        },
+        {
+          "Key": "8f973ee1-e9d2-4fbd-bd8d-6698eca0c035",
+          "Alias": "fallbackImage",
+          "DataType": "umb://data-type/ad9f0cf2bda245d59ea1a63cfc873fd3",
+          "Description": "Shows in result tiles if no image is available on article.",
+          "Name": "Fallback Image",
+          "SortOrder": 2
+        }
+      ]
+    }
+  ],
+  "PropertyTypes": [],
+  "Udi": "umb://document-type/b78657ca9e3749de998a1542ddfc4a6e",
+  "Dependencies": [
+    {
+      "Udi": "umb://data-type/5aa12b11cd24491f94da21e6399ddc33",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/ad9f0cf2bda245d59ea1a63cfc873fd3",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type-container/8cacfbb1be7e47339707ec783af9070c",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type/14d24fc815e945d6baa835eae09a1d7f",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type/7cc368ff00cb4264ad60f52a76c3a911",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type/a848d7fc16b145f985c21523107d4c0b"
+    },
+    {
+      "Udi": "umb://document-type/f0c2133970844a948c095978736296ce",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://template/5819f23c63054f3387c0a93b9f557825",
+      "Ordering": true
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
+  "__version": "13.0.4"
+}

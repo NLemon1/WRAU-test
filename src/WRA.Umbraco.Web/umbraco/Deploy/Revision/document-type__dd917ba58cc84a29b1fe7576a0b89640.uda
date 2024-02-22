@@ -1,0 +1,33 @@
+{
+  "Name": "Checkout Shipping Method Page",
+  "Alias": "checkoutShippingMethodPage",
+  "DefaultTemplate": "umb://template/6133189e15754be69ed799854711a698",
+  "AllowedTemplates": [
+    "umb://template/6133189e15754be69ed799854711a698"
+  ],
+  "HistoryCleanup": {},
+  "Icon": "icon-truck color-light-green",
+  "Thumbnail": "folder.png",
+  "Permissions": {
+    "AllowedChildContentTypes": []
+  },
+  "Parent": "umb://document-type/bd79af91c3834a54844ca30f568b74d5",
+  "CompositionContentTypes": [
+    "umb://document-type/bd79af91c3834a54844ca30f568b74d5"
+  ],
+  "PropertyGroups": [],
+  "PropertyTypes": [],
+  "Udi": "umb://document-type/dd917ba58cc84a29b1fe7576a0b89640",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type/bd79af91c3834a54844ca30f568b74d5",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://template/6133189e15754be69ed799854711a698",
+      "Ordering": true
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
+  "__version": "13.0.4"
+}

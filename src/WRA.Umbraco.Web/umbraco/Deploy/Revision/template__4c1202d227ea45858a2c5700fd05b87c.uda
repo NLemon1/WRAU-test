@@ -1,0 +1,14 @@
+{
+  "Name": "Categories Page",
+  "Alias": "CategoriesPage",
+  "File": "umb://template-file/CategoriesPage.cshtml",
+  "Udi": "umb://template/4c1202d227ea45858a2c5700fd05b87c",
+  "Dependencies": [
+    {
+      "Udi": "umb://template-file/CategoriesPage.cshtml",
+      "Ordering": true
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.TemplateArtifact",
+  "__version": "13.0.4"
+}

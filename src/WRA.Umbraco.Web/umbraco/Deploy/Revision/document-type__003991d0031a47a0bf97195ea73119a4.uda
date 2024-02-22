@@ -1,0 +1,34 @@
+{
+  "Name": "Reusable Widgets",
+  "Alias": "reusableWidgets",
+  "AllowedTemplates": [],
+  "HistoryCleanup": {},
+  "Icon": "icon-folder-outline color-black",
+  "Thumbnail": "folder.png",
+  "Permissions": {
+    "AllowedAtRoot": true,
+    "AllowedChildContentTypes": [
+      "umb://document-type/5e4314c761294e1c9cc573b37360d9d8",
+      "umb://document-type/c640b1c88ca64a8bad513776425ba92b"
+    ]
+  },
+  "Parent": "umb://document-type-container/811495c9ae7b467da08ce40db9f6c9ca",
+  "CompositionContentTypes": [],
+  "PropertyGroups": [],
+  "PropertyTypes": [],
+  "Udi": "umb://document-type/003991d0031a47a0bf97195ea73119a4",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type-container/811495c9ae7b467da08ce40db9f6c9ca",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type/5e4314c761294e1c9cc573b37360d9d8"
+    },
+    {
+      "Udi": "umb://document-type/c640b1c88ca64a8bad513776425ba92b"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
+  "__version": "13.0.4"
+}

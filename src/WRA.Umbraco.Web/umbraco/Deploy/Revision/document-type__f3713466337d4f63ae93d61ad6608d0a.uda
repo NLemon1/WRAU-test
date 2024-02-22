@@ -1,0 +1,84 @@
+{
+  "Name": "Education Card",
+  "Alias": "educationCard",
+  "AllowedTemplates": [],
+  "HistoryCleanup": {},
+  "Icon": "icon-playing-cards color-black",
+  "Thumbnail": "folder.png",
+  "Description": "(use on homepage only)",
+  "Permissions": {
+    "IsElementType": true,
+    "AllowedChildContentTypes": []
+  },
+  "Parent": "umb://document-type-container/7d7bb95bd7634722b04820839c0ae21e",
+  "CompositionContentTypes": [],
+  "PropertyGroups": [
+    {
+      "Key": "ea528140-ca00-4015-884b-a602164755e7",
+      "Name": "Group",
+      "Alias": "group",
+      "PropertyTypes": [
+        {
+          "Key": "26164ef6-faf8-42ff-b9d5-b512b3fb084b",
+          "Alias": "pageLink",
+          "DataType": "umb://data-type/094ea51013be4f358f03687f54bb9ba2",
+          "Name": "PageLink",
+          "SortOrder": 4
+        },
+        {
+          "Key": "497c3bad-b82f-4e3a-b7ae-9f95c6c624b2",
+          "Alias": "headline",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Headline",
+          "SortOrder": 2
+        },
+        {
+          "Key": "65d58148-5c5a-4768-b698-dea1821ca1de",
+          "Alias": "number",
+          "DataType": "umb://data-type/2e6d3631066e44b8aec496f09099b2b5",
+          "Name": "Number"
+        },
+        {
+          "Key": "b5bee64a-f921-4481-b2b0-6c2e5ef2aed4",
+          "Alias": "content",
+          "DataType": "umb://data-type/c6bac0dd4ab945b18e30e4b619ee5da3",
+          "Name": "Content",
+          "SortOrder": 3
+        },
+        {
+          "Key": "e88af5ed-ecfb-49bd-a439-129f4a47c97f",
+          "Alias": "overline",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Overline",
+          "SortOrder": 1
+        }
+      ]
+    }
+  ],
+  "PropertyTypes": [],
+  "Udi": "umb://document-type/f3713466337d4f63ae93d61ad6608d0a",
+  "Dependencies": [
+    {
+      "Udi": "umb://data-type/094ea51013be4f358f03687f54bb9ba2",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/2e6d3631066e44b8aec496f09099b2b5",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/c6bac0dd4ab945b18e30e4b619ee5da3",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type-container/7d7bb95bd7634722b04820839c0ae21e",
+      "Ordering": true
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
+  "__version": "13.0.4"
+}

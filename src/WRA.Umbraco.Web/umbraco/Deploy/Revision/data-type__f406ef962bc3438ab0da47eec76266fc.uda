@@ -1,0 +1,14 @@
+{
+  "Name": "Site Settings - EnableMessage - Toggle",
+  "Alias": "",
+  "EditorAlias": "Umbraco.TrueFalse",
+  "DatabaseType": "Integer",
+  "Configuration": {
+    "default": false,
+    "showLabels": false
+  },
+  "Udi": "umb://data-type/f406ef962bc3438ab0da47eec76266fc",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
+  "__version": "13.0.4"
+}

@@ -1,0 +1,160 @@
+{
+  "Name": "News Article",
+  "Alias": "article",
+  "DefaultTemplate": "umb://template/277cf1ab9768401ea686247ee1e2b70f",
+  "AllowedTemplates": [
+    "umb://template/277cf1ab9768401ea686247ee1e2b70f"
+  ],
+  "HistoryCleanup": {},
+  "Icon": "icon-article color-black",
+  "Thumbnail": "folder.png",
+  "Permissions": {
+    "AllowedChildContentTypes": []
+  },
+  "Parent": "umb://document-type-container/8cacfbb1be7e47339707ec783af9070c",
+  "CompositionContentTypes": [
+    "umb://document-type/14d24fc815e945d6baa835eae09a1d7f",
+    "umb://document-type/7cc368ff00cb4264ad60f52a76c3a911",
+    "umb://document-type/f0c2133970844a948c095978736296ce"
+  ],
+  "PropertyGroups": [
+    {
+      "Key": "fa630479-6ba3-4682-93c6-12e5b63a5c76",
+      "Name": "Content",
+      "Alias": "content",
+      "PropertyTypes": [
+        {
+          "Key": "5d0ad50b-3f01-45c3-8cf1-c53f7707d79c",
+          "Alias": "richTextContent",
+          "DataType": "umb://data-type/ca90c9500aff4e72b976a30b1ac57dad",
+          "Name": "Rich Text Content",
+          "SortOrder": 6
+        },
+        {
+          "Key": "bc11ab3e-6105-4033-9903-eec25be46433",
+          "Alias": "title",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Description": "Overrides default document name.",
+          "Name": "Title"
+        },
+        {
+          "Key": "c1ab1f85-0bf6-4ab5-990c-990945fdecf2",
+          "Alias": "image",
+          "DataType": "umb://data-type/ad9f0cf2bda245d59ea1a63cfc873fd3",
+          "Description": "min 550px width",
+          "Name": "Image",
+          "SortOrder": 1
+        },
+        {
+          "Key": "d06b0279-9648-4c25-b9a3-a362fec2144a",
+          "Alias": "excerpt",
+          "DataType": "umb://data-type/51fd7f92cc5a4c2fb9ca4095a58b41af",
+          "Description": "Displays on cards. Will override beginning article text.",
+          "Name": "Excerpt",
+          "SortOrder": 8
+        },
+        {
+          "Key": "d3cb61ac-c413-48fb-9d07-dbe3d9555376",
+          "Alias": "date",
+          "DataType": "umb://data-type/5046194e4237453ca54715db3a07c4e1",
+          "Description": "Date of publication",
+          "Mandatory": true,
+          "Name": "Date",
+          "SortOrder": 2
+        },
+        {
+          "Key": "d59f43c3-9517-41ee-ad1a-6f34010416f5",
+          "Alias": "author",
+          "DataType": "umb://data-type/7b78b6edbe8743d5a1863a62f6c5c977",
+          "Name": "Author",
+          "SortOrder": 3
+        },
+        {
+          "Key": "ebf7de56-5b02-47f3-ba95-0df38aad7dd7",
+          "Alias": "sections",
+          "DataType": "umb://data-type/4505ed15d227485ca996c463b2cd0888",
+          "Name": "Sections",
+          "SortOrder": 7
+        },
+        {
+          "Key": "ec13572f-5e99-4abc-b907-88b41bf5e6a5",
+          "Alias": "category",
+          "DataType": "umb://data-type/dec076d181cd432abbbd07f7d59a58ea",
+          "Description": "Select one category.",
+          "Mandatory": true,
+          "Name": "Category",
+          "SortOrder": 4
+        },
+        {
+          "Key": "f2295017-c363-4b7a-ba35-97bbbc5f183f",
+          "Alias": "magazineLink",
+          "DataType": "umb://data-type/332b3c9d57d04525bb5b7f96d64710f3",
+          "Name": "Magazine Link",
+          "SortOrder": 5
+        }
+      ]
+    }
+  ],
+  "PropertyTypes": [],
+  "Udi": "umb://document-type/a848d7fc16b145f985c21523107d4c0b",
+  "Dependencies": [
+    {
+      "Udi": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/332b3c9d57d04525bb5b7f96d64710f3",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/4505ed15d227485ca996c463b2cd0888",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/5046194e4237453ca54715db3a07c4e1",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/51fd7f92cc5a4c2fb9ca4095a58b41af",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/7b78b6edbe8743d5a1863a62f6c5c977",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/ad9f0cf2bda245d59ea1a63cfc873fd3",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/ca90c9500aff4e72b976a30b1ac57dad",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/dec076d181cd432abbbd07f7d59a58ea",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type-container/8cacfbb1be7e47339707ec783af9070c",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type/14d24fc815e945d6baa835eae09a1d7f",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type/7cc368ff00cb4264ad60f52a76c3a911",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type/f0c2133970844a948c095978736296ce",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://template/277cf1ab9768401ea686247ee1e2b70f",
+      "Ordering": true
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
+  "__version": "13.0.4"
+}

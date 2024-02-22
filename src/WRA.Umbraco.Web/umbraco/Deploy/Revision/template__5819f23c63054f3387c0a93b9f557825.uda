@@ -1,0 +1,14 @@
+{
+  "Name": "News Articles",
+  "Alias": "NewsArticles",
+  "File": "umb://template-file/NewsArticles.cshtml",
+  "Udi": "umb://template/5819f23c63054f3387c0a93b9f557825",
+  "Dependencies": [
+    {
+      "Udi": "umb://template-file/NewsArticles.cshtml",
+      "Ordering": true
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.TemplateArtifact",
+  "__version": "13.0.4"
+}

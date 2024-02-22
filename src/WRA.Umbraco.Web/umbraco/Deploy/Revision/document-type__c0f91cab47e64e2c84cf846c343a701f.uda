@@ -1,0 +1,77 @@
+{
+  "Name": "Icon Item",
+  "Alias": "iconItem",
+  "AllowedTemplates": [],
+  "HistoryCleanup": {},
+  "Icon": "icon-bug color-black",
+  "Thumbnail": "folder.png",
+  "Permissions": {
+    "IsElementType": true,
+    "AllowedChildContentTypes": []
+  },
+  "Parent": "umb://document-type-container/7d7bb95bd7634722b04820839c0ae21e",
+  "CompositionContentTypes": [],
+  "PropertyGroups": [
+    {
+      "Key": "4393496e-5e2e-4a66-a667-a0358d7c3427",
+      "Name": "Content",
+      "Alias": "content",
+      "PropertyTypes": [
+        {
+          "Key": "07138029-8eab-42ab-af48-9d0a255366ce",
+          "Alias": "icon",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Description": "Enter the Regukar Icon name from https://fontawesome.com/search?q=star&o=r&s=regular",
+          "Name": "Icon"
+        },
+        {
+          "Key": "5202f431-51ac-495d-a1ec-b48282cbe10d",
+          "Alias": "contrast",
+          "DataType": "umb://data-type/5cfc7c6b29bb4b16a3976a6ffa2e630b",
+          "Name": "Contrast",
+          "SortOrder": 2
+        },
+        {
+          "Key": "8cb98f81-15e9-47cc-87f7-2a7c7a836d9c",
+          "Alias": "bottomMargin",
+          "DataType": "umb://data-type/0770a1fb65ac42618d9f77c1a75e5b62",
+          "Name": "Bottom Margin",
+          "SortOrder": 3
+        },
+        {
+          "Key": "a5e59c74-7cff-400e-8708-609279675f3a",
+          "Alias": "iconSize",
+          "DataType": "umb://data-type/5987d4630a39441c9c1da386a4d51a8b",
+          "Name": "Icon Size",
+          "SortOrder": 1
+        }
+      ]
+    }
+  ],
+  "PropertyTypes": [],
+  "Udi": "umb://document-type/c0f91cab47e64e2c84cf846c343a701f",
+  "Dependencies": [
+    {
+      "Udi": "umb://data-type/0770a1fb65ac42618d9f77c1a75e5b62",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/5987d4630a39441c9c1da386a4d51a8b",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/5cfc7c6b29bb4b16a3976a6ffa2e630b",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type-container/7d7bb95bd7634722b04820839c0ae21e",
+      "Ordering": true
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
+  "__version": "13.0.4"
+}

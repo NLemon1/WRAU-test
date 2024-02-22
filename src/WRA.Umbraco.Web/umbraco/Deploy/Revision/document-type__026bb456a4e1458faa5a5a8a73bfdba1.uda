@@ -1,0 +1,75 @@
+{
+  "Name": "Generic Section",
+  "Alias": "genericSection",
+  "AllowedTemplates": [],
+  "HistoryCleanup": {},
+  "Icon": "icon-layout color-black",
+  "Thumbnail": "folder.png",
+  "Permissions": {
+    "IsElementType": true,
+    "AllowedChildContentTypes": []
+  },
+  "Parent": "umb://document-type-container/37b4b44f0abc4536af8ed684511c2571",
+  "CompositionContentTypes": [
+    "umb://document-type/0abae81534064d8398a5115d90ddd177",
+    "umb://document-type/38e48d076783491993c671f1add73d05",
+    "umb://document-type/60f9d673dad543a09928bdcb457eb7e6",
+    "umb://document-type/960c0ac2ce454e69a912f801dee7c0b7",
+    "umb://document-type/c0aede092c904c27b56c5afbd90068fc",
+    "umb://document-type/d34735ed19f440a6babe442a9e096524"
+  ],
+  "PropertyGroups": [
+    {
+      "Key": "419ac9ad-b668-4716-b32d-f8fc3f801e55",
+      "Name": "Content",
+      "Alias": "content",
+      "PropertyTypes": [
+        {
+          "Key": "c730a4ec-3492-4cac-97fe-f7ff292ac4bc",
+          "Alias": "innerWidth",
+          "DataType": "umb://data-type/124ac81f2dc3400890c72c3459851c01",
+          "Description": "Max-width % on inside content (inside color background).",
+          "Name": "Inner Width"
+        }
+      ]
+    }
+  ],
+  "PropertyTypes": [],
+  "Udi": "umb://document-type/026bb456a4e1458faa5a5a8a73bfdba1",
+  "Dependencies": [
+    {
+      "Udi": "umb://data-type/124ac81f2dc3400890c72c3459851c01",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type-container/37b4b44f0abc4536af8ed684511c2571",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type/0abae81534064d8398a5115d90ddd177",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type/38e48d076783491993c671f1add73d05",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type/60f9d673dad543a09928bdcb457eb7e6",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type/960c0ac2ce454e69a912f801dee7c0b7",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type/c0aede092c904c27b56c5afbd90068fc",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type/d34735ed19f440a6babe442a9e096524",
+      "Ordering": true
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
+  "__version": "13.0.4"
+}

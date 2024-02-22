@@ -1,0 +1,43 @@
+{
+  "Name": "Page Settings",
+  "Alias": "pageSettings",
+  "AllowedTemplates": [],
+  "HistoryCleanup": {},
+  "Icon": "icon-settings color-black",
+  "Thumbnail": "folder.png",
+  "Permissions": {
+    "AllowedChildContentTypes": []
+  },
+  "Parent": "umb://document-type-container/5de99ed69c2445159d69e36d531ca63a",
+  "CompositionContentTypes": [],
+  "PropertyGroups": [
+    {
+      "Key": "cf8132b7-c0fe-4be6-bfc8-e0c12e551193",
+      "Name": "Page Settings",
+      "SortOrder": 997,
+      "Alias": "pageSettings1",
+      "PropertyTypes": [
+        {
+          "Key": "dd7485ce-65e8-4148-ba9a-0ca5d512857e",
+          "Alias": "siteFooterWidget",
+          "DataType": "umb://data-type/e0dfde56f2f8421881c24da0f5d2524f",
+          "Name": "Site Footer Widget"
+        }
+      ]
+    }
+  ],
+  "PropertyTypes": [],
+  "Udi": "umb://document-type/f0c2133970844a948c095978736296ce",
+  "Dependencies": [
+    {
+      "Udi": "umb://data-type/e0dfde56f2f8421881c24da0f5d2524f",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type-container/5de99ed69c2445159d69e36d531ca63a",
+      "Ordering": true
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
+  "__version": "13.0.4"
+}

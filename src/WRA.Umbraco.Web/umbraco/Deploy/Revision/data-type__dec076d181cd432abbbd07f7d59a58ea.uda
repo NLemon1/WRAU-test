@@ -1,0 +1,20 @@
+{
+  "Name": "Article - Category - Content Picker",
+  "Alias": "",
+  "EditorAlias": "Umbraco.ContentPicker",
+  "DatabaseType": "Nvarchar",
+  "Configuration": {
+    "showOpenButton": false,
+    "startNodeId": "umb://document/0d430f6ff9cd458587663cf0ef447589",
+    "ignoreUserStartNodes": false
+  },
+  "Udi": "umb://data-type/dec076d181cd432abbbd07f7d59a58ea",
+  "Dependencies": [
+    {
+      "Udi": "umb://document/0d430f6ff9cd458587663cf0ef447589",
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
+  "__version": "13.0.4"
+}

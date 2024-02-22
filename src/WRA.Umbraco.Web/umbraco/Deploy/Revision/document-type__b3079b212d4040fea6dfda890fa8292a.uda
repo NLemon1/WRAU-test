@@ -1,0 +1,43 @@
+{
+  "Name": "Membership Widget",
+  "Alias": "membershipWidget",
+  "AllowedTemplates": [],
+  "HistoryCleanup": {},
+  "Icon": "icon-layout color-black",
+  "Thumbnail": "folder.png",
+  "Permissions": {
+    "IsElementType": true,
+    "AllowedChildContentTypes": []
+  },
+  "Parent": "umb://document-type-container/37b4b44f0abc4536af8ed684511c2571",
+  "CompositionContentTypes": [],
+  "PropertyGroups": [
+    {
+      "Key": "1f1f88d5-f82e-4bcb-992d-c09ac3efc115",
+      "Name": "Content",
+      "Alias": "content",
+      "PropertyTypes": [
+        {
+          "Key": "035f13ca-3fdf-48fc-ad90-22929e71f2b8",
+          "Alias": "selectWidget",
+          "DataType": "umb://data-type/dc54efa9165b4f3583d7ebe7530d6245",
+          "Name": "Select widget"
+        }
+      ]
+    }
+  ],
+  "PropertyTypes": [],
+  "Udi": "umb://document-type/b3079b212d4040fea6dfda890fa8292a",
+  "Dependencies": [
+    {
+      "Udi": "umb://data-type/dc54efa9165b4f3583d7ebe7530d6245",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type-container/37b4b44f0abc4536af8ed684511c2571",
+      "Ordering": true
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
+  "__version": "13.0.4"
+}

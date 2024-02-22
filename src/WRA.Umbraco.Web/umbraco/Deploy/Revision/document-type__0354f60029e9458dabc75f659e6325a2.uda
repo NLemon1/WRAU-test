@@ -1,0 +1,107 @@
+{
+  "Name": "Headline",
+  "Alias": "headlineBlock",
+  "AllowedTemplates": [],
+  "HistoryCleanup": {},
+  "Icon": "icon-science",
+  "Thumbnail": "folder.png",
+  "Permissions": {
+    "IsElementType": true,
+    "AllowedChildContentTypes": []
+  },
+  "Parent": "umb://document-type-container/7d7bb95bd7634722b04820839c0ae21e",
+  "CompositionContentTypes": [
+    "umb://document-type/38e48d076783491993c671f1add73d05"
+  ],
+  "PropertyGroups": [
+    {
+      "Key": "e58dbebc-c4be-420f-bb4e-91674abc8b86",
+      "Name": "Content",
+      "Alias": "content",
+      "PropertyTypes": [
+        {
+          "Key": "2d5b512c-8d35-4b63-86dd-1f97a4ea6ad5",
+          "Alias": "headlineText",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Mandatory": true,
+          "Name": "Headline Text"
+        },
+        {
+          "Key": "326b716e-c960-4d95-a961-7e1a02b6d5de",
+          "Alias": "fontSize",
+          "DataType": "umb://data-type/0b6a45e744ba430d9da54e46060b9e03",
+          "Description": "Defaults to pre-determined heading level size.",
+          "Name": "Font Size",
+          "SortOrder": 2
+        },
+        {
+          "Key": "39294bc4-c2de-4ccf-a0ed-48fe3314461e",
+          "Alias": "bottomMargin",
+          "DataType": "umb://data-type/0770a1fb65ac42618d9f77c1a75e5b62",
+          "Name": "Bottom Margin",
+          "SortOrder": 5
+        },
+        {
+          "Key": "8fc6ddef-41aa-4b95-9ca9-a92e3cf3c22c",
+          "Alias": "textColor",
+          "DataType": "umb://data-type/6e3c0d18fd014527b3b46819b3947a5d",
+          "Name": "Text Color",
+          "SortOrder": 4
+        },
+        {
+          "Key": "a6af5eaf-deaf-4162-9607-c6bd0ca83d3d",
+          "Alias": "headingLevel",
+          "DataType": "umb://data-type/89d838390e524406b9f43f0bc6999826",
+          "Mandatory": true,
+          "Name": "Heading Level",
+          "SortOrder": 1
+        },
+        {
+          "Key": "adb5dd8d-908e-448e-895e-0c5aa074c0d3",
+          "Alias": "textAlignment",
+          "DataType": "umb://data-type/a775628831bb4a81980de0e4830a3269",
+          "Name": "Text Alignment",
+          "SortOrder": 3
+        }
+      ]
+    }
+  ],
+  "PropertyTypes": [],
+  "Udi": "umb://document-type/0354f60029e9458dabc75f659e6325a2",
+  "Dependencies": [
+    {
+      "Udi": "umb://data-type/0770a1fb65ac42618d9f77c1a75e5b62",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/0b6a45e744ba430d9da54e46060b9e03",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/6e3c0d18fd014527b3b46819b3947a5d",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/89d838390e524406b9f43f0bc6999826",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/a775628831bb4a81980de0e4830a3269",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type-container/7d7bb95bd7634722b04820839c0ae21e",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type/38e48d076783491993c671f1add73d05",
+      "Ordering": true
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
+  "__version": "13.0.4"
+}

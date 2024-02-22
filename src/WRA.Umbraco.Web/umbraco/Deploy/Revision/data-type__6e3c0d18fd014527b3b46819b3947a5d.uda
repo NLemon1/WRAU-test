@@ -1,0 +1,27 @@
+{
+  "Name": "Text Color - Color Picker",
+  "Alias": "",
+  "EditorAlias": "Umbraco.ColorPicker",
+  "DatabaseType": "Nvarchar",
+  "Configuration": {
+    "useLabel": false,
+    "items": [
+      {
+        "id": 1,
+        "value": "{\"value\":\"050f1e\",\"label\":\"050f1e\"}"
+      },
+      {
+        "id": 2,
+        "value": "{\"value\":\"ffffff\",\"label\":\"ffffff\"}"
+      },
+      {
+        "id": 3,
+        "value": "{\"value\":\"2560b9\",\"label\":\"2560b9\"}"
+      }
+    ]
+  },
+  "Udi": "umb://data-type/6e3c0d18fd014527b3b46819b3947a5d",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
+  "__version": "13.0.4"
+}

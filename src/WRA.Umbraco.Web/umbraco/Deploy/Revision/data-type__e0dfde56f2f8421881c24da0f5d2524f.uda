@@ -1,0 +1,20 @@
+{
+  "Name": "Site Footer Widget Picker",
+  "Alias": "",
+  "EditorAlias": "Umbraco.ContentPicker",
+  "DatabaseType": "Nvarchar",
+  "Configuration": {
+    "showOpenButton": false,
+    "startNodeId": "umb://document/a5e6ad3042864e2a99e97eef04ee5cc0",
+    "ignoreUserStartNodes": false
+  },
+  "Udi": "umb://data-type/e0dfde56f2f8421881c24da0f5d2524f",
+  "Dependencies": [
+    {
+      "Udi": "umb://document/a5e6ad3042864e2a99e97eef04ee5cc0",
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
+  "__version": "13.0.4"
+}

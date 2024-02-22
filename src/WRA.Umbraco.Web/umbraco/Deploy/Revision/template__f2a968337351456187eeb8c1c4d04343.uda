@@ -1,0 +1,14 @@
+{
+  "Name": "Cart Page",
+  "Alias": "CartPage",
+  "File": "umb://template-file/CartPage.cshtml",
+  "Udi": "umb://template/f2a968337351456187eeb8c1c4d04343",
+  "Dependencies": [
+    {
+      "Udi": "umb://template-file/CartPage.cshtml",
+      "Ordering": true
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.TemplateArtifact",
+  "__version": "13.0.4"
+}

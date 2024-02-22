@@ -1,0 +1,35 @@
+{
+  "Name": "Block Grid - Primary Nav Menu Item",
+  "Alias": "",
+  "EditorAlias": "Umbraco.BlockGrid",
+  "Configuration": {
+    "blocks": [
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": true,
+        "allowInAreas": true,
+        "areas": [],
+        "contentElementTypeKey": "13d9dae7-c73c-46db-aa6d-a3c7cc0c0b86",
+        "view": "~/App_Plugins/CustomBlockView/primaryNavMenu.html",
+        "stylesheet": "~/css/dist/global.css",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false
+      }
+    ],
+    "blockGroups": [],
+    "validationLimit": {},
+    "useLiveEditing": false
+  },
+  "Udi": "umb://data-type/da5c838df7884056a036cfdf7a2b66cf",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type/13d9dae7c73c46dbaa6da3c7cc0c0b86"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
+  "__version": "13.0.4"
+}
