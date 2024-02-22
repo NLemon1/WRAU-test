@@ -2,30 +2,16 @@
   "Name": "zero value",
   "Alias": "zeroValue",
   "Sku": "zv",
-  "TaxClassUdi": "umb://umbraco-commerce-tax-class/b2f596dc22524bb282d1018d4cad9aae",
   "PaymentProviderAlias": "zeroValue",
   "PaymentProviderSettings": {
     "ContinueUrl": "/continue"
   },
-  "AllowedCountryRegions": [
-    {
-      "CountryUdi": "umb://umbraco-commerce-country/5c4488dc6c174d31b34c018d4cadfb53"
-    }
-  ],
   "SortOrder": 1,
   "StoreUdi": "umb://umbraco-commerce-store/a568c06259364d818f97018d4cad99b6",
   "Udi": "umb://umbraco-commerce-payment-method/408fa0eac9a745d5922e018dcd3f7c7f",
   "Dependencies": [
     {
       "Udi": "umb://umbraco-commerce-store/a568c06259364d818f97018d4cad99b6",
-      "Mode": "Exist"
-    },
-    {
-      "Udi": "umb://umbraco-commerce-tax-class/b2f596dc22524bb282d1018d4cad9aae",
-      "Mode": "Exist"
-    },
-    {
-      "Udi": "umb://umbraco-commerce-country/5c4488dc6c174d31b34c018d4cadfb53",
       "Mode": "Exist"
     }
   ],
