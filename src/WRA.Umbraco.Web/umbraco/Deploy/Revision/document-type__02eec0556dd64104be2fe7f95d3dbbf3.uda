@@ -45,6 +45,13 @@
           "SortOrder": 3
         },
         {
+          "Key": "8ae6fb7f-df99-4a65-9a51-24aac5acb0ce",
+          "Alias": "moreArticles",
+          "DataType": "umb://data-type/b4e3535a175347e28568602cf8cfee6f",
+          "Name": "More Articles",
+          "SortOrder": 5
+        },
+        {
           "Key": "9466a06d-e419-4d59-a325-1e881ad2fa76",
           "Alias": "featuredOnlineArticles",
           "DataType": "umb://data-type/bd7768baf6bb4721ad06353749be5b7e",
@@ -72,6 +79,10 @@
     },
     {
       "Udi": "umb://data-type/ad9f0cf2bda245d59ea1a63cfc873fd3",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/b4e3535a175347e28568602cf8cfee6f",
       "Ordering": true
     },
     {

@@ -81,6 +81,14 @@ namespace WRA.Umbraco.Models
 		public virtual global::System.DateTime MonthYearTitle => this.Value<global::System.DateTime>(_publishedValueFallback, "monthYearTitle");
 
 		///<summary>
+		/// More Articles
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("moreArticles")]
+		public virtual global::System.Collections.Generic.IEnumerable<global::Umbraco.Cms.Core.Models.Link> MoreArticles => this.Value<global::System.Collections.Generic.IEnumerable<global::Umbraco.Cms.Core.Models.Link>>(_publishedValueFallback, "moreArticles");
+
+		///<summary>
 		/// Pdf
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
