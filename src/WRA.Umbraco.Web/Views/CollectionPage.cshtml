@@ -1,4 +1,5 @@
-﻿@using Umbraco.Commerce.Core.Models;
+﻿@using Microsoft.AspNetCore.Http.Extensions;
+@using Umbraco.Commerce.Core.Models;
 @using Umbraco.Commerce;
 @using Umbraco.Commerce.Extensions;
 @using Umbraco.Cms.Core.Models.PublishedContent;
@@ -12,54 +13,69 @@
 
     bool isBundled = true;//TO DO: need to flag if the product is a bundle
 
-    //TO DO: This needs to be dynamic?
-    List<SelectListItem> StaticClassCollections = new()
-    {
-        new("Broker Pre-Licensing", "Broker"),
-        new("Sales Pre-Licensing", "Sales"),
-        new("Continuing", "Continuing")
-    };
+
+    //QUESTION: Make Categories selectable per Collection??
+    //categories dropdown
+    IEnumerable<IPublishedContent> classCategories = Umbraco.ContentAtRoot()
+        .DescendantsOrSelfOfType("categoryPage").Where(x => x.IsVisible()).OrderBy(p => p.Name);
+
+    //access incoming referrer parameter
+    string refParameter = ViewContext.HttpContext.Request.Query["ref"].ToString();
+
+    //access incoming category parameter
+    string categoryParameter = ViewContext.HttpContext.Request.Query["category"].ToString();
+    string subCategoryParameter = ViewContext.HttpContext.Request.Query["subcategory"].ToString();
+
+    //check if parameter is part of category collection
+    IEnumerable<IPublishedContent> checkCategory = Umbraco.ContentAtRoot().DescendantsOrSelfOfType("categoryPage").Where(x => x.IsVisible() && x.Name == categoryParameter);
+    
+    var currentCategory = checkCategory.FirstOrDefault();//current category
+
+    //check if parameter is part of subcategory collection
+    IEnumerable<IPublishedContent> checkSubCategory = Umbraco.ContentAtRoot().DescendantsOrSelfOfType("categoryPage").Where(x => x.IsVisible() && x.Name == subCategoryParameter);
 
 }
 
 <header class="page-header page-header--no-accent">
     <div class="container">
         <div class="container--sm">
-            <h1 class="mb-0">@Model.Name</h1>
+            <h1 class="js-collection-title mb-0">
+                @if (checkCategory.Count() != 0)
+                {
+                    @checkCategory.FirstOrDefault().Name
+                } else
+                {
+                    @Model.Name
+                }
+            </h1>
+            <span class="d-block">(CollectionPage.cshtml)</span>
         </div>
     </div>
 </header>
 
-<div class="text-bg-secondary pb-5">
-    <partial name="Breadcrumbs" />
-
+<div class="text-bg-secondary pt-1 pb-5">
+    <div class="text-light">
+        @await Html.PartialAsync("_breadcrumbsProducts", new ViewDataDictionary(this.ViewData) { { "CssClass", "breadcrumbs--light" }, { "ParentName", "Education" }, { "ParentUrl", "/education" }, { "CurrentName", (checkCategory.Count() != 0 ? checkCategory.FirstOrDefault().Name : string.Empty) } })
+    </div>
     <div class="container">
-        <label class="visually-hidden" for="collection-filter">Filter</label>
-        <select id="collection-filter" class="form-select d-inline-block w-auto">
-
-            @* //TO DO: Needs to pull from somewhere? This will act as a jump link to "product page"? ' *@
-            <option value="all">All</option>
-            @foreach (var classCollection in StaticClassCollections)
+        <label class="visually-hidden" for="collection-filter">Filter Categories</label>
+        <select id="collection-filter" class="js-collection-category-filter form-select d-inline-block w-auto">
+            @foreach (var classCategory in classCategories)
             {
-                <option value="@classCollection.Value">@classCollection.Text</option>
+                <!option value="@classCategory.Name" @(categoryParameter == classCategory.Name ? "selected" : string.Empty)>@classCategory.Name</!option>
             }
-
         </select>
     </div>
-
-    <p>tabs -- these are static or dynamic?? TBD</p>
 </div>
 
 @await Html.PartialAsync("blockgrid/default", sections)
 
-@* CARDS FOR Collection *@
 <div class="container my-4 my-lg-6">
 
-    @if (isBundled)
-    {
+    @*  @if (isBundled)  //COURSE BUNDLE CARD
+        {
         <h2 class="h3 pt-4 border-top border-medium mb-6">Course Bundle</h2>
 
-        @* CARD FOR COURSE BUNDLE *@
         <div class="card card-bundle col-6 gap-0 p-0">
             <p class="mb-0 fs-xs px-4 py-1" style="background: var(--bs-blue-light)">Bundle <span class="ms-3 fw-semibold">Credit Hours: 18</span></p>
             <div class="p-4 h-100">
@@ -83,71 +99,24 @@
                 </div>
             </div>
         </div>
-    }
-    
-    @* CARD FOR EVENT *@
-    <div class="py-4 border-top border-medium mt-6">
-        <div class="card p-5 p-lg-9 bg-white">
-            <div class="row gy-4">
-                <div class="col-md-6 pe-lg-7">
-                    <p class="d-inline-block mb-4 px-2 py-1 bg-light fw-semibold fs-sm text-uppercase">Oct 1-4, 2024</p>
-                    <h2 class="h3 mb-4">Event Title</h2>
-                    <p>Copy here about registering for the Annual Convention and taking classes in person. Lorem ipsum dolor sit amet ver tussi condasquelane. Lorem ipsum dolor ver tussi condasquelane.</p>
-                    <a href="/" id="view-product" class="btn btn-primary border-0">Register Now</a>
-                </div>
-                <div class="col-md-6 ps-lg-7">
-                    <ol class="list-unstyled d-flex flex-column justify-content-between h-100">
-                        @for (var i = 1; i < 5; i++)
-                        {
-                            <li>
-                                <p class="fs-md fw-bold">Course @(i): Lorem ipsum dolor sit amet consectetur. Ut sagittis sit nibh.</p>
-                            </li>
-                        }
-                    </ol>
-                </div>
-            </div>
+    } *@
 
-        </div>
+    <h2 class="js-listings-title h3 pt-4 mt-4 mt-lg-8 border-top border-medium mb-4">Individual Classes</h2>
 
+    <div class="js-collection-subcategory-container" hidden>
+        <label for="collection-filter" class="d-block text-uppercase font-family-3 fw-normal mb-2">Course Type</label>
+        <select id="collection-filter" class="js-collection-subcategory-filter form-select d-inline-block w-auto mb-4 mb-lg-6">
+        </select>
     </div>
-
-
-    <h2 class="h3 pt-4 mt-4 mt-lg-8 border-top border-medium mb-6">Individual Classes</h2>
-
-    @* CARDS FOR INDIVIDUAL CLASSES *@
-    <div class="row g-4">
-        @for (var i = 1; i < 10; i++)
-        {
-            <div class="col-md-6 col-lg-4">
-                <div class="card-class bg-light p-4">
-                    <p class="fs-xs">Class <span class="fw-bold">Credit Hours: 1</span></p>
-                    <p class="d-inline-block mb-4 px-2 py-1 bg-white fw-semibold fs-sm text-uppercase">On Demand</p>
-                    <h3 class="fs-lg text-capitalize fw-semibold mb-4">Class Name Title</h3>
-
-                    <div class="d-block mb-1">
-                        <span class="h3 fw-bold">
-                            $50.00
-                        </span>
-                        <span class="fs-sm" style="color: var(--bs-gray-30)">
-                            &nbsp;member pricing
-                        </span>
-                    </div>
-                    <div class="d-block fs-sm mb-0" style="color: var(--bs-gray-30)">
-                        $50.00 &nbsp;non-member pricing
-                    </div>
-
-                    <div class="d-flex flex-column flex-md-row gap-3 mt-4">
-                        <a href="/" id="view-product" class="btn btn-primary btn-sm flex-grow-1">View Product</a>
-                        <a href="/" id="add-to-cart" class="btn btn-secondary btn-sm border-0  flex-grow-1">Add To Cart</a>
-                    </div>
-
-                </div>
-            </div>
-        }
+    <div class="position-relative" style="min-height: 350px;">
+        <div class="js-product-collection row align-items-md-stretch g-4">
+            @* "The space between our wicked lies is, Where we hope to keep safe from pain" *@
+        </div>
+        <div class="js-results-loader search-loading" title="Please wait, loading.">
+            <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+        </div>
     </div>
 
 </div>
-
-
 
 

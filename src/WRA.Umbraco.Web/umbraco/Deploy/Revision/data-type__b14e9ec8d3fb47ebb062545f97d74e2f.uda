@@ -1,0 +1,19 @@
+{
+  "Name": "Interior Hero - Course Search Categories - Multinode Treepicker",
+  "Alias": "",
+  "EditorAlias": "Umbraco.MultiNodeTreePicker",
+  "Configuration": {
+    "startNode": {
+      "type": "content"
+    },
+    "filter": "categoryPage",
+    "minNumber": 0,
+    "maxNumber": 0,
+    "showOpenButton": false,
+    "ignoreUserStartNodes": false
+  },
+  "Udi": "umb://data-type/b14e9ec8d3fb47ebb062545f97d74e2f",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
+  "__version": "13.0.4"
+}

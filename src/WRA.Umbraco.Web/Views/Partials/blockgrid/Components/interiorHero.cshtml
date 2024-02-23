@@ -41,7 +41,9 @@
         props += $" style=\"{style}\"";
     }
 
+   
 
+    
 }
 
 <div @Html.Raw(props.Trim())>
@@ -65,22 +67,39 @@
 
                         @if (content.ShowCourseSearch)
                         {
-                            <div class="col-xl-8 mt-4">
-                                <form id="course-search" method="get" action="/">
-                                    <fieldset class="d-flex flex-column gap-3 bg-transparent">
-                                        <legend class="fw-bold fs-md mb-0">Course Search</legend>
-                                        <label class="visually-hidden" for="category">Category</label>
-                                        <select id="category" class="form-control">
-                                            <option>Select course category</option>
-                                        </select>
-                                        <label class="visually-hidden" for="subcategory">Subcategory</label>
-                                        <select id="subcategory" class="form-control">
-                                            <option>Select course subcategory</option>
-                                        </select>
-                                        <button type="submit" class="btn btn-primary w-100 border-0 outline-0">Find Courses</button>
-                                    </fieldset>
-                                </form>
-                            </div>
+                            @if (content.HasValue("courseSearchCategories"))
+                            {
+                                
+                                IEnumerable<IPublishedContent> categoriesList = content.Value<IEnumerable<IPublishedContent>>("courseSearchCategories").Where(x => x.IsVisible()).OrderBy(p => p.Name);
+
+                                <div class="col-xl-8 mt-4">
+                                    <form id="course-search" method="post" action="/products/products/" class="position-relative">
+                                        <div class="js-results-loader-courses search-loading" title="Please wait, loading.">
+                                            <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                                        </div>
+                                        <fieldset class="d-flex flex-column gap-3 bg-transparent">
+                                            <legend class="fw-bold fs-md mb-0">Course Search</legend>
+                                            <label class="visually-hidden" for="category">Category</label>
+                                            @if (categoriesList.Any()) {
+                                                <select id="category" class="js-courses-category-filter form-control">
+                                                    <option>Select course category</option>
+                                                    @foreach (var category in categoriesList)
+                                                    {
+                                                        <option value="@category.Name">@category.Name</option>
+                                                    }
+                                                </select>
+                                            }
+                                            <div class="js-courses-subcategory-container">
+                                                <label class="visually-hidden" for="subcategory">Subcategory</label>
+                                                <select id="subcategory" class="js-courses-subcategory-filter form-control">
+                                                    <option>Select course subcategory</option>
+                                                </select>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary w-100 border-0 outline-0">Find Courses</button>
+                                        </fieldset>
+                                    </form>
+                                </div>
+                            }
                         }
                     </div>
 

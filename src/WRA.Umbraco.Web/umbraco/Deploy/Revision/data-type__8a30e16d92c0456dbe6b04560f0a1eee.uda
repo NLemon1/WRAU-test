@@ -1,0 +1,19 @@
+{
+  "Name": "Product Category Landing - CategoriesSubcategories - Multinode Treepicker",
+  "Alias": "",
+  "EditorAlias": "Umbraco.MultiNodeTreePicker",
+  "Configuration": {
+    "startNode": {
+      "type": "content"
+    },
+    "filter": "categoryPage,subCategoryPage",
+    "minNumber": 0,
+    "maxNumber": 0,
+    "showOpenButton": false,
+    "ignoreUserStartNodes": false
+  },
+  "Udi": "umb://data-type/8a30e16d92c0456dbe6b04560f0a1eee",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
+  "__version": "13.0.4"
+}

@@ -62,6 +62,14 @@
           "Description": "Image should be ~ 540 x 540px (@ 1x)",
           "Mandatory": true,
           "Name": "Image (mobile)",
+          "SortOrder": 6
+        },
+        {
+          "Key": "a3702b0f-bdf7-40f0-b7f6-76d3f3010270",
+          "Alias": "courseSearchCategories",
+          "DataType": "umb://data-type/b14e9ec8d3fb47ebb062545f97d74e2f",
+          "Description": "Choose categories if showing \"Course Search\"",
+          "Name": "Course Search Categories",
           "SortOrder": 5
         },
         {
@@ -71,7 +79,7 @@
           "Description": "Image should be ~ 1920 x 540px (@1x)",
           "Mandatory": true,
           "Name": "Image (desktop)",
-          "SortOrder": 6
+          "SortOrder": 7
         }
       ]
     }
@@ -97,6 +105,10 @@
     },
     {
       "Udi": "umb://data-type/ad9f0cf2bda245d59ea1a63cfc873fd3",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/b14e9ec8d3fb47ebb062545f97d74e2f",
       "Ordering": true
     },
     {

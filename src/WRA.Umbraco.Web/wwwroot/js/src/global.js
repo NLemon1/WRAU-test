@@ -13,7 +13,8 @@ import multimediaFilters from './components/multimedia-filters';
 import calendar from './components/calendar';
 import quantitySelector from './components/quantity-selector';
 import checkout from './components/checkout';
-
+import education from './components/education';
+import courseSearch from './components/course-search';
 
 expandableTextCards();
 header();
@@ -31,6 +32,14 @@ multimediaFilters();
 quantitySelector();
 checkout();
 
+if (document.body.classList.contains("page-template-collectionPage")) {
+    education();
+}
+
 if (document.getElementById("ec")) {
     calendar();
+}
+
+if (document.getElementById("course-search")) {
+    courseSearch();
 }
