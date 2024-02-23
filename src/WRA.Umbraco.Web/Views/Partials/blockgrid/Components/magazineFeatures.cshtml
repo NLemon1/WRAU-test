@@ -71,12 +71,12 @@
                             <i class="fas fa-download ms-1"></i>
                         </a>
                     </div>
-                    <img src="@imageCurrent.Url()?width=640" class="w-100 top-0 h-100 opacity-50 fit-cover mb-4 position-absolute z-1" width="320" height="412" alt="@(imageCurrent.Value("altText") ?? string.Empty)" />
+                    <img src="@imageCurrent.GetCropUrl(width: 640, height: 412, furtherOptions: "&format=WebP")" class="w-100 top-0 h-100 opacity-50 fit-cover mb-4 position-absolute z-1" width="320" height="412" alt="@(imageCurrent.Value("altText") ?? string.Empty)" />
                 </div>
 
                 <div class="row align-self-stretch g-0 d-none d-md-flex">
                     <div class="pe-0 col-md-6">
-                        <img style="flex-basis: 50%;object-fit:contain;" src="@imageCurrent.Url()?width=640" class="w-100 h-100 d-md-block" width="320" height="412" alt="@(imageCurrent.Value("altText") ?? string.Empty)" />
+                        <img style="flex-basis: 50%;object-fit:contain;" src="@imageCurrent.GetCropUrl(width: 640, height: 412, furtherOptions: "&format=WebP")" class="w-100 h-100 d-md-block" width="320" height="412" alt="@(imageCurrent.Value("altText") ?? string.Empty)" />
                     </div>
                     <div class="col-md-6 p-4 d-flex flex-column align-items-start justify-content-center h-100" style="background: var(--bs-gray-10)">
                         <h4 class="h3 mb-3">@currentIssueContent.Name</h4>
@@ -125,7 +125,7 @@
                                 var articleSummary = child.HasValue("excerpt") ? child.Value("excerpt") : cleanContent;
 
                                 <li class="d-flex flex-row position-relative list-group-item">
-                                    <img src="@articleImage.MediaUrl()?width=240&height=160" class="fit-cover" width="120" height="80" alt="@(imageCurrent.Value("altText") ?? "")" />
+                                    <img src="@articleImage.GetCropUrl(width: 120, height: 80, furtherOptions: "&format=WebP")" srcset="@articleImage.GetCropUrl(width: 240, height: 160, furtherOptions: "&format=WebP") 2x" class="fit-cover" width="120" height="80" alt="@(imageCurrent.Value("altText") ?? "")" />
                                     <div class="flex-fill ps-3">
                                         <a href="@child.Url()" class="stretched-link link-hover-inverse">
                                             <h4 class="fs-md mb-1">@articleTitle</h4>

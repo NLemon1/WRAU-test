@@ -154,7 +154,7 @@
                                     }
                                     <div id="panel@(safeId)" class="is-hidden js-nav-sub-menu sub-menu py-5 py-lg-7 fs-sm font-family-1" role=tabpanel>
                                         <div class="container position-relative">
-                                                <button class="js-sub-menu-close btn-close border-0">Close <i class="fal fa-times"></i></button>
+                                            <button class="js-sub-menu-close btn-close border-0">Close <i class="fal fa-times"></i></button>
                                             <div class="row">
                                                 <div class="col-4 m-0 pt-lg-3">
                                                     <span class="h2 d-block">@settings.Value($"navMenu{i}Name")</span>
@@ -164,7 +164,7 @@
                                                     }
                                                     @if (settings.HasValue($"navMenu{i}Image"))
                                                     {
-                                                        <img src="@(settings.Value<IPublishedContent>($"navMenu{i}Image").Url())" alt="@(settings.Value<IPublishedContent>($"navMenu{i}Image").Value("altText"))" class="img-curved img-fluid" loading="lazy">
+                                                        <img src="@(settings.Value<IPublishedContent>($"navMenu{i}Image").GetCropUrl(width: 350, furtherOptions: "&format=WebP"))" srcset="@(settings.Value<IPublishedContent>($"navMenu{i}Image").GetCropUrl(width: 700, furtherOptions: "&format=WebP")) 2x" alt="@(settings.Value<IPublishedContent>($"navMenu{i}Image").Value("altText"))" class="img-curved img-fluid" loading="lazy">
                                                     }
                                                     @if (!String.IsNullOrWhiteSpace(link.Name))
                                                     {

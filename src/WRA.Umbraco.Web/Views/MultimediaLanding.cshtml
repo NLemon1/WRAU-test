@@ -104,7 +104,7 @@
         var videoYouTubeId = featuredVideo.Value("youTubeId");
         var videoTitle = featuredVideo.HasValue("title") ? featuredVideo.Value("title") : featuredVideo.Name;
         var videoImageOverride = featuredVideo.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("ThumbnailOverride");
-        var videoImage = videoImageOverride != null ? videoImageOverride.Url() : $"https://i3.ytimg.com/vi/{videoYouTubeId}/maxresdefault.jpg";
+        var videoImage = videoImageOverride != null ? videoImageOverride.GetCropUrl(width: 768, furtherOptions: "&format=WebP") : $"https://i3.ytimg.com/vi/{videoYouTubeId}/maxresdefault.jpg";
 
         <div class="js-featured multimedia-feature row g-0" data-featuredtype="video" @(!isVideo || isSearch ? "hidden" : "")>
             <div class="col-md-7 col-lg-8 pe-lg-2" style="background-color: var(--bs-gray-10)">
@@ -134,7 +134,7 @@
         var videoYouTubeId = featuredAudio.Value("youTubeId");
         var videoTitle = featuredAudio.HasValue("title") ? featuredAudio.Value("title") : featuredAudio.Name;
         var videoImageOverride = featuredAudio.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("ThumbnailOverride");
-        var videoImage = videoImageOverride != null ? videoImageOverride.Url() : $"https://i3.ytimg.com/vi/{videoYouTubeId}/maxresdefault.jpg";
+        var videoImage = videoImageOverride != null ? videoImageOverride.GetCropUrl(width: 768, furtherOptions: "&format=WebP") : $"https://i3.ytimg.com/vi/{videoYouTubeId}/maxresdefault.jpg";
 
         <div class="js-featured row multimedia-feature g-0" data-featuredtype="audio" @(!isAudio || isSearch ? "hidden" : "")>
             <div class="col-md-7 col-lg-8 pe-lg-2" style="background-color: var(--bs-gray-10)">

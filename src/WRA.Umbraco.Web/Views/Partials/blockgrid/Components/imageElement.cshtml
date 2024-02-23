@@ -27,5 +27,5 @@
 }
 
 <figure @Html.Raw(props.Trim())>
-    <img loading="lazy" class="img-fluid" src="@image.Url()" width="@image.Value("umbracoWidth")" height="@image.Value("umbracoHeight")" alt="@(image.Value("altText") ?? "")" />
+    <img loading="lazy" class="img-fluid" src="@image.GetCropUrl(width: 600, furtherOptions:"&format=WebP")" srcset="@image.GetCropUrl(width: 1200, furtherOptions:"&format=WebP") 2x" width="600" height="@image.Value("umbracoHeight")" alt="@(image.Value("altText") ?? "")" />
 </figure>

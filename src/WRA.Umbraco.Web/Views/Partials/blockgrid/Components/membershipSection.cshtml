@@ -126,10 +126,9 @@
                                                     </span>
                                                 </p>
                                             </div>
-                                           
-                                            <img class="slider-testimonials__slide__img align-self-end border-rounded mt-auto me-n4" src="@image.MediaUrl()" alt="@image.Value("altText")" />
-                                        </div>
 
+                                            <img class="slider-testimonials__slide__img align-self-end border-rounded mt-auto me-n4" src="@image.GetCropUrl(width: 200, furtherOptions:"&format=WebP")" srcset="@image.GetCropUrl(width: 400, furtherOptions:"&format=WebP") 2x" alt="@image.Value("altText")" />
+                                        </div>
                                     }
                                 </div>
 

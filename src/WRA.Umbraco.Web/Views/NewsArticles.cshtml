@@ -119,7 +119,7 @@
                 var articleCategory = featuredArticleObject.Value<WRA.Umbraco.Models.ArticleCategory>("category");
 
                 var newsCardImage = featuredArticleObject.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("image");
-                var imageSet = !String.IsNullOrEmpty(newsCardImage.MediaUrl()) ? newsCardImage.MediaUrl() : newsCardFallbackImage.MediaUrl();
+                var imageSet = !String.IsNullOrEmpty(newsCardImage.GetCropUrl(width: 660, height: 440, furtherOptions: "&format=WebP")) ? newsCardImage.GetCropUrl(width: 660, height: 440, furtherOptions: "&format=WebP") : newsCardFallbackImage.GetCropUrl(width: 660, height: 440, furtherOptions: "&format=WebP");
 
                 var articleDateReadable = String.Format("{0:MMMM d, yyyy}", featuredArticleObject.Value("date"));
                 var articleDate = String.Format("{0:yyyy-MM-dd}", featuredArticleObject.Value("date"));
@@ -133,7 +133,7 @@
                             <figure class="block-image-element img-curved img-curved--large img-decor">
                                 @if (imageSet != null)
                                 {
-                                    <img src="@imageSet?width=660&height=440" loading="lazy" class="img-fluid" width="660" height="330" alt="@(newsCardImage != null ? newsCardImage.Value("altText") : "")" />
+                                    <img src="@imageSet" loading="lazy" class="img-fluid" width="660" height="330" alt="@(newsCardImage != null ? newsCardImage.Value("altText") : "")" />
                                 }
                             </figure>
                         </div>
@@ -170,7 +170,7 @@
         }
     }
     <div class="position-relative">
-        <div id="article-results" class="js-article-results row my-4 mb-6 g-3 g-lg-6" style="min-height: 500px;" data-fallback="@newsCardFallbackImage.MediaUrl()" data-cattotal="@totalPages">
+        <div id="article-results" class="js-article-results row my-4 mb-6 g-3 g-lg-6" style="min-height: 500px;" data-fallback="@newsCardFallbackImage.GetCropUrl(width: 660, height: 330, furtherOptions: "&format=WebP")" data-cattotal="@totalPages">
             @foreach (var item in results.Take(pageSize))
             {
                 var articleTitle = item.HasProperty("title") ? item.Value("title") : item.Name;
@@ -178,7 +178,7 @@
                 var articleDate = String.Format("{0:yyyy-MM-dd}", item.Value("date"));
                 var articleCategory = item.Value<WRA.Umbraco.Models.ArticleCategory>("category");
                 var newsCardImage = item.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("image");
-                var imageSet = !String.IsNullOrEmpty(newsCardImage.MediaUrl()) ? newsCardImage.MediaUrl() : newsCardFallbackImage.MediaUrl();
+                var imageSet = !String.IsNullOrEmpty(newsCardImage.MediaUrl()) ? newsCardImage.GetCropUrl(width: 660, height: 330, furtherOptions: "&format=WebP") : newsCardFallbackImage.GetCropUrl(width: 660, height: 330, furtherOptions: "&format=WebP");
 
                 string cleanContent = "";
 

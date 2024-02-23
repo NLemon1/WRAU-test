@@ -11,8 +11,8 @@
     <div class="container container--sm">
         @await Html.GetBlockGridItemAreaHtmlAsync(Model, "mission-statement-area")
         <picture>
-            <source srcset="@backgroundImage.GetCropUrl(width: 768)" media="(max-width: 768px)" />
-            <source srcset="@backgroundImage.GetCropUrl(width: 1280)" media="(max-width: 1280px)" />
+            <source srcset="@backgroundImage.GetCropUrl(width: 768, furtherOptions:"&format=WebP")" media="(max-width: 768px)" />
+            <source srcset="@backgroundImage.GetCropUrl(width: 1280, furtherOptions:"&format=WebP")" media="(max-width: 1280px)" />
             <img class="mission-statement__image" src="@backgroundImage.MediaUrl()" alt="@backgroundImage.Value("altText")" />
         </picture>
     </div>

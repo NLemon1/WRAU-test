@@ -51,8 +51,8 @@
             var imageDesktop = content.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("imageDesktop");
             var imageMobile = content.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("imageMobile");
 
-            <img src="@imageDesktop.MediaUrl()" class="block-home-hero__media__img d-none d-lg-block" alt="@imageDesktop.Value("altText")" />
-            <img src="@imageMobile.MediaUrl()" class="block-home-hero__media__img d-lg-none" alt="@imageMobile.Value("altText")" />
+            <img src="@imageDesktop.GetCropUrl(width: 1920, height: 600, furtherOptions:"&format=WebP")" width="1920" height="600" class="block-home-hero__media__img d-none d-lg-block" alt="@imageDesktop.Value("altText")" />
+            <img src="@imageMobile.GetCropUrl(width: 540, height: 540, furtherOptions:"&format=WebP")" width="540" height="540" srcset="@imageMobile.GetCropUrl(width: 1080, height: 1080, furtherOptions:"&format=WebP") 2x" class="block-home-hero__media__img d-lg-none" alt="@imageMobile.Value("altText")" />
         }
     </div>
 

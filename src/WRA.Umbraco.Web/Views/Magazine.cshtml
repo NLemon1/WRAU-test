@@ -60,7 +60,7 @@
         <h1 class="h1 mb-5">@content.Name</h1>
         <div class="row">
             <div class="col-lg-4 d-flex flex-column align-items-center pb-6 pb-lg-0">
-                <img src="@imageCurrent.Url()?width=640" class="img-fluid fit-cover mb-4" width="320" height="412" alt="@(imageCurrent.Value("altText") ?? "")" />
+                <img src="@imageCurrent.GetCropUrl(width: 320, height: 412, furtherOptions: "&format=WebP")" srcset="@imageCurrent.GetCropUrl(width: 640, height: 824, furtherOptions: "&format=WebP") 2x" class="img-fluid fit-cover mb-4" width="320" height="412" alt="@(imageCurrent.Value("altText") ?? "")" />
                 <a href="@content.Pdf" target="_blank" class="btn btn-primary">Download PDF</a>
             </div>
             <div class="col-lg-8">
@@ -95,7 +95,7 @@
                                         var articleSummary = child.HasValue("excerpt") ? child.Value("excerpt") : cleanContent;
 
                                         <li class="d-flex flex-row position-relative list-group-item">
-                                            <img src="@articleImage.MediaUrl()?width=240&height=160" class="img-fluid fit-cover" width="120" height="80" alt="@(imageCurrent.Value("altText") ?? "")" />
+                                            <img src="@articleImage.GetCropUrl(width: 240, height: 160, furtherOptions: "&format=WebP")" class="img-fluid fit-cover" width="120" height="80" alt="@(imageCurrent.Value("altText") ?? "")" />
                                             <div class="flex-fill ps-3">
                                                 <a href="@child.Url()" class="stretched-link link-hover-inverse">
                                                     <h4 class="fs-md mb-1">@articleTitle</h4>
@@ -172,7 +172,7 @@
 
                 <div class="col-6 col-md-4 col-lg-3">
                     <a href="@item.Url()" class="text-decoration-none d-block link-hover-inverse">
-                        <img src="@image.Url()" class="w-100 h-auto mb-3" style="max-width:234px;" width="@image.Value("umbracoWidth")" height="@image.Value("umbracoHeight")" alt="@(image.Value("altText") ?? "")" />
+                        <img src="@image.GetCropUrl(width: 468, furtherOptions: "&format=WebP")" class="w-100 h-auto mb-3" style="max-width:234px;" width="234" alt="@(image.Value("altText") ?? "")" />
                         <h3 class="h4 mb-2">@item.Name</h3>
                         @if (item.HasValue("excerpt"))
                         {

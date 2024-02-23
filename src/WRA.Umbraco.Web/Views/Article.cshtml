@@ -32,7 +32,7 @@
                 "name": "@articleTitle",
                 @if (content.HasValue("image"))
                 {
-                    <text>"image": "@content.Image.Url()",</text>
+                    <text>"image": "@content.Image.GetCropUrl(width: 1200, furtherOptions: "&format=WebP")",</text>
                 }
                 "datePublished": "@articleDateISO"
             }
@@ -101,7 +101,7 @@
         {
             <div class="col-md-6 d-flex flex-column justify-content-center">
                 <figure class="img-curved img-curved--large text-end">
-                    <img loading="lazy" class="img-fluid" src="@content.Image.Url()?width=550" srcset="@content.Image.Url()?width=1110 2x" width="@content.Image.Value("umbracoWidth")" height="@content.Image.Value("umbracoHeight")" alt="@(content.Image.Value("altText") ?? "")">
+                    <img loading="lazy" class="img-fluid" src="@content.Image.GetCropUrl(width: 555, furtherOptions: "&format=WebP")" srcset="@content.Image.GetCropUrl(width: 1110, furtherOptions: "&format=WebP") 2x" width="555" alt="@(content.Image.Value("altText") ?? "")">
                 </figure>
             </div>
         }
@@ -139,7 +139,7 @@
                       
                             <div class="col">
                             <a href="@child.Url()" class="news-card d-flex flex-row align-items-center p-2 text-decoration-none">
-                                <img src="@image2.MediaUrl()" class="object-fit-cover" width="120" height="80" alt="@child.GetProperty("title").GetValue()" />
+                                <img src="@image2.GetCropUrl(width: 120, height: 80, furtherOptions: "&format=WebP")" srcset="@image2.GetCropUrl(width: 240, height: 160, furtherOptions: "&format=WebP") 2x" class="object-fit-cover" width="120" height="80" alt="@child.GetProperty("title").GetValue()" />
                                 <div class="w-100 h-100 d-flex flex-column ps-2 py-2">
                                     <h3 class="h6 news-card__headline">@child.GetProperty("title").GetValue()</h3>
                                     <p class="mt-auto fw-light fs-xs" style="color: var(--bs-gray-30)">@String.Format("{0:MMMM d, yyyy}", pubDate)</p>

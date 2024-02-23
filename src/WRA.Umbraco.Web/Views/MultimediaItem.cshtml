@@ -97,7 +97,7 @@
 
                         var imageRelated = child.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("ThumbnailOverride");
                         var imageYouTubeId = child.GetProperty("youTubeId").GetValue();
-                        var imageRelatedThumb = imageRelated != null ? imageRelated.Url() : $"https://i3.ytimg.com/vi/{imageYouTubeId}/maxresdefault.jpg";
+                        var imageRelatedThumb = imageRelated != null ? imageRelated.GetCropUrl(width: 768, furtherOptions: "&format=WebP") : $"https://i3.ytimg.com/vi/{imageYouTubeId}/maxresdefault.jpg";
                         var isFirstAria = child.Id == firstItem.Id  ? "true" : "false";
 
                         <div class="col-md-6 col-lg-4">
@@ -165,7 +165,7 @@ else
                         var pubDate = child.GetProperty("date").GetValue();
                         var imageRelated = child.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("ThumbnailOverride");
                         var imageYouTubeId = child.GetProperty("youTubeId").GetValue();
-                        var imageRelatedThumb = imageRelated != null ? imageRelated.Url() : $"https://i3.ytimg.com/vi/{imageYouTubeId}/maxresdefault.jpg";
+                        var imageRelatedThumb = imageRelated != null ? imageRelated.GetCropUrl(width: 768, furtherOptions: "&format=WebP") : $"https://i3.ytimg.com/vi/{imageYouTubeId}/maxresdefault.jpg";
 
                         <div class="col-md-6 col-lg-4">
                             <a href="@child.Url()" class="card card-media p-4 flex-md-column align-items-start text-decoration-none text-dark">

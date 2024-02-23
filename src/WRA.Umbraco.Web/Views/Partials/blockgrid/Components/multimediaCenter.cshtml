@@ -27,8 +27,8 @@
                         var card1Image = content.Value<MediaWithCrops>("card1Image");
                     }
                     <picture>
-                        <source srcset="@card1Image.GetCropUrl(width: 372)" media="(max-width: 768px)" />
-                        <img src="@card1Image.MediaUrl()" width="744" height="430" alt="@card1Image.Value("altText")" />
+                        <source srcset="@card1Image.GetCropUrl(width: 372, furtherOptions: "&format=WebP")" media="(max-width: 768px)" />
+                        <img src="@card1Image.GetCropUrl(width: 744, height: 430, furtherOptions: "&format=WebP")" width="744" height="430" alt="@card1Image.Value("altText")" />
                     </picture>
                 </div>
                 <div class="multimedia-card__content">
@@ -58,8 +58,8 @@
                         var card2Image = content.Value<MediaWithCrops>("card2Image");
                     }
                     <picture>
-                        <source srcset="@card2Image.GetCropUrl(width: 372)" media="(max-width: 768px)" />
-                        <img src="@card2Image.MediaUrl()" width="744" height="430" alt="@card2Image.Value("altText")" />
+                        <source srcset="@card2Image.GetCropUrl(width: 372, furtherOptions: "&format=WebP")" media="(max-width: 768px)" />
+                        <img src="@card2Image.GetCropUrl(width: 744, height: 430, furtherOptions: "&format=WebP")" width="744" height="430" alt="@card2Image.Value("altText")" />
                     </picture>
                 </div>
                 <div class="multimedia-card__content">

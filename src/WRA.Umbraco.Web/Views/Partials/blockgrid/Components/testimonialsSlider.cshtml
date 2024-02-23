@@ -34,7 +34,7 @@
                             {
                                 var image = testimonial.Value<MediaWithCrops>("image");
 
-                                <img class="align-self-start rounded-circle"  src="@image?.GetCropUrl(width: 64)" alt="@image?.Value("altText")" />
+                                <img class="align-self-start rounded-circle" src="@image?.GetCropUrl(width: 64, furtherOptions: "&format=WebP")" alt="@image?.Value("altText")" />
                             }
                             @if (testimonial.HasValue("quote"))
                             {
