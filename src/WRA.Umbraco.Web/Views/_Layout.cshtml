@@ -65,7 +65,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     @RenderSection("head", required: false)
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-rqn26AG5Pj86AF4SO72RK5fyefcQ/x32DNQfChxWvbXIyXFePlEktwD18fEz+kQU" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/ee0cbe98db.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:ital,wght@0,400;0,500;0,600;0,800;1,400;1,500;1,600;1,800&family=Roboto+Serif:ital,opsz,wght@0,8..144,400;1,8..144,400&display=swap" rel="stylesheet">
     <style> html { @logoStyle } </style>
     <link href="/css/dist/global.css" rel="stylesheet" asp-append-version="true">
@@ -491,7 +491,7 @@
                                 {
                                     <li>
                                         <a href="@settings.Value("twitter")" target="_blank">
-                                            <i class="fab fa-twitter fa-lg"></i>
+                                            <i class="fa-brands fa-x-twitter fa-lg"></i>
                                             <span class="visually-hidden">Twitter</span>
                                         </a>
                                     </li>
@@ -519,18 +519,18 @@
                     </div>
                     <div class="col-12 col-lg-4 mt-0">
                         <h3 class="h4">Legal Hotline</h3>
+                        @if (settings.HasValue("lhNotes"))
+                        {
+                            <p class="my-2">@settings.Value("lhNotes")</p>
+                        }
                         <a href="tel:@settings.Value("lhPhone")">@settings.Value("lhPhone")</a><br>
                         @if (settings.HasValue("lhPhone2"))
                         {
                             <a href="tel:@settings.Value("lhPhone2")">@settings.Value("lhPhone2")</a><br>
                         }
-                        @if (settings.HasValue("lhNotes"))
-                        {
-                            <p class="my-2">@settings.Value("lhNotes")</p>
-                        }
                         @if (settings.HasValue("lhHours"))
                         {
-                            @settings.Value("lhHours")
+                            <p class="my-2">@settings.Value("lhHours")</p>
                         }
                     </div>
                 </div>
