@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\Generated\EventCalendar.generated.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <!-- CoreCompat is deprecated and unmaintained but is require for the Global Payments SDK /shrug -->
     <PackageReference Include="Azure.Messaging.ServiceBus" Version="7.17.2" />
     <PackageReference Include="CoreCompat.System.Drawing" Version="1.0.0-beta006" />

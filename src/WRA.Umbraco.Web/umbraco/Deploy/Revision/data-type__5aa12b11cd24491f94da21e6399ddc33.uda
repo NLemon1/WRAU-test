@@ -1158,19 +1158,6 @@
         "rowMinSpan": 1,
         "rowMaxSpan": 1,
         "allowAtRoot": true,
-        "allowInAreas": true,
-        "areas": [],
-        "contentElementTypeKey": "b6d70662-ffa7-438a-83b7-3a648ba8544b",
-        "label": "",
-        "editorSize": "medium",
-        "inlineEditing": false,
-        "forceHideContentEditorInOverlay": false
-      },
-      {
-        "columnSpanOptions": [],
-        "rowMinSpan": 1,
-        "rowMaxSpan": 1,
-        "allowAtRoot": true,
         "allowInAreas": false,
         "areas": [],
         "contentElementTypeKey": "b3079b21-2d40-40fe-a6df-da890fa8292a",
@@ -1207,6 +1194,19 @@
         "inlineEditing": false,
         "forceHideContentEditorInOverlay": false,
         "groupKey": "61e5b4ab-de54-46b2-9862-ccd8301a2b8e"
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": true,
+        "allowInAreas": true,
+        "areas": [],
+        "contentElementTypeKey": "d0326835-a867-40fd-a537-86ac5a2cd620",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false
       }
     ],
     "blockGroups": [
@@ -1333,9 +1333,6 @@
       "Udi": "umb://document-type/b65e28c8ab2748dd88ccc6dc27c40f4b"
     },
     {
-      "Udi": "umb://document-type/b6d70662ffa7438a83b73a648ba8544b"
-    },
-    {
       "Udi": "umb://document-type/bf995e2dfadc4379b5a3614b1f9782cc"
     },
     {
@@ -1346,6 +1343,9 @@
     },
     {
       "Udi": "umb://document-type/cffca6dfc3f54d9cab916591c86747c7"
+    },
+    {
+      "Udi": "umb://document-type/d0326835a86740fda53786ac5a2cd620"
     },
     {
       "Udi": "umb://document-type/d55381302bb84d8c97329d6bfcd0a24e"

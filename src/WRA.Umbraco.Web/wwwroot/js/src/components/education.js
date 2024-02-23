@@ -126,7 +126,7 @@ const education = () => {
         updateDomElements(category);
 
         let bodyObject = {
-            "productType": "Products", //Events, Products, Courses
+            "productType": "Courses", //Events, Products, Courses
             "category": decodeURIComponent(category), //Professional Development, Publications, Conferences/Conventions, etc.
             "subCategory": decodeURIComponent(subcategory == "All" ? "" : subcategory),//children of category
             "taxonomy": "",//Reference Manuals, Books, Virtual, etc.
