@@ -48,7 +48,7 @@ const courseSearch = () => {
 
         productSubCategoryDropdown.innerHTML = "";//clear <option> tags
 
-        if (subcategoryArray.length > 1) {
+        if (subcategoryArray.length > 1 && category !== "") {
             productSubCategoryContainer.removeAttribute("hidden");
         } else {
             productSubCategoryContainer.setAttribute("hidden", "hidden");
@@ -94,9 +94,8 @@ const courseSearch = () => {
         }).then(res => {
             return res.json();
         }).then(res => {
-            console.log(res);
+            //console.log(res);
             renderResults(res);
-
         });
     }
 

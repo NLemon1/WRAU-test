@@ -74,7 +74,7 @@
 
                                 <div class="col-xl-8 mt-4">
                                     <form id="course-search" method="post" action="/products/products/" class="position-relative">
-                                        <div class="js-results-loader-courses search-loading" title="Please wait, loading.">
+                                        <div class="js-results-loader-courses search-loading search-loading--small" title="Please wait, loading.">
                                             <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
                                         </div>
                                         <fieldset class="d-flex flex-column gap-3 bg-transparent">
@@ -89,7 +89,7 @@
                                                     }
                                                 </select>
                                             }
-                                            <div class="js-courses-subcategory-container">
+                                            <div class="js-courses-subcategory-container" hidden>
                                                 <label class="visually-hidden" for="subcategory">Subcategory</label>
                                                 <select id="subcategory" class="js-courses-subcategory-filter form-control">
                                                     <option>Select course subcategory</option>
