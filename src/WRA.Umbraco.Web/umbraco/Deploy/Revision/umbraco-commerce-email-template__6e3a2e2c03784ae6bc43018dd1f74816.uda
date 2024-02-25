@@ -1,0 +1,23 @@
+{
+  "Name": "Order Error",
+  "Alias": "orderError",
+  "SendToCustomer": true,
+  "Subject": "Order Error",
+  "SenderName": "Umbraco Commerce",
+  "SenderAddress": "noreply@umbraco.com",
+  "ToAddresses": [],
+  "CcAddresses": [],
+  "BccAddresses": [],
+  "TemplateView": "~/Views/UmbracoCommerce/Templates/Email/OrderErrorEmail.cshtml",
+  "SortOrder": 1,
+  "StoreUdi": "umb://umbraco-commerce-store/f35d55b6a09e4c199f9a018dd1f745f4",
+  "Udi": "umb://umbraco-commerce-email-template/6e3a2e2c03784ae6bc43018dd1f74816",
+  "Dependencies": [
+    {
+      "Udi": "umb://umbraco-commerce-store/f35d55b6a09e4c199f9a018dd1f745f4",
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Commerce.Deploy,Umbraco.Commerce.Deploy.Artifacts.EmailTemplateArtifact",
+  "__version": "13.0.4"
+}
