@@ -6,24 +6,24 @@
     <Configurations>Debug;Release;Local</Configurations>
   </PropertyGroup>
  
-  <ItemGroup>
+  <!-- <ItemGroup>
     <None Remove="gulpfile.js" />
     <None Remove="VS.vs.zip" />
   </ItemGroup>
-  
+   -->
   <ItemGroup>
     <Content Include="App_Plugins\CustomBlockView\*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   
-  <ItemGroup>
+  <!-- <ItemGroup>
     <Content Remove="Views\Calendar.cshtml" />
   </ItemGroup>
   
   <ItemGroup>
     <Content Include="build.mjs" />
-  </ItemGroup>
+  </ItemGroup> -->
 
   <ItemGroup>
     <PackageReference Include="Umbraco.Cloud.Cms.PublicAccess" Version="13.0.0" />
@@ -33,6 +33,7 @@
     <PackageReference Include="Umbraco.Cms.Imaging.ImageSharp" Version="13.1.1" />
     <PackageReference Include="Umbraco.Cms.Web.Common" Version="13.1.1" />
     <PackageReference Include="Umbraco.Cms.Infrastructure" Version="13.1.1" />
+    <PackageReference Include="Umbraco.Commerce.Deploy" Version="13.1.0" />
     <PackageReference Include="Umbraco.Deploy.Cloud" Version="13.0.4" />
     <PackageReference Include="Umbraco.Deploy.Contrib" Version="13.0.0" />
     <PackageReference Include="Umbraco.Forms" Version="13.0.2" />
@@ -59,8 +60,8 @@
 
   <PropertyGroup>
     <!-- Remove RazorCompileOnBuild and RazorCompileOnPublish when not using ModelsMode InMemoryAuto -->
-    <RazorCompileOnBuild>true</RazorCompileOnBuild>
-    <RazorCompileOnPublish>true</RazorCompileOnPublish>
+    <RazorCompileOnBuild>false</RazorCompileOnBuild>
+    <RazorCompileOnPublish>false</RazorCompileOnPublish>
   </PropertyGroup>
   
 </Project>
