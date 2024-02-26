@@ -184,29 +184,34 @@
                 }
             </div>
         </div>
-
-        <div class="row my-4 mb-6 gy-4">
-            @if (magazineCollections.FirstOrDefault().Children.Any())
-            {
-                @foreach (var item in magazineCollections.FirstOrDefault().Children)
+        
+        @if (magazineCollections != null)
+        {
+            <div class="row my-4 mb-6 gy-4">
+                @if (magazineCollections.FirstOrDefault().Children.Any())
                 {
-                    var image = item.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("image");
-                    if (item.Url() != null)
+                    @foreach (var item in magazineCollections.FirstOrDefault().Children)
                     {
-                        <div class="col-6 col-md-4 col-lg-3">
-                            <a href="@item.Url()" class="text-decoration-none d-block link-hover-inverse">
-                                <img src="@image.GetCropUrl(width: 468, furtherOptions: "&format=WebP")" class="w-100 h-auto mb-3" style="max-width:234px;" width="@image.Value("umbracoWidth")" height="@image.Value("umbracoHeight")" alt="@(image.Value("altText") ?? "")" />
-                                <h3 class="h4 mb-2">@item.Name</h3>
-                                @if (item.HasValue("excerpt"))
-                                {
-                                    <p class="fs-sm" style="color: var(--bs-gray-30)">@item.Value("excerpt")</p>
-                                }
-                            </a>
-                    </div>
+                        var image = item.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("image");
+                        if (item.Url() != null)
+                        {
+                            <div class="col-6 col-md-4 col-lg-3">
+                                <a href="@item.Url()" class="text-decoration-none d-block link-hover-inverse">
+                                    @if(image != null)
+                                    {
+                                        <img src="@image.GetCropUrl(width: 468, furtherOptions: "&format=WebP")" class="w-100 h-auto mb-3" style="max-width:234px;" width="@image.Value("umbracoWidth")" height="@image.Value("umbracoHeight")" alt="@(image.Value("altText") ?? "")" />
+                                    }
+                                    <h3 class="h4 mb-2">@item.Name</h3>
+                                    @if (item.HasValue("excerpt"))
+                                    {
+                                        <p class="fs-sm" style="color: var(--bs-gray-30)">@item.Value("excerpt")</p>
+                                    }
+                                </a>
+                        </div>
+                        }
                     }
                 }
-            }
-        </div>
-
+            </div>
+        }
     </div>
 </div>
