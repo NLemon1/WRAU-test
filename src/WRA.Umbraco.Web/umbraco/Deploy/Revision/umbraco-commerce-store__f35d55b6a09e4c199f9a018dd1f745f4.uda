@@ -22,6 +22,13 @@
   "DefaultGiftCardEmailTemplateUdi": "umb://umbraco-commerce-email-template/51461704e69d472db282018dd1f74821",
   "ConfirmationEmailTemplateUdi": "umb://umbraco-commerce-email-template/e413999149114c6a918e018dd1f747d8",
   "ErrorEmailTemplateUdi": "umb://umbraco-commerce-email-template/6e3a2e2c03784ae6bc43018dd1f74816",
+  "AllowedUserRoles": [
+    "admin",
+    "editor",
+    "sensitiveData",
+    "translator",
+    "writer"
+  ],
   "Udi": "umb://umbraco-commerce-store/f35d55b6a09e4c199f9a018dd1f745f4",
   "Dependencies": [
     {
