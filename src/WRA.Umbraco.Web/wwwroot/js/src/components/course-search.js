@@ -69,7 +69,7 @@ const courseSearch = () => {
         handleIndicators(true, resultsLoader);
 
         let bodyObject = {
-            "productType": "Events", //Events, Products, Courses
+            "productType": "Courses", //Events, Products, Courses
             "category": category, //Professional Development, Publications, Conferences/Conventions, etc.
             "subCategory": subcategory == "All" ? "" : subcategory,//children of category
             "taxonomy": "",//Reference Manuals, Books, Virtual, etc.
@@ -135,7 +135,7 @@ const courseSearch = () => {
 
     const updateActionUrl = () => {
 
-        const setParams = subcategory !== "" ? `${actionInitial}?category=${category}&subcategory=${subcategory}` : `${actionInitial}?category=${category}`;
+        const setParams = subcategory !== "" ? `${actionInitial}?type=Courses&category=${category}&subcategory=${subcategory}` : `${actionInitial}?type=courses&category=${category}`;
         courseSearchForm.setAttribute("action", setParams);
 
         updatedAction = true;

@@ -12,6 +12,9 @@
     var content = (ContentModels.ProductCategoryLanding)Model;
     var sections = Model.Value<IEnumerable<BlockGridItem>>("sections");
 
+    var productType = content.Value<IEnumerable<IPublishedContent>>("productType");
+    var singleType = productType.FirstOrDefault().Name;
+
     IEnumerable<IPublishedContent> productGroups = Model.Value<IEnumerable<IPublishedContent>>("categoriesSubcategories").Where(x => x.IsVisible()).OrderBy(p => p.Name);
 }
 
@@ -32,7 +35,6 @@
 @await Html.PartialAsync("blockgrid/default", sections)
 
 
-
 <div class="container my-4 my-lg-6">
     <div class="row g-4">
 
@@ -44,10 +46,10 @@
 
             if (productGroup.GetType().Name == "SubCategoryPage")
             {
-                setParameters = "/products/products?ref=" + @Model.Name + "&category=" + @productGroup.Parent.Name + " & subcategory = " + @productGroup.Name;
+                setParameters = "/products/products?ref=" + @Model.Name + "&type=" + @singleType + "&category=" + @productGroup.Parent.Name + "&subcategory=" + @productGroup.Name;
             } else
             {
-                setParameters = "/products/products?ref=" + @Model.Name + "&category=" + @productGroup.Name + "&subcategory=All";
+                setParameters = "/products/products?ref=" + @Model.Name + "&type=" + @singleType + "&category=" + @productGroup.Name + "&subcategory=All";
             }
 
             <div class="col-md-4">

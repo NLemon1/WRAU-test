@@ -29,6 +29,7 @@
           "Alias": "categoriesSubcategories",
           "DataType": "umb://data-type/8a30e16d92c0456dbe6b04560f0a1eee",
           "Description": "Select Category or Subcategory to populate cards.",
+          "Mandatory": true,
           "Name": "Categories/Subcategories",
           "SortOrder": 1
         },
@@ -37,6 +38,15 @@
           "Alias": "sections",
           "DataType": "umb://data-type/5aa12b11cd24491f94da21e6399ddc33",
           "Name": "Sections"
+        },
+        {
+          "Key": "e27ddec2-8b46-421c-a1f0-d5eb38c71557",
+          "Alias": "productType",
+          "DataType": "umb://data-type/713acc4d3dcf48d19cee806d4d116aeb",
+          "Description": "Select a product type.",
+          "Mandatory": true,
+          "Name": "Product Type",
+          "SortOrder": 2
         }
       ]
     },
@@ -53,6 +63,10 @@
   "Dependencies": [
     {
       "Udi": "umb://data-type/5aa12b11cd24491f94da21e6399ddc33",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/713acc4d3dcf48d19cee806d4d116aeb",
       "Ordering": true
     },
     {

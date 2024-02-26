@@ -1,4 +1,4 @@
-const education = () => {
+const products = () => {
 
     //DOM presentation elements
     const productResults = document.querySelector('.js-product-collection');
@@ -24,12 +24,18 @@ const education = () => {
     const windowLoadQueryString = window.location.search;
     const urlParams = new URLSearchParams(windowLoadQueryString);
 
+    let type = "";
+
+    if (urlParams.has("type")) {
+        type = urlParams.get("type");
+    }
+
     let subcategory = ""; 
 
     if (urlParams.has("subcategory")) {
         subcategory = urlParams.get("subcategory");
     }
-
+    
     let category = "";
 
     if (urlParams.has("category")) {
@@ -126,7 +132,7 @@ const education = () => {
         updateDomElements(category);
 
         let bodyObject = {
-            "productType": "Courses", //Events, Products, Courses
+            "productType": decodeURIComponent(type), //Events, Products, Courses
             "category": decodeURIComponent(category), //Professional Development, Publications, Conferences/Conventions, etc.
             "subCategory": decodeURIComponent(subcategory == "All" ? "" : subcategory),//children of category
             "taxonomy": "",//Reference Manuals, Books, Virtual, etc.
@@ -167,13 +173,13 @@ const education = () => {
 
         if (isCategory && !isSubCategory) {
             urlParams.set('category', category);
-            window.history.pushState({ id: `category-${category}` }, '', `${location.pathname}?category=${category}`);
+            window.history.pushState({ id: `${type}-category-${category}` }, '', `${location.pathname}?type=${type}&category=${category}`);
         }
 
         if (isCategory && isSubCategory) {
             urlParams.set('category', category);
             urlParams.set('subcategory', subcategory);
-            window.history.pushState({ id: `category-${category}subcategory-${subcategory}` }, '', `${location.pathname}?category=${category}&subcategory=${subcategory}`);
+            window.history.pushState({ id: `${type}-category-${category}subcategory-${subcategory}` }, '', `${location.pathname}?type=${type}&category=${category}&subcategory=${subcategory}`);
         }
        
     }
@@ -270,4 +276,4 @@ const education = () => {
 
 };
 
-export default education;
+export default products;

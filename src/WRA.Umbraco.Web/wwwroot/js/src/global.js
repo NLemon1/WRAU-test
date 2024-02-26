@@ -13,7 +13,7 @@ import multimediaFilters from './components/multimedia-filters';
 import calendar from './components/calendar';
 import quantitySelector from './components/quantity-selector';
 import checkout from './components/checkout';
-import education from './components/education';
+import products from './components/products';
 import courseSearch from './components/course-search';
 
 expandableTextCards();
@@ -33,7 +33,7 @@ quantitySelector();
 checkout();
 
 if (document.body.classList.contains("page-template-collectionPage")) {
-    education();
+    products();
 }
 
 if (document.getElementById("ec")) {
