@@ -1,0 +1,17 @@
+{
+  "Name": "GBP",
+  "Alias": "GBP",
+  "Code": "GBP",
+  "CultureName": "en-GB",
+  "SortOrder": 1,
+  "StoreUdi": "umb://umbraco-commerce-store/f35d55b6a09e4c199f9a018dd1f745f4",
+  "Udi": "umb://umbraco-commerce-currency/65280e0e353c4ea88a70018dd1f746c2",
+  "Dependencies": [
+    {
+      "Udi": "umb://umbraco-commerce-store/f35d55b6a09e4c199f9a018dd1f745f4",
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Commerce.Deploy,Umbraco.Commerce.Deploy.Artifacts.CurrencyArtifact",
+  "__version": "13.0.4"
+}
