@@ -26,6 +26,7 @@
   </ItemGroup> -->
 
   <ItemGroup>
+    <PackageReference Include="CMSImport" Version="13.1.0" />
     <PackageReference Include="Umbraco.Cloud.Cms.PublicAccess" Version="13.0.0" />
     <PackageReference Include="Umbraco.Cloud.Identity.Cms" Version="13.0.0" />
     <PackageReference Include="Umbraco.Cloud.StorageProviders.AzureBlob" Version="13.0.0" />
