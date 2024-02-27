@@ -1,7 +1,6 @@
 {
   "Name": "Product Page",
   "Alias": "productPage",
-  "DefaultTemplate": "umb://template/472d765a0e4c434b8ca84fa1d95a227b",
   "AllowedTemplates": [
     "umb://template/472d765a0e4c434b8ca84fa1d95a227b"
   ],
@@ -23,7 +22,7 @@
       "Key": "02292fc4-6af8-4e4d-b9eb-6786a8e8eb42",
       "Name": "Options",
       "SortOrder": 1000,
-      "Alias": "options",
+      "Alias": "details/options",
       "PropertyTypes": [
         {
           "Key": "3eb3016c-8f30-4ae5-9710-ad353760282d",
@@ -76,6 +75,42 @@
       ]
     },
     {
+      "Key": "1ca3c80e-35f7-4580-95cc-8c2339d747cc",
+      "Name": "Tabbed Content",
+      "SortOrder": 1,
+      "Type": 1,
+      "Alias": "tabbedContent",
+      "PropertyTypes": [
+        {
+          "Key": "2f345352-ce46-4538-903b-e62ea9dd3365",
+          "Alias": "trainingTakeaways",
+          "DataType": "umb://data-type/8b64a6e0df5f4b7cbd82b51cd42fca56",
+          "Name": "Training Takeaways",
+          "SortOrder": 3
+        },
+        {
+          "Key": "77eda608-5ce1-4cbe-937f-11f4728fb0d9",
+          "Alias": "moreInfo",
+          "DataType": "umb://data-type/0c3fda9b19ce48e29a6738b21197a292",
+          "Name": "More Info",
+          "SortOrder": 2
+        },
+        {
+          "Key": "7f424389-8f30-499c-b0ab-c600524ebffb",
+          "Alias": "courseDetails",
+          "DataType": "umb://data-type/586290edee92451bbc06a1529d546367",
+          "Name": "Course Details"
+        },
+        {
+          "Key": "d541db05-84e1-453a-8bc4-53db988bcc71",
+          "Alias": "courseInfo",
+          "DataType": "umb://data-type/64d49a046ca14f03b569cd762357c83b",
+          "Name": "Course Info",
+          "SortOrder": 1
+        }
+      ]
+    },
+    {
       "Key": "2fc399db-5bc3-4e13-b2ba-ed94061a62aa",
       "Name": "Content",
       "Alias": "content",
@@ -101,11 +136,22 @@
           "SortOrder": 5
         }
       ]
+    },
+    {
+      "Key": "627af795-acd6-4649-90e7-62fc8ade2a17",
+      "Name": "Details",
+      "Type": 1,
+      "Alias": "details",
+      "PropertyTypes": []
     }
   ],
   "PropertyTypes": [],
   "Udi": "umb://document-type/6ed103f65d4e47759105d341370c1690",
   "Dependencies": [
+    {
+      "Udi": "umb://data-type/0c3fda9b19ce48e29a6738b21197a292",
+      "Ordering": true
+    },
     {
       "Udi": "umb://data-type/0e9794ebf9b54f20a78893acd233a7e4",
       "Ordering": true
@@ -119,7 +165,19 @@
       "Ordering": true
     },
     {
+      "Udi": "umb://data-type/586290edee92451bbc06a1529d546367",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/64d49a046ca14f03b569cd762357c83b",
+      "Ordering": true
+    },
+    {
       "Udi": "umb://data-type/6c713be2f2ab4d96b5ad9394c505a577",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/8b64a6e0df5f4b7cbd82b51cd42fca56",
       "Ordering": true
     },
     {

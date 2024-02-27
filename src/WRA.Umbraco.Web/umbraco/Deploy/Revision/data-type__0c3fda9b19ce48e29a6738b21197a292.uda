@@ -1,0 +1,38 @@
+{
+  "Name": "More Info - More Info Content - Rich Text Editor",
+  "Alias": "",
+  "EditorAlias": "Umbraco.TinyMCE",
+  "Configuration": {
+    "editor": {
+      "toolbar": [
+        "ace",
+        "styles",
+        "bold",
+        "italic",
+        "alignleft",
+        "aligncenter",
+        "alignright",
+        "bullist",
+        "numlist",
+        "outdent",
+        "indent",
+        "link",
+        "umbmediapicker",
+        "umbmacro",
+        "umbembeddialog"
+      ],
+      "stylesheets": [],
+      "maxImageSize": 500,
+      "mode": "classic"
+    },
+    "blocks": [],
+    "useLiveEditing": false,
+    "overlaySize": "small",
+    "hideLabel": false,
+    "ignoreUserStartNodes": false
+  },
+  "Udi": "umb://data-type/0c3fda9b19ce48e29a6738b21197a292",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
+  "__version": "13.0.4"
+}

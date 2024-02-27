@@ -58,6 +58,22 @@ namespace WRA.Umbraco.Models
 		public virtual global::System.Collections.Generic.IEnumerable<global::Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent> Categories => this.Value<global::System.Collections.Generic.IEnumerable<global::Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent>>(_publishedValueFallback, "categories");
 
 		///<summary>
+		/// Course Details
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("courseDetails")]
+		public virtual global::Umbraco.Cms.Core.Strings.IHtmlEncodedString CourseDetails => this.Value<global::Umbraco.Cms.Core.Strings.IHtmlEncodedString>(_publishedValueFallback, "courseDetails");
+
+		///<summary>
+		/// Course Info
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("courseInfo")]
+		public virtual global::Umbraco.Cms.Core.Strings.IHtmlEncodedString CourseInfo => this.Value<global::Umbraco.Cms.Core.Strings.IHtmlEncodedString>(_publishedValueFallback, "courseInfo");
+
+		///<summary>
 		/// End Date
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
@@ -87,6 +103,14 @@ namespace WRA.Umbraco.Models
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("longDescription")]
 		public virtual global::Umbraco.Cms.Core.Strings.IHtmlEncodedString LongDescription => this.Value<global::Umbraco.Cms.Core.Strings.IHtmlEncodedString>(_publishedValueFallback, "longDescription");
+
+		///<summary>
+		/// More Info
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("moreInfo")]
+		public virtual global::Umbraco.Cms.Core.Strings.IHtmlEncodedString MoreInfo => this.Value<global::Umbraco.Cms.Core.Strings.IHtmlEncodedString>(_publishedValueFallback, "moreInfo");
 
 		///<summary>
 		/// Product Id
@@ -126,6 +150,14 @@ namespace WRA.Umbraco.Models
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("taxonomy")]
 		public virtual string Taxonomy => this.Value<string>(_publishedValueFallback, "taxonomy");
+
+		///<summary>
+		/// Training Takeaways
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("trainingTakeaways")]
+		public virtual global::Umbraco.Cms.Core.Strings.IHtmlEncodedString TrainingTakeaways => this.Value<global::Umbraco.Cms.Core.Strings.IHtmlEncodedString>(_publishedValueFallback, "trainingTakeaways");
 
 		///<summary>
 		/// Meta Description: Enter meta description if desired.
