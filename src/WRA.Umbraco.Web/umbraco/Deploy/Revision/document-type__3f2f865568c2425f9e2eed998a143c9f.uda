@@ -1,9 +1,9 @@
 {
-  "Name": "Umbraco testform1",
-  "Alias": "umbracoTestform1",
-  "DefaultTemplate": "umb://template/04b45a7387dd4856a17d85d450fc654b",
+  "Name": "umbraco test form",
+  "Alias": "umbracoTestForm",
+  "DefaultTemplate": "umb://template/c9a1d5e0c02e4e42bc81b3d7606a1fb2",
   "AllowedTemplates": [
-    "umb://template/04b45a7387dd4856a17d85d450fc654b"
+    "umb://template/c9a1d5e0c02e4e42bc81b3d7606a1fb2"
   ],
   "HistoryCleanup": {},
   "Icon": "icon-document",
@@ -15,12 +15,12 @@
   "CompositionContentTypes": [],
   "PropertyGroups": [
     {
-      "Key": "b6ffc2d9-9bf0-455b-8b85-7391bdaa1f97",
-      "Name": "form1",
-      "Alias": "form1",
+      "Key": "35d56998-2cc0-49c3-898a-82846c983936",
+      "Name": "form",
+      "Alias": "form",
       "PropertyTypes": [
         {
-          "Key": "a7318640-308c-455f-9111-1a98059aaa50",
+          "Key": "3915101e-c119-42eb-8651-27faab070b08",
           "Alias": "form1",
           "DataType": "umb://data-type/2bff224694e947f6a58cbc8c41d1c784",
           "Name": "form1"
@@ -29,14 +29,14 @@
     }
   ],
   "PropertyTypes": [],
-  "Udi": "umb://document-type/d135b949e0544f7694803581ba3632ac",
+  "Udi": "umb://document-type/3f2f865568c2425f9e2eed998a143c9f",
   "Dependencies": [
     {
       "Udi": "umb://data-type/2bff224694e947f6a58cbc8c41d1c784",
       "Ordering": true
     },
     {
-      "Udi": "umb://template/04b45a7387dd4856a17d85d450fc654b",
+      "Udi": "umb://template/c9a1d5e0c02e4e42bc81b3d7606a1fb2",
       "Ordering": true
     }
   ],
