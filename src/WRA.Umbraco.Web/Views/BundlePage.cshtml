@@ -1,24 +1,21 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
 @using ContentModels = WRA.Umbraco.Models;
+@using WRA.Umbraco.Controllers;
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.BundlePage>
 @{
 	Layout = "~/Views/_Layout.cshtml";
 }
 <div>
-	@using (Html.BeginUmbracoForm("AddBundleToCart", "CartSurface")){
-		<input type="hidden" name="BundleReference" value="@Model.BundleReferece" />
-		<select multiple size="@Model.BundledProducts.Count()">
-			@foreach (var bundleItem in Model.BundledProducts.Select((p, i) => new { Product = p, Index = i }))
-			{
-				var productRef = $"BundledProducts[{bundleItem.Index}].ProductReference";
-				var productName = $"BundledProducts[{bundleItem.Index}].ProductName";
-				<option name=@productName value="@bundleItem.Product.Name">@bundleItem.Product.Name</option>
-				@* <option hidden name=@productRef value="@bundleItem.Product.Key.ToString()">@bundleItem.Product.Key</option> *@
-
-				@Html.Hidden(productRef, bundleItem.Product.Key.ToString());
-				@* @Html.Hidden(productName, bundleItem.Product.Name);  *@
-			}
-		</select>
+	@using (Html.BeginUmbracoForm<CartSurfaceController>("AddBundleToCart")){
+        <input type="hidden" name="BundleReference" value="@Model.BundleReferece" />
+			<div>
+				@foreach (var bundleItem in Model.BundledProducts.Select((p, i) => new { Product = p, Index = i }))
+				{
+					var objectIndexKey = $"BundledProducts[{bundleItem.Index}]";
+					<input type="checkbox" name=@objectIndexKey id="@bundleItem.Product.Id" value="@bundleItem.Product.Key" />
+					<label for="@bundleItem.Product.Id">@bundleItem.Product.Name</label>
+				}
+			</div>
 		<button id="add-to-cart" class="btn btn-primary mb-6" type="submit">Add to Cart</button>
 	}
 </div>

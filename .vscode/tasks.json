@@ -7,7 +7,7 @@
       "type": "process",
       "args": [
         "build",
-        "D:/Lightburn/WRA.Umbraco/src/WRA.Umbraco.Web/WRA.Umbraco.Web.csproj",
+        "${workspaceFolder}/src/WRA.Umbraco.Web/WRA.Umbraco.Web.csproj",
         "/property:GenerateFullPaths=true",
         "/consoleloggerparameters:NoSummary"
       ],

@@ -10,7 +10,7 @@
       "request": "launch",
       "preLaunchTask": "build",
       // If you have changed target frameworks, make sure to update the program path.
-      "program": " D:/Lightburn/WRA.Umbraco/src/WRA.Umbraco.Web/bin/Debug/net8.0/WRA.Umbraco.Web.dll",
+      "program": "${workspaceFolder}/src/WRA.Umbraco.Web/bin/Debug/net8.0/WRA.Umbraco.Web.dll",
       "args": [],
       "cwd": "${workspaceFolder}/src/WRA.Umbraco.Web",
       "stopAtEntry": false,
