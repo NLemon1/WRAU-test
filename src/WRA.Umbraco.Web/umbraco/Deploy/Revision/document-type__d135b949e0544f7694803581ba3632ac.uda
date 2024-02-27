@@ -22,7 +22,7 @@
         {
           "Key": "a7318640-308c-455f-9111-1a98059aaa50",
           "Alias": "form1",
-          "DataType": "umb://data-type/2bff224694e947f6a58cbc8c41d1c784",
+          "DataType": "umb://data-type/e994ee074ba74d6b823baab799503adb",
           "Name": "form1"
         }
       ]
@@ -32,7 +32,7 @@
   "Udi": "umb://document-type/d135b949e0544f7694803581ba3632ac",
   "Dependencies": [
     {
-      "Udi": "umb://data-type/2bff224694e947f6a58cbc8c41d1c784",
+      "Udi": "umb://data-type/e994ee074ba74d6b823baab799503adb",
       "Ordering": true
     },
     {
