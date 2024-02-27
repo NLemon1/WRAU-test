@@ -1,0 +1,14 @@
+{
+  "Name": "Bundle Page",
+  "Alias": "BundlePage",
+  "File": "umb://template-file/BundlePage.cshtml",
+  "Udi": "umb://template/f35e68a309e14a5f98958bab440c2136",
+  "Dependencies": [
+    {
+      "Udi": "umb://template-file/BundlePage.cshtml",
+      "Ordering": true
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.TemplateArtifact",
+  "__version": "13.0.4"
+}

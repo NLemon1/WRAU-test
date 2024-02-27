@@ -1,0 +1,92 @@
+{
+  "Name": "Bundle Page",
+  "Alias": "bundlePage",
+  "DefaultTemplate": "umb://template/f35e68a309e14a5f98958bab440c2136",
+  "AllowedTemplates": [
+    "umb://template/f35e68a309e14a5f98958bab440c2136"
+  ],
+  "HistoryCleanup": {},
+  "Icon": "icon-categories color-deep-purple",
+  "Thumbnail": "folder.png",
+  "Permissions": {
+    "AllowedChildContentTypes": []
+  },
+  "Parent": "umb://document-type/ab792f1f277c43d69f07a142386b855d",
+  "CompositionContentTypes": [
+    "umb://document-type/ab792f1f277c43d69f07a142386b855d"
+  ],
+  "PropertyGroups": [
+    {
+      "Key": "2dfdd225-f155-4ed6-8a90-842bd2f92dba",
+      "Name": "Bundle Products",
+      "SortOrder": 1001,
+      "Alias": "bundleProducts",
+      "PropertyTypes": [
+        {
+          "Key": "0ce86bae-c318-4a04-b541-9974e6954315",
+          "Alias": "bundledProducts",
+          "DataType": "umb://data-type/fba59106b6ea462aac8fafe16d5975db",
+          "Name": "Bundled Products"
+        },
+        {
+          "Key": "b4ef60fd-35c4-4e56-b7aa-13a4a83ef2cb",
+          "Alias": "bundleSubCategories",
+          "DataType": "umb://data-type/dcf9993bca6444d498327cb83e0af234",
+          "Name": "Bundle SubCategories",
+          "SortOrder": 1
+        }
+      ]
+    },
+    {
+      "Key": "4fa8b788-2373-4f9e-8520-1794cd87a134",
+      "Name": "Bundle Properties",
+      "SortOrder": 1000,
+      "Alias": "bundleProperties",
+      "PropertyTypes": [
+        {
+          "Key": "91e3985a-6b2b-4f56-9d61-90f9144992bd",
+          "Alias": "bundleTitle",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Bundle Title"
+        },
+        {
+          "Key": "de5f3e0b-7a62-4545-9254-bfef1c9eb296",
+          "Alias": "tags",
+          "DataType": "umb://data-type/b6b73142b9c14bf8a16de1c23320b549",
+          "Name": "Tags",
+          "SortOrder": 1
+        }
+      ]
+    }
+  ],
+  "PropertyTypes": [],
+  "Udi": "umb://document-type/de09e8a08995400ca15bbb29ad2a15c4",
+  "Dependencies": [
+    {
+      "Udi": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/b6b73142b9c14bf8a16de1c23320b549",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/dcf9993bca6444d498327cb83e0af234",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/fba59106b6ea462aac8fafe16d5975db",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type/ab792f1f277c43d69f07a142386b855d",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://template/f35e68a309e14a5f98958bab440c2136",
+      "Ordering": true
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
+  "__version": "13.0.4"
+}

@@ -66,6 +66,43 @@ namespace WRA.Umbraco.Controllers
             return RedirectToCurrentUmbracoPage();
         }
 
+        public IActionResult AddBundleToCart(AddBundleToCartDto postModel)
+        {
+            var bundleReference = postModel.BundleReference;
+            var primaryProduct = postModel.BundledProducts.First();
+            var primaryProductReference = primaryProduct.ProductReference;
+            int qty = 1;
+            try
+            {
+                _commerceApi.Uow.Execute(uow =>
+                {
+                    var store = CurrentPage.GetStore();
+                    var order = _commerceApi.GetOrCreateCurrentOrder(store.Id)
+                        .AsWritable(uow)
+                        .AddProduct(primaryProductReference, qty, bundleReference);
+
+                    // the first product is already added as the "main" bundle item, so we skip it here.
+                    foreach (var bp in postModel.BundledProducts.Skip(1))
+                    {
+                        order.AddProductToBundle(bundleReference, bp.ProductReference, qty);
+                    }
+                    _commerceApi.SaveOrder(order);
+
+                    uow.Complete();
+                });
+            }
+            catch (ValidationException ex)
+            {
+                ModelState.AddModelError("bundleReference", "Failed to add bundle to cart");
+
+                return CurrentUmbracoPage();
+            }
+
+            TempData["addedBundleReference"] = postModel.BundleReference;
+
+            return RedirectToCurrentUmbracoPage();
+        }
+
         [HttpPost]
         public IActionResult UpdateCart(UpdateCartDto postModel)
         {

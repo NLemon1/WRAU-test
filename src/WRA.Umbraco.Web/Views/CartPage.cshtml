@@ -53,6 +53,19 @@
                                                     }
                                                 }
                                             </div>
+                                            <div>
+                                                @if (item.OrderLine.IsBundle()){
+                                                    var bundleItems = item.OrderLine.OrderLines;
+                                                    foreach (var bundleItem in bundleItems)
+                                                    {
+                                                        <div class="fs-xs" style="color: #696f78;">@bundleItem.Name</div>
+                                                        foreach (var attr in bundleItem.Attributes)
+                                                        {
+                                                            <div class="fs-xs" style="color: #696f78;">@attr.Value</div>
+                                                        }
+                                                    }
+                                                }
+                                            </div>
                                         </div>
                                     </td>
                                     <td>

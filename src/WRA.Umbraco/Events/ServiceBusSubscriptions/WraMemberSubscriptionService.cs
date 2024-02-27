@@ -14,7 +14,7 @@ public class WraMemberSubscriptionService : BackgroundService
     private readonly string _subscriptionName;
     private readonly string _connectionString;
     private readonly string _baseUrl;
-    private ServiceBusProcessor _processor;
+    ServiceBusProcessor _processor;
     readonly ILogger<WraMemberSubscriptionService> _logger;
 
     public WraMemberSubscriptionService(IOptions<MemberSubscriptionServiceSettings> settings, ILogger<WraMemberSubscriptionService> logger)
@@ -24,13 +24,14 @@ public class WraMemberSubscriptionService : BackgroundService
         _connectionString = settings.Value.AzureUrl;
         _baseUrl = settings.Value.BaseUrl;
         _logger = logger;
+
+        var client = new ServiceBusClient(_connectionString);
+        _processor = client.CreateProcessor(_topicName, _subscriptionName, new ServiceBusProcessorOptions());
     }
 
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        var client = new ServiceBusClient(_connectionString);
-        _processor = client.CreateProcessor(_topicName, _subscriptionName, new ServiceBusProcessorOptions());
 
         _processor.ProcessMessageAsync += MessageHandler;
         _processor.ProcessErrorAsync += ErrorHandler;
