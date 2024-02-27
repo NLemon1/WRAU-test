@@ -135,7 +135,7 @@ const courseSearch = () => {
 
     const updateActionUrl = () => {
 
-        const setParams = subcategory !== "" ? `${actionInitial}?type=Courses&category=${category}&subcategory=${subcategory}` : `${actionInitial}?type=courses&category=${category}`;
+        const setParams = subcategory !== "" ? `${actionInitial}?type=Courses&category=${category}&subcategory=${subcategory}` : `${actionInitial}?type=Courses&category=${category}`;
         courseSearchForm.setAttribute("action", setParams);
 
         updatedAction = true;
