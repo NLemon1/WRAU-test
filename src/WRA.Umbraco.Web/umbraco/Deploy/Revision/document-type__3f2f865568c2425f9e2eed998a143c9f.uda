@@ -1,0 +1,26 @@
+{
+  "Name": "umbraco test form",
+  "Alias": "umbracoTestForm",
+  "DefaultTemplate": "umb://template/c9a1d5e0c02e4e42bc81b3d7606a1fb2",
+  "AllowedTemplates": [
+    "umb://template/c9a1d5e0c02e4e42bc81b3d7606a1fb2"
+  ],
+  "HistoryCleanup": {},
+  "Icon": "icon-document",
+  "Thumbnail": "folder.png",
+  "Permissions": {
+    "AllowedChildContentTypes": []
+  },
+  "CompositionContentTypes": [],
+  "PropertyGroups": [],
+  "PropertyTypes": [],
+  "Udi": "umb://document-type/3f2f865568c2425f9e2eed998a143c9f",
+  "Dependencies": [
+    {
+      "Udi": "umb://template/c9a1d5e0c02e4e42bc81b3d7606a1fb2",
+      "Ordering": true
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
+  "__version": "13.0.4"
+}
