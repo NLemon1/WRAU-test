@@ -16,7 +16,7 @@
     var endDate = @String.Format("{0:MMMM d}", Model.EndDate) ?? string.Empty;
     var endTime = @String.Format("{0:h:mm tt}", Model.EndDate) ?? string.Empty;
 
-    //This template used for Courses, Event, Product detail
+    var productType = Model.Parent.Name; //Events, Products, Courses
 
 }
 
@@ -85,7 +85,8 @@
         </div>
         <div class="col-12 col-lg-6">
             
-            @if (startDate != null && Model.StartDate.ToShortDateString() != "1/1/0001"){
+            @if (startDate != null && Model.StartDate > DateTime.Today && productType != "Products")
+            {
                 <p class="mb-4 fs-sm">
                     @startDate
                     @if (startDate != endDate)
@@ -208,31 +209,29 @@
             }
         </div>
 
-        <div style="height: 96px;"></div>
 
     }
     
-                @* TO DO: Need load FAQs *@
-                @* <div class="accordions-wrapper">
-                    @for (var i = 1; i < 5; i++)
-                    {
-                        <details class="accordion">
-                            <summary class="accordion__toggle">
-                                Question: Lorem Ipsum
-                                <div class="accordion__toggle-icon">
-                                    <i class="fas fa-chevron-down"></i>
-                                    <i class="fas fa-chevron-up"></i>
-                                </div>
-                            </summary>
-                            <div class="accordion__content">
-                                Answer: <br>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                        </details>
-                    }
-                </div> *@
+    @* TO DO: Need load FAQs *@
+    @* <div class="accordions-wrapper">
+        @for (var i = 1; i < 5; i++)
+        {
+            <details class="accordion">
+                <summary class="accordion__toggle">
+                    Question: Lorem Ipsum
+                    <div class="accordion__toggle-icon">
+                        <i class="fas fa-chevron-down"></i>
+                        <i class="fas fa-chevron-up"></i>
+                    </div>
+                </summary>
+                <div class="accordion__content">
+                    Answer: <br>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+            </details>
+        }
+    </div> *@
 
-
-
+    <div style="height: 96px;"></div>
 </div>
 
 @{

@@ -19,7 +19,7 @@
     var endDate = @String.Format("{0:MMMM d}", Model.EndDate) ?? string.Empty;
     var endTime = @String.Format("{0:h:mm tt}", Model.EndDate) ?? string.Empty;
 
-    //This template used for Courses, Event, Product detail
+    var productType = Model.Parent.Name; //Events, Products, Courses
 }
 
 
@@ -90,7 +90,7 @@
         </div>
         <div class="col-12 col-lg-6">
             
-            @if (startDate != null && Model.StartDate.ToShortDateString() != "1/1/0001")
+            @if (startDate != null && Model.StartDate > DateTime.Today && productType != "Products")
             {
                 <p class="mb-4 fs-sm">
                     @startDate
@@ -216,8 +216,8 @@
             }
         </div>
 
-        <div style="height: 96px;"></div>
     }
+    <div style="height: 96px;"></div>
 </div>
 
 
