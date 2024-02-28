@@ -65,7 +65,23 @@ namespace WRA.Umbraco.Models
 		public virtual global::System.DateTime EndDate => this.Value<global::System.DateTime>(_publishedValueFallback, "endDate");
 
 		///<summary>
-		/// Short Description
+		/// Event Details (optional): Expanded event details when calendar item is clicked.
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("eventDetails")]
+		public virtual global::Umbraco.Cms.Core.Strings.IHtmlEncodedString EventDetails => this.Value<global::Umbraco.Cms.Core.Strings.IHtmlEncodedString>(_publishedValueFallback, "eventDetails");
+
+		///<summary>
+		/// Event Link (optional): Links to external page when calendar item is clicked.
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("eventLink")]
+		public virtual global::Umbraco.Cms.Core.Models.Link EventLink => this.Value<global::Umbraco.Cms.Core.Models.Link>(_publishedValueFallback, "eventLink");
+
+		///<summary>
+		/// Short Description: Shows on calendar after event title.
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]

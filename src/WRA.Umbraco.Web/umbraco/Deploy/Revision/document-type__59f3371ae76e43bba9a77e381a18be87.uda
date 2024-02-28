@@ -33,7 +33,7 @@
           "Key": "34a5cec4-7b42-49fb-992d-3024dd232db7",
           "Alias": "colorCode",
           "DataType": "umb://data-type/edd63835d0084d4a84585b5703c5a13b",
-          "Description": "Used in Calendar, if type is event.",
+          "Description": "Required if \"Show in Calendar\" is selected above.",
           "Name": "Color Code",
           "SortOrder": 4
         },

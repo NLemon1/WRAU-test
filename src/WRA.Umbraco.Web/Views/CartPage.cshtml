@@ -6,6 +6,8 @@
 
 @if (Model != null && Model.Order != null && Model.Order.OrderLines.Count > 0)
 {
+    var totalDiscount = Model.Order.GetTotalPriceAdjustmentByType<DiscountAdjustment>();
+
     using (Html.BeginUmbracoForm("UpdateCart", "CartSurface"))
     {
         <div class="container py-5 py-lg-9">
@@ -63,6 +65,16 @@
                                                         {
                                                             <div class="fs-xs" style="color: #696f78;">@attr.Value</div>
                                                         }
+                                                        Price linePrice = item.OrderLine.TotalPrice.WithoutAdjustments;
+                                                        Price linePriceAdjustments = item.OrderLine.TotalPrice.Adjustment;
+                                                        @if(linePriceAdjustments != null && linePriceAdjustments > 0)
+                                                        {
+                                                            <div class="fs-xs" style="color: #696f78;">
+                                                               <s> @linePrice.Formatted().WithoutTax</s>
+                                                               @linePriceAdjustments.Formatted().WithoutTax
+                                                            </div>
+                                                        }
+                                                        <div class="fs-xs" style="color: #696f78;"></div>
                                                     }
                                                 }
                                             </div>
@@ -102,14 +114,14 @@
                         <table class="w-100">
                             <tr>
                                 <td class="pb-3">Subtotal</td>
-                                <td class="pb-3 text-end">@Model.Order.SubtotalPrice.WithoutAdjustments.Formatted().WithoutTax</td>
+                                @* <td class="pb-3 text-end">@Model.Order.SubtotalPrice.Adjustment.Formatted()</td> *@
+                                <td class="pb-3 text-end">@Model.Order.SubtotalPrice.Value.Formatted().WithoutTax</td>
                             </tr>
                             <tr>
                                 <td class="pb-3">Estimated Tax</td>
                                 <td class="pb-3 text-end">@Model.Order.TotalPrice.Value.Formatted().Tax</td>
                             </tr>
                             @{
-                                var totalDiscount = Model.Order.GetTotalPriceAdjustmentByType<DiscountAdjustment>();
                                 if (totalDiscount != 0)
                                 {
                                     <tr>

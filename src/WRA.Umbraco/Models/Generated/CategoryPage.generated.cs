@@ -50,7 +50,7 @@ namespace WRA.Umbraco.Models
 		// properties
 
 		///<summary>
-		/// Color Code: Used in Calendar, if type is event.
+		/// Color Code: Required if "Show in Calendar" is selected above.
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]

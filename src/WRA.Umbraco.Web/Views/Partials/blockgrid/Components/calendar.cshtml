@@ -43,7 +43,7 @@
             <text>{</text>
                 <text>id:"</text>@category.Id<text>",</text>
                 <text>title:"</text>@category.Name<text>",</text>
-                <text>eventBackgroundColor:"</text>@category.Value("colorCode")<text>"</text>
+                <text>eventBackgroundColor:"</text>@(category.HasValue("colorCode") ? category.Value("colorCode") : "#000000")<text>"</text>
             <text>},</text>
             }
         }
