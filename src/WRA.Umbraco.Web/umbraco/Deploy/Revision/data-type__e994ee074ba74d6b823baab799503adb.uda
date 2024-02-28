@@ -1,15 +1,14 @@
 {
-  "Name": "Umbraco testform1 - Form Picker",
+  "Name": "Umbraco testform1 - form1 - Form Picker",
   "Alias": "",
   "EditorAlias": "UmbracoForms.FormPicker",
   "DatabaseType": "Nvarchar",
   "Configuration": {
     "allowedForms": [
-      "f72c26b1-8fad-42d3-acda-999e3f1da3a3",
       "3410248b-7daf-48df-8399-c1ee027f363c"
     ]
   },
-  "Udi": "umb://data-type/2bff224694e947f6a58cbc8c41d1c784",
+  "Udi": "umb://data-type/e994ee074ba74d6b823baab799503adb",
   "Dependencies": [],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
   "__version": "13.0.4"
