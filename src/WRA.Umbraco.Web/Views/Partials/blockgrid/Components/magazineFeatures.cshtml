@@ -73,7 +73,7 @@
                     </div>
                     @if (imageCurrent != null)
                     {
-                        <img src="@imageCurrent.GetCropUrl(width: 640, height: 412, furtherOptions: "&format=WebP")" class="w-100 top-0 h-100 opacity-50 fit-cover mb-4 position-absolute z-1" width="320" height="412" alt="@(imageCurrent.Value("altText") ?? string.Empty)" />
+                        <img src="@imageCurrent.GetCropUrl(width: 412, furtherOptions: "&format=WebP")" class="w-100 top-0 h-100 opacity-50 fit-cover mb-4 position-absolute z-1" width="320" alt="@(imageCurrent.Value("altText") ?? string.Empty)" />
                     }
                 </div>
 
@@ -81,7 +81,7 @@
                     <div class="pe-0 col-md-6">
                         @if (imageCurrent != null)
                         {
-                            <img style="flex-basis: 50%;object-fit:contain;" src="@imageCurrent.GetCropUrl(width: 640, height: 412, furtherOptions: "&format=WebP")" class="w-100 h-100 d-md-block" width="320" height="412" alt="@(imageCurrent.Value("altText") ?? string.Empty)" />
+                            <img style="flex-basis: 50%;object-fit:contain;" src="@imageCurrent.GetCropUrl(width: 412, furtherOptions: "&format=WebP")" class="w-100 h-100 d-md-block" width="320" alt="@(imageCurrent.Value("altText") ?? string.Empty)" />
                         }
                     </div>
                     <div class="col-md-6 p-4 d-flex flex-column align-items-start justify-content-center h-100" style="background: var(--bs-gray-10)">
@@ -125,14 +125,14 @@
 
                                 if (child.HasValue("richTextContent") && !child.HasValue("excerpt"))
                                 {
-                                    cleanContent = HtmlHelperExtensions.ShortenExcerpt(child.Value("richTextContent").ToString(), 135);
+                                    cleanContent = HtmlHelperExtensions.ShortenExcerpt(child?.Value("richTextContent").ToString(), 135);
                                 }
 
                                 var articleSummary = child.HasValue("excerpt") ? child.Value("excerpt") : cleanContent;
 
                                 <li class="d-flex flex-row position-relative list-group-item">
                                     @if (articleImage != null){
-                                        <img src="@articleImage.GetCropUrl(width: 120, height: 80, furtherOptions: "&format=WebP")" srcset="@articleImage.GetCropUrl(width: 240, height: 160, furtherOptions: "&format=WebP") 2x" class="fit-cover" width="120" height="80" alt="@(imageCurrent.Value("altText") ?? "")" />
+                                        <img src="@articleImage?.GetCropUrl(width: 120, height: 80, furtherOptions: "&format=WebP")" srcset="@articleImage?.GetCropUrl(width: 240, height: 160, furtherOptions: "&format=WebP") 2x" class="fit-cover" width="120" height="80" alt="@(articleImage?.Value("altText") ?? "")" />
                                     }
                                     <div class="flex-fill ps-3">
                                         <a href="@child.Url()" class="stretched-link link-hover-inverse">
