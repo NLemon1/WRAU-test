@@ -57,9 +57,10 @@ const products = () => {
         if (results.length > 0) {
 
             results.forEach((result) => {
+                //console.log(result);
 
                 //How we determine button display text?
-                const setCTA = result.taxonomy == "Reference Manuals" || result.taxonomy == "Books" ? `<a href="${result.url}" id="add-to-cart" class="btn btn-secondary btn-sm border-0  flex-grow-1">Add To Cart</a>` : `<a href="${result.url}" id="view-product" class="btn btn-primary btn-sm flex-grow-1">View Product</a>`;
+                const setCTA = result.productType == "Products" ? `<a href="${result.url}" id="add-to-cart" class="btn btn-secondary btn-sm border-0  flex-grow-1">Add To Cart</a>` : `<a href="${result.url}" id="view-product" class="btn btn-primary btn-sm flex-grow-1">Register</a>`;
 
                 productResults.innerHTML += (
                     `

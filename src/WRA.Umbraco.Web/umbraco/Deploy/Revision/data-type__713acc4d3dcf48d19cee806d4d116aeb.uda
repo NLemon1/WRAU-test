@@ -6,7 +6,7 @@
     "startNode": {
       "type": "content"
     },
-    "filter": "categoryPage",
+    "filter": "collectionPage",
     "minNumber": 1,
     "maxNumber": 2,
     "showOpenButton": false,
