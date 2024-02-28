@@ -6,15 +6,15 @@
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ProductPage>
 
 @{
-    var multiVariantProductPage = Model as ProductPage;//Will need variants for member vs. non-member price?
+    var multiVariantProductPage = Model as ProductPage;
 
     var store = Model.Value<StoreReadOnly>("store", fallback: Fallback.ToAncestors);
     var addedProductReference = TempData["addedProductReference"]?.ToString();
 
     var startDate = @String.Format("{0:MMMM d}", Model.StartDate) ?? string.Empty;
-    var startTime = @String.Format("{0:HH:mm}", Model.StartDate) ?? string.Empty;
+    var startTime = @String.Format("{0:h:mm tt}", Model.StartDate) ?? string.Empty;
     var endDate = @String.Format("{0:MMMM d}", Model.EndDate) ?? string.Empty;
-    var endTime = @String.Format("{0:HH:mm}", Model.EndDate) ?? string.Empty;
+    var endTime = @String.Format("{0:h:mm tt}", Model.EndDate) ?? string.Empty;
 
     //This template used for Courses, Event, Product detail
 
@@ -110,7 +110,7 @@
             {
                 <h1 class="h3 mb-4">@Model.Name</h1>
                 RenderVariants(store, Model, addedProductReference);
-                <button id="add-to-cart" class="btn btn-primary mb-6" type="submit">Add to Cart</button>
+                <button id="add-to-cart" class="btn btn-primary mt-4 mb-6" type="submit">Add to Cart</button>
             }
 
             @if (!String.IsNullOrEmpty(Model.LongDescription.ToString()))
@@ -276,18 +276,23 @@
         {
             @Html.Hidden("productReference", product.GetProductReference())
 
-            <div class="d-flex flex-row align-items-baseline w-100">
+            <div class="d-flex flex-row align-items-baseline w-100 mb-1">
                 <div class="h3 mb-0">@(product.MemberPricing?.Formatted())</div>
                 <div class="fs-sm mb-3" style="color: var(--bs-gray-30)">
                     &nbsp;member pricing
                 </div>
             </div>
-
-            <div class="mt-n2 mb-2 d-flex flex-row align-items-baseline fs-sm mb-0 w-100" style="color: var(--bs-gray-30)">
+            <div class="mt-n3 d-flex flex-row align-items-baseline fs-sm w-100" style="color: var(--bs-gray-30)">
                 @(product.NonMemberPricing.Formatted())
                 <div class="mb-3">&nbsp;non-member pricing</div>
             </div>
-
+            @if (product.DoorPricing != null)
+            {
+                <div class="mt-n3 d-flex flex-row align-items-baseline fs-sm w-100" style="color: var(--bs-gray-30)">
+                    @(product.DoorPricing.Formatted())
+                <div class="mb-3">&nbsp;at the Door</div>
+            </div>
+            }
         }
     }
 }

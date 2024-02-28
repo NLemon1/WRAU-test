@@ -74,6 +74,14 @@ namespace WRA.Umbraco.Models
 		public virtual global::Umbraco.Cms.Core.Strings.IHtmlEncodedString CourseInfo => this.Value<global::Umbraco.Cms.Core.Strings.IHtmlEncodedString>(_publishedValueFallback, "courseInfo");
 
 		///<summary>
+		/// Door Price
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("doorPrice")]
+		public virtual global::Umbraco.Commerce.Cms.Models.PricePropertyValue DoorPrice => this.Value<global::Umbraco.Commerce.Cms.Models.PricePropertyValue>(_publishedValueFallback, "doorPrice");
+
+		///<summary>
 		/// End Date
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]

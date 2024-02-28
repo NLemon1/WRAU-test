@@ -18,6 +18,7 @@ namespace WRA.Umbraco.Models
         public ProductPrice MemberPricing => this.MemberPrice.GetPriceFor(CurrencyId);
         public ProductPrice NonMemberPricing => this.Price.GetPriceFor(CurrencyId);
         public IEnumerable<ProductVariant> ChildVariants => this.Children.OfType<ProductVariant>();
+        public ProductPrice DoorPricing => this.DoorPrice?.GetPriceFor(CurrencyId);
 
     }
 }

@@ -120,6 +120,13 @@
           "Alias": "shortDescription",
           "DataType": "umb://data-type/c6bac0dd4ab945b18e30e4b619ee5da3",
           "Name": "Short Description",
+          "SortOrder": 5
+        },
+        {
+          "Key": "42989a38-3e60-4ebb-bac3-5f0369db8b66",
+          "Alias": "doorPrice",
+          "DataType": "umb://data-type/cd32dc55ada2469db6c629dc907760c9",
+          "Name": "Door Price",
           "SortOrder": 4
         },
         {
@@ -133,7 +140,7 @@
           "Alias": "longDescription",
           "DataType": "umb://data-type/6c713be2f2ab4d96b5ad9394c505a577",
           "Name": "Long Description",
-          "SortOrder": 5
+          "SortOrder": 6
         }
       ]
     },
@@ -182,6 +189,10 @@
     },
     {
       "Udi": "umb://data-type/c6bac0dd4ab945b18e30e4b619ee5da3",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/cd32dc55ada2469db6c629dc907760c9",
       "Ordering": true
     },
     {
