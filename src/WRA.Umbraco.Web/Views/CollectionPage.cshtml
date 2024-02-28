@@ -11,9 +11,6 @@
 @{
     var sections = Model.Value<IEnumerable<BlockGridItem>>("sections");
 
-    bool isBundled = true;//TO DO: need to flag if the product is a bundle
-
-
     //QUESTION: Make Categories selectable per Collection??
     //categories dropdown
     IEnumerable<IPublishedContent> classCategories = Umbraco.ContentAtRoot()

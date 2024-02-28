@@ -98,6 +98,10 @@
     &-secondary {
         padding: 1rem 1rem;
 
+        &.btn-sm {
+            padding: 0.5rem 1rem;
+        }
+
         &:where(:not(.btn-light)) {
             color: $btn-color;
 

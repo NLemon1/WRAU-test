@@ -1,21 +1,82 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
 @using ContentModels = WRA.Umbraco.Models;
 @using WRA.Umbraco.Controllers;
+
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.BundlePage>
+
 @{
-	Layout = "~/Views/_Layout.cshtml";
+    Layout = "~/Views/_Layout.cshtml";
 }
-<div>
-	@using (Html.BeginUmbracoForm<CartSurfaceController>("AddBundleToCart")){
-        <input type="hidden" name="BundleReference" value="@Model.BundleReferece" />
-			<div>
-				@foreach (var bundleItem in Model.BundledProducts.Select((p, i) => new { Product = p, Index = i }))
-				{
-					var objectIndexKey = $"BundledProducts[{bundleItem.Index}]";
-					<input type="checkbox" name=@objectIndexKey id="@bundleItem.Product.Id" value="@bundleItem.Product.Key" />
-					<label for="@bundleItem.Product.Id">@bundleItem.Product.Name</label>
-				}
-			</div>
-		<button id="add-to-cart" class="btn btn-primary mb-6" type="submit">Add to Cart</button>
-	}
+
+<header class="page-header page-header--no-accent">
+    <div class="container">
+        <div class="container--sm">
+            <h1 class="js-collection-title mb-0">
+				@Model.Name
+            </h1>
+        </div>
+    </div>
+</header>
+
+<div class="text-bg-secondary">
+    <div class="text-light">
+        @await Html.PartialAsync("_breadcrumbsProducts", new ViewDataDictionary(this.ViewData) { { "CssClass", "breadcrumbs--light" }, { "ParentName", "Education" }, { "ParentUrl", "/education" } })
+    </div>
+</div>
+<div class="bg-white overflow-hidden">
+    <div class="js-bundles-form container my-4 mt-lg-6 mb-12">
+
+        @if (!String.IsNullOrEmpty(Model.ShortDescription?.ToString()))
+        {
+            <div class="rich-text my-5 my-lg-7">
+                @Html.Raw(Model.ShortDescription)
+            </div>
+        }
+
+        <h2 class="h3 w-100 pt-4 pb-1 border-top border-medium">Selected Courses to Bundle</h2>
+
+        @using (Html.BeginUmbracoForm<CartSurfaceController>("AddBundleToCart"))
+        {
+            <input type="hidden" name="BundleReference" value="@Model.BundleReferece" />
+
+            <div class="row gy-3">
+			    @foreach (var bundleItem in Model.BundledProducts.Select((p, i) => new { Product = p, Index = i }))
+                {
+                    var objectIndexKey = $"BundledProducts[{bundleItem.Index}]";
+
+                    <div class="col-md-6 col-lg-4 col-bundle">
+                        <input type="checkbox" class="js-bundle-checkbox input-bundle" name="@objectIndexKey" id="@bundleItem.Product.Id" value="@bundleItem.Product.Key" />
+                        <div class="card card-bundle">
+                            <p class="mb-3 fs-xs">Class <span class="ms-3 fw-semibold">Credit Hours: XXX</span></p>
+                            <h3 class="fw-bold fs-lg text-capitalize mb2_5">@bundleItem.Product.Name</h3>
+                            <div class="d-flex flex-row gap-3 mt-auto">
+                                <label for="@bundleItem.Product.Id" class="js-bundle-select btn btn-primary btn-sm w-50 py-3" tabindex="1" role="button" aria-haspopup="dialog" aria-controls="bundleSelected" style="cursor:pointer">
+                                    <span class="btn__select">Select</span>
+                                    <span class="visually-hidden">OR</span>
+                                    <span class="btn__deselect">Deselect</span>
+                                </label>
+                                @if (bundleItem.Product.HasProperty("ShortDescription"))
+                                {
+                                <button class="js-bundle-pop-details btn btn-secondary btn-sm w-50 py-3" aria-controls="@(bundleItem.Product.Id)moreDetails">View Details</button>
+                                }
+                            </div>
+                            @if (bundleItem.Product.HasProperty("ShortDescription"))
+                            {
+                                <div id="@(bundleItem.Product.Id)moreDetails" name="@(bundleItem.Product.Id)moreDetails" aria-hidden="true" hidden class="js-bundle-modal">
+                                    @Html.Raw(bundleItem.Product.GetProperty("ShortDescription")?.GetSourceValue())
+                                </div>
+                            }
+                        </div>
+                    </div>
+			    }
+	        </div>
+
+            <div id="bundleSelected" class="js-bundle-bag position-fixed bottom-0 start-0 w-100 p-3 p-md-4 bg-white shadow-lg" role="dialog" hidden name="bundleSelected">
+                <div class="container d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-end gap-2 gap-md-4">
+                    <p class="m-0 fw-bolder font-family-3"><span class="js-bundle-count"></span> Courses Selected</p>
+                    <button id="add-to-cart" class="btn btn-primary btn-sm py-3 align-self-stretch align-self-md-auto" type="submit">Add Courses to Cart</button>
+                </div>
+            </div>
+	    }
+    </div>
 </div>

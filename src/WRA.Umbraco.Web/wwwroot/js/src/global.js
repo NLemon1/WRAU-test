@@ -15,6 +15,7 @@ import quantitySelector from './components/quantity-selector';
 import checkout from './components/checkout';
 import products from './components/products';
 import courseSearch from './components/course-search';
+import bundles from './components/bundles';
 
 expandableTextCards();
 header();
@@ -42,4 +43,8 @@ if (document.getElementById("ec")) {
 
 if (document.getElementById("course-search")) {
     courseSearch();
+}
+
+if (document.body.classList.contains("page-template-bundlePage")) {
+    bundles();
 }

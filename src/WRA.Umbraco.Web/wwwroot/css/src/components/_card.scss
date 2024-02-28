@@ -382,3 +382,39 @@
         }
     }
 }
+
+// Bundle Card
+
+.col-bundle {
+
+    .card-bundle.card {
+        padding: 1.75rem;
+        background-color: $gray-10;
+        border: solid 1.5px $gray-10;
+        transition: all 150ms ease 0s;
+        box-shadow: none;
+    }
+
+    .btn__deselect {
+        display: none;
+    }
+
+    .input-bundle {
+        visibility: hidden;
+        opacity: 0;
+
+        &:checked {
+            + .card-bundle {
+                background-color: $blue-light;
+                border: solid 1.5px $blue-dark;
+                
+                .btn__select {
+                    display: none;
+                }
+                .btn__deselect {
+                    display: inline;
+                }
+            }
+        }
+    }
+}
