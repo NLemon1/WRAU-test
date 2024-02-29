@@ -20,7 +20,7 @@ namespace WRA.Umbraco.Models
 {
 	/// <summary>Bundle Page</summary>
 	[PublishedModel("bundlePage")]
-	public partial class BundlePage : BudlesPage
+	public partial class BundlePage : BudlesPage, IProductComp
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
@@ -74,11 +74,43 @@ namespace WRA.Umbraco.Models
 		public virtual string BundleTitle => this.Value<string>(_publishedValueFallback, "bundleTitle");
 
 		///<summary>
+		/// Short Description
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("shortDescription")]
+		public virtual global::Umbraco.Cms.Core.Strings.IHtmlEncodedString ShortDescription => this.Value<global::Umbraco.Cms.Core.Strings.IHtmlEncodedString>(_publishedValueFallback, "shortDescription");
+
+		///<summary>
 		/// Tags
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("tags")]
 		public virtual global::System.Collections.Generic.IEnumerable<string> Tags => this.Value<global::System.Collections.Generic.IEnumerable<string>>(_publishedValueFallback, "tags");
+
+		///<summary>
+		/// Member Price
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("memberPrice")]
+		public virtual global::Umbraco.Commerce.Cms.Models.PricePropertyValue MemberPrice => global::WRA.Umbraco.Models.ProductComp.GetMemberPrice(this, _publishedValueFallback);
+
+		///<summary>
+		/// Price
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("price")]
+		public virtual global::Umbraco.Commerce.Cms.Models.PricePropertyValue Price => global::WRA.Umbraco.Models.ProductComp.GetPrice(this, _publishedValueFallback);
+
+		///<summary>
+		/// SKU: The unique SKU.
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("sku")]
+		public virtual string Sku => global::WRA.Umbraco.Models.ProductComp.GetSku(this, _publishedValueFallback);
 	}
 }

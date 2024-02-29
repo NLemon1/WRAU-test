@@ -44,16 +44,16 @@
 		background: transparent;
 		font-size: 22px;
 
-		.fa:last-child {
+		.fa-times {
 			display: none;
 		}
 
 		&[aria-expanded="true"] {
-			.fa:first-child {
+			.fa-bars {
 				display: none;
 			}
 
-			.fa:last-child {
+			.fa-times {
 				display: block;
 			}
 		}

@@ -52,7 +52,7 @@
 
 <div class="text-bg-secondary pt-1 pb-5">
     <div class="text-light">
-        @await Html.PartialAsync("_breadcrumbsProducts", new ViewDataDictionary(this.ViewData) { { "CssClass", "breadcrumbs--light" }, { "ParentName", "Education" }, { "ParentUrl", "/education" }, { "CurrentName", (checkCategory.Count() != 0 ? checkCategory.FirstOrDefault().Name : string.Empty) } })
+        @await Html.PartialAsync("_breadcrumbsProducts", new ViewDataDictionary(this.ViewData) { { "CssClass", "breadcrumbs--light" }, { "CurrentName", (checkCategory.Count() != 0 ? checkCategory.FirstOrDefault().Name : string.Empty) } })
     </div>
     <div class="container">
         <label class="visually-hidden" for="collection-filter">Filter Categories</label>

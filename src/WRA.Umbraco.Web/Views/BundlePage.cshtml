@@ -20,7 +20,7 @@
 
 <div class="text-bg-secondary">
     <div class="text-light">
-        @await Html.PartialAsync("_breadcrumbsProducts", new ViewDataDictionary(this.ViewData) { { "CssClass", "breadcrumbs--light" }, { "ParentName", "Education" }, { "ParentUrl", "/education" } })
+        @await Html.PartialAsync("_breadcrumbsProducts", new ViewDataDictionary(this.ViewData) { { "CssClass", "breadcrumbs--light" } })
     </div>
 </div>
 <div class="bg-white overflow-hidden">
@@ -62,8 +62,19 @@
                             </div>
                             @if (bundleItem.Product.HasProperty("ShortDescription"))
                             {
-                                <div id="@(bundleItem.Product.Id)moreDetails" name="@(bundleItem.Product.Id)moreDetails" aria-hidden="true" hidden class="js-bundle-modal">
-                                    @Html.Raw(bundleItem.Product.GetProperty("ShortDescription")?.GetSourceValue())
+                                <div id="@(bundleItem.Product.Id)moreDetails" name="@(bundleItem.Product.Id)moreDetails" aria-hidden="true" class="js-modal modal bundle-modal">
+                                    <div class="modal__container">
+                                        <div class="modal__header">
+                                            <button aria-controls="@(bundleItem.Product.Id)moreDetails" title="Close Modal" class="js-modal-close btn-close border-0"><i class="fal fa-times"></i></button>
+                                        </div>
+                                        <div class="modal__content">
+                                            <p class="h5">Course #</p>
+                                            <div class="modal__content__inner">
+                                                <span class="h3 d-block fw-bold fs-lg text-capitalize mb2_5">@bundleItem.Product.Name</span>
+                                                @Html.Raw(bundleItem.Product.GetProperty("ShortDescription")?.GetSourceValue())
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             }
                         </div>
