@@ -1,0 +1,17 @@
+{
+  "Name": "Member Reset Password",
+  "Alias": "MemberResetPassword",
+  "MacroSource": "~/Views/MacroPartials/MemberResetPassword.cshtml",
+  "UseInEditor": true,
+  "Properties": [],
+  "Udi": "umb://macro/248626a6d5084998a00a40501749914d",
+  "Dependencies": [
+    {
+      "Udi": "umb://partial-view-macro/MemberResetPassword.cshtml",
+      "Ordering": true,
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.MacroArtifact",
+  "__version": "13.0.4"
+}
