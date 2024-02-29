@@ -1,0 +1,14 @@
+{
+  "Name": "Board - Roster Opt In - Toggle",
+  "Alias": "",
+  "EditorAlias": "Umbraco.TrueFalse",
+  "DatabaseType": "Integer",
+  "Configuration": {
+    "default": false,
+    "showLabels": false
+  },
+  "Udi": "umb://data-type/26f9b680f38e4cc584f4711409f34692",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
+  "__version": "13.0.4"
+}

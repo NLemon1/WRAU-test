@@ -43,4 +43,15 @@ public class WRAExternalApiService
 
         return response;
     }
+
+    public async Task<RestResponse> GetBoards()
+    {
+        var options = new RestClientOptions("https://app2.wra.org/umbraco/api/v1");
+        var client = new RestClient(options);
+        var request = new RestRequest("localboard");
+        request.AddHeader("X-API-KEY", _token);
+        var response = await client.GetAsync(request);
+
+        return response;
+    }
 }

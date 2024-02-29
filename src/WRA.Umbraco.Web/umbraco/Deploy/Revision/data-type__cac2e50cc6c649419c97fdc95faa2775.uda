@@ -1,0 +1,14 @@
+{
+  "Name": "Board - Roster Opt In Date - DateTime (1)",
+  "Alias": "",
+  "EditorAlias": "Umbraco.DateTime",
+  "DatabaseType": "Date",
+  "Configuration": {
+    "format": "YYYY-MM-DD HH:mm:ss",
+    "offsetTime": false
+  },
+  "Udi": "umb://data-type/cac2e50cc6c649419c97fdc95faa2775",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
+  "__version": "13.0.4"
+}

@@ -1,0 +1,29 @@
+{
+  "Name": "Boards",
+  "Alias": "boards",
+  "AllowedTemplates": [],
+  "HistoryCleanup": {},
+  "Icon": "icon-meeting color-amber",
+  "Thumbnail": "folder.png",
+  "Permissions": {
+    "AllowedChildContentTypes": [
+      "umb://document-type/bed1d6b70e944771810bc5153adf80f4"
+    ]
+  },
+  "Parent": "umb://document-type-container/8cacfbb1be7e47339707ec783af9070c",
+  "CompositionContentTypes": [],
+  "PropertyGroups": [],
+  "PropertyTypes": [],
+  "Udi": "umb://document-type/e8f78e8e71b4473e99ba2bfcb047f5f0",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type-container/8cacfbb1be7e47339707ec783af9070c",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type/bed1d6b70e944771810bc5153adf80f4"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
+  "__version": "13.0.4"
+}

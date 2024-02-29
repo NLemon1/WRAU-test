@@ -12,6 +12,7 @@ using Umbraco.Commerce.Core.Events.Notification;
 using Umbraco.Commerce.Core.Models;
 using Umbraco.Commerce.Core.Services;
 using WRA.Umbraco.Dtos;
+using WRA.Umbraco.Models;
 
 namespace WRA.Umbraco.Services;
 
@@ -23,6 +24,8 @@ public class WRAMemberManagementService
     private readonly IUmbracoCommerceApi _commerceApi;
     private readonly IUmbracoContextAccessor _umbracoContextAccessor;
     private readonly IOrderService _orderService;
+    private readonly SearchService _searchService;
+    private readonly IContentService _contentService;
 
     public WRAMemberManagementService(
         IMemberService memberService,
@@ -30,7 +33,9 @@ public class WRAMemberManagementService
         ICoreScopeProvider coreScopeProvider,
         IUmbracoCommerceApi commerceApi,
         IUmbracoContextAccessor umbracoContextAccessor,
-        IOrderService orderService
+        IOrderService orderService,
+        SearchService searchService,
+        IContentService contentService
     )
     {
         _memberService = memberService;
@@ -39,6 +44,8 @@ public class WRAMemberManagementService
         _commerceApi = commerceApi;
         _umbracoContextAccessor = umbracoContextAccessor;
         _orderService = orderService;
+        _searchService = searchService;
+        _contentService = contentService;
     }
 
 
@@ -255,10 +262,32 @@ public class WRAMemberManagementService
         return false;
     }
 
+    #region Member Content Items
 
-    // public  IEnumerable<OrderReadOnly> GetAllOrdersForCustomer(IMember member)
-    // {
-    //     _orderService.GetFinalizedOrdersForCustomer()
+    public async Task<IContent> CreateBoard(MemberBoardDto mb)
+    {
+        // first get the board page that all indivial boards will be under.
+        var BoardsContainer = _searchService.Search(Boards.ModelTypeAlias)?
+            .FirstOrDefault()?
+            .Content as Boards;
 
-    // }
+        var existingBoard = _searchService.Search(Board.ModelTypeAlias)?
+            .FirstOrDefault(x => x.Content.Value("externalId") == mb.Id);
+        bool boardExists = existingBoard != null;
+
+        var board = boardExists ?
+            existingBoard.Content as IContent :
+            _contentService.Create(mb.Name, BoardsContainer.Id, Board.ModelTypeAlias);
+
+        board.SetValue("externalId", mb.Id);
+        board.SetValue("chapterId", mb.Chapter);
+        board.SetValue("rosterOptIn", mb.RosterOptIn);
+        board.SetValue("rosterOptInDate", mb.RosterOptInDate);
+
+        _contentService.SaveAndPublish(board);
+
+        return board;
+    }
+
+    #endregion
 }

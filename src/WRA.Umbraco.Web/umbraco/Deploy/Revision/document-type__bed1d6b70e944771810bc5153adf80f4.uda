@@ -1,0 +1,77 @@
+{
+  "Name": "Board",
+  "Alias": "board",
+  "AllowedTemplates": [],
+  "HistoryCleanup": {},
+  "Icon": "icon-users color-amber",
+  "Thumbnail": "folder.png",
+  "Permissions": {
+    "AllowedChildContentTypes": []
+  },
+  "Parent": "umb://document-type/e8f78e8e71b4473e99ba2bfcb047f5f0",
+  "CompositionContentTypes": [
+    "umb://document-type/e8f78e8e71b4473e99ba2bfcb047f5f0"
+  ],
+  "PropertyGroups": [
+    {
+      "Key": "d0b01223-bc4c-4ae7-9763-4bdbdbfb4f95",
+      "Name": "Properties",
+      "Alias": "properties",
+      "PropertyTypes": [
+        {
+          "Key": "15ce8cb5-6418-4aa3-ab32-e4db4aed1cf0",
+          "Alias": "rosterOptInDate",
+          "DataType": "umb://data-type/cac2e50cc6c649419c97fdc95faa2775",
+          "Name": "Roster Opt In Date",
+          "SortOrder": 3
+        },
+        {
+          "Key": "caaf4062-54e7-47b5-b552-2a50cb4630c4",
+          "Alias": "rosterOptIn",
+          "DataType": "umb://data-type/26f9b680f38e4cc584f4711409f34692",
+          "Name": "Roster Opt In",
+          "SortOrder": 2
+        },
+        {
+          "Key": "d4b00aff-d4b2-4b2f-a96a-aa694427939e",
+          "Alias": "chapterId",
+          "DataType": "umb://data-type/33d65b62bea747929fef75e166557f45",
+          "Name": "Chapter Id",
+          "SortOrder": 1
+        },
+        {
+          "Key": "ecdec09a-7be5-4ffe-9403-1d9062be9a52",
+          "Alias": "externalId",
+          "DataType": "umb://data-type/f0bc4bfbb49940d6ba86058885a5178c",
+          "Name": "External Id"
+        }
+      ]
+    }
+  ],
+  "PropertyTypes": [],
+  "Udi": "umb://document-type/bed1d6b70e944771810bc5153adf80f4",
+  "Dependencies": [
+    {
+      "Udi": "umb://data-type/26f9b680f38e4cc584f4711409f34692",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/33d65b62bea747929fef75e166557f45",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/cac2e50cc6c649419c97fdc95faa2775",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/f0bc4bfbb49940d6ba86058885a5178c",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type/e8f78e8e71b4473e99ba2bfcb047f5f0",
+      "Ordering": true
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
+  "__version": "13.0.4"
+}

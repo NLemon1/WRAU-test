@@ -1,16 +1,14 @@
 
 
+using System.Text.Json;
 using System.Web.Http;
-using Azure;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Umbraco.Cms.Api.Common.Attributes;
 using Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Core.Scoping;
-using Umbraco.Cms.Core.Security;
 using Umbraco.Cms.Core.Services;
-using Umbraco.Cms.Web.Website.Models;
 using WRA.Umbraco.Dtos;
+using WRA.Umbraco.Models;
 using WRA.Umbraco.Services;
 
 namespace WRA.Umbraco.Controllers;
@@ -21,18 +19,26 @@ namespace WRA.Umbraco.Controllers;
 public class MemberSyncApiController : ApiController
 {
     private readonly IMemberService _memberService;
-    private readonly IMemberManager _memberManager;
+    private readonly IContentService _contentService;
+    private readonly SearchService _searchService;
     private readonly ICoreScopeProvider _coreScopeProvider;
     private readonly WRAMemberManagementService _WRAMemberManagementService;
+    private readonly WRAExternalApiService _wraExternalApiService;
 
 
     public MemberSyncApiController(
         WRAMemberManagementService WRAMemberManagementService,
-        ICoreScopeProvider coreScopeProvider
+        ICoreScopeProvider coreScopeProvider,
+        IContentService contentService,
+        SearchService searchService,
+        WRAExternalApiService wraExternalApiService
     )
     {
         _WRAMemberManagementService = WRAMemberManagementService;
         _coreScopeProvider = coreScopeProvider;
+        _contentService = contentService;
+        _searchService = searchService;
+        _wraExternalApiService = wraExternalApiService;
     }
 
 
@@ -91,6 +97,34 @@ public class MemberSyncApiController : ApiController
             // do something here
             throw ex;
         }
+    }
+
+
+    [HttpPost]
+    [Route("CreateBoard")]
+    public async Task<IActionResult> CreateBoard(MemberBoardDto mb)
+    {
+        var result = _WRAMemberManagementService.CreateBoard(mb);
+        if (result == null)
+        {
+            return StatusCode(System.Net.HttpStatusCode.InternalServerError);
+        }
+        return Ok(result.Id);
+    }
+
+    [HttpPost]
+    [Route("SyncAllBoards")]
+    public async Task<IActionResult> SyncAllBoards()
+    {
+        var productsResp = await _wraExternalApiService.GetBoards();
+        var localBoards = JsonSerializer.Deserialize<List<MemberBoardDto>>(productsResp.Content);
+
+        foreach (var board in localBoards)
+        {
+            await _WRAMemberManagementService.CreateBoard(board);
+        }
+        return Ok();
+
     }
 
 
