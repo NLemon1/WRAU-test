@@ -34,8 +34,8 @@
         @Html.Raw(Model.Value("scripts"));
     }
 }
-@if(MemberCanViewPage){
-    <h1> Can't see this unless you're logged in or this page is available to everyone!</h1>
+@if (MemberCanViewPage) {
+    @* gated page popup to do *@
 }
 
 @await Html.PartialAsync("blockgrid/default", sections)
