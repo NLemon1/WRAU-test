@@ -18,7 +18,7 @@ using Umbraco.Extensions;
 
 namespace WRA.Umbraco.Models
 {
-	/// <summary>Accordions</summary>
+	/// <summary>Accordion</summary>
 	[PublishedModel("accordions")]
 	public partial class Accordions : PublishedElementModel
 	{

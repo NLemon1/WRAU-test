@@ -5,6 +5,7 @@
   "HistoryCleanup": {},
   "Icon": "icon-science",
   "Thumbnail": "folder.png",
+  "Description": "To be placed within \"Tabs\" block.",
   "Permissions": {
     "IsElementType": true,
     "AllowedChildContentTypes": []

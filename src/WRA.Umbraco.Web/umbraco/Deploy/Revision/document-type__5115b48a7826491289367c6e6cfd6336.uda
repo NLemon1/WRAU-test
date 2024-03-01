@@ -1,10 +1,11 @@
 {
-  "Name": "Accordion",
+  "Name": "Accordion Item",
   "Alias": "accordion",
   "AllowedTemplates": [],
   "HistoryCleanup": {},
   "Icon": "icon-science",
   "Thumbnail": "folder.png",
+  "Description": "Must be placed within \"Accordions\" block.",
   "Permissions": {
     "IsElementType": true,
     "AllowedChildContentTypes": []

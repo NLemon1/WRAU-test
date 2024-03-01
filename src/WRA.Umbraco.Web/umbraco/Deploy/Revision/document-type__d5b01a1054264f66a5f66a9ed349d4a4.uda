@@ -5,6 +5,7 @@
   "HistoryCleanup": {},
   "Icon": "icon-layout color-black",
   "Thumbnail": "folder.png",
+  "Description": "Add \"Tab\" blocks within.",
   "Permissions": {
     "IsElementType": true,
     "AllowedChildContentTypes": []
