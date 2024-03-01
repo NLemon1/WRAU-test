@@ -1,0 +1,26 @@
+{
+  "Name": "Invoicing",
+  "Alias": "invoicing",
+  "Sku": "4815",
+  "PaymentProviderAlias": "invoicing",
+  "PaymentProviderSettings": {},
+  "AllowedCountryRegions": [
+    {
+      "CountryUdi": "umb://umbraco-commerce-country/86825bcabfe84fab83cc018df7705768"
+    }
+  ],
+  "StoreUdi": "umb://umbraco-commerce-store/0b0522c7d33b47a7a2c5018df77056c6",
+  "Udi": "umb://umbraco-commerce-payment-method/e18237a9714a4ad2b150018df770583c",
+  "Dependencies": [
+    {
+      "Udi": "umb://umbraco-commerce-store/0b0522c7d33b47a7a2c5018df77056c6",
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://umbraco-commerce-country/86825bcabfe84fab83cc018df7705768",
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Commerce.Deploy,Umbraco.Commerce.Deploy.Artifacts.PaymentMethodArtifact",
+  "__version": "13.0.4"
+}

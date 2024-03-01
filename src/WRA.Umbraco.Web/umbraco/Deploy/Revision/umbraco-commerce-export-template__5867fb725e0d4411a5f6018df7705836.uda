@@ -1,0 +1,18 @@
+{
+  "Name": "Order CSV Export",
+  "Alias": "orderCsvExport",
+  "FileMimeType": "text/csv",
+  "FileExtension": "csv",
+  "TemplateView": "~/Views/UmbracoCommerce/Templates/Export/OrderCsvExport.cshtml",
+  "SortOrder": 1,
+  "StoreUdi": "umb://umbraco-commerce-store/0b0522c7d33b47a7a2c5018df77056c6",
+  "Udi": "umb://umbraco-commerce-export-template/5867fb725e0d4411a5f6018df7705836",
+  "Dependencies": [
+    {
+      "Udi": "umb://umbraco-commerce-store/0b0522c7d33b47a7a2c5018df77056c6",
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Commerce.Deploy,Umbraco.Commerce.Deploy.Artifacts.ExportTemplateArtifact",
+  "__version": "13.0.4"
+}

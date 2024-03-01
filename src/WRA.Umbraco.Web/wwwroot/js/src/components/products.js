@@ -104,7 +104,6 @@ const products = () => {
         }
 
         handleIndicators(false, resultsLoader);
-        console.log(subcategoryArray);
     }
 
     const populateSubCategories = () => {
@@ -118,9 +117,12 @@ const products = () => {
         }
 
         subcategoryArray.forEach((subCatOption) => {
+
+            const checkIfActive = subCatOption == subcategory ? "selected" : "";
+
             productSubCategoryDropdown.innerHTML += (
                 `
-                <option value="${subCatOption}">${subCatOption}</option>
+                <option ${checkIfActive} value="${subCatOption}">${subCatOption}</option>
                 `
             )
         });
@@ -160,7 +162,7 @@ const products = () => {
         }).then(res => {
             return res.json();
         }).then(res => {
-            console.log(res);
+            //console.log(res);
             renderResults(res);
 
         });

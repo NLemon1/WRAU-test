@@ -1,0 +1,27 @@
+{
+  "Name": "Pickup",
+  "Alias": "pickup",
+  "Sku": "1623",
+  "ShippingProviderAlias": "basic",
+  "ShippingProviderSettings": {},
+  "AllowedCountryRegions": [
+    {
+      "CountryUdi": "umb://umbraco-commerce-country/86825bcabfe84fab83cc018df7705768"
+    }
+  ],
+  "SortOrder": 5,
+  "StoreUdi": "umb://umbraco-commerce-store/0b0522c7d33b47a7a2c5018df77056c6",
+  "Udi": "umb://umbraco-commerce-shipping-method/d4cf028e827d41f69a16018df770586b",
+  "Dependencies": [
+    {
+      "Udi": "umb://umbraco-commerce-store/0b0522c7d33b47a7a2c5018df77056c6",
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://umbraco-commerce-country/86825bcabfe84fab83cc018df7705768",
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Commerce.Deploy,Umbraco.Commerce.Deploy.Artifacts.ShippingMethodArtifact",
+  "__version": "13.0.4"
+}
