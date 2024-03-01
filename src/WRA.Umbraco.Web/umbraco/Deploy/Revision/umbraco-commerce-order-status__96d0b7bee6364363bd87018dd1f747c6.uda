@@ -1,0 +1,16 @@
+{
+  "Name": "Cancelled",
+  "Alias": "cancelled",
+  "Color": "orange",
+  "SortOrder": 2,
+  "StoreUdi": "umb://umbraco-commerce-store/f35d55b6a09e4c199f9a018dd1f745f4",
+  "Udi": "umb://umbraco-commerce-order-status/96d0b7bee6364363bd87018dd1f747c6",
+  "Dependencies": [
+    {
+      "Udi": "umb://umbraco-commerce-store/f35d55b6a09e4c199f9a018dd1f745f4",
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Commerce.Deploy,Umbraco.Commerce.Deploy.Artifacts.OrderStatusArtifact",
+  "__version": "13.0.4"
+}

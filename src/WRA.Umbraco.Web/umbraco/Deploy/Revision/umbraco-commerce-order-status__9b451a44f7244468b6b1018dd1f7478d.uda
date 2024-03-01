@@ -1,0 +1,15 @@
+{
+  "Name": "New",
+  "Alias": "new",
+  "Color": "light-blue",
+  "StoreUdi": "umb://umbraco-commerce-store/f35d55b6a09e4c199f9a018dd1f745f4",
+  "Udi": "umb://umbraco-commerce-order-status/9b451a44f7244468b6b1018dd1f7478d",
+  "Dependencies": [
+    {
+      "Udi": "umb://umbraco-commerce-store/f35d55b6a09e4c199f9a018dd1f745f4",
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Commerce.Deploy,Umbraco.Commerce.Deploy.Artifacts.OrderStatusArtifact",
+  "__version": "13.0.4"
+}
