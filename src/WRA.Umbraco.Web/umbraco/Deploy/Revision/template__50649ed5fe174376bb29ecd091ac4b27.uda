@@ -1,0 +1,14 @@
+{
+  "Name": "MonthYear",
+  "Alias": "MonthYear",
+  "File": "umb://template-file/MonthYear.cshtml",
+  "Udi": "umb://template/50649ed5fe174376bb29ecd091ac4b27",
+  "Dependencies": [
+    {
+      "Udi": "umb://template-file/MonthYear.cshtml",
+      "Ordering": true
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.TemplateArtifact",
+  "__version": "13.0.4"
+}

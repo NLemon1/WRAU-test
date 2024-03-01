@@ -10,7 +10,8 @@
   "Thumbnail": "folder.png",
   "Permissions": {
     "AllowedChildContentTypes": [
-      "umb://document-type/a848d7fc16b145f985c21523107d4c0b"
+      "umb://document-type/a848d7fc16b145f985c21523107d4c0b",
+      "umb://document-type/c23e89a9d6d144f0be8766aca7b2d670"
     ]
   },
   "Parent": "umb://document-type-container/8cacfbb1be7e47339707ec783af9070c",
@@ -69,6 +70,9 @@
     },
     {
       "Udi": "umb://document-type/a848d7fc16b145f985c21523107d4c0b"
+    },
+    {
+      "Udi": "umb://document-type/c23e89a9d6d144f0be8766aca7b2d670"
     },
     {
       "Udi": "umb://document-type/f0c2133970844a948c095978736296ce",

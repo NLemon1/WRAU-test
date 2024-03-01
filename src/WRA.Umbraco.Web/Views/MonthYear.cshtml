@@ -1,0 +1,16 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.MonthYear>
+@using ContentModels = WRA.Umbraco.Models;
+@{
+    Layout = "~/Views/_Layout.cshtml";
+    var content = (ContentModels.MonthYear)Model;
+
+}
+
+<header class="container">
+
+    <a class="d-inline-flex align-items-center gap-1 text-decoration-none mt-4 my-lg-5 fw-bold" href="@content.Parent.Url()">
+        <i class="fa fa-chevron-left" width="16" height="16" aria-hidden="true"></i>
+        @content.Parent.Name
+    </a>
+</header>

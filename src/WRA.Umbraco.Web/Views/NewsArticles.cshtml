@@ -20,9 +20,14 @@
     string selectedCategory = !String.IsNullOrEmpty(urlQuery["category"]) ? System.Uri.EscapeDataString(urlQuery["category"]) : null;
     string searchPhrase = !String.IsNullOrEmpty(urlQuery["search"]) ? System.Uri.EscapeDataString(urlQuery["search"]) : null;
 
-    IEnumerable<IPublishedContent> results = !String.IsNullOrEmpty(selectedCategory) ?
+   /* 
+    * NEED TO FIX
+    * IEnumerable<IPublishedContent> results = !String.IsNullOrEmpty(selectedCategory) ?
         Model.Children.Where(p => p.IsVisible() && @HtmlHelperExtensions.FormatSlug(p.Value<WRA.Umbraco.Models.ArticleCategory>("category").Name) == selectedCategory).OrderBy(p => p.GetProperty("date").GetSourceValue()).Reverse()
         : Model.Children.OrderBy(p => p.GetProperty("date").GetSourceValue()).Reverse();
+        */
+    IEnumerable<IPublishedContent> results = Umbraco.ContentAtRoot().DescendantsOrSelfOfType("article");
+
 
     int categorizedResultCount = results.Count();
     var resultMath = Decimal.Divide(categorizedResultCount, pageSize);//Results / PageSize
