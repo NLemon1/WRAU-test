@@ -1,7 +1,7 @@
 namespace WRA.Umbraco.Dtos;
 
 public record HotTipRequestDto(
-    string Category,
-    IEnumerable<string> SubCategory,
+    IEnumerable<string> Categories,
+    IEnumerable<string> SubCategories,
     Pagination Pagination
 );

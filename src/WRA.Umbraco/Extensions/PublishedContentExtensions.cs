@@ -57,7 +57,7 @@ namespace WRA.Umbraco
         {
             return new HotTipDto(
                 content.Name,
-                content?.Category?.Name ?? string.Empty,
+                content?.Category == null ? [] : content.Category!.Select(cat => cat.Name),
                 content?.Subcategories == null ? [] : content.Subcategories!.Select(cat => cat.Name),
                 content?.Question?.ToString() ?? string.Empty,
                 content?.Answer?.ToString() ?? string.Empty,

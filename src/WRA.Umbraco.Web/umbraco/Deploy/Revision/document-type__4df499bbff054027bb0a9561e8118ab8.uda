@@ -36,7 +36,7 @@
           "Alias": "category",
           "DataType": "umb://data-type/d1a945834ee241fab4969b6ec8f86915",
           "Mandatory": true,
-          "Name": "Category",
+          "Name": "Categories",
           "SortOrder": 2
         },
         {

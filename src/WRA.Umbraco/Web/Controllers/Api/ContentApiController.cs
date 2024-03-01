@@ -67,12 +67,14 @@ public class ContentApiController : ApiController
         var responseResults = rawResults
                 .Select(result => new HotTipEntry(result.Content, new NoopPublishedValueFallback()));
 
-        if (!string.IsNullOrEmpty(request.Category))
+        // check if there are any requested categories...
+        if (request.Categories?.Any() ?? false)
         {
-            responseResults = responseResults.Where(rr => CategoryMatch(rr.Category.Name, request.Category));
-            if (request.SubCategory.Any())
+            // if so, do a match
+            responseResults = responseResults.Where(rr => CategoryMatch(rr.Category, request.Categories));
+            if (request.SubCategories.Any())
             {
-                responseResults = responseResults.Where(rr => SubCategoryMatch(rr.Subcategories, request.SubCategory));
+                responseResults = responseResults.Where(rr => CategoryMatch(rr.Subcategories, request.SubCategories));
             }
         }
 
@@ -204,7 +206,7 @@ public class ContentApiController : ApiController
         if (resultCategory == null) { return false; }
         return resultCategory.Equals(category, StringComparison.OrdinalIgnoreCase);
     }
-    private static bool SubCategoryMatch(IEnumerable<IPublishedContent> resultSubCategories, IEnumerable<string> requestSubcategories)
+    private static bool CategoryMatch(IEnumerable<IPublishedContent> resultSubCategories, IEnumerable<string> requestSubcategories)
     {
         if (resultSubCategories == null || !resultSubCategories.Any()) { return false; }
         var subcategories = resultSubCategories.Select(x => x.Name);
