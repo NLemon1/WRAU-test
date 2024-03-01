@@ -9,8 +9,8 @@ const hotTipLibrary = () => {
     const mobileSubcategorySelect = document.querySelector('.js-mobile-hot-tip-subcategory');
     const desktopSubcategoryFilters = document.querySelectorAll('.js-desktop-subcategory-filter');
 
-    let selectedCategory = params.has('category') ? params.get('category') : '';
-    let selectedSubcategory = params.has('subcategory') ? [params.get('subcategory')] : [];
+    let selectedCategories = params.has('category') ? [params.get('category')] : [];
+    let selectedSubcategories = params.has('subcategory') ? [params.get('subcategory')] : [];
 
     const paginationContainer = document.querySelector('.js-hot-tip-list-pagination');
     let pageNumber = 1;
@@ -42,8 +42,8 @@ const hotTipLibrary = () => {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                "category": selectedCategory,
-                "subCategory": selectedSubcategory,
+                "categories": selectedCategories,
+                "subcategories": selectedSubcategories,
                 "pagination": {
                     "pageNumber": pageNumber,
                     "pageSize": pageSize
@@ -71,32 +71,35 @@ const hotTipLibrary = () => {
         if (results.length) {
             results.forEach(result => {
                 let publishDate = new Date(result.publishDate);
+                let categories = result.categories;
                 let subcategories = result.subCategory;
 
                 resultsList.innerHTML += `
-                <div class="mb-2 p-4 pb-2 bg-light" itemscope itemtype="https://schema.org/Question">
-                    <div class="d-flex align-items-lg-center mb-3 fw-semibold" style="font-size: 0.75rem;">
-                        <div class="flex-grow-1">
-                            <span class="d-inline-block mb-1 me-1 px-3 py-2 rounded-pill bg-secondary text-white">${result.category}</span>
-                            ${Object.keys(subcategories).map(subcategory => {
-                    return `<span class="d-inline-block mb-1 me-1 px-3 py-2 rounded-pill bg-primary text-white">${result.subCategory[subcategory]}</span>`;
-                }).join('')}
+                    <div class="mb-2 p-4 pb-2 bg-light" itemscope itemtype="https://schema.org/Question">
+                        <div class="d-flex align-items-lg-center mb-3 fw-semibold" style="font-size: 0.75rem;">
+                            <div class="flex-grow-1">
+                                ${Object.keys(categories).map(category => {
+                                    return `<span class="d-inline-block mb-1 me-1 px-3 py-2 rounded-pill bg-secondary text-white">${result.categories[category]}</span>`;
+                                }).join('')}
+                                ${Object.keys(subcategories).map(subcategory => {
+                                    return `<span class="d-inline-block mb-1 me-1 px-3 py-2 rounded-pill bg-primary text-white">${result.subCategory[subcategory]}</span>`;
+                                }).join('')}
+                            </div>
+                            <time itemprop="dateCreated" datetime="${publishDate}">${publishDate.getMonth() + 1}/${publishDate.getDate()}/${publishDate.getFullYear()}</time>
                         </div>
-                        <time itemprop="dateCreated" datetime="${publishDate}">${publishDate.getMonth() + 1}/${publishDate.getDate()}/${publishDate.getFullYear()}</time>
-                    </div>
-                    <div class="hot-tip-content">
-                        <div itemprop="name" class="mb-3">
-                            ${result.question}
-                        </div>
-                        <div itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
-                            <div itemprop="text">
-                                ${result.answer}
+                        <div class="hot-tip-content">
+                            <div itemprop="name" class="mb-3">
+                                ${result.question}
+                            </div>
+                            <div itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+                                <div itemprop="text">
+                                    ${result.answer}
+                                </div>
                             </div>
                         </div>
+                        <button class="hot-tip-toggle py-3" type="button">Read Answer</button>
                     </div>
-                    <button class="hot-tip-toggle py-3" type="button">Read Answer</button>
-                </div>
-            `;
+                `;
             });
         } else {
             resultsList.innerHTML = '<div class="pb-5 pb-lg-10 text-center">Sorry, there are no results that match the search criteria.</div>';
