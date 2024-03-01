@@ -1,0 +1,19 @@
+{
+  "Name": "Magazine - Pdf - Media Picker",
+  "Alias": "",
+  "EditorAlias": "Umbraco.MediaPicker3",
+  "Configuration": {
+    "filter": "File,Image",
+    "multiple": false,
+    "validationLimit": {
+      "max": 1
+    },
+    "enableLocalFocalPoint": false,
+    "crops": [],
+    "ignoreUserStartNodes": false
+  },
+  "Udi": "umb://data-type/037e9ad0bffe43df9c221b50cdf561ab",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
+  "__version": "13.0.4"
+}

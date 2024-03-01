@@ -61,7 +61,12 @@
         <div class="row">
             <div class="col-lg-4 d-flex flex-column align-items-center pb-6 pb-lg-0">
                 <img src="@imageCurrent?.GetCropUrl(width: 320, height: 412, furtherOptions: "&format=WebP")" srcset="@imageCurrent?.GetCropUrl(width: 640, height: 824, furtherOptions: "&format=WebP") 2x" class="img-fluid fit-cover mb-4" width="320" height="412" alt="@(imageCurrent?.Value("altText"))" />
-                <a href="@content.Pdf" target="_blank" class="btn btn-primary">Download PDF</a>
+                @if (content.Pdf != null)
+                {
+                    var pdfFile = content.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("pdf");
+                    
+                    <a href="@pdfFile?.GetCropUrl()" target="_blank" class="btn btn-primary">Download PDF</a>
+                }
             </div>
             <div class="col-lg-8">
                 <div class="d-flex flex-row align-items-center justify-content-center justify-content-md-between mb-3">

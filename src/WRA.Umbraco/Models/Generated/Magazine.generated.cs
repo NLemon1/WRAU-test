@@ -94,7 +94,7 @@ namespace WRA.Umbraco.Models
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("pdf")]
-		public virtual string Pdf => this.Value<string>(_publishedValueFallback, "pdf");
+		public virtual global::Umbraco.Cms.Core.Models.MediaWithCrops Pdf => this.Value<global::Umbraco.Cms.Core.Models.MediaWithCrops>(_publishedValueFallback, "pdf");
 
 		///<summary>
 		/// Meta Description: Enter meta description if desired.

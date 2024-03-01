@@ -16,19 +16,33 @@
     var articleDateISO = String.Format("{0:s}", content.Date) + "+06:00";
 
     string absUrl = ViewContext.HttpContext.Request.GetEncodedUrl();
+
+    var authors = Model.Value<IEnumerable<IPublishedContent>>("Author");
 }
+
 
 @section scripts {
 
-    @if (content.HasValue("Author") && !String.IsNullOrEmpty(content.Author.Value("authorTitle").ToString()) && !String.IsNullOrEmpty(Model.Name))
+    @if (content.HasValue("Author") && authors != null && !String.IsNullOrEmpty(Model.Name))
     {
+        var authorCount = authors.Count();
+        int authorInt = 1;
+
         <script type="application/ld+json">
             {
                 "@@context": "https://schema.org",
                 "@@type": "Article",
                 "headline": "@articleTitle",
                 "url": "@absUrl",
-                "author": "@content.Author.Value("authorName")",
+                "author": [
+                    @foreach (var author in authors)
+                    {
+
+                        <text>{"@@type": "Person",</text>
+                <text>"name": "@author.Value("authorName")"}@(authorInt != authorCount ? "," : string.Empty)</text>
+                        authorInt++;
+                    }
+                ],
                 "name": "@articleTitle",
                 @if (content.HasValue("image"))
                 {
@@ -59,24 +73,33 @@
                 @articleTitle
             </h1>
             <div>
-                @if (content.HasValue("Author"))
+              
+                @if (authors != null)
                 {
-                    bool hasTitle = !String.IsNullOrEmpty(content.Author.Value("authorTitle").ToString());
-                    string setSpacer = hasTitle ? ", " : "";
                     <p>
-                        @if(!String.IsNullOrEmpty(content.Author.Value("authorName").ToString())){
-                            @content.Author.Value("authorName")
-                            @setSpacer
-                        } else
+                    @foreach (var author in authors)
+                    {
+                        bool hasTitle = !String.IsNullOrEmpty(author?.Value("authorTitle").ToString());
+                        string setSpacer = hasTitle ? ", " : "";
+
+                        @if (!String.IsNullOrEmpty(author.Value("authorName").ToString()))
                         {
-                            @content.Author.Name
+                            @author.Value("authorName")
+                        }
+                        else
+                        {
+                            @author.Name
                         }
                         @if (hasTitle)
                         {
-                            @content.Author.Value("authorTitle")
+                            @setSpacer
+                            @author.Value("authorTitle")
                         }
+                        <br />
+                    }
                     </p>
                 }
+                
 
                 @if (content.HasValue("magazineLink"))
                 {

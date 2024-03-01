@@ -73,6 +73,8 @@ const hotTipLibrary = () => {
                 let publishDate = new Date(result.publishDate);
                 let categories = result.categories;
                 let subcategories = result.subCategory;
+                const question = "<strong>Question:</strong> " + result.question;
+                const answer = "<strong>Answer:</strong> " + result.answer;
 
                 resultsList.innerHTML += `
                     <div class="mb-2 p-4 pb-2 bg-light" itemscope itemtype="https://schema.org/Question">
@@ -88,12 +90,12 @@ const hotTipLibrary = () => {
                             <time itemprop="dateCreated" datetime="${publishDate}">${publishDate.getMonth() + 1}/${publishDate.getDate()}/${publishDate.getFullYear()}</time>
                         </div>
                         <div class="hot-tip-content">
-                            <div itemprop="name" class="mb-3">
-                                ${result.question}
+                            <div itemprop="name" class="mb-3 hot-tip-content__inner">
+                                ${question}
                             </div>
                             <div itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
-                                <div itemprop="text">
-                                    ${result.answer}
+                                <div itemprop="text" class="hot-tip-content__inner">
+                                    ${answer}
                                 </div>
                             </div>
                         </div>

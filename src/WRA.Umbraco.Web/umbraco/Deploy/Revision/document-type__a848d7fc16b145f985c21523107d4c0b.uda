@@ -65,7 +65,7 @@
         {
           "Key": "d59f43c3-9517-41ee-ad1a-6f34010416f5",
           "Alias": "author",
-          "DataType": "umb://data-type/7b78b6edbe8743d5a1863a62f6c5c977",
+          "DataType": "umb://data-type/7e2c5d5825ba46fdb6483fe56d4af5ff",
           "Name": "Author",
           "SortOrder": 3
         },
@@ -119,7 +119,7 @@
       "Ordering": true
     },
     {
-      "Udi": "umb://data-type/7b78b6edbe8743d5a1863a62f6c5c977",
+      "Udi": "umb://data-type/7e2c5d5825ba46fdb6483fe56d4af5ff",
       "Ordering": true
     },
     {

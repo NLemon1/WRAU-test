@@ -1,0 +1,19 @@
+{
+  "Name": "News Article - Author - Multinode Treepicker",
+  "Alias": "",
+  "EditorAlias": "Umbraco.MultiNodeTreePicker",
+  "Configuration": {
+    "startNode": {
+      "type": "content",
+      "id": "umb://document/6671d0598e5c4daeb606f17e813a8f29"
+    },
+    "minNumber": 0,
+    "maxNumber": 10,
+    "showOpenButton": false,
+    "ignoreUserStartNodes": false
+  },
+  "Udi": "umb://data-type/7e2c5d5825ba46fdb6483fe56d4af5ff",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
+  "__version": "13.0.4"
+}

@@ -27,7 +27,7 @@
         {
           "Key": "0fcb27ee-f876-4c90-8e4d-49baf2d1a597",
           "Alias": "pdf",
-          "DataType": "umb://data-type/c44d0bf2cc3445ae9e319d8a058c0c33",
+          "DataType": "umb://data-type/00dc378cea194845ac1a1363d883b5f5",
           "Name": "Pdf",
           "SortOrder": 1
         },
@@ -74,6 +74,10 @@
   "Udi": "umb://document-type/02eec0556dd64104be2fe7f95d3dbbf3",
   "Dependencies": [
     {
+      "Udi": "umb://data-type/00dc378cea194845ac1a1363d883b5f5",
+      "Ordering": true
+    },
+    {
       "Udi": "umb://data-type/48c0fdf8edf54f92a36fed57da2bc329",
       "Ordering": true
     },
@@ -87,10 +91,6 @@
     },
     {
       "Udi": "umb://data-type/bd7768baf6bb4721ad06353749be5b7e",
-      "Ordering": true
-    },
-    {
-      "Udi": "umb://data-type/c44d0bf2cc3445ae9e319d8a058c0c33",
       "Ordering": true
     },
     {
