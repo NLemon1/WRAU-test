@@ -26,7 +26,7 @@
         Model.Children.Where(p => p.IsVisible() && @HtmlHelperExtensions.FormatSlug(p.Value<WRA.Umbraco.Models.ArticleCategory>("category").Name) == selectedCategory).OrderBy(p => p.GetProperty("date").GetSourceValue()).Reverse()
         : Model.Children.OrderBy(p => p.GetProperty("date").GetSourceValue()).Reverse();
         */
-    IEnumerable<IPublishedContent> results = Umbraco.ContentAtRoot().DescendantsOrSelfOfType("article");
+    IEnumerable<IPublishedContent> results = !String.IsNullOrEmpty(selectedCategory) ? Umbraco.ContentAtRoot().DescendantsOrSelfOfType("article").Where(p => p.IsVisible() && @HtmlHelperExtensions.FormatSlug(p.Value<WRA.Umbraco.Models.ArticleCategory>("category").Name) == selectedCategory).OrderBy(p => p.GetProperty("date").GetSourceValue()).Reverse() : Umbraco.ContentAtRoot().DescendantsOrSelfOfType("article").Where(p => p.IsVisible()).OrderBy(p => p.GetProperty("date").GetSourceValue()).Reverse();
 
 
     int categorizedResultCount = results.Count();

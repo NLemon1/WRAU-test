@@ -50,6 +50,7 @@ public class ContentApiController : ApiController
 
         // cast and paginate to DTO response
         var paginatedResults = responseResults
+            .OrderBy(p => p.Date).Reverse()
             .Paginate<Article>(request.Pagination)
             .Select(r => r.AsDto());
 
