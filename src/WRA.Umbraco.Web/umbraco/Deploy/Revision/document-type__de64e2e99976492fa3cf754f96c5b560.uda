@@ -1,0 +1,52 @@
+{
+  "Name": "Reset Password",
+  "Alias": "resetPassword",
+  "DefaultTemplate": "umb://template/a2d92962a9524392be91c24a7b508065",
+  "AllowedTemplates": [
+    "umb://template/a2d92962a9524392be91c24a7b508065"
+  ],
+  "HistoryCleanup": {},
+  "Icon": "icon-alert color-black",
+  "Thumbnail": "folder.png",
+  "Permissions": {
+    "AllowedChildContentTypes": []
+  },
+  "Parent": "umb://document-type-container/8cacfbb1be7e47339707ec783af9070c",
+  "CompositionContentTypes": [
+    "umb://document-type/14d24fc815e945d6baa835eae09a1d7f",
+    "umb://document-type/25643d0a41c8436bb2a037a8d0e1a188",
+    "umb://document-type/7cc368ff00cb4264ad60f52a76c3a911",
+    "umb://document-type/f0c2133970844a948c095978736296ce"
+  ],
+  "PropertyGroups": [],
+  "PropertyTypes": [],
+  "Udi": "umb://document-type/de64e2e99976492fa3cf754f96c5b560",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type-container/8cacfbb1be7e47339707ec783af9070c",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type/14d24fc815e945d6baa835eae09a1d7f",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type/25643d0a41c8436bb2a037a8d0e1a188",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type/7cc368ff00cb4264ad60f52a76c3a911",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type/f0c2133970844a948c095978736296ce",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://template/a2d92962a9524392be91c24a7b508065",
+      "Ordering": true
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
+  "__version": "13.0.4"
+}
