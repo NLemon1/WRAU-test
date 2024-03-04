@@ -20,7 +20,7 @@ namespace WRA.Umbraco.Models
 {
 	/// <summary>Tabs</summary>
 	[PublishedModel("tabs")]
-	public partial class Tabs : PublishedElementModel
+	public partial class Tabs : PublishedElementModel, IBlockVisibility
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
@@ -78,5 +78,20 @@ namespace WRA.Umbraco.Models
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("overline")]
 		public virtual string Overline => this.Value<string>(_publishedValueFallback, "overline");
+
+		///<summary>
+		/// Visible To All
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
+		[ImplementPropertyType("visibleToAll")]
+		public virtual bool VisibleToAll => global::WRA.Umbraco.Models.BlockVisibility.GetVisibleToAll(this, _publishedValueFallback);
+
+		///<summary>
+		/// Visible To Member Groups: Member Groups for whom this content is visible
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("visibleToMemberGroups")]
+		public virtual string VisibleToMemberGroups => global::WRA.Umbraco.Models.BlockVisibility.GetVisibleToMemberGroups(this, _publishedValueFallback);
 	}
 }
