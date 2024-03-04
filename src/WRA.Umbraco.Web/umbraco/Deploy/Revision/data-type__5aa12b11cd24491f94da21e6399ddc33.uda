@@ -302,7 +302,7 @@
         "rowMinSpan": 1,
         "rowMaxSpan": 1,
         "allowAtRoot": true,
-        "allowInAreas": false,
+        "allowInAreas": true,
         "areas": [
           {
             "key": "4a7162dc-fd49-40a2-858e-aa5e72e71c9d",
