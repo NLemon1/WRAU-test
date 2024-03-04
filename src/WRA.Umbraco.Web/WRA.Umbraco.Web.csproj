@@ -37,6 +37,7 @@
     <PackageReference Include="Umbraco.Deploy.Cloud" Version="13.0.4" />
     <PackageReference Include="Umbraco.Deploy.Contrib" Version="13.0.0" />
     <PackageReference Include="Umbraco.Forms" Version="13.0.2" />
+    <PackageReference Include="Umbraco.Forms.Deploy" Version="13.0.0" />
     <PackageReference Include="Umbraco.Workflow" Version="13.0.2" />
     <PackageReference Include="Umbraco.Forms.Core.Providers" Version="13.0.2" />
 
