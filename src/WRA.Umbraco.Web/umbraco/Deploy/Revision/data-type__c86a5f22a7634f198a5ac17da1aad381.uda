@@ -1,0 +1,19 @@
+{
+  "Name": "Bundle Page - Sub Categories - Multinode Treepicker",
+  "Alias": "",
+  "EditorAlias": "Umbraco.MultiNodeTreePicker",
+  "Configuration": {
+    "startNode": {
+      "type": "content"
+    },
+    "filter": "subCategoryPage",
+    "minNumber": 0,
+    "maxNumber": 0,
+    "showOpenButton": false,
+    "ignoreUserStartNodes": false
+  },
+  "Udi": "umb://data-type/c86a5f22a7634f198a5ac17da1aad381",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
+  "__version": "13.0.4"
+}

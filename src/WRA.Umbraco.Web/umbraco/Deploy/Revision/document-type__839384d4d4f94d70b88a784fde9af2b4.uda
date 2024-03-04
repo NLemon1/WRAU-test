@@ -1,0 +1,79 @@
+{
+  "Name": "Bundle Page",
+  "Alias": "bundlePage",
+  "DefaultTemplate": "umb://template/f35e68a309e14a5f98958bab440c2136",
+  "AllowedTemplates": [
+    "umb://template/f35e68a309e14a5f98958bab440c2136"
+  ],
+  "HistoryCleanup": {},
+  "Icon": "icon-inbox-full color-deep-purple",
+  "Thumbnail": "folder.png",
+  "Permissions": {
+    "AllowedChildContentTypes": []
+  },
+  "Parent": "umb://document-type/50852124ab78495fbc75a7ddd5045c9c",
+  "CompositionContentTypes": [
+    "umb://document-type/50852124ab78495fbc75a7ddd5045c9c",
+    "umb://document-type/c7472437951a435c8292440e6396daf2"
+  ],
+  "PropertyGroups": [
+    {
+      "Key": "fc1dc750-56e6-427f-a19f-ed59948a82b3",
+      "Name": "Properties",
+      "Type": 1,
+      "Alias": "properties",
+      "PropertyTypes": [
+        {
+          "Key": "004943f1-3d03-4e1b-a27c-1a1c7367769e",
+          "Alias": "shortDescription",
+          "DataType": "umb://data-type/c6bac0dd4ab945b18e30e4b619ee5da3",
+          "Name": "Short Description",
+          "SortOrder": 2
+        },
+        {
+          "Key": "570463ef-02d9-4a86-a6f1-2aa1b2ffd573",
+          "Alias": "bundledProducts",
+          "DataType": "umb://data-type/1db19b70214c448dbbf7dc848a144056",
+          "Name": "Bundled Products",
+          "SortOrder": 1
+        },
+        {
+          "Key": "5e34d6ca-c088-49ed-8d34-a5b91c07ce49",
+          "Alias": "subCategories",
+          "DataType": "umb://data-type/c86a5f22a7634f198a5ac17da1aad381",
+          "Name": "Sub Categories"
+        }
+      ]
+    }
+  ],
+  "PropertyTypes": [],
+  "Udi": "umb://document-type/839384d4d4f94d70b88a784fde9af2b4",
+  "Dependencies": [
+    {
+      "Udi": "umb://data-type/1db19b70214c448dbbf7dc848a144056",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/c6bac0dd4ab945b18e30e4b619ee5da3",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/c86a5f22a7634f198a5ac17da1aad381",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type/50852124ab78495fbc75a7ddd5045c9c",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type/c7472437951a435c8292440e6396daf2",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://template/f35e68a309e14a5f98958bab440c2136",
+      "Ordering": true
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
+  "__version": "13.0.4"
+}

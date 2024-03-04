@@ -1,17 +1,15 @@
 {
-  "Name": "Budles Page",
-  "Alias": "budlesPage",
-  "DefaultTemplate": "umb://template/f1445ab4e56e43ca8da2d0694436031e",
+  "Name": "Bundles Page",
+  "Alias": "bundlesPage",
+  "DefaultTemplate": "umb://template/1578da223d2e4b2ea748009fc9609a96",
   "AllowedTemplates": [
-    "umb://template/f1445ab4e56e43ca8da2d0694436031e"
+    "umb://template/1578da223d2e4b2ea748009fc9609a96"
   ],
   "HistoryCleanup": {},
   "Icon": "icon-box color-deep-purple",
   "Thumbnail": "folder.png",
   "Permissions": {
-    "AllowedChildContentTypes": [
-      "umb://document-type/de09e8a08995400ca15bbb29ad2a15c4"
-    ]
+    "AllowedChildContentTypes": []
   },
   "Parent": "umb://document-type-container/2443f0d8c7a44e1baa3511778e6789dd",
   "CompositionContentTypes": [
@@ -22,7 +20,7 @@
   ],
   "PropertyGroups": [],
   "PropertyTypes": [],
-  "Udi": "umb://document-type/ab792f1f277c43d69f07a142386b855d",
+  "Udi": "umb://document-type/50852124ab78495fbc75a7ddd5045c9c",
   "Dependencies": [
     {
       "Udi": "umb://document-type-container/2443f0d8c7a44e1baa3511778e6789dd",
@@ -41,14 +39,11 @@
       "Ordering": true
     },
     {
-      "Udi": "umb://document-type/de09e8a08995400ca15bbb29ad2a15c4"
-    },
-    {
       "Udi": "umb://document-type/f0c2133970844a948c095978736296ce",
       "Ordering": true
     },
     {
-      "Udi": "umb://template/f1445ab4e56e43ca8da2d0694436031e",
+      "Udi": "umb://template/1578da223d2e4b2ea748009fc9609a96",
       "Ordering": true
     }
   ],

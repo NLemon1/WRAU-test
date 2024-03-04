@@ -18,14 +18,14 @@ using Umbraco.Extensions;
 
 namespace WRA.Umbraco.Models
 {
-	/// <summary>Budles Page</summary>
-	[PublishedModel("budlesPage")]
-	public partial class BudlesPage : PublishedContentModel, IMeta, IPageSettings, IRouting, IVisibility
+	/// <summary>Bundles Page</summary>
+	[PublishedModel("bundlesPage")]
+	public partial class BundlesPage : PublishedContentModel, IMeta, IPageSettings, IRouting, IVisibility
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
-		public new const string ModelTypeAlias = "budlesPage";
+		public new const string ModelTypeAlias = "bundlesPage";
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
 		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
@@ -34,14 +34,14 @@ namespace WRA.Umbraco.Models
 			=> PublishedModelUtility.GetModelContentType(publishedSnapshotAccessor, ModelItemType, ModelTypeAlias);
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
 		[return: global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		public static IPublishedPropertyType GetModelPropertyType<TValue>(IPublishedSnapshotAccessor publishedSnapshotAccessor, Expression<Func<BudlesPage, TValue>> selector)
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(IPublishedSnapshotAccessor publishedSnapshotAccessor, Expression<Func<BundlesPage, TValue>> selector)
 			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(publishedSnapshotAccessor), selector);
 #pragma warning restore 0109
 
 		private IPublishedValueFallback _publishedValueFallback;
 
 		// ctor
-		public BudlesPage(IPublishedContent content, IPublishedValueFallback publishedValueFallback)
+		public BundlesPage(IPublishedContent content, IPublishedValueFallback publishedValueFallback)
 			: base(content, publishedValueFallback)
 		{
 			_publishedValueFallback = publishedValueFallback;

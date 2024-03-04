@@ -1,8 +1,14 @@
 {
   "Name": "Umbraco testform1",
   "Alias": "UmbracoTestform1",
+  "File": "umb://template-file/UmbracoTestform1.cshtml",
   "Udi": "umb://template/04b45a7387dd4856a17d85d450fc654b",
-  "Dependencies": [],
+  "Dependencies": [
+    {
+      "Udi": "umb://template-file/UmbracoTestform1.cshtml",
+      "Ordering": true
+    }
+  ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.TemplateArtifact",
   "__version": "13.0.4"
 }

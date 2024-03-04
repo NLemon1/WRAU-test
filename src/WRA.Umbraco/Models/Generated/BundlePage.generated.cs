@@ -20,7 +20,7 @@ namespace WRA.Umbraco.Models
 {
 	/// <summary>Bundle Page</summary>
 	[PublishedModel("bundlePage")]
-	public partial class BundlePage : BudlesPage, IProductComp
+	public partial class BundlePage : BundlesPage, IProductComp
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
@@ -58,36 +58,20 @@ namespace WRA.Umbraco.Models
 		public virtual global::System.Collections.Generic.IEnumerable<global::Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent> BundledProducts => this.Value<global::System.Collections.Generic.IEnumerable<global::Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent>>(_publishedValueFallback, "bundledProducts");
 
 		///<summary>
-		/// Bundle SubCategories
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("bundleSubCategories")]
-		public virtual global::System.Collections.Generic.IEnumerable<global::Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent> BundleSubCategories => this.Value<global::System.Collections.Generic.IEnumerable<global::Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent>>(_publishedValueFallback, "bundleSubCategories");
-
-		///<summary>
-		/// Bundle Title
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("bundleTitle")]
-		public virtual string BundleTitle => this.Value<string>(_publishedValueFallback, "bundleTitle");
-
-		///<summary>
 		/// Short Description
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("shortDescription")]
-		public virtual global::Umbraco.Cms.Core.Strings.IHtmlEncodedString ShortDescription => this.Value<global::Umbraco.Cms.Core.Strings.IHtmlEncodedString>(_publishedValueFallback, "shortDescription");
+		public virtual string ShortDescription => this.Value<string>(_publishedValueFallback, "shortDescription");
 
 		///<summary>
-		/// Tags
+		/// Sub Categories
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("tags")]
-		public virtual global::System.Collections.Generic.IEnumerable<string> Tags => this.Value<global::System.Collections.Generic.IEnumerable<string>>(_publishedValueFallback, "tags");
+		[ImplementPropertyType("subCategories")]
+		public virtual global::System.Collections.Generic.IEnumerable<global::Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent> SubCategories => this.Value<global::System.Collections.Generic.IEnumerable<global::Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent>>(_publishedValueFallback, "subCategories");
 
 		///<summary>
 		/// Member Price
