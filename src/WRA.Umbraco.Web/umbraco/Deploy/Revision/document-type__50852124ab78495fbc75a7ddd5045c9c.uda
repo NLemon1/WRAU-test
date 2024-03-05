@@ -9,7 +9,9 @@
   "Icon": "icon-box color-deep-purple",
   "Thumbnail": "folder.png",
   "Permissions": {
-    "AllowedChildContentTypes": []
+    "AllowedChildContentTypes": [
+      "umb://document-type/839384d4d4f94d70b88a784fde9af2b4"
+    ]
   },
   "Parent": "umb://document-type-container/2443f0d8c7a44e1baa3511778e6789dd",
   "CompositionContentTypes": [
@@ -37,6 +39,9 @@
     {
       "Udi": "umb://document-type/7cc368ff00cb4264ad60f52a76c3a911",
       "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type/839384d4d4f94d70b88a784fde9af2b4"
     },
     {
       "Udi": "umb://document-type/f0c2133970844a948c095978736296ce",
