@@ -3,19 +3,65 @@
 @using WRA.Umbraco;
 @using System.Linq;
 @using Umbraco.Commerce.Extensions;
+@using Umbraco.Cms.Core.Models.Blocks
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.SubCategoryPage>
-@inject SearchService _searchService;
 @using ContentModels = WRA.Umbraco.Models;
 @{
 	Layout = "~/Views/_Layout.cshtml";
-	var products = _searchService.SearchProductsBySubCategory(Model.UrlSegment!);
+    var sectionsTop = Model.Value<IEnumerable<BlockGridItem>>("sectionsTop");
+    var sectionsBottom = Model.Value<IEnumerable<BlockGridItem>>("sectionsBottom");
+   
+    IEnumerable<IPublishedContent> siblingSubcategories = Model.SiblingsAndSelf().Where(x => x.IsVisible()).OrderBy(p => p.Name);
+
 }
-@foreach (var product in products.Select(x => x.Content as ProductPage))
-{
-	<div>
-		<h2>@product.Name</h2>
-		<p>@(product.MemberPricing?.Formatted())</p>
-    <p>@(product.NonMemberPricing.Formatted())</p>
-	</div>
-}
- 
+
+<script type="text/javascript">
+    window.productDataSubCategory = "@(Model.Name)";
+</script>
+
+
+<header class="page-header page-header--no-accent">
+    <div class="container">
+        <div class="container--sm">
+            <h1 class="js-collection-title mb-0">
+                @Model.Name
+            </h1>
+        </div>
+    </div>
+</header>
+
+<div class="text-bg-secondary pt-1 pb-5">
+    <div class="text-light">
+        @await Html.PartialAsync("_breadcrumbsProducts", new ViewDataDictionary(this.ViewData) { { "CssClass", "breadcrumbs--light" } })
+    </div>
+    <div class="container">
+        <label class="visually-hidden" for="collection-filter">Filter Categories</label>
+        <select id="collection-filter" class="js-collection-category-filter form-select d-inline-block w-auto">
+            @foreach (var siblingSubcategory in siblingSubcategories)
+            {
+                <!option value="@siblingSubcategory.Url()" @(Model.Id == siblingSubcategory.Id ? "selected" : string.Empty)>@siblingSubcategory.Name</!option>
+            }
+        </select>
+    </div>
+</div>
+
+@await Html.PartialAsync("blockgrid/default", sectionsTop)
+
+<div class="container my-4 my-lg-6">
+    <h2 class="js-listings-title h3 pt-4 mt-4 mt-lg-8 border-top border-medium mb-4">Individual Classes</h2>
+    <div class="js-taxonomy-container" hidden>
+        <label for="collection-filter" class="d-block text-uppercase font-family-3 fw-normal mb-2">@Model.TaxonomyTypeLabel Type</label>
+        <select id="collection-filter" class="js-taxonomy-filter form-select d-inline-block w-auto mb-4 mb-lg-6">
+        </select>
+    </div>
+    <div class="position-relative" style="min-height: 350px;">
+        <div class="js-product-collection row align-items-md-stretch g-4">
+            @* "The space between our wicked lies is, Where we hope to keep safe from pain" *@
+        </div>
+        <div class="js-results-loader search-loading" title="Please wait, loading.">
+            <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+        </div>
+    </div>
+</div>
+
+@await Html.PartialAsync("blockgrid/default", sectionsBottom)

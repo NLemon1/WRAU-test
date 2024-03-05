@@ -1,22 +1,18 @@
-﻿
-@using Umbraco.Cms.Web.Common.PublishedModels;
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.ProductCategoryLanding>
-@using ContentModels = WRA.Umbraco.Models;
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@using WRA.Umbraco.Services;
+@using WRA.Umbraco;
+@using System.Linq;
+@using Umbraco.Commerce.Extensions;
 @using Umbraco.Cms.Core.Models.Blocks
-@using System.Text.RegularExpressions;
-@using WRA.Umbraco.Web.Helpers
-
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.CategoryPage>
+@using ContentModels = WRA.Umbraco.Models;
 
 @{
     Layout = "~/Views/_Layout.cshtml";
-    var content = (ContentModels.ProductCategoryLanding)Model;
     var sections = Model.Value<IEnumerable<BlockGridItem>>("sections");
 
-    var productCategory = content.GetProperty("category").GetSourceValue();
-    var productSubcategories = Umbraco.Content(productCategory).Children.Where(p => p.IsVisible()).OrderBy(p => p.Name);
-
+    var productSubcategories = Model.Children.Where(p => p.IsVisible()).OrderBy(p => p.Name);
 }
-
 
 <header class="page-header page-header--no-accent">
     <div class="container">
@@ -27,17 +23,15 @@
 </header>
 
 <div class="text-bg-secondary">
-    <div class="py-5">
+    <div class="py-2">
         @await Html.PartialAsync("_breadcrumbsProducts", new ViewDataDictionary(this.ViewData) { { "CssClass", "breadcrumbs--light" } })
     </div>
 </div>
 
 @await Html.PartialAsync("blockgrid/default", sections)
 
-
 <div class="container my-4 my-lg-6">
     <div class="row g-4">
-    
         @foreach (var productGroup in productSubcategories)
         {
             <div class="col-md-4">
@@ -57,7 +51,5 @@
                 </div>
             </div>
         }
-
-       
     </div>
 </div>

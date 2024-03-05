@@ -66,6 +66,14 @@ namespace WRA.Umbraco.Models
 		public virtual string ExternalId => this.Value<string>(_publishedValueFallback, "externalId");
 
 		///<summary>
+		/// Sections: Add content blocks here.
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("sections")]
+		public virtual global::Umbraco.Cms.Core.Models.Blocks.BlockGridModel Sections => this.Value<global::Umbraco.Cms.Core.Models.Blocks.BlockGridModel>(_publishedValueFallback, "sections");
+
+		///<summary>
 		/// Show in Calendar: Enable calendar category.
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]

@@ -10,6 +10,7 @@
 
 @{
     MemberIdentityUser currentMember = await _membermanager.GetCurrentMemberAsync();
+
     var settings = Umbraco.ContentAtRoot().FirstOrDefault(x => x.ContentType.Alias == "siteSettings");
     IPublishedContent home = Umbraco.ContentAtRoot().Where(pc => pc.Name == "Home").FirstOrDefault();
     string metaTitle = Model.HasValue("metaTitle") ? Model.Value<string>("metaTitle") : Model.Name + " | " + settings.Value("siteName");
@@ -77,8 +78,8 @@
 
 </head>
 <body class="page-template-@Model.ContentType.Alias page-id-@Model.Id">
-    @Html.Raw(settings.Value("bodyOpenScripts"))
 
+    @Html.Raw(settings.Value("bodyOpenScripts"))
     <a class="visually-hidden-focusable" href="#content">Skip to content</a>
     
     @if (settings.HasValue("enableMessage") && settings.Value<bool>("enableMessage") && (Context.Request.Cookies["wra_alert_banner"] != alertTimestamp))

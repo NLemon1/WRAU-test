@@ -1,0 +1,14 @@
+{
+  "Name": "Category Page",
+  "Alias": "CategoryPage",
+  "File": "umb://template-file/CategoryPage.cshtml",
+  "Udi": "umb://template/33fad06581354066b7fd7120c0c5f9da",
+  "Dependencies": [
+    {
+      "Udi": "umb://template-file/CategoryPage.cshtml",
+      "Ordering": true
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.TemplateArtifact",
+  "__version": "13.0.4"
+}

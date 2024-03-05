@@ -33,7 +33,7 @@ multimediaFilters();
 quantitySelector();
 checkout();
 
-if (document.body.classList.contains("page-template-collectionPage")) {
+if (document.body.classList.contains("page-template-subCategoryPage")) {
     products();
 }
 

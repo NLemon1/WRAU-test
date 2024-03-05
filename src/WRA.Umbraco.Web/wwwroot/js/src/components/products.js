@@ -2,45 +2,48 @@ const products = () => {
 
     //DOM presentation elements
     const productResults = document.querySelector('.js-product-collection');
-    const collectionTitle = document.querySelector('.js-collection-title');
+    //const collectionTitle = document.querySelector('.js-collection-title');
     const listingsTitle = document.querySelector('.js-listings-title');
-    const currentBreadcrumb = document.querySelector('.js-breadcrumb-current');
+    //const currentBreadcrumb = document.querySelector('.js-breadcrumb-current');
     const resultsLoader = document.querySelector('.js-results-loader');
 
+    //NEED TO LOAD ALL TAXONOMY OPTIONS FIRST, separate from filedterd results load
 
     //DOM event elements
-    const productCategoryDropdown = document.querySelector('.js-collection-category-filter');
-    const productSubCategoryDropdown = document.querySelector('.js-collection-subcategory-filter');
-    const productSubCategoryContainer = document.querySelector('.js-collection-subcategory-container');
+    const productSubcategoryDropdown = document.querySelector('.js-collection-category-filter');
+    const productTaxonomyDropdown = document.querySelector('.js-taxonomy-filter');
+    const productTaxonomyContainer = document.querySelector('.js-taxonomy-container');
 
     //Static vars
     const apiEndpointUrl = "/GetProducts";
     let pageNumber = 1;
     const pageSize = 100;
-    let subcategoryArray = ["All"];
+    let taxonomyArray = ["All"];
 
     //Urls
 
     const windowLoadQueryString = window.location.search;
     const urlParams = new URLSearchParams(windowLoadQueryString);
 
+    let taxonomy = "";
+
+    if (urlParams.has("taxonomy")) {
+        taxonomy = urlParams.get("taxonomy");
+    }
+
     let type = "";
 
     if (urlParams.has("type")) {
-        type = urlParams.get("type");
+        taxonomy = urlParams.get("type");
     }
 
-    let subcategory = ""; 
+    let subcategory = window.productDataSubCategory; 
 
-    if (urlParams.has("subcategory")) {
-        subcategory = urlParams.get("subcategory");
-    }
-    
     let category = "";
 
-    if (urlParams.has("category")) {
+ /*   if (urlParams.has("category")) {
         category = urlParams.get("category");
-    }
+    }*/
 
     //Results
 
@@ -59,7 +62,6 @@ const products = () => {
             results.forEach((result) => {
                 //console.log(result);
 
-                //How we determine button display text?
                 const setCTA = result.productType == "Products" ? `<a href="${result.url}" id="add-to-cart" class="btn btn-secondary btn-sm border-0  flex-grow-1">Add To Cart</a>` : `<a href="${result.url}" id="view-product" class="btn btn-primary btn-sm flex-grow-1">Register</a>`;
 
                 productResults.innerHTML += (
@@ -91,12 +93,6 @@ const products = () => {
 
                     `
                 );
-
-                if (result.subCategory != "All" && !subcategoryArray.includes(result.subCategory, subcategoryArray)) {
-                    subcategoryArray.push(result.subCategory);
-                    populateSubCategories();
-                }
-
             });
 
         } else {
@@ -106,23 +102,35 @@ const products = () => {
         handleIndicators(false, resultsLoader);
     }
 
-    const populateSubCategories = () => {
+    const loadTaxonomyTerms = (results) => {
+        if (results.length > 0) {
+            results.forEach((result) => {
 
-        productSubCategoryDropdown.innerHTML = "";//clear <option> tags
+                if (result.taxonomy != "All" && !taxonomyArray.includes(result.taxonomy, taxonomyArray)) {
+                    taxonomyArray.push(result.taxonomy);
+                    populateTaxonomy();
+                }
+            })
+        }
+    }
 
-        if (subcategoryArray.length > 1) {
-            productSubCategoryContainer.removeAttribute("hidden");
+    const populateTaxonomy = () => {
+
+        productTaxonomyDropdown.innerHTML = "";//clear <option> tags
+
+        if (taxonomyArray.length > 1) {
+            productTaxonomyContainer.removeAttribute("hidden");
         } else {
-            productSubCategoryContainer.setAttribute("hidden", "hidden");
+            productTaxonomyContainer.setAttribute("hidden", "hidden");
         }
 
-        subcategoryArray.forEach((subCatOption) => {
+        taxonomyArray.forEach((taxonomyOption) => {
 
-            const checkIfActive = subCatOption == subcategory ? "selected" : "";
+            const checkIfActive = taxonomyOption == taxonomy ? "selected" : "";
 
-            productSubCategoryDropdown.innerHTML += (
+            productTaxonomyDropdown.innerHTML += (
                 `
-                <option ${checkIfActive} value="${subCatOption}">${subCatOption}</option>
+                <option ${checkIfActive} value="${taxonomyOption}">${taxonomyOption}</option>
                 `
             )
         });
@@ -132,13 +140,15 @@ const products = () => {
     postResults = () => {
 
         handleIndicators(true, resultsLoader);
-        updateDomElements(category);
+       // updateDomElements(category);
+
+        const checkTax = taxonomy === "All" ? "" : taxonomy; 
 
         let bodyObject = {
             "productType": decodeURIComponent(type), //Events, Products, Courses
             "category": decodeURIComponent(category), //Professional Development, Publications, Conferences/Conventions, etc.
-            "subCategory": decodeURIComponent(subcategory == "All" ? "" : subcategory),//children of category
-            "taxonomy": "",//Reference Manuals, Books, Virtual, etc.
+            "subCategory": decodeURIComponent(subcategory),//children of category
+            "taxonomy": decodeURIComponent(checkTax),//Reference Manuals, Books, Virtual, etc.
             "pagination": {
                 "pageNumber": pageNumber,
                 "pageSize": pageSize
@@ -164,7 +174,7 @@ const products = () => {
         }).then(res => {
             //console.log(res);
             renderResults(res);
-
+            loadTaxonomyTerms(res);
         });
     }
 
@@ -172,24 +182,16 @@ const products = () => {
         productResults.innerHTML = "";
     }
 
-    const urlHandler = (isCategory, isSubCategory) => {
+    const urlHandler = (isTaxonomy) => {
 
-        if (isCategory && !isSubCategory) {
-            urlParams.set('category', category);
-            window.history.pushState({ id: `${type}-category-${category}` }, '', `${location.pathname}?type=${type}&category=${category}`);
-        }
-
-        if (isCategory && isSubCategory) {
-            urlParams.set('category', category);
-            urlParams.set('subcategory', subcategory);
-            window.history.pushState({ id: `${type}-category-${category}subcategory-${subcategory}` }, '', `${location.pathname}?type=${type}&category=${category}&subcategory=${subcategory}`);
+        if (isTaxonomy) {
+            urlParams.set('taxonomy', taxonomy);
+            window.history.pushState({ id: `${taxonomy}` }, '', `${location.pathname}?taxonomy=${taxonomy}`);
         }
        
     }
 
     const updateDomElements = (titleText) => {
-        collectionTitle.innerHTML = titleText;
-        currentBreadcrumb.innerHTML = titleText;
         listingsTitle.innerHTML = titleText;
     }
 
@@ -199,40 +201,22 @@ const products = () => {
 
 
     //Event Handlers
-    if (productCategoryDropdown) {
-
-        productCategoryDropdown.addEventListener("change", (e) => {
+    if (productSubcategoryDropdown) {
+        productSubcategoryDropdown.addEventListener("change", (e) => {
             e.preventDefault();
-
-            killResults();
-
             category = e.target.value;
-
-            //clearing subcategory dropdown
-            subcategory = "";
-            subcategoryArray = ["All"];
-            productSubCategoryContainer.setAttribute("hidden", "hidden");
-            productSubCategoryDropdown.innerHTML = "";//clear <option> tags
-
-            if (productSubCategoryDropdown) {
-                resetDropdown(productSubCategoryDropdown, "");
-            }
-
-            urlHandler(true, false);
-            postResults();
-
+            window.location.href = category;
         })
     }
 
-    if (productSubCategoryDropdown) {
+    if (productTaxonomyDropdown) {
 
-        productSubCategoryDropdown.addEventListener("change", (e) => {
+        productTaxonomyDropdown.addEventListener("change", (e) => {
             e.preventDefault();
 
             killResults();
 
-            updateDomElements(category);
-            subcategory = e.target.value;;
+            taxonomy = e.target.value;
 
             urlHandler(true, true);
             postResults();
@@ -246,29 +230,15 @@ const products = () => {
 
         const popUrlParams = new URLSearchParams(window.location.search);
 
-        if (popUrlParams.has("category") && !popUrlParams.has("subcategory")) {
-
-            category = popUrlParams.get("category");
-            resetDropdown(productCategoryDropdown, category);
-            resetDropdown(productSubCategoryDropdown, "All");
-
-
-        } else if (popUrlParams.has("category") && popUrlParams.has("subcategory")) {
-
-            category = popUrlParams.get("category");
-            subcategory = popUrlParams.get("subcategory");
-            resetDropdown(productCategoryDropdown, category);
-
-            if (productSubCategoryDropdown) {
-                resetDropdown(productSubCategoryDropdown, subcategory);
-            }
-
+        if (popUrlParams.has("taxonomy")) {
+            taxonomy = popUrlParams.get("taxonomy");
+            resetDropdown(productTaxonomyDropdown, taxonomy);
         } else {
-            category = "";
-            subcategory = "";
-            resetDropdown(productSubCategoryDropdown, "All");
+            taxonomy = "";
+            resetDropdown(productTaxonomyDropdown, "All");
         }
-        
+
+
         postResults();
 
     });
