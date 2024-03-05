@@ -57,7 +57,7 @@
                                 </label>
                                 @if (bundleItem.Product.HasProperty("ShortDescription"))
                                 {
-                                <button class="js-bundle-pop-details btn btn-secondary btn-sm w-50 py-3" aria-controls="@(bundleItem.Product.Id)moreDetails">View Details</button>
+                                    <button class="js-bundle-pop-details btn btn-secondary btn-sm w-50 py-3" aria-controls="@(bundleItem.Product.Id)moreDetails">View Details</button>
                                 }
                             </div>
                             @if (bundleItem.Product.HasProperty("ShortDescription"))
@@ -73,6 +73,9 @@
                                                 <span class="h3 d-block fw-bold fs-lg text-capitalize mb2_5">@bundleItem.Product.Name</span>
                                                 @Html.Raw(bundleItem.Product.GetProperty("ShortDescription")?.GetSourceValue())
                                             </div>
+                                            <a href="@bundleItem.Product.Url()" target="_blank" class="mt-4 btn btn-primary btn-sm">
+                                                Full Details
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -81,7 +84,6 @@
                     </div>
 			    }
 	        </div>
-
             <div id="bundleSelected" class="js-bundle-bag position-fixed bottom-0 start-0 w-100 p-3 p-md-4 bg-white shadow-lg" role="dialog" hidden name="bundleSelected">
                 <div class="container d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-end gap-2 gap-md-4">
                     <p class="m-0 fw-bolder font-family-3"><span class="js-bundle-count"></span> Courses Selected</p>
