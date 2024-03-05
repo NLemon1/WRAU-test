@@ -18,8 +18,8 @@
     string absUrl = ViewContext.HttpContext.Request.GetEncodedUrl();
 
     var authors = Model.Value<IEnumerable<IPublishedContent>>("Author");
+    var parentCrumb = content.Parent.Parent.UrlSegment != "news-updates" ? content.Parent : content.Parent.Parent;
 }
-
 
 @section scripts {
 
@@ -56,9 +56,9 @@
 
 <header class="container">
 
-    <a class="d-inline-flex align-items-center gap-1 text-decoration-none mt-4 my-lg-5 fw-bold" href="@content.Parent.Url()">
+    <a class="d-inline-flex align-items-center gap-1 text-decoration-none mt-4 my-lg-5 fw-bold" href="@parentCrumb.Url()">
         <i class="fa fa-chevron-left" width="16" height="16" aria-hidden="true"></i>
-        @content.Parent.Name
+        @parentCrumb.Name
     </a>
 
     <div class="row">
