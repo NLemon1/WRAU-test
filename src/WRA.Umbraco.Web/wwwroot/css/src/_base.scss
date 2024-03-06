@@ -22,6 +22,7 @@ html {
     --utility-nav-height: 64px;
     --nav-height: 64px;
     --alert-height: 48px;
+    height: 100%;
 
     @include media-breakpoint-down(lg) {
         --header-height: 64px;
@@ -29,6 +30,17 @@ html {
 
     @include media-breakpoint-down(md) {
         --alert-height: 96px;
+    }
+}
+
+// sticky footer (and reserved space for gated pages)
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+
+    .site-main {
+        flex-grow: 1;
     }
 }
 

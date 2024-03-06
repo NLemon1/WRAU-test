@@ -1,0 +1,57 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+
+@{
+    var settings = Umbraco.ContentAtRoot().FirstOrDefault(x => x.ContentType.Alias == "siteSettings");
+}
+
+<button class="d-none" type="button" data-a11y-dialog-show="forms-library-dialog">
+    Open the dialog
+</button>
+<div id="forms-library-dialog" class="js-dialog dialog-container" aria-hidden="true">
+    <div class="dialog-overlay" data-a11y-dialog-hide></div>
+    <div class="dialog-content-wrapper" style="max-width: 456px;" role="document">
+        <div class="dialog-content-header text-end">
+            <h2 class="h4 mb-0">Member Login Required</h2>
+            <button type="button" data-a11y-dialog-hide aria-label="Close dialog">
+                &times;
+            </button>
+        </div>
+        <div class="dialog-content">
+            <div class="my-3 text-center">
+                <img src="@(settings.Value<IPublishedContent>("headerLogo").Url())" alt="@(settings.Value<IPublishedContent>("headerLogo").Value("altText"))" />
+            </div>
+            <form>
+                <div class="mb-3">
+                    <label for="gated-username" class="form-label fs-sm">Username</label>
+                    <input id="gated-username" class="form-control" type="text" required />
+                </div>
+                <div class="mb-3">
+                    <label for="gated-password" class="form-label fs-sm">Password</label>
+                    <input id="gated-password" class="form-control" type="password" />
+                </div>
+                <button class="btn btn-primary btn-sm w-100" type="submit">Login</button>
+                <div class="d-flex justify-content-center mt-4 mb-2 fs-sm">
+                    <a href="#">Create Account</a>
+                    <a class="ms-3 ps-3 border-start" href="#">Reset Password</a>
+                    <a class="ms-3 ps-3 border-start" href="#">Help</a>
+                </div>
+            </form>
+        </div>
+        @* <div class="dialog-content-footer">
+            <div class="dialog-content-footer__left">
+                <div class="form-check">
+                    <input id="forms-library-dialog-checkbox" class="form-check-input" type="checkbox">
+                    <label for="forms-library-dialog-checkbox" class="form-check-label">I have read and agree to the above.</label>
+                </div>
+            </div>
+            <div class="dialog-content-footer__right">
+                <a class="btn btn-light btn-sm" href="/">
+                    Cancel
+                </a>
+                <button class="btn btn-primary btn-sm" type="button" disabled>
+                    Continue
+                </button>
+            </div>
+        </div> *@
+    </div>
+</div>

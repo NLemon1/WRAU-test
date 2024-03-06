@@ -34,8 +34,12 @@
         @Html.Raw(Model.Value("scripts"));
     }
 }
-@if (MemberCanViewPage) {
-    @* gated page popup to do *@
+
+@if (!MemberCanViewPage)
+{
+    <partial name="GatedPage" />
+
+    return;
 }
 
 @await Html.PartialAsync("blockgrid/default", sections)
@@ -47,7 +51,7 @@
     </button>
     <div id="forms-library-dialog" class="js-dialog dialog-container" aria-hidden="true">
         <div class="dialog-overlay" data-a11y-dialog-hide></div>
-        <div class="dialog-content-wrapper" role="document">
+        <div class="dialog-content-wrapper" style="height: 75vh; max-width: 824px;" role="document">
             <div class="dialog-content-header">
                 <h2 class="h4 mb-0">@settings.Value("dialogHeading")</h2>
                 <button type="button" data-a11y-dialog-hide aria-label="Close dialog">
