@@ -15,5 +15,10 @@ public record ProductPageResponseDto(
     string End,
     string Url,
     int ResourceId,
-    object ExtendedProps
+    object ExtendedProps,
+    string startDate,
+    string startTime,
+    string endDate,
+    string endTime,
+    int productId
 );

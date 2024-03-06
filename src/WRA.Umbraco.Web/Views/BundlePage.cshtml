@@ -47,10 +47,10 @@
                     <div class="col-md-6 col-lg-4 col-bundle">
                         <input type="checkbox" class="js-bundle-checkbox input-bundle" name="@objectIndexKey" id="@bundleItem.Product.Id" value="@bundleItem.Product.Key" />
                         <div class="card card-bundle">
-                            <p class="mb-3 fs-xs">Class <span class="ms-3 fw-semibold">Credit Hours: XXX</span></p>
+                            <p class="mb-3 fs-xs">Class <span class="ms-3 fw-semibold" style="color: red;">Credit Hours: XXX</span></p>
                             <h3 class="fw-bold fs-lg text-capitalize mb2_5">@bundleItem.Product.Name</h3>
                             <div class="d-flex flex-row gap-3 mt-auto">
-                                <label for="@bundleItem.Product.Id" class="js-bundle-select btn btn-primary btn-sm w-50 py-3" tabindex="1" role="button" aria-haspopup="dialog" aria-controls="bundleSelected" style="cursor:pointer">
+                                <label for="@bundleItem.Product.Id" class="js-bundle-select btn btn-primary btn-sm w-50 py-3 d-flex flex-column justify-content-center" tabindex="1" role="button" aria-haspopup="dialog" aria-controls="bundleSelected" style="cursor:pointer">
                                     <span class="btn__select">Select</span>
                                     <span class="visually-hidden">OR</span>
                                     <span class="btn__deselect">Deselect</span>

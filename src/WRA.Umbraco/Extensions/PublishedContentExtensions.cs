@@ -98,7 +98,12 @@ namespace WRA.Umbraco
                 System.String.Format("{0:yyyy-MM-dd H:mm}", p.EndDate),
                 p.Url(),
                 p?.Categories?.First()?.Id ?? 0,
-                p.Url()
+                p.Url(),
+                System.String.Format("{0:MMMM d}", p.StartDate) ?? string.Empty,
+                System.String.Format("{0:h:mm tt}", p.StartDate) ?? string.Empty,
+                System.String.Format("{0:MMMM d}", p.EndDate) ?? string.Empty,
+                System.String.Format("{0:h:mm tt}", p.EndDate) ?? string.Empty,
+                p.Id
             );
         }
 

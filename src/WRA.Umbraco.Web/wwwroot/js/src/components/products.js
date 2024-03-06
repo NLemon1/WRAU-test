@@ -55,21 +55,74 @@ const products = () => {
         }
     }
 
+    const formatDateTime = (startDate, endDate, startTime, endTime) => {
+
+        let dateString = startDate;
+
+        if (startDate != endDate) {
+            dateString += `<span>${endDate}</span>`;
+        }
+
+        dateString += "&nbsp;&nbsp;";
+
+        dateString += ` <span class="fw-normal">${startTime}</span>`;
+        if (startTime != endTime) {
+            dateString += `<span class="fw-normal"> &ndash; ${endTime}</span>`;
+        }
+
+        return dateString;
+    }
+
+    const handleAddToCart = (cartCtas) => {
+
+        cartCtas.forEach((cartCta) => {
+
+            cartCta.addEventListener("click", (e) => {
+
+                e.preventDefault();
+
+                alert("ADD ME TO CART!")
+
+              /*  var postData = {
+                    productNodeId: cartCta.dataset.productid
+                }
+
+                fetch('/umbraco/api/productapi/getproductvariant',
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json; charset=utf-8"
+                        },
+                        referrerPolicy: "no-referrer",
+                        body: JSON.stringify(postData)
+                    }).then(res => {
+                        if (res.status === 200) {
+                            console.log("ok");
+                        }
+                });*/
+            });
+
+        });
+    }
+
     const renderResults = (results) => {
 
         if (results.length > 0) {
 
             results.forEach((result) => {
-                //console.log(result);
+                console.log(result)
+                const setCTA = result.productType == "Products" ? `<a href="${result.url}" id="add-to-cart" data-productid="${result.productId}" class="js-add-cart btn btn-secondary btn-sm border-0 flex-grow-1 py-3">Add To Cart</a>` : `<a href="${result.url}" id="view-product" class="btn btn-primary btn-sm flex-grow-1 py-3">See Details</a><a href="${result.url}" id="view-product" class="btn btn-secondary btn-sm border-0 flex-grow-1 py-3">Register</a>`;
 
-                const setCTA = result.productType == "Products" ? `<a href="${result.url}" id="add-to-cart" class="btn btn-secondary btn-sm border-0  flex-grow-1">Add To Cart</a>` : `<a href="${result.url}" id="view-product" class="btn btn-primary btn-sm flex-grow-1">Register</a>`;
+                const setDate = (result.productType == "Events" || result.productType == "Courses") && result.start !== null ? `<p class="fs-xs fw-bold mb-1">${formatDateTime(result.startDate, result.endDate, result.startTime, result.endTime)}</p>` : "";
+                const setCredits = result.productType !== "Products" ? `<p class="fs-xs mb-1" style="color: red;">Credit Hours: <span class="fw-bold"> XXX</span></p>` : "";
 
                 productResults.innerHTML += (
                     `
                     <div class="col-md-6 col-lg-4">
                         <div class="card-class bg-light p-4 h-100 d-flex flex-column align-items-start">
-                            <p class="fs-xs">Class <span class="fw-bold">Credit Hours: XXXX</span></p>
-                            <p class="d-inline-block mb-4 px-2 py-1 bg-white fw-semibold fs-sm text-uppercase">${result.taxonomy}</p>
+                            ${setDate}
+                            ${setCredits}
+                            <p class="d-inline-block mb-4 mt-2_5 px-2 py-1 bg-white fw-semibold fs-sm text-uppercase">${result.taxonomy}</p>
                             <h3 class="fs-lg text-capitalize fw-semibold mb-4">${result.title}</h3>
 
                             <div class="d-block mb-1">
@@ -84,7 +137,7 @@ const products = () => {
                                 ${result.price} &nbsp;non-member pricing
                             </div>
 
-                            <div class="d-flex self-align-end flex-column flex-md-row align-items-center gap-3 mt-auto pt-3">
+                            <div class="d-flex w-100 self-align-end flex-column flex-md-row align-items-center gap-3 mt-auto pt-4">
                                 ${setCTA}
                             </div>
 
@@ -94,6 +147,8 @@ const products = () => {
                     `
                 );
             });
+
+            handleAddToCart(document.querySelectorAll(".js-add-cart"));
 
         } else {
             productResults.innerHTML = (`<div class="d-block col-md-10 mx-auto h5 text-center">No results. Try again.</div>`);
@@ -137,10 +192,46 @@ const products = () => {
 
     }
 
+    postTaxonomyTerms = () => {
+
+       // const checkTax = taxonomy === "All" ? "" : taxonomy;
+
+        let bodyObject = {
+            "productType": decodeURIComponent(type), //Events, Products, Courses
+            "category": decodeURIComponent(category), //Professional Development, Publications, Conferences/Conventions, etc.
+            "subCategory": decodeURIComponent(subcategory),//children of category
+            "taxonomy": "",//Reference Manuals, Books, Virtual, etc.
+            "pagination": {
+                "pageNumber": pageNumber,
+                "pageSize": pageSize
+            }
+        };
+
+        const bodyRequest = JSON.stringify(bodyObject);
+
+        console.log(bodyRequest);
+
+        fetch(apiEndpointUrl,
+            {
+                method: "POST",
+                mode: "cors",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Access-Control-Allow-Origin": "*"
+                },
+                referrerPolicy: "no-referrer",
+                body: bodyRequest
+            }).then(res => {
+                return res.json();
+            }).then(res => {
+                loadTaxonomyTerms(res);
+            });
+    }
+    
+
     postResults = () => {
 
         handleIndicators(true, resultsLoader);
-       // updateDomElements(category);
 
         const checkTax = taxonomy === "All" ? "" : taxonomy; 
 
@@ -174,7 +265,6 @@ const products = () => {
         }).then(res => {
             //console.log(res);
             renderResults(res);
-            loadTaxonomyTerms(res);
         });
     }
 
@@ -246,6 +336,7 @@ const products = () => {
     //Page Load
 
     postResults();
+    postTaxonomyTerms();
 
 };
 
