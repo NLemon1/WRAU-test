@@ -95,9 +95,22 @@
                                             </a>
                                         </div>
                                     </td>
-                                    <td class="fw-bold">
+                                    @if(item.OrderLine.TotalPrice.TotalAdjustment != 0)
+                                    {
+                                        <td class="fw-bold">
+                                            <s>@item.OrderLine.TotalPrice.WithoutAdjustments.Formatted().WithoutTax</s>
+                                            @item.OrderLine.TotalPrice.Value.Formatted().WithoutTax
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td class="fw-bold">
+                                            @item.OrderLine.TotalPrice.WithoutAdjustments.Formatted().WithoutTax
+                                        </td>
+                                    }
+                                    @* <td class="fw-bold">
                                         @item.OrderLine.TotalPrice.WithoutAdjustments.Formatted().WithoutTax
-                                    </td>
+                                    </td> *@
                                 </tr>
                             }
                         </tbody>
