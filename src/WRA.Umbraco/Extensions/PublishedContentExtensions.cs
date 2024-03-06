@@ -310,6 +310,14 @@ namespace WRA.Umbraco
             return content!.AsProduct()!.CalculatePrice();
         }
 
+        public static ProductPrice PercentDiscountedDisplayPrice(this ProductPrice productPrice, Decimal discountPercent)
+        {
+            var discount = discountPercent / 100;
+            var price = productPrice.Value;
+            var DiscountedPrice = price - (price * discount);
+            return new ProductPrice(DiscountedPrice, productPrice.CurrencyId);
+        }
+
         public static Price? CalculatePrice(this IProductComp variant, IProductComp parent)
         {
             return variant?.AsProduct(parent)?.CalculatePrice();

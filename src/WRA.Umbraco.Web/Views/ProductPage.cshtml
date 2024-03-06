@@ -2,10 +2,13 @@
 @using Umbraco.Commerce;
 @using Umbraco.Commerce.Extensions;
 @using Umbraco.Cms.Core.Models.PublishedContent;
+@using WRA.Umbraco.Services;
 @using WRA.Umbraco;
+@inject WraProductService _wraProductService;
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ProductPage>
 
 @{
+    var discountsAttchedToProduct = _wraProductService.GetTimeBasedDiscounts(Model);
     var multiVariantProductPage = Model as ProductPage;
 
     var store = Model.Value<StoreReadOnly>("store", fallback: Fallback.ToAncestors);
@@ -285,6 +288,15 @@
                 @(product.NonMemberPricing.Formatted())
                 <div class="mb-3">&nbsp;non-member pricing</div>
             </div>
+            @if(discountsAttchedToProduct.Any()){
+                    @foreach (var discount in discountsAttchedToProduct)
+                    {
+                        <div class="mt-n3 d-flex flex-row align-items-baseline fs-sm w-100" style="color: var(--bs-gray-30)">
+                            @product.NonMemberPricing.PercentDiscountedDisplayPrice(discount.Percentage)?.Formatted()
+                            <div class="mb-3">&nbsp;Through @discount.EndDate.ToString("MMMM dd")</div>
+                        </div>
+                    }
+            }
             @if (product.DoorPricing != null)
             {
                 <div class="mt-n3 d-flex flex-row align-items-baseline fs-sm w-100" style="color: var(--bs-gray-30)">

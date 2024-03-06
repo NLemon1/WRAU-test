@@ -42,6 +42,7 @@ namespace WRA.Umbraco.Web
             services.AddTransient<SearchService>();
             services.AddTransient<WRAProductManagementService>();
             services.AddTransient<QueueService>();
+            services.AddTransient<WraProductService>();
 
             services.Configure<MemberSubscriptionServiceSettings>(_config.GetSection("SubscriptionServiceSettings:MemberSubscriptionSettings"));
             services.AddSingleton<IHostedService, WraMemberSubscriptionService>();
