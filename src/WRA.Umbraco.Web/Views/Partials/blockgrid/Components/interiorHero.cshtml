@@ -42,9 +42,6 @@
         props += $" style=\"{style}\"";
     }
 
-   
-
-    
 }
 
 <div @Html.Raw(props.Trim())>
@@ -74,39 +71,39 @@
                                 IEnumerable<IPublishedContent> categoriesList = content.Value<IEnumerable<IPublishedContent>>("courseSearchCategories").Where(x => x.IsVisible()).OrderBy(p => p.Name);
 
                                 <div class="col-xl-8 mt-4">
-
-                                    <fieldset id="course-search" class="d-flex flex-column gap-3 bg-transparent">
-                                        <legend class="fw-bold fs-md mb-0">Course Search</legend>
-                                        <label class="visually-hidden" for="category">Category</label>
-                                        @if (categoriesList.Any())
-                                        {
-                                            <select id="category" class="js-category-filter form-control">
-                                                <option selected>Select course category</option>
-                                                @foreach (var category in categoriesList)
-                                                {
-                                                    <option value="@category.UrlSegment()">@category.Name</option>
-                                                }
-                                            </select>
-                                        }
-                                        @foreach (var category in categoriesList)
-                                        {
-                                            <div class="js-subcategory-container" data-id="@category.UrlSegment()" hidden>
-                                                <label class="visually-hidden" for="@category.UrlSegment()">Subcategory</label>
-                                                <select id="@category.UrlSegment()" class="js-subcategory-filter form-control">
-                                                    <option selected>Select course subcategory</option>
-                                                    @{
-                                                        IEnumerable<IPublishedContent> subCategoriesList = category.Children.Where(x => x.IsVisible()).OrderBy(p => p.Name);
-                                                    }
-                                                    @foreach (var subcategory in subCategoriesList)
+                                    <form id="course-search" method="post" action="/products/products/" class="position-relative">
+                                        <fieldset class="d-flex flex-column gap-3 bg-transparent">
+                                            <legend class="fw-bold fs-md mb-0">Course Search</legend>
+                                            <label class="visually-hidden" for="category">Category</label>
+                                            @if (categoriesList.Any())
+                                            {
+                                                <select id="category" class="js-category-filter form-control">
+                                                    <option value="" selected>Select course category</option>
+                                                    @foreach (var category in categoriesList)
                                                     {
-                                                        <option value="@subcategory.Url()">@subcategory.Name</option>
+                                                        <option value="@category.Url()">@category.Name</option>
                                                     }
                                                 </select>
-                                            </div>
-                                        }
-                                        <button type="submit" class="js-courses-submit btn btn-primary w-100 border-0 outline-0" disabled>Find Courses</button>
-                                    </fieldset>
-                                   
+                                            }
+                                            @foreach (var category in categoriesList)
+                                            {
+                                                <div class="js-subcategory-container" data-id="@category.Url()" hidden>
+                                                    <label class="visually-hidden" for="@category.Url()">Subcategory</label>
+                                                    <select id="@category.Url()" class="js-subcategory-filter form-control">
+                                                        <option value="" selected>Select course subcategory</option>
+                                                        @{
+                                                            IEnumerable<IPublishedContent> subCategoriesList = category.Children.Where(x => x.IsVisible()).OrderBy(p => p.Name);
+                                                        }
+                                                        @foreach (var subcategory in subCategoriesList)
+                                                        {
+                                                            <option value="@subcategory.Url()">@subcategory.Name</option>
+                                                        }
+                                                    </select>
+                                                </div>
+                                            }
+                                            <button type="button" class="js-courses-submit btn btn-primary w-100 border-0 outline-0" disabled>Find Courses</button>
+                                        </fieldset>
+                                    </form>
                                 </div>
                             }
                         }
