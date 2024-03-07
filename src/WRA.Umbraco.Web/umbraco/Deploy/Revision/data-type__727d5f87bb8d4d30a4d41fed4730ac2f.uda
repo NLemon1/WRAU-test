@@ -1,0 +1,135 @@
+{
+  "Name": "Product Page - Block Content - Block Grid",
+  "Alias": "",
+  "EditorAlias": "Umbraco.BlockGrid",
+  "Configuration": {
+    "blocks": [
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": true,
+        "allowInAreas": false,
+        "areas": [
+          {
+            "key": "a220222d-6e91-4da2-92e5-9fcbcfb582de",
+            "alias": "tabs-area",
+            "columnSpan": 6,
+            "rowSpan": 1,
+            "minAllowed": 0,
+            "specifiedAllowance": [
+              {
+                "elementTypeKey": "ac859905-1e6d-4dc4-90ad-4245c0f7fbce"
+              }
+            ]
+          }
+        ],
+        "contentElementTypeKey": "d5b01a10-5426-4f66-a5f6-6a9ed349d4a4",
+        "view": "~/App_Plugins/CustomBlockView/tabs.html",
+        "stylesheet": "~/css/dist/global.css",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": false,
+        "allowInAreas": true,
+        "areas": [
+          {
+            "key": "8d938564-787b-4ad3-902d-11b984dc1582",
+            "alias": "tab-area",
+            "columnSpan": 6,
+            "rowSpan": 1,
+            "minAllowed": 0,
+            "specifiedAllowance": [
+              {
+                "elementTypeKey": "fa444fc1-2c1e-414a-9fef-276551c06714"
+              },
+              {
+                "elementTypeKey": "c86d81f9-bb4a-4047-bc5b-ca65a1d534a9"
+              },
+              {
+                "elementTypeKey": "0354f600-29e9-458d-abc7-5f659e6325a2"
+              }
+            ]
+          }
+        ],
+        "contentElementTypeKey": "ac859905-1e6d-4dc4-90ad-4245c0f7fbce",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": true,
+        "allowInAreas": true,
+        "areas": [],
+        "contentElementTypeKey": "fa444fc1-2c1e-414a-9fef-276551c06714",
+        "view": "~/App_Plugins/CustomBlockView/richText.html",
+        "stylesheet": "~/css/dist/global.css",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": true,
+        "allowInAreas": true,
+        "areas": [],
+        "contentElementTypeKey": "c86d81f9-bb4a-4047-bc5b-ca65a1d534a9",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": true,
+        "allowInAreas": true,
+        "areas": [],
+        "contentElementTypeKey": "0354f600-29e9-458d-abc7-5f659e6325a2",
+        "view": "~/App_Plugins/CustomBlockView/headlineBlock.html",
+        "stylesheet": "~/css/dist/global.css",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false
+      }
+    ],
+    "blockGroups": [],
+    "validationLimit": {},
+    "useLiveEditing": true
+  },
+  "Udi": "umb://data-type/727d5f87bb8d4d30a4d41fed4730ac2f",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type/0354f60029e9458dabc75f659e6325a2"
+    },
+    {
+      "Udi": "umb://document-type/ac8599051e6d4dc490ad4245c0f7fbce"
+    },
+    {
+      "Udi": "umb://document-type/c86d81f9bb4a4047bc5bca65a1d534a9"
+    },
+    {
+      "Udi": "umb://document-type/d5b01a1054264f66a5f66a9ed349d4a4"
+    },
+    {
+      "Udi": "umb://document-type/fa444fc12c1e414a9fef276551c06714"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
+  "__version": "13.0.4"
+}

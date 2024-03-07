@@ -4,10 +4,14 @@
 @using Umbraco.Cms.Core.Models.PublishedContent;
 @using WRA.Umbraco.Services;
 @using WRA.Umbraco;
-@inject WraProductService _wraProductService;
+@using Umbraco.Cms.Core.Models.Blocks;
+@inject WraProductService _wraProductService
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ProductPage>
+@using ContentModels = WRA.Umbraco.Models;
 
 @{
+    var sections = Model.Value<IEnumerable<BlockGridItem>>("blockContent");
+
     var discountsAttchedToProduct = _wraProductService.GetTimeBasedDiscounts(Model);
     var multiVariantProductPage = Model as ProductPage;
 
@@ -20,6 +24,7 @@
     var endTime = @String.Format("{0:h:mm tt}", Model.EndDate) ?? string.Empty;
 
     var productType = Model.Parent.Name; //Events, Products, Courses
+
 
 }
 
@@ -123,117 +128,7 @@
             }
         </div>
     </div>
-
-    @if (!String.IsNullOrEmpty(Model.CourseInfo.ToString()) || !String.IsNullOrEmpty(Model.TrainingTakeaways.ToString()) || !String.IsNullOrEmpty(Model.CourseDetails.ToString()) || !String.IsNullOrEmpty(Model.MoreInfo.ToString())){
-        <div style="height: 64px;"></div>
-        <div class="tabs tabs--mobile-dropdown tabs--vertical js-tabs">
-            <div class="">
-                <ul role="tablist" class="tabs__tabs-list">
-
-                    @if (!String.IsNullOrEmpty(Model.CourseInfo.ToString()))
-                    {
-                        <li role="presentation">
-                            <a id="tab-1" class="tabs__trigger js-tabs-trigger" href="#tab-section-1" role="tab" aria-controls="tab-section-1" aria-selected="false">Course Info</a>
-                        </li>
-                    }
-                    @if (!String.IsNullOrEmpty(Model.TrainingTakeaways.ToString()))
-                    {
-                        <li role="presentation">
-                            <a id="tab-2" class="tabs__trigger js-tabs-trigger" href="#tab-section-2" role="tab" aria-controls="tab-section-2" aria-selected="false">Training Takeaways</a>
-                        </li>
-                    }
-                    @if (!String.IsNullOrEmpty(Model.CourseDetails.ToString()))
-                    {
-                        <li role="presentation">
-                            <a id="tab-3" class="tabs__trigger js-tabs-trigger" href="#tab-section-3" role="tab" aria-controls="tab-section-3" aria-selected="false">Course Details</a>
-                        </li>
-                    }
-                    @if (!String.IsNullOrEmpty(Model.MoreInfo.ToString()))
-                    {
-                        <li role="presentation">
-                            <a id="tab-4" class="tabs__trigger js-tabs-trigger" href="#tab-section-4" role="tab" aria-controls="tab-section-4" aria-selected="false">More @Model.Name Info</a>
-                        </li>
-                    }
-                </ul>
-            </div>
-            <select class="tabs__dropdown js-tabs-dropdown" aria-label="Select a tab">
-                @if (!String.IsNullOrEmpty(Model.CourseInfo.ToString()))
-                {
-                    <option value="#tab-section-1">Course Info</option>
-                }
-                @if (!String.IsNullOrEmpty(Model.TrainingTakeaways.ToString()))
-                {
-                    <option value="#tab-section-2">Training Takeaways</option>
-                }
-                @if (!String.IsNullOrEmpty(Model.CourseDetails.ToString()))
-                {
-                    <option value="#tab-section-3">Course Details</option>
-                }
-                @if (!String.IsNullOrEmpty(Model.MoreInfo.ToString()))
-                {
-                    <option value="#tab-section-4">More @Model.Name Info</option>
-                }
-            </select>
-            @if (!String.IsNullOrEmpty(Model.CourseInfo.ToString()))
-            {
-                <section id="tab-section-1" class="tabs__panel px-4 js-tabs-panel" role="tabpanel" aria-labelledby="tab-1" tabindex="0">
-                    <div class="tabs__accordion-trigger js-accordion-trigger" aria-controls="tab-section-1" aria-expanded="false" tabindex="0"></div>
-                    <div class="content" aria-hidden="true">
-                        @Html.Raw(Model.CourseInfo)
-                    </div>
-                </section>
-            }
-            @if (!String.IsNullOrEmpty(Model.TrainingTakeaways.ToString()))
-            {
-                <section id="tab-section-2" class="tabs__panel px-4 js-tabs-panel" role="tabpanel" aria-labelledby="tab-2" tabindex="0">
-                    <div class="tabs__accordion-trigger js-accordion-trigger" aria-controls="tab-section-2" aria-expanded="false" tabindex="0"></div>
-                    <div class="content" aria-hidden="true">
-                        @Html.Raw(Model.TrainingTakeaways)
-                    </div>
-                </section>
-            }
-            @if (!String.IsNullOrEmpty(Model.CourseDetails.ToString()))
-            {
-                <section id="tab-section-3" class="tabs__panel px-4 js-tabs-panel" role="tabpanel" aria-labelledby="tab-3" tabindex="0">
-                    <div class="tabs__accordion-trigger js-accordion-trigger" aria-controls="tab-section-3" aria-expanded="false" tabindex="0"></div>
-                    <div class="content" aria-hidden="true">
-                        @Html.Raw(Model.CourseDetails)
-                    </div>
-                </section>
-            }
-            @if (!String.IsNullOrEmpty(Model.MoreInfo.ToString()))
-            {
-                <section id="tab-section-4" class="tabs__panel px-4 js-tabs-panel" role="tabpanel" aria-labelledby="tab-4" tabindex="0">
-                    <div class="tabs__accordion-trigger js-accordion-trigger" aria-controls="tab-section-4" aria-expanded="false" tabindex="0"></div>
-                    <div class="content" aria-hidden="true">
-                        @Html.Raw(Model.MoreInfo)
-                    </div>
-                </section>
-            }
-        </div>
-
-
-    }
-    
-    @* TO DO: Need load FAQs *@
-    @* <div class="accordions-wrapper">
-        @for (var i = 1; i < 5; i++)
-        {
-            <details class="accordion">
-                <summary class="accordion__toggle">
-                    Question: Lorem Ipsum
-                    <div class="accordion__toggle-icon">
-                        <i class="fas fa-chevron-down"></i>
-                        <i class="fas fa-chevron-up"></i>
-                    </div>
-                </summary>
-                <div class="accordion__content">
-                    Answer: <br>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-            </details>
-        }
-    </div> *@
-
+                @await Html.PartialAsync("blockgrid/default", sections)
     <div style="height: 96px;"></div>
 </div>
 
