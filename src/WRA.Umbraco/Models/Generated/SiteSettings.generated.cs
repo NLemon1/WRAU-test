@@ -540,6 +540,54 @@ namespace WRA.Umbraco.Models
 		public virtual string NavMenu5Name => this.Value<string>(_publishedValueFallback, "navMenu5Name");
 
 		///<summary>
+		/// Nav Menu 6 Column 1
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("navMenu6Column1")]
+		public virtual global::Umbraco.Cms.Core.Models.Blocks.BlockGridModel NavMenu6Column1 => this.Value<global::Umbraco.Cms.Core.Models.Blocks.BlockGridModel>(_publishedValueFallback, "navMenu6Column1");
+
+		///<summary>
+		/// Nav Menu 6 Column 2
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("navMenu6Column2")]
+		public virtual global::Umbraco.Cms.Core.Models.Blocks.BlockGridModel NavMenu6Column2 => this.Value<global::Umbraco.Cms.Core.Models.Blocks.BlockGridModel>(_publishedValueFallback, "navMenu6Column2");
+
+		///<summary>
+		/// Nav Menu 6 Image
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("navMenu6Image")]
+		public virtual global::Umbraco.Cms.Core.Models.MediaWithCrops NavMenu6Image => this.Value<global::Umbraco.Cms.Core.Models.MediaWithCrops>(_publishedValueFallback, "navMenu6Image");
+
+		///<summary>
+		/// Nav Menu 6 Intro Copy
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("navMenu6IntroCopy")]
+		public virtual string NavMenu6IntroCopy => this.Value<string>(_publishedValueFallback, "navMenu6IntroCopy");
+
+		///<summary>
+		/// Nav Menu 6 Link
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("navMenu6Link")]
+		public virtual global::Umbraco.Cms.Core.Models.Link NavMenu6Link => this.Value<global::Umbraco.Cms.Core.Models.Link>(_publishedValueFallback, "navMenu6Link");
+
+		///<summary>
+		/// Nav Menu 6 Name
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("navMenu6Name")]
+		public virtual string NavMenu6Name => this.Value<string>(_publishedValueFallback, "navMenu6Name");
+
+		///<summary>
 		/// OG Image Fallback
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
