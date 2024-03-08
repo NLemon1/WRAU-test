@@ -1,7 +1,10 @@
 {
   "Name": "Category Page",
   "Alias": "categoryPage",
-  "AllowedTemplates": [],
+  "DefaultTemplate": "umb://template/33fad06581354066b7fd7120c0c5f9da",
+  "AllowedTemplates": [
+    "umb://template/33fad06581354066b7fd7120c0c5f9da"
+  ],
   "HistoryCleanup": {},
   "Icon": "icon-tag color-red",
   "Thumbnail": "folder.png",
@@ -38,6 +41,14 @@
           "SortOrder": 4
         },
         {
+          "Key": "4a6a8acb-a941-4627-b622-4b8a75c397ea",
+          "Alias": "sections",
+          "DataType": "umb://data-type/5aa12b11cd24491f94da21e6399ddc33",
+          "Description": "Add content blocks here.",
+          "Name": "Sections",
+          "SortOrder": 5
+        },
+        {
           "Key": "cc9361d7-c287-467b-b86d-3d0b3b5599db",
           "Alias": "externalId",
           "DataType": "umb://data-type/f0bc4bfbb49940d6ba86058885a5178c",
@@ -49,6 +60,10 @@
   "PropertyTypes": [],
   "Udi": "umb://document-type/59f3371ae76e43bba9a77e381a18be87",
   "Dependencies": [
+    {
+      "Udi": "umb://data-type/5aa12b11cd24491f94da21e6399ddc33",
+      "Ordering": true
+    },
     {
       "Udi": "umb://data-type/a135d918eccc468181719380ce19c789",
       "Ordering": true
@@ -71,6 +86,10 @@
     },
     {
       "Udi": "umb://document-type/c069f4e9dbef40c3acf42e2af704c3e3"
+    },
+    {
+      "Udi": "umb://template/33fad06581354066b7fd7120c0c5f9da",
+      "Ordering": true
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",

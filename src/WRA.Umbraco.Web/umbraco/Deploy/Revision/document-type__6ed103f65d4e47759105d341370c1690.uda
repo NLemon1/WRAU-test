@@ -75,38 +75,17 @@
       ]
     },
     {
-      "Key": "1ca3c80e-35f7-4580-95cc-8c2339d747cc",
-      "Name": "Tabbed Content",
-      "SortOrder": 1,
-      "Type": 1,
-      "Alias": "tabbedContent",
+      "Key": "0e354728-0eef-4c5d-be67-22b44dc9f3ca",
+      "Name": "Content",
+      "SortOrder": 1001,
+      "Alias": "details/content",
       "PropertyTypes": [
         {
-          "Key": "2f345352-ce46-4538-903b-e62ea9dd3365",
-          "Alias": "trainingTakeaways",
-          "DataType": "umb://data-type/8b64a6e0df5f4b7cbd82b51cd42fca56",
-          "Name": "Training Takeaways",
-          "SortOrder": 3
-        },
-        {
-          "Key": "77eda608-5ce1-4cbe-937f-11f4728fb0d9",
-          "Alias": "moreInfo",
-          "DataType": "umb://data-type/0c3fda9b19ce48e29a6738b21197a292",
-          "Name": "More Info",
-          "SortOrder": 2
-        },
-        {
-          "Key": "7f424389-8f30-499c-b0ab-c600524ebffb",
-          "Alias": "courseDetails",
-          "DataType": "umb://data-type/586290edee92451bbc06a1529d546367",
-          "Name": "Course Details"
-        },
-        {
-          "Key": "d541db05-84e1-453a-8bc4-53db988bcc71",
-          "Alias": "courseInfo",
-          "DataType": "umb://data-type/64d49a046ca14f03b569cd762357c83b",
-          "Name": "Course Info",
-          "SortOrder": 1
+          "Key": "4cf8618a-636e-419b-959d-1bf2effea1f2",
+          "Alias": "blockContent",
+          "DataType": "umb://data-type/727d5f87bb8d4d30a4d41fed4730ac2f",
+          "Description": "For adding, tabs, richtext, etc.",
+          "Name": "Block Content"
         }
       ]
     },
@@ -116,11 +95,19 @@
       "Alias": "content",
       "PropertyTypes": [
         {
+          "Key": "11470fb2-5a65-47d7-ad84-7d70be024296",
+          "Alias": "alternateTitle",
+          "DataType": "umb://data-type/c6bac0dd4ab945b18e30e4b619ee5da3",
+          "Description": "Optional - Used for bundled course cards.",
+          "Name": "Alternate Title",
+          "SortOrder": 5
+        },
+        {
           "Key": "409a21f6-17c9-485d-82eb-fef92dc11d72",
           "Alias": "shortDescription",
           "DataType": "umb://data-type/c6bac0dd4ab945b18e30e4b619ee5da3",
           "Name": "Short Description",
-          "SortOrder": 5
+          "SortOrder": 6
         },
         {
           "Key": "42989a38-3e60-4ebb-bac3-5f0369db8b66",
@@ -140,7 +127,15 @@
           "Alias": "longDescription",
           "DataType": "umb://data-type/6c713be2f2ab4d96b5ad9394c505a577",
           "Name": "Long Description",
-          "SortOrder": 6
+          "SortOrder": 7
+        },
+        {
+          "Key": "f6198b3e-e830-41d4-81ef-3b75a8a5f3c5",
+          "Alias": "creditHours",
+          "DataType": "umb://data-type/784ec7c9a1e84406ba65afc108f6ad37",
+          "Description": "If product is a course/class, add numeric credit hour.",
+          "Name": "Credit Hours",
+          "SortOrder": 8
         }
       ]
     },
@@ -156,10 +151,6 @@
   "Udi": "umb://document-type/6ed103f65d4e47759105d341370c1690",
   "Dependencies": [
     {
-      "Udi": "umb://data-type/0c3fda9b19ce48e29a6738b21197a292",
-      "Ordering": true
-    },
-    {
       "Udi": "umb://data-type/0e9794ebf9b54f20a78893acd233a7e4",
       "Ordering": true
     },
@@ -172,19 +163,15 @@
       "Ordering": true
     },
     {
-      "Udi": "umb://data-type/586290edee92451bbc06a1529d546367",
-      "Ordering": true
-    },
-    {
-      "Udi": "umb://data-type/64d49a046ca14f03b569cd762357c83b",
-      "Ordering": true
-    },
-    {
       "Udi": "umb://data-type/6c713be2f2ab4d96b5ad9394c505a577",
       "Ordering": true
     },
     {
-      "Udi": "umb://data-type/8b64a6e0df5f4b7cbd82b51cd42fca56",
+      "Udi": "umb://data-type/727d5f87bb8d4d30a4d41fed4730ac2f",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/784ec7c9a1e84406ba65afc108f6ad37",
       "Ordering": true
     },
     {

@@ -12,6 +12,7 @@
     var sections = Model.Value<IEnumerable<BlockGridItem>>("sections");
 
     var productSubcategories = Model.Children.Where(p => p.IsVisible()).OrderBy(p => p.Name);
+
 }
 
 <header class="page-header page-header--no-accent">
