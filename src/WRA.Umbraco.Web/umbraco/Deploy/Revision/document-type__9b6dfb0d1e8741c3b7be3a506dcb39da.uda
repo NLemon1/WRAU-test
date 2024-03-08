@@ -475,56 +475,6 @@
       ]
     },
     {
-      "Key": "a8896386-117c-44bc-8650-8777f82171f1",
-      "Name": "Nav 6 Menu",
-      "SortOrder": 5,
-      "Alias": "header/nav6Menu",
-      "PropertyTypes": [
-        {
-          "Key": "1724bd33-48d7-4562-97c9-f58afad79a98",
-          "Alias": "navMenu6Image",
-          "DataType": "umb://data-type/ad9f0cf2bda245d59ea1a63cfc873fd3",
-          "Name": "Nav Menu 6 Image",
-          "SortOrder": 2
-        },
-        {
-          "Key": "2cf54600-0a5f-41e6-99b4-da580fe2b328",
-          "Alias": "navMenu6Column1",
-          "DataType": "umb://data-type/da5c838df7884056a036cfdf7a2b66cf",
-          "Name": "Nav Menu 6 Column 1",
-          "SortOrder": 4
-        },
-        {
-          "Key": "58cf8c06-505c-4a20-80c5-d30c59577911",
-          "Alias": "navMenu6Link",
-          "DataType": "umb://data-type/094ea51013be4f358f03687f54bb9ba2",
-          "Name": "Nav Menu 6 Link",
-          "SortOrder": 3
-        },
-        {
-          "Key": "d6cc1baf-4048-4cc5-a5a4-f6b6fcb696b5",
-          "Alias": "navMenu6Name",
-          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
-          "Mandatory": true,
-          "Name": "Nav Menu 6 Name"
-        },
-        {
-          "Key": "eb0b8306-552d-4137-bab0-2ad1c2a40ae3",
-          "Alias": "navMenu6Column2",
-          "DataType": "umb://data-type/da5c838df7884056a036cfdf7a2b66cf",
-          "Name": "Nav Menu 6 Column 2",
-          "SortOrder": 5
-        },
-        {
-          "Key": "f5a9a7b6-50a4-4c14-9256-6a133898b325",
-          "Alias": "navMenu6IntroCopy",
-          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
-          "Name": "Nav Menu 6 Intro Copy",
-          "SortOrder": 1
-        }
-      ]
-    },
-    {
       "Key": "aa7f8709-b460-4a6b-b155-49decc3d2345",
       "Name": "Nav 4 Menu",
       "SortOrder": 3,
