@@ -1,6 +1,12 @@
 {
   "Name": "Wisconsin Realtor Association Store",
   "Alias": "wisconsinRealtorAssociationStore",
+  "BaseCurrencyUdi": "umb://umbraco-commerce-currency/952c300228b84053bc8d018e244a7b6d",
+  "DefaultCountryUdi": "umb://umbraco-commerce-country/e3383bdc08f44488b9bb018e2449e808",
+  "DefaultTaxClassUdi": "umb://umbraco-commerce-tax-class/b0e88d0c6c4540dc897d018e24497aaa",
+  "DefaultLocationUdi": "umb://umbraco-commerce-location/8715ea41185740a984d2018e24497a78",
+  "DefaultOrderStatusUdi": "umb://umbraco-commerce-order-status/827e1651ae5448b2acb5018e24497ab8",
+  "ErrorOrderStatusUdi": "umb://umbraco-commerce-order-status/f911f13adcc44112bd07018e24497ac0",
   "CookieTimeout": "365.00:00:00",
   "CartNumberTemplate": "CART-{0}",
   "OrderNumberTemplate": "ORDER-{0}",
@@ -13,12 +19,52 @@
     "giftCardRecipientEmail",
     "giftCardMessage"
   ],
+  "DefaultGiftCardEmailTemplateUdi": "umb://umbraco-commerce-email-template/ec494b4a0e1648c3b22a018e24497acb",
+  "ConfirmationEmailTemplateUdi": "umb://umbraco-commerce-email-template/1a60c96b1bd3401cb535018e24497ac1",
+  "ErrorEmailTemplateUdi": "umb://umbraco-commerce-email-template/cdda86e49c2d4c6992a8018e24497acb",
   "AllowedUserRoles": [
     "admin",
     "commerce"
   ],
   "Udi": "umb://umbraco-commerce-store/c18ce6af53a242fb9ea3018e24497a4f",
-  "Dependencies": [],
+  "Dependencies": [
+    {
+      "Udi": "umb://umbraco-commerce-currency/952c300228b84053bc8d018e244a7b6d",
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://umbraco-commerce-country/e3383bdc08f44488b9bb018e2449e808",
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://umbraco-commerce-tax-class/b0e88d0c6c4540dc897d018e24497aaa",
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://umbraco-commerce-location/8715ea41185740a984d2018e24497a78",
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://umbraco-commerce-order-status/827e1651ae5448b2acb5018e24497ab8",
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://umbraco-commerce-order-status/f911f13adcc44112bd07018e24497ac0",
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://umbraco-commerce-email-template/ec494b4a0e1648c3b22a018e24497acb",
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://umbraco-commerce-email-template/1a60c96b1bd3401cb535018e24497ac1",
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://umbraco-commerce-email-template/cdda86e49c2d4c6992a8018e24497acb",
+      "Mode": "Exist"
+    }
+  ],
   "__type": "Umbraco.Commerce.Deploy,Umbraco.Commerce.Deploy.Artifacts.StoreArtifact",
   "__version": "13.0.4"
 }
