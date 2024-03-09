@@ -1,0 +1,15 @@
+{
+  "Name": "Order Receipt",
+  "Alias": "orderReceipt",
+  "TemplateView": "~/Views/UmbracoCommerce/Templates/Print/OrderReceipt.cshtml",
+  "StoreUdi": "umb://umbraco-commerce-store/c18ce6af53a242fb9ea3018e24497a4f",
+  "Udi": "umb://umbraco-commerce-print-template/e8398c2229e5442b82d5018e24497acc",
+  "Dependencies": [
+    {
+      "Udi": "umb://umbraco-commerce-store/c18ce6af53a242fb9ea3018e24497a4f",
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Commerce.Deploy,Umbraco.Commerce.Deploy.Artifacts.PrintTemplateArtifact",
+  "__version": "13.0.4"
+}

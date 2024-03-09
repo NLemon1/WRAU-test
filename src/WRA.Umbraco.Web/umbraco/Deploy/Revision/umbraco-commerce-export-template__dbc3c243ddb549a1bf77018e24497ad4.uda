@@ -1,0 +1,18 @@
+{
+  "Name": "Cart CSV Export",
+  "Alias": "cartCsvExport",
+  "Category": 3,
+  "FileMimeType": "text/csv",
+  "FileExtension": "csv",
+  "TemplateView": "~/Views/UmbracoCommerce/Templates/Export/CartCsvExport.cshtml",
+  "StoreUdi": "umb://umbraco-commerce-store/c18ce6af53a242fb9ea3018e24497a4f",
+  "Udi": "umb://umbraco-commerce-export-template/dbc3c243ddb549a1bf77018e24497ad4",
+  "Dependencies": [
+    {
+      "Udi": "umb://umbraco-commerce-store/c18ce6af53a242fb9ea3018e24497a4f",
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Commerce.Deploy,Umbraco.Commerce.Deploy.Artifacts.ExportTemplateArtifact",
+  "__version": "13.0.4"
+}

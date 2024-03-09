@@ -1,0 +1,16 @@
+{
+  "Name": "Completed",
+  "Alias": "completed",
+  "Color": "green",
+  "SortOrder": 1,
+  "StoreUdi": "umb://umbraco-commerce-store/c18ce6af53a242fb9ea3018e24497a4f",
+  "Udi": "umb://umbraco-commerce-order-status/4d11227c8dbc474b9baf018e24497abf",
+  "Dependencies": [
+    {
+      "Udi": "umb://umbraco-commerce-store/c18ce6af53a242fb9ea3018e24497a4f",
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Commerce.Deploy,Umbraco.Commerce.Deploy.Artifacts.OrderStatusArtifact",
+  "__version": "13.0.4"
+}

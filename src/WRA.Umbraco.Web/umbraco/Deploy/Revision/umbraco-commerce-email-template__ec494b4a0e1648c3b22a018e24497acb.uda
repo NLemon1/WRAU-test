@@ -1,0 +1,24 @@
+{
+  "Name": "Gift Card",
+  "Alias": "giftCard",
+  "Category": 1,
+  "SendToCustomer": true,
+  "Subject": "Gift Card",
+  "SenderName": "Umbraco Commerce",
+  "SenderAddress": "noreply@umbraco.com",
+  "ToAddresses": [],
+  "CcAddresses": [],
+  "BccAddresses": [],
+  "TemplateView": "~/Views/UmbracoCommerce/Templates/Email/GiftCardEmail.cshtml",
+  "SortOrder": 2,
+  "StoreUdi": "umb://umbraco-commerce-store/c18ce6af53a242fb9ea3018e24497a4f",
+  "Udi": "umb://umbraco-commerce-email-template/ec494b4a0e1648c3b22a018e24497acb",
+  "Dependencies": [
+    {
+      "Udi": "umb://umbraco-commerce-store/c18ce6af53a242fb9ea3018e24497a4f",
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Commerce.Deploy,Umbraco.Commerce.Deploy.Artifacts.EmailTemplateArtifact",
+  "__version": "13.0.4"
+}

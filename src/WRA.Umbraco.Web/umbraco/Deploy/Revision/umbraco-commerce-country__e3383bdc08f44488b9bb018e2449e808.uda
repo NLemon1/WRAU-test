@@ -1,0 +1,26 @@
+{
+  "Name": "United States of America",
+  "Alias": "US",
+  "Code": "US",
+  "DefaultCurrencyUdi": "umb://umbraco-commerce-currency/952c300228b84053bc8d018e244a7b6d",
+  "DefaultPaymentMethodUdi": "umb://umbraco-commerce-payment-method/bacbe2cd1a9b4fe08697018e24497ade",
+  "SortOrder": 1,
+  "StoreUdi": "umb://umbraco-commerce-store/c18ce6af53a242fb9ea3018e24497a4f",
+  "Udi": "umb://umbraco-commerce-country/e3383bdc08f44488b9bb018e2449e808",
+  "Dependencies": [
+    {
+      "Udi": "umb://umbraco-commerce-store/c18ce6af53a242fb9ea3018e24497a4f",
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://umbraco-commerce-currency/952c300228b84053bc8d018e244a7b6d",
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://umbraco-commerce-payment-method/bacbe2cd1a9b4fe08697018e24497ade",
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Commerce.Deploy,Umbraco.Commerce.Deploy.Artifacts.CountryArtifact",
+  "__version": "13.0.4"
+}
