@@ -1,0 +1,38 @@
+{
+  "Name": "Credit Card",
+  "Alias": "creditCard",
+  "Sku": "CC",
+  "TaxClassUdi": "umb://umbraco-commerce-tax-class/b0e88d0c6c4540dc897d018e24497aaa",
+  "PaymentProviderAlias": "GlobalPayments",
+  "PaymentProviderSettings": {
+    "ContinueUrl": "/checkout/order-confirmation/",
+    "TestMode": "1",
+    "TestPublicKey": "pkapi_cert_bMg2WpUw7FzvNMaZZF",
+    "TestSecretKey": "skapi_cert_MU7SBQAmenIAGxuZsGgGvIZXvDW224Nr4BllXi_Ijg"
+  },
+  "CanCapturePayments": true,
+  "AllowedCountryRegions": [
+    {
+      "CountryUdi": "umb://umbraco-commerce-country/e3383bdc08f44488b9bb018e2449e808"
+    }
+  ],
+  "SortOrder": 1,
+  "StoreUdi": "umb://umbraco-commerce-store/c18ce6af53a242fb9ea3018e24497a4f",
+  "Udi": "umb://umbraco-commerce-payment-method/252c3f0e73fa48839148018e24e20a98",
+  "Dependencies": [
+    {
+      "Udi": "umb://umbraco-commerce-store/c18ce6af53a242fb9ea3018e24497a4f",
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://umbraco-commerce-tax-class/b0e88d0c6c4540dc897d018e24497aaa",
+      "Mode": "Exist"
+    },
+    {
+      "Udi": "umb://umbraco-commerce-country/e3383bdc08f44488b9bb018e2449e808",
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Commerce.Deploy,Umbraco.Commerce.Deploy.Artifacts.PaymentMethodArtifact",
+  "__version": "13.0.4"
+}
