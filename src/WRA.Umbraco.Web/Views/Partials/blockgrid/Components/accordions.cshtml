@@ -6,6 +6,7 @@
     var content = (ContentModels.Accordions)Model.Content;
     bool enableDarkMode = content.Value<bool>("enableDarkMode");
     bool enableOutsideBorder = content.Value<bool>("enableOutsideBorder");
+    bool enableFAQSchema = content.Value<bool>("enableFAQSchema");
 
     var accordions = Model.Areas.FirstOrDefault();
 
@@ -29,4 +30,34 @@
             }
         </div>
     }
+}
+
+@if (accordions != null && enableFAQSchema)
+{
+    var accordionsCount = accordions.Count();
+    int accordionInt = 1;
+
+    <script type="application/ld+json">
+    {
+        "@@context": "https://schema.org",
+        "@@type": "FAQPage",
+        "mainEntity": [
+            @foreach (var accordion in accordions)
+            {
+            var cleanAnswer = await Html.GetBlockGridItemAreaHtmlAsync(accordion, "accordion-area");
+            <text>
+                {
+                    "@@type": "Question",
+                    "name": "@accordion.Content.Value("label")",
+                    "acceptedAnswer": {
+                        "@@type": "Answer",
+                        "text": "@Html.Raw(cleanAnswer.ToHtmlString().StripHtml())"
+                    }
+                }@(accordionInt != accordionsCount ? "," : string.Empty)
+            </text>
+            accordionInt++;
+            }
+        ]
+    }
+    </script>
 }

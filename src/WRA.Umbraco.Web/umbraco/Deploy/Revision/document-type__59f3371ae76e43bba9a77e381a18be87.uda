@@ -1,7 +1,9 @@
 {
   "Name": "Category Page",
   "Alias": "categoryPage",
-  "AllowedTemplates": [],
+  "AllowedTemplates": [
+    "umb://template/33fad06581354066b7fd7120c0c5f9da"
+  ],
   "HistoryCleanup": {},
   "Icon": "icon-tag color-red",
   "Thumbnail": "folder.png",
@@ -71,6 +73,10 @@
     },
     {
       "Udi": "umb://document-type/c069f4e9dbef40c3acf42e2af704c3e3"
+    },
+    {
+      "Udi": "umb://template/33fad06581354066b7fd7120c0c5f9da",
+      "Ordering": true
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",

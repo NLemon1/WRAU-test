@@ -19,6 +19,14 @@
       "Alias": "content",
       "PropertyTypes": [
         {
+          "Key": "6276e104-9a2f-4b59-94ea-c71216c405d9",
+          "Alias": "enableFAQSchema",
+          "DataType": "umb://data-type/92897bc6a5f34ffeae27f2e7e33dda49",
+          "Description": "Renders FAQ structured data for SEO value. Only use for FAQ instances.",
+          "Name": "Enable FAQ Schema",
+          "SortOrder": 2
+        },
+        {
           "Key": "bec20b87-35e8-4143-8fa5-8c18ffa72fbb",
           "Alias": "enableOutsideBorder",
           "DataType": "umb://data-type/92897bc6a5f34ffeae27f2e7e33dda49",
