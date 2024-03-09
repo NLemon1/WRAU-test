@@ -1,8 +1,14 @@
 {
   "Name": "Budles Page",
   "Alias": "BudlesPage",
+  "File": "umb://template-file/BudlesPage.cshtml",
   "Udi": "umb://template/f1445ab4e56e43ca8da2d0694436031e",
-  "Dependencies": [],
+  "Dependencies": [
+    {
+      "Udi": "umb://template-file/BudlesPage.cshtml",
+      "Ordering": true
+    }
+  ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.TemplateArtifact",
   "__version": "13.0.4"
 }
