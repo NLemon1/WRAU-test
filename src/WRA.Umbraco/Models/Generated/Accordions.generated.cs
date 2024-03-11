@@ -57,6 +57,13 @@ namespace WRA.Umbraco.Models
 		public virtual bool EnableDarkMode => this.Value<bool>(_publishedValueFallback, "enableDarkMode");
 
 		///<summary>
+		/// Enable FAQ Schema: Renders FAQ structured data for SEO value. Only use for FAQ instances.
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
+		[ImplementPropertyType("enableFAQSchema")]
+		public virtual bool EnableFaqschema => this.Value<bool>(_publishedValueFallback, "enableFAQSchema");
+
+		///<summary>
 		/// Enable outside border?
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
