@@ -18,6 +18,22 @@
   ],
   "PropertyGroups": [
     {
+      "Key": "3ba80d03-6046-4289-b2a0-29f4d9fdc96c",
+      "Name": "Content",
+      "SortOrder": 1,
+      "Type": 1,
+      "Alias": "content1",
+      "PropertyTypes": [
+        {
+          "Key": "59f9664a-85cd-46ac-8c53-a3f2398a9a1b",
+          "Alias": "introContent",
+          "DataType": "umb://data-type/e501f7f2011144008248dd70b96f2ef2",
+          "Description": "Displays on Bundle Page",
+          "Name": "Intro Content"
+        }
+      ]
+    },
+    {
       "Key": "fc1dc750-56e6-427f-a19f-ed59948a82b3",
       "Name": "Properties",
       "Type": 1,
@@ -59,6 +75,10 @@
     },
     {
       "Udi": "umb://data-type/c86a5f22a7634f198a5ac17da1aad381",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/e501f7f2011144008248dd70b96f2ef2",
       "Ordering": true
     },
     {

@@ -26,10 +26,10 @@
 <div class="bg-white overflow-hidden">
     <div class="js-bundles-form container my-4 mt-lg-6 mb-12">
 
-        @if (!String.IsNullOrEmpty(Model.ShortDescription?.ToString()))
+        @if (!String.IsNullOrEmpty(Model.IntroContent?.ToString()))
         {
             <div class="rich-text my-5 my-lg-7">
-                @Html.Raw(Model.ShortDescription)
+                @Html.Raw(Model.IntroContent)
             </div>
         }
 
@@ -47,7 +47,10 @@
                     <div class="col-md-6 col-lg-4 col-bundle">
                         <input type="checkbox" class="js-bundle-checkbox input-bundle" name="@objectIndexKey" id="@bundleItem.Product.Id" value="@bundleItem.Product.Key" />
                         <div class="card card-bundle">
-                            <p class="mb-3 fs-xs">Class <span class="ms-3 fw-semibold" style="color: red;">Credit Hours: XXX</span></p>
+                            @if (bundleItem.Product.HasValue("creditHours"))
+                            {
+                                <p class="mb-3 fs-xs">Class <span class="ms-3 fw-semibold">Credit Hours: @bundleItem.Product.GetProperty("creditHours").GetSourceValue()</span></p>
+                            }
                             <h3 class="fw-bold fs-lg text-capitalize mb2_5">@bundleItem.Product.Name</h3>
                             <div class="d-flex flex-row gap-3 mt-auto">
                                 <label for="@bundleItem.Product.Id" class="js-bundle-select btn btn-primary btn-sm w-50 py-3 d-flex flex-column justify-content-center" tabindex="1" role="button" aria-haspopup="dialog" aria-controls="bundleSelected" style="cursor:pointer">

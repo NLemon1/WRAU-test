@@ -1,0 +1,15 @@
+{
+  "Name": "Product Page - Credit Hours - Numeric (1)",
+  "Alias": "",
+  "EditorAlias": "Umbraco.Integer",
+  "DatabaseType": "Integer",
+  "Configuration": {
+    "min": 0,
+    "step": 0.5,
+    "max": 40
+  },
+  "Udi": "umb://data-type/9b641984c0214315bf3feeff86280582",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
+  "__version": "13.0.4"
+}

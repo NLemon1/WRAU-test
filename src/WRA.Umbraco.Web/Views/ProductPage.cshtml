@@ -128,9 +128,11 @@
             }
         </div>
     </div>
-                @await Html.PartialAsync("blockgrid/default", sections)
     <div style="height: 96px;"></div>
 </div>
+
+@await Html.PartialAsync("blockgrid/default", sections)
+
 
 @{
     void RenderVariants(StoreReadOnly? store, ProductPage product, string? addedProductReference)
