@@ -22,48 +22,26 @@ namespace WRA.Umbraco.Controllers;
 public class ProductApiController : UmbracoApiController
 {
     private readonly IProductService _productService;
+    private readonly WraProductService _wraProductService;
     private readonly IPublishedContentQuery _publishedContentQuery;
     private readonly SearchService _searchService;
 
     public ProductApiController(IProductService productService,
         IPublishedContentQuery publishedContentQuery,
-        SearchService searchService)
+        SearchService searchService,
+        WraProductService wraProductService)
     {
         _productService = productService;
         _publishedContentQuery = publishedContentQuery;
         _searchService = searchService;
+        _wraProductService = wraProductService;
     }
 
     [HttpPost]
     [Route("GetProducts")]
     public IEnumerable<ProductPageResponseDto> GetProducts([FromBody] ProductsRequestDto request)
     {
-        IEnumerable<ProductPage> products = _searchService.Search(ProductPage.ModelTypeAlias)
-            .Select(p => new ProductPage(p.Content, new NoopPublishedValueFallback()));
-
-        // first, lets apply the product type filter
-        if (!string.IsNullOrEmpty(request.ProductType))
-        {
-            products = products.Where(p => string.Equals(p.Collection.Name, request.ProductType, StringComparison.OrdinalIgnoreCase));
-        }
-        // now lets apply category and sub-category filters if they are requested
-        if (!string.IsNullOrEmpty(request.Category))
-        {
-            products = products
-                .Where(p => p.Categories.ContainsProductCategory(request.Category));
-        }
-        if (!string.IsNullOrEmpty(request.SubCategory))
-        {
-            products = products
-                .Where(p => p.SubCategories.ContainsProductCategory(request.SubCategory));
-        }
-        // finally, lets apply a taxonmy filter if it is requested
-        if (!string.IsNullOrEmpty(request.Taxonomy))
-        {
-            products = products
-                .Where(p => p.Taxonomy.Contains(request.Taxonomy, StringComparison.OrdinalIgnoreCase));
-        }
-
+        var products = _wraProductService.GetProducts(request);
         var responseItems = products.Select(p => p.AsDto());
         return responseItems;
 

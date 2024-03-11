@@ -11,7 +11,7 @@ using System.Text;
 
 namespace WRA.Umbraco.Events
 {
-    public class TransformExamineValues : INotificationHandler<UmbracoApplicationStartingNotification>
+    public class TransformExamineValues
     {
         private readonly IExamineManager _examineManager;
         private readonly IUmbracoContextFactory _umbracoContextFactory;
@@ -24,7 +24,7 @@ namespace WRA.Umbraco.Events
         }
 
 
-        public void Handle(UmbracoApplicationStartingNotification notification)
+        public void SetCategoriesOnProducts()
         {
             // Listen for nodes being reindexed in the external index set
             if (_examineManager.TryGetIndex("ExternalIndex", out var index))
@@ -42,7 +42,8 @@ namespace WRA.Umbraco.Events
 
                         // Make sure node is a product page node
                         if (e.ValueSet.ItemType.InvariantEquals(ProductPage.ModelTypeAlias)
-                            || e.ValueSet.ItemType.InvariantEquals(MultiVariantProductPage.ModelTypeAlias))
+                            || e.ValueSet.ItemType.InvariantEquals(MultiVariantProductPage.ModelTypeAlias)
+                                || e.ValueSet.ItemType.InvariantEquals(BundlePage.ModelTypeAlias))
                         {
                             // Make sure some categories are defined
                             if (e.ValueSet.Values.ContainsKey("categories"))

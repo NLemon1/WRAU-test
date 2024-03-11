@@ -8,6 +8,7 @@
   "HistoryCleanup": {},
   "Icon": "icon-box color-deep-purple",
   "Thumbnail": "folder.png",
+  "IsContainer": true,
   "Permissions": {
     "AllowedChildContentTypes": [
       "umb://document-type/839384d4d4f94d70b88a784fde9af2b4"

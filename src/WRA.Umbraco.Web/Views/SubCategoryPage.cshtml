@@ -50,7 +50,20 @@
 {
     <div class="container my-4 my-lg-6" style="border: solid 6px red;">
         <h2 class="js-listings-title h3 pt-4 mt-4 mt-lg-8 border-top border-medium mb-4">Course Bundle</h2>
-        <h1>TO DO: BUNDLE CARDS HERE</h1>
+        <div>
+            @foreach (var courseBundle in Model.ProductBundles)
+            {
+                <div class="col-md-6 col-lg-4">
+                    <div class="card card--course-bundle">
+                        <div class="card-body">
+                            <h3 class="h5 card-title">@courseBundle.Name</h3>
+                            <p class="card-text">@courseBundle.ShortDescription</p>
+                            <a href="@courseBundle.Url()" class="btn btn-primary">View Course Bundle</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
     </div>
 }
 
@@ -68,9 +81,25 @@
         {
             <text>Products</text>
         }
+        @if(Model.Products.Any()){
+            @foreach(var product in Model.Products)
+            {
+                <div class="col-md-6 col-lg-4">
+                    @* lets make a parial? *@
+                    @* @await Html.PartialAsync("product-card", product) *@
+                    <div class="card card--product">
+                        <div class="card-body">
+                            <h3 class="h5 card-title">@product.Name</h3>
+                            <p class="card-text">@product.ShortDescription</p>
+                            <a href="@product.Url()" class="btn btn-primary">View Product</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
     </h2>
     <div class="js-taxonomy-container" hidden>
-        <label for="collection-filter" class="d-block text-uppercase font-family-3 fw-normal mb-2">@Model.TaxonomyTypeLabel Type</label>
+        @* <label for="collection-filter" class="d-block text-uppercase font-family-3 fw-normal mb-2">@Model.TaxonomyTypeLabel Type</label> *@
         <select id="collection-filter" class="js-taxonomy-filter form-select d-inline-block w-auto mb-4 mb-lg-6">
         </select>
     </div>

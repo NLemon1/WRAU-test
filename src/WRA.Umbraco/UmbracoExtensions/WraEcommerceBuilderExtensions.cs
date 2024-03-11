@@ -47,7 +47,8 @@ public static class WraEcommerceBuilderExtensions
 
         });
 
-        umbracoBuilder.AddNotificationHandler<UmbracoApplicationStartingNotification, TransformExamineValues>();
+        umbracoBuilder.AddNotificationHandler<ContentCacheRefresherNotification, ProductExamineValuesOnSave>();
+        umbracoBuilder.AddNotificationHandler<UmbracoApplicationStartingNotification, ProdcutExamineValuesStartup>();
 
         return umbracoBuilder;
     }

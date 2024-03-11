@@ -58,6 +58,51 @@ public class SearchService
 
         }
     }
+
+    public IEnumerable<PublishedSearchResult> SearchBySubCategory(GuidUdi subCategoryId, string contentAlias)
+    {
+        if (_examineManager.TryGetIndex(Constants.UmbracoIndexes.ExternalIndexName, out IIndex index))
+        {
+            var q = $"+(__NodeTypeAlias:{contentAlias})";
+
+            if (subCategoryId != null)
+            {
+                q += $" +subCategories:\"{subCategoryId}\"";
+            }
+
+            var searcher = index.Searcher;
+            var query = searcher.CreateQuery().NativeQuery(q);
+            var results = _publishedContentQuery
+                .Search(query.OrderBy(new SortableField("name", SortType.String)));
+
+            foreach (var result in results)
+            {
+                yield return result;
+            }
+        }
+    }
+    public IEnumerable<PublishedSearchResult> SearchBySubCategory(string subCategoryAlias, string contentAlias)
+    {
+        if (_examineManager.TryGetIndex(Constants.UmbracoIndexes.ExternalIndexName, out IIndex index))
+        {
+            var q = $"+(__NodeTypeAlias:{contentAlias})";
+
+            if (!subCategoryAlias.IsNullOrWhiteSpace())
+            {
+                q += $" +subCategoryAliases:\"{subCategoryAlias}\"";
+            }
+
+            var searcher = index.Searcher;
+            var query = searcher.CreateQuery().NativeQuery(q);
+            var results = _publishedContentQuery
+                .Search(query.OrderBy(new SortableField("name", SortType.String)));
+
+            foreach (var result in results)
+            {
+                yield return result;
+            }
+        }
+    }
     public IEnumerable<PublishedSearchResult> SearchProductsByCategory(int? collectionId, string category)
     {
 
@@ -84,69 +129,38 @@ public class SearchService
             {
                 yield return result;
             }
-            // var results = query.OrderBy(new SortableField("name", SortType.String))
-            //     .Execute(QueryOptions.SkipTake(pageSize * (page - 1), pageSize));
-            // var totalResults = results.TotalItemCount;
-
-            // using (var ctx = _umbracoContextFactory.EnsureUmbracoContext())
-            // {
-            //     var items = results.ToPublishedSearchResults(ctx.UmbracoContext.Content)
-            //         .Select(x => x.Content)
-            //         .OfType<ProductPage>()
-            //         .OrderBy(x => x.SortOrder);
-
-            //     return new PagedResult<ProductPage>(totalResults, page, pageSize)
-            //     {
-            //         Items = items
-            //     };
-            // }
         }
     }
 
-    public IEnumerable<PublishedSearchResult> SearchProductsBySubCategory(string subCategory, int? collectionId = null)
-    {
+    // public IEnumerable<PublishedSearchResult> SearchProductsBySubCategory(string subCategory, int? collectionId = null)
+    // {
 
-        if (_examineManager.TryGetIndex("ExternalIndex", out var index))
-        {
-            var q = $"+(__NodeTypeAlias:{ProductPage.ModelTypeAlias} __NodeTypeAlias:{MultiVariantProductPage.ModelTypeAlias})";
+    //     if (_examineManager.TryGetIndex("ExternalIndex", out var index))
+    //     {
+    //         var q = $"+(__NodeTypeAlias:{ProductPage.ModelTypeAlias} __NodeTypeAlias:{MultiVariantProductPage.ModelTypeAlias})";
 
-            if (collectionId.HasValue)
-            {
-                q += $" +searchPath:{collectionId.Value}";
-            }
+    //         if (collectionId.HasValue)
+    //         {
+    //             q += $" +searchPath:{collectionId.Value}";
+    //         }
 
-            if (!subCategory.IsNullOrWhiteSpace())
-            {
-                q += $" +subCategoryAliases:\"{subCategory}\"";
-            }
+    //         if (!subCategory.IsNullOrWhiteSpace())
+    //         {
+    //             q += $" +subCategoryAliases:\"{subCategory}\"";
+    //         }
 
-            var searcher = index.Searcher;
-            var query = searcher.CreateQuery().NativeQuery(q);
-            var results = _publishedContentQuery
-                .Search(query.OrderBy(new SortableField("name", SortType.String)));
+    //         var searcher = index.Searcher;
+    //         var query = searcher.CreateQuery().NativeQuery(q);
+    //         var results = _publishedContentQuery
+    //             .Search(query.OrderBy(new SortableField("name", SortType.String)));
 
-            foreach (var result in results)
-            {
-                yield return result;
-            }
-            // var results = query.OrderBy(new SortableField("name", SortType.String))
-            //     .Execute(QueryOptions.SkipTake(pageSize * (page - 1), pageSize));
-            // var totalResults = results.TotalItemCount;
+    //         foreach (var result in results)
+    //         {
+    //             yield return result;
+    //         }
 
-            // using (var ctx = _umbracoContextFactory.EnsureUmbracoContext())
-            // {
-            //     var items = results.ToPublishedSearchResults(ctx.UmbracoContext.Content)
-            //         .Select(x => x.Content)
-            //         .OfType<ProductPage>()
-            //         .OrderBy(x => x.SortOrder);
-
-            //     return new PagedResult<ProductPage>(totalResults, page, pageSize)
-            //     {
-            //         Items = items
-            //     };
-            // }
-        }
-    }
+    //     }
+    // }
 
 }
 

@@ -1,5 +1,7 @@
 
 
+using Microsoft.Extensions.Azure;
+using Smidge.Models;
 using Umbraco.Cms.Core;
 using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Cms.Core.Web;
@@ -9,6 +11,7 @@ using Umbraco.Commerce.Core.Api;
 using Umbraco.Commerce.Core.Discounts.Rules;
 using Umbraco.Commerce.Core.Models;
 using Umbraco.Commerce.Core.Services;
+using WRA.Umbraco.Dtos;
 using WRA.Umbraco.Models;
 
 namespace WRA.Umbraco.Services;
@@ -18,15 +21,67 @@ public class WraProductService
     private readonly IUmbracoCommerceApi _commerceApi;
     private readonly IProductService _productService;
     private readonly IUmbracoContextAccessor _umbracoContextAccessor;
+    private readonly SearchService _searchService;
 
     public WraProductService(
         IUmbracoCommerceApi umbracoCommerceApi,
         IProductService productService,
-        IUmbracoContextAccessor umbracoContextAccessor)
+        IUmbracoContextAccessor umbracoContextAccessor,
+        SearchService searchService)
     {
         _commerceApi = umbracoCommerceApi;
         _productService = productService;
         _umbracoContextAccessor = umbracoContextAccessor;
+        _searchService = searchService;
+    }
+
+    public IEnumerable<ProductPage> GetProducts(ProductsRequestDto request)
+    {
+        IEnumerable<ProductPage> products = _searchService.Search(ProductPage.ModelTypeAlias)
+            .Select(p => new ProductPage(p.Content, new NoopPublishedValueFallback()));
+
+        // first, lets apply the product type filter
+        if (!string.IsNullOrEmpty(request.ProductType))
+        {
+            products = products.Where(p => string.Equals(p.Collection.Name, request.ProductType, StringComparison.OrdinalIgnoreCase));
+        }
+        // now lets apply category and sub-category filters if they are requested
+        if (!string.IsNullOrEmpty(request.Category))
+        {
+            products = products
+                .Where(p => p.Categories.ContainsProductCategory(request.Category));
+        }
+        if (!string.IsNullOrEmpty(request.SubCategory))
+        {
+            products = products
+                .Where(p => p.SubCategories.ContainsProductCategory(request.SubCategory));
+        }
+        // finally, lets apply a taxonmy filter if it is requested
+        if (!string.IsNullOrEmpty(request.Taxonomy))
+        {
+            products = products
+                .Where(p => p.Taxonomy.Contains(request.Taxonomy));
+        }
+        return products;
+    }
+
+    public IEnumerable<BundlePage> GetProductBundles(ProductBundlesRequestDto request)
+    {
+        IEnumerable<BundlePage> bundles = _searchService.SearchBySubCategory(request.SubCategory, BundlePage.ModelTypeAlias)
+            .Select(p => new BundlePage(p.Content, new NoopPublishedValueFallback()));
+        return bundles;
+    }
+    public IEnumerable<BundlePage> GetProductBundlesBySubCategory(Guid subCategoryUdi)
+    {
+        GuidUdi udi = new GuidUdi("document", subCategoryUdi);
+        return _searchService.SearchBySubCategory(udi, BundlePage.ModelTypeAlias)
+            .Select(p => new BundlePage(p.Content, new NoopPublishedValueFallback()));
+    }
+    public IEnumerable<ProductPage> GetProductsBySubCategory(Guid subCategoryUdi)
+    {
+        GuidUdi udi = new GuidUdi("document", subCategoryUdi);
+        return _searchService.SearchBySubCategory(udi, ProductPage.ModelTypeAlias)
+            .Select(p => new ProductPage(p.Content, new NoopPublishedValueFallback()));
     }
 
     public IEnumerable<TimeBasedDiscountDto?> GetTimeBasedDiscounts(IProductComp content)
@@ -39,26 +94,21 @@ public class WraProductService
 
         var udi = new GuidUdi("document", content.Key);
 
-        // Get active discounts
-        var discounts = _commerceApi.GetActiveDiscounts(product.StoreId);
-        // string timeBasedDiscountAlias = "TimeBaseLineItemDiscountRule";
-        string timeBasedDiscountAlias = "orderLineProductDiscountRule";
+        // Get specific discount that holds the rules for "time based discounts"
+        string timeBasedDiscountAlias = "timeBasedDiscount";
+        var TimeBasedDiscount = _commerceApi.GetDiscount(product.StoreId, timeBasedDiscountAlias);
 
-        var TimeBasedDiscount = discounts
-            .Where(x => x.Alias == "productTimeBasedDiscount")
-            .FirstOrDefault();
-
-        if (TimeBasedDiscount == null)
+        if (TimeBasedDiscount == null || !TimeBasedDiscount.IsActive)
             return [];
 
+        // Time based discounts must be in GroupDiscountRules that contain the products along with a "Time Discount Rule"
         var rewards = TimeBasedDiscount.Rewards;
-
+        // Here we will grab the groups on the discount
         var groupedDiscountRules = TimeBasedDiscount.Rules.Children
             .Where(r => r.RuleProviderAlias == "groupDiscountRule")
             .Select(x => x);
 
-
-        // Discounts rules are defined in the backoffice, so we need to find the rule that applies to the requested product
+        // Next we will build the kvp that contains our product UDI...
         var kvps = new List<KeyValuePair<string, string>>()
         {
             new KeyValuePair<string, string>("nodeId", udi.ToString()),
@@ -67,27 +117,13 @@ public class WraProductService
         // Filter to single rule automatic discounts that are time based
         var timeBasedDiscountsOnProduct = groupedDiscountRules.Where(x =>
             x.Children.Where(c =>
-                c.RuleProviderAlias == timeBasedDiscountAlias && c.Settings.ContainsAll(kvps)).Any());
-
-
-
-        // if none found, return null
-        if (discounts.Any() == false)
-            return null;
-
-        // TODO get rule provider definitions from this method.
-        // IEnumerable<DiscountRuleProviderDefinition> ruleProvider = _commerceApi.GetDiscountRuleProviderDefinitions();
-
-        // use the above kvp to find the discount that applies to the product
-        // also, we are only interested in a specific rule whch applies to a line item product
-
+                c.RuleProviderAlias == "orderLineProductDiscountRule" && c.Settings.ContainsAll(kvps)).Any());
 
         if (!timeBasedDiscountsOnProduct.Any())
         {
             return [];
         }
-
-
+        // we will only support percent discount rewards for now.
         List<TimeBasedDiscountDto> timeBasedDiscounts = new();
         var awardKvps = new List<KeyValuePair<string, string>>()
             {
@@ -127,64 +163,9 @@ public class WraProductService
                 }
             }
         }
+        // filter out discounts that have allready expired
         return timeBasedDiscounts.Where(tbd => tbd.EndDate >= DateTime.Now);
     }
-    // foreach (var discountItem in timeBasedDiscountsOnProduct)
-    // {
-    //     var dateRangeRule = discountItem.Children
-    //         .FirstOrDefault(r => r.RuleProviderAlias == "DateRangeRule");
-
-    //     var discountRuleStartDate = dateRangeRule.Settings["startDate"].TryConvertTo<DateTime>().Result;
-    //     var discountRuleEndDate = dateRangeRule.Settings["endDate"].TryConvertTo<DateTime>().Result;
-    //     bool isPastDiscountWindow = discountRuleEndDate <= DateTime.Now;
-    //     if (isPastDiscountWindow) { continue; }
-    //     //get time based discount rules for the product
-    //     // var applicableRules = discountItem.Rules.Children
-    //     //     .Where(r => r.RuleProviderAlias == timeBasedDiscountAlias &&
-    //     //                 r.Settings.ContainsAll(kvps));
-
-    //     // now that we have our discount, we need to only grab percentage based rewards
-    //     var awardKvps = new List<KeyValuePair<string, string>>()
-    //     {
-    //         //new KeyValuePair<string, string>("nodeId", udi.ToString()),
-    //         new KeyValuePair<string, string>("adjustmentType", "Percentage")
-    //     };
-
-
-    //     var contentpublished = content as IPublishedContent;
-    //     var percentageReward = rewards
-    //         .Where(r =>
-    //         {
-    //             return r.Settings.ContainsAll(awardKvps);
-    //         });
-    //     foreach (var reward in rewards)
-    //     {
-    //         if (reward != null)
-    //         {
-    //             var startDate = reward.Settings["startDate"].TryConvertTo<DateTime>().Result;
-    //             var endDate = reward.Settings["endDate"].TryConvertTo<DateTime>().Result;
-    //             // get the percentage value of the reward
-    //             var pctDiscount = reward.Settings["percentage"];
-
-    //             if (string.IsNullOrEmpty(pctDiscount) || startDate == null || endDate == null)
-    //                 return null;
-    //             // cast as decimal
-    //             var attempt = pctDiscount.TryConvertTo<decimal>();
-    //             if (attempt.Success)
-    //             {
-    //                 // return the discount along with it's active dates
-    //                 timeBasedDiscounts.Add(new TimeBasedDiscountDto
-    //                 {
-    //                     StartDate = startDate,
-    //                     EndDate = endDate,
-    //                     Percentage = attempt.Result
-    //                 });
-    //             }
-    //         }
-    //     }
-    // }
-    // return timeBasedDiscounts.Where(tbd => tbd.StartDate <= DateTime.Now);
-
 }
 
 
@@ -193,4 +174,5 @@ public class TimeBasedDiscountDto
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
     public decimal Percentage { get; set; }
+    public bool Active => DateTime.Now >= StartDate && DateTime.Now <= EndDate;
 }
