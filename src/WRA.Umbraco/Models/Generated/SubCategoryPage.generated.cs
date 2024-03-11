@@ -82,6 +82,30 @@ namespace WRA.Umbraco.Models
 		public virtual string ExternalId => this.Value<string>(_publishedValueFallback, "externalId");
 
 		///<summary>
+		/// Sections Bottom
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("sectionsBottom")]
+		public virtual global::Umbraco.Cms.Core.Models.Blocks.BlockGridModel SectionsBottom => this.Value<global::Umbraco.Cms.Core.Models.Blocks.BlockGridModel>(_publishedValueFallback, "sectionsBottom");
+
+		///<summary>
+		/// Sections Top
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("sectionsTop")]
+		public virtual global::Umbraco.Cms.Core.Models.Blocks.BlockGridModel SectionsTop => this.Value<global::Umbraco.Cms.Core.Models.Blocks.BlockGridModel>(_publishedValueFallback, "sectionsTop");
+
+		///<summary>
+		/// Taxonomy Type Label
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("taxonomyTypeLabel")]
+		public virtual string TaxonomyTypeLabel => this.Value<string>(_publishedValueFallback, "taxonomyTypeLabel");
+
+		///<summary>
 		/// Meta Description: Enter meta description if desired.
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
