@@ -30,6 +30,13 @@
           "DataType": "umb://data-type/e501f7f2011144008248dd70b96f2ef2",
           "Description": "Displays on Bundle Page",
           "Name": "Intro Content"
+        },
+        {
+          "Key": "cd31c5a5-84fb-4313-8940-3f87c1ad9af7",
+          "Alias": "enablePopular",
+          "DataType": "umb://data-type/92897bc6a5f34ffeae27f2e7e33dda49",
+          "Name": "Enable Popular",
+          "SortOrder": 1
         }
       ]
     },
@@ -67,6 +74,10 @@
   "Dependencies": [
     {
       "Udi": "umb://data-type/1db19b70214c448dbbf7dc848a144056",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/92897bc6a5f34ffeae27f2e7e33dda49",
       "Ordering": true
     },
     {

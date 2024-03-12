@@ -1,0 +1,14 @@
+{
+  "Name": "Bundle Page - Popular - Toggle",
+  "Alias": "",
+  "EditorAlias": "Umbraco.TrueFalse",
+  "DatabaseType": "Integer",
+  "Configuration": {
+    "default": false,
+    "showLabels": false
+  },
+  "Udi": "umb://data-type/a0016dd9ab1d45be9f1da6a1f8c80850",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
+  "__version": "13.0.4"
+}

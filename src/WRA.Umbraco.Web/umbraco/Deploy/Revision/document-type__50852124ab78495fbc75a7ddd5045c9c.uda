@@ -21,10 +21,30 @@
     "umb://document-type/7cc368ff00cb4264ad60f52a76c3a911",
     "umb://document-type/f0c2133970844a948c095978736296ce"
   ],
-  "PropertyGroups": [],
+  "PropertyGroups": [
+    {
+      "Key": "8ea70057-c7a1-483b-9436-e95ca95f6f69",
+      "Name": "Content",
+      "SortOrder": 1000,
+      "Alias": "content",
+      "PropertyTypes": [
+        {
+          "Key": "6c9b5e07-9e25-4472-b4fb-8beb496997c0",
+          "Alias": "blockContent",
+          "DataType": "umb://data-type/5aa12b11cd24491f94da21e6399ddc33",
+          "Description": "(above the bundles cards)",
+          "Name": "Block Content"
+        }
+      ]
+    }
+  ],
   "PropertyTypes": [],
   "Udi": "umb://document-type/50852124ab78495fbc75a7ddd5045c9c",
   "Dependencies": [
+    {
+      "Udi": "umb://data-type/5aa12b11cd24491f94da21e6399ddc33",
+      "Ordering": true
+    },
     {
       "Udi": "umb://document-type-container/2443f0d8c7a44e1baa3511778e6789dd",
       "Ordering": true

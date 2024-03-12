@@ -58,6 +58,13 @@ namespace WRA.Umbraco.Models
 		public virtual global::System.Collections.Generic.IEnumerable<global::Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent> BundledProducts => this.Value<global::System.Collections.Generic.IEnumerable<global::Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent>>(_publishedValueFallback, "bundledProducts");
 
 		///<summary>
+		/// Enable Popular
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]
+		[ImplementPropertyType("enablePopular")]
+		public virtual bool EnablePopular => this.Value<bool>(_publishedValueFallback, "enablePopular");
+
+		///<summary>
 		/// Intro Content: Displays on Bundle Page
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.1.1+cd47bdb")]

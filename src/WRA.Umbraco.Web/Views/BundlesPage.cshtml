@@ -1,6 +1,85 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
 @using ContentModels = WRA.Umbraco.Models;
+@using Umbraco.Cms.Core.Models.Blocks;
+
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.BundlesPage>
 @{
-	Layout = null;
+    Layout = "~/Views/_Layout.cshtml";
+    var sections = Model.Value<IEnumerable<BlockGridItem>>("blockContent");
+    IEnumerable<IPublishedContent> courseBundles = Model.Children.Where(x => x.IsVisible()).OrderBy(p => p.Name);
 }
+
+@await Html.PartialAsync("blockgrid/default", sections)
+
+<div class="bg-white overflow-hidden">
+    <div class="container my-4 mt-lg-6 mb-12">
+        @if (courseBundles.Any())
+        {
+            int creditHours = 0;
+
+            <div class="row">
+                @foreach (var courseBundle in courseBundles)
+                {
+                    var bundledProducts = courseBundle.Value<IEnumerable<IPublishedContent>>("bundledProducts");
+
+                    if (bundledProducts != null)
+                    {
+                        foreach (var bundledProduct in bundledProducts)
+                        {
+                            if (bundledProduct.HasValue("creditHours"))
+                            {
+                                creditHours += bundledProduct.Value<int>("creditHours"); // item.GetProperty("creditHours").GetSourceValue();
+                            }
+                        }
+                    }
+
+                    <div class="col-md-6 gy-4 gy-lg-5"> 
+                        <div class="card card-bundle p-0">
+                            <p class="mb-0 fs-xs px-4 py-1 w-100 d-flex flex-row justify-content-between" style="background: var(--bs-blue-light)">
+                                @if (creditHours != 0)   
+                                {
+                                    <span class="py-1">Bundle <span class="ms-3 fw-semibold">Credit Hours: @creditHours</span></span>
+                                }
+                                @if (courseBundle.HasValue("enablePopular"))
+                                {
+                                    <span class="text-end bg-info px-2_5 py-1 rounded-pill fw-bold">Most Popular</span>
+                                }
+                            </p>
+                            <div class="p-4 h-100">
+                                @* <p class="d-inline-block mb-4 px-2 py-1 bg-light fw-semibold fs-sm text-uppercase">On Demand</p> *@
+                                <h3 class="fs-lg text-capitalize fw-semibold mb-4">@courseBundle.Name</h3>
+                                <div class="d-flex flex-row align-self-stretch mt-5 mt-7">
+                                    <a href="@courseBundle.Url()" id="view-product" class="btn btn-primary border-0">View Product</a>
+                                    <div class="ps-4">
+                                        <div class="d-block mb-1">
+                                            @if (courseBundle.HasValue("price"))
+                                            {
+                                                <span class="h3 fw-bold">
+                                                    @courseBundle.GetProperty("price")?.GetValue()
+                                                    $100
+                                                </span>
+                                                <span class="fs-sm" style="color: var(--bs-gray-30)">
+                                                    &nbsp;member pricing
+                                                </span>
+                                                <br />
+                                            }
+                                            @if (courseBundle.HasValue("memberPrice"))
+                                            {
+                                                <div class="d-block fs-sm mb-0" style="color: var(--bs-gray-30)">
+                                                    @courseBundle.GetProperty("price")?.GetValue()
+                                                    &nbsp;non-member pricing
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    creditHours = 0;
+                }
+            </div>
+        }
+
+    </div>
+</div>
