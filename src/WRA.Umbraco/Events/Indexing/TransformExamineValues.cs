@@ -73,7 +73,9 @@ namespace WRA.Umbraco.Events
                                 // If we have some aliases, add these to the lucene index in a searchable way
                                 if (categoryAliases.Count > 0)
                                 {
-                                    values.Add("categoryAliases", new[] { string.Join(" ", categoryAliases) });
+                                    SetOrUpdateExamineValue(values, "subCategoryAliases", string.Join(" ", categoryAliases));
+
+                                    // values.Add("categoryAliases", new[] { string.Join(" ", categoryAliases) });
                                 }
                             }
                             if (e.ValueSet.Values.ContainsKey("subCategories"))
@@ -103,7 +105,17 @@ namespace WRA.Umbraco.Events
                                 // If we have some aliases, add these to the lucene index in a searchable way
                                 if (subCategoryAliases.Count > 0)
                                 {
-                                    values.Add("subCategoryAliases", new[] { string.Join(" ", subCategoryAliases) });
+                                    SetOrUpdateExamineValue(values, "subCategoryAliases", string.Join(" ", subCategoryAliases));
+                                    // bool valueExists = values.TryGetValue("subCategoryAliases", out var y);
+                                    // if (valueExists)
+                                    // {
+                                    //     values["subCategoryAliases"] = new[] { string.Join(" ", subCategoryAliases) };
+                                    // }
+                                    // else
+                                    // {
+
+                                    //     values.Add("subCategoryAliases", new[] { string.Join(" ", subCategoryAliases) });
+                                    // }
                                 }
                             }
                         }
@@ -113,9 +125,11 @@ namespace WRA.Umbraco.Events
                         // ================================================================
 
                         // Create searchable path
-                        if (e.ValueSet.Values.ContainsKey("path") && !values.ContainsKey("searchPath"))
+                        if (e.ValueSet.Values.ContainsKey("path"))
                         {
-                            values.Add("searchPath", new[] { e.ValueSet.GetValue("path").ToString().Replace(',', ' ') });
+                            SetOrUpdateExamineValue(values, "subCategoryAliases", new[] { e.ValueSet.GetValue("path").ToString().Replace(',', ' ') });
+
+                            // values.Add("searchPath", new[] { e.ValueSet.GetValue("path").ToString().Replace(',', ' ') });
                         }
 
                         // Stuff all the fields into a single field for easier searching
@@ -129,7 +143,8 @@ namespace WRA.Umbraco.Events
                             }
                         }
 
-                        values.Add("contents", new[] { combinedFields.ToString() });
+                        // values.Add("contents", new[] { combinedFields.ToString() });
+                        SetOrUpdateExamineValue(values, "contents", new[] { combinedFields.ToString() });
 
                         // Update the value
                         e.SetValues(values);
@@ -141,6 +156,23 @@ namespace WRA.Umbraco.Events
                     throw;
                 }
             }
+        }
+
+        private void SetOrUpdateExamineValue(Dictionary<string, IEnumerable<object>> values, string key, string value)
+        {
+            if (values.ContainsKey(key))
+            {
+                values[key] = new[] { value };
+            }
+            else
+            {
+                values.Add(key, new[] { value });
+            }
+        }
+
+        private void SetOrUpdateExamineValue(Dictionary<string, IEnumerable<object>> values, string key, string[] value)
+        {
+            SetOrUpdateExamineValue(values, key, string.Join(" ", value));
         }
     }
 }
