@@ -50,6 +50,14 @@ namespace WRA.Umbraco.Models
 		// properties
 
 		///<summary>
+		/// Block Content: Content blocks for "categories" page.
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.2.0+7dff3a3")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("blockContent")]
+		public virtual global::Umbraco.Cms.Core.Models.Blocks.BlockGridModel BlockContent => this.Value<global::Umbraco.Cms.Core.Models.Blocks.BlockGridModel>(_publishedValueFallback, "blockContent");
+
+		///<summary>
 		/// Meta Description: Enter meta description if desired.
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.2.0+7dff3a3")]

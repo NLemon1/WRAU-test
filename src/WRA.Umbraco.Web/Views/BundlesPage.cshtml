@@ -2,17 +2,25 @@
 @using ContentModels = WRA.Umbraco.Models;
 @using Umbraco.Cms.Core.Models.Blocks;
 
+@using WRA.Umbraco.Services;
+@using WRA.Umbraco;
+@using System.Linq;
+@using Umbraco.Commerce.Extensions;
+
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.BundlesPage>
 @{
     Layout = "~/Views/_Layout.cshtml";
     var sections = Model.Value<IEnumerable<BlockGridItem>>("blockContent");
     IEnumerable<IPublishedContent> courseBundles = Model.Children.Where(x => x.IsVisible()).OrderBy(p => p.Name);
+
+    var currency = Model.GetStore().BaseCurrencyId ?? Guid.Empty;
+
 }
 
 @await Html.PartialAsync("blockgrid/default", sections)
 
 <div class="bg-white overflow-hidden">
-    <div class="container my-4 mt-lg-6 mb-12">
+    <div class="container">
         @if (courseBundles.Any())
         {
             int creditHours = 0;
@@ -28,7 +36,7 @@
                         {
                             if (bundledProduct.HasValue("creditHours"))
                             {
-                                creditHours += bundledProduct.Value<int>("creditHours"); // item.GetProperty("creditHours").GetSourceValue();
+                                creditHours += bundledProduct.Value<int>("creditHours");
                             }
                         }
                     }
@@ -42,7 +50,7 @@
                                 }
                                 @if (courseBundle.HasValue("enablePopular"))
                                 {
-                                    <span class="text-end bg-info px-2_5 py-1 rounded-pill fw-bold">Most Popular</span>
+                                    <span class="text-end bg-info px-2_5 py-1 rounded-pill fw-bold ms-auto">Most Popular</span>
                                 }
                             </p>
                             <div class="p-4 h-100">
@@ -52,18 +60,17 @@
                                     <a href="@courseBundle.Url()" id="view-product" class="btn btn-primary border-0">View Bundle</a>
                                     <div class="ps-4">
                                         <div class="d-block mb-1">
-                                            @if (courseBundle.HasValue("price"))
+                                            @if (courseBundle.HasValue("memberPrice"))
                                             {
                                                 <span class="h3 fw-bold">
-                                                    @courseBundle.GetProperty("price")?.GetValue()
-                                                    $100
+                                                    @courseBundle.GetProperty("memberPrice")?.GetValue()
                                                 </span>
                                                 <span class="fs-sm" style="color: var(--bs-gray-30)">
                                                     &nbsp;member pricing
                                                 </span>
                                                 <br />
                                             }
-                                            @if (courseBundle.HasValue("memberPrice"))
+                                            @if (courseBundle.HasValue("price"))
                                             {
                                                 <div class="d-block fs-sm mb-0" style="color: var(--bs-gray-30)">
                                                     @courseBundle.GetProperty("price")?.GetValue()
@@ -83,3 +90,4 @@
 
     </div>
 </div>
+<div class="d-block py-4 py-lg-6"></div>

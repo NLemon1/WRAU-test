@@ -66,6 +66,13 @@
           "Name": "Sections Top"
         },
         {
+          "Key": "9bd6355f-5b63-4e4f-ac4d-cff6865a28d8",
+          "Alias": "resultsHeadline",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "ResultsHeadline",
+          "SortOrder": 2
+        },
+        {
           "Key": "a4db1f59-8f8d-4082-b84b-4a5c944d778b",
           "Alias": "sectionsBottom",
           "DataType": "umb://data-type/5aa12b11cd24491f94da21e6399ddc33",
@@ -77,7 +84,7 @@
           "Alias": "taxonomyTypeLabel",
           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
           "Name": "Taxonomy Type Label",
-          "SortOrder": 2
+          "SortOrder": 3
         }
       ]
     }

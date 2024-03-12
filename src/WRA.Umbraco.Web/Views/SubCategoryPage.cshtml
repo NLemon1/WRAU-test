@@ -4,15 +4,18 @@
 @using System.Linq;
 @using Umbraco.Commerce.Extensions;
 @using Umbraco.Cms.Core.Models.Blocks
+
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.SubCategoryPage>
 @using ContentModels = WRA.Umbraco.Models;
+
 @{
 	Layout = "~/Views/_Layout.cshtml";
     var sectionsTop = Model.Value<IEnumerable<BlockGridItem>>("sectionsTop");
     var sectionsBottom = Model.Value<IEnumerable<BlockGridItem>>("sectionsBottom");
    
     IEnumerable<IPublishedContent> siblingSubcategories = Model.SiblingsAndSelf().Where(x => x.IsVisible()).OrderBy(p => p.Name);
-
+    
+    var currency = Model.GetStore().BaseCurrencyId ?? Guid.Empty;
 }
 
 <script type="text/javascript">
@@ -51,20 +54,70 @@
 
 @if (Model.ProductBundles.Any())
 {
-    <div class="container my-4 my-lg-6">
+    int creditHours = 0;
+
+    <div class="container">
         <h2 class="js-listings-title h3 pt-4 mt-4 mt-lg-8 border-top border-medium mb-4">Course Bundle</h2>
-        <div>
+        <div class="row">
+
             @foreach (var courseBundle in Model.ProductBundles)
             {
-                <div class="col-md-6 col-lg-4">
-                    <div class="card card--course-bundle">
-                        <div class="card-body">
-                            <h3 class="h5 card-title">@courseBundle.Name</h3>
-                            <p class="card-text">@courseBundle.ShortDescription</p>
-                            <a href="@courseBundle.Url()" class="btn btn-primary">View Course Bundle</a>
+                var bundledProducts = courseBundle.Value<IEnumerable<IPublishedContent>>("bundledProducts");
+
+                if (bundledProducts != null)
+                {
+                    foreach (var bundledProduct in bundledProducts)
+                    {
+                        if (bundledProduct.HasValue("creditHours"))
+                        {
+                            creditHours += bundledProduct.Value<int>("creditHours");
+                        }
+                    }
+                }
+
+                <div class="col-md-6 gy-4 gy-lg-5">
+                    <div class="card card-bundle p-0">
+                        <p class="mb-0 fs-xs px-4 py-1 w-100 d-flex flex-row justify-content-between" style="background: var(--bs-blue-light)">
+                            @if (creditHours != 0)
+                            {
+                                <span class="py-1">Bundle <span class="ms-3 fw-semibold">Credit Hours: @creditHours</span></span>
+                            }
+                            @if (courseBundle.HasValue("enablePopular"))
+                            {
+                                <span class="text-end bg-info px-2_5 py-1 rounded-pill fw-bold ms-auto">Most Popular</span>
+                            }
+                        </p>
+                        <div class="p-4 h-100">
+                            @* <p class="d-inline-block mb-4 px-2 py-1 bg-light fw-semibold fs-sm text-uppercase">On Demand</p> *@
+                            <h3 class="fs-lg text-capitalize fw-semibold mb-4">@courseBundle.Name</h3>
+                            <div class="d-flex flex-row align-self-stretch mt-5 mt-7">
+                                <a href="@courseBundle.Url()" id="view-product" class="btn btn-primary border-0">View Bundle</a>
+                                <div class="ps-4">
+                                    <div class="d-block mb-1">
+                                        @if (courseBundle.MemberPrice != null)
+                                        {
+                                            <span class="h3 fw-bold">
+                                                @courseBundle.MemberPrice.GetPriceFor(currency).Formatted().Value
+                                            </span>
+                                            <span class="fs-sm" style="color: var(--bs-gray-30)">
+                                                &nbsp;member pricing
+                                            </span>
+                                            <br />
+                                        }
+                                        @if (courseBundle.Price != null)
+                                        {
+                                            <div class="d-block fs-sm mb-0" style="color: var(--bs-gray-30)">
+                                                @courseBundle.Price.GetPriceFor(currency).Formatted().Value
+                                                &nbsp;non-member pricing
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+                creditHours = 0;
             }
         </div>
     </div>
@@ -74,13 +127,9 @@
 
 <div class="container my-4 my-lg-6">
     <h2 class="js-listings-title h3 pt-4 mt-4 mt-lg-8 border-top border-medium mb-4">
-        @if (Model.Parent.Name == "Continuing Education")
+        @if (!String.IsNullOrEmpty(Model.ResultsHeadline))
         {
-            <text>Individual Classes</text>
-        } 
-        else if (Model.Parent.Name == "Professional Development")
-        {
-            <text>Designations</text>
+            @Model.ResultsHeadline
         } 
         else
         {

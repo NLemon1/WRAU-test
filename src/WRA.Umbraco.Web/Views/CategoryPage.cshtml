@@ -31,7 +31,9 @@
 
 @await Html.PartialAsync("blockgrid/default", sections)
 
-<div class="container my-4 my-lg-6">
+<div class="d-block py-4 py-lg-6"></div>
+
+<div class="container">
     <div class="row g-4">
         @foreach (var productGroup in productSubcategories)
         {
@@ -54,3 +56,4 @@
         }
     </div>
 </div>
+<div class="d-block py-4 py-lg-6"></div>

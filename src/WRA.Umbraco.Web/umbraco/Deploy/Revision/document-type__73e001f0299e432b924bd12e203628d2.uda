@@ -19,10 +19,29 @@
     "umb://document-type/887a5a0def444bc09b2f7825ac1ebfba",
     "umb://document-type/f0c2133970844a948c095978736296ce"
   ],
-  "PropertyGroups": [],
+  "PropertyGroups": [
+    {
+      "Key": "3c5a4389-724e-4893-bf47-69c40ce3c2af",
+      "Name": "Content",
+      "Alias": "content",
+      "PropertyTypes": [
+        {
+          "Key": "4d51c858-9bf7-4455-b4e7-cac7ce56f922",
+          "Alias": "blockContent",
+          "DataType": "umb://data-type/5aa12b11cd24491f94da21e6399ddc33",
+          "Description": "Content blocks for \"categories\" page.",
+          "Name": "Block Content"
+        }
+      ]
+    }
+  ],
   "PropertyTypes": [],
   "Udi": "umb://document-type/73e001f0299e432b924bd12e203628d2",
   "Dependencies": [
+    {
+      "Udi": "umb://data-type/5aa12b11cd24491f94da21e6399ddc33",
+      "Ordering": true
+    },
     {
       "Udi": "umb://document-type-container/2443f0d8c7a44e1baa3511778e6789dd",
       "Ordering": true
