@@ -113,7 +113,7 @@ namespace WRA.Umbraco.Events
                         // ================================================================
 
                         // Create searchable path
-                        if (e.ValueSet.Values.ContainsKey("path"))
+                        if (e.ValueSet.Values.ContainsKey("path") && !values.ContainsKey("searchPath"))
                         {
                             values.Add("searchPath", new[] { e.ValueSet.GetValue("path").ToString().Replace(',', ' ') });
                         }
