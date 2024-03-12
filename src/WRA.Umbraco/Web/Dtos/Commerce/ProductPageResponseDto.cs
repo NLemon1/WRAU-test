@@ -20,5 +20,6 @@ public record ProductPageResponseDto(
     string startTime,
     string endDate,
     string endTime,
-    int productId
+    int productId,
+    int creditHours
 );

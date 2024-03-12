@@ -103,7 +103,8 @@ namespace WRA.Umbraco
                 System.String.Format("{0:h:mm tt}", p.StartDate) ?? string.Empty,
                 System.String.Format("{0:MMMM d}", p.EndDate) ?? string.Empty,
                 System.String.Format("{0:h:mm tt}", p.EndDate) ?? string.Empty,
-                p.Id
+                p.Id,
+                p?.CreditHours ?? 0
             );
         }
 
