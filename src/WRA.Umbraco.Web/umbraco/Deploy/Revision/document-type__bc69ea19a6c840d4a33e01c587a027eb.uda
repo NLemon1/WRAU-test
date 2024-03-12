@@ -1,0 +1,138 @@
+{
+  "Name": "Company",
+  "Alias": "company",
+  "AllowedTemplates": [],
+  "HistoryCleanup": {},
+  "Icon": "icon-briefcase color-indigo",
+  "Thumbnail": "folder.png",
+  "Permissions": {
+    "AllowedChildContentTypes": []
+  },
+  "Parent": "umb://document-type/7f52f3aa18f3459d909367c6621285d9",
+  "CompositionContentTypes": [
+    "umb://document-type/7f52f3aa18f3459d909367c6621285d9"
+  ],
+  "PropertyGroups": [
+    {
+      "Key": "6daf0020-c55f-47d7-8417-2345cefe38cc",
+      "Name": "Properties",
+      "Alias": "properties",
+      "PropertyTypes": [
+        {
+          "Key": "15f7aa6f-ac6e-43e0-b11e-1a565bf57c20",
+          "Alias": "memberTypeId",
+          "DataType": "umb://data-type/f0bc4bfbb49940d6ba86058885a5178c",
+          "Name": "MemberTypeId",
+          "SortOrder": 2
+        },
+        {
+          "Key": "4789a935-1d02-450c-894e-65534b02add7",
+          "Alias": "email",
+          "DataType": "umb://data-type/a6eee56c7a6546a99af8685e1d453a5e",
+          "Name": "Email",
+          "SortOrder": 9
+        },
+        {
+          "Key": "5a1ec7a6-44cd-4366-a457-63e987b2be99",
+          "Alias": "status",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Status",
+          "SortOrder": 4
+        },
+        {
+          "Key": "6bb9b24f-a44d-4ee9-87a3-95969e7ffb83",
+          "Alias": "websiteUrl",
+          "DataType": "umb://data-type/7a650a16a03c4447a8edf4f184672911",
+          "Name": "WebsiteUrl",
+          "SortOrder": 10
+        },
+        {
+          "Key": "79df2e22-61cd-4e38-ba34-8ebcc4c9a108",
+          "Alias": "city",
+          "DataType": "umb://data-type/76fc22d959b64a00afdc9bdf5590c0dd",
+          "Name": "City",
+          "SortOrder": 6
+        },
+        {
+          "Key": "881fc712-bb9e-4d79-95a9-1d1b7d322cac",
+          "Alias": "organizationCode",
+          "DataType": "umb://data-type/f0bc4bfbb49940d6ba86058885a5178c",
+          "Name": "OrganizationCode",
+          "SortOrder": 1
+        },
+        {
+          "Key": "89a3cb37-3755-41a0-99a7-0b1a94416ea4",
+          "Alias": "state",
+          "DataType": "umb://data-type/a8cdee68feb84333a3f481a46ccb6b44",
+          "Name": "State",
+          "SortOrder": 7
+        },
+        {
+          "Key": "94d20ff6-d379-4518-a0dd-5494a9e851b5",
+          "Alias": "companyCategory",
+          "DataType": "umb://data-type/f0bc4bfbb49940d6ba86058885a5178c",
+          "Name": "CompanyCategory",
+          "SortOrder": 3
+        },
+        {
+          "Key": "aa011f53-f128-4be9-93a1-2677e9119d91",
+          "Alias": "zip",
+          "DataType": "umb://data-type/e0a0e0ed35bc4ec482b75a2be503e622",
+          "Name": "Zip",
+          "SortOrder": 8
+        },
+        {
+          "Key": "e4f75677-757f-4a98-b025-8e706841218d",
+          "Alias": "address",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Address",
+          "SortOrder": 5
+        },
+        {
+          "Key": "ef462918-88a3-4161-8f6f-04377cb8405d",
+          "Alias": "externalId",
+          "DataType": "umb://data-type/f0bc4bfbb49940d6ba86058885a5178c",
+          "Name": "ExternalId"
+        }
+      ]
+    }
+  ],
+  "PropertyTypes": [],
+  "Udi": "umb://document-type/bc69ea19a6c840d4a33e01c587a027eb",
+  "Dependencies": [
+    {
+      "Udi": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/76fc22d959b64a00afdc9bdf5590c0dd",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/7a650a16a03c4447a8edf4f184672911",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/a6eee56c7a6546a99af8685e1d453a5e",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/a8cdee68feb84333a3f481a46ccb6b44",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/e0a0e0ed35bc4ec482b75a2be503e622",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/f0bc4bfbb49940d6ba86058885a5178c",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type/7f52f3aa18f3459d909367c6621285d9",
+      "Ordering": true
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
+  "__version": "13.0.4"
+}

@@ -1,27 +1,22 @@
 {
-  "Name": "Boards",
-  "Alias": "boards",
+  "Name": "Companies",
+  "Alias": "companies",
   "AllowedTemplates": [],
   "HistoryCleanup": {},
-  "Icon": "icon-meeting color-amber",
+  "Icon": "icon-users-alt color-indigo",
   "Thumbnail": "folder.png",
   "Permissions": {
-    "AllowedChildContentTypes": [
-      "umb://document-type/bed1d6b70e944771810bc5153adf80f4"
-    ]
+    "AllowedChildContentTypes": []
   },
   "Parent": "umb://document-type-container/3767e51e2a094bce91970e131b9932f8",
   "CompositionContentTypes": [],
   "PropertyGroups": [],
   "PropertyTypes": [],
-  "Udi": "umb://document-type/e8f78e8e71b4473e99ba2bfcb047f5f0",
+  "Udi": "umb://document-type/7f52f3aa18f3459d909367c6621285d9",
   "Dependencies": [
     {
       "Udi": "umb://document-type-container/3767e51e2a094bce91970e131b9932f8",
       "Ordering": true
-    },
-    {
-      "Udi": "umb://document-type/bed1d6b70e944771810bc5153adf80f4"
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
