@@ -11,7 +11,7 @@
     var sections = Model.Value<IEnumerable<BlockGridItem>>("sections");
 
     IEnumerable<IPublishedContent> classCategories = Umbraco.ContentAtRoot()
-        .DescendantsOrSelfOfType("categoryPage").Where(x => x.IsVisible()).OrderBy(p => p.Name);
+        .DescendantsOrSelfOfType("categoryPage").Where(x => x.IsVisible() && x.Children.Count() > 0).OrderBy(p => p.Name);
 
 }
 
@@ -45,7 +45,7 @@
                     {
                         <p class="px-2 px-md-0">@classCategory.GetProperty("description").GetSourceValue()</p>
                     }
-                    <a href="/products/products?category=@classCategory.Name" class="mini-card__link fs-normal mt-auto stretched-link text-decoration-none fw-bold">
+                    <a href="@classCategory.Url()" class="mini-card__link fs-normal mt-auto stretched-link text-decoration-none fw-bold">
                         Views Offerings
                         <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M0.82077 8L12.0313 8" stroke="#2560B9" stroke-width="1.37143" stroke-linecap="round" stroke-linejoin="round" />
