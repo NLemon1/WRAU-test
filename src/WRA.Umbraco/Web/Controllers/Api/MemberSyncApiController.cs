@@ -127,5 +127,57 @@ public class MemberSyncApiController : ApiController
 
     }
 
+    [HttpPost]
+    [Route("SyncaAllMembers")]
+    public async Task<IActionResult> SyncAllMembers()
+    {
+        var membersResp = await _wraExternalApiService.GetMembers();
+        var members = JsonSerializer.Deserialize<List<MemberDto>>(membersResp.Content);
+        var members1 = JsonSerializer.Deserialize<SearchResponse<MemberDto>>(membersResp.Content);
+
+        foreach (var member in members)
+        {
+            await _WRAMemberManagementService.Create(member);
+        }
+        return Ok();
+    }
+
+
+    [HttpPost]
+    [Route("CreateCompany")]
+    public async Task<IActionResult> CreateCompany(CompanyDto company)
+    {
+        var result = await _WRAMemberManagementService.CreateCompany(company);
+        if (result == null)
+        {
+            return StatusCode(System.Net.HttpStatusCode.InternalServerError);
+        }
+        return Ok(result.Id);
+    }
+
+    [HttpPost]
+    [Route("CreateActiveCompanySubscription")]
+    public async Task<IActionResult> CreateActiveCompanySubscription(WraCompanySubscriptionDto companySubscription)
+    {
+        var result = await _WRAMemberManagementService.CreateActiveCompanySubscription(companySubscription);
+        if (result == null)
+        {
+            return StatusCode(System.Net.HttpStatusCode.InternalServerError);
+        }
+        return Ok(result.Id);
+    }
+
+
+}
+
+class SearchResponse<T>
+{
+    public List<T> Data { get; set; }
+    public int CurrentPage { get; set; }
+    public int TotalPages { get; set; }
+    public int TotalCount { get; set; }
+    public int PageSize { get; set; }
+    public bool HasPreviousPage { get; set; }
+    public bool HasNextPage { get; set; }
 
 }

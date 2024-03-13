@@ -113,6 +113,14 @@ namespace WRA.Umbraco.Models
 		public virtual string City => this.Value<string>(_publishedValueFallback, "city");
 
 		///<summary>
+		/// Company
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.2.0+7dff3a3")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("company")]
+		public virtual global::Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent Company => this.Value<global::Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent>(_publishedValueFallback, "company");
+
+		///<summary>
 		/// Company Id
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.2.0+7dff3a3")]

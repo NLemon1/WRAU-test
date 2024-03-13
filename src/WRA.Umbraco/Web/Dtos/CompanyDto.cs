@@ -1,11 +1,12 @@
 using System;
 using System.Text.Json.Serialization;
 
-namespace WRA.Umbraco.Models.Dtos.Commerce
+namespace WRA.Umbraco.Dtos
 {
     public class CompanyDto
     {
-        [JsonPropertyName("ExternalId")]
+        [JsonPropertyName("id")]
+        public string ExternalId { get; set; }
         public string iMISId { get; set; }
         public string organizationCode { get; set; }
         public Guid memberTypeId { get; set; }

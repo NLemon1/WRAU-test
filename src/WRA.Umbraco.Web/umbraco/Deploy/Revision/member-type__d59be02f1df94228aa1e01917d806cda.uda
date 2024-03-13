@@ -212,6 +212,13 @@
           "SortOrder": 11
         },
         {
+          "Key": "ed0d2c6a-3d51-4ed6-a528-f13f06ea006a",
+          "Alias": "company",
+          "DataType": "umb://data-type/fd1e0da556064862b6795d0cf3a52a59",
+          "Name": "Company",
+          "SortOrder": 29
+        },
+        {
           "Key": "ef7d56f7-1a7e-4c11-b51a-589069f690fc",
           "Alias": "externalId",
           "DataType": "umb://data-type/f0bc4bfbb49940d6ba86058885a5178c",
@@ -260,6 +267,10 @@
     },
     {
       "Udi": "umb://data-type/f0bc4bfbb49940d6ba86058885a5178c",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/fd1e0da556064862b6795d0cf3a52a59",
       "Ordering": true
     }
   ],

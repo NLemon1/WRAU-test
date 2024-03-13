@@ -1,7 +1,9 @@
 
+using System.Drawing;
 using System.Runtime.CompilerServices;
 using Microsoft.AspNetCore.Identity;
 using Umbraco.Cms.Core.Models;
+using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Cms.Core.Scoping;
 using Umbraco.Cms.Core.Security;
 using Umbraco.Cms.Core.Services;
@@ -68,6 +70,10 @@ public class WRAMemberManagementService
 
         // updates all the fields on the user
         newMember.UpdateWRAMemberProperties(member);
+        // set the complex properties such as company and subscriptions
+        var matchingCompany = GetCompany(member.CompanyId);
+        newMember.SetValue("company", matchingCompany.GetUdi());
+        // newMember.SetValue("subscriptions", member.Subscriptions.Select(s => s.Id).ToArray());
         // since a new member could potentially not exist in WRA's 
         newMember.IsApproved = false;
 
@@ -288,7 +294,7 @@ public class WRAMemberManagementService
         return board;
     }
 
-    public async Task<IContent> CreateActiveSubscription(WraCompanySubscriptionDto request)
+    public async Task<IContent> CreateActiveCompanySubscription(WraCompanySubscriptionDto request)
     {
         var ActiveSubscriptionsParentNode = _searchService.Search(ActiveSubscriptions.ModelTypeAlias)?
             .FirstOrDefault();
@@ -305,13 +311,16 @@ public class WRAMemberManagementService
                 ActiveSubscriptionsParentNode.Content.Id,
                 CompanySubscription.ModelTypeAlias);
 
-        var memberCompany = await GetCompany(request.CompanyId);
+        var subscriptionCompany = GetCompany(request.CompanyId);
+        if (subscriptionCompany == null)
+        {
+            throw new InvalidOperationException("Company does not exist in Umbraco.");
+        }
 
         subscription.SetValue("externalId", request.Id);
-        subscription.SetValue("company", memberCompany.GetUdi());
-        // subscription.SetValue("subscriptionType", request.);
-        // subscription.SetValue("startDate", request.StartDate);
-        // subscription.SetValue("endDate", request.EndDate);
+        // subscription.SetValue("company", subscriptionCompany.GetUdi());
+        subscription.SetValue("startDate", request.BeginDate);
+        subscription.SetValue("endDate", request.PaidThru);
         subscription.SetValue("status", request.Status);
 
         _contentService.SaveAndPublish(subscription);
@@ -319,18 +328,62 @@ public class WRAMemberManagementService
         return subscription;
     }
 
-    public async Task<IContent> GetCompany(string companyId)
+    #region  companies
+    // private async Task<IContent> TieCompanyToSubscription(string companyId)
+    // {
+    //     var company = _searchService.Search(Company.ModelTypeAlias)?
+    //         .FirstOrDefault(x => x.Content.Value("externalId") == companyId);
+
+    //     company.Content.va("subscriptions", companyId);
+
+    //     return company?.Content as IContent;
+    // }
+    public IPublishedContent GetCompany(string companyId)
     {
         var company = _searchService.Search(Company.ModelTypeAlias)?
-            .FirstOrDefault(x => x.Content.Value("externalId") == companyId);
+            .FirstOrDefault(x => x.Content.Value("externalId").Equals(companyId));
 
-        return company?.Content as IContent;
+        var content = company.Content;
+        return content;
     }
 
-    // public async Task<IMember> GetMember(string email)
-    // {
-    //     return _searchService.get(email);
-    // }
+    public async Task<IContent> CreateCompany(CompanyDto companyDto)
+    {
+        var CompaniesContainer = _searchService.Search(Companies.ModelTypeAlias)?
+            .FirstOrDefault();
+
+        var existingCompany = GetCompany(companyDto.ExternalId);
+        var company = existingCompany != null ? existingCompany as IContent :
+         _contentService.Create(companyDto.name, CompaniesContainer.Content.Id, Company.ModelTypeAlias);
+
+
+        await SetCompanyProperties(company, companyDto);
+        _contentService.SaveAndPublish(company);
+        return company;
+    }
+
+    public Task SetCompanyProperties(IContent company, CompanyDto companyDto)
+    {
+        company.SetValue("externalId", companyDto.ExternalId);
+        company.SetValue("organizationCode", companyDto.organizationCode);
+        company.SetValue("memberTypeId", companyDto.memberTypeId);
+        company.SetValue("companyCategory", companyDto.category);
+        company.SetValue("status", companyDto.status);
+        company.SetValue("address", companyDto.address);
+        company.SetValue("city", companyDto.city);
+        company.SetValue("state", companyDto.state);
+        company.SetValue("zip", companyDto.zip);
+        company.SetValue("email", companyDto.email);
+        company.SetValue("websiteUrl", companyDto.websiteUrl);
+
+        return Task.CompletedTask;
+
+        // public async Task<IMember> GetMember(string email)
+        // {
+        //     return _searchService.get(email);
+        // }
+    }
+    #endregion
 
     #endregion
 }

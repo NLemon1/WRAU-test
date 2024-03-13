@@ -6,7 +6,10 @@
   "Icon": "icon-users-alt color-indigo",
   "Thumbnail": "folder.png",
   "Permissions": {
-    "AllowedChildContentTypes": []
+    "AllowedAtRoot": true,
+    "AllowedChildContentTypes": [
+      "umb://document-type/bc69ea19a6c840d4a33e01c587a027eb"
+    ]
   },
   "Parent": "umb://document-type-container/3767e51e2a094bce91970e131b9932f8",
   "CompositionContentTypes": [],
@@ -17,6 +20,9 @@
     {
       "Udi": "umb://document-type-container/3767e51e2a094bce91970e131b9932f8",
       "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type/bc69ea19a6c840d4a33e01c587a027eb"
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",

@@ -342,5 +342,9 @@ namespace WRA.Umbraco
         {
             return Udi.Create(Constants.UdiEntityType.Document, content.Key);
         }
+        public static Udi? GetUdi(this IPublishedContent content)
+        {
+            return Udi.Create(Constants.UdiEntityType.Document, content.Key);
+        }
     }
 }

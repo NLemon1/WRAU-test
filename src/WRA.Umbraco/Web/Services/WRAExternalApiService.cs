@@ -1,3 +1,4 @@
+using Lucene.Net.Analysis.Core;
 using RestSharp;
 using RestSharp.Authenticators;
 
@@ -49,6 +50,26 @@ public class WRAExternalApiService
         var options = new RestClientOptions("https://app2.wra.org/umbraco/api/v1");
         var client = new RestClient(options);
         var request = new RestRequest("localboard");
+        request.AddHeader("X-API-KEY", _token);
+        var response = await client.GetAsync(request);
+
+        return response;
+    }
+    public async Task<RestResponse> GetMembers()
+    {
+        var options = new RestClientOptions("https://app2.wra.org/umbraco/api/v1");
+        var client = new RestClient(options);
+        var request = new RestRequest("member/search").AddBody(new { keyword = "", pageSize = 50, pageNumber = 1 });
+        request.AddHeader("X-API-KEY", _token);
+        var response = await client.PostAsync(request);
+
+        return response;
+    }
+    public async Task<RestResponse> GetCompanies()
+    {
+        var options = new RestClientOptions("https://app2.wra.org/umbraco/api/v1");
+        var client = new RestClient(options);
+        var request = new RestRequest("member/search").AddBody(new { keyword = "", pageSize = 50, pageNumber = 1 });
         request.AddHeader("X-API-KEY", _token);
         var response = await client.GetAsync(request);
 
