@@ -170,6 +170,13 @@ public class ProductSyncApiController : ApiController
         }
     }
 
+    [HttpPost]
+    [Route("SyncProduct")]
+    public async Task SyncProduct(WraProductDto product)
+    {
+        await _WRAProductManagementService.CreateProduct(product);
+    }
+
 
     private void SetProductProperties(IContent content, WraProductDto productDto, StoreReadOnly? store)
     {

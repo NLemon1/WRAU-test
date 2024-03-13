@@ -2,6 +2,7 @@ using My.Custom.Swagger;
 using WRA.Umbraco.Services;
 using WRA.Umbraco.Extensions;
 using WRA.Umbraco.Events.ServiceBusSubscriptions;
+using Umbraco.Commerce.Extensions;
 
 namespace WRA.Umbraco.Web
 {

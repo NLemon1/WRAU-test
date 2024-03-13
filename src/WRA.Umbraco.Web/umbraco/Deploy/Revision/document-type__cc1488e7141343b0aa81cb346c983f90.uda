@@ -1,0 +1,26 @@
+{
+  "Name": "Subscription",
+  "Alias": "subscription",
+  "AllowedTemplates": [],
+  "HistoryCleanup": {},
+  "Icon": "icon-infinity color-light-blue",
+  "Thumbnail": "folder.png",
+  "Permissions": {
+    "AllowedChildContentTypes": []
+  },
+  "Parent": "umb://document-type/6ed103f65d4e47759105d341370c1690",
+  "CompositionContentTypes": [
+    "umb://document-type/6ed103f65d4e47759105d341370c1690"
+  ],
+  "PropertyGroups": [],
+  "PropertyTypes": [],
+  "Udi": "umb://document-type/cc1488e7141343b0aa81cb346c983f90",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type/6ed103f65d4e47759105d341370c1690",
+      "Ordering": true
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
+  "__version": "13.0.4"
+}

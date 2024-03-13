@@ -69,7 +69,7 @@ public class WraProductDto
     public DateTime StartDate { get; set; }
 
     [JsonPropertyName("endDate")]
-    public DateTime EndDate { get; set; }
+    public DateTime? EndDate { get; set; }
 
     [JsonPropertyName("eventStartDate")]
     public DateTime? EventStartDate { get; set; }

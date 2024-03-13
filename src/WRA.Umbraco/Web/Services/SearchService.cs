@@ -132,6 +132,29 @@ public class SearchService
         }
     }
 
+    // public IEnumerable<PublishedSearchResult> SearchForMembers(string searchTerm)
+    // {
+    //     if (_examineManager.TryGetIndex(Constants.UmbracoIndexes.MembersIndexName, out IIndex index))
+    //     {
+    //         var q = $"+(__NodeTypeAlias:{MemberPage.ModelTypeAlias})";
+
+    //         if (!searchTerm.IsNullOrWhiteSpace())
+    //         {
+    //             q += $" +name:{searchTerm}";
+    //         }
+
+    //         var searcher = index.Searcher;
+    //         var query = searcher.CreateQuery().NativeQuery(q);
+    //         var results = _publishedContentQuery
+    //             .Search(query.OrderBy(new SortableField("name", SortType.String)));
+
+    //         foreach (var result in results)
+    //         {
+    //             yield return result;
+    //         }
+    //     }
+    // }
+
     // public IEnumerable<PublishedSearchResult> SearchProductsBySubCategory(string subCategory, int? collectionId = null)
     // {
 

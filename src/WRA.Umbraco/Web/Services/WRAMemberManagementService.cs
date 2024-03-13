@@ -1,4 +1,5 @@
 
+using System.Runtime.CompilerServices;
 using Microsoft.AspNetCore.Identity;
 using Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Core.Scoping;
@@ -122,7 +123,7 @@ public class WRAMemberManagementService
     {
 
         // TODO: make membergroups an array for one to many relationship.
-        var memberGroup = mdto.MemberType switch
+        var memberGroup = mdto.MemberTypeCode switch
         {
             "MDR" => "DesignatedRealtor",
             "ST" => "WRA Member",
@@ -286,6 +287,50 @@ public class WRAMemberManagementService
 
         return board;
     }
+
+    public async Task<IContent> CreateActiveSubscription(WraCompanySubscriptionDto request)
+    {
+        var ActiveSubscriptionsParentNode = _searchService.Search(ActiveSubscriptions.ModelTypeAlias)?
+            .FirstOrDefault();
+
+        var existingSubscription = _searchService.Search(CompanySubscription.ModelTypeAlias)?
+            .FirstOrDefault(x => x.Content.Value("externalId") == request.Id);
+
+        bool subscriptionExists = existingSubscription != null;
+
+        var subscription = subscriptionExists ?
+            existingSubscription.Content as IContent :
+            _contentService.Create(
+                request.ProductName,
+                ActiveSubscriptionsParentNode.Content.Id,
+                CompanySubscription.ModelTypeAlias);
+
+        var memberCompany = await GetCompany(request.CompanyId);
+
+        subscription.SetValue("externalId", request.Id);
+        subscription.SetValue("company", memberCompany.GetUdi());
+        // subscription.SetValue("subscriptionType", request.);
+        // subscription.SetValue("startDate", request.StartDate);
+        // subscription.SetValue("endDate", request.EndDate);
+        subscription.SetValue("status", request.Status);
+
+        _contentService.SaveAndPublish(subscription);
+
+        return subscription;
+    }
+
+    public async Task<IContent> GetCompany(string companyId)
+    {
+        var company = _searchService.Search(Company.ModelTypeAlias)?
+            .FirstOrDefault(x => x.Content.Value("externalId") == companyId);
+
+        return company?.Content as IContent;
+    }
+
+    // public async Task<IMember> GetMember(string email)
+    // {
+    //     return _searchService.get(email);
+    // }
 
     #endregion
 }

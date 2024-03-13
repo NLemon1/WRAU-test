@@ -1,0 +1,14 @@
+{
+  "Name": "Company Subscription - Paid Through - DateTime",
+  "Alias": "",
+  "EditorAlias": "Umbraco.DateTime",
+  "DatabaseType": "Date",
+  "Configuration": {
+    "format": "YYYY-MM-DD HH:mm:ss",
+    "offsetTime": false
+  },
+  "Udi": "umb://data-type/1aef004bfe9344a98a28fe11707a9b7d",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
+  "__version": "13.0.4"
+}

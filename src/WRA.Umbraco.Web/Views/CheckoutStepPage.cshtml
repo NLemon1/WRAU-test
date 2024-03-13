@@ -21,9 +21,23 @@
 
 <div class="checkout-wrapper">
     <div class="container py-5 py-lg-9">
-        <h1 class="mb-4">Checkout</h1>
-
-        <partial name="CheckoutBreadcrumbs"/>
+        @if (Model.ShortStepName == "Confirmation")
+        {
+            <div class="d-inline-flex align-items-center mb-4">
+                <div class="me-3">
+                    <i class="fa fa-circle-check" width="46" height="46" aria-hidden="true" style="font-size: 46px; color: #2560b9;"></i>
+                </div>
+                <div>
+                    <p class="mb-0">Order #@(Model.Order.OrderNumber ?? Model.Order.CartNumber)</p>
+                    <h1 class="mb-0">Thank You!</h1>
+                </div>
+            </div>
+        }
+        else
+        {
+            <h1 class="mb-4">Checkout</h1>
+            <partial name="CheckoutBreadcrumbs" />
+        }
 
         <div class="row">
             <div class="col-12 col-lg-5 col-xl-4 offset-xl-1 order-lg-1 mb-5 mb-lg-0 pt-4 pt-lg-0 checkout-sidebar">

@@ -57,7 +57,7 @@ public class WraMemberSubscriptionService : BackgroundService
         var options = new RestClientOptions(_baseUrl);
         var client = new RestClient(options);
         // Check if this member already exists in umbraco. If not call Create.
-        if (memberDto?.MemberId == null || memberDto.MemberId == 0)
+        if (memberDto?.UmbracoId == null || memberDto.UmbracoId == "0")
         {
             var jsonBody = JsonSerializer.Serialize(memberDto);
             _logger.LogInformation("Sending To Member Creation Api...");

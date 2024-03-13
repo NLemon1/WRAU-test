@@ -8,6 +8,8 @@ using Umbraco.Cms.Core.Web;
 using Umbraco.Extensions;
 using WRA.Umbraco.Models;
 using System.Text;
+using Umbraco.Cms.Core.Models.PublishedContent;
+using Umbraco.Cms.Core.Services;
 
 namespace WRA.Umbraco.Events
 {

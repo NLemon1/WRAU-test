@@ -1,0 +1,88 @@
+{
+  "Name": "Company Subscription",
+  "Alias": "companySubscription",
+  "AllowedTemplates": [],
+  "HistoryCleanup": {},
+  "Icon": "icon-infinity color-indigo",
+  "Thumbnail": "folder.png",
+  "Permissions": {
+    "AllowedChildContentTypes": []
+  },
+  "Parent": "umb://document-type/a81b9d30d11f4ace93967ef93267b08c",
+  "CompositionContentTypes": [
+    "umb://document-type/a81b9d30d11f4ace93967ef93267b08c"
+  ],
+  "PropertyGroups": [
+    {
+      "Key": "5bbf1d3f-1b37-49c7-a3b7-f57ff182ad3a",
+      "Name": "Properties",
+      "Alias": "properties",
+      "PropertyTypes": [
+        {
+          "Key": "19f712ae-0b1d-49ca-9dae-8916a8eb21ad",
+          "Alias": "paidThrough",
+          "DataType": "umb://data-type/1aef004bfe9344a98a28fe11707a9b7d",
+          "Name": "Paid Through",
+          "SortOrder": 3
+        },
+        {
+          "Key": "536255b6-190e-43b9-9142-d9cb88126750",
+          "Alias": "beginDate",
+          "DataType": "umb://data-type/23b802c8b3d44d5b9fe466aea6f0baaf",
+          "Name": "Begin Date",
+          "SortOrder": 2
+        },
+        {
+          "Key": "5c0258a5-a7f4-4308-8fa8-55451d155c57",
+          "Alias": "member",
+          "DataType": "umb://data-type/1ea2e01febd84ce18d716b1149e63548",
+          "Name": "Member",
+          "SortOrder": 1
+        },
+        {
+          "Key": "6329ba48-e5ad-47ff-bf13-b3cc94b34402",
+          "Alias": "externalId",
+          "DataType": "umb://data-type/f0bc4bfbb49940d6ba86058885a5178c",
+          "Name": "External Id",
+          "SortOrder": 4
+        },
+        {
+          "Key": "87049c9f-670a-4d00-9c7c-3002c0cfde9e",
+          "Alias": "company",
+          "DataType": "umb://data-type/fd1e0da556064862b6795d0cf3a52a59",
+          "Name": "Company"
+        }
+      ]
+    }
+  ],
+  "PropertyTypes": [],
+  "Udi": "umb://document-type/16b2d214ad3c40d7b06218e0db35f3a5",
+  "Dependencies": [
+    {
+      "Udi": "umb://data-type/1aef004bfe9344a98a28fe11707a9b7d",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/1ea2e01febd84ce18d716b1149e63548",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/23b802c8b3d44d5b9fe466aea6f0baaf",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/f0bc4bfbb49940d6ba86058885a5178c",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/fd1e0da556064862b6795d0cf3a52a59",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type/a81b9d30d11f4ace93967ef93267b08c",
+      "Ordering": true
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
+  "__version": "13.0.4"
+}

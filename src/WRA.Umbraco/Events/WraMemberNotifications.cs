@@ -29,13 +29,13 @@ public class WraMemberNotifications : INotificationHandler<MemberSavedNotificati
             MemberDto member = memberNotif.AsDto();
 
             // Write to the logs every time a member is saved.
-            _logger.LogInformation($"Member {member.MemberId} has been saved and notification published! name: {member.FullName} WraID: {member.Id}");
+            _logger.LogInformation($"Member ({member.FullName}) has been saved and notification published! name: {member.FullName} WraID: {member.ExternalId} umbracoId: {member.UmbracoId} email: {member.Email}");
 
             // we need to send passsword hash as well. 
             // WRA deserializes this and adds it to their system so that user do not have out of sync passwords
             // this property wont be set by default as I wont it to only be set in one instance.
-            var pw = memberNotif.RawPasswordValue;
-            member.SecurtyHash = pw;
+            // var pw = memberNotif.RawPasswordValue;
+            // member. = pw;
 
 
             //TODO: create static options class
@@ -43,7 +43,7 @@ public class WraMemberNotifications : INotificationHandler<MemberSavedNotificati
             string memberJson = JsonSerializer.Serialize(member, options);
             _logger.LogInformation("Sending to Queue...");
             await _queueService.SendMessage(memberJson, "website-prod-member");
-            _logger.LogInformation($"Message sent for memberId: {member.MemberId} - {member.Email}");
+            _logger.LogInformation($"Message sent for external memberId: {member.UmbracoId} - {member.Email}");
 
         }
     }

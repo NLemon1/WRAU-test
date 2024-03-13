@@ -6,6 +6,7 @@ using Umbraco.Commerce.Extensions;
 using WRA.Umbraco.Dtos;
 using Umbraco.Cms.Core.Models;
 using System.Text;
+using Umbraco.Cms.Core;
 namespace WRA.Umbraco
 {
     public static class PublishedContentExtensions
@@ -112,7 +113,7 @@ namespace WRA.Umbraco
         {
             MemberDto mdto = new MemberDto
             {
-                MemberId = m.Id,
+                ExternalId = m.GetValue<string>("externalId"),
                 Email = m.Email,
                 BrokerFullName = m.GetValue<string>("brokerFullName").SafeString(),
                 BrokerEmail = m.GetValue<string>("brokerEmail").SafeString(),
@@ -123,7 +124,7 @@ namespace WRA.Umbraco
                 CellPhone = m.GetValue<string>("cellPhone").SafeString(),
                 CanUseHotline = m.GetValue<bool>("canUseHotline"),
                 CompanyLogoUrl = m.GetValue<string>("companyLogoUrl").SafeString(),
-                CompanyId = m.GetValue<int>("companyId"),
+                CompanyId = m.GetValue<string>("companyId"),
                 CompanyName = m.GetValue<string>("companyName").SafeString(),
                 //Getber.SetValue("companySubscriptions", mdto.CompanySubscriptions);
                 Fax = m.GetValue<string>("fax").SafeString(),
@@ -131,11 +132,10 @@ namespace WRA.Umbraco
                 LastName = m.GetValue<string>("lastName").SafeString(),
                 Gender = m.GetValue<string>("gender").SafeString(),
                 HomePhone = m.GetValue<string>("homePhone").SafeString(),
-                Id = m.GetValue<int>("externalId"),
                 ImageUrl = m.GetValue<string>("imageUrl").SafeString(),
                 JoinDate = m.GetValue<DateTime>("joinDate"),
                 MandatoryHotlineLetter = m.GetValue<bool>("mandatoryHotlineLetter"),
-                NrdsId = m.GetValue<string>("nrdsId").SafeString(),
+                NRDSId = m.GetValue<string>("nrdsId").SafeString(),
                 PaidThruDate = m.GetValue<DateTime>("paidThruDate"),
                 Prefix = m.GetValue<string>("prefix").SafeString(),
                 Suffix = m.GetValue<string>("suffix").SafeString(),
@@ -211,6 +211,7 @@ namespace WRA.Umbraco
         /// <returns></returns>
         public static IMember? UpdateWRAMemberProperties(this IMember member, MemberDto mdto)
         {
+            member.SetValue("externalId", mdto.ExternalId);
             member.SetValue("brokerFullName", mdto.BrokerFullName);
             member.SetValue("brokerEmail", mdto.BrokerEmail);
             member.SetValue("address1", mdto.Address1);
@@ -228,11 +229,10 @@ namespace WRA.Umbraco
             member.SetValue("lastName", mdto.LastName);
             member.SetValue("gender", mdto.Gender);
             member.SetValue("homePhone", mdto.HomePhone);
-            member.SetValue("externalId", mdto.Id);
             member.SetValue("imageUrl", mdto.ImageUrl);
             member.SetValue("joinDate", mdto.JoinDate);
             member.SetValue("mandatoryHotlineLetter", mdto.MandatoryHotlineLetter);
-            member.SetValue("nrdsId", mdto.NrdsId);
+            member.SetValue("nrdsId", mdto.NRDSId);
             member.SetValue("paidThruDate", mdto.PaidThruDate);
             member.SetValue("prefix", mdto.Prefix);
             member.SetValue("suffix", mdto.Suffix);
@@ -337,6 +337,10 @@ namespace WRA.Umbraco
         public static string SafeString(this object? item)
         {
             return item?.ToString() ?? string.Empty;
+        }
+        public static Udi? GetUdi(this IContent content)
+        {
+            return Udi.Create(Constants.UdiEntityType.Document, content.Key);
         }
     }
 }

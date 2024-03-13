@@ -74,7 +74,7 @@ public class WRAProductManagementService
         if (collectionPage == null) { _logger.LogError($"No collection match for product{product.Id}"); return; }
 
         // while we have the relvent info, lets grab the store ID for when we need it for currency stuff...
-        var store = collectionPage.AncestorOrSelf<Home>()?.Store!;
+        var store = collectionPage.GetStore();
 
 
         // We have our colleciton page, so now lets see if it contains a record that already exists...
