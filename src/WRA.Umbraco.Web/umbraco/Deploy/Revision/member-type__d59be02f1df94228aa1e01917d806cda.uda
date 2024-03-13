@@ -177,6 +177,13 @@
           "SortOrder": 21
         },
         {
+          "Key": "b44911f5-a8c0-416e-9d39-6be77acda068",
+          "Alias": "localBoards",
+          "DataType": "umb://data-type/83289ee15c5e48aba8b52fe1bb3c9838",
+          "Name": "Local Boards",
+          "SortOrder": 30
+        },
+        {
           "Key": "b45ecb11-7286-4e0d-b121-83a776e9351d",
           "Alias": "zip",
           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
@@ -247,6 +254,10 @@
     },
     {
       "Udi": "umb://data-type/21d9555ffa684cad80cbad6a3570fbe7",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/83289ee15c5e48aba8b52fe1bb3c9838",
       "Ordering": true
     },
     {

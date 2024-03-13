@@ -1,6 +1,7 @@
 
 using System.Drawing;
 using System.Runtime.CompilerServices;
+using GlobalPayments.Api.Entities;
 using Microsoft.AspNetCore.Identity;
 using Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Core.Models.PublishedContent;
@@ -319,15 +320,19 @@ public class WRAMemberManagementService
                 CompanySubscription.ModelTypeAlias);
 
         var subscriptionCompany = GetCompany(request.CompanyId);
-        if (subscriptionCompany == null)
-        {
-            throw new InvalidOperationException("Company does not exist in Umbraco.");
-        }
+        if (subscriptionCompany == null) { throw new InvalidOperationException("Company does not exist in Umbraco."); }
+
+        var subscriptionProduct = _searchService.Search(ProductPage.ModelTypeAlias)?
+            .FirstOrDefault(x => x.Content.Value("productId").Equals(request.ProductId));
+        if (subscriptionProduct == null) { throw new InvalidOperationException("Product does not exist in Umbraco."); }
+
+        // var member = _memberService.GetByEmail(request.Email);
 
         subscription.SetValue("externalId", request.Id);
-        // subscription.SetValue("company", subscriptionCompany.GetUdi());
-        subscription.SetValue("startDate", request.BeginDate);
-        subscription.SetValue("endDate", request.PaidThru);
+        subscription.SetValue("company", subscriptionCompany.GetUdi());
+        subscription.SetValue("subscriptionProduct", subscriptionProduct.Content.GetUdi());
+        subscription.SetValue("beginDate", request.BeginDate);
+        subscription.SetValue("paidThrough", request.PaidThru);
         subscription.SetValue("status", request.Status);
 
         _contentService.SaveAndPublish(subscription);
