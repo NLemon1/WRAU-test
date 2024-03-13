@@ -61,6 +61,10 @@ public class WRAMemberManagementService
         // supress any notification to prevent our listener from firing an "updated member" webhook back at the queue
         using var _ = scope.Notifications.Suppress();
 
+        // first check if the member already exists in the database
+        var existingMember = _memberService.GetByEmail(member.Email);
+        // if one exists, send to update method
+        if (existingMember != null) { return await Update(member); }
         // spin up an Imember rather than memberIdentity to avoid db locks.
         var newMember = _memberService.CreateMember(
             member.Email,
@@ -86,7 +90,7 @@ public class WRAMemberManagementService
         return newMember;
     }
 
-    public async Task<IMember?> Update(MemberDto reqMember)
+    public async Task<IMember?> Update(MemberDto member)
     {
         // crate a scope
         using ICoreScope scope = _coreScopeProvider.CreateCoreScope(autoComplete: true);
@@ -94,12 +98,15 @@ public class WRAMemberManagementService
         using var _ = scope.Notifications.Suppress();
 
         // Query by email as they are unique in this site and in WRA's records.
-        var existingMember = _memberService.GetByEmail(reqMember.Email);
+        var existingMember = _memberService.GetByEmail(member.Email);
         if (existingMember == null) { return null; }
 
 
-        existingMember.UpdateWRAMemberProperties(reqMember);
-        await AssignMemberToMemberGroup(existingMember, reqMember);
+        existingMember.UpdateWRAMemberProperties(member);
+        var matchingCompany = GetCompany(member.CompanyId);
+
+        existingMember.SetValue("company", matchingCompany.GetUdi());
+        await AssignMemberToMemberGroup(existingMember, member);
 
         _memberService.Save(existingMember);
         return existingMember;
@@ -338,12 +345,12 @@ public class WRAMemberManagementService
 
     //     return company?.Content as IContent;
     // }
-    public IPublishedContent GetCompany(string companyId)
+    public IPublishedContent? GetCompany(string companyId)
     {
         var company = _searchService.Search(Company.ModelTypeAlias)?
             .FirstOrDefault(x => x.Content.Value("externalId").Equals(companyId));
 
-        var content = company.Content;
+        var content = company?.Content;
         return content;
     }
 
