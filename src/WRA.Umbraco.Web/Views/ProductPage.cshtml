@@ -5,12 +5,14 @@
 @using WRA.Umbraco.Services;
 @using WRA.Umbraco;
 @using Umbraco.Cms.Core.Models.Blocks;
+
 @inject WraProductService _wraProductService
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ProductPage>
 @using ContentModels = WRA.Umbraco.Models;
 
 @{
     var sections = Model.Value<IEnumerable<BlockGridItem>>("blockContent");
+    var settings = Umbraco.ContentAtRoot().FirstOrDefault(x => x.ContentType.Alias == "siteSettings");
 
     var discountsAttchedToProduct = _wraProductService.GetTimeBasedDiscounts(Model) ?? [];
     var multiVariantProductPage = Model as ProductPage;
@@ -89,6 +91,10 @@
                 var mainImage = Model.Images.FirstOrDefault();
 
                 <img class="img-fluid img-curved img-curved--large" src="@mainImage.GetCropUrl(552, 552).ToString()" alt="@(mainImage.Value("altText") ?? "")" />
+            } 
+            else if (settings.Value<IPublishedContent>("oGImageFallback") != null)
+            {
+                <img class="img-fluid img-curved img-curved--large" src="@(settings.Value<IPublishedContent>("oGImageFallback").Url(mode:UrlMode.Absolute))" alt="" />
             }
         </div>
         <div class="col-12 col-lg-6">

@@ -49,10 +49,8 @@
 
 @await Html.PartialAsync("blockgrid/default", sectionsTop)
 
-@* @if (Model.Parent?.Name == "Continuing Education")
-{ *@
 
-@if (Model.ProductBundles.Any())
+@if (Model.ProductBundles.Any() && @Model.Parent?.Name != "Professional Development")
 {
     int creditHours = 0;
 
@@ -121,9 +119,9 @@
             }
         </div>
     </div>
-    }
+}
 
-@* } *@
+
 
 <div class="container my-4 my-lg-6">
     <h2 class="js-listings-title h3 pt-4 mt-4 mt-lg-8 border-top border-medium mb-4">
@@ -142,20 +140,6 @@
     </div>
     <div class="position-relative" style="min-height: 350px;">
         <div class="js-product-collection row align-items-md-stretch g-4">
-        @*  LOAD ON SERVER SIDE TOO?
-            @if(Model.Products.Any()){
-            @foreach(var product in Model.Products)
-            {
-
-                <div class="card card--product">
-                    <div class="card-body">
-                        <h3 class="h5 card-title">@product.Name</h3>
-                        <p class="card-text">@product.ShortDescription</p>
-                        <a href="@product.Url()" class="btn btn-primary">View Product</a>
-                    </div>
-                </div>
-            }
-        } *@
         </div>
         <div class="js-results-loader search-loading" title="Please wait, loading.">
             <div class="lds-ring"><div></div><div></div><div></div><div></div></div>

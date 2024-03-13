@@ -51,7 +51,17 @@
                             {
                                 <p class="mb-3 fs-xs">Class <span class="ms-3 fw-semibold">Credit Hours: @bundleItem.Product.GetProperty("creditHours").GetSourceValue()</span></p>
                             }
-                            <h3 class="fw-bold fs-lg text-capitalize mb2_5">@bundleItem.Product.Name</h3>
+                            <h3 class="fw-bold fs-lg text-capitalize mb2_5">
+                                @if (bundleItem.Product.HasValue("alternateTitle"))
+                                {
+                                    @bundleItem.Product.Value("alternateTitle")
+                                } 
+                                else
+                                {
+                                    @bundleItem.Product.Name
+                                }
+                            </h3>
+
                             <div class="d-flex flex-row gap-3 mt-auto">
                                 <label for="@bundleItem.Product.Id" class="js-bundle-select btn btn-primary btn-sm w-50 py-3 d-flex flex-column justify-content-center" tabindex="1" role="button" aria-haspopup="dialog" aria-controls="bundleSelected" style="cursor:pointer">
                                     <span class="btn__select">Select</span>

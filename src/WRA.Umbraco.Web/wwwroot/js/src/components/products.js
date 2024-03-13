@@ -110,11 +110,12 @@ const products = () => {
         if (results.length > 0) {
 
             results.forEach((result) => {
-                //console.log(result)
+
                 const setCTA = result.productType == "Products" ? `<a href="${result.url}" id="add-to-cart" data-productid="${result.productId}" class="js-add-cart btn btn-secondary btn-sm border-0 flex-grow-1 py-3">Add To Cart</a>` : `<a href="${result.url}" id="view-product" class="btn btn-primary btn-sm flex-grow-1 py-3">See Details</a><a href="${result.url}" id="view-product" class="btn btn-secondary btn-sm border-0 flex-grow-1 py-3">Register</a>`;
 
                 const setDate = (result.productType == "Events" || result.productType == "Courses") && result.start !== null ? `<p class="fs-xs fw-bold mb-1">${formatDateTime(result.startDate, result.endDate, result.startTime, result.endTime)}</p>` : "";
                 const setCredits = result.creditHours !== 0 ? `<p class="fs-xs mb-1">Credit Hours: <span class="fw-bold"> ${result.creditHours}</span></p>` : "";
+                const setTaxonomy = result.taxonomy !== null ? `<p class="d-inline-block mb-4 mt-2_5 px-2 py-1 bg-white fw-semibold fs-sm text-uppercase">${result.taxonomy}</p>` : "";
 
                 productResults.innerHTML += (
                     `
@@ -122,7 +123,7 @@ const products = () => {
                         <div class="card-class bg-light p-4 h-100 d-flex flex-column align-items-start">
                             ${setDate}
                             ${setCredits}
-                            <p class="d-inline-block mb-4 mt-2_5 px-2 py-1 bg-white fw-semibold fs-sm text-uppercase">${result.taxonomy}</p>
+                            ${setTaxonomy}
                             <h3 class="fs-lg text-capitalize fw-semibold mb-4">${result.title}</h3>
 
                             <div class="d-block mb-1">
@@ -158,7 +159,7 @@ const products = () => {
     }
 
     const loadTaxonomyTerms = (results) => {
-        if (results.length > 0) {
+        if (results.length > 1) {
             results.forEach((result) => {
 
                 if (result.taxonomy != "All" && !taxonomyArray.includes(result.taxonomy, taxonomyArray)) {

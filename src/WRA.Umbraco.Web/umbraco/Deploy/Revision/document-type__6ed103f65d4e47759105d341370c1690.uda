@@ -91,7 +91,7 @@
           "Alias": "doorPrice",
           "DataType": "umb://data-type/cd32dc55ada2469db6c629dc907760c9",
           "Name": "Door Price",
-          "SortOrder": 5
+          "SortOrder": 4
         },
         {
           "Key": "67e9187c-ed9e-414c-a936-efa45e5be335",
@@ -99,7 +99,7 @@
           "DataType": "umb://data-type/9b641984c0214315bf3feeff86280582",
           "Description": "If product is a course/class, add numeric credit hour.",
           "Name": "Credit Hours",
-          "SortOrder": 6
+          "SortOrder": 5
         },
         {
           "Key": "6fbd417c-6362-4fe6-900a-ee2a0c82ec12",
@@ -107,7 +107,7 @@
           "DataType": "umb://data-type/c6bac0dd4ab945b18e30e4b619ee5da3",
           "Description": "Optional - Used for bundled course cards.",
           "Name": "Alternate Title",
-          "SortOrder": 2
+          "SortOrder": 6
         },
         {
           "Key": "81cddd0c-5cdb-4f9c-8b50-518197a542e4",
