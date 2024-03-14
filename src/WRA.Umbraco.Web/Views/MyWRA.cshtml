@@ -1,0 +1,83 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.MyWra>
+@using ContentModels = WRA.Umbraco.Models;
+@{
+    Layout = "~/Views/_Layout.cshtml";
+    var content = (ContentModels.MyWra)Model;
+}
+
+<div class="w-100">
+
+    <div class="row g-0">
+
+        <div class="col position-relative d-lg-none" aria-hidden="true">
+            <header class="page-header page-header--mywra">
+                <div class="container">
+                    <div class="d-flex flex-column align-items-center py-4">
+                        <div class="decorative-img-wrapper">
+                            <img src="https://placehold.co/300x300" class="img-fluid fit-cover" width="150" height="150" alt="" />
+                        </div>
+                        <h2 class="js-collection-title mt-4 mb-0 text-center">
+                            Welcome, George Lightburn
+                        </h2>
+                    </div>
+                </div>
+            </header>
+        </div>
+
+        <div class="col-12 col-lg-3" style="background-color: var(--bs-gray-10)">
+            <div class="mywra-left px-4">
+                <div class="border-top pt-4 mt-lg-9 border-dark d-block w-100"></div>
+                <div class="mb-3 pb-2 d-lg-none">
+                    <label class="visually-hidden" for="hot-tip-category">Select a category</label>
+                    <select id="mywra-mobile" class="form-select">
+                        @for (var i = 1; i < 6; i++)
+                        {
+                            <!option @(i == 1 ? "selected" : "") value="">My Education</!option>
+                        }
+                    </select>
+                </div>
+                <ul class="list-unstyled d-flex flex-column gap-4 d-none d-lg-block">
+                    @for (var i = 1; i < 6; i++)
+                    {
+                    <li>
+                        <a href="/" class="btn-mywra" @(i == 1 ? "aria-selected=true" : "")>My Education</a>
+                    </li>
+                    }
+                </ul>
+            </div>
+        </div>
+
+        <div class="col position-relative">
+            <header class="page-header page-header--mywra d-none d-lg-block pt-4">
+                <div class="container">
+                    <div class="container--sm position-relative mb-lg-n12">
+                        <div class="d-flex flex-row align-items-center">
+                            <div class="decorative-img-wrapper">
+                                <img src="https://placehold.co/300x300" class="img-fluid fit-cover" width="150" height="150" alt="" />
+                            </div>
+                            <h2 class="js-collection-title mb-0 ms-6">
+                                Welcome, George Lightburn
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="mywra-right container container--md ms-0 pt-5 pt-lg-12">
+
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ullamcorper dignissim cras tincidunt lobortis. Integer eget aliquet nibh praesent tristique magna sit amet purus. Volutpat lacus laoreet non curabitur gravida arcu. Libero nunc consequat interdum varius sit amet. Varius duis at consectetur lorem. Imperdiet massa tincidunt nunc pulvinar sapien et ligula ullamcorper malesuada. Eu volutpat odio facilisis mauris sit amet. Ipsum nunc aliquet bibendum enim facilisis gravida neque convallis a. Iaculis nunc sed augue lacus viverra vitae. Sed vulputate mi sit amet mauris commodo quis imperdiet. Congue nisi vitae suscipit tellus mauris a diam maecenas sed. Faucibus purus in massa tempor nec feugiat.
+
+                Consequat interdum varius sit amet. Etiam tempor orci eu lobortis elementum nibh. Mauris vitae ultricies leo integer malesuada nunc vel risus commodo. Iaculis at erat pellentesque adipiscing commodo elit at imperdiet. Lobortis scelerisque fermentum dui faucibus in ornare quam. Nulla facilisi morbi tempus iaculis urna id volutpat lacus laoreet. Id ornare arcu odio ut sem. Pretium nibh ipsum consequat nisl. Et pharetra pharetra massa massa ultricies mi quis hendrerit. Erat pellentesque adipiscing commodo elit at. Tincidunt eget nullam non nisi est. Adipiscing elit ut aliquam purus sit amet. Aenean vel elit scelerisque mauris pellentesque pulvinar pellentesque habitant. Ut diam quam nulla porttitor massa id. Mi in nulla posuere sollicitudin aliquam ultrices sagittis. Elit ullamcorper dignissim cras tincidunt. Vitae semper quis lectus nulla at. Magna sit amet purus gravida quis blandit. Nibh mauris cursus mattis molestie.
+
+                Quam vulputate dignissim suspendisse in est. In cursus turpis massa tincidunt dui ut ornare. Pulvinar etiam non quam lacus. Curabitur vitae nunc sed velit dignissim sodales ut eu. Egestas sed tempus urna et pharetra pharetra. Et netus et malesuada fames. Penatibus et magnis dis parturient montes nascetur ridiculus mus. Commodo odio aenean sed adipiscing diam donec adipiscing. Integer quis auctor elit sed vulputate mi. Magna fringilla urna porttitor rhoncus dolor purus non enim. Mi bibendum neque egestas congue quisque egestas. Arcu bibendum at varius vel pharetra vel. Elit eget gravida cum sociis natoque penatibus et. Iaculis at erat pellentesque adipiscing commodo elit. Fermentum odio eu feugiat pretium nibh. Ullamcorper a lacus vestibulum sed arcu. In metus vulputate eu scelerisque felis imperdiet proin fermentum leo.
+
+                Eget mi proin sed libero. Sed vulputate mi sit amet mauris commodo quis imperdiet. Magnis dis parturient montes nascetur ridiculus mus mauris vitae. Sit amet commodo nulla facilisi nullam vehicula ipsum. Sit amet mattis vulputate enim nulla aliquet porttitor. Tristique sollicitudin nibh sit amet commodo nulla. Condimentum lacinia quis vel eros donec ac odio tempor. Quis viverra nibh cras pulvinar mattis nunc sed blandit libero. Cursus mattis molestie a iaculis at erat pellentesque. Blandit aliquam etiam erat velit scelerisque in dictum non.
+
+                Tristique senectus et netus et malesuada. Sed faucibus turpis in eu mi bibendum neque egestas congue. Tincidunt tortor aliquam nulla facilisi cras fermentum odio eu. Tortor pretium viverra suspendisse potenti nullam ac tortor vitae. Tellus molestie nunc non blandit massa. Vel pharetra vel turpis nunc eget lorem. Commodo ullamcorper a lacus vestibulum sed arcu non odio. Massa sapien faucibus et molestie ac feugiat sed lectus. Vel facilisis volutpat est velit. Aliquet bibendum enim facilisis gravida neque. Nisi lacus sed viverra tellus in hac habitasse platea. Rhoncus dolor purus non enim.
+            </div>
+
+        </div>
+
+    </div>
+</div>

@@ -1,22 +1,25 @@
 .page-header {
     z-index: 1;
     position: relative;
-    overflow-x: hidden;
     display: flex;
     align-items: center;
     padding: 1rem 0;
     min-height: 160px;
     background-color: $gray-10;
 
-    @include media-breakpoint-up(md) {
-        min-height: 240px;
+    &:not(.page-header--mywra) {
+        overflow-x: hidden;
+
+        @include media-breakpoint-up(md) {
+            min-height: 240px;
+        }
     }
 
     &:before {
         content: '';
         z-index: -1;
         position: absolute;
-        top: 0;
+        top: -2px;
         right: 5vw;
         bottom: 0;
         width: 240px;
@@ -48,6 +51,36 @@
         &:before,
         &:after {
             display: none;
+        }
+    }
+
+    &.page-header--mywra {
+        min-height: 140px;
+
+        &:before {
+            width: 120px;
+            right: 0;
+
+            @include media-breakpoint-up(lg) {
+                right: 5vw;
+            }
+
+            @media screen and (min-width: 1254px) {
+                right: calc(50% - 418px);
+            }
+        }
+
+        &:after {
+            width: 120px;
+
+            @include media-breakpoint-up(lg) {
+                width: calc(5vw + 120px);
+            }
+
+            @media screen and (min-width: 1254px) {
+                left: calc(50% + 324px);
+                width: auto;
+            }
         }
     }
 }

@@ -87,15 +87,15 @@
     }
 }
 
-/*
+
 .decorative-img-wrapper {
     position: relative;
     overflow: visible;
     display: inline-block;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     
     @include media-breakpoint-up(lg) {
-        margin-bottom: 40px;
+        margin-bottom: 10px;
     }
     
     > img {
@@ -106,31 +106,22 @@
     &::after {
         content: "";
         position: absolute;
-        left: -20px;
-        bottom: -20px;
+        right: -10px;
+        bottom: -10px;
         z-index: 0;
         width: 100%;
         height: auto;
-        aspect-ratio: 550 / 310;
+        aspect-ratio: 1 / 1;
         background-color: $yellow;
-
-        @include media-breakpoint-up(lg) {
-            left: -40px;
-            bottom: -40px;
-        }
     }
 
     &--right {
         &::after {
-            left: 20px;
-
-            @include media-breakpoint-up(lg) {
-                left: 40px;
-            }
+            right: -10px;
         }
 
     }
 
 }
 
-    */
+   

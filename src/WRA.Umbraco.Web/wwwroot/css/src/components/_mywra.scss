@@ -1,0 +1,36 @@
+.mywra-left {
+    margin: 0 auto;
+
+    @include media-breakpoint-up(lg) {
+        max-width: 292px;
+        margin-right: 0;
+    }
+}
+
+.mywra-right {
+    min-height: 400px;
+}
+
+
+.btn-mywra {
+    display: block;
+    padding: 1.125rem 1.5rem;
+    border-radius: 0.25rem;
+    line-height: 1;
+    text-transform: uppercase;
+    transition: $btn-transition;
+    font-weight: 600;
+    color: $primary;
+    text-decoration: none;
+
+    &:focus,
+    &:hover {
+        background-color: $tertiary;
+        text-decoration: none;
+    }
+
+    &[aria-selected='true'] {
+        background-color: $primary;
+        color: white;
+    }
+}
