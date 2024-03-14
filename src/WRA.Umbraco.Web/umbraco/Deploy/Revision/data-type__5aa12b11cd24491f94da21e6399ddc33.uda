@@ -1063,6 +1063,8 @@
         "allowInAreas": true,
         "areas": [],
         "contentElementTypeKey": "9755c6ec-23d9-4993-81cf-26541fb17bfb",
+        "view": "~/App_Plugins/CustomBlockView/hotTipLibrary.html",
+        "stylesheet": "~/css/dist/global.css",
         "label": "",
         "editorSize": "medium",
         "inlineEditing": false,
