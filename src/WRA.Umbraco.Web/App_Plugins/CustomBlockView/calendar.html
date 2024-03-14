@@ -1,0 +1,52 @@
+﻿<style>
+    .calendar-block {
+        position: relative;
+    }
+
+    .calendar-block img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .calendar-block-overlay {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: transparent;
+
+        transition: background-color 250ms;
+    }
+
+    .calendar-block-label {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 1rem 1.25rem;
+        border-radius: 0.25rem;
+        background-color: black;
+        text-align: center;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: white;
+
+        opacity: 0;
+        transition: opacity 250ms: 
+    }
+
+    .calendar-block:hover .calendar-block-overlay {
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+
+    .calendar-block:hover .calendar-block-label {
+        opacity: 1;
+    }
+</style>
+
+<div ng-controller="calendarController" class="calendar-block">
+    <img src="../../App_Plugins/CustomBlockView/calendar-screenshot.png" />
+    <div class="calendar-block-overlay"></div>
+    <div class="calendar-block-label">Example Screenshot</div>
+</div>

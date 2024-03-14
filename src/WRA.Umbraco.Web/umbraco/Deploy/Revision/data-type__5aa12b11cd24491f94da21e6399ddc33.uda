@@ -1191,6 +1191,8 @@
         "allowInAreas": true,
         "areas": [],
         "contentElementTypeKey": "d0326835-a867-40fd-a537-86ac5a2cd620",
+        "view": "~/App_Plugins/CustomBlockView/calendar.html",
+        "stylesheet": "~/css/dist/global.css",
         "label": "",
         "editorSize": "medium",
         "inlineEditing": false,
