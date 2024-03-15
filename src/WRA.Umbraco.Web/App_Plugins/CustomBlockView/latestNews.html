@@ -1,4 +1,4 @@
-<div ng-controller="latestNewsController" ng-click="block.edit()" class="{{className}} block-latest-news py-5 g-4" style="background: var(--bs-gray-10);">
+<div ng-controller="latestNewsController" ng-click="block.edit()" class="{{className}} block-latest-news py-5 g-4" style="background-color: #f4f4f7;">
     <div class="container">
         <div class="d-flex flex-row justify-content-between align-items-end">
             <h2 class="h4 text-center text-lg-start">Latest News</h2>
@@ -10,7 +10,7 @@
                 </svg>
             </a>
         </div>
-        <div class="row">
+        <div class="row mt-3">
             <div ng-repeat="x in [].constructor(3) track by $index" class="col-md-4">
                 <a href="@child.Url()" class="news-card d-flex flex-row align-items-center p-2 text-decoration-none">
                     <img src="https://fpoimg.com/120x80?text=Preview" class="object-fit-cover" alt="" />
