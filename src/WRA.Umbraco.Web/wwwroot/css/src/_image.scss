@@ -3,7 +3,7 @@
     border-radius: 0px 60px 0px 0px;
 
     @include media-breakpoint-up(lg) {
-        border-radius: 0px 80px 0px, 0px;
+        border-radius: 0px 80px 0px 0px;
     }
 }
 
@@ -12,7 +12,7 @@
     border-radius: 0px 150px 0px 0px;
 
     @include media-breakpoint-up(lg) {
-        border-radius: 0px 206px 0px 0px;
+        //border-radius: 0px 206px 0px 0px; // per client: doesn't match design
     }
 }
 
