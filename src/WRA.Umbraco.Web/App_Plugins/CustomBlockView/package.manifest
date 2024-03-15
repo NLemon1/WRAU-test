@@ -34,7 +34,8 @@
     "~/App_Plugins/CustomBlockView/backgroundContainer.controller.js",
     "~/App_Plugins/CustomBlockView/primaryNavMenu.controller.js",
     "~/App_Plugins/CustomBlockView/spacer.controller.js",
-    "~/App_Plugins/CustomBlockView/calendar.controller.js"
+    "~/App_Plugins/CustomBlockView/calendar.controller.js",
+    "~/App_Plugins/CustomBlockView/membershipWidget.controller.js"
   ],
   "css": [
     "~/App_Plugins/CustomBlockView/override.css"

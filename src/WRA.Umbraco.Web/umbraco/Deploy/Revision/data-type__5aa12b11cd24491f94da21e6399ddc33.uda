@@ -1165,6 +1165,8 @@
         "allowInAreas": false,
         "areas": [],
         "contentElementTypeKey": "b3079b21-2d40-40fe-a6df-da890fa8292a",
+        "view": "~/App_Plugins/CustomBlockView/membershipWidget.html",
+        "stylesheet": "~/css/dist/global.css",
         "label": "",
         "editorSize": "medium",
         "inlineEditing": false,
