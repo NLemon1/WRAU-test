@@ -49,6 +49,14 @@
           "SortOrder": 5
         },
         {
+          "Key": "874175df-339e-403a-87fa-e522019f25ed",
+          "Alias": "hideCategory",
+          "DataType": "umb://data-type/0e97aeb8891f4140b94f2d8c47112a17",
+          "Description": "Hide on Categories Product Page",
+          "Name": "Hide Category",
+          "SortOrder": 6
+        },
+        {
           "Key": "cc9361d7-c287-467b-b86d-3d0b3b5599db",
           "Alias": "externalId",
           "DataType": "umb://data-type/f0bc4bfbb49940d6ba86058885a5178c",
@@ -60,6 +68,10 @@
   "PropertyTypes": [],
   "Udi": "umb://document-type/59f3371ae76e43bba9a77e381a18be87",
   "Dependencies": [
+    {
+      "Udi": "umb://data-type/0e97aeb8891f4140b94f2d8c47112a17",
+      "Ordering": true
+    },
     {
       "Udi": "umb://data-type/5aa12b11cd24491f94da21e6399ddc33",
       "Ordering": true

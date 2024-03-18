@@ -45,6 +45,14 @@
           "SortOrder": 2
         },
         {
+          "Key": "9bb1264a-5d26-4818-880a-c664b82fd5c9",
+          "Alias": "hideSubcategory",
+          "DataType": "umb://data-type/b10613df1a26490db6639cf7a26868fa",
+          "Description": "Hide on Subcategories Products Page",
+          "Name": "Hide Subcategory",
+          "SortOrder": 4
+        },
+        {
           "Key": "f4e980b7-4a61-4f3f-9246-6ca6223407c3",
           "Alias": "externalId",
           "DataType": "umb://data-type/f0bc4bfbb49940d6ba86058885a5178c",
@@ -102,6 +110,10 @@
     },
     {
       "Udi": "umb://data-type/5aa12b11cd24491f94da21e6399ddc33",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/b10613df1a26490db6639cf7a26868fa",
       "Ordering": true
     },
     {

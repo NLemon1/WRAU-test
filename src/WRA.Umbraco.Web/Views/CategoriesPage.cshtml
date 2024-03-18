@@ -12,7 +12,7 @@
     Layout = "~/Views/_Layout.cshtml";
 
     var sections = Model.Value<IEnumerable<BlockGridItem>>("blockContent");
-    var productCategories = Model.Children.Where(p => p.IsVisible() && p.IsPublished() && p.Children.Count() > 0).OrderBy(p => p.Name);
+    var productCategories = Model.Children.Where(p => p.IsVisible() && p.IsPublished() && p.Children.Count() > 0 && p.Value<bool>("hideCategory") != true).OrderBy(p => p.Name);
 }
 
 <header class="page-header page-header--no-accent">

@@ -82,6 +82,13 @@ namespace WRA.Umbraco.Models
 		public virtual string ExternalId => this.Value<string>(_publishedValueFallback, "externalId");
 
 		///<summary>
+		/// Hide Subcategory: Hide on Subcategories Products Page
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.2.0+7dff3a3")]
+		[ImplementPropertyType("hideSubcategory")]
+		public virtual bool HideSubcategory => this.Value<bool>(_publishedValueFallback, "hideSubcategory");
+
+		///<summary>
 		/// ResultsHeadline
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.2.0+7dff3a3")]
