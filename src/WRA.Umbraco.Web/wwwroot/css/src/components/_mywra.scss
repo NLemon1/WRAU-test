@@ -34,3 +34,60 @@
         color: white;
     }
 }
+
+.table-courses,
+.table-info {
+
+    td {
+        position: relative;
+
+        &::after {
+            position: absolute;
+            bottom: 0px;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            content: "";
+            width: 100%;
+            display: block;
+            height: 1px;
+            border-bottom: solid 1px #D7D7DC;
+        }
+    }
+
+    tr > td:first-child {
+        padding-left: 1.25rem;
+
+        &::after {
+            left: 1.25rem;
+        }
+    }
+
+    tr > td:last-child {
+        padding-right: 1.25rem;
+
+        &::after {
+            left: -2.5rem;
+        }
+    }
+
+
+    thead > tr > th:first-child {
+        padding-left: 1.25rem;
+    }
+
+    thead > tr > th:last-child {
+        padding-right: 1.25rem;
+    }
+
+    &.table-info {
+        tr:last-child {
+            td {
+                &::after {
+                    border-bottom: 0px;
+                }
+            }
+        }
+    }
+
+}

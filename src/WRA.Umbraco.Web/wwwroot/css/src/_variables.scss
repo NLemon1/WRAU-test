@@ -50,6 +50,8 @@ $gray-20: #D7D7DC;
 $gray-30: #696F78;
 $gray-40: #050F1E;
 
+$red: #E14942;
+
 $primary: $blue-medium;
 $secondary: $blue-dark;
 $tertiary: $blue-light;
@@ -62,7 +64,8 @@ $body-color: $gray-40;
 $colors: (
     'blue-medium': $blue-medium,
     'blue-dark': $blue-dark,
-    'blue-light': $blue-light
+    'blue-light': $blue-light,
+    'red': $red
 );
 
 $theme-colors: (

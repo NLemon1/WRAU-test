@@ -2,6 +2,10 @@
     border: 1px solid $gray-30;
     border-radius: 0.5rem;
 
+    &--light {
+        border-color: $gray-20;
+    }
+
     .accordion {
         //
 
@@ -33,6 +37,24 @@
 
 .accordion {
     border-bottom: 1px solid $gray-30;
+
+    &--light {
+        border-bottom: 0px;
+        position: relative;
+
+        &::after {
+            position: absolute;
+            bottom: 0px;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            content: "";
+            width: calc(100% - 2.5rem);
+            display: block;
+            height: 1px;
+            border-bottom: 1px solid $gray-20;
+        }
+    }
 
     &__toggle {
         display: flex;

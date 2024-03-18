@@ -16,6 +16,8 @@ import checkout from './components/checkout';
 import products from './components/products';
 import courseSearch from './components/course-search';
 import bundles from './components/bundles';
+import popModal from './components/popmodal';
+import print from './components/print';
 
 expandableTextCards();
 header();
@@ -32,6 +34,7 @@ articleFilters();
 multimediaFilters();
 quantitySelector();
 checkout();
+popModal();
 
 if (document.body.classList.contains("page-template-subCategoryPage")) {
     products();
@@ -48,3 +51,5 @@ if (document.getElementById("course-search")) {
 if (document.body.classList.contains("page-template-bundlePage")) {
     bundles();
 }
+
+print();

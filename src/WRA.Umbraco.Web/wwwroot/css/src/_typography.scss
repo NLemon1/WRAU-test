@@ -202,3 +202,9 @@ a.link-hover-inverse {
         text-decoration: none;
     }
 }
+
+.text-link {
+    @extend a;
+    border: none;
+    background: transparent;
+}

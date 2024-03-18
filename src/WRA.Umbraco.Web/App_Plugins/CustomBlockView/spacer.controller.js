@@ -1,7 +1,6 @@
 angular.module("umbraco").controller("spacerController", function ($scope) {
     
     const block = $scope.block.data;
-    console.log(block);
 
     let style = "";
 

@@ -7,7 +7,6 @@
 }
 
 <div class="w-100">
-
     <div class="row g-0">
 
         <div class="col position-relative d-lg-none" aria-hidden="true">
@@ -37,20 +36,25 @@
                         }
                     </select>
                 </div>
-                <ul class="list-unstyled d-flex flex-column gap-4 d-none d-lg-block">
-                    @for (var i = 1; i < 6; i++)
-                    {
-                    <li>
-                        <a href="/" class="btn-mywra" @(i == 1 ? "aria-selected=true" : "")>My Education</a>
-                    </li>
-                    }
-                </ul>
+                <div class="d-none d-lg-block">
+                    <ul class="list-unstyled d-flex flex-column gap-1">
+                        @for (var i = 1; i < 6; i++)
+                        {
+                        <li>
+                            <a href="/" class="btn-mywra" @(i == 1 ? "aria-selected=true" : string.Empty)>My Education</a>
+                        </li>
+                        }
+                    </ul>
+                    <div class="border-top border-dark d-block w-100"></div>
+                    <a href="/" class="btn-mywra mt-3" style="color: var(--bs-red)">Log Out</a>
+                </div>
+
             </div>
         </div>
 
         <div class="col position-relative">
             <header class="page-header page-header--mywra d-none d-lg-block pt-4">
-                <div class="container">
+                <div class="container ps-4">
                     <div class="container--sm position-relative mb-lg-n12">
                         <div class="d-flex flex-row align-items-center">
                             <div class="decorative-img-wrapper">
@@ -66,18 +70,585 @@
 
             <div class="mywra-right container container--md ms-0 pt-5 pt-lg-12">
 
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ullamcorper dignissim cras tincidunt lobortis. Integer eget aliquet nibh praesent tristique magna sit amet purus. Volutpat lacus laoreet non curabitur gravida arcu. Libero nunc consequat interdum varius sit amet. Varius duis at consectetur lorem. Imperdiet massa tincidunt nunc pulvinar sapien et ligula ullamcorper malesuada. Eu volutpat odio facilisis mauris sit amet. Ipsum nunc aliquet bibendum enim facilisis gravida neque convallis a. Iaculis nunc sed augue lacus viverra vitae. Sed vulputate mi sit amet mauris commodo quis imperdiet. Congue nisi vitae suscipit tellus mauris a diam maecenas sed. Faucibus purus in massa tempor nec feugiat.
+                <!-- Text Box Field -->
+                <h1 class="h2">My Education</h1>
+                
+                <!-- Rich Text Field-->
+                <div class="rich-text mb-5">
+                    <p>Lorem ipsum dolor sit amet consectetur. At eget vulputate sapien duis curabitur vulputate morbi feugiat euismod. </p>
+                </div>
 
-                Consequat interdum varius sit amet. Etiam tempor orci eu lobortis elementum nibh. Mauris vitae ultricies leo integer malesuada nunc vel risus commodo. Iaculis at erat pellentesque adipiscing commodo elit at imperdiet. Lobortis scelerisque fermentum dui faucibus in ornare quam. Nulla facilisi morbi tempus iaculis urna id volutpat lacus laoreet. Id ornare arcu odio ut sem. Pretium nibh ipsum consequat nisl. Et pharetra pharetra massa massa ultricies mi quis hendrerit. Erat pellentesque adipiscing commodo elit at. Tincidunt eget nullam non nisi est. Adipiscing elit ut aliquam purus sit amet. Aenean vel elit scelerisque mauris pellentesque pulvinar pellentesque habitant. Ut diam quam nulla porttitor massa id. Mi in nulla posuere sollicitudin aliquam ultrices sagittis. Elit ullamcorper dignissim cras tincidunt. Vitae semper quis lectus nulla at. Magna sit amet purus gravida quis blandit. Nibh mauris cursus mattis molestie.
+                <!-- Required Courses -->
+                <div class="w-100 py-4 border border-medium rounded mb-5">
+                    <h3 class="h5 py-2 px-4">Required Courses</h3>
+                    <table class="table-courses w-100 fs-sm">
+                        <thead class="fw-bold" style="background: var(--bs-gray-10)">
+                            <tr>
+                                <th class="py-2">CE Course</th>
+                                <th>Status</th>
+                                <th class="text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody style="color: var(--bs-gray-30)">
+                            @for (var i = 1; i < 6; i++)
+                            {
+                                <tr class="">
+                                    <td class="py-2">
+                                        Lorem ipsum dolor @i
+                                    </td>
+                                    <td class="py-2">
+                                        At eget vulputate sapien duis curabitur
+                                    </td>
+                                    <td class="py-2 text-center">
+                                        <button class="border-0 bg-transparent px-2 py-2" title="Download">
+                                            <i class="fa-regular fa-arrow-down-to-bracket text-primary fs-lg"></i>
+                                        </button>
+                                        <button class="border-0 bg-transparent px-2 py-2" title="Buy">
+                                            <i class="far fa-shopping-cart text-primary fs-lg"></i>
+                                        </button>
+                                        <button class="border-0 bg-transparent px-2 py-2" title="External Link">
+                                            <i class="fa-regular fa-arrow-up-right-from-square text-primary fs-lg"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <div class="text-center">
+                    <a href="/" class="btn btn-primary btn-sm mt-4">View All Courses</a>
+                    </div>
+                </div>
 
-                Quam vulputate dignissim suspendisse in est. In cursus turpis massa tincidunt dui ut ornare. Pulvinar etiam non quam lacus. Curabitur vitae nunc sed velit dignissim sodales ut eu. Egestas sed tempus urna et pharetra pharetra. Et netus et malesuada fames. Penatibus et magnis dis parturient montes nascetur ridiculus mus. Commodo odio aenean sed adipiscing diam donec adipiscing. Integer quis auctor elit sed vulputate mi. Magna fringilla urna porttitor rhoncus dolor purus non enim. Mi bibendum neque egestas congue quisque egestas. Arcu bibendum at varius vel pharetra vel. Elit eget gravida cum sociis natoque penatibus et. Iaculis at erat pellentesque adipiscing commodo elit. Fermentum odio eu feugiat pretium nibh. Ullamcorper a lacus vestibulum sed arcu. In metus vulputate eu scelerisque felis imperdiet proin fermentum leo.
+                <!-- Misc Courses -->
+                <h3 class="h5 py-2 px-4">Lorem Courses</h3>
+                <div class="accordions-wrapper accordions-wrapper--border accordions-wrapper--border--light mb-5">
+                    @for (var i = 1; i < 5; i++)
+                    {
+                        <details class="accordion accordion--light">
+                            <summary class="accordion__toggle px-3">
+                                <div class="ps-1">
+                                Lorem Ipsum Dolor
+                                </div>
+                                <div class="accordion__toggle-icon me-1">
+                                    <i class="fas fa-chevron-down"></i>
+                                    <i class="fas fa-chevron-up"></i>
+                                </div>
+                                    
+                            </summary>
+                            <div class="accordion__content px-4 text-body">
+                                @for (var c = 1; c < 5; c++)
+                                {
+                                    <div class="border border-medium p-4 rounded mb-3">
+                                        <h4 class="h6">
+                                            Pretium aenean pharetra magna
+                                        </h4>
+                                        <p class="fw-light">
+                                            Gain the power you need to strive with the WRA Mini Course Series.
+                                        </p>
+                                        <p>
+                                            You may access this course until 5/14/2024.
+                                        </p>
+                                    </div>
+                                }
+                            </div>
+                        </details>
+                    }
+                </div>
 
-                Eget mi proin sed libero. Sed vulputate mi sit amet mauris commodo quis imperdiet. Magnis dis parturient montes nascetur ridiculus mus mauris vitae. Sit amet commodo nulla facilisi nullam vehicula ipsum. Sit amet mattis vulputate enim nulla aliquet porttitor. Tristique sollicitudin nibh sit amet commodo nulla. Condimentum lacinia quis vel eros donec ac odio tempor. Quis viverra nibh cras pulvinar mattis nunc sed blandit libero. Cursus mattis molestie a iaculis at erat pellentesque. Blandit aliquam etiam erat velit scelerisque in dictum non.
+                <!-- Interior Links -->
+                <div class="w-100 px-2 border border-medium rounded mb-5">
+                    <div class="px-2_5 d-flex flex-column g-4">
+                        @for (var b = 1; b < 5; b++)
+                        {
+                            <a href="/" class="w-100 py-3 text-body fw-bold text-decoration-none border-bottom border-medium d-flex flex-row align-items-center justify-content-between">
+                                <span>Lorem Ipsum Dolor</span>
+                                <i class="fas fa-chevron-right" style="color: var(--bs-primary)"></i>
+                            </a>
+                        }
+                    </div>
+                </div>
 
-                Tristique senectus et netus et malesuada. Sed faucibus turpis in eu mi bibendum neque egestas congue. Tincidunt tortor aliquam nulla facilisi cras fermentum odio eu. Tortor pretium viverra suspendisse potenti nullam ac tortor vitae. Tellus molestie nunc non blandit massa. Vel pharetra vel turpis nunc eget lorem. Commodo ullamcorper a lacus vestibulum sed arcu non odio. Massa sapien faucibus et molestie ac feugiat sed lectus. Vel facilisis volutpat est velit. Aliquet bibendum enim facilisis gravida neque. Nisi lacus sed viverra tellus in hac habitasse platea. Rhoncus dolor purus non enim.
+
+
+                <!-- PERSONAL INFORMATION -->
+
+                <!-- Text Box Field -->
+                <h3 class="h2">Personal Information</h3>
+
+                <!-- Rich Text Field-->
+                <div class="rich-text mb-5">
+                    <p>Lorem ipsum dolor sit amet consectetur. At eget vulputate sapien duis curabitur vulputate morbi feugiat euismod. </p>
+                </div>
+
+                <h3 class="h5 mb-2">Information</h3>
+                <div class="w-100 border border-medium rounded mb-5">
+                    <table class="table-info w-100 fs-sm">
+                        <thead class="visually-hidden">
+                            <tr>
+                                <th>Item</th>
+                                <th>Value</th>
+                                <th>Edit</th>
+                            </tr>
+                        </thead>
+                        <tbody style="color: var(--bs-gray-30)">
+                            @for (var i = 1; i < 5; i++)
+                            {
+                                <tr class="">
+                                    <td class="py-2">
+                                        Lorem ipsum dolor @i
+                                    </td>
+                                    <td class="py-2 text-body">
+                                        At eget vulputate sapien duis curabitur
+                                    </td>
+                                    <td class="py-2 text-end">
+                                        <button class="text-link border-0 bg-transparent px-2 py-2">
+                                            Edit
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3 class="h5 mb-2">Settings</h3>
+                <div class="w-100 border border-medium rounded mb-5">
+                    <table class="table-info w-100 fs-sm">
+                        <thead class="visually-hidden">
+                            <tr>
+                                <th>Item</th>
+                                <th>Value</th>
+                                <th>Edit</th>
+                            </tr>
+                        </thead>
+                        <tbody style="color: var(--bs-gray-30)">
+                            @for (var i = 1; i < 7; i++)
+                            {
+                                <tr class="">
+                                    <td class="py-2">
+                                        Lorem ipsum dolor @i
+                                    </td>
+                                    <td class="py-2 text-body">
+                                        At eget vulputate sapien duis curabitur
+                                    </td>
+                                    <td class="py-2 text-end">
+                                        <button class="text-link border-0 bg-transparent px-2 py-2">
+                                            Edit
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+
+
+                <!-- RPAC Donor Status -->
+
+                <!-- Text Box Field -->
+                <h3 class="h2">RPAC & Direct Giver Donor Status</h3>
+
+                <!-- Rich Text Field-->
+                <div class="rich-text mb-5">
+                    <p>The information below shows your total contributions made through RPAC and the Direct Giver program. You can view your Direct Giver balance at Direct Giver History and you can make disbursements at Disburse from Direct Giver.</p>
+                </div>
+                <div class="border border-medium p-4 rounded mb-3">
+                    <h4 class="h6 mb-4 fs-lg">
+                        Make a Contribution
+                    </h4>
+                    <div class="d-flex flex-row gap-3">
+                        <a href="/" class="btn btn-primary">Contribute To RPAC</a>
+                        <a href="/" class="btn btn-primary">Contribute To Direct Giver</a>
+                    </div>
+                </div>
+                <div class="border border-medium p-4 rounded mb-3">
+                    <h4 class="h6 mb-4 fs-lg">
+                        Contribution History
+                    </h4>
+
+                    <table class="table-info w-100 fs-sm">
+                        <thead>
+                            <tr>
+                                <th>Year</th>
+                                <th>RPAC</th>
+                                <th>Direct Giver</th>
+                                <th>NARLIFE</th>
+                            </tr>
+                        </thead>
+                        <tbody style="color: var(--bs-gray-30)" class="text-body">
+                            @for (var i = 1; i < 6; i++)
+                            {
+                                <tr class="">
+                                    <td class="py-2">
+                                        202@(i)
+                                    </td>
+                                    <td class="py-2">
+                                        $100.00
+                                    </td>
+                                    <td class="py-2">
+                                       $50.00
+                                    </td>
+                                    <td class="py-2">
+                                       $20.00
+                                    </td>
+                                </tr>
+                            }
+                            <tr class="fw-bold">
+                                <td class="py-2">
+                                    Total
+                                </td>
+                                <td class="py-2">
+                                    $200.00
+                                </td>
+                                <td class="py-2">
+                                    $150.00
+                                </td>
+                                <td class="py-2">
+                                    $60.00
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
+
+                <!-- Subscription Preferences -->
+               
+                <!-- Text Box Field -->
+                <h3 class="h2">Subscription Preferences</h3>
+                <!-- Rich Text Field-->
+                <div class="rich-text mb-5">
+                    <p>At eget vulputate sapien duis curabitur vulputate morbi feugiat euismod.</p>
+                </div>
+                <h4 class="h5">Inman Select</h4>
+                <div class="border border-medium p-4 rounded mb-5">
+                    <h4 class="h6 mb-4 fs-lg">
+                        Free Inman Select Membership Sign Up
+                    </h4>
+                    <div class="rich-text">
+                        The WRA's partnership with Inman News gives you access to exclusive news, in-depth reporting and thorough analysis with Inman Select. Inman Select gives you everything you need to know to be smarter about real estate, such as daily news, award-winning commentary, special reports, webinars and more. With Inman Select, you're connected to the latest news, relevant insights, and a community of real estate leaders.
+                    </div>
+                    <a href="/" class="btn btn-primary">Sign up for Inman Select</a>
+                </div>
+
+                <!-- Text Box Field -->
+                <h4 class="h5">Wisconsin Real Estate Magazine</h4>
+                <div class="border border-medium p-4 rounded mb-5">
+                    <!-- Text Box Field -->
+                    <h4 class="h6 mb-4 fs-lg">
+                        myWRA Wisconsin Real Estate Magazine Delivery Preferences
+                    </h4>
+                    <!-- Rich Text Field -->
+                    <div class="rich-text">
+                        Select how you would like to receive Wisconsin Real Estate Magazine.
+                    </div>
+                    <div class="form-group">
+                        <div class="d-flex flex-row mb-3">
+                            <input id="wranews" class="form-check-input" type="checkbox">
+                            <div class="ps-2">
+                                <label for="wranews" class="form-check-label fw-bold">WRA News Email</label>
+                                <p>Receive the WRA Real Estate News weekly email notifying you when the magazine is online.</p>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-row">
+                            <input id="wranews" class="form-check-input" type="checkbox">
+                            <div class="ps-2">
+                                <label for="wranews" class="form-check-label fw-bold">WRA News Email</label>
+                                <p>Receive the WRA Real Estate News weekly email notifying you when the magazine is online.</p>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary btn-sm mt-3">Save Preferences</button>
+                    </div>
+                </div>
+
+                <!-- Text Box Field -->
+                <h4 class="h5">Email Newsletters</h4>
+                <div class="border border-medium p-4 rounded mb-5">
+                    <!-- Text Box Field -->
+                    <h4 class="h6 mb-4 fs-lg">
+                        myWRA Email Delivery Preferences
+                    </h4>
+                    <!-- Rich Text Field -->
+                    <div class="rich-text">
+                        Select e-mails from the list below that you wish to receive. You will not receive emails that are not selected.
+                    </div>
+                    <div class="form-group">
+                        @for (var i = 1; i < 8; i++)
+                        {
+                            <div class="d-flex flex-row mb-3">
+                                <input id="email@(i)" class="form-check-input" type="checkbox">
+                                <div class="ps-2">
+                                    <label for="email@(i)" class="form-check-label fw-bold">Lorem Ipsum (weekly)</label>
+                                    <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                    <p><a href="/">See Sample</a></p>
+                                </div>
+                            </div>
+                        }
+                        <button class="btn btn-primary btn-sm mt-3">Save Preferences</button>
+                    </div>
+                </div>
+
+
+
+                <!-- TOOL KIT -->
+
+                <!-- Text Box Field -->
+                <h4 class="h5">Tool Kit</h4>
+
+                <!-- Rich Text Field -->
+                <div class="rich-text mb-5">
+                    Lorem ipsum dolor sit amet consectetur. At eget vulputate sapien duis curabitur vulputate morbi feugiat euismod.
+                </div>
+
+                <div class="border border-medium p-4 rounded mb-5">
+                    <h4 class="h6 mb-4 fs-lg">
+                        Zip Form
+                    </h4>
+                    <div class="rich-text">
+                        Lorem ipsum dolor sit amet consectetur. At eget vulputate sapien duis curabitur vulputate morbi feugiat euismod.
+                    </div>
+                    <a href="/" class="btn btn-primary">Access Zip Form</a>
+                </div>
+                <div class="border border-medium p-4 rounded mb-5">
+                    <h4 class="h6 mb-4 fs-lg">
+                        Forms Library
+                    </h4>
+                    <div class="rich-text">
+                        Lorem ipsum dolor sit amet consectetur. At eget vulputate sapien duis curabitur vulputate morbi feugiat euismod.
+                    </div>
+                    <a href="/" class="btn btn-primary">Access Forms Library</a>
+                </div>
+                <div class="border border-medium p-4 rounded mb-5">
+                    <h4 class="h6 mb-4 fs-lg">
+                        Line By Line Training
+                    </h4>
+                    <div class="rich-text">
+                        Lorem ipsum dolor sit amet consectetur. At eget vulputate sapien duis curabitur vulputate morbi feugiat euismod.
+                    </div>
+                    <a href="/" class="btn btn-primary">Access Line By Line Training</a>
+                </div>
+
+
+
+                <!-- WRA DUES -->
+
+                <!-- Text Box Field -->
+                <h4 class="h5">Tool Kit</h4>
+
+                <!-- Rich Text Field -->
+                <div class="rich-text mb-5">
+                    Dues billing is a function of your local board, and the WRA does not collect dues for your local board unless authorized.
+                </div>
+                <div class="w-100 px-2 border border-medium rounded mb-5">
+                    <div class="px-2_5 d-flex flex-column g-4">
+                        <a href="/" class="w-100 py-3 text-body fw-bold text-decoration-none border-bottom border-medium d-flex flex-row align-items-center justify-content-between">
+                            <span>Pay Dues</span>
+                            <i class="fas fa-chevron-right" style="color: var(--bs-primary)"></i>
+                        </a>
+                        <a href="/" class="w-100 py-3 text-body fw-bold text-decoration-none border-bottom border-medium d-flex flex-row align-items-center justify-content-between">
+                            <span>Dues History</span>
+                            <i class="fas fa-chevron-right" style="color: var(--bs-primary)"></i>
+                        </a>
+                    </div>
+                </div>
+
+
+
+                <!-- WRA DUES -->
+
+                <!-- Text Box Field -->
+                <h3 class="h2">Pay Dues</h3>
+
+                <!-- Rich Text Field -->
+                <div class="rich-text mb-5">
+                    At eget vulputate sapien duis curabitur vulputate morbi feugiat euismod.
+                </div>
+
+                <h4 class="h5 mb-3">Payment Instructions</h4>
+               
+                @for (var i = 1; i < 4; i++)
+                {
+                    <div class="border border-medium p-4 rounded mb-3">
+                        <h4 class="h6 mb-4 fs-lg">
+                            Members Of XXXXX:
+                        </h4>
+                        <div class="rich-text">
+                            <ul class="list-unstyled">
+                                <li>Commercial Association of REALTORS® Wisconsin</li>
+                                <li>Jefferson County Board REALTORS®</li>
+                                <li>La Crosse Area REALTORS® Association </li>
+                                <li>Manitowoc County Board of REALTORS®</li>
+                                <li>REALTORS® Association of Northwestern Wisconsin</li>
+                            </ul>
+                            <p>
+                            Lorem ipsum dolor sit amet consectetur. At eget vulputate sapien duis curabitur vulputate morbi feugiat euismod.
+                            </p>
+                        </div>
+                        <a href="/" class="btn btn-primary">Pay Dues Now</a>
+                        <small class="d-block fw-bold fs-xs mt-3">Note: NAR only accepts Visa and Mastercard</small>
+                    </div>
+                }
+
+                <h3 class="h5 mb-3">George's Local Board Information</h3>
+                <div class="w-100 border border-medium rounded mb-5">
+                    <table class="table-info w-100 fs-sm">
+                        <thead class="visually-hidden">
+                            <tr>
+                                <th>Item</th>
+                                <th>Value</th>
+                            </tr>
+                        </thead>
+                        <tbody style="color: var(--bs-gray-30)">
+                            <tr>
+                                <td class="py-2">
+                                    Name
+                                </td>
+                                <td class="py-2 text-body">
+                                    Individual Board Members
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="py-2">
+                                    Address
+                                </td>
+                                <td class="py-2 text-body">
+                                4801 Forest Run RdMadison, WI 53704-7411
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="py-2">
+                                    Phone
+                                </td>
+                                <td class="py-2 text-body">
+                                (608) 241-2047
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="py-2">
+                                    Fax
+                                </td>
+                                <td class="py-2 text-body">
+                                (608) 241-2901
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="py-2">
+                                    Email
+                                </td>
+                                <td class="py-2 text-body">
+                                    lan@wra.org
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="py-2">
+                                    Website
+                                </td>
+                                <td class="py-2 text-body">
+                                www.wra.org
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
+
+                <!-- WRA DUES HISTORY  -->
+
+                <!-- Text Box Field -->
+                <h3 class="h2">Dues History</h3>
+
+                <!-- Rich Text Field -->
+                <div class="rich-text mb-5">
+                    At eget vulputate sapien duis curabitur vulputate morbi feugiat euismod.
+                </div>
+
+                <div class="w-100 border border-medium rounded mb-5">
+                    <table class="table-info w-100 fs-sm">
+                        <thead class="fw-bold border-bottom border-medium">
+                            <tr>
+                                <th class="py-2" >Transaction Date</th>
+                                <th class="py-2">Total Amount</th>
+                                <th class="visually-hidden">View or Print</th>
+                            </tr>
+                        </thead>
+                        <tbody style="color: var(--bs-gray-30)" class="text-body">
+                            @for (var i = 1; i < 4; i++)
+                            {
+                                <tr>
+                                    <td class="py-2">
+                                        @(i)/10/2022
+                                    </td>
+                                    <td class="py-2">
+                                        $869.00
+                                    </td>
+                                    <td class="py-2 text-end">
+                                        <button class="js-pop-btn text-link" aria-controls="dues@(i)">View/Print</button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                    <!-- View/Print Modals -->
+                    @for (var i = 1; i < 4; i++)
+                    {
+                        <div id="dues@(i)" name="dues@(i)" aria-hidden="true" class="js-modal modal bundle-modal">
+                            <div class="modal__container">
+                                <div class="modal__header">
+                                    <button aria-controls="dues@(i)" title="Close Modal" class="js-modal-close btn-close border-0"><i class="fal fa-times"></i></button>
+                                </div>
+                                <div class="modal__content">
+                                    <div class="printer_area">
+                                        <p class="h5">REALTORS® Association of @i Lorem</p>
+                                        <p>Dues payment receipt 11/10/2023</p>
+                                        <div id="dues@(i)" class="modal__content__inner  p-0">
+                                            <table class="table-info w-100 fs-sm">
+                                                <thead class="fw-bold border-bottom border-medium">
+                                                    <tr>
+                                                        <th class="py-2 text-start fw-bold">Item</th>
+                                                        <th class="py-2 text-end fw-bold">Amount Paid</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody style="color: var(--bs-gray-30)" class="text-body">
+                                                    @for (var ii = 1; ii < 7; ii++)
+                                                    {
+                                                        <tr>
+                                                            <td class="py-2 text-start">
+                                                                Lorem Ipsum
+                                                            </td>
+                                                            <td class="py-2 text-end">
+                                                                $@(ii)00.00
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                                <tfoot class="fw-bold">
+                                                    <tr>
+                                                        <td class="py-2 text-start">
+                                                            Total
+                                                        </td>
+                                                        <td class="py-2 text-end">
+                                                            $XXXX.00
+                                                        </td>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <a href="#" onclick="javascript: return false;" data-printid="dues@(i)" class="js-print d-print-none mt-4 btn btn-primary btn-sm">
+                                        Print
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+
             </div>
-
         </div>
-
     </div>
 </div>
