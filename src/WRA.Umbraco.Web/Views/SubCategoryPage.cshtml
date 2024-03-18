@@ -50,7 +50,7 @@
 @await Html.PartialAsync("blockgrid/default", sectionsTop)
 
 
-@if (Model.ProductBundles.Any() && @Model.Parent?.Name != "Professional Development")
+@if (Model.ProductBundles.Any())
 {
     int creditHours = 0;
 
