@@ -41,10 +41,10 @@
         },
         {
           "Key": "946c15b7-2592-4fb6-9b07-536e73d2a1c7",
-          "Alias": "hottipPublishDate",
+          "Alias": "originalPublishedDate",
           "DataType": "umb://data-type/5046194e4237453ca54715db3a07c4e1",
           "Mandatory": true,
-          "Name": "Hottip Publish Date",
+          "Name": "Original Published Date",
           "SortOrder": 4
         },
         {

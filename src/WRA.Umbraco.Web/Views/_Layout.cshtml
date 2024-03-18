@@ -12,34 +12,36 @@
     MemberIdentityUser currentMember = await _membermanager.GetCurrentMemberAsync();
 
     var settings = Umbraco.ContentAtRoot().FirstOrDefault(x => x.ContentType.Alias == "siteSettings");
-    IPublishedContent home = Umbraco.ContentAtRoot().Where(pc => pc.Name == "Home").FirstOrDefault();
-    string metaTitle = Model.HasValue("metaTitle") ? Model.Value<string>("metaTitle") : Model.Name + " | " + settings.Value("siteName");
-    string metaDescription = Model.HasValue("metaDescription") ? Model.Value<string>("metaDescription") : "";
+
+    IPublishedContent home = Umbraco.ContentAtRoot()?.Where(pc => pc.Name == "Home")?.FirstOrDefault();
+    
+    //Model will contain all the data of the current page
+    string metaTitle = Model.HasValue("metaTitle") ? Model.Value<string>("metaTitle") : Model.Name + " | " + settings?.Value("siteName");
+    string metaDescription = Model.HasValue("metaDescription") ? Model.Value<string>("metaDescription") : string.Empty;
     string logoStyle = "";
 
-    if (settings.HasValue("logoWidth"))
+    if (!String.IsNullOrEmpty(settings?.Value<string>("logoWidth")))
     {
         logoStyle += $"--logo-width:{settings.Value("logoWidth")}px;";
     }
 
-    if (settings.HasValue("mobileLogoWidth"))
+    if (!String.IsNullOrEmpty(settings?.Value<string>("mobileLogoWidth")))
     {
         logoStyle += $"--logo-mobile-width:{settings.Value("mobileLogoWidth")}px;";
     }
 
-    if (settings.HasValue("footerLogoWidth"))
+    if (!String.IsNullOrEmpty(settings?.Value<string>("footerLogoWidth")))
     {
         logoStyle += $"--footer-logo-width:{settings.Value("footerLogoWidth")}px;";
     }
 
-    if (settings.HasValue("footerLogoMobileWidth"))
+    if (!String.IsNullOrEmpty(settings?.Value<string>("footerLogoMobileWidth")))
     {
         logoStyle += $"--footer-logo-mobile-width:{settings.Value("footerLogoMobileWidth")}px;";
     }
 
-    var alertTimestamp = @settings.Value("timestamp").ToString().ToLower().Replace(" ", "").Replace("/", "").Replace(":", "").Replace("am", "").Replace("pm", "");
-    var alertExpDays = @settings.Value("expirationDays").ToString();
-
+    string alertTimestamp = String.Format("{0:Mdyyyyhmmss}", settings?.Value("timestamp"));//convert to string to write a cookie via data attributes
+    int alertExpDays = settings?.Value<int>("expirationDays") ?? 0; //strongly typed int for exp dates, though will be converted to string on FE
 
 }
 
@@ -52,11 +54,11 @@
     <meta name="description" content="@metaDescription">
     @if (Model.HasValue("openGraphImage"))
     {
-        <meta property="og:image" content="@(Model.Value<IPublishedContent>("openGraphImage").Url(mode:UrlMode.Absolute))">
+        <meta property="og:image" content="@(Model?.Value<IPublishedContent>("openGraphImage")?.Url(mode:UrlMode.Absolute))">
     }
     else if (settings.HasValue("oGImageFallback"))
     {
-        <meta property="og:image" content="@(settings.Value<IPublishedContent>("oGImageFallback").Url(mode:UrlMode.Absolute))">
+        <meta property="og:image" content="@(settings?.Value<IPublishedContent>("oGImageFallback")?.Url(mode:UrlMode.Absolute))">
     }
     <link rel="icon" href="~/favicon.ico" sizes="32x32" />
     <link rel="icon" href="~/icon.svg" type="image/svg+xml" />
@@ -74,12 +76,12 @@
 
 
     @Html.RenderUmbracoFormDependencies(Url)
-    @Html.Raw(settings.Value("headScripts"))
+    @Html.Raw(settings?.Value("headScripts"))
 
 </head>
 <body class="page-template-@Model.ContentType.Alias page-id-@Model.Id">
 
-    @Html.Raw(settings.Value("bodyOpenScripts"))
+    @Html.Raw(settings?.Value("bodyOpenScripts"))
     <a class="visually-hidden-focusable" href="#content">Skip to content</a>
     
     @if (settings.HasValue("enableMessage") && settings.Value<bool>("enableMessage") && (Context.Request.Cookies["wra_alert_banner"] != alertTimestamp))
@@ -87,7 +89,7 @@
         <div id="site-alert" class="site-alert" data-timestamp="@alertTimestamp" data-expiration="@alertExpDays">
             <div class="container py-2 h-100 d-flex flex-row align-items-center justify-content-center">
                 <div class="rich-text">
-                    @Html.Raw(settings.Value("message"))
+                    @Html.Raw(settings?.Value("message"))
                 </div>
                 <button aria-controls="site-alert" class="js-alert-close btn-close border-0 bg-transparent px-4 h-100 self-end"><span class="visually-hidden">>Close</span><i class="fal fa-times text-white"></i></button>
             </div>
@@ -104,22 +106,27 @@
                 <div class="container d-lg-flex flex-column h-100">
                     <div class="site-header__top-inner d-flex flex-row align-items-center justify-content-between h-100">
                         <a class="site-header__logo text-decoration-none" href="/">
-                            <img src="@(settings.Value<IPublishedContent>("headerLogo").Url())" class="w-100" alt="@(settings.Value<IPublishedContent>("headerLogo").Value("altText"))" />
+                            <img src="@(settings?.Value<IPublishedContent>("headerLogo")?.Url())" class="w-100" alt="@(settings?.Value<IPublishedContent>("headerLogo")?.Value("altText"))" />
                         </a>
-                        @if (settings.HasValue("utilityNavMenu"))
-                        {
-                            var utilityNavMenu = settings.Value<IEnumerable<Link>>("utilityNavMenu");
-                            <ul class="nav-utility list-unstyled m-0 gap-4 d-none d-lg-flex flex-row align-items-center font-family-3 fw-light ms-auto me-4">
-                                @foreach (var link in utilityNavMenu)
-                                {
-                                    <li>
-                                        <a href="@link.Url" target="@link.Target">
-                                            <span>@link.Name</span>
-                                        </a>
-                                    </li>
-                                }
-                            </ul>
+                        
+                        @{
+                            var utilityNavMenu = settings?.Value<IEnumerable<Link>>("utilityNavMenu");
+
+                            if (utilityNavMenu.Any())
+                            {
+                                <ul class="nav-utility list-unstyled m-0 gap-4 d-none d-lg-flex flex-row align-items-center font-family-3 fw-light ms-auto me-4">
+                                    @foreach (var link in utilityNavMenu)
+                                    {
+                                        <li>
+                                            <a href="@link.Url" target="@link.Target">
+                                                <span>@link.Name</span>
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+                            }
                         }
+
                         @* <a href="/login" class="btn btn-primary btn-sm d-none d-lg-block">Login</a> *@
                         <partial name="_loginButton" model=@currentMember />
                         
@@ -143,7 +150,7 @@
                         @* MEGA MENU ITERATIONS // assumes only 6 mega menus *@
                         @for (int i = 1; i <= 6; i++)
                         {
-                            @if (settings.HasValue($"navMenu{i}Name") && settings.HasValue($"navMenu{i}Link"))
+                                @if (!String.IsNullOrEmpty(settings?.Value<string>($"navMenu{i}Name")?.ToString()) && !String.IsNullOrEmpty(settings?.Value<string>($"navMenu{i}Link")?.ToString()))
                             {
                                 var link = settings.Value<Link>($"navMenu{i}Link");
                                 var safeId = Regex.Replace($"navMenu{i}Name", "[^a-zA-Z0-9-]+", "");
@@ -165,21 +172,21 @@
                                                     }
                                                     @if (settings.HasValue($"navMenu{i}Image"))
                                                     {
-                                                        <img src="@(settings.Value<IPublishedContent>($"navMenu{i}Image").GetCropUrl(width: 350, furtherOptions: "&format=WebP"))" srcset="@(settings.Value<IPublishedContent>($"navMenu{i}Image").GetCropUrl(width: 700, furtherOptions: "&format=WebP")) 2x" alt="@(settings.Value<IPublishedContent>($"navMenu{i}Image").Value("altText"))" class="img-curved img-fluid" loading="lazy">
+                                                        <img src="@(settings?.Value<IPublishedContent>($"navMenu{i}Image")?.GetCropUrl(width: 350, furtherOptions: "&format=WebP"))" srcset="@(settings?.Value<IPublishedContent>($"navMenu{i}Image")?.GetCropUrl(width: 700, furtherOptions: "&format=WebP")) 2x" alt="@(settings?.Value<IPublishedContent>($"navMenu{i}Image")?.Value("altText"))" class="img-curved img-fluid" loading="lazy">
                                                     }
                                                     @if (!String.IsNullOrWhiteSpace(link.Name))
                                                     {
                                                         <a href="@link.Url" class="btn btn-primary mt-4" target="@link.Target">@link.Name</a>
                                                     }
                                                 </div>
-                                                @if (settings.HasValue($"navMenu{i}Column1"))
+                                                @if (!String.IsNullOrEmpty(settings?.Value<string>($"navMenu{i}Column1")?.ToString()))
                                                 {
                                                     var content = settings.Value($"navMenu{i}Column1");
                                                         <div class="col-4 m-0 pt-lg-3">
                                                         @await Html.PartialAsync("blockgrid/blank", content)
                                                     </div>
                                                 }
-                                                @if (settings.HasValue($"navMenu{i}Column2"))
+                                                @if (!String.IsNullOrEmpty(settings?.Value<string>($"navMenu{i}Column2")?.ToString()))
                                                 {
                                                     var content = settings.Value($"navMenu{i}Column2");
                                                     <div class="col-4 m-0 pt-lg-3">
@@ -268,21 +275,25 @@
                         }
                     </ul>
 
-                    @if (settings.HasValue("utilityNavMenu"))
-                    {
-                        var utilityNavMenu = settings.Value<IEnumerable<Link>>("utilityNavMenu");
-                        <div class="container my-4 pt-5 border-top border-dark">
-                            <div class="row mobile-nav-utility gy-5 pt-5">
-                                @foreach (var link in utilityNavMenu)
-                                {
-                                    <div class="col-6 m-0">
-                                        <a href="@link.Url" class="btn btn-secondary btn-mobile w-100 btn-sm" target="@link.Target">
-                                            <span>@link.Name</span>
-                                        </a>
-                                    </div>
-                                }
+                    
+                    @{
+                        var utilityNavMenuMobile = settings?.Value<IEnumerable<Link>>("utilityNavMenu");
+
+                        if (utilityNavMenuMobile.Any())
+                        {
+                            <div class="container my-4 pt-5 border-top border-dark">
+                                <div class="row mobile-nav-utility gy-5 pt-5">
+                                    @foreach (var link in utilityNavMenuMobile)
+                                    {
+                                        <div class="col-6 m-0">
+                                            <a href="@link.Url" class="btn btn-secondary btn-mobile w-100 btn-sm" target="@link.Target">
+                                                <span>@link.Name</span>
+                                            </a>
+                                        </div>
+                                    }
+                                </div>
                             </div>
-                        </div>
+                        }
                     }
                 </nav>
 

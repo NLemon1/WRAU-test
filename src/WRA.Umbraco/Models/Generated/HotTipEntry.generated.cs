@@ -66,11 +66,11 @@ namespace WRA.Umbraco.Models
 		public virtual global::System.Collections.Generic.IEnumerable<global::Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent> Category => this.Value<global::System.Collections.Generic.IEnumerable<global::Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent>>(_publishedValueFallback, "category");
 
 		///<summary>
-		/// Hottip Publish Date
+		/// Original Published Date
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.2.0+7dff3a3")]
-		[ImplementPropertyType("hottipPublishDate")]
-		public virtual global::System.DateTime HottipPublishDate => this.Value<global::System.DateTime>(_publishedValueFallback, "hottipPublishDate");
+		[ImplementPropertyType("originalPublishedDate")]
+		public virtual global::System.DateTime OriginalPublishedDate => this.Value<global::System.DateTime>(_publishedValueFallback, "originalPublishedDate");
 
 		///<summary>
 		/// Question

@@ -62,7 +62,7 @@ namespace WRA.Umbraco
                 content?.Subcategories == null ? [] : content.Subcategories!.Select(cat => cat.Name),
                 content?.Question?.ToString() ?? string.Empty,
                 content?.Answer?.ToString() ?? string.Empty,
-                content?.HottipPublishDate == null ? string.Empty : content.HottipPublishDate.ToString()
+                content?.OriginalPublishedDate == null ? string.Empty : content.OriginalPublishedDate.ToString()
             );
         }
 
