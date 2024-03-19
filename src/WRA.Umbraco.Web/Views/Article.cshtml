@@ -10,7 +10,7 @@
     var image = content.Image;
     var sections = Model.Value<IEnumerable<BlockGridItem>>("sections");
 
-    string articleTitle = !String.IsNullOrEmpty(Model.Title) ? content.Title : content.Name;
+    string articleTitle = !String.IsNullOrEmpty(content.Title) ? content.Title : content.Name;
     var articleDateReadable = String.Format("{0:MMMM d, yyyy}", content.Date);
     var articleDate = String.Format("{0:yyyy-MM-dd}", content.Date);
     var articleDateISO = String.Format("{0:s}", content.Date) + "+06:00";
@@ -18,7 +18,7 @@
     string absUrl = ViewContext.HttpContext.Request.GetEncodedUrl();
 
     var authors = Model.Value<IEnumerable<IPublishedContent>>("Author");
-    var parentCrumb = content.Parent.Parent.UrlSegment != "news-updates" ? content.Parent : content.Parent.Parent;
+    var parentCrumb = content?.Parent?.Parent?.UrlSegment != "news-updates" ? content?.Parent : content?.Parent?.Parent;
 }
 
 @section scripts {
@@ -56,10 +56,13 @@
 
 <header class="container">
 
-    <a class="d-inline-flex align-items-center gap-1 text-decoration-none mt-4 my-lg-5 fw-bold" href="@parentCrumb.Url()">
-        <i class="fa fa-chevron-left" width="16" height="16" aria-hidden="true"></i>
-        @parentCrumb.Name
-    </a>
+    @if (parentCrumb != null)
+    {
+        <a class="d-inline-flex align-items-center gap-1 text-decoration-none mt-4 my-lg-5 fw-bold" href="@parentCrumb.Url()">
+            <i class="fa fa-chevron-left" width="16" height="16" aria-hidden="true"></i>
+            @parentCrumb.Name
+        </a>
+    }
 
     <div class="row">
         <div class="col-md-6 d-flex flex-column justify-content-center">

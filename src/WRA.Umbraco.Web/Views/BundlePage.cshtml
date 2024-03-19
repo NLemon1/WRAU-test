@@ -68,12 +68,12 @@
                                     <span class="visually-hidden">OR</span>
                                     <span class="btn__deselect">Deselect</span>
                                 </label>
-                                @if (bundleItem.Product.HasProperty("ShortDescription"))
+                                @if (bundleItem.Product.HasValue("ShortDescription"))
                                 {
                                     <button class="js-pop-btn btn btn-secondary btn-sm w-50 py-3" aria-controls="@(bundleItem.Product.Id)moreDetails">View Details</button>
                                 }
                             </div>
-                            @if (bundleItem.Product.HasProperty("ShortDescription"))
+                            @if (bundleItem.Product.HasValue("ShortDescription"))
                             {
                                 <div id="@(bundleItem.Product.Id)moreDetails" name="@(bundleItem.Product.Id)moreDetails" aria-hidden="true" class="js-modal modal bundle-modal">
                                     <div class="modal__container">
@@ -84,7 +84,7 @@
                                             <p class="h5">Course #</p>
                                             <div class="modal__content__inner">
                                                 <span class="h3 d-block fw-bold fs-lg text-capitalize mb2_5">@bundleItem.Product.Name</span>
-                                                @Html.Raw(bundleItem.Product.GetProperty("ShortDescription")?.GetSourceValue())
+                                                @Html.Raw(bundleItem.Product.Value<string>("ShortDescription"))
                                             </div>
                                             <a href="@bundleItem.Product.Url()" target="_blank" class="mt-4 btn btn-primary btn-sm">
                                                 Full Details

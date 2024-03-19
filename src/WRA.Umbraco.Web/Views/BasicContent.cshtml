@@ -13,10 +13,9 @@
         
     var currentMember = await _membermanager.GetCurrentMemberAsync();
     bool MemberCanViewPage = await _gatedContentService.MemberCanViewPage(Model, currentMember);
-
 }
 
-@if (Model.HasValue("backgroundOffset") && Model.Value("backgroundOffset").ToString() == "True")
+@if (Model.Value<bool>("backgroundOffset"))
 {
     ViewBag.MainCss += "bg-offset-decor";
 }
