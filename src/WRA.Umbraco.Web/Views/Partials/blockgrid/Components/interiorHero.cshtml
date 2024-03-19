@@ -67,8 +67,8 @@
                         {
                             @if (content.HasValue("courseSearchCategories"))
                             {
-                                
-                                IEnumerable<IPublishedContent> categoriesList = content.Value<IEnumerable<IPublishedContent>>("courseSearchCategories").Where(x => x.IsVisible()).OrderBy(p => p.Name);
+
+                                IEnumerable<IPublishedContent> categoriesList = Umbraco.ContentAtRoot().FirstOrDefault().DescendantsOfType("categoryPage").Where(x => x.IsVisible() && x.IsPublished() && x.Value<bool>("hideCategory") != true).OrderBy(p => p.Name);
 
                                 <div class="col-xl-8 mt-4">
                                     <form id="course-search" method="post" action="/products/products/" class="position-relative">
@@ -92,7 +92,7 @@
                                                     <select id="@category.Url()" class="js-subcategory-filter form-control">
                                                         <option value="" selected>Select course subcategory</option>
                                                         @{
-                                                            IEnumerable<IPublishedContent> subCategoriesList = category.Children.Where(x => x.IsVisible()).OrderBy(p => p.Name);
+                                                            IEnumerable<IPublishedContent> subCategoriesList = category.Children.Where(x => x.IsVisible() && x.IsPublished() && x.Value<bool>("hideSubcategory") != true).OrderBy(p => p.Name);
                                                         }
                                                         @foreach (var subcategory in subCategoriesList)
                                                         {
