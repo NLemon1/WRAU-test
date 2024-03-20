@@ -10,16 +10,17 @@
         "italic",
         "alignleft",
         "aligncenter",
-        "alignright",
         "bullist",
         "numlist",
         "link",
-        "umbmediapicker"
+        "umbmediapicker",
+        "superscript"
       ],
       "stylesheets": [],
       "maxImageSize": 500,
       "mode": "classic"
     },
+    "blocks": [],
     "useLiveEditing": false,
     "overlaySize": "small",
     "hideLabel": false,
