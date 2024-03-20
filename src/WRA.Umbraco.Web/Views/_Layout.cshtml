@@ -18,7 +18,8 @@
     //Model will contain all the data of the current page
     string metaTitle = Model.HasValue("metaTitle") ? Model.Value<string>("metaTitle") : Model.Name + " | " + settings?.Value("siteName");
     string metaDescription = Model.HasValue("metaDescription") ? Model.Value<string>("metaDescription") : string.Empty;
-    string logoStyle = "";
+    
+    string logoStyle = string.Empty;
 
     if (!String.IsNullOrEmpty(settings?.Value<string>("logoWidth")))
     {
