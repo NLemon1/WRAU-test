@@ -15,11 +15,11 @@
             {
                 <li class="mb-3">
                     <a href="@eventItem.Url()" class="btn btn-link btn-light ms-n2">@eventItem.Name</a>
-                    @if (eventItem.HasProperty("startDate"))
+                    @if (eventItem.HasValue("startDate"))
                     {
                         <p class="mb-0 fs-sm">@String.Format("{0:MMMM d, yyyy}", eventItem.GetProperty("startDate").GetValue())</p>
                     }
-                    @if (eventItem.HasProperty("location"))
+                    @if (eventItem.HasValue("location"))
                     {
                         <p class="mb-0 fs-sm">@eventItem.GetProperty("location").GetValue()</p>
                     }

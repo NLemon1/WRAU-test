@@ -20,10 +20,28 @@
     "umb://document-type/887a5a0def444bc09b2f7825ac1ebfba",
     "umb://document-type/f0c2133970844a948c095978736296ce"
   ],
-  "PropertyGroups": [],
+  "PropertyGroups": [
+    {
+      "Key": "2786f02c-bd06-4a1d-8e02-22ef4ce65d57",
+      "Name": "Content",
+      "Alias": "content",
+      "PropertyTypes": [
+        {
+          "Key": "9b432000-906a-4a82-9388-93a0fd03639c",
+          "Alias": "gridBlocks",
+          "DataType": "umb://data-type/5aa12b11cd24491f94da21e6399ddc33",
+          "Name": "Grid Blocks"
+        }
+      ]
+    }
+  ],
   "PropertyTypes": [],
   "Udi": "umb://document-type/54218439115a4125a776e02dac878b42",
   "Dependencies": [
+    {
+      "Udi": "umb://data-type/5aa12b11cd24491f94da21e6399ddc33",
+      "Ordering": true
+    },
     {
       "Udi": "umb://document-type-container/2443f0d8c7a44e1baa3511778e6789dd",
       "Ordering": true

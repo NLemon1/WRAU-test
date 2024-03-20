@@ -6,8 +6,8 @@
 @{
     var content = (ContentModels.HeadlineBlock)Model.Content;
     string className = "mb-3 mb-lg-4";
-    string style = "";
-    string props = "";
+    string style = string.Empty;
+    string props = string.Empty;
     string headingLevel = content.HeadingLevel.ToLower();
 
     if (content.HasValue("fontSize"))

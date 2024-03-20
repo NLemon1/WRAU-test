@@ -2,7 +2,7 @@
 @using ContentModels = WRA.Umbraco.Models;
 @{
     var content = (ContentModels.Spacer)Model.Content;
-    string style = "";
+    string style = string.Empty;
     var className = "spacer ";
 
     if (content.HasValue("additionalCssClasses"))

@@ -6,10 +6,10 @@
 @{
     var content = (ContentModels.ImageTextRow)Model.Content;
 
-    string col1Bg = "";
-    string col2Bg = "";
-    string col1ClassName = "";
-    string col2ClassName = "";
+    string col1Bg = string.Empty;
+    string col2Bg = string.Empty;
+    string col1ClassName = string.Empty;
+    string col2ClassName = string.Empty;
 
     if (content.HasValue("col1BackgroundColor"))
     {
@@ -25,9 +25,9 @@
     }
 
     string className = "block-image-text-row container";
-    string rowClassName = "";
-    string props = "";
-    string style = "";
+    string rowClassName = string.Empty;
+    string props = string.Empty;
+    string style = string.Empty;
 
     if (content.HasValue("yPadding"))
     {

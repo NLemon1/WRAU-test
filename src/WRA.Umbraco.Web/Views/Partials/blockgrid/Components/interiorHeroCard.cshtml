@@ -6,9 +6,9 @@
 @using ContentModels = WRA.Umbraco.Models;
 @{
     var content = (ContentModels.InteriorHeroCard)Model.Content;
-    string props = "";
+    string props = string.Empty;
 	string className = "block-interior-hero-card align-items-center text-center p-5 p-lg-8";
-    string style = "";
+    string style = string.Empty;
 
     if (content.HasValue("color"))
     {

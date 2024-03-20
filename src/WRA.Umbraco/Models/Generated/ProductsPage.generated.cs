@@ -50,6 +50,14 @@ namespace WRA.Umbraco.Models
 		// properties
 
 		///<summary>
+		/// Grid Blocks
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.2.0+7dff3a3")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("gridBlocks")]
+		public virtual global::Umbraco.Cms.Core.Models.Blocks.BlockGridModel GridBlocks => this.Value<global::Umbraco.Cms.Core.Models.Blocks.BlockGridModel>(_publishedValueFallback, "gridBlocks");
+
+		///<summary>
 		/// Meta Description: Enter meta description if desired.
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.2.0+7dff3a3")]

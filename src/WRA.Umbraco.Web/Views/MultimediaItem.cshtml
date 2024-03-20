@@ -6,16 +6,16 @@
     Layout = "~/Views/_Layout.cshtml";
     var content = (ContentModels.MultimediaItem)Model;
     var image = content.ThumbnailOverride;
-    var sections = Model.Value<IEnumerable<BlockGridItem>>("sections");
+    var sections = content.Value<IEnumerable<BlockGridItem>>("sections");
 
     bool isPlayList = content.Children.Any();//determines if treated as a playlist or single video experience
 
     var getType = content.MediaType == "Video" ? "Videos" : "Audio";
 
-    string mediaItemTitle = !String.IsNullOrEmpty(Model.Title) ? content.Title : content.Name;
+    string mediaItemTitle = !String.IsNullOrEmpty(content.Title) ? content.Title : content.Name;
     var mediaItemDateReadable = String.Format("{0:MMMM d, yyyy}", content.Date);
     var mediaItemDate = String.Format("{0:yyyy-MM-dd}", content.Date);
-    var mediaItemThumb = content.ThumbnailOverride != null ? image.Url() : $"https://i3.ytimg.com/vi/{content.YouTubeId}/maxresdefault.jpg";
+    var mediaItemThumb = content.ThumbnailOverride != null ? image?.Url() : $"https://i3.ytimg.com/vi/{content.YouTubeId}/maxresdefault.jpg";
     var mediaItemDateISO = String.Format("{0:s}", content.Date) + "+06:00";
 }
 

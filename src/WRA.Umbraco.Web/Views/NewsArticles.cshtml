@@ -20,14 +20,7 @@
     string selectedCategory = !String.IsNullOrEmpty(urlQuery["category"]) ? System.Uri.EscapeDataString(urlQuery["category"]) : null;
     string searchPhrase = !String.IsNullOrEmpty(urlQuery["search"]) ? System.Uri.EscapeDataString(urlQuery["search"]) : null;
 
-   /* 
-    * NEED TO FIX
-    * IEnumerable<IPublishedContent> results = !String.IsNullOrEmpty(selectedCategory) ?
-        Model.Children.Where(p => p.IsVisible() && @HtmlHelperExtensions.FormatSlug(p.Value<WRA.Umbraco.Models.ArticleCategory>("category").Name) == selectedCategory).OrderBy(p => p.GetProperty("date").GetSourceValue()).Reverse()
-        : Model.Children.OrderBy(p => p.GetProperty("date").GetSourceValue()).Reverse();
-        */
-    IEnumerable<IPublishedContent> results = !String.IsNullOrEmpty(selectedCategory) ? Umbraco.ContentAtRoot().DescendantsOrSelfOfType("article").Where(p => p.IsVisible() && @HtmlHelperExtensions.FormatSlug(p.Value<WRA.Umbraco.Models.ArticleCategory>("category").Name) == selectedCategory).OrderBy(p => p.GetProperty("date").GetSourceValue()).Reverse() : Umbraco.ContentAtRoot().DescendantsOrSelfOfType("article").Where(p => p.IsVisible()).OrderBy(p => p.GetProperty("date").GetSourceValue()).Reverse();
-
+    IEnumerable<IPublishedContent> results = !String.IsNullOrEmpty(selectedCategory) ? Umbraco.ContentAtRoot().DescendantsOrSelfOfType("article").Where(p => p.IsVisible() && @HtmlHelperExtensions.FormatSlug(p.Value<WRA.Umbraco.Models.ArticleCategory>("category").Name) == selectedCategory).OrderBy(p => p.Value<DateTime>("date")).Reverse() : Umbraco.ContentAtRoot().DescendantsOrSelfOfType("article").Where(p => p.IsVisible()).OrderBy(p => p.Value<DateTime>("date")).Reverse();
 
     int categorizedResultCount = results.Count();
     var resultMath = Decimal.Divide(categorizedResultCount, pageSize);//Results / PageSize
@@ -35,7 +28,6 @@
 
     var setAll = selectedCategory == null ? "aria-selected=true" : "aria-selected=false";
     var newsCardFallbackImage = content.FallbackImage;
-
 }
 
 @await Html.PartialAsync("blockgrid/default", sections)
@@ -108,13 +100,12 @@
         
         @foreach (var newsCategory in newsCategories)
         {
-           
             IPublishedContent featuredArticleObject = newsCategory.Value<IPublishedContent>("featuredArticle");
 
             if (featuredArticleObject != null)
             {
-                var articleTitle = featuredArticleObject.HasProperty("title") ? featuredArticleObject.Value("title") : featuredArticleObject.Name;
-                string cleanContent = "";
+                var articleTitle = featuredArticleObject.HasValue("title") ? featuredArticleObject.Value("title") : featuredArticleObject.Name;
+                string cleanContent = string.Empty;
 
                 if (featuredArticleObject.HasValue("richTextContent") && !featuredArticleObject.HasValue("excerpt"))
                 {
@@ -124,13 +115,13 @@
                 var articleCategory = featuredArticleObject.Value<WRA.Umbraco.Models.ArticleCategory>("category");
 
                 var newsCardImage = featuredArticleObject.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("image");
-                var imageSet = !String.IsNullOrEmpty(newsCardImage.GetCropUrl(width: 660, height: 440, furtherOptions: "&format=WebP")) ? newsCardImage.GetCropUrl(width: 660, height: 440, furtherOptions: "&format=WebP") : newsCardFallbackImage.GetCropUrl(width: 660, height: 440, furtherOptions: "&format=WebP");
+                var imageSet = !String.IsNullOrEmpty(newsCardImage?.GetCropUrl(width: 660, height: 440, furtherOptions: "&format=WebP")) ? newsCardImage.GetCropUrl(width: 660, height: 440, furtherOptions: "&format=WebP") : newsCardFallbackImage?.GetCropUrl(width: 660, height: 440, furtherOptions: "&format=WebP");
 
                 var articleDateReadable = String.Format("{0:MMMM d, yyyy}", featuredArticleObject.Value("date"));
                 var articleDate = String.Format("{0:yyyy-MM-dd}", featuredArticleObject.Value("date"));
 
                 var initialActiveTab = selectedCategory == HtmlHelperExtensions.FormatSlug(newsCategory.Name) || (String.IsNullOrEmpty(selectedCategory) && HtmlHelperExtensions.FormatSlug(newsCategory.Name) == firstCatSlug);
-                var setTabActive = initialActiveTab != true ? "hidden" : "";
+                var setTabActive = initialActiveTab != true ? "hidden" : string.Empty;
 
                 <div class="js-featured-article featured-article block-image-text-row position-relative" @(setTabActive) data-featuredcat="@HtmlHelperExtensions.FormatSlug(newsCategory.Name)">
                     <div class="row ">
@@ -146,7 +137,7 @@
                             @if (featuredArticleObject.HasValue("category"))
                             {
                                 <span class="chip align-self-start mb-3 mb-lg-4">
-                                    @articleCategory.Name
+                                    @articleCategory?.Name
                                 </span>
                             }
 
@@ -175,7 +166,7 @@
         }
     }
     <div class="position-relative">
-        <div id="article-results" class="js-article-results row my-4 mb-6 g-3 g-lg-6" style="min-height: 500px;" data-fallback="@newsCardFallbackImage.GetCropUrl(width: 660, height: 330, furtherOptions: "&format=WebP")" data-cattotal="@totalPages">
+        <div id="article-results" class="js-article-results row my-4 mb-6 g-3 g-lg-6" style="min-height: 500px;" data-fallback="@newsCardFallbackImage?.GetCropUrl(width: 660, height: 330, furtherOptions: "&format=WebP")" data-cattotal="@totalPages">
             @foreach (var item in results.Take(pageSize))
             {
                 var articleTitle = item.HasProperty("title") ? item.Value("title") : item.Name;
@@ -183,7 +174,7 @@
                 var articleDate = String.Format("{0:yyyy-MM-dd}", item.Value("date"));
                 var articleCategory = item.Value<WRA.Umbraco.Models.ArticleCategory>("category");
                 var newsCardImage = item.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("image");
-                var imageSet = !String.IsNullOrEmpty(newsCardImage.MediaUrl()) ? newsCardImage.GetCropUrl(width: 660, height: 330, furtherOptions: "&format=WebP") : newsCardFallbackImage.GetCropUrl(width: 660, height: 330, furtherOptions: "&format=WebP");
+                var imageSet = !String.IsNullOrEmpty(newsCardImage?.MediaUrl()) ? newsCardImage.GetCropUrl(width: 660, height: 330, furtherOptions: "&format=WebP") : newsCardFallbackImage?.GetCropUrl(width: 660, height: 330, furtherOptions: "&format=WebP");
 
                 string cleanContent = "";
 
@@ -209,10 +200,10 @@
                                     @articleDateReadable
                                 </time>
                             }
-                            @if (item.HasValue("category"))
+                            @if (!String.IsNullOrEmpty(articleCategory?.ToString()))
                             {
                                 <span class="chip chip--no-hover align-self-start">
-                                    @articleCategory.Name
+                                    @articleCategory?.Name
                                 </span>
                             }
                         </div>

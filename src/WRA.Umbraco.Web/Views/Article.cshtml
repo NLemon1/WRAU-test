@@ -8,7 +8,7 @@
     Layout = "~/Views/_Layout.cshtml";
     var content = (ContentModels.Article)Model;
     var image = content.Image;
-    var sections = Model.Value<IEnumerable<BlockGridItem>>("sections");
+    var sections = content.Value<IEnumerable<BlockGridItem>>("sections");
 
     string articleTitle = !String.IsNullOrEmpty(content.Title) ? content.Title : content.Name;
     var articleDateReadable = String.Format("{0:MMMM d, yyyy}", content.Date);
@@ -17,13 +17,13 @@
 
     string absUrl = ViewContext.HttpContext.Request.GetEncodedUrl();
 
-    var authors = Model.Value<IEnumerable<IPublishedContent>>("Author");
+    var authors = content.Value<IEnumerable<IPublishedContent>>("Author");
     var parentCrumb = content?.Parent?.Parent?.UrlSegment != "news-updates" ? content?.Parent : content?.Parent?.Parent;
 }
 
 @section scripts {
 
-    @if (content.HasValue("Author") && authors != null && !String.IsNullOrEmpty(Model.Name))
+    @if (content.Author != null && authors != null && !String.IsNullOrEmpty(content.Name))
     {
         var authorCount = authors.Count();
         int authorInt = 1;
@@ -46,7 +46,7 @@
                 "name": "@articleTitle",
                 @if (content.HasValue("image"))
                 {
-                    <text>"image": "@content.Image.GetCropUrl(width: 1200, furtherOptions: "&format=WebP")",</text>
+                    <text>"image": "@content?.Image?.GetCropUrl(width: 1200, furtherOptions: "&format=WebP")",</text>
                 }
                 "datePublished": "@articleDateISO"
             }
@@ -68,7 +68,7 @@
         <div class="col-md-6 d-flex flex-column justify-content-center">
             @if (content.HasValue("Category"))
             {
-                <a href="/news-updates?category=@HtmlHelperExtensions.FormatSlug(@content.Category.Name)" class="chip align-self-start mb-3 mb-lg-4">
+                <a href="/news-updates?category=@HtmlHelperExtensions.FormatSlug(content.Category.Name)" class="chip align-self-start mb-3 mb-lg-4">
                     @content.Category.Name
                 </a>
             }
@@ -76,39 +76,37 @@
                 @articleTitle
             </h1>
             <div>
-              
                 @if (authors != null)
                 {
                     <p>
                     @foreach (var author in authors)
                     {
-                        bool hasTitle = !String.IsNullOrEmpty(author?.Value("authorTitle").ToString());
+                        bool hasTitle = !String.IsNullOrEmpty(author?.Value<string>("authorTitle"));
                         string setSpacer = hasTitle ? ", " : "";
 
-                        @if (!String.IsNullOrEmpty(author.Value("authorName").ToString()))
+                        @if (!String.IsNullOrEmpty(author?.Value<string>("authorName")))
                         {
                             @author.Value("authorName")
                         }
                         else
                         {
-                            @author.Name
+                            @author?.Name
                         }
                         @if (hasTitle)
                         {
                             @setSpacer
-                            @author.Value("authorTitle")
+                            @author?.Value("authorTitle")
                         }
                         <br />
                     }
                     </p>
                 }
                 
-
                 @if (content.HasValue("magazineLink"))
                 {
                     <p class="mb-3">
-                        <a href="@content.MagazineLink.Url()">
-                            @content.MagazineLink.Name
+                        <a href="@content.MagazineLink?.Url()">
+                            @content.MagazineLink?.Name
                         </a>
                     </p>
                 }
@@ -127,7 +125,7 @@
         {
             <div class="col-md-6 d-flex flex-column justify-content-center">
                 <figure class="img-curved img-curved--large text-end">
-                    <img loading="lazy" class="img-fluid" src="@content.Image.GetCropUrl(width: 555, furtherOptions: "&format=WebP")" srcset="@content.Image.GetCropUrl(width: 1110, furtherOptions: "&format=WebP") 2x" width="555" alt="@(content.Image.Value("altText") ?? "")">
+                    <img loading="lazy" class="img-fluid" src="@content.Image?.GetCropUrl(width: 555, furtherOptions: "&format=WebP")" srcset="@content.Image?.GetCropUrl(width: 1110, furtherOptions: "&format=WebP") 2x" width="555" alt="@(content.Image?.Value("altText") ?? string.Empty)">
                 </figure>
             </div>
         }
@@ -148,8 +146,8 @@
         <div class="col-md-5 col-lg-4 ps-lg-5">
             @{
                 IEnumerable<IPublishedContent> newsArticles = Umbraco.ContentAtRoot().DescendantsOrSelfOfType("article")
-                .Where(p => p.IsVisible() && p.Value<WRA.Umbraco.Models.ArticleCategory>("category").Id == content.Category.Id && p.Id != content.Id)
-                .OrderBy(p => p.GetProperty("date").GetSourceValue()).Reverse()
+                .Where(p => p.IsVisible() && p.Value<WRA.Umbraco.Models.ArticleCategory>("category")?.Id == content.Category?.Id && p.Id != content.Id)
+                .OrderBy(p => p.Value<DateTime>("date")).Reverse()
                 .Take(5);
             }
 
@@ -159,15 +157,17 @@
                 <div class="row g-1 g-lg-3">
                     @foreach (var child in newsArticles)
                     {
-                        //var categoryName = child.Value<WRA.Umbraco.Models.ArticleCategory>("category");
-                        var pubDate = child.GetProperty("date").GetValue();
+                        var pubDate = child.Value<DateTime>("date");
                         var image2 = child.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("image");
                       
-                            <div class="col">
+                        <div class="col">
                             <a href="@child.Url()" class="news-card d-flex flex-row align-items-center p-2 text-decoration-none">
-                                <img src="@image2.GetCropUrl(width: 120, height: 80, furtherOptions: "&format=WebP")" srcset="@image2.GetCropUrl(width: 240, height: 160, furtherOptions: "&format=WebP") 2x" class="object-fit-cover" width="120" height="80" alt="@child.GetProperty("title").GetValue()" />
+                                @if (image2 != null)
+                                {
+                                    <img src="@image2?.GetCropUrl(width: 120, height: 80, furtherOptions: "&format=WebP")" srcset="@image2?.GetCropUrl(width: 240, height: 160, furtherOptions: "&format=WebP") 2x" class="object-fit-cover" width="120" height="80" alt="@child?.Value("title")" />
+                                }
                                 <div class="w-100 h-100 d-flex flex-column ps-2 py-2">
-                                    <h3 class="h6 news-card__headline">@child.GetProperty("title").GetValue()</h3>
+                                    <h3 class="h6 news-card__headline">@child?.Value("title")</h3>
                                     <p class="mt-auto fw-light fs-xs" style="color: var(--bs-gray-30)">@String.Format("{0:MMMM d, yyyy}", pubDate)</p>
                                 </div>
                             </a>

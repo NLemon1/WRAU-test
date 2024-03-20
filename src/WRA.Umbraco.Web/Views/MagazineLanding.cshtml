@@ -57,7 +57,6 @@
                             <h3 class="h4 text-white px-3 py-2" style="background-color: var(--bs-blue-dark)">
                                 Featured Articles
                             </h3>
-
                             @if (content.Value<IEnumerable<IPublishedContent>>("FeaturedOnlineArticles") != null)
                             {
                                 var articles = content.Value<IEnumerable<IPublishedContent>>("FeaturedOnlineArticles");
@@ -68,7 +67,7 @@
                                         @foreach (var child in articles.Where(x => x.IsVisible()).Take(3))
                                         {
 
-                                            var articleTitle = child.HasProperty("Title") ? child.Value("Title") : child.Name;
+                                            var articleTitle = child.HasValue("Title") ? child.Value("Title") : child.Name;
                                             var articleImage = child.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("image");
 
                                             string cleanContent = "";
@@ -81,7 +80,10 @@
                                             var articleSummary = child.HasValue("excerpt") ? child.Value("excerpt") : cleanContent;
 
                                             <li class="d-flex flex-row position-relative list-group-item">
-                                                <img src="@articleImage.GetCropUrl(width: 240, height: 160, furtherOptions: "&format=WebP")" class="img-fluid fit-cover" width="120" height="80" alt="@(articleImage.Value("altText") ?? "")" />
+                                                @if (articleImage != null)
+                                                {
+                                                    <img src="@articleImage.GetCropUrl(width: 240, height: 160, furtherOptions: "&format=WebP")" class="img-fluid fit-cover" width="120" height="80" alt="@(articleImage.Value("altText") ?? string.Empty)" />
+                                                }
                                                 <div class="flex-fill ps-3">
                                                     <a href="@child.Url()" class="stretched-link link-hover-inverse">
                                                         <h4 class="fs-md mb-1">@articleTitle</h4>
@@ -98,66 +100,28 @@
                             }
 
                         </div>
-
-                        @if (moreArticles != null)
+                        @if (moreArticles.Any())
                         {
-                            @if (moreArticles.Any())
-                            {
-                                <div class="col-lg-5 ps-lg-1 ms-lg-auto">
-                                    <div class="ps-lg-4 border-medium border-start no-border-mobile h-100">
-                                        <h3 class="h4 text-white px-3 py-2" style="background-color: var(--bs-blue-dark)">
-                                            More News
-                                        </h3>
-                                        <ul class="list-unstyled gap-2 d-flex flex-column pt-2">
-                                            @foreach (var link in moreArticles)
-                                            {
-                                                <li><a href="@link.Url" class="fw-bold fs-sm" style="color: inherit" target="@link.Target">@link.Name</a></li>
-                                            }
-                                        </ul>
-                                    </div>
+                            <div class="col-lg-5 ps-lg-1 ms-lg-auto">
+                                <div class="ps-lg-4 border-medium border-start no-border-mobile h-100">
+                                    <h3 class="h4 text-white px-3 py-2" style="background-color: var(--bs-blue-dark)">
+                                        More News
+                                    </h3>
+                                    <ul class="list-unstyled gap-2 d-flex flex-column pt-2">
+                                        @foreach (var link in moreArticles)
+                                        {
+                                            <li><a href="@link.Url" class="fw-bold fs-sm" style="color: inherit" target="@link.Target">@link.Name</a></li>
+                                        }
+                                    </ul>
                                 </div>
-                            }
+                            </div>
                         }
-
-                       @*  @if (content.Value<IEnumerable<IPublishedContent>>("FeaturedOnlineArticles") != null)
-                        {
-                            var articles = content.Value<IEnumerable<IPublishedContent>>("FeaturedOnlineArticles");
-
-                            @if (articles.Any() && articles.Count() > 3)
-                            {
-                                var totalArticles = articles.Count() - 3;
-                                var articlesMore = articles.Where(x => x.IsVisible()).TakeLast(totalArticles);
-
-                                <div class="col-lg-5 ps-lg-1 ms-lg-auto">
-                                    <div class="ps-lg-4 border-medium border-start no-border-mobile h-100">
-                                        <h3 class="h4 text-white px-3 py-2" style="background-color: var(--bs-blue-dark)">
-                                            More News
-                                        </h3>
-                                        <ul class="list-unstyled gap-2 d-flex flex-column pt-2">
-                                            @foreach (var child in articlesMore)
-                                            {
-                                                var articleMoreTitle = child.HasProperty("Title") ? child.Value("Title") : child.Name;
-
-                                                <li>
-                                                    <a href="@child.Url()" class="fw-bold fs-sm" style="color: inherit">@articleMoreTitle</a>
-                                                </li>
-                                            }
-                                        </ul>
-                                    </div>
-                                </div>
-                            }
-                        } *@
                     </div> 
                     <a href="/news-updates/" class="btn btn-primary btn-sm d-lg-none w-100 mt-4">See All</a>
                 </div>
             </div>
         </div>
-
     }
-
-
-
-
 </div>
 <div class="w-100 py-7 py-lg-10" style="background-color: var(--bs-gray-10)">
     <div class="container">

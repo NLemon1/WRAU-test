@@ -9,15 +9,15 @@
 
 @{
     Layout = "~/Views/_Layout.cshtml";
-    var sections = Model.Value<IEnumerable<BlockGridItem>>("sections");
-
+    var content = (ContentModels.CategoryPage)Model;
+    var sections = content.Value<IEnumerable<BlockGridItem>>("sections");
     var productSubcategories = Model.Children.Where(p => p.IsVisible() && p.IsPublished() && p.Value<bool>("hideSubcategory") != true).OrderBy(p => p.Name);
 }
 
 <header class="page-header page-header--no-accent">
     <div class="container">
         <div class="container--sm">
-            <h1 class="mb-0">@Model.Name</h1>
+            <h1 class="mb-0">@content.Name</h1>
         </div>
     </div>
 </header>
@@ -34,24 +34,27 @@
 
 <div class="container">
     <div class="row g-4">
-        @foreach (var productGroup in productSubcategories)
+        @if (productSubcategories.Any())
         {
-            <div class="col-md-4">
-                <div class="block-mini-card mini-card p-2 p-md-4 pb-lg-0 d-flex flex-column">
-                    <h3 class="mini-card__headline h5 mb-4 px-2 px-md-0 pt-4 pt-md-0">@productGroup.Name</h3>
-                    @if (productGroup.HasProperty("description"))
-                    {
-                        <p class="px-2 px-md-0">@productGroup?.GetProperty("description")?.GetValue()</p>
-                    }
-                    <a href="@productGroup?.Url()" class="mini-card__link fs-normal mt-auto stretched-link text-decoration-none fw-bold">
-                        Views Offerings
-                        <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M0.82077 8L12.0313 8" stroke="#2560B9" stroke-width="1.37143" stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M8.51727 4L12.5173 8L8.51727 12" stroke="#2560B9" stroke-width="1.37143" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </a>
+            foreach (var productGroup in productSubcategories)
+            {
+                <div class="col-md-4">
+                    <div class="block-mini-card mini-card p-2 p-md-4 pb-lg-0 d-flex flex-column">
+                        <h3 class="mini-card__headline h5 mb-4 px-2 px-md-0 pt-4 pt-md-0">@productGroup.Name</h3>
+                        @if (productGroup.HasValue("description"))
+                        {
+                            <p class="px-2 px-md-0">@productGroup?.Value("description")</p>
+                        }
+                        <a href="@productGroup?.Url()" class="mini-card__link fs-normal mt-auto stretched-link text-decoration-none fw-bold">
+                            Views Offerings
+                            <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0.82077 8L12.0313 8" stroke="#2560B9" stroke-width="1.37143" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M8.51727 4L12.5173 8L8.51727 12" stroke="#2560B9" stroke-width="1.37143" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </a>
+                    </div>
                 </div>
-            </div>
+            }
         }
     </div>
 </div>

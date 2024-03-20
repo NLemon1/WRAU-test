@@ -21,8 +21,8 @@
     var articles = currentIssueContent.Value<IEnumerable<IPublishedContent>>("FeaturedOnlineArticles");
 
     string className = "block-magazine-featured";
-    string style = "";
-    string props = "";
+    string style = string.Empty;
+    string props = string.Empty;
 
 
     if (content.HasValue("additionalCssClasses"))
@@ -118,10 +118,10 @@
                             @foreach (var child in articles.Where(x => x.IsVisible()).Take(3))
                             {
 
-                                var articleTitle = child.HasProperty("Title") ? child.Value("Title") : child.Name;
+                                var articleTitle = child.HasValue("Title") ? child.Value("Title") : child.Name;
                                 var articleImage = child.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("image");
 
-                                string cleanContent = "";
+                                string cleanContent = string.Empty;
 
                                 if (child.HasValue("richTextContent") && !child.HasValue("excerpt"))
                                 {

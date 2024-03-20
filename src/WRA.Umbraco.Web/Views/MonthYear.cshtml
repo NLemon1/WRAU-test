@@ -7,17 +7,16 @@
     Layout = "~/Views/_Layout.cshtml";
     var content = (ContentModels.MonthYear)Model;
 
-    var resultsFiltered = Model.Children.Where(p => p.IsVisible()).OrderBy(p => p.GetProperty("date").GetSourceValue()).Reverse();
+    var resultsFiltered = content.Children.Where(p => p.IsVisible()).OrderBy(p => p.Value<DateTime>("date")).Reverse();
     var newsCardFallbackImage = content.Parent?.Value<NewsArticles>("fallbackImage");
 }
 
 <header class="container">
-    <a class="d-inline-flex align-items-center gap-1 text-decoration-none mt-4 my-lg-5 fw-bold" href="@content.Parent.Url()">
+    <a class="d-inline-flex align-items-center gap-1 text-decoration-none mt-4 my-lg-5 fw-bold" href="@content.Parent?.Url()">
         <i class="fa fa-chevron-left" width="16" height="16" aria-hidden="true"></i>
-        @content.Parent.Name
+        @content.Parent?.Name
     </a>
     <h1>@content.Name</h1>
-
 </header>
 
 <div class="container pb-6">
@@ -26,15 +25,14 @@
         <div id="article-results" class="row my-4 mb-6 g-3 g-lg-6" style="min-height: 500px;">
             @foreach (var item in resultsFiltered)
             {
-                var articleTitle = item.HasProperty("title") ? item.Value("title") : item.Name;
+                var articleTitle = item.HasValue("title") ? item.Value("title") : item.Name;
                 var articleDateReadable = String.Format("{0:MMMM d, yyyy}", item.Value("date"));
                 var articleDate = String.Format("{0:yyyy-MM-dd}", item.Value("date"));
                 var articleCategory = item.Value<WRA.Umbraco.Models.ArticleCategory>("category");
                 var newsCardImage = item.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("image");
-                var imageSet = !String.IsNullOrEmpty(newsCardImage.MediaUrl()) ? newsCardImage.GetCropUrl(width: 660, height: 330, furtherOptions: "&format=WebP") : newsCardFallbackImage.GetCropUrl(width: 660, height: 330, furtherOptions: "&format=WebP");
+                var imageSet = !String.IsNullOrEmpty(newsCardImage?.MediaUrl()) ? newsCardImage.GetCropUrl(width: 660, height: 330, furtherOptions: "&format=WebP") : newsCardFallbackImage?.GetCropUrl(width: 660, height: 330, furtherOptions: "&format=WebP");
 
-
-                string cleanContent = "";
+                string cleanContent = string.Empty;
 
                 if (item.HasValue("richTextContent") && !item.HasValue("excerpt"))
                 {

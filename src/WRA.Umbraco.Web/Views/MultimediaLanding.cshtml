@@ -10,20 +10,19 @@
     Layout = "~/Views/_Layout.cshtml";
 
     var content = (ContentModels.MultimediaLanding)Model;
-    var sections = Model.Value<IEnumerable<BlockGridItem>>("gridSection");
+    var sections = content.Value<IEnumerable<BlockGridItem>>("gridSection");
     int pageSize = 15;
 
     IPublishedContent featuredVideo = content.FeaturedVideo;
     IPublishedContent featuredAudio = content.FeaturedAudio;
-
 
     var urlQuery = Context.Request.Query;
     string selectedType = !String.IsNullOrEmpty(urlQuery["type"]) ? System.Uri.EscapeDataString(urlQuery["type"]).ToLower() : null;
     string searchPhrase = !String.IsNullOrEmpty(urlQuery["search"]) ? System.Uri.EscapeDataString(urlQuery["search"]) : null;
 
    IEnumerable<IPublishedContent> results = !String.IsNullOrEmpty(selectedType) ?
-       content.Descendants().Where(p => p.IsVisible() && p.Value("mediaType").ToString().ToLower() == selectedType).OrderBy(p => p.GetProperty("date").GetSourceValue()).Reverse()
-      : content.Descendants().OrderBy(p => p.GetProperty("date").GetSourceValue()).Reverse();
+       content.Descendants().Where(p => p.IsVisible() && p.Value("mediaType")?.ToString()?.ToLower() == selectedType).OrderBy(p => p.Value<DateTime>("date")).Reverse()
+      : content.Descendants().OrderBy(p => p.Value<DateTime>("date")).Reverse();
 
     int categorizedResultCount = results.Count();
     var resultMath = Decimal.Divide(categorizedResultCount, pageSize);//Results / PageSize
@@ -148,7 +147,7 @@
                 {
                     <p class="mb-3">@featuredAudio.Value("description")</p>
                 }
-                <a href="@featuredVideo.Url()" class="btn btn-link-arrow ms-n2">
+                <a href="@featuredVideo?.Url()" class="btn btn-link-arrow ms-n2">
                     Listen to Podcast
                     <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M0.820801 8L12.0314 8" stroke="#050F1E" stroke-width="1.37143" stroke-linecap="round" stroke-linejoin="round" />

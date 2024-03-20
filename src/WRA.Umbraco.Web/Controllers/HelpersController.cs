@@ -23,9 +23,15 @@ namespace WRA.Umbraco.Web.Helpers
         }
         public static string ShortenExcerpt(string ExcerptContent, int CharLimit)
         {
-            string initialString = Regex.Replace(ExcerptContent.ToString(), "<.*?>", String.Empty).ToString();
-            string finalString = initialString.Length > CharLimit ? initialString.Substring(0, CharLimit) + "..." : initialString;
-            return finalString;
+            if (ExcerptContent != null)
+            {
+                string initialString = Regex.Replace(ExcerptContent.ToString(), "<.*?>", String.Empty).ToString();
+                string finalString = initialString.Length > CharLimit ? initialString.Substring(0, CharLimit) + "..." : initialString;
+                return finalString;
+            } else
+            {
+                return string.Empty;
+            }
         }
 
     }

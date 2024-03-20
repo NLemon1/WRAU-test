@@ -12,7 +12,7 @@
 
     string className = "block-interior-hero";
     string style = $"--mobileImage: url({imageMobile.GetCropUrl(width: 768, furtherOptions: "&format=WebP")}); --desktopImage:  url({imageMobile.GetCropUrl(width: 1920, furtherOptions: "&format=WebP")});";
-    string props = "";
+    string props = string.Empty;
 
     //check if has content in area
     bool hasAreaContent = Model.Areas.FirstOrDefault().Any();
