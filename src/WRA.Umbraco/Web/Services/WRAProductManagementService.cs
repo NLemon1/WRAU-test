@@ -10,6 +10,7 @@ using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Cms.Core.Scoping;
 using Umbraco.Cms.Core.Services;
 using Umbraco.Cms.Infrastructure.Examine;
+using Umbraco.Cms.Infrastructure.HostedServices;
 using Umbraco.Commerce.Core.Models;
 using Umbraco.Commerce.Core.Services;
 using WRA.Umbraco.Models;
@@ -33,6 +34,7 @@ public class WRAProductManagementService
         ILogger<WRAProductManagementService> logger,
         ICoreScopeProvider coreScopeProvider
     )
+
     {
         _logger = logger;
         _currencyService = currencyService;
@@ -50,47 +52,55 @@ public class WRAProductManagementService
     /// <returns></returns>
     public async Task CreateProduct(WraProductDto product)
     {
-        // crate a scope
-        using ICoreScope scope = _coreScopeProvider.CreateCoreScope(autoComplete: true);
-        // supress any notification to prevent our listener from firing an "updated product" webhook back at the queue
-        // using var _ = scope.Notifications.Suppress();
-
-        // now we need the "products" parent node to place these products under...
-        var productCollectionPageQuery = _searchService.Search(CollectionPage.ModelTypeAlias);
-        var matchingProduct = _searchService.Search(ProductPage.ModelTypeAlias);
-
-        var productCollections = productCollectionPageQuery
-           .Select(result => new CollectionPage(result.Content, new NoopPublishedValueFallback()));
-
-        // now that we have the products, lets translate it to a product page content type...
-        var productType = product.ProductType;
-
-        // get collection that matches product Type
-        var collectionPage = productCollections.Where(c => c.Name == productType)
-           .FirstOrDefault();
-
-        // collection page doesn't exist and needs to be created
-        // maybe exception instead?
-        if (collectionPage == null) { _logger.LogError($"No collection match for product{product.Id}"); return; }
-
-        // while we have the relvent info, lets grab the store ID for when we need it for currency stuff...
-        var store = collectionPage.GetStore();
-
-
-        // We have our colleciton page, so now lets see if it contains a record that already exists...
-        // if it returns nothing (no page exists matching the ID from WRA), we create one.
-        // var productPagetest = GetExistingProductPage(product.Sku);
-        var productPage = GetExistingProductPage(product.Sku);
-        if (productPage == null)
+        try
         {
-            productPage = _contentService.Create(product.Name, collectionPage.Id, ProductPage.ModelTypeAlias);
+            // crate a scope
+            using ICoreScope scope = _coreScopeProvider.CreateCoreScope(autoComplete: true);
+            // supress any notification to prevent our listener from firing an "updated product" webhook back at the queue
+            using var _ = scope.Notifications.Suppress();
+
+            // now we need the "products" parent node to place these products under...
+            var productCollectionPageQuery = _searchService.Search(CollectionPage.ModelTypeAlias);
+            var matchingProduct = _searchService.Search(ProductPage.ModelTypeAlias);
+
+            var productCollections = productCollectionPageQuery
+               .Select(result => new CollectionPage(result.Content, new NoopPublishedValueFallback()));
+
+            // now that we have the products, lets translate it to a product page content type...
+            var productType = product.ProductType;
+
+            // get collection that matches product Type
+            var collectionPage = productCollections.Where(c => c.Name == productType)
+               .FirstOrDefault();
+
+            // collection page doesn't exist and needs to be created
+            // maybe exception instead?
+            if (collectionPage == null) { _logger.LogError($"No collection match for product{product.Id}"); return; }
+
+            // while we have the relvent info, lets grab the store ID for when we need it for currency stuff...
+            var store = collectionPage.GetStore();
+
+
+            // We have our colleciton page, so now lets see if it contains a record that already exists...
+            // if it returns nothing (no page exists matching the ID from WRA), we create one.
+            // var productPagetest = GetExistingProductPage(product.Sku);
+            var productPage = GetExistingProductPage(product.Sku);
+            if (productPage == null)
+            {
+                productPage = _contentService.Create(product.Name, collectionPage.Id, ProductPage.ModelTypeAlias);
+            }
+
+            //set properties on our product
+            await SetProductProperties(productPage, product, store);
+
+            // save and publish the product! Wow! 
+            _contentService.SaveAndPublish(productPage);
         }
+        catch (System.Exception)
+        {
 
-        //set properties on our product
-        await SetProductProperties(productPage, product, store);
-
-        // save and publish the product! Wow! 
-        _contentService.SaveAndPublish(productPage);
+            throw;
+        }
     }
 
     public async Task Update(WraProductDto product)

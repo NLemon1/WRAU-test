@@ -16,6 +16,8 @@ using WRA.Umbraco.Models;
 using WRA.Umbraco.Services;
 using Umbraco.Cms.Infrastructure.Examine;
 using NPoco.Expressions;
+using Umbraco.Cms.Infrastructure.HostedServices;
+
 
 namespace WRA.Umbraco.Controllers;
 
@@ -30,8 +32,9 @@ public class ProductSyncApiController : ApiController
     private readonly IProductService _productService;
     private readonly IContentService _contentService;
     private readonly ICurrencyService _currencyService;
-    readonly IIndexRebuilder _indexbuilder;
     private WRAProductManagementService _WRAProductManagementService;
+    private readonly IBackgroundTaskQueue _backgroundTaskQueue;
+
     public ProductSyncApiController(
         SearchService searchService,
         WRAExternalApiService wRAExternalApiService,
@@ -39,7 +42,8 @@ public class ProductSyncApiController : ApiController
         IContentService contentService,
         ICurrencyService currencyService,
         WRAProductManagementService WRAProductManagementService,
-        IIndexRebuilder indexbuilder)
+        IIndexRebuilder indexbuilder,
+        IBackgroundTaskQueue backgroundTaskQueue)
     {
         _searchService = searchService;
         _wraExternalApiService = wRAExternalApiService;
@@ -47,7 +51,7 @@ public class ProductSyncApiController : ApiController
         _contentService = contentService;
         _currencyService = currencyService;
         _WRAProductManagementService = WRAProductManagementService;
-        _indexbuilder = indexbuilder;
+        _backgroundTaskQueue = backgroundTaskQueue;
     }
 
 
@@ -183,6 +187,16 @@ public class ProductSyncApiController : ApiController
         foreach (WraProductDto p in externalProducts)
         {
             await _WRAProductManagementService.CreateProduct(p);
+            _backgroundTaskQueue.QueueBackgroundWorkItem(
+                cancellationToken =>
+                {
+                    using (ExecutionContext.SuppressFlow())
+                    {
+                        Task.Run(() => _WRAProductManagementService.CreateProduct(p));
+                        return Task.CompletedTask;
+                    }
+                }
+            );
         }
     }
 
