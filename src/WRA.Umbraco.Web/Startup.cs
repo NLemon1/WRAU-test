@@ -3,6 +3,8 @@ using WRA.Umbraco.Services;
 using WRA.Umbraco.Extensions;
 using WRA.Umbraco.Events.ServiceBusSubscriptions;
 using Umbraco.Commerce.Extensions;
+using Microsoft.AspNetCore.Identity;
+using Umbraco.Cms.Core.Security;
 
 namespace WRA.Umbraco.Web
 {
@@ -51,6 +53,8 @@ namespace WRA.Umbraco.Web
             // services.Configure<ProductSubscriptionServiceSettings>(_config.GetSection("SubscriptionServiceSettings:ProductSubscriptionSettings"));
             // services.AddSingleton<IHostedService, WraProductSubscriptionService>();
 
+            // services.AddScoped<IPasswordHasher<MemberIdentityUser>, CustomMemberPasswordHasher<MemberIdentityUser>>();
+
             // umbraco services
             services.AddUmbraco(_env, _config)
                 .AddBackOffice()
@@ -62,7 +66,6 @@ namespace WRA.Umbraco.Web
                 .ConfigureMySwaggerGen()
                 .Build();
 
-            // services.AddScoped<IPasswordHasher<BackOfficeIdentityUser>, CustomMemberPasswordHasher<BackOfficeIdentityUser>>();
         }
 
         /// <summary>

@@ -33,13 +33,6 @@
           "SortOrder": 3
         },
         {
-          "Key": "5c0258a5-a7f4-4308-8fa8-55451d155c57",
-          "Alias": "member",
-          "DataType": "umb://data-type/1ea2e01febd84ce18d716b1149e63548",
-          "Name": "Member",
-          "SortOrder": 2
-        },
-        {
           "Key": "5f61d349-1b50-45eb-9a7c-0db9f3f467bd",
           "Alias": "subscriptionProduct",
           "DataType": "umb://data-type/9732558a5f7f4a1c87da970b64cdd434",
@@ -74,10 +67,6 @@
   "Dependencies": [
     {
       "Udi": "umb://data-type/1aef004bfe9344a98a28fe11707a9b7d",
-      "Ordering": true
-    },
-    {
-      "Udi": "umb://data-type/1ea2e01febd84ce18d716b1149e63548",
       "Ordering": true
     },
     {

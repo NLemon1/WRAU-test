@@ -73,14 +73,6 @@ namespace WRA.Umbraco.Models
 		public virtual string ExternalId => this.Value<string>(_publishedValueFallback, "externalId");
 
 		///<summary>
-		/// Member
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.2.0+7dff3a3")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("member")]
-		public virtual global::Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent Member => this.Value<global::Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent>(_publishedValueFallback, "member");
-
-		///<summary>
 		/// Paid Through
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.2.0+7dff3a3")]

@@ -18,6 +18,14 @@
       "Alias": "visibility",
       "PropertyTypes": [
         {
+          "Key": "14711956-b63d-4ff8-a46b-a0e9db15aefb",
+          "Alias": "gatedBlockAlias",
+          "DataType": "umb://data-type/b127a0be51b44c6faa590b6467c41fef",
+          "Description": "Enter the alias of the block that will display if a member cannot view this block's content.",
+          "Name": "Gated Block Alias",
+          "SortOrder": 2
+        },
+        {
           "Key": "6fe0c656-6e05-4a5e-a723-f7d2ebf6901d",
           "Alias": "visibleToAll",
           "DataType": "umb://data-type/e4abd11c0a504c07818820f7ba1db243",
@@ -37,6 +45,10 @@
   "PropertyTypes": [],
   "Udi": "umb://document-type/60f9d673dad543a09928bdcb457eb7e6",
   "Dependencies": [
+    {
+      "Udi": "umb://data-type/b127a0be51b44c6faa590b6467c41fef",
+      "Ordering": true
+    },
     {
       "Udi": "umb://data-type/dd89b040008648e3b01ddc830783916a",
       "Ordering": true

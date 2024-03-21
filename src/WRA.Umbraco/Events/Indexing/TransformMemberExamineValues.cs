@@ -42,7 +42,7 @@ public class TransformMemberExamineValues
                         var memberId = e.ValueSet.GetValue("id").ToString();
                         int id = int.Parse(memberId);
                         var memberExternalId = _memberService.GetById(id);
-                        var externalId = memberExternalId.GetValue("externalId").ToString();
+                        var externalId = memberExternalId.GetValue("externalId")?.ToString() ?? string.Empty;
                         SetOrUpdateExamineValue(values, "ExternalId", externalId);
 
                         // if (e.ValueSet.Values.ContainsKey("ExternalId"))

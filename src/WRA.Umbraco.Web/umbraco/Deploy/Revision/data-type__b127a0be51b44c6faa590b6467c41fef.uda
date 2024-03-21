@@ -1,0 +1,11 @@
+{
+  "Name": "Block Visibility - Gated Block Alias - Textbox",
+  "Alias": "",
+  "EditorAlias": "Umbraco.TextBox",
+  "DatabaseType": "Nvarchar",
+  "Configuration": {},
+  "Udi": "umb://data-type/b127a0be51b44c6faa590b6467c41fef",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
+  "__version": "13.0.4"
+}

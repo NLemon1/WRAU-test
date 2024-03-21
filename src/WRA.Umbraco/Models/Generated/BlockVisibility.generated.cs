@@ -22,6 +22,11 @@ namespace WRA.Umbraco.Models
 	/// <summary>Block Visibility</summary>
 	public partial interface IBlockVisibility : IPublishedElement
 	{
+		/// <summary>Gated Block Alias</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.2.0+7dff3a3")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		string GatedBlockAlias { get; }
+
 		/// <summary>Visible To All</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.2.0+7dff3a3")]
 		bool VisibleToAll { get; }
@@ -62,6 +67,19 @@ namespace WRA.Umbraco.Models
 		}
 
 		// properties
+
+		///<summary>
+		/// Gated Block Alias: Enter the alias of the block that will display if a member cannot view this block's content.
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.2.0+7dff3a3")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("gatedBlockAlias")]
+		public virtual string GatedBlockAlias => GetGatedBlockAlias(this, _publishedValueFallback);
+
+		/// <summary>Static getter for Gated Block Alias</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.2.0+7dff3a3")]
+		[return: global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		public static string GetGatedBlockAlias(IBlockVisibility that, IPublishedValueFallback publishedValueFallback) => that.Value<string>(publishedValueFallback, "gatedBlockAlias");
 
 		///<summary>
 		/// Visible To All

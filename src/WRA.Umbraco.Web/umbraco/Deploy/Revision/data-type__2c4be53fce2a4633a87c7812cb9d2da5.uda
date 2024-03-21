@@ -1,0 +1,18 @@
+{
+  "Name": "Block Visibility - Alternate Block Alias - Block List",
+  "Alias": "",
+  "EditorAlias": "Umbraco.BlockList",
+  "Configuration": {
+    "blocks": [],
+    "validationLimit": {
+      "max": 1
+    },
+    "useSingleBlockMode": true,
+    "useLiveEditing": false,
+    "useInlineEditingAsDefault": false
+  },
+  "Udi": "umb://data-type/2c4be53fce2a4633a87c7812cb9d2da5",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
+  "__version": "13.0.4"
+}

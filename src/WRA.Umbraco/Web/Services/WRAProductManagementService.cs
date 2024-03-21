@@ -191,6 +191,7 @@ public class WRAProductManagementService
         content.SetValue("startDate", productDto.StartDate);
         content.SetValue("endDate", productDto.EndDate);
         content.SetValue("longDescription", productDto.Description);
+        content.SetValue("location", productDto.Location);
     }
 
     private (IPublishedContent?, IPublishedContent?) GetCategories(string categoryName, string subCategoryName)

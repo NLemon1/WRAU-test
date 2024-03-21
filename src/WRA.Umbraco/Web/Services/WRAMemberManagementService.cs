@@ -326,10 +326,44 @@ public class WRAMemberManagementService
             .FirstOrDefault(x => x.Content.Value("productId").Equals(request.ProductId));
         if (subscriptionProduct == null) { throw new InvalidOperationException("Product does not exist in Umbraco."); }
 
-        // var member = _memberService.GetByEmail(request.Email);
-
         subscription.SetValue("externalId", request.Id);
         subscription.SetValue("company", subscriptionCompany.GetUdi());
+        subscription.SetValue("subscriptionProduct", subscriptionProduct.Content.GetUdi());
+        subscription.SetValue("beginDate", request.BeginDate);
+        subscription.SetValue("paidThrough", request.PaidThru);
+        subscription.SetValue("status", request.Status);
+
+        _contentService.SaveAndPublish(subscription);
+
+        return subscription;
+    }
+
+    public async Task<IContent> CreateMemberSubscription(WraMemberSubscriptionDto request)
+    {
+        var ActiveSubscriptionsParentNode = _searchService.Search(ActiveSubscriptions.ModelTypeAlias)?
+            .FirstOrDefault();
+
+        var existingSubscription = _searchService.Search(MemberSubscription.ModelTypeAlias)?
+            .FirstOrDefault(x => x.Content.Value("externalId") == request.Id);
+
+        bool subscriptionExists = existingSubscription != null;
+
+        var subscription = subscriptionExists ?
+            existingSubscription.Content as IContent :
+            _contentService.Create(
+                request.ProductName,
+                ActiveSubscriptionsParentNode.Content.Id,
+                MemberSubscription.ModelTypeAlias);
+
+        var subscriptionMember = _memberService.GetAllMembers().FirstOrDefault(m => m.GetValue("externalId").Equals(request.MemberId));
+        if (subscriptionMember == null) { throw new InvalidOperationException("Member does not exist in Umbraco."); }
+
+        var subscriptionProduct = _searchService.Search(ProductPage.ModelTypeAlias)?
+            .FirstOrDefault(x => x.Content.Value("productId").Equals(request.ProductId));
+        if (subscriptionProduct == null) { throw new InvalidOperationException("Product does not exist in Umbraco."); }
+
+        subscription.SetValue("externalId", request.Id);
+        subscription.SetValue("member", subscriptionMember.GetUdi());
         subscription.SetValue("subscriptionProduct", subscriptionProduct.Content.GetUdi());
         subscription.SetValue("beginDate", request.BeginDate);
         subscription.SetValue("paidThrough", request.PaidThru);

@@ -36,17 +36,7 @@
                 className += "w-100";
                 break;
         }
-    }/* else {
-className += "container";
-}*/
-
-
-    @* <div class="@className"
-data-content-element-type-alias="@item.Content.ContentType.Alias"
-data-content-element-type-key="@item.Content.ContentType.Key"
-data-element-udi="@item.ContentUdi">
-NOT SURE IF NEED THIS
-*@
+    }
 
     var partialViewName = "blockgrid/Components/" + item.Content.ContentType.Alias;
     try
@@ -54,6 +44,15 @@ NOT SURE IF NEED THIS
         if (await _gatedContentService.MemberCanViewBlock(item, currentMember))
         {
             @await Html.PartialAsync(partialViewName, item)
+        }
+        else
+        {
+            if (content.HasValue("alternateBlockAlias"))
+            {
+                var blockAlias = content.Value("gatedBlockAlias");
+                var alternateBlockAlias = $"blockgrid/Components/{blockAlias}";
+                @await Html.PartialAsync(alternateBlockAlias, item)
+            }
         }
     }
     catch (InvalidOperationException)

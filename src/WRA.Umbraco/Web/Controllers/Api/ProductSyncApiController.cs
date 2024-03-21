@@ -15,6 +15,7 @@ using WRA.Umbraco.Dtos;
 using WRA.Umbraco.Models;
 using WRA.Umbraco.Services;
 using Umbraco.Cms.Infrastructure.Examine;
+using NPoco.Expressions;
 
 namespace WRA.Umbraco.Controllers;
 
@@ -52,63 +53,73 @@ public class ProductSyncApiController : ApiController
 
     [HttpPost]
     [Route("SyncProductCategories")]
-    public async Task SyncProductCategories()
+    public async Task<bool> SyncProductCategories()
     {
-        var categoriesResp = await _wraExternalApiService.GetProductCategories();
-        var subcategories = await _wraExternalApiService.GetProductSubCategories();
-
-        var categoryContent = categoriesResp.Content;
-        var subCategoryContent = subcategories.Content;
-        // we have the content
-        // lets create a category in umbraco with it...
-
-        //first lets deserialize:
-        var categories = JsonSerializer.Deserialize<IEnumerable<WraExternalProductCategoryDto>>(categoryContent);
-        var subCategories = JsonSerializer.Deserialize<IEnumerable<WraExternalProductSubCategoryDto>>(subCategoryContent);
-
-
-        //once we have our categories deserialized, lets make some umbraco content items...
-        // First we get the "categories" page that houes all of the categories and subcategories.
-        var categoriesPageQuery = _searchService.Search(CategoriesPage.ModelTypeAlias);
-        if (categoriesPageQuery == null || !categoriesPageQuery.Any()) { return; }
-        var categoriesPage = categoriesPageQuery
-            .Select(result => new CategoriesPage(result.Content, new NoopPublishedValueFallback()))
-            .FirstOrDefault();
-
-
-        foreach (var cat in categories)
+        try
         {
-            // check if it extists first
-            var existingCategoryPages = _searchService.Search(CategoryPage.ModelTypeAlias)
-                .Where(excat => excat.Content.Value<Guid>("externalId").Equals(cat.ExternalId));
 
-            // category added, now lets check to see if it needs any subcategories
-            var releventSubcategories = subCategories.Where(sub => sub.ExternalCategoryId.Equals(cat.ExternalId));
+            var categoriesResp = await _wraExternalApiService.GetProductCategories();
+            var subcategories = await _wraExternalApiService.GetProductSubCategories();
 
-            if (existingCategoryPages != null && existingCategoryPages.Any())
+            var categoryContent = categoriesResp.Content;
+            var subCategoryContent = subcategories.Content;
+            // we have the content
+            // lets create a category in umbraco with it...
+
+            //first lets deserialize:
+            var categories = JsonSerializer.Deserialize<IEnumerable<WraExternalProductCategoryDto>>(categoryContent);
+            var subCategories = JsonSerializer.Deserialize<IEnumerable<WraExternalProductSubCategoryDto>>(subCategoryContent);
+
+
+            //once we have our categories deserialized, lets make some umbraco content items...
+            // First we get the "categories" page that houes all of the categories and subcategories.
+            var categoriesPageQuery = _searchService.Search(CategoriesPage.ModelTypeAlias);
+            if (categoriesPageQuery == null || !categoriesPageQuery.Any()) { return false; }
+            var categoriesPage = categoriesPageQuery
+                .Select(result => new CategoriesPage(result.Content, new NoopPublishedValueFallback()))
+                .FirstOrDefault();
+
+
+            foreach (var cat in categories)
             {
-                // if it does, get the ID, query the content directly, and set the fields again.
-                var categoryPageSearchResult = existingCategoryPages.FirstOrDefault();
-                var existingCategoryPage = _contentService.GetById(categoryPageSearchResult.Content.Id);
-                SetCategoryProperties(existingCategoryPage, cat);
-                _contentService.SaveAndPublish(existingCategoryPage);
+                // check if it extists first
+                var existingCategoryPages = _searchService.Search(CategoryPage.ModelTypeAlias)
+                    .Where(excat => excat.Content.Value<Guid>("externalId").Equals(cat.ExternalId));
 
-                // now set subcategories
-                SetSubCategoryPages(releventSubcategories, existingCategoryPage);
-            }
-            else
-            {
-                var newCategoryPage = _contentService.Create(cat.Name, categoriesPage.Id, CategoryPage.ModelTypeAlias);
-                SetCategoryProperties(newCategoryPage, cat);
-                _contentService.SaveAndPublish(newCategoryPage);
+                // category added, now lets check to see if it needs any subcategories
+                var releventSubcategories = subCategories.Where(sub => sub.ExternalCategoryId.Equals(cat.ExternalId));
 
-                // now set subcategories
-                SetSubCategoryPages(releventSubcategories, newCategoryPage);
+                if (existingCategoryPages != null && existingCategoryPages.Any())
+                {
+                    // if it does, get the ID, query the content directly, and set the fields again.
+                    var categoryPageSearchResult = existingCategoryPages.FirstOrDefault();
+                    var existingCategoryPage = _contentService.GetById(categoryPageSearchResult.Content.Id);
+                    SetCategoryProperties(existingCategoryPage, cat);
+                    _contentService.SaveAndPublish(existingCategoryPage);
 
-            }
-            // _contentService.CreateContent(cat.Name, Udi.Create("", key), CategoryPage.ModelTypeAlias);
+                    // now set subcategories
+                    SetSubCategoryPages(releventSubcategories, existingCategoryPage);
+                }
+                else
+                {
+                    var newCategoryPage = _contentService.Create(cat.Name, categoriesPage.Id, CategoryPage.ModelTypeAlias);
+                    SetCategoryProperties(newCategoryPage, cat);
+                    _contentService.SaveAndPublish(newCategoryPage);
 
-        };
+                    // now set subcategories
+                    SetSubCategoryPages(releventSubcategories, newCategoryPage);
+
+                }
+                // _contentService.CreateContent(cat.Name, Udi.Create("", key), CategoryPage.ModelTypeAlias);
+            };
+
+            return true; // success
+        }
+        catch (System.Exception)
+        {
+            return false;
+            throw;
+        }
     }
 
     private void SetSubCategoryPages(IEnumerable<WraExternalProductSubCategoryDto> subCategories, IContent parentCategory)
@@ -156,12 +167,17 @@ public class ProductSyncApiController : ApiController
     [Route("SyncAllProducts")]
     public async Task SyncAllProducts()
     {
+        // first sync all categories and subcategories
+        bool syncCategoriesSuccess = await SyncProductCategories();
+        if (!syncCategoriesSuccess)
+        {
+            throw new Exception("Failed to sync categories");
+        }
         // Get all products from WRA's ERP
         var productsResp = await _wraExternalApiService.GetProducts();
         var content = productsResp.Content;
 
         //first lets deserialize:
-        //lets just grab the first 50 for testing
         var externalProducts = JsonSerializer.Deserialize<List<WraProductDto>>(content);
 
         foreach (WraProductDto p in externalProducts)

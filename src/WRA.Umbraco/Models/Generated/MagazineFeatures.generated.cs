@@ -74,6 +74,14 @@ namespace WRA.Umbraco.Models
 		public virtual string AdditionalCssClasses => global::WRA.Umbraco.Models.AdditionalCss.GetAdditionalCssClasses(this, _publishedValueFallback);
 
 		///<summary>
+		/// Gated Block Alias: Enter the alias of the block that will display if a member cannot view this block's content.
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.2.0+7dff3a3")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("gatedBlockAlias")]
+		public virtual string GatedBlockAlias => global::WRA.Umbraco.Models.BlockVisibility.GetGatedBlockAlias(this, _publishedValueFallback);
+
+		///<summary>
 		/// Visible To All
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.2.0+7dff3a3")]
