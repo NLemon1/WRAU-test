@@ -20,7 +20,8 @@
         "umbmediapicker",
         "umbblockpicker",
         "umbmacro",
-        "umbembeddialog"
+        "umbembeddialog",
+        "superscript"
       ],
       "stylesheets": [],
       "maxImageSize": 500,
