@@ -43,7 +43,7 @@ namespace WRA.Umbraco.Web
             services.AddScoped<WRAMemberManagementService>();
 
             services.AddTransient<SearchService>();
-            services.AddTransient<WRAProductManagementService>();
+            services.AddSingleton<IProductManagementService, WRAProductManagementService>();
             services.AddTransient<QueueService>();
             services.AddTransient<WraProductService>();
 

@@ -29,10 +29,9 @@ public class ProductSyncApiController : ApiController
 {
     private readonly SearchService _searchService;
     private readonly WRAExternalApiService _wraExternalApiService;
-    private readonly IProductService _productService;
     private readonly IContentService _contentService;
     private readonly ICurrencyService _currencyService;
-    private WRAProductManagementService _WRAProductManagementService;
+    private IProductManagementService _productManagementService;
     private readonly IBackgroundTaskQueue _backgroundTaskQueue;
 
     public ProductSyncApiController(
@@ -41,16 +40,14 @@ public class ProductSyncApiController : ApiController
         IProductService productService,
         IContentService contentService,
         ICurrencyService currencyService,
-        WRAProductManagementService WRAProductManagementService,
-        IIndexRebuilder indexbuilder,
+        IProductManagementService WRAProductManagementService,
         IBackgroundTaskQueue backgroundTaskQueue)
     {
         _searchService = searchService;
         _wraExternalApiService = wRAExternalApiService;
-        _productService = productService;
         _contentService = contentService;
         _currencyService = currencyService;
-        _WRAProductManagementService = WRAProductManagementService;
+        _productManagementService = WRAProductManagementService;
         _backgroundTaskQueue = backgroundTaskQueue;
     }
 
@@ -119,10 +116,10 @@ public class ProductSyncApiController : ApiController
 
             return true; // success
         }
-        catch (System.Exception)
+        catch (System.Exception ex)
         {
-            return false;
-            throw;
+
+            throw ex;
         }
     }
 
@@ -186,13 +183,13 @@ public class ProductSyncApiController : ApiController
 
         foreach (WraProductDto p in externalProducts)
         {
-            await _WRAProductManagementService.CreateProduct(p);
+            await _productManagementService.CreateProduct(p);
             _backgroundTaskQueue.QueueBackgroundWorkItem(
                 cancellationToken =>
                 {
                     using (ExecutionContext.SuppressFlow())
                     {
-                        Task.Run(() => _WRAProductManagementService.CreateProduct(p));
+                        Task.Run(() => _productManagementService.CreateProduct(p));
                         return Task.CompletedTask;
                     }
                 }
@@ -204,7 +201,7 @@ public class ProductSyncApiController : ApiController
     [Route("SyncProduct")]
     public async Task SyncProduct(WraProductDto product)
     {
-        await _WRAProductManagementService.CreateProduct(product);
+        await _productManagementService.CreateProduct(product);
     }
 
 

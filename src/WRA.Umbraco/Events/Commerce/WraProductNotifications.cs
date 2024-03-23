@@ -8,11 +8,11 @@ namespace WRA.Umbraco.Events;
 
 public class WraProductNotifications : INotificationHandler<ContentPublishedNotification>
 {
-    readonly WRAProductManagementService _productService;
+    readonly IProductManagementService _productManagementService;
     readonly QueueService _queueService;
-    public WraProductNotifications(WRAProductManagementService WRAProductManagementService) : base()
+    public WraProductNotifications(IProductManagementService WRAProductManagementService) : base()
     {
-        _productService = WRAProductManagementService;
+        _productManagementService = WRAProductManagementService;
     }
     public async void Handle(ContentPublishedNotification notification)
     {
@@ -21,7 +21,7 @@ public class WraProductNotifications : INotificationHandler<ContentPublishedNoti
             if (node.ContentType.Alias.Equals("productPage"))
             {
                 var productSku = node.GetValue<string>("sku");
-                var product = await _productService.GetWraProduct(productSku);
+                var product = await _productManagementService.GetProduct(productSku);
 
                 var options = new JsonSerializerOptions { WriteIndented = false };
                 string jsonResponse = JsonSerializer.Serialize(product, options);
