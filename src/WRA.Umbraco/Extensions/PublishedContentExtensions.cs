@@ -89,6 +89,7 @@ namespace WRA.Umbraco
             var currency = p.GetStore().BaseCurrencyId ?? Guid.Empty;
             return new ProductPageResponseDto(
                 p.Name,
+                p.Key,
                 p.Collection.Name,
                 p?.Taxonomy?.SafeString(),
                 p?.Categories?.First().Name ?? string.Empty,
