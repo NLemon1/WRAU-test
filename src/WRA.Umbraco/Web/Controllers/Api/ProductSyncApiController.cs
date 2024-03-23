@@ -17,6 +17,7 @@ using WRA.Umbraco.Services;
 using Umbraco.Cms.Infrastructure.Examine;
 using NPoco.Expressions;
 using Umbraco.Cms.Infrastructure.HostedServices;
+using Microsoft.AspNetCore.Http.Timeouts;
 
 
 namespace WRA.Umbraco.Controllers;
@@ -166,6 +167,7 @@ public class ProductSyncApiController : ApiController
 
     [HttpPost]
     [Route("SyncAllProducts")]
+    [RequestTimeout(600000)]
     public async Task SyncAllProducts()
     {
         // first sync all categories and subcategories
@@ -183,17 +185,7 @@ public class ProductSyncApiController : ApiController
 
         foreach (WraProductDto p in externalProducts)
         {
-            await _productManagementService.CreateProduct(p);
-            _backgroundTaskQueue.QueueBackgroundWorkItem(
-                cancellationToken =>
-                {
-                    using (ExecutionContext.SuppressFlow())
-                    {
-                        Task.Run(() => _productManagementService.CreateProduct(p));
-                        return Task.CompletedTask;
-                    }
-                }
-            );
+            _productManagementService.CreateProduct(p);
         }
     }
 

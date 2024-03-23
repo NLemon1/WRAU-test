@@ -4,6 +4,7 @@
 @using System.Linq;
 @using Umbraco.Commerce.Extensions;
 @using Umbraco.Cms.Core.Models.Blocks
+@using Umbraco.Cms.Core.Models.PublishedContent;
 
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.SubCategoryPage>
 @using ContentModels = WRA.Umbraco.Models;
@@ -19,7 +20,10 @@
 }
 
 <script type="text/javascript">
+    // category/subcat should use the key instead of the name
     window.productDataSubCategory = "@(Model.Name)";
+    window.orderId = "@Model.Order.Id";
+    window.storeId = "@Model.GetStore()"
 </script>
 
 <header class="page-header page-header--no-accent">

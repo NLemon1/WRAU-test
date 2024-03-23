@@ -12,5 +12,7 @@ namespace WRA.Umbraco.Models
     {
         public IEnumerable<BundlePage> ProductBundles { get; set; } = [];
         public IEnumerable<ProductPage> Products { get; set; } = [];
+
+        public OrderReadOnly Order => this.GetOrCreateOrder();
     }
 }

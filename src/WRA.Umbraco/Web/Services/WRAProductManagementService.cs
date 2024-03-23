@@ -61,11 +61,14 @@ public class WRAProductManagementService : IProductManagementService
             // supress any notification to prevent our listener from firing an "updated product" webhook back at the queue
             using var _ = scope.Notifications.Suppress();
 
-            // now we need the "products" parent node to place these products under...
-            var collectionPage = siteRoot.Children
-                .Where(c => c.ContentType.Alias == CollectionPage.ModelTypeAlias)
-                .FirstOrDefault(c => c.Name == product.ProductType);
+            // now we need the product's parent node to place these products under...
+            var collectionPages = siteRoot.Children
+                .Where(c => c.ContentType.Alias == ProductsPage.ModelTypeAlias)
+                .FirstOrDefault()?.Children
+                .Where(c => c.ContentType.Alias == CollectionPage.ModelTypeAlias);
 
+
+            var collectionPage = collectionPages.FirstOrDefault(c => c.Name.Equals(product.ProductType));
             // collection page doesn't exist and needs to be created
             // maybe exception instead?
             if (collectionPage == null) { _logger.LogError($"No collection match for {product.ProductType}"); return; }

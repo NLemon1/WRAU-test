@@ -259,6 +259,11 @@ namespace WRA.Umbraco
         {
             return UmbracoCommerceApi.Instance.GetCurrentOrder(content.GetStore().Id);
         }
+
+        public static OrderReadOnly GetOrCreateOrder(this IPublishedContent content)
+        {
+            return UmbracoCommerceApi.Instance.GetOrCreateCurrentOrder(content.GetStore().Id);
+        }
         // public static OrderReadOnly GetCurrentCustomer(this IPublishedContent content)
         // {
         //     return UmbracoCommerceApi.Instance.custom(content.GetStore().Id);
