@@ -21,7 +21,7 @@ public class WraProductNotifications : INotificationHandler<ContentPublishedNoti
             if (node.ContentType.Alias.Equals("productPage"))
             {
                 var productSku = node.GetValue<string>("sku");
-                var product = await _productManagementService.GetProduct(productSku);
+                var product = _productManagementService.GetProduct(productSku);
 
                 var options = new JsonSerializerOptions { WriteIndented = false };
                 string jsonResponse = JsonSerializer.Serialize(product, options);
