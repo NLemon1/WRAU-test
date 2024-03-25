@@ -1,7 +1,17 @@
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+@using Umbraco.Cms.Web.Common.Models
+@using Umbraco.Cms.Web.Common.Security
+@using Umbraco.Cms.Web.Website.Controllers
+@using Umbraco.Cms.Core.Services
+@using Umbraco.Extensions
+@inject IMemberExternalLoginProviders memberExternalLoginProviders
+@inject ITwoFactorLoginService twoFactorLoginService
 
 @{
     var settings = Umbraco.ContentAtRoot().FirstOrDefault(x => x.ContentType.Alias == "siteSettings");
+
+    var loginModel = new LoginModel();
+    loginModel.RedirectUrl = Umbraco.AssignedContentItem.Url();
 }
 
 <div class="gated-block container container--md" style="background-image: url(../gated-block-bg.jpg);">
@@ -13,7 +23,7 @@
             </div>
             <div class="col-md-6">
                 <p><strong>Log in to see this content and get all the WRA website has to offer.</strong></p>
-                <form>
+                @using (Html.BeginUmbracoForm<UmbLoginController>("HandleLogin", new { RedirectUrl = loginModel.RedirectUrl })) {
                     <label for="gated-username" class="visually-hidden">Username (required)</label>
                     <input id="gated-username" class="form-control mb-2" type="text" required placeholder="Username" />
 
@@ -21,7 +31,7 @@
                     <input id="gated-password" class="form-control" type="password" required placeholder="Password" />
 
                     <button class="btn btn-primary my-4" type="submit">Log In</button>
-                </form>
+                }
                 <p class="fs-sm">Not a member? <a href="/membership/">Learn how to join the WRA</a></p>
             </div>
         </div>
