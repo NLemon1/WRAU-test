@@ -73,7 +73,7 @@ namespace WRA.Umbraco.Services
             // If "Visible to all" isn't
             if (member != null && blockHasGatedContent)
             {
-                var authorizedMemberGroups = block.Content.Value<string[]>(_gatedMemberGroups)?.ToList();
+                var authorizedMemberGroups = block.Content.Value<string>(_gatedMemberGroups)?.Split(',')?.ToList();
                 return await MemberIsInAuthorizedGroup(authorizedMemberGroups, member);
             }
             if (!blockHasVisibilityToggle)
@@ -88,7 +88,7 @@ namespace WRA.Umbraco.Services
         {
             // get roles on the member. This will be a list of group names, NOT IDs.
             var memberGroups = await _memberManager.GetRolesAsync(member);
-            if (memberGroups?.Any() ?? false)
+            if ((memberGroups?.Any() ?? false) && (authorizedMemberGroups?.Any() ?? false))
             {
                 // return result If member is in the authorized group...
                 foreach (var memberGroupName in memberGroups)

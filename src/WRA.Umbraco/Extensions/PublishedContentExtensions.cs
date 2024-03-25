@@ -77,8 +77,8 @@ namespace WRA.Umbraco
                 content.YouTubeId ?? string.Empty,
                 content.Description ?? string.Empty,
                 content?.ThumbnailOverride?.MediaUrl().ToString() ?? string.Empty,
-                System.String.Format("{0:yyyy-MM-dd}", content!.Date),
-                System.String.Format("{0:MMMM d, yyyy}", content!.Date),
+                string.Format("{0:yyyy-MM-dd}", content!.Date),
+                string.Format("{0:MMMM d, yyyy}", content!.Date),
                 content.Children.Any(),
                 children ?? new List<MultimediaDto>()
             );
