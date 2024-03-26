@@ -26,41 +26,19 @@
             <div class="col-md-6">
                 <p><strong>Log in to see this content and get all the WRA website has to offer.</strong></p>
                 @using (Html.BeginUmbracoForm<UmbLoginController>("HandleLogin", new { RedirectUrl = loginModel.RedirectUrl })) {
-                        <h1>Log In</h1>
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <div class="mb-3">
-                            <label asp-for="@loginModel.Username" class="form-label"></label>
-                            <input asp-for="@loginModel.Username" class="form-control" />
-                            <span asp-validation-for="@loginModel.Username" class="form-text text-danger"></span>
-                        </div>
-                        <div class="mb-3">
-                            <label asp-for="@loginModel.Password" class="form-label"></label>
-                            <input asp-for="@loginModel.Password" class="form-control" />
-                            <span asp-validation-for="@loginModel.Password" class="form-text text-danger"></span>
-                        </div>
-                        @*<div class="mb-3 form-check">
-                            <input asp-for="@loginModel.RememberMe" class="form-check-input">
-                            <label asp-for="@loginModel.RememberMe" class="form-check-label">
-                                @Html.DisplayNameFor(m => loginModel.RememberMe)
-                            </label>
-                        </div>*@
-                        <button type="submit" class="btn btn-primary">Login</button>
-                        <div class="d-flex mt-3 fs-sm">
-                            <a href="#">Create Account</a>
-                            <a class="ms-3 ps-3 border-start" href="#">Reset Password</a>
-                            <a class="ms-3 ps-3 border-start" href="#">Help</a>
-                        </div>
-                    }
-                    @* <form>
-                        <label for="gated-username" class="visually-hidden">Username (required)</label>
-                        <input id="gated-username" class="form-control mb-2" type="text" required placeholder="Username" />
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                        <label for="gated-password" class="visually-hidden">Password (required)</label>
-                        <input id="gated-password" class="form-control" type="password" required placeholder="Password" />
+                    <label asp-for="@loginModel.Username" class="visually-hidden">Username (required)</label>
+                    <input asp-for="@loginModel.Username" class="form-control mb-2" required placeholder="Username" />
+                    <span asp-validation-for="@loginModel.Username" class="form-text text-danger"></span>
 
-                        <button class="btn btn-primary my-4" type="submit">Log In</button>
-                    </form> *@
-                    <p class="fs-sm">Not a member? <a href="/membership/">Learn how to join the WRA</a></p>
+                    <label asp-for="@loginModel.Password" class="visually-hidden">Password (required)</label>
+                    <input asp-for="@loginModel.Password" class="form-control" required placeholder="Password" />
+                    <span asp-validation-for="@loginModel.Password" class="form-text text-danger"></span>
+
+                    <button class="btn btn-primary my-4" type="submit">Log In</button>
+                }
+                <p class="fs-sm">Not a member? <a href="/membership/">Learn how to join the WRA</a></p>
             </div>
         </div>
     </div>
