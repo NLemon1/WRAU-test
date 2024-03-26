@@ -1,7 +1,19 @@
-﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+﻿@using Umbraco.Cms.Core.Models.PublishedContent;
+@using Umbraco.Cms.Web.Website.Controllers;
+@using Umbraco.Cms.Web.Common.Models;
+@using Umbraco.Cms.Web.Common.Models
+@using Umbraco.Cms.Web.Common.Security
+@using Umbraco.Cms.Web.Website.Controllers
+@using Umbraco.Cms.Core.Services
+@using Umbraco.Extensions
+@inject IMemberExternalLoginProviders memberExternalLoginProviders
+@inject ITwoFactorLoginService twoFactorLoginService
 
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @{
+    var loginModel = new LoginModel();
     var settings = Umbraco.ContentAtRoot().FirstOrDefault(x => x.ContentType.Alias == "siteSettings");
+    loginModel.RedirectUrl = Umbraco.AssignedContentItem.Url();
 }
 
 <button class="d-none" type="button" data-a11y-dialog-show="forms-library-dialog">
@@ -20,22 +32,26 @@
             <div class="my-3 text-center">
                 <img src="@(settings.Value<IPublishedContent>("headerLogo").Url())" alt="@(settings.Value<IPublishedContent>("headerLogo").Value("altText"))" />
             </div>
-            <form>
+            @using (Html.BeginUmbracoForm<UmbLoginController>("HandleLogin", new { RedirectUrl = loginModel.RedirectUrl })) {
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
                 <div class="mb-3">
-                    <label for="gated-username" class="form-label fs-sm">Username</label>
-                    <input id="gated-username" class="form-control" type="text" required />
+                    <label asp-for="@loginModel.Username" class="form-label fs-sm">Username</label>
+                    <input asp-for="@loginModel.Username" class="form-control" required />
+                    <span asp-validation-for="@loginModel.Username" class="form-text text-danger"></span>
                 </div>
                 <div class="mb-3">
-                    <label for="gated-password" class="form-label fs-sm">Password</label>
-                    <input id="gated-password" class="form-control" type="password" />
+                    <label asp-for="@loginModel.Password" class="form-label fs-sm">Password</label>
+                    <input asp-for="@loginModel.Password" class="form-control" required />
+                    <span asp-validation-for="@loginModel.Password" class="form-text text-danger"></span>
                 </div>
                 <button class="btn btn-primary btn-sm w-100" type="submit">Login</button>
                 <div class="d-flex justify-content-center mt-4 mb-2 fs-sm">
-                    <a href="#">Create Account</a>
-                    <a class="ms-3 ps-3 border-start" href="#">Reset Password</a>
+                    <a href="/create-account/">Create Account</a>
+                    <a class="ms-3 ps-3 border-start" href="/reset-password/">Reset Password</a>
                     <a class="ms-3 ps-3 border-start" href="#">Help</a>
                 </div>
-            </form>
+            }
         </div>
         @* <div class="dialog-content-footer">
             <div class="dialog-content-footer__left">
