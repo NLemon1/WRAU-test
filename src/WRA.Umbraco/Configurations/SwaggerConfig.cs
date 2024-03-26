@@ -3,7 +3,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace My.Custom.Swagger;
+namespace WRA.Umbraco.Configurations;
 
 public class MyConfigureSwaggerGenOptions : IConfigureOptions<SwaggerGenOptions>
 {

@@ -1,11 +1,12 @@
 ﻿@using Umbraco.Extensions
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
 @using Umbraco.Cms.Core.Models.Blocks
 @using ContentModels = WRA.Umbraco.Models;
 @using Umbraco.Cms.Core.Services;
 @using System.Linq;
 @using WRA.Umbraco.Web.Helpers
+@using Umbraco.Cms.Core.Models.PublishedContent;
 
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
 @{
     var content = (ContentModels.LatestNews)Model.Content;
 
@@ -72,16 +73,17 @@
                 {
                     var pubDate = child.GetProperty("date").GetValue();
                     var image = child.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("image");
-
-                    <div class="col-md-4">
-                        <a href="@child.Url()" class="news-card d-flex flex-row align-items-center p-2 text-decoration-none">
-                            <img src="@image.GetCropUrl(width: 120, height: 80, furtherOptions:"&format=WebP")" srcset="@image.GetCropUrl(width: 240, height: 160, furtherOptions:"&format=WebP") 2x" class="object-fit-cover" width="120" height="80" alt="@child.GetProperty("title").GetValue()" />
-                            <div class="w-100 h-100 d-flex flex-column ps-2 py-2">
-                                <h3 class="h6 news-card__headline">@child.GetProperty("title").GetValue()</h3>
-                                <p class="mt-auto fw-light fs-xs" style="color: var(--bs-gray-30)">@String.Format("{0:MMMM d, yyyy}", pubDate)</p>
-                            </div>
-                        </a>
-                    </div>
+                    @if(image != null){
+                        <div class="col-md-4">
+                            <a href="@child.Url()" class="news-card d-flex flex-row align-items-center p-2 text-decoration-none">
+                                <img src="@image.GetCropUrl(width: 120, height: 80, furtherOptions:"&format=WebP")" srcset="@image.GetCropUrl(width: 240, height: 160, furtherOptions:"&format=WebP") 2x" class="object-fit-cover" width="120" height="80" alt="@child.GetProperty("title").GetValue()" />
+                                <div class="w-100 h-100 d-flex flex-column ps-2 py-2">
+                                    <h3 class="h6 news-card__headline">@child.GetProperty("title").GetValue()</h3>
+                                    <p class="mt-auto fw-light fs-xs" style="color: var(--bs-gray-30)">@String.Format("{0:MMMM d, yyyy}", pubDate)</p>
+                                </div>
+                            </a>
+                        </div>
+                    }
                 }
             </div>
         }

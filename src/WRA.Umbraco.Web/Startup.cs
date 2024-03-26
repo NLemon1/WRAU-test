@@ -1,4 +1,4 @@
-using My.Custom.Swagger;
+using WRA.Umbraco.Configurations;
 using WRA.Umbraco.Services;
 using WRA.Umbraco.Extensions;
 using WRA.Umbraco.Events.ServiceBusSubscriptions;
