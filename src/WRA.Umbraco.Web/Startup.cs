@@ -53,7 +53,6 @@ namespace WRA.Umbraco.Web
             // services.Configure<ProductSubscriptionServiceSettings>(_config.GetSection("SubscriptionServiceSettings:ProductSubscriptionSettings"));
             // services.AddSingleton<IHostedService, WraProductSubscriptionService>();
 
-            // services.AddScoped<IPasswordHasher<MemberIdentityUser>, CustomMemberPasswordHasher<MemberIdentityUser>>();
 
             // umbraco services
             services.AddUmbraco(_env, _config)
@@ -66,6 +65,7 @@ namespace WRA.Umbraco.Web
                 .ConfigureMySwaggerGen()
                 .Build();
 
+            services.AddSingleton<IPasswordHasher<MemberIdentityUser>, CustomMemberPasswordHasher<MemberIdentityUser>>();
         }
 
         /// <summary>

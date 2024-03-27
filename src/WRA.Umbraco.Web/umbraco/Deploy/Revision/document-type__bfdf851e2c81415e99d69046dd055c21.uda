@@ -6,7 +6,7 @@
     "umb://template/ec480a40125744e1aa99c0db63f17e55"
   ],
   "HistoryCleanup": {},
-  "Icon": "icon-document color-black",
+  "Icon": "icon-document color-indigo",
   "Thumbnail": "folder.png",
   "Permissions": {
     "AllowedAtRoot": true,

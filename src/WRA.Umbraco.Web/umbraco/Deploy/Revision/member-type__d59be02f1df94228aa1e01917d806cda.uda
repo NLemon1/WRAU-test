@@ -163,6 +163,13 @@
           "SortOrder": 28
         },
         {
+          "Key": "9a0a601f-3666-4690-97e3-ac92be7ca98b",
+          "Alias": "token",
+          "DataType": "umb://data-type/f0bc4bfbb49940d6ba86058885a5178c",
+          "Name": "Token",
+          "SortOrder": 31
+        },
+        {
           "Key": "a0355d70-cdf3-4472-8cde-c7617cef3daa",
           "Alias": "mandatoryHotlineLetter",
           "DataType": "umb://data-type/92897bc6a5f34ffeae27f2e7e33dda49",
