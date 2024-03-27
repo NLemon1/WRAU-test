@@ -12,7 +12,7 @@ let ctx = await esbuild.context({
     bundle: true,
     minify: prod ? true : false,
     target: 'es2017',
-    sourcemap: prod ? false : 'inline',
+    sourcemap: prod ? false : 'external',
     plugins: [
         sassPlugin({
             async transform(source, resolveDir) {
