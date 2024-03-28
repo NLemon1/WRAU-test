@@ -1,0 +1,47 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>;
+@using ContentModels = WRA.Umbraco.Models;
+
+@{
+    var content = (ContentModels.AdWidget)Model.Content;
+    IPublishedContent adWidget = content.Value<IPublishedContent>("selectAd");
+    var adsFolder = Umbraco.ContentAtRoot().FirstOrDefault(x => x.ContentType.Alias == "adsFolder");
+    
+    //
+    // Note: the client has specifically requested that there's no usage of "ad" or "marketing" in the rendered HTML.
+    //
+
+    @if (adWidget != null)
+    {
+        var image = adWidget.Value<MediaWithCrops>("image");
+        var mobileImage = adWidget.Value<MediaWithCrops>("mobileImage");
+
+        <div class="container my-6 my-lg-9">
+            <picture>
+                <source srcset="@mobileImage.GetCropUrl(width: 656, furtherOptions:"&format=WebP")" media="(max-width: 768px)" />
+                <source srcset="@image.GetCropUrl(width: 2256, furtherOptions:"&format=WebP")" media="(max-width: 1280px)" />
+                <img class="img-fluid" src="@image.MediaUrl()" alt="@adWidget.Value("alternateDescription")" />
+            </picture>
+        </div>
+    }
+    else
+    {
+        // get random ad from all available ads
+        var random = new Random();
+        var allAds = adsFolder.Children().ToArray();
+        var allAdsCount = allAds.Count();
+        int randomAdIndex = random.Next(0, allAdsCount);
+        var randomAd = allAds[randomAdIndex];
+
+        // get images from randomly selected ad
+        var image = randomAd.Value<MediaWithCrops>("image");
+        var mobileImage = randomAd.Value<MediaWithCrops>("mobileImage");
+
+        <div class="container my-6 my-lg-9">
+            <picture>
+                <source srcset="@mobileImage.GetCropUrl(width: 656, furtherOptions:"&format=WebP")" media="(max-width: 768px)" />
+                <source srcset="@image.GetCropUrl(width: 2256, furtherOptions:"&format=WebP")" media="(max-width: 1280px)" />
+                <img class="img-fluid" src="@image.MediaUrl()" alt="@randomAd.Value("alternateDescription")" />
+            </picture>
+        </div>
+    }
+}

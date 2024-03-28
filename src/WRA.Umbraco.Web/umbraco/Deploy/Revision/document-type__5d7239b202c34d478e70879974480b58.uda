@@ -1,0 +1,66 @@
+{
+  "Name": "Ad",
+  "Alias": "ad",
+  "AllowedTemplates": [],
+  "HistoryCleanup": {},
+  "Icon": "icon-document color-black",
+  "Thumbnail": "folder.png",
+  "Permissions": {
+    "AllowedChildContentTypes": []
+  },
+  "Parent": "umb://document-type-container/811495c9ae7b467da08ce40db9f6c9ca",
+  "CompositionContentTypes": [],
+  "PropertyGroups": [
+    {
+      "Key": "3265cd4f-bd44-43cd-8518-954c6f1be28e",
+      "Name": "Content",
+      "Alias": "content",
+      "PropertyTypes": [
+        {
+          "Key": "a3588849-0677-4565-b0fd-29caeba24b3d",
+          "Alias": "image",
+          "DataType": "umb://data-type/ad9f0cf2bda245d59ea1a63cfc873fd3",
+          "Description": "2256 x 272",
+          "Mandatory": true,
+          "Name": "Image"
+        },
+        {
+          "Key": "c8f5cdfc-d5ca-4302-a9f7-73d4eca5ff8d",
+          "Alias": "alternateDescription",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Description": "This should describe the image in 1 or 2 brief sentences. If text is embedded within the image make sure to include it here.",
+          "Mandatory": true,
+          "Name": "Alternate Description",
+          "SortOrder": 2
+        },
+        {
+          "Key": "fd78b1ad-a55c-445c-9fe7-32f27376adea",
+          "Alias": "mobileImage",
+          "DataType": "umb://data-type/ad9f0cf2bda245d59ea1a63cfc873fd3",
+          "Description": "656 x 336",
+          "Mandatory": true,
+          "Name": "Mobile Image",
+          "SortOrder": 1
+        }
+      ]
+    }
+  ],
+  "PropertyTypes": [],
+  "Udi": "umb://document-type/5d7239b202c34d478e70879974480b58",
+  "Dependencies": [
+    {
+      "Udi": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/ad9f0cf2bda245d59ea1a63cfc873fd3",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type-container/811495c9ae7b467da08ce40db9f6c9ca",
+      "Ordering": true
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
+  "__version": "13.0.4"
+}

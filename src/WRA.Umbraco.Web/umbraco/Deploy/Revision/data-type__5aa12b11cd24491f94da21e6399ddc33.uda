@@ -1201,6 +1201,22 @@
         "editorSize": "medium",
         "inlineEditing": false,
         "forceHideContentEditorInOverlay": false
+      },
+      {
+        "columnSpanOptions": [],
+        "rowMinSpan": 1,
+        "rowMaxSpan": 1,
+        "allowAtRoot": true,
+        "allowInAreas": true,
+        "areas": [],
+        "contentElementTypeKey": "4d7ace05-bdbb-4dc1-bd2b-b15e42d179ee",
+        "view": "~/App_Plugins/CustomBlockView/adWidget.html",
+        "stylesheet": "~/css/dist/global.css",
+        "label": "",
+        "editorSize": "medium",
+        "inlineEditing": false,
+        "forceHideContentEditorInOverlay": false,
+        "groupKey": "61e5b4ab-de54-46b2-9862-ccd8301a2b8e"
       }
     ],
     "blockGroups": [
@@ -1250,6 +1266,9 @@
     },
     {
       "Udi": "umb://document-type/4bbf8c17c0b04d559e26b53d5feb4794"
+    },
+    {
+      "Udi": "umb://document-type/4d7ace05bdbb4dc1bd2bb15e42d179ee"
     },
     {
       "Udi": "umb://document-type/5115b48a7826491289367c6e6cfd6336"

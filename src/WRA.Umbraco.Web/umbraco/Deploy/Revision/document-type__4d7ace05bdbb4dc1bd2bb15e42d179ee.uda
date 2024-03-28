@@ -1,0 +1,44 @@
+{
+  "Name": "Ad Widget",
+  "Alias": "adWidget",
+  "AllowedTemplates": [],
+  "HistoryCleanup": {},
+  "Icon": "icon-layout color-black",
+  "Thumbnail": "folder.png",
+  "Permissions": {
+    "IsElementType": true,
+    "AllowedChildContentTypes": []
+  },
+  "Parent": "umb://document-type-container/37b4b44f0abc4536af8ed684511c2571",
+  "CompositionContentTypes": [],
+  "PropertyGroups": [
+    {
+      "Key": "d9a0fd2d-75c3-4523-a2c1-3aa1e458e462",
+      "Name": "Content",
+      "Alias": "content",
+      "PropertyTypes": [
+        {
+          "Key": "36bfc255-67aa-494c-b8e9-bb6956f46c38",
+          "Alias": "selectAd",
+          "DataType": "umb://data-type/2816b59aabfe49bcb1613f64be9e55c7",
+          "Description": "Optional. If no ad is selected then one will be randomly selected each time this block is loaded.",
+          "Name": "Select ad"
+        }
+      ]
+    }
+  ],
+  "PropertyTypes": [],
+  "Udi": "umb://document-type/4d7ace05bdbb4dc1bd2bb15e42d179ee",
+  "Dependencies": [
+    {
+      "Udi": "umb://data-type/2816b59aabfe49bcb1613f64be9e55c7",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type-container/37b4b44f0abc4536af8ed684511c2571",
+      "Ordering": true
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
+  "__version": "13.0.4"
+}

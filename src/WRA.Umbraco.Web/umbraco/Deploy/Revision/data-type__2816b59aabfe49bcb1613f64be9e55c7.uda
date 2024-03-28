@@ -1,0 +1,20 @@
+{
+  "Name": "Ad Widget - Content Picker",
+  "Alias": "",
+  "EditorAlias": "Umbraco.ContentPicker",
+  "DatabaseType": "Nvarchar",
+  "Configuration": {
+    "showOpenButton": false,
+    "startNodeId": "umb://document/453fd019310248b785b203fc4ab911a9",
+    "ignoreUserStartNodes": false
+  },
+  "Udi": "umb://data-type/2816b59aabfe49bcb1613f64be9e55c7",
+  "Dependencies": [
+    {
+      "Udi": "umb://document/453fd019310248b785b203fc4ab911a9",
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
+  "__version": "13.0.4"
+}
