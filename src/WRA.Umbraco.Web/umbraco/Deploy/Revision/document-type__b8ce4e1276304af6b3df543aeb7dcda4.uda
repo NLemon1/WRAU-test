@@ -1,0 +1,25 @@
+{
+  "Name": "Date Folder",
+  "Alias": "dateFolder",
+  "AllowedTemplates": [],
+  "HistoryCleanup": {},
+  "Icon": "icon-calendar-alt color-black",
+  "Thumbnail": "folder.png",
+  "Description": "Date folder used for automatically organizing content into year and month.",
+  "Permissions": {
+    "AllowedChildContentTypes": []
+  },
+  "Parent": "umb://document-type-container/5de99ed69c2445159d69e36d531ca63a",
+  "CompositionContentTypes": [],
+  "PropertyGroups": [],
+  "PropertyTypes": [],
+  "Udi": "umb://document-type/b8ce4e1276304af6b3df543aeb7dcda4",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type-container/5de99ed69c2445159d69e36d531ca63a",
+      "Ordering": true
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
+  "__version": "13.0.4"
+}
