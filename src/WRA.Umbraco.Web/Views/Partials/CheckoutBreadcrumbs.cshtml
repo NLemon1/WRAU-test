@@ -7,6 +7,9 @@
 
 <nav class="mb-7" aria-label="breadcrumbs">
     <ul class="list-unstyled mb-0 breadcrumbs">
+        <li>
+            <a href="/cart/">Cart</a>
+        </li>
         @foreach( var step in steps)
         {
             if(step.Id == Model.CurrentStep.Id)

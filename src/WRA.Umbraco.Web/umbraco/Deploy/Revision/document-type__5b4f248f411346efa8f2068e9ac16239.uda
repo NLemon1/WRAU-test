@@ -1,0 +1,33 @@
+{
+  "Name": "Checkout Account",
+  "Alias": "checkoutAccount",
+  "DefaultTemplate": "umb://template/79916d6746ca4c19b8c5b2ffae627bbe",
+  "AllowedTemplates": [
+    "umb://template/79916d6746ca4c19b8c5b2ffae627bbe"
+  ],
+  "HistoryCleanup": {},
+  "Icon": "icon-umb-users color-light-green",
+  "Thumbnail": "folder.png",
+  "Permissions": {
+    "AllowedChildContentTypes": []
+  },
+  "Parent": "umb://document-type/bd79af91c3834a54844ca30f568b74d5",
+  "CompositionContentTypes": [
+    "umb://document-type/bd79af91c3834a54844ca30f568b74d5"
+  ],
+  "PropertyGroups": [],
+  "PropertyTypes": [],
+  "Udi": "umb://document-type/5b4f248f411346efa8f2068e9ac16239",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type/bd79af91c3834a54844ca30f568b74d5",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://template/79916d6746ca4c19b8c5b2ffae627bbe",
+      "Ordering": true
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
+  "__version": "13.0.4"
+}

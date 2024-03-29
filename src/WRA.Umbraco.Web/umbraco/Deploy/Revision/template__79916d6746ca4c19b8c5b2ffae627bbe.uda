@@ -1,0 +1,14 @@
+{
+  "Name": "Checkout Account",
+  "Alias": "CheckoutAccount",
+  "File": "umb://template-file/CheckoutAccount.cshtml",
+  "Udi": "umb://template/79916d6746ca4c19b8c5b2ffae627bbe",
+  "Dependencies": [
+    {
+      "Udi": "umb://template-file/CheckoutAccount.cshtml",
+      "Ordering": true
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.TemplateArtifact",
+  "__version": "13.0.4"
+}
