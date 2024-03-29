@@ -15,7 +15,7 @@
         var image = adWidget.Value<MediaWithCrops>("image");
         var mobileImage = adWidget.Value<MediaWithCrops>("mobileImage");
 
-        <div class="container my-6 my-lg-9">
+        <div class="container my-6 my-lg-9 text-center">
             <picture>
                 <source srcset="@mobileImage.GetCropUrl(width: 656, furtherOptions:"&format=WebP")" media="(max-width: 768px)" />
                 <source srcset="@image.GetCropUrl(width: 2256, furtherOptions:"&format=WebP")" media="(max-width: 1280px)" />
@@ -36,7 +36,7 @@
         var image = randomAd.Value<MediaWithCrops>("image");
         var mobileImage = randomAd.Value<MediaWithCrops>("mobileImage");
 
-        <div class="container my-6 my-lg-9">
+        <div class="container my-6 my-lg-9 text-center">
             <picture>
                 <source srcset="@mobileImage.GetCropUrl(width: 656, furtherOptions:"&format=WebP")" media="(max-width: 768px)" />
                 <source srcset="@image.GetCropUrl(width: 2256, furtherOptions:"&format=WebP")" media="(max-width: 1280px)" />
