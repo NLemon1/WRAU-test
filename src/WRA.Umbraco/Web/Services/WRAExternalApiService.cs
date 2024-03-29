@@ -55,7 +55,7 @@ public class WRAExternalApiService
 
         return response;
     }
-    public async Task<RestResponse> GetMembers()
+    public async Task<RestResponse> GetMembers(int amount = 10000)
     {
         var options = new RestClientOptions("https://app2.wra.org/umbraco/api/v1");
         var client = new RestClient(options);
@@ -65,13 +65,13 @@ public class WRAExternalApiService
 
         return response;
     }
-    public async Task<RestResponse> GetCompanies()
+    public async Task<RestResponse> GetCompanies(int amount = 20000)
     {
         var options = new RestClientOptions("https://app2.wra.org/umbraco/api/v1");
         var client = new RestClient(options);
-        var request = new RestRequest("member/search").AddBody(new { keyword = "", pageSize = 50, pageNumber = 1 });
+        var request = new RestRequest("company/search").AddBody(new { keyword = "", pageSize = amount, pageNumber = 1 });
         request.AddHeader("X-API-KEY", _token);
-        var response = await client.GetAsync(request);
+        var response = await client.PostAsync(request);
 
         return response;
     }

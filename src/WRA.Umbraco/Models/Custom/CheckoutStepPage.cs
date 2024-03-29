@@ -10,7 +10,6 @@ namespace WRA.Umbraco.Models;
 
 public partial class CheckoutStepPage
 {
-    readonly IMemberService _memberService;
     public CartPage CartPage => this.GetHome().CartPage;
     public CheckoutPage CheckoutPage => this.GetCheckoutPage();
     public virtual OrderReadOnly Order => this.GetCurrentOrder();

@@ -3,6 +3,8 @@
 using System.Text.Json;
 using System.Web.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using SqlKata;
 using Umbraco.Cms.Api.Common.Attributes;
 using Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Core.Scoping;
@@ -10,6 +12,8 @@ using Umbraco.Cms.Core.Services;
 using WRA.Umbraco.Dtos;
 using WRA.Umbraco.Models;
 using WRA.Umbraco.Services;
+using System.Text.Json.Serialization;
+
 
 namespace WRA.Umbraco.Controllers;
 
@@ -24,6 +28,7 @@ public class MemberSyncApiController : ApiController
     private readonly ICoreScopeProvider _coreScopeProvider;
     private readonly WRAMemberManagementService _WRAMemberManagementService;
     private readonly WRAExternalApiService _wraExternalApiService;
+    private readonly ILogger<MemberSyncApiController> _logger;
 
 
     public MemberSyncApiController(
@@ -31,7 +36,8 @@ public class MemberSyncApiController : ApiController
         ICoreScopeProvider coreScopeProvider,
         IContentService contentService,
         SearchService searchService,
-        WRAExternalApiService wraExternalApiService
+        WRAExternalApiService wraExternalApiService,
+        ILogger<MemberSyncApiController> logger
     )
     {
         _WRAMemberManagementService = WRAMemberManagementService;
@@ -39,6 +45,7 @@ public class MemberSyncApiController : ApiController
         _contentService = contentService;
         _searchService = searchService;
         _wraExternalApiService = wraExternalApiService;
+        _logger = logger;
     }
 
 
@@ -128,25 +135,66 @@ public class MemberSyncApiController : ApiController
     }
 
     [HttpPost]
-    [Route("SyncaAllMembers")]
-    public async Task<IActionResult> SyncAllMembers()
+    [Route("SyncAllMembers")]
+    public async Task<IActionResult> SyncAllMembers(bool syncOnlyMembers = false, int limit = 10000)
     {
-        var membersResp = await _wraExternalApiService.GetMembers();
-        var members = JsonSerializer.Deserialize<List<MemberDto>>(membersResp.Content);
-        var members1 = JsonSerializer.Deserialize<SearchResponse<MemberDto>>(membersResp.Content);
-
-        foreach (var member in members)
+        try
         {
-            await _WRAMemberManagementService.Create(member);
+            if (!syncOnlyMembers)
+            {
+                await SyncAllBoards();
+                await SyncAllCompanies();
+            }
+            var membersResp = await _wraExternalApiService.GetMembers(limit);
+            var members = JsonSerializer.Deserialize<SearchResponse<MemberDto>>(membersResp.Content);
+
+            // crate a scope
+            using ICoreScope scope = _coreScopeProvider.CreateCoreScope(autoComplete: true);
+
+            // supress any notification to prevent our listener from firing an "updated member" webhook back at the queue
+            using var _ = scope.Notifications.Suppress();
+
+            foreach (var member in members.Data)
+            {
+                _WRAMemberManagementService.Create(member);
+            }
+            return Ok();
         }
-        return Ok();
+        catch (System.Exception ex)
+        {
+            _logger.LogError($"Error syncing members from API. error: {ex.Message}");
+            throw;
+        }
     }
 
+
+    [HttpPost]
+    [Route("SyncAllCompanies")]
+    public async Task<IActionResult> SyncAllCompanies()
+    {
+        try
+        {
+            var companiesResp = await _wraExternalApiService.GetCompanies();
+            var companies = JsonSerializer.Deserialize<SearchResponse<CompanyDto>>(companiesResp.Content);
+
+            foreach (var company in companies.Data)
+            {
+                await _WRAMemberManagementService.CreateCompany(company);
+            }
+            return Ok();
+        }
+        catch (System.Exception ex)
+        {
+            _logger.LogError($"Error syncing companies from API. error: {ex.Message}");
+            throw;
+        }
+    }
 
     [HttpPost]
     [Route("CreateCompany")]
     public async Task<IActionResult> CreateCompany(CompanyDto company)
     {
+
         var result = await _WRAMemberManagementService.CreateCompany(company);
         if (result == null)
         {
@@ -159,7 +207,7 @@ public class MemberSyncApiController : ApiController
     [Route("CreateActiveCompanySubscription")]
     public async Task<IActionResult> CreateActiveCompanySubscription(WraCompanySubscriptionDto companySubscription)
     {
-        var result = await _WRAMemberManagementService.CreateActiveCompanySubscription(companySubscription);
+        var result = _WRAMemberManagementService.CreateActiveCompanySubscription(companySubscription);
         if (result == null)
         {
             return StatusCode(System.Net.HttpStatusCode.InternalServerError);
@@ -172,7 +220,8 @@ public class MemberSyncApiController : ApiController
 
 class SearchResponse<T>
 {
-    public List<T> Data { get; set; }
+    [JsonPropertyName("data")]
+    public IEnumerable<T> Data { get; set; }
     public int CurrentPage { get; set; }
     public int TotalPages { get; set; }
     public int TotalCount { get; set; }

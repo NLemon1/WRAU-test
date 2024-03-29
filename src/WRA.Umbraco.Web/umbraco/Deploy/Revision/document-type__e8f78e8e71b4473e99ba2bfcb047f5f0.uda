@@ -5,6 +5,7 @@
   "HistoryCleanup": {},
   "Icon": "icon-meeting color-amber",
   "Thumbnail": "folder.png",
+  "IsContainer": true,
   "Permissions": {
     "AllowedChildContentTypes": [
       "umb://document-type/bed1d6b70e944771810bc5153adf80f4"

@@ -1,10 +1,9 @@
-
 using System.Drawing;
-using System.Runtime.CompilerServices;
-using GlobalPayments.Api.Entities;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Logging;
 using Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Core.Models.PublishedContent;
+using Umbraco.Cms.Core.PublishedCache;
 using Umbraco.Cms.Core.Scoping;
 using Umbraco.Cms.Core.Security;
 using Umbraco.Cms.Core.Services;
@@ -12,7 +11,6 @@ using Umbraco.Cms.Core.Web;
 using Umbraco.Cms.Web.Website.Models;
 using Umbraco.Commerce.Core.Api;
 using Umbraco.Commerce.Core.Models;
-using Umbraco.Commerce.Core.Services;
 using WRA.Umbraco.Dtos;
 using WRA.Umbraco.Models;
 
@@ -25,9 +23,10 @@ public class WRAMemberManagementService
     private readonly ICoreScopeProvider _coreScopeProvider;
     private readonly IUmbracoCommerceApi _commerceApi;
     private readonly IUmbracoContextAccessor _umbracoContextAccessor;
-    private readonly IOrderService _orderService;
-    private readonly SearchService _searchService;
     private readonly IContentService _contentService;
+    private readonly IUmbracoContextFactory _umbracoContextFactory;
+    private readonly ILogger<WRAMemberManagementService> _logger;
+
 
     public WRAMemberManagementService(
         IMemberService memberService,
@@ -35,9 +34,9 @@ public class WRAMemberManagementService
         ICoreScopeProvider coreScopeProvider,
         IUmbracoCommerceApi commerceApi,
         IUmbracoContextAccessor umbracoContextAccessor,
-        IOrderService orderService,
-        SearchService searchService,
-        IContentService contentService
+        IContentService contentService,
+        IUmbracoContextFactory umbracoContextFactory,
+        ILogger<WRAMemberManagementService> logger
     )
     {
         _memberService = memberService;
@@ -45,9 +44,9 @@ public class WRAMemberManagementService
         _coreScopeProvider = coreScopeProvider;
         _commerceApi = commerceApi;
         _umbracoContextAccessor = umbracoContextAccessor;
-        _orderService = orderService;
-        _searchService = searchService;
         _contentService = contentService;
+        _umbracoContextFactory = umbracoContextFactory;
+        _logger = logger;
     }
 
 
@@ -55,48 +54,60 @@ public class WRAMemberManagementService
     /// CRUD Operations for Webhooks
     /// </summary>
     /// <param name="member"></param>
-    public async Task<IMember?> Create(MemberDto member)
+    public IMember? Create(MemberDto member)
     {
-        // crate a scope
-        using ICoreScope scope = _coreScopeProvider.CreateCoreScope(autoComplete: true);
-        // supress any notification to prevent our listener from firing an "updated member" webhook back at the queue
-        using var _ = scope.Notifications.Suppress();
+        try
+        {
+            // first check if the member already exists in the database
+            var existingMember = _memberService.GetByEmail(member.Email);
+            // if one exists, send to update method
+            if (existingMember != null) { return Update(member); }
+            // spin up an Imember rather than memberIdentity to avoid db locks.
+            var memberName = $"{member.FirstName} {member?.LastName}";
+            if (string.IsNullOrWhiteSpace(memberName))
+            {
+                memberName = member.Email;
+            }
+            var newMember = _memberService.CreateMember(
+                member.Email,
+                member.Email,
+                memberName,
+                "Member");
 
-        // first check if the member already exists in the database
-        var existingMember = _memberService.GetByEmail(member.Email);
-        // if one exists, send to update method
-        if (existingMember != null) { return await Update(member); }
-        // spin up an Imember rather than memberIdentity to avoid db locks.
-        var newMember = _memberService.CreateMember(
-            member.Email,
-            member.Email,
-            member.FullName,
-            "Member");
+            // updates all the fields on the user
+            newMember.UpdateWRAMemberProperties(member);
+            if (!string.IsNullOrEmpty(member?.CompanyId) && member.CompanyId != Guid.Empty.ToString())
+            {
+                // set the complex properties such as company and subscriptions
+                var matchingCompany = GetCompany(member.CompanyId);
+                newMember.SetValue("company", matchingCompany.GetUdi());
+            }
+            // newMember.SetValue("subscriptions", member.Subscriptions.Select(s => s.Id).ToArray());
+            // since a new member could potentially not exist in WRA's 
+            newMember.IsApproved = false;
 
-        // updates all the fields on the user
-        newMember.UpdateWRAMemberProperties(member);
-        // set the complex properties such as company and subscriptions
-        var matchingCompany = GetCompany(member.CompanyId);
-        newMember.SetValue("company", matchingCompany.GetUdi());
-        // newMember.SetValue("subscriptions", member.Subscriptions.Select(s => s.Id).ToArray());
-        // since a new member could potentially not exist in WRA's 
-        newMember.IsApproved = false;
+            // Must save here so an ID is assigned to the new member.
+            // We need the memberId to create a link to member and memberGroups (roles).
+            _memberService.Save(newMember);
+            _logger.LogInformation($"Created member: {newMember.Email} - {newMember.Id}");
 
-        // Must save here so an ID is assigned to the new member.
-        // We need the memberId to create a link to member and memberGroups (roles).
-        _memberService.Save(newMember);
-
-        // assign to relvevant memberGroup...
-        await AssignMemberToMemberGroup(newMember, member);
-        return newMember;
+            // assign to relvevant memberGroup...
+            AssignMemberToMemberGroup(newMember, member);
+            return newMember;
+        }
+        catch (System.Exception ex)
+        {
+            _logger.LogError($"Error creating member ({member.Email}) -> {ex.Message}");
+            throw;
+        }
     }
 
-    public async Task<IMember?> Update(MemberDto member)
+    public IMember? Update(MemberDto member)
     {
-        // crate a scope
-        using ICoreScope scope = _coreScopeProvider.CreateCoreScope(autoComplete: true);
-        // supress any notification to prevent our listener from firing an "updated member" webhook back at the queue
-        using var _ = scope.Notifications.Suppress();
+        // // crate a scope
+        // using ICoreScope scope = _coreScopeProvider.CreateCoreScope(autoComplete: true);
+        // // supress any notification to prevent our listener from firing an "updated member" webhook back at the queue
+        // using var _ = scope.Notifications.Suppress();
 
         // Query by email as they are unique in this site and in WRA's records.
         var existingMember = _memberService.GetByEmail(member.Email);
@@ -104,10 +115,15 @@ public class WRAMemberManagementService
 
 
         existingMember.UpdateWRAMemberProperties(member);
-        var matchingCompany = GetCompany(member.CompanyId);
-
-        existingMember.SetValue("company", matchingCompany.GetUdi());
-        await AssignMemberToMemberGroup(existingMember, member);
+        if (!string.IsNullOrEmpty(member?.CompanyId) && member.CompanyId != Guid.Empty.ToString())
+        {
+            var matchingCompany = GetCompany(member.CompanyId);
+            if (matchingCompany != null)
+            {
+                existingMember.SetValue("company", matchingCompany.GetUdi());
+            }
+        }
+        AssignMemberToMemberGroup(existingMember, member);
 
         _memberService.Save(existingMember);
         return existingMember;
@@ -133,7 +149,7 @@ public class WRAMemberManagementService
     /// <param name="member"></param>
     /// <param name="mdto"></param>
 
-    private async Task AssignMemberToMemberGroup(IMember member, MemberDto mdto)
+    private void AssignMemberToMemberGroup(IMember member, MemberDto mdto)
     {
 
         // TODO: make membergroups an array for one to many relationship.
@@ -281,17 +297,26 @@ public class WRAMemberManagementService
 
     public async Task<IContent> CreateBoard(MemberBoardDto mb)
     {
-        // first get the board page that all indivial boards will be under.
-        var BoardsContainer = _searchService.Search(Boards.ModelTypeAlias)?
-            .FirstOrDefault()?
-            .Content as Boards;
+        var contentCache = GetContentCache();
+        var siteRoot = contentCache?.GetAtRoot().FirstOrDefault();
 
-        var existingBoard = _searchService.Search(Board.ModelTypeAlias)?
-            .FirstOrDefault(x => x.Content.Value("externalId") == mb.Id);
+        // first get the board page that all indivial boards will be under.
+        var BoardsContainer = siteRoot?.Children
+            .FirstOrDefault(x => x.ContentType.Alias == Boards.ModelTypeAlias);
+        // var BoardsContainer = _searchService.Search(Boards.ModelTypeAlias)?
+        //     .FirstOrDefault()?
+        //     .Content as Boards;
+
+        var existingBoard = siteRoot?.Children
+            .Where(x => x.ContentType.Alias == Board.ModelTypeAlias)
+            .FirstOrDefault(x => x.Value("externalId") == mb.Id);
+
+        // var existingBoard = _searchService.Search(Board.ModelTypeAlias)?
+        //     .FirstOrDefault(x => x.Content.Value("externalId") == mb.Id);
         bool boardExists = existingBoard != null;
 
         var board = boardExists ?
-            existingBoard.Content as IContent :
+            existingBoard as IContent :
             _contentService.Create(mb.Name, BoardsContainer.Id, Board.ModelTypeAlias);
 
         board.SetValue("externalId", mb.Id);
@@ -304,33 +329,37 @@ public class WRAMemberManagementService
         return board;
     }
 
-    public async Task<IContent> CreateActiveCompanySubscription(WraCompanySubscriptionDto request)
+    public IContent CreateActiveCompanySubscription(WraCompanySubscriptionDto request)
     {
-        var ActiveSubscriptionsParentNode = _searchService.Search(ActiveSubscriptions.ModelTypeAlias)?
-            .FirstOrDefault();
+        var contentCache = GetContentCache();
+        var siteRoot = contentCache?.GetAtRoot().FirstOrDefault();
 
-        var existingSubscription = _searchService.Search(CompanySubscription.ModelTypeAlias)?
-            .FirstOrDefault(x => x.Content.Value("externalId") == request.Id);
+        var ActiveSubscriptionsContainer = siteRoot?.Children
+            .FirstOrDefault(x => x.ContentType.Alias == ActiveSubscriptions.ModelTypeAlias);
+
+        var existingSubscription = siteRoot?.Children
+            .Where(x => x.ContentType.Alias == CompanySubscription.ModelTypeAlias)?
+            .FirstOrDefault(x => x.Value("externalId") == request.Id);
 
         bool subscriptionExists = existingSubscription != null;
 
         var subscription = subscriptionExists ?
-            existingSubscription.Content as IContent :
+            existingSubscription as IContent :
             _contentService.Create(
                 request.ProductName,
-                ActiveSubscriptionsParentNode.Content.Id,
+                ActiveSubscriptionsContainer.Id,
                 CompanySubscription.ModelTypeAlias);
 
         var subscriptionCompany = GetCompany(request.CompanyId);
         if (subscriptionCompany == null) { throw new InvalidOperationException("Company does not exist in Umbraco."); }
 
-        var subscriptionProduct = _searchService.Search(ProductPage.ModelTypeAlias)?
-            .FirstOrDefault(x => x.Content.Value("productId").Equals(request.ProductId));
+        var subscriptionProduct = siteRoot.Children.Where(x => x.ContentType.Alias == ProductPage.ModelTypeAlias)?
+            .FirstOrDefault(x => x.Value("productId").Equals(request.ProductId));
         if (subscriptionProduct == null) { throw new InvalidOperationException("Product does not exist in Umbraco."); }
 
         subscription.SetValue("externalId", request.Id);
         subscription.SetValue("company", subscriptionCompany.GetUdi());
-        subscription.SetValue("subscriptionProduct", subscriptionProduct.Content.GetUdi());
+        subscription.SetValue("subscriptionProduct", subscriptionProduct.GetUdi());
         subscription.SetValue("beginDate", request.BeginDate);
         subscription.SetValue("paidThrough", request.PaidThru);
         subscription.SetValue("status", request.Status);
@@ -342,31 +371,37 @@ public class WRAMemberManagementService
 
     public async Task<IContent> CreateMemberSubscription(WraMemberSubscriptionDto request)
     {
-        var ActiveSubscriptionsParentNode = _searchService.Search(ActiveSubscriptions.ModelTypeAlias)?
-            .FirstOrDefault();
+        var contentCache = GetContentCache();
+        var siteRoot = contentCache?.GetAtRoot().FirstOrDefault();
 
-        var existingSubscription = _searchService.Search(MemberSubscription.ModelTypeAlias)?
-            .FirstOrDefault(x => x.Content.Value("externalId") == request.Id);
+        var ActiveSubscriptionsContainer = siteRoot.Children
+            .FirstOrDefault(x => x.ContentType.Alias == ActiveSubscriptions.ModelTypeAlias);
+
+        var existingSubscription = siteRoot.Children
+            .Where(x => x.ContentType.Alias == MemberSubscription.ModelTypeAlias)?
+            .FirstOrDefault(x => x.Value("externalId") == request.Id);
 
         bool subscriptionExists = existingSubscription != null;
 
         var subscription = subscriptionExists ?
-            existingSubscription.Content as IContent :
+            existingSubscription as IContent :
             _contentService.Create(
                 request.ProductName,
-                ActiveSubscriptionsParentNode.Content.Id,
+                ActiveSubscriptionsContainer.Id,
                 MemberSubscription.ModelTypeAlias);
 
         var subscriptionMember = _memberService.GetAllMembers().FirstOrDefault(m => m.GetValue("externalId").Equals(request.MemberId));
         if (subscriptionMember == null) { throw new InvalidOperationException("Member does not exist in Umbraco."); }
 
-        var subscriptionProduct = _searchService.Search(ProductPage.ModelTypeAlias)?
-            .FirstOrDefault(x => x.Content.Value("productId").Equals(request.ProductId));
+        var subscriptionProduct = siteRoot.Children.Where(x => x.ContentType.Alias == ProductPage.ModelTypeAlias)?
+            .FirstOrDefault(x => x.Value("productId").Equals(request.ProductId));
+        // var subscriptionProduct = _searchService.Search(ProductPage.ModelTypeAlias)?
+        //     .FirstOrDefault(x => x.Content.Value("productId").Equals(request.ProductId));
         if (subscriptionProduct == null) { throw new InvalidOperationException("Product does not exist in Umbraco."); }
 
         subscription.SetValue("externalId", request.Id);
         subscription.SetValue("member", subscriptionMember.GetUdi());
-        subscription.SetValue("subscriptionProduct", subscriptionProduct.Content.GetUdi());
+        subscription.SetValue("subscriptionProduct", subscriptionProduct.GetUdi());
         subscription.SetValue("beginDate", request.BeginDate);
         subscription.SetValue("paidThrough", request.PaidThru);
         subscription.SetValue("status", request.Status);
@@ -386,35 +421,74 @@ public class WRAMemberManagementService
 
     //     return company?.Content as IContent;
     // }
-    public IPublishedContent? GetCompany(string companyId)
+    public IPublishedContent? GetCompany(string companyId, IPublishedContent? contentCache = null)
     {
-        var company = _searchService.Search(Company.ModelTypeAlias)?
-            .FirstOrDefault(x => x.Content.Value("externalId").Equals(companyId));
+        IPublishedContent siteRoot;
+        if (contentCache == null)
+        {
+            siteRoot = GetContentCache()?.GetAtRoot().FirstOrDefault();
+        }
+        else
+        {
+            siteRoot = contentCache;
+        }
+        var companies = siteRoot?.Children?
+            .FirstOrDefault(x => x.ContentType.Alias == Companies.ModelTypeAlias)?
+            .Children
+            .Where(x => x.ContentType.Alias == Company.ModelTypeAlias);
 
-        var content = company?.Content;
-        return content;
+        var company = companies?.FirstOrDefault(x => x.Value("externalId").Equals(companyId));
+        // var company = _searchService.Search(Company.ModelTypeAlias)?
+        //     .FirstOrDefault(x => x.Content.Value("externalId").Equals(companyId));
+
+        return company;
     }
 
     public async Task<IContent> CreateCompany(CompanyDto companyDto)
     {
-        var CompaniesContainer = _searchService.Search(Companies.ModelTypeAlias)?
-            .FirstOrDefault();
+        try
+        {
+            var contentCache = GetContentCache();
+            var siteRoot = contentCache?.GetAtRoot().FirstOrDefault();
+            var companiesContainer = siteRoot?.Children
+                .FirstOrDefault(x => x.ContentType.Alias == Companies.ModelTypeAlias);
 
-        var existingCompany = GetCompany(companyDto.ExternalId);
-        var company = existingCompany != null ? existingCompany as IContent :
-         _contentService.Create(companyDto.name, CompaniesContainer.Content.Id, Company.ModelTypeAlias);
+            var existingCompany = GetCompany(companyDto.ExternalId, siteRoot);
+            if (existingCompany != null)
+            {
+                // update the company
+                var existingCompanyContent = _contentService.GetById(existingCompany.Id);
+                SetCompanyProperties(existingCompanyContent!, companyDto);
+                _contentService.SaveAndPublish(existingCompanyContent);
+                return existingCompanyContent;
+                // _contentService.SaveAndPublish(existingCompany);
 
+            }
+            _logger.LogInformation($"Creating company: {companyDto.name} - {companyDto.ExternalId}");
+            if (string.IsNullOrEmpty(companyDto?.name) || string.IsNullOrEmpty(companyDto?.ExternalId))
+            {
+                _logger.LogError("Company name or externalId is null. Cannot create company.");
+                return null;
+            }
 
-        await SetCompanyProperties(company, companyDto);
-        _contentService.SaveAndPublish(company);
-        return company;
+            var newCompany = _contentService.Create(companyDto.name, companiesContainer.Id, Company.ModelTypeAlias);
+
+            SetCompanyProperties(newCompany, companyDto);
+            _contentService.SaveAndPublish(newCompany);
+            return newCompany;
+        }
+        catch (System.Exception ex)
+        {
+            _logger.LogError($"Error creating company ({companyDto.name} - {companyDto.ExternalId}) -> {ex.Message}");
+            throw;
+        }
     }
 
-    public Task SetCompanyProperties(IContent company, CompanyDto companyDto)
+    public IContent SetCompanyProperties(IContent company, CompanyDto companyDto)
     {
         company.SetValue("externalId", companyDto.ExternalId);
         company.SetValue("organizationCode", companyDto.organizationCode);
-        company.SetValue("memberTypeId", companyDto.memberTypeId);
+        company.SetValue("memberTypeId", companyDto.memberTypeId.ToString());
         company.SetValue("companyCategory", companyDto.category);
         company.SetValue("status", companyDto.status);
         company.SetValue("address", companyDto.address);
@@ -424,14 +498,22 @@ public class WRAMemberManagementService
         company.SetValue("email", companyDto.email);
         company.SetValue("websiteUrl", companyDto.websiteUrl);
 
-        return Task.CompletedTask;
+        return company;
 
         // public async Task<IMember> GetMember(string email)
         // {
         //     return _searchService.get(email);
         // }
     }
+
     #endregion
 
     #endregion
+
+    private IPublishedContentCache GetContentCache()
+    {
+        using var umbracoContextReference = _umbracoContextFactory.EnsureUmbracoContext();
+        var contentQuery = umbracoContextReference.UmbracoContext.Content;
+        return contentQuery;
+    }
 }
