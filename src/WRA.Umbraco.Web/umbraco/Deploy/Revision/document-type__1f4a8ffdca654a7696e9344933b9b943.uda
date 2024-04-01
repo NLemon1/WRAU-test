@@ -5,6 +5,7 @@
   "HistoryCleanup": {},
   "Icon": "icon-fire color-red",
   "Thumbnail": "folder.png",
+  "IsContainer": true,
   "Permissions": {
     "AllowedAtRoot": true,
     "AllowedChildContentTypes": [
