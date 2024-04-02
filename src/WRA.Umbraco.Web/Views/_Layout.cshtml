@@ -119,8 +119,8 @@
                                     @foreach (var link in utilityNavMenu)
                                     {
                                         <li>
-                                            <a href="@link.Url" target="@link.Target">
-                                                <span>@link.Name</span>
+                                            <a href="@link?.Url" target="@link?.Target">
+                                                <span>@link?.Name</span>
                                             </a>
                                         </li>
                                     }
@@ -159,7 +159,7 @@
                                 <li>
                                     @if (link != null)
                                     {
-                                        <a href="@link.Url" class="js-nav-item" role="tab" aria-selected="false" aria-controls="panel@(safeId)" target="@link.Target">@settings.Value($"navMenu{i}Name")</a>
+                                        <a href="@link?.Url" class="js-nav-item" role="tab" aria-selected="false" aria-controls="panel@(safeId)" target="@link?.Target">@settings.Value($"navMenu{i}Name")</a>
                                     }
                                     <div id="panel@(safeId)" class="is-hidden js-nav-sub-menu sub-menu py-5 py-lg-7 fs-sm font-family-1" role=tabpanel>
                                         <div class="container position-relative">
@@ -177,7 +177,7 @@
                                                     }
                                                     @if (!String.IsNullOrWhiteSpace(link.Name))
                                                     {
-                                                        <a href="@link.Url" class="btn btn-primary mt-4" target="@link.Target">@link.Name</a>
+                                                        <a href="@link?.Url" class="btn btn-primary mt-4" target="@link?.Target">@link?.Name</a>
                                                     }
                                                 </div>
                                                 @if (!String.IsNullOrEmpty(settings?.Value<string>($"navMenu{i}Column1")?.ToString()))
@@ -234,7 +234,7 @@
                                         
                                     @if (link != null)
                                     {
-                                        <button class="js-nav-mobile-item border-0 w-100 d-flex flex-row justify-content-between align-items-center bg-transparent" role="tab" aria-selected="false" aria-controls="mobilePanel@(safeId)" target="@link.Target"><span>@settings.Value($"navMenu{i}Name")</span> <i class="fa fa-chevron-right text-primary"></i></button>
+                                        <button class="js-nav-mobile-item border-0 w-100 d-flex flex-row justify-content-between align-items-center bg-transparent" role="tab" aria-selected="false" aria-controls="mobilePanel@(safeId)" target="@link?.Target"><span>@settings.Value($"navMenu{i}Name")</span> <i class="fa fa-chevron-right text-primary"></i></button>
                                     }
 
                                     <div id="mobilePanel@(safeId)" class="is-hidden js-nav-mobile-sub-menu sub-menu-mobile" role=tabpanel>
@@ -248,8 +248,8 @@
                                             @if (!String.IsNullOrWhiteSpace(link.Name))
                                             {
                                                 <div class="sub-menu__item">
-                                                    <a href="@link.Url" class="btn btn-link-arrow btn-link-arrow--primary" target="@link.Target">
-                                                        @link.Name
+                                                    <a href="@link?.Url" class="btn btn-link-arrow btn-link-arrow--primary" target="@link?.Target">
+                                                        @link?.Name
                                                         <svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                             <path d="M1 11H16.8889" stroke="#2560B9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                                             <path d="M12 5.5L17.5 11L12 16.5" stroke="#2560B9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -287,8 +287,8 @@
                                     @foreach (var link in utilityNavMenuMobile)
                                     {
                                         <div class="col-6 m-0">
-                                            <a href="@link.Url" class="btn btn-secondary btn-mobile w-100 btn-sm" target="@link.Target">
-                                                <span>@link.Name</span>
+                                            <a href="@link?.Url" class="btn btn-secondary btn-mobile w-100 btn-sm" target="@link?.Target">
+                                                <span>@link?.Name</span>
                                             </a>
                                         </div>
                                     }
@@ -355,7 +355,7 @@
                                             {
                                                 @Html.Raw(siteFooterWidget.Value("content"))
                                             }
-                                            <a class="btn @colorSchemeBtnClasses mt-2" href="@link.Url" target="@link.Target">@link.Name</a>
+                                            <a class="btn @colorSchemeBtnClasses mt-2" href="@link?.Url" target="@link?.Target">@link?.Name</a>
                                         </div>
                                     </div>
                                 </div>
@@ -472,7 +472,7 @@
                                             @foreach (var link in footerLinks)
                                             {
                                                 <li class="pb-3">
-                                                    <a href="@link.Url" target="@link.Target">@link.Name</a>
+                                                    <a href="@link?.Url" target="@link?.Target">@link?.Name</a>
                                                 </li>
                                             }
                                         </ul>
@@ -562,7 +562,7 @@
                                     @foreach (var link in footerUtilityLinks)
                                     {
                                         <li>
-                                            <a href="@link.Url" target="@link.Target">@link.Name</a>
+                                            <a href="@link?.Url" target="@link?.Target">@link?.Name</a>
                                         </li>
                                     }
                                 </ul>

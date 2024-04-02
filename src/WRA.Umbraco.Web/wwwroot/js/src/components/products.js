@@ -7,6 +7,8 @@ const products = () => {
     //const currentBreadcrumb = document.querySelector('.js-breadcrumb-current');
     const resultsLoader = document.querySelector('.js-results-loader');
 
+    const countCarts = document.querySelectorAll('.js-cart-count');
+
     //NEED TO LOAD ALL TAXONOMY OPTIONS FIRST, separate from filedterd results load
 
     //DOM event elements
@@ -17,7 +19,7 @@ const products = () => {
     //Static vars
     const apiEndpointUrl = "/GetProducts";
     let pageNumber = 1;
-    const pageSize = 100;
+    const pageSize = 250;
     let taxonomyArray = ["All"];
 
     //Urls
@@ -73,6 +75,15 @@ const products = () => {
         return dateString;
     }
 
+    const updateCartTotal = (newTotal) => {
+
+        countCarts.forEach((cartCount) => {
+            cartCount.innerText = newTotal;
+            cartCount.ariaLabel = `Your cart contains ${newTotal} items`;
+        })
+
+    }
+   
     const handleAddToCart = (cartCtas) => {
 
         cartCtas.forEach((cartCta) => {
@@ -81,37 +92,46 @@ const products = () => {
 
                 e.preventDefault();
 
-                alert("ADD ME TO CART!")
+                const getProdRef = cartCta.dataset.productref;
 
-              /*  var postData = {
-                    productNodeId: cartCta.dataset.productid
+                var postData = {
+                    "productReference": getProdRef,
+                    "quantity": 1
                 }
 
-                fetch('/umbraco/api/productapi/getproductvariant',
+                fetch(`/umbraco/commerce/storefront/api/v1/order/${window.orderId}`,
                     {
                         method: "POST",
                         headers: {
-                            "Content-Type": "application/json; charset=utf-8"
+                            "Content-Type": "application/json; charset=utf-8",
+                            "API-Key": "BtwRaJBwxCYe7eBKnbC7",
+                            "Store": window.storeId,
+                            "Accept": "application/json; charset=utf-8"
                         },
                         referrerPolicy: "no-referrer",
                         body: JSON.stringify(postData)
                     }).then(res => {
-                        if (res.status === 200) {
-                            console.log("ok");
+                        return res.json();
+                    }).then(res => {
+                        if (res.type === "Error") {
+                            throw new Error(res.title);
+                        } else {
+                            updateCartTotal(res.totalQuantity)
                         }
-                });*/
+                 });
             });
-
         });
     }
 
     const renderResults = (results) => {
 
+        //console.log(results);
+
         if (results.length > 0) {
 
             results.forEach((result) => {
 
-                const setCTA = result.productType == "Products" ? `<a href="${result.url}" id="add-to-cart" data-productid="${result.productId}" class="js-add-cart btn btn-secondary btn-sm border-0 flex-grow-1 py-3">Add To Cart</a>` : `<a href="${result.url}" id="view-product" class="btn btn-primary btn-sm flex-grow-1 py-3">See Details</a><a href="${result.url}" id="view-product" class="btn btn-secondary btn-sm border-0 flex-grow-1 py-3">Register</a>`;
+                const setCTA = result.productType == "Products" ? `<a href="${result.url}" id="add-to-cart" data-productref="${result.productReference}" class="js-add-cart btn btn-secondary btn-sm border-0 flex-grow-1 py-3">Add To Cart</a>` : `<a href="${result.url}" id="view-product" class="btn btn-primary btn-sm flex-grow-1 py-3">See Details</a><a href="${result.url}" id="view-product" class="btn btn-secondary btn-sm border-0 flex-grow-1 py-3">Register</a>`;
 
                 const setDate = (result.productType == "Events" || result.productType == "Courses") && result.start !== null ? `<p class="fs-xs fw-bold mb-1">${formatDateTime(result.startDate, result.endDate, result.startTime, result.endTime)}</p>` : "";
                 const setCredits = result.creditHours !== 0 ? `<p class="fs-xs mb-1">Credit Hours: <span class="fw-bold"> ${result.creditHours}</span></p>` : "";
@@ -195,8 +215,6 @@ const products = () => {
 
     postTaxonomyTerms = () => {
 
-       // const checkTax = taxonomy === "All" ? "" : taxonomy;
-
         let bodyObject = {
             "productType": decodeURIComponent(type), //Events, Products, Courses
             "category": decodeURIComponent(category), //Professional Development, Publications, Conferences/Conventions, etc.
@@ -210,7 +228,7 @@ const products = () => {
 
         const bodyRequest = JSON.stringify(bodyObject);
 
-        console.log(bodyRequest);
+        //console.log(bodyRequest);
 
         fetch(apiEndpointUrl,
             {
@@ -249,7 +267,7 @@ const products = () => {
 
         const bodyRequest = JSON.stringify(bodyObject);
 
-        console.log(bodyRequest);
+        //console.log(bodyRequest);
 
         fetch(apiEndpointUrl,
         {
@@ -264,7 +282,6 @@ const products = () => {
         }).then(res => {
             return res.json();
         }).then(res => {
-            //console.log(res);
             renderResults(res);
         });
     }

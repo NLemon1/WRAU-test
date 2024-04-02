@@ -15,7 +15,7 @@
             {
                 var link = content.Value<Link>("link");
 
-                <a class="btn btn-primary" href="@link.Url" target="@link.Target">@link.Name</a>
+                <a class="btn btn-primary" href="@link?.Url" target="@link?.Target">@link?.Name</a>
             }
         </div>
     </div>
@@ -88,7 +88,7 @@
         var link = content.Value<Link>("link");
 
         <div class="d-sm-none">
-            <a class="btn btn-primary w-100 mt-4" href="@link.Url" target="@link.Target">@link.Name</a>
+            <a class="btn btn-primary w-100 mt-4" href="@link?.Url" target="@link?.Target">@link?.Name</a>
         </div>
     }
 </div>

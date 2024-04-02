@@ -132,7 +132,7 @@
                                 <ul class="list-unstyled gap-2 d-flex flex-column pt-2">
                                     @foreach (var link in moreArticles)
                                     {
-                                        <li><a href="@link.Url" class="fw-bold fs-sm" style="color: inherit" target="@link.Target">@link.Name</a></li>
+                                        <li><a href="@link?.Url" class="fw-bold fs-sm" style="color: inherit" target="@link?.Target">@link?.Name</a></li>
                                     }
                                 </ul>
                             </div>

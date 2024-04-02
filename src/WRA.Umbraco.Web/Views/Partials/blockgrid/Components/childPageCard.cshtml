@@ -9,7 +9,7 @@
 }
 
 <div class="@Html.Raw(className.Trim())">
-	<a href="@link.Url" target="@link.Target" title="@link.Name" class="child-card__inner d-flex flex-column align-items-center align-content-center text-decoration-none text-black">
+	<a href="@link?.Url" target="@link?.Target" title="@link?.Name" class="child-card__inner d-flex flex-column align-items-center align-content-center text-decoration-none text-black">
 	
 		@if (content.HasValue("icon"))
 		{

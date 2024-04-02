@@ -9,8 +9,8 @@
 }
 
 <div class="sub-menu__item @(secondaryLinks.Count() == 0 ? "position-relative" : "")">
-    <a href="@link.Url" href="@link.Url" target="@link.Target" class="btn btn-link-arrow btn-link-arrow--primary @(secondaryLinks.Count() == 0 ? "position-static stretched-link" : "")">
-        @link.Name
+    <a href="@link?.Url" href="@link?.Url" target="@link?.Target" class="btn btn-link-arrow btn-link-arrow--primary @(secondaryLinks.Count() == 0 ? "position-static stretched-link" : "")">
+        @link?.Name
         <svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M1 11H16.8889" stroke="#2560B9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
             <path d="M12 5.5L17.5 11L12 16.5" stroke="#2560B9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />

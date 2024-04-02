@@ -4,8 +4,8 @@
 @{
     IEnumerable<IPublishedContent> eventsList = Umbraco.ContentAtRoot()
            .DescendantsOrSelfOfType("productPage")
-           .Where(p => p.Parent.Name == "Events" && p.IsVisible())
-           .OrderBy(p => p.GetProperty("startDate").GetSourceValue())
+           .Where(p => p.Parent?.Name == "Events" && p.IsVisible())
+           .OrderBy(p => p.GetProperty("startDate")?.GetSourceValue())
            .Take(4);
 
     @if (eventsList.Any())
@@ -13,7 +13,7 @@
         <ol class="list-unstyled">
             @foreach (var eventItem in eventsList)
             {
-                <li class="mb-3">
+                <li class="mb-2_5">
                     <a href="@eventItem.Url()" class="btn btn-link btn-light ms-n2">@eventItem.Name</a>
                     @if (eventItem.HasValue("startDate"))
                     {
