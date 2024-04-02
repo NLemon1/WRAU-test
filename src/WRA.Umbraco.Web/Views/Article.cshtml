@@ -65,7 +65,7 @@
     }
 
     <div class="row">
-        <div class="col-md-6 d-flex flex-column justify-content-center">
+        <div class="col-md-6 d-flex flex-column justify-content-center py-3 py-lg-0">
             @if (content.HasValue("Category"))
             {
                 <a href="/news-updates?category=@HtmlHelperExtensions.FormatSlug(content.Category.Name)" class="chip align-self-start mb-3 mb-lg-4">
@@ -106,7 +106,7 @@
                 {
                     <p class="mb-3">
                         <a href="@content.MagazineLink?.Url()">
-                            @content.MagazineLink?.Name
+                            Featured in WREM @content.MagazineLink?.Name Issue
                         </a>
                     </p>
                 }
@@ -124,7 +124,7 @@
         @if (content.HasValue("image"))
         {
             <div class="col-md-6 d-flex flex-column justify-content-center">
-                <figure class="img-curved img-curved--large text-end">
+                <figure class="img-curved img-curved--large text-end ratio" style="--bs-aspect-ratio: 66%;">
                     <img loading="lazy" class="img-fluid" src="@content.Image?.GetCropUrl(width: 555, furtherOptions: "&format=WebP")" srcset="@content.Image?.GetCropUrl(width: 1110, furtherOptions: "&format=WebP") 2x" width="555" alt="@(content.Image?.Value("altText") ?? string.Empty)">
                 </figure>
             </div>
