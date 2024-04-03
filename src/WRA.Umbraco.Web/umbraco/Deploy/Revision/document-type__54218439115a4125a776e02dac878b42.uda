@@ -1,6 +1,7 @@
 {
   "Name": "Products Page",
   "Alias": "productsPage",
+  "DefaultTemplate": "umb://template/05c59d3439f5448e8ae904bdc31df492",
   "AllowedTemplates": [
     "umb://template/05c59d3439f5448e8ae904bdc31df492"
   ],
@@ -71,5 +72,5 @@
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
-  "__version": "13.0.4"
+  "__version": "13.1.0"
 }

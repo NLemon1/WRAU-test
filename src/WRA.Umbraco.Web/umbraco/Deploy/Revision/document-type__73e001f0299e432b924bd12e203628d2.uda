@@ -1,6 +1,7 @@
 {
   "Name": "Categories Page",
   "Alias": "categoriesPage",
+  "DefaultTemplate": "umb://template/4c1202d227ea45858a2c5700fd05b87c",
   "AllowedTemplates": [
     "umb://template/4c1202d227ea45858a2c5700fd05b87c"
   ],
@@ -71,5 +72,5 @@
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
-  "__version": "13.0.4"
+  "__version": "13.1.0"
 }
