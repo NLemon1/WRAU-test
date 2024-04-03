@@ -10,10 +10,13 @@
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.BundlesPage>
 @{
     Layout = "~/Views/_Layout.cshtml";
-    var sections = Model.Value<IEnumerable<BlockGridItem>>("blockContent");
-    IEnumerable<IPublishedContent> courseBundles = Model.Children.Where(x => x.IsVisible()).OrderBy(p => p.Name);
+    
+    var content = (ContentModels.BundlesPage)Model;
 
-    var currency = Model.GetStore().BaseCurrencyId ?? Guid.Empty;
+    var sections = content.Value<IEnumerable<BlockGridItem>>("blockContent");
+    IEnumerable<IPublishedContent> courseBundles = content.Children.DescendantsOrSelfOfType("bundlePage").Where(x => x.IsVisible()).OrderBy(p => p.Name);
+
+    var currency = content.GetStore().BaseCurrencyId ?? Guid.Empty;
 
 }
 
