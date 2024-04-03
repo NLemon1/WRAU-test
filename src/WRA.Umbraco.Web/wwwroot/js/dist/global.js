@@ -6958,7 +6958,7 @@
   var hot_tip_library_default = hotTipLibrary;
 
   // wwwroot/js/src/components/alert.js
-  var alert2 = () => {
+  var alert = () => {
     const closeAlert = document.querySelector(".js-alert-close");
     const alertBanner = document.getElementById("site-alert");
     const setCookie = (timestamp, exp) => {
@@ -6977,7 +6977,7 @@
       });
     }
   };
-  var alert_default = alert2;
+  var alert_default = alert;
 
   // wwwroot/js/src/components/article-filters.js
   var articleFilters = () => {
@@ -7788,12 +7788,13 @@
     const productResults = document.querySelector(".js-product-collection");
     const listingsTitle = document.querySelector(".js-listings-title");
     const resultsLoader = document.querySelector(".js-results-loader");
+    const countCarts = document.querySelectorAll(".js-cart-count");
     const productSubcategoryDropdown = document.querySelector(".js-collection-category-filter");
     const productTaxonomyDropdown = document.querySelector(".js-taxonomy-filter");
     const productTaxonomyContainer = document.querySelector(".js-taxonomy-container");
     const apiEndpointUrl = "/GetProducts";
     let pageNumber = 1;
-    const pageSize = 100;
+    const pageSize = 250;
     let taxonomyArray = ["All"];
     const windowLoadQueryString = window.location.search;
     const urlParams = new URLSearchParams(windowLoadQueryString);
@@ -7826,18 +7827,50 @@
       }
       return dateString;
     };
+    const updateCartTotal = (newTotal) => {
+      countCarts.forEach((cartCount) => {
+        cartCount.innerText = newTotal;
+        cartCount.ariaLabel = `Your cart contains ${newTotal} items`;
+      });
+    };
     const handleAddToCart = (cartCtas) => {
       cartCtas.forEach((cartCta) => {
         cartCta.addEventListener("click", (e) => {
           e.preventDefault();
-          alert("ADD ME TO CART!");
+          const getProdRef = cartCta.dataset.productref;
+          var postData = {
+            "productReference": getProdRef,
+            "quantity": 1
+          };
+          fetch(
+            `/umbraco/commerce/storefront/api/v1/order/${window.orderId}`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json; charset=utf-8",
+                "API-Key": "BtwRaJBwxCYe7eBKnbC7",
+                "Store": window.storeId,
+                "Accept": "application/json; charset=utf-8"
+              },
+              referrerPolicy: "no-referrer",
+              body: JSON.stringify(postData)
+            }
+          ).then((res) => {
+            return res.json();
+          }).then((res) => {
+            if (res.type === "Error") {
+              throw new Error(res.title);
+            } else {
+              updateCartTotal(res.totalQuantity);
+            }
+          });
         });
       });
     };
     const renderResults = (results) => {
       if (results.length > 0) {
         results.forEach((result) => {
-          const setCTA = result.productType == "Products" ? `<a href="${result.url}" id="add-to-cart" data-productid="${result.productId}" class="js-add-cart btn btn-secondary btn-sm border-0 flex-grow-1 py-3">Add To Cart</a>` : `<a href="${result.url}" id="view-product" class="btn btn-primary btn-sm flex-grow-1 py-3">See Details</a><a href="${result.url}" id="view-product" class="btn btn-secondary btn-sm border-0 flex-grow-1 py-3">Register</a>`;
+          const setCTA = result.productType == "Products" ? `<a href="${result.url}" id="add-to-cart" data-productref="${result.productReference}" class="js-add-cart btn btn-secondary btn-sm border-0 flex-grow-1 py-3">Add To Cart</a>` : `<a href="${result.url}" id="view-product" class="btn btn-primary btn-sm flex-grow-1 py-3">See Details</a><a href="${result.url}" id="view-product" class="btn btn-secondary btn-sm border-0 flex-grow-1 py-3">Register</a>`;
           const setDate = (result.productType == "Events" || result.productType == "Courses") && result.start !== null ? `<p class="fs-xs fw-bold mb-1">${formatDateTime(result.startDate, result.endDate, result.startTime, result.endTime)}</p>` : "";
           const setCredits = result.creditHours !== 0 ? `<p class="fs-xs mb-1">Credit Hours: <span class="fw-bold"> ${result.creditHours}</span></p>` : "";
           const setTaxonomy = result.taxonomy !== null ? `<p class="d-inline-block mb-4 mt-2_5 px-2 py-1 bg-white fw-semibold fs-sm text-uppercase">${result.taxonomy}</p>` : "";
@@ -7916,7 +7949,6 @@
         }
       };
       const bodyRequest = JSON.stringify(bodyObject);
-      console.log(bodyRequest);
       fetch(
         apiEndpointUrl,
         {
@@ -7953,7 +7985,6 @@
         }
       };
       const bodyRequest = JSON.stringify(bodyObject);
-      console.log(bodyRequest);
       fetch(
         apiEndpointUrl,
         {
