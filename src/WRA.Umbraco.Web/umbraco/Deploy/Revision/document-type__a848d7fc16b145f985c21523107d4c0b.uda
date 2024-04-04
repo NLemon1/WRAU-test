@@ -28,7 +28,14 @@
           "Alias": "richTextContent",
           "DataType": "umb://data-type/ca90c9500aff4e72b976a30b1ac57dad",
           "Name": "Rich Text Content",
-          "SortOrder": 6
+          "SortOrder": 7
+        },
+        {
+          "Key": "9c2b18c6-8120-4451-b27f-c30ffc89a1d8",
+          "Alias": "subtitle",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Subtitle",
+          "SortOrder": 1
         },
         {
           "Key": "bc11ab3e-6105-4033-9903-eec25be46433",
@@ -43,7 +50,7 @@
           "DataType": "umb://data-type/ad9f0cf2bda245d59ea1a63cfc873fd3",
           "Description": "min 550px width",
           "Name": "Image",
-          "SortOrder": 1
+          "SortOrder": 2
         },
         {
           "Key": "d06b0279-9648-4c25-b9a3-a362fec2144a",
@@ -51,7 +58,7 @@
           "DataType": "umb://data-type/51fd7f92cc5a4c2fb9ca4095a58b41af",
           "Description": "Displays on cards. Will override beginning article text.",
           "Name": "Excerpt",
-          "SortOrder": 8
+          "SortOrder": 9
         },
         {
           "Key": "d3cb61ac-c413-48fb-9d07-dbe3d9555376",
@@ -60,21 +67,21 @@
           "Description": "Date of publication",
           "Mandatory": true,
           "Name": "Date",
-          "SortOrder": 2
+          "SortOrder": 3
         },
         {
           "Key": "d59f43c3-9517-41ee-ad1a-6f34010416f5",
           "Alias": "author",
           "DataType": "umb://data-type/7e2c5d5825ba46fdb6483fe56d4af5ff",
           "Name": "Author",
-          "SortOrder": 3
+          "SortOrder": 4
         },
         {
           "Key": "ebf7de56-5b02-47f3-ba95-0df38aad7dd7",
           "Alias": "sections",
           "DataType": "umb://data-type/4505ed15d227485ca996c463b2cd0888",
           "Name": "Sections",
-          "SortOrder": 7
+          "SortOrder": 8
         },
         {
           "Key": "ec13572f-5e99-4abc-b907-88b41bf5e6a5",
@@ -83,14 +90,14 @@
           "Description": "Select one category.",
           "Mandatory": true,
           "Name": "Category",
-          "SortOrder": 4
+          "SortOrder": 5
         },
         {
           "Key": "f2295017-c363-4b7a-ba35-97bbbc5f183f",
           "Alias": "magazineLink",
           "DataType": "umb://data-type/332b3c9d57d04525bb5b7f96d64710f3",
           "Name": "Magazine Link",
-          "SortOrder": 5
+          "SortOrder": 6
         }
       ]
     }
@@ -156,5 +163,5 @@
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
-  "__version": "13.0.4"
+  "__version": "13.1.0"
 }

@@ -75,6 +75,12 @@
             <h1 class="mb-3 h5 pe-lg-5 fs-2">
                 @articleTitle
             </h1>
+            @if (!String.IsNullOrEmpty(content.Subtitle))
+            {
+                <h2 class="mt-n2 mb-3 mb-lg-4 h5 pe-lg-5 fw-normal">
+                    @content.Subtitle
+                </h2>
+            }
             <div>
                 @if (authors != null)
                 {
