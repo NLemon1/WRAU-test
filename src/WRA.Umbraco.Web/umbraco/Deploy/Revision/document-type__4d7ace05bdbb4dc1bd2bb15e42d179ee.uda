@@ -1,5 +1,5 @@
 {
-  "Name": "Ad Widget",
+  "Name": "Featured Partner Widget",
   "Alias": "adWidget",
   "AllowedTemplates": [],
   "HistoryCleanup": {},
@@ -21,8 +21,8 @@
           "Key": "36bfc255-67aa-494c-b8e9-bb6956f46c38",
           "Alias": "selectAd",
           "DataType": "umb://data-type/2816b59aabfe49bcb1613f64be9e55c7",
-          "Description": "Optional. If no ad is selected then one will be randomly selected each time this block is loaded.",
-          "Name": "Select ad"
+          "Description": "Optional. If no \"featured partner\" is selected then one will be randomly selected each time this block is loaded.",
+          "Name": "Select featured partner"
         }
       ]
     }
@@ -40,5 +40,5 @@
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
-  "__version": "13.0.4"
+  "__version": "13.1.0"
 }

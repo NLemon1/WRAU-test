@@ -18,7 +18,7 @@ using Umbraco.Extensions;
 
 namespace WRA.Umbraco.Models
 {
-	/// <summary>Ad Widget</summary>
+	/// <summary>Featured Partner Widget</summary>
 	[PublishedModel("adWidget")]
 	public partial class AdWidget : PublishedElementModel
 	{
@@ -50,7 +50,7 @@ namespace WRA.Umbraco.Models
 		// properties
 
 		///<summary>
-		/// Select ad: Optional. If no ad is selected then one will be randomly selected each time this block is loaded.
+		/// Select featured partner: Optional. If no "featured partner" is selected then one will be randomly selected each time this block is loaded.
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.2.2+79d241a")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
