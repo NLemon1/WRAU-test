@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Umbraco.Cms.Core;
 using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Cms.Infrastructure.Examine;
+using Umbraco.Cms.Web.Common;
 using WRA.Umbraco.Models;
 
 namespace WRA.Umbraco.Services;
@@ -12,13 +13,33 @@ public class SearchService
 {
     private readonly IPublishedContentQuery _publishedContentQuery;
     private readonly IExamineManager _examineManager;
+    private readonly UmbracoHelper _umbracoHelper;
 
     public SearchService(
         IPublishedContentQuery publishedContentQuery,
-        IExamineManager examineManager)
+        IExamineManager examineManager,
+        UmbracoHelper umbracoHelper)
     {
         _publishedContentQuery = publishedContentQuery;
         _examineManager = examineManager;
+        _umbracoHelper = umbracoHelper;
+    }
+
+    public IEnumerable<IPublishedContent> SearchPages(string searchTerm = "")
+    {
+        if (_examineManager.TryGetIndex(Constants.UmbracoIndexes.ExternalIndexName, out IIndex index))
+        {
+
+            var searcher = index.Searcher;
+            var query = searcher.CreateQuery().NativeQuery("+__IndexType:content +nodeName:" + searchTerm);
+
+            var results = _publishedContentQuery.Search(query);
+            foreach (var result in results)
+            {
+                yield return result.Content;
+            }
+
+        }
     }
     public IEnumerable<PublishedSearchResult> Search(string nodeTypeAlias, string searchTerm = "")
     {

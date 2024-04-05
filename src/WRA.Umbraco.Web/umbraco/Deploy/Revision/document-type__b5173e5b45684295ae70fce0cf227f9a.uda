@@ -11,6 +11,7 @@
   "Permissions": {
     "AllowedChildContentTypes": []
   },
+  "Parent": "umb://document-type-container/288d09ea0a27469487ea02aa49648bae",
   "CompositionContentTypes": [
     "umb://document-type/14d24fc815e945d6baa835eae09a1d7f",
     "umb://document-type/7cc368ff00cb4264ad60f52a76c3a911",
@@ -48,6 +49,10 @@
     },
     {
       "Udi": "umb://data-type/9001e1a4d3d940178577caf42c500db5",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type-container/288d09ea0a27469487ea02aa49648bae",
       "Ordering": true
     },
     {
