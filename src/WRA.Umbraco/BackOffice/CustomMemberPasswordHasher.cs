@@ -1,6 +1,7 @@
 using System.Security.Cryptography;
 using System.Text;
 using Microsoft.Extensions.Logging;
+using Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Core.Security;
 using Umbraco.Cms.Core.Serialization;
 using Umbraco.Cms.Core.Services;
@@ -46,9 +47,12 @@ public class CustomMemberPasswordHasher<Tuser> : UmbracoPasswordHasher<Tuser> wh
 
     private void SetSaltPropertyOnMember(Tuser member, string salt)
     {
-        var memberIdentity = _memberService.GetByKey(member.Key);
-        memberIdentity.SetValue("token", salt);
-        _memberService.Save(memberIdentity);
+        if (member?.Key != null || member?.Key != Guid.Empty)
+        {
+            var memberIdentity = _memberService.GetByKey(member.Key);
+            memberIdentity.SetValue("token", salt);
+            _memberService.Save(memberIdentity);
+        }
     }
 
     private string HashPw(string password, byte[] salt)
