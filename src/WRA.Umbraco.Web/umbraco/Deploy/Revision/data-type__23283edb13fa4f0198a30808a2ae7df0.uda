@@ -1,0 +1,19 @@
+{
+  "Name": "Calendar - Categories - Multinode Treepicker",
+  "Alias": "",
+  "EditorAlias": "Umbraco.MultiNodeTreePicker",
+  "Configuration": {
+    "startNode": {
+      "type": "content"
+    },
+    "filter": "categoryPage",
+    "minNumber": 0,
+    "maxNumber": 10,
+    "showOpenButton": false,
+    "ignoreUserStartNodes": false
+  },
+  "Udi": "umb://data-type/23283edb13fa4f0198a30808a2ae7df0",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
+  "__version": "13.1.0"
+}

@@ -13,10 +13,28 @@
   "CompositionContentTypes": [
     "umb://document-type/38e48d076783491993c671f1add73d05"
   ],
-  "PropertyGroups": [],
+  "PropertyGroups": [
+    {
+      "Key": "13ec7ced-bfd3-42e5-a184-824e6ab04efe",
+      "Name": "Advanced",
+      "Alias": "advanced/advanced",
+      "PropertyTypes": [
+        {
+          "Key": "41c5df98-06d2-40b0-b002-a8dc49406444",
+          "Alias": "categories",
+          "DataType": "umb://data-type/23283edb13fa4f0198a30808a2ae7df0",
+          "Name": "Categories"
+        }
+      ]
+    }
+  ],
   "PropertyTypes": [],
   "Udi": "umb://document-type/d0326835a86740fda53786ac5a2cd620",
   "Dependencies": [
+    {
+      "Udi": "umb://data-type/23283edb13fa4f0198a30808a2ae7df0",
+      "Ordering": true
+    },
     {
       "Udi": "umb://document-type-container/37b4b44f0abc4536af8ed684511c2571",
       "Ordering": true
@@ -27,5 +45,5 @@
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
-  "__version": "13.0.4"
+  "__version": "13.1.0"
 }

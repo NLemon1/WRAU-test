@@ -23,11 +23,8 @@
         props += $" style=\"{style}\"";
     }
 
+    var categoriesProducts = content.Value<IEnumerable<IPublishedContent>>("categories");
 
-    IEnumerable<IPublishedContent> categoriesProducts = Umbraco.ContentAtRoot()
-                                    .DescendantsOrSelfOfType("categoryPage")
-                                    .Where(p => p.Value<bool>("showInCalendar") == true)
-                                    .OrderBy(p => p.Name);
 }
 
 @section scriptsPre {
@@ -38,7 +35,7 @@
     window.setResources = [
         @if (categoriesProducts.Any())
         {
-        foreach (var category in categoriesProducts)
+        foreach (var category in categoriesProducts.OrderBy(p => p.Name))
         {
             <text>{</text>
                 <text>id:"</text>@category.Id<text>",</text>

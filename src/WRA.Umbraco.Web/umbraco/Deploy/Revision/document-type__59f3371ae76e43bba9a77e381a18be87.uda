@@ -25,14 +25,6 @@
       "Alias": "content",
       "PropertyTypes": [
         {
-          "Key": "09dc6b5d-7905-4b62-9308-57f375cd9d83",
-          "Alias": "showInCalendar",
-          "DataType": "umb://data-type/a135d918eccc468181719380ce19c789",
-          "Description": "Enable calendar category.",
-          "Name": "Show in Calendar",
-          "SortOrder": 3
-        },
-        {
           "Key": "34a5cec4-7b42-49fb-992d-3024dd232db7",
           "Alias": "colorCode",
           "DataType": "umb://data-type/edd63835d0084d4a84585b5703c5a13b",
@@ -77,10 +69,6 @@
       "Ordering": true
     },
     {
-      "Udi": "umb://data-type/a135d918eccc468181719380ce19c789",
-      "Ordering": true
-    },
-    {
       "Udi": "umb://data-type/edd63835d0084d4a84585b5703c5a13b",
       "Ordering": true
     },
@@ -105,5 +93,5 @@
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
-  "__version": "13.0.4"
+  "__version": "13.1.0"
 }

@@ -7,9 +7,11 @@ const calendar = () => {
     const apiEndpointUrl = "/GetProducts";
     const styleSet = document.querySelector('.js-filter-styles');
 
+    //console.log(window.setResources)
+
     let bodyObject = {
         "productType": "Events",
-        "category": "",
+        "category": "", //NEED to allow ARRAY "Conferences and Conventions", "Real Estate Webinars and Forums", "Broker Licensing"
         "subCategory": "",
         "taxonomy": "",
         "pagination": {
@@ -73,7 +75,7 @@ const calendar = () => {
                         }).then(res => {
                             return res.json();
                         }).then(res => {
-                           // console.log(res);
+                            //console.log(res);
                             successCallback(res);
                     });
                 }
@@ -92,7 +94,7 @@ const calendar = () => {
            // console.log(isLoading);
 
             if (isLoading == false) {
-                console.log("loading done");
+                //console.log("loading done");
                 //remove if exists
                 calendarFilters.innerHTML = "";
 

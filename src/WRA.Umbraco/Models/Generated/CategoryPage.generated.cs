@@ -81,13 +81,6 @@ namespace WRA.Umbraco.Models
 		public virtual global::Umbraco.Cms.Core.Models.Blocks.BlockGridModel Sections => this.Value<global::Umbraco.Cms.Core.Models.Blocks.BlockGridModel>(_publishedValueFallback, "sections");
 
 		///<summary>
-		/// Show in Calendar: Enable calendar category.
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.2.2+79d241a")]
-		[ImplementPropertyType("showInCalendar")]
-		public virtual bool ShowInCalendar => this.Value<bool>(_publishedValueFallback, "showInCalendar");
-
-		///<summary>
 		/// Description
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.2.2+79d241a")]
