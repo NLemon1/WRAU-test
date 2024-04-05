@@ -47,7 +47,7 @@ public class CustomMemberPasswordHasher<Tuser> : UmbracoPasswordHasher<Tuser> wh
 
     private void SetSaltPropertyOnMember(Tuser member, string salt)
     {
-        if (member?.Key != null || member?.Key != Guid.Empty)
+        if (member?.Key != null && member?.Key != Guid.Empty)
         {
             var memberIdentity = _memberService.GetByKey(member.Key);
             memberIdentity.SetValue("token", salt);

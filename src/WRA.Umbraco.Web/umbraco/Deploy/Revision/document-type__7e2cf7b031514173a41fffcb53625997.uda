@@ -1,0 +1,105 @@
+{
+  "Name": "mywraProfile",
+  "Alias": "mywraProfile",
+  "DefaultTemplate": "umb://template/13df270e3833430cbf71ab7e102518f9",
+  "AllowedTemplates": [
+    "umb://template/13df270e3833430cbf71ab7e102518f9"
+  ],
+  "HistoryCleanup": {},
+  "Icon": "icon-badge color-black",
+  "Thumbnail": "folder.png",
+  "Permissions": {
+    "AllowedChildContentTypes": []
+  },
+  "Parent": "umb://document-type-container/288d09ea0a27469487ea02aa49648bae",
+  "CompositionContentTypes": [
+    "umb://document-type/14d24fc815e945d6baa835eae09a1d7f",
+    "umb://document-type/7cc368ff00cb4264ad60f52a76c3a911",
+    "umb://document-type/f0c2133970844a948c095978736296ce"
+  ],
+  "PropertyGroups": [
+    {
+      "Key": "c7166bca-723d-4dce-a322-d40f3c92db53",
+      "Name": "Content",
+      "SortOrder": 1000,
+      "Alias": "content",
+      "PropertyTypes": [
+        {
+          "Key": "0ff54867-b9e0-4976-83d5-6457f623a6cd",
+          "Alias": "personalInformationHeadline",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Personal Information Headline"
+        },
+        {
+          "Key": "1894f571-a0fe-469f-b95c-822e75b19f51",
+          "Alias": "contributionsIntroContent",
+          "DataType": "umb://data-type/9001e1a4d3d940178577caf42c500db5",
+          "Name": "Contributions Intro Content",
+          "SortOrder": 5
+        },
+        {
+          "Key": "2f5b94bd-33cc-49a8-98e5-f991609c35e4",
+          "Alias": "committeesIntroContent",
+          "DataType": "umb://data-type/9001e1a4d3d940178577caf42c500db5",
+          "Name": "Committees Intro Content",
+          "SortOrder": 3
+        },
+        {
+          "Key": "3abf6ddc-6cfa-416b-b7a8-f013e5548ad7",
+          "Alias": "committeesHeadline",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Committees Headline",
+          "SortOrder": 2
+        },
+        {
+          "Key": "3d41438f-23aa-4679-b373-b4c48292b314",
+          "Alias": "personalInformationIntroContent",
+          "DataType": "umb://data-type/9001e1a4d3d940178577caf42c500db5",
+          "Name": "Personal Information Intro Content",
+          "SortOrder": 1
+        },
+        {
+          "Key": "d0d8ddc9-5ef0-4e2d-9a5c-64246948f0a9",
+          "Alias": "contributionsHeadline",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Contributions Headline",
+          "SortOrder": 4
+        }
+      ]
+    }
+  ],
+  "PropertyTypes": [],
+  "Udi": "umb://document-type/7e2cf7b031514173a41fffcb53625997",
+  "Dependencies": [
+    {
+      "Udi": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/9001e1a4d3d940178577caf42c500db5",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type-container/288d09ea0a27469487ea02aa49648bae",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type/14d24fc815e945d6baa835eae09a1d7f",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type/7cc368ff00cb4264ad60f52a76c3a911",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type/f0c2133970844a948c095978736296ce",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://template/13df270e3833430cbf71ab7e102518f9",
+      "Ordering": true
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
+  "__version": "13.1.0"
+}

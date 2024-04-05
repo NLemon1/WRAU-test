@@ -1,0 +1,23 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.MywraProfile>
+@using ContentModels = WRA.Umbraco.Models;
+@{
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+<div class="w-100">
+    <div class="row g-0">
+
+        @await Html.PartialAsync("_mywraHeader", new ViewDataDictionary(this.ViewData) { { "isMobile", true } })
+        @await Html.PartialAsync("_mywraNav")
+
+        <div class="col position-relative">
+            @await Html.PartialAsync("_mywraHeader", new ViewDataDictionary(this.ViewData) { { "isMobile", false } })
+            <div class="mywra-right container container--md ms-0 pt-5 pt-lg-12">
+
+                Profle
+
+            </div>
+        </div>
+    </div>
+</div>

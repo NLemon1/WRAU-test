@@ -1,0 +1,14 @@
+{
+  "Name": "mywraEducation",
+  "Alias": "mywraEducation",
+  "File": "umb://template-file/mywraEducation.cshtml",
+  "Udi": "umb://template/0efd0d855ad04723982673c1dc2a3cca",
+  "Dependencies": [
+    {
+      "Udi": "umb://template-file/mywraEducation.cshtml",
+      "Ordering": true
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.TemplateArtifact",
+  "__version": "13.1.0"
+}

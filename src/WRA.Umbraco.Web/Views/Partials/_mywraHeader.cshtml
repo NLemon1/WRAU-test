@@ -1,0 +1,35 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using ContentModels = WRA.Umbraco.Models;
+
+@if (ViewData["isMobile"].Equals(true))
+{
+    <div class="col position-relative d-lg-none" aria-hidden="true">
+        <header class="page-header page-header--mywra">
+            <div class="container">
+                <div class="d-flex flex-column align-items-center py-4">
+                    <div class="decorative-img-wrapper">
+                        <img src="https://placehold.co/300x300" class="img-fluid fit-cover" width="150" height="150" alt="" />
+                    </div>
+                    <h2 class="js-collection-title mt-4 mb-0 text-center">
+                        Welcome, George Lightburn
+                    </h2>
+                </div>
+            </div>
+        </header>
+    </div>
+} else {
+    <header class="page-header page-header--mywra d-none d-lg-block pt-4">
+        <div class="container ps-4">
+            <div class="container--sm position-relative mb-lg-n12">
+                <div class="d-flex flex-row align-items-center">
+                    <div class="decorative-img-wrapper">
+                        <img src="https://placehold.co/300x300" class="img-fluid fit-cover" width="150" height="150" alt="" />
+                    </div>
+                    <h2 class="js-collection-title mb-0 ms-6">
+                        Welcome, George Lightburn
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </header>
+}

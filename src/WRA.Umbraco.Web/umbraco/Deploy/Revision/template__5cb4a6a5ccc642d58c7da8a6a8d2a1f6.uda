@@ -1,0 +1,14 @@
+{
+  "Name": "mywraDues",
+  "Alias": "mywraDues",
+  "File": "umb://template-file/mywraDues.cshtml",
+  "Udi": "umb://template/5cb4a6a5ccc642d58c7da8a6a8d2a1f6",
+  "Dependencies": [
+    {
+      "Udi": "umb://template-file/mywraDues.cshtml",
+      "Ordering": true
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.TemplateArtifact",
+  "__version": "13.1.0"
+}

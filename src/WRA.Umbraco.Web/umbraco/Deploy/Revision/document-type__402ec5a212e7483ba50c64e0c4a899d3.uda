@@ -25,7 +25,8 @@
       "umb://document-type/50852124ab78495fbc75a7ddd5045c9c",
       "umb://document-type/2258cd7d175d4ac1b98dfb00fbebc7b3",
       "umb://document-type/de64e2e99976492fa3cf754f96c5b560",
-      "umb://document-type/7f52f3aa18f3459d909367c6621285d9"
+      "umb://document-type/7f52f3aa18f3459d909367c6621285d9",
+      "umb://document-type/0e4fbf4835e74e70ba66c619e70242a4"
     ]
   },
   "Parent": "umb://document-type-container/8cacfbb1be7e47339707ec783af9070c",
@@ -97,6 +98,9 @@
       "Ordering": true
     },
     {
+      "Udi": "umb://document-type/0e4fbf4835e74e70ba66c619e70242a4"
+    },
+    {
       "Udi": "umb://document-type/14d24fc815e945d6baa835eae09a1d7f",
       "Ordering": true
     },
@@ -159,5 +163,5 @@
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
-  "__version": "13.0.4"
+  "__version": "13.1.0"
 }

@@ -1,0 +1,77 @@
+{
+  "Name": "mywraEducation",
+  "Alias": "mywraEducation",
+  "DefaultTemplate": "umb://template/0efd0d855ad04723982673c1dc2a3cca",
+  "AllowedTemplates": [
+    "umb://template/0efd0d855ad04723982673c1dc2a3cca"
+  ],
+  "HistoryCleanup": {},
+  "Icon": "icon-name-badge color-black",
+  "Thumbnail": "folder.png",
+  "Permissions": {
+    "AllowedChildContentTypes": []
+  },
+  "Parent": "umb://document-type-container/288d09ea0a27469487ea02aa49648bae",
+  "CompositionContentTypes": [
+    "umb://document-type/14d24fc815e945d6baa835eae09a1d7f",
+    "umb://document-type/7cc368ff00cb4264ad60f52a76c3a911",
+    "umb://document-type/f0c2133970844a948c095978736296ce"
+  ],
+  "PropertyGroups": [
+    {
+      "Key": "05410cba-467e-4b4b-8b6c-82ba260587a2",
+      "Name": "Content",
+      "SortOrder": 1000,
+      "Alias": "content",
+      "PropertyTypes": [
+        {
+          "Key": "7ca16741-8f47-4d40-b159-f9ee97ab2d12",
+          "Alias": "headline",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Headline"
+        },
+        {
+          "Key": "83aa0ba6-239b-4c99-bd92-30ec209a8610",
+          "Alias": "introContent",
+          "DataType": "umb://data-type/9001e1a4d3d940178577caf42c500db5",
+          "Name": "Intro Content",
+          "SortOrder": 1
+        }
+      ]
+    }
+  ],
+  "PropertyTypes": [],
+  "Udi": "umb://document-type/b5173e5b45684295ae70fce0cf227f9a",
+  "Dependencies": [
+    {
+      "Udi": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/9001e1a4d3d940178577caf42c500db5",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type-container/288d09ea0a27469487ea02aa49648bae",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type/14d24fc815e945d6baa835eae09a1d7f",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type/7cc368ff00cb4264ad60f52a76c3a911",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type/f0c2133970844a948c095978736296ce",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://template/0efd0d855ad04723982673c1dc2a3cca",
+      "Ordering": true
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
+  "__version": "13.1.0"
+}

@@ -1,0 +1,25 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.MywraEducation>
+@using ContentModels = WRA.Umbraco.Models;
+@{
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+<div class="w-100">
+    <div class="row g-0">
+        @Html.Partial("mywraBanner")
+        @Html.Partial("mywraHeader")
+
+        <div class="col position-relative">
+
+            @section aside {
+                @Html.Partial("mywraHeader")
+            }
+
+            <div class="mywra-right container container--md ms-0 pt-5 pt-lg-12">
+            
+            </div>
+
+        </div>
+    </div>
+</div>

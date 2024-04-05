@@ -1,0 +1,14 @@
+{
+  "Name": "mywraToolKit",
+  "Alias": "mywraToolKit",
+  "File": "umb://template-file/mywraToolKit.cshtml",
+  "Udi": "umb://template/899389ab287e45fc9adf0ec8f60da956",
+  "Dependencies": [
+    {
+      "Udi": "umb://template-file/mywraToolKit.cshtml",
+      "Ordering": true
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.TemplateArtifact",
+  "__version": "13.1.0"
+}
