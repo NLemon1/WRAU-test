@@ -196,10 +196,7 @@ public class WRAMemberManagementService
             MemberIdentityUser.CreateNew(model.Username, model.Email, model.MemberTypeAlias, true, model.Name);
 
         IdentityResult identityResult = await _memberManager.CreateAsync(
-            identityUser);
-
-
-        await _memberManager.AddPasswordAsync(identityUser, model.Password);
+            identityUser, model.Password);
 
         if (identityResult.Succeeded)
         {
