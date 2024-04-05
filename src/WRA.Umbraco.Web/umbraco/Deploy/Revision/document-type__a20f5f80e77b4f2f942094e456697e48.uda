@@ -24,6 +24,27 @@
       "Alias": "content",
       "PropertyTypes": [
         {
+          "Key": "405e8965-d70d-41ef-9913-c7cd5564035e",
+          "Alias": "payDuesHeadline",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Pay Dues Headline",
+          "SortOrder": 2
+        },
+        {
+          "Key": "9fb723ea-3eed-4605-bcd5-455703529d4d",
+          "Alias": "duesHistoryHeadline",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Dues History Headline",
+          "SortOrder": 4
+        },
+        {
+          "Key": "a6bcd824-93d1-47bc-8756-16cea65f7d8b",
+          "Alias": "duesHistoryIntroContent",
+          "DataType": "umb://data-type/9001e1a4d3d940178577caf42c500db5",
+          "Name": "Dues History Intro Content",
+          "SortOrder": 5
+        },
+        {
           "Key": "df6258df-3a28-4607-9f6d-b1c9c466c509",
           "Alias": "headline",
           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
@@ -35,6 +56,13 @@
           "DataType": "umb://data-type/9001e1a4d3d940178577caf42c500db5",
           "Name": "Intro Content",
           "SortOrder": 1
+        },
+        {
+          "Key": "f7e8edda-9774-46e4-a031-36575e8e0ce9",
+          "Alias": "payDuesIntroContent",
+          "DataType": "umb://data-type/9001e1a4d3d940178577caf42c500db5",
+          "Name": "Pay Dues Intro Content",
+          "SortOrder": 3
         }
       ]
     }

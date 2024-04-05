@@ -1,8 +1,10 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.MywraToolKit>
 @using ContentModels = WRA.Umbraco.Models;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<WRA.Umbraco.Models.MywraToolKit>
+
 @{
     Layout = "~/Views/_Layout.cshtml";
+    var content = (ContentModels.MywraToolKit)Model;
 }
 
 <div class="w-100">
@@ -13,11 +15,52 @@
 
         <div class="col position-relative">
             @await Html.PartialAsync("_mywraHeader", new ViewDataDictionary(this.ViewData) { { "isMobile", false } })
-            <div class="mywra-right container container--md ms-0 pt-5 pt-lg-12">
+          
+            <div class="mywra-right container container--md ms-0 pt-5 pt-lg-11">
 
-                ToolKit
+                @if (!String.IsNullOrEmpty(content.Headline))
+                {
+                    <h1 class="h2">@content.Headline</h1>
+                }
+
+                @if (!String.IsNullOrEmpty(content.IntroContent.ToString()))
+                {
+                    <div class="rich-text mb-5">
+                        @Html.Raw(content.IntroContent)
+                    </div>
+                }
+
+                <div class="border border-medium p-4 rounded mb-5">
+                    <h2 class="h6 mb-4 fs-lg">
+                        Zip Form
+                    </h2>
+                    <div class="rich-text">
+                        Lorem ipsum dolor sit amet consectetur. At eget vulputate sapien duis curabitur vulputate morbi feugiat euismod.
+                    </div>
+                    <a href="/" class="btn btn-primary">Access Zip Form</a>
+                </div>
+                <div class="border border-medium p-4 rounded mb-5">
+                    <h2 class="h6 mb-4 fs-lg">
+                        Forms Library
+                    </h2>
+                    <div class="rich-text">
+                        Lorem ipsum dolor sit amet consectetur. At eget vulputate sapien duis curabitur vulputate morbi feugiat euismod.
+                    </div>
+                    <a href="/" class="btn btn-primary">Access Forms Library</a>
+                </div>
+                <div class="border border-medium p-4 rounded mb-5">
+                    <h2 class="h6 mb-4 fs-lg">
+                        Line By Line Training
+                    </h2>
+                    <div class="rich-text">
+                        Lorem ipsum dolor sit amet consectetur. At eget vulputate sapien duis curabitur vulputate morbi feugiat euismod.
+                    </div>
+                    <a href="/" class="btn btn-primary">Access Line By Line Training</a>
+                </div>
+
 
             </div>
+
         </div>
     </div>
 </div>

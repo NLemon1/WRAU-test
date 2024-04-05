@@ -63,6 +63,20 @@
           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
           "Name": "Contributions Headline",
           "SortOrder": 4
+        },
+        {
+          "Key": "d27b8026-68aa-4033-8b1b-e8034d6dc135",
+          "Alias": "subscriptionsHeadline",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Subscriptions Headline",
+          "SortOrder": 6
+        },
+        {
+          "Key": "f47d9099-a989-496e-8da4-c142954b4ff9",
+          "Alias": "subscriptionsIntroContent",
+          "DataType": "umb://data-type/9001e1a4d3d940178577caf42c500db5",
+          "Name": "Subscriptions Intro Content",
+          "SortOrder": 7
         }
       ]
     }

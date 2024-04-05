@@ -1,23 +1,112 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.MywraEducation>
 @using ContentModels = WRA.Umbraco.Models;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<WRA.Umbraco.Models.MywraEducation>
 @{
     Layout = "~/Views/_Layout.cshtml";
+    var content = (ContentModels.MywraEducation)Model;
 }
 
 <div class="w-100">
     <div class="row g-0">
-        @Html.Partial("mywraBanner")
-        @Html.Partial("mywraHeader")
+        @await Html.PartialAsync("_mywraHeader", new ViewDataDictionary(this.ViewData) { { "isMobile", true } })
+        @await Html.PartialAsync("_mywraNav")
 
         <div class="col position-relative">
+            @await Html.PartialAsync("_mywraHeader", new ViewDataDictionary(this.ViewData) { { "isMobile", false } })
 
-            @section aside {
-                @Html.Partial("mywraHeader")
-            }
+            <div class="mywra-right container container--md ms-0 pt-5 pt-lg-11">
 
-            <div class="mywra-right container container--md ms-0 pt-5 pt-lg-12">
-            
+                <div class="pb-2 pb-lg-4">
+                    @if (!String.IsNullOrEmpty(content.Headline)){
+                        <h1 class="h2">@content.Headline</h1>
+                    }
+
+                    @if (!String.IsNullOrEmpty(content.IntroContent.ToString()))
+                    {
+                        <div class="rich-text mb-5">
+                            @Html.Raw(content.IntroContent)
+                        </div>
+                    }
+                </div>
+
+                <!-- Required Courses -->
+                <div class="w-100 py-4 border border-medium rounded mb-5">
+                    <h3 class="h5 py-2 px-4">Required Courses</h3>
+                    <table class="table-courses w-100 fs-sm">
+                        <thead class="fw-bold" style="background: var(--bs-gray-10)">
+                            <tr>
+                                <th class="py-2">CE Course</th>
+                                <th>Status</th>
+                                <th class="text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody style="color: var(--bs-gray-30)">
+                            @for (var i = 1; i < 6; i++)
+                            {
+                                <tr class="">
+                                    <td class="py-2">
+                                        Lorem ipsum dolor @i
+                                    </td>
+                                    <td class="py-2">
+                                        At eget vulputate sapien duis curabitur
+                                    </td>
+                                    <td class="py-2 text-center">
+                                        <button class="border-0 bg-transparent px-2 py-2" title="Download">
+                                            <i class="fa-regular fa-arrow-down-to-bracket text-primary fs-lg"></i>
+                                        </button>
+                                        <button class="border-0 bg-transparent px-2 py-2" title="Buy">
+                                            <i class="far fa-shopping-cart text-primary fs-lg"></i>
+                                        </button>
+                                        <button class="border-0 bg-transparent px-2 py-2" title="External Link">
+                                            <i class="fa-regular fa-arrow-up-right-from-square text-primary fs-lg"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <div class="text-center">
+                        <a href="/" class="btn btn-primary btn-sm mt-4">View All Courses</a>
+                    </div>
+                </div>
+
+                <!-- Misc Courses -->
+                <h3 class="h5 py-2 px-4">Lorem Courses</h3>
+                <div class="accordions-wrapper accordions-wrapper--border accordions-wrapper--border--light mb-5">
+                    @for (var i = 1; i < 5; i++)
+                    {
+                        <details class="accordion accordion--light">
+                            <summary class="accordion__toggle px-3">
+                                <div class="ps-1">
+                                    Lorem Ipsum Dolor
+                                </div>
+                                <div class="accordion__toggle-icon me-1">
+                                    <i class="fas fa-chevron-down"></i>
+                                    <i class="fas fa-chevron-up"></i>
+                                </div>
+
+                            </summary>
+                            <div class="accordion__content px-4 text-body">
+                                @for (var c = 1; c < 5; c++)
+                                {
+                                    <div class="border border-medium p-4 rounded mb-3">
+                                        <h4 class="h6">
+                                            Pretium aenean pharetra magna
+                                        </h4>
+                                        <p class="fw-light">
+                                            Gain the power you need to strive with the WRA Mini Course Series.
+                                        </p>
+                                        <p>
+                                            You may access this course until 5/14/2024.
+                                        </p>
+                                    </div>
+                                }
+                            </div>
+                        </details>
+                    }
+                </div>
+
+
             </div>
 
         </div>

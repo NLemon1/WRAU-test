@@ -98,6 +98,22 @@ namespace WRA.Umbraco.Models
 		public virtual global::Umbraco.Cms.Core.Strings.IHtmlEncodedString PersonalInformationIntroContent => this.Value<global::Umbraco.Cms.Core.Strings.IHtmlEncodedString>(_publishedValueFallback, "personalInformationIntroContent");
 
 		///<summary>
+		/// Subscriptions Headline
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.2.2+79d241a")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("subscriptionsHeadline")]
+		public virtual string SubscriptionsHeadline => this.Value<string>(_publishedValueFallback, "subscriptionsHeadline");
+
+		///<summary>
+		/// Subscriptions Intro Content
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.2.2+79d241a")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("subscriptionsIntroContent")]
+		public virtual global::Umbraco.Cms.Core.Strings.IHtmlEncodedString SubscriptionsIntroContent => this.Value<global::Umbraco.Cms.Core.Strings.IHtmlEncodedString>(_publishedValueFallback, "subscriptionsIntroContent");
+
+		///<summary>
 		/// Meta Description: Enter meta description if desired.
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.2.2+79d241a")]

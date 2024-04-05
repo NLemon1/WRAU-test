@@ -1,27 +1,37 @@
 ﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @using ContentModels = WRA.Umbraco.Models;
 
+@{
+    IEnumerable<IPublishedContent> myWraNavItems = Model.SiblingsAndSelf().Where(x => x.IsVisible() && x.IsPublished());
+}
+
 <div class="col-12 col-lg-3" style="background-color: var(--bs-gray-10)">
     <div class="mywra-left px-4 pb-6">
         <div class="border-top pt-4 mt-lg-9 border-dark d-block w-100"></div>
         <div class="mb-3 pb-2 d-lg-none">
-            <label class="visually-hidden" for="hot-tip-category">Select a category</label>
-            <select id="mywra-mobile" class="form-select">
-                @for (var i = 1; i < 6; i++)
-                {
-                    <!option @(i == 1 ? "selected" : "") value="">My Education</!option>
-                }
-            </select>
+            @if (myWraNavItems.Any())
+            {
+                <label class="visually-hidden" for="hot-tip-category">Select a category</label>
+                <select id="mywra-mobile" class="form-select" onchange="window.document.location.href=this.options[this.selectedIndex].value;">
+                    @foreach (var item in myWraNavItems)
+                    {
+                        <!option @(Model.Id == item.Id ? "selected" : "") value="@item.Url()">@item.Name</!option>
+                    }
+                </select>
+            }
         </div>
         <div class="d-none d-lg-block">
-            <ul class="list-unstyled d-flex flex-column gap-1">
-                @for (var i = 1; i < 6; i++)
-                {
-                    <li>
-                        <a href="/" class="btn-mywra" @(i == 1 ? "aria-selected=true" : string.Empty)>My Education</a>
-                    </li>
-                }
-            </ul>
+            @if (myWraNavItems.Any())
+            {
+                <ul class="list-unstyled d-flex flex-column gap-1">
+                    @foreach (var item in myWraNavItems)
+                    {
+                        <li>
+                            <a href="@item.Url()" class="btn-mywra" @(Model.Id == item.Id ? "aria-selected=true" : string.Empty)>@item.Name</a>
+                        </li>
+                    }
+                </ul>
+            }
             <div class="border-top border-dark d-block w-100"></div>
             <a href="/" class="btn-mywra mt-3" style="color: var(--bs-red)">Log Out</a>
         </div>

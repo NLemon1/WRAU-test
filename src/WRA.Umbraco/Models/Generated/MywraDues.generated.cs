@@ -50,6 +50,22 @@ namespace WRA.Umbraco.Models
 		// properties
 
 		///<summary>
+		/// Dues History Headline
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.2.2+79d241a")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("duesHistoryHeadline")]
+		public virtual string DuesHistoryHeadline => this.Value<string>(_publishedValueFallback, "duesHistoryHeadline");
+
+		///<summary>
+		/// Dues History Intro Content
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.2.2+79d241a")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("duesHistoryIntroContent")]
+		public virtual global::Umbraco.Cms.Core.Strings.IHtmlEncodedString DuesHistoryIntroContent => this.Value<global::Umbraco.Cms.Core.Strings.IHtmlEncodedString>(_publishedValueFallback, "duesHistoryIntroContent");
+
+		///<summary>
 		/// Headline
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.2.2+79d241a")]
@@ -64,6 +80,22 @@ namespace WRA.Umbraco.Models
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("introContent")]
 		public virtual global::Umbraco.Cms.Core.Strings.IHtmlEncodedString IntroContent => this.Value<global::Umbraco.Cms.Core.Strings.IHtmlEncodedString>(_publishedValueFallback, "introContent");
+
+		///<summary>
+		/// Pay Dues Headline
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.2.2+79d241a")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("payDuesHeadline")]
+		public virtual string PayDuesHeadline => this.Value<string>(_publishedValueFallback, "payDuesHeadline");
+
+		///<summary>
+		/// Pay Dues Intro Content
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.2.2+79d241a")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("payDuesIntroContent")]
+		public virtual global::Umbraco.Cms.Core.Strings.IHtmlEncodedString PayDuesIntroContent => this.Value<global::Umbraco.Cms.Core.Strings.IHtmlEncodedString>(_publishedValueFallback, "payDuesIntroContent");
 
 		///<summary>
 		/// Meta Description: Enter meta description if desired.
