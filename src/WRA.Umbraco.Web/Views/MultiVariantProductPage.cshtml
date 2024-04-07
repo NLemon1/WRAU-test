@@ -1,288 +1,288 @@
-﻿@using Umbraco.Commerce.Core.Models;
-@using Umbraco.Commerce;
-@using Umbraco.Commerce.Extensions;
-@using Umbraco.Cms.Core.Models.PublishedContent;
-@using WRA.Umbraco;
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.MultiVariantProductPage>
-@using ContentModels = WRA.Umbraco.Models;
-@{
-    Layout = "~/Views/_Layout.cshtml";
-}
-@{
-    var multiVariantProductPage = Model as MultiVariantProductPage;
-    var store = Model.Value<StoreReadOnly>("store", fallback: Fallback.ToAncestors);
-    var addedProductReference = TempData["addedProductReference"]?.ToString();
-    var parentPages = Model.Ancestors().Reverse();
-
-    var startDate = @String.Format("{0:MMMM d}", Model.StartDate) ?? string.Empty;
-    var startTime = @String.Format("{0:h:mm tt}", Model.StartDate) ?? string.Empty;
-    var endDate = @String.Format("{0:MMMM d}", Model.EndDate) ?? string.Empty;
-    var endTime = @String.Format("{0:h:mm tt}", Model.EndDate) ?? string.Empty;
-
-    var productType = Model.Parent.Name; //Events, Products, Courses
-}
-
-
-@if (multiVariantProductPage != null && multiVariantProductPage.Variants != null && multiVariantProductPage.Variants.Count > 0)
-{
-    <script>
-
-        // Create JS function to update variant info dynamically
-        var updateProductVariantInfo = function () {
-
-            // Convert selected values into a key value collection
-            var attributeValues = Array.from($("select[data-attribute]")).reduce(function (accumulator, currentValue) {
-                accumulator[currentValue.dataset.attribute] = currentValue.value;
-                return accumulator;
-            }, {});
-
-            // Construct the post data to pass to the API controller
-            var postData = {
-                productNodeId: @Model.Id,
-                attributes: attributeValues
-            }
-
-            // Disable the add to cart button while loading
-            $("#add-to-cart").prop('disabled', true).css({ opacity: 0.2 });
-
-            // Fetch the variant data for the given attribute combination and update the UI accordingly
-            $.ajax({
-                url: "/umbraco/api/productapi/getproductvariant",
-                type: "POST",
-                data: JSON.stringify(postData),
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (data) {
-                    if (data) {
-                        $("[data-variant-price]").text(data.priceFormatted);
-                        $("[name=productVariantReference]").val(data.productVariantReference);
-                        $(".product-image").attr("src", data.imageUrl);
-                        $("#add-to-cart").prop('disabled', false).css({ opacity: 1 });
-                    } else {
-                        $("[data-variant-price]").text("Unavailable");
-                        $("[name=productVariantReference]").val("");
-                        $(".product-image").attr("src", $(".product-image").data("defaultUrl"));
-                    }
-                }
-            });
-
-            return false;
-        }
-
-        // Update variant info on load
-        updateProductVariantInfo();
-
-    </script>
-}
-
-<div class="py-3">
-    @await Html.PartialAsync("_breadcrumbs")
-</div>
-
-<div class="container">
-    <div class="row gx-lg-12">
-        <div class="col-12 col-lg-6 mb-6 mb-lg-0">
-            @if (Model.Images.Count() > 0)
-            {
-                var mainImage = Model.Images.FirstOrDefault();
-                <img class="img-fluid img-curved img-curved--large" src="@mainImage.GetCropUrl(552, 552).ToString()" alt="@(mainImage.Value("altText") ?? "")" />
-            }
-        </div>
-        <div class="col-12 col-lg-6">
-            
-            @if (startDate != null && Model.StartDate > DateTime.Today && productType != "Products")
-            {
-                <p class="mb-4 fs-sm">
-                    @startDate
-                    @if (startDate != endDate)
-                    {
-                        <span>@endDate</span>
-                    }
-                    <text>&nbsp;&nbsp;</text>
-                    <span class="fw-bold">@startTime</span>
-                    @if (startTime != endTime)
-                    {
-                        <span class="fw-bold"> &ndash; @endTime</span>
-                    }
-                </p>
-            }
-
-            @if (!String.IsNullOrEmpty(Model.Taxonomy))
-            {
-                <p class="d-inline-block mb-2 px-2 py-1 bg-light fw-semibold text-uppercase">@Model.Taxonomy</p>
-            }
-
-            @using (Html.BeginUmbracoForm("AddToCart", "CartSurface"))
-            {
-                <h1 class="h3 mb-4">@Model.Name</h1>
-                RenderVariants(store, Model, addedProductReference);
-
-                <button id="add-to-cart" class="btn btn-primary mt-4 mb-6" type="submit">@(productType != "Products" ? "Register" : "Add to Card")</button>
-            }
-
-            @if (!String.IsNullOrEmpty(Model.LongDescription.ToString()))
-            {
-                @Html.Raw(Model.LongDescription)
-            }
-        </div>
-    </div>
-
-    @if (!String.IsNullOrEmpty(Model.CourseInfo.ToString()) || !String.IsNullOrEmpty(Model.TrainingTakeaways.ToString()) || !String.IsNullOrEmpty(Model.CourseDetails.ToString()) || !String.IsNullOrEmpty(Model.MoreInfo.ToString()))
-    {
-        <div style="height: 64px;"></div>
-
-        <div class="tabs tabs--mobile-dropdown tabs--vertical js-tabs">
-            <div class="">
-                <ul role="tablist" class="tabs__tabs-list">
-
-                    @if (!String.IsNullOrEmpty(Model.CourseInfo.ToString()))
-                    {
-                        <li role="presentation">
-                            <a id="tab-1" class="tabs__trigger js-tabs-trigger" href="#tab-section-1" role="tab" aria-controls="tab-section-1" aria-selected="false">Course Info</a>
-                        </li>
-                    }
-                    @if (!String.IsNullOrEmpty(Model.TrainingTakeaways.ToString()))
-                    {
-                        <li role="presentation">
-                            <a id="tab-2" class="tabs__trigger js-tabs-trigger" href="#tab-section-2" role="tab" aria-controls="tab-section-2" aria-selected="false">Training Takeaways</a>
-                        </li>
-                    }
-                    @if (!String.IsNullOrEmpty(Model.CourseDetails.ToString()))
-                    {
-                        <li role="presentation">
-                            <a id="tab-3" class="tabs__trigger js-tabs-trigger" href="#tab-section-3" role="tab" aria-controls="tab-section-3" aria-selected="false">Course Details</a>
-                        </li>
-                    }
-                    @if (!String.IsNullOrEmpty(Model.MoreInfo.ToString()))
-                    {
-                        <li role="presentation">
-                            <a id="tab-4" class="tabs__trigger js-tabs-trigger" href="#tab-section-4" role="tab" aria-controls="tab-section-4" aria-selected="false">More @Model.Name Info</a>
-                        </li>
-                    }
-                </ul>
-            </div>
-            <select class="tabs__dropdown js-tabs-dropdown" aria-label="Select a tab">
-                @if (!String.IsNullOrEmpty(Model.CourseInfo.ToString()))
-                {
-                    <option value="#tab-section-1">Course Info</option>
-                }
-                @if (!String.IsNullOrEmpty(Model.TrainingTakeaways.ToString()))
-                {
-                    <option value="#tab-section-2">Training Takeaways</option>
-                }
-                @if (!String.IsNullOrEmpty(Model.CourseDetails.ToString()))
-                {
-                    <option value="#tab-section-3">Course Details</option>
-                }
-                @if (!String.IsNullOrEmpty(Model.MoreInfo.ToString()))
-                {
-                    <option value="#tab-section-4">More @Model.Name Info</option>
-                }
-            </select>
-            @if (!String.IsNullOrEmpty(Model.CourseInfo.ToString()))
-            {
-                <section id="tab-section-1" class="tabs__panel px-4 js-tabs-panel" role="tabpanel" aria-labelledby="tab-1" tabindex="0">
-                    <div class="tabs__accordion-trigger js-accordion-trigger" aria-controls="tab-section-1" aria-expanded="false" tabindex="0"></div>
-                    <div class="content" aria-hidden="true">
-                        @Html.Raw(Model.CourseInfo)
-                    </div>
-                </section>
-            }
-            @if (!String.IsNullOrEmpty(Model.TrainingTakeaways.ToString()))
-            {
-                <section id="tab-section-2" class="tabs__panel px-4 js-tabs-panel" role="tabpanel" aria-labelledby="tab-2" tabindex="0">
-                    <div class="tabs__accordion-trigger js-accordion-trigger" aria-controls="tab-section-2" aria-expanded="false" tabindex="0"></div>
-                    <div class="content" aria-hidden="true">
-                        @Html.Raw(Model.TrainingTakeaways)
-                    </div>
-                </section>
-            }
-            @if (!String.IsNullOrEmpty(Model.CourseDetails.ToString()))
-            {
-                <section id="tab-section-3" class="tabs__panel px-4 js-tabs-panel" role="tabpanel" aria-labelledby="tab-3" tabindex="0">
-                    <div class="tabs__accordion-trigger js-accordion-trigger" aria-controls="tab-section-3" aria-expanded="false" tabindex="0"></div>
-                    <div class="content" aria-hidden="true">
-                        @Html.Raw(Model.CourseDetails)
-                    </div>
-                </section>
-            }
-            @if (!String.IsNullOrEmpty(Model.MoreInfo.ToString()))
-            {
-                <section id="tab-section-4" class="tabs__panel px-4 js-tabs-panel" role="tabpanel" aria-labelledby="tab-4" tabindex="0">
-                    <div class="tabs__accordion-trigger js-accordion-trigger" aria-controls="tab-section-4" aria-expanded="false" tabindex="0"></div>
-                    <div class="content" aria-hidden="true">
-                        @Html.Raw(Model.MoreInfo)
-                    </div>
-                </section>
-            }
-        </div>
-
-    }
-    <div style="height: 96px;"></div>
-</div>
-
-
-
-@{
-    void RenderVariants(StoreReadOnly store, ProductPage product, string addedProductReference)
-    {
-        var multiVariantProductPage = Model as MultiVariantProductPage;
-
-        if (multiVariantProductPage != null && multiVariantProductPage.Variants != null && multiVariantProductPage.Variants.Count > 0)
-        {
-            @Html.Hidden("productReference", Model.GetProductReference())
-            @Html.Hidden("productVariantReference", "")
-
-            var attrs = multiVariantProductPage.Variants.GetInUseProductAttributes();
-
-            foreach (var attr in attrs)
-            {
-                <p class="mt-4">@(attr.Name)</p>
-                <select class="w-full border border-gray-300 p-2 mt-1" data-attribute="@(attr.Alias)" data-attribute-name="@(attr.Name)" onchange="updateProductVariantInfo()">
-                    @foreach (var val in attr.Values)
-                    {
-                        <!option value="@val.Alias">@(val.Name)</!option>
-                    }
-                </select>
-            }
-
-            <p class="mt-4" data-variant-price></p>
-        }
-        else if (product.ChildVariants.Any())
-        {
-            @* if (product.IsGiftCard)
-            {
-                var selectedReference = addedProductReference ?? product.ChildVariants.FirstOrDefault()?.GetProductReference();
-
-                <div class="gift-cards flex justify-start space-x-2 mt-4">
-                    @foreach (var variant in product.ChildVariants)
-                    {
-                        var productReference = variant.GetProductReference();
-
-                        <span class="relative">
-                            <input type="radio" class="form-radio absolute w-0 h-0" name="productReference" id="giftcard-@productReference" value="@productReference" @Html.Raw(selectedReference == productReference ? "checked=\"checked\"" : "") />
-                            <label class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 cursor-pointer" for="giftcard-@productReference">@(variant.CalculatePrice()?.Formatted())</label>
-                        </span>
-                    }
-                </div>
-            }
-            else
-            { *@
-            <select name="productReference" class="w-full border border-gray-300 p-2 mt-1">
-                @foreach (var variant in product.ChildVariants)
-                {
-                    var productReference = variant.GetProductReference();
-
-                    <!option value="@productReference" @Html.Raw(addedProductReference == productReference ? "selected=\" selected\"" : "" )>@(variant.Name) - @(variant.CalculatePrice()?.Formatted())</!option>
-                }
-            </select>
-            @* } *@
-        }
-        else
-        {
-            @Html.Hidden("productReference", product.GetProductReference())
-
-            <p>@(product.CalculatePrice()?.Formatted())</p>
-        }
-    }
-}
+﻿@* @using Umbraco.Commerce.Core.Models; *@
+@* @using Umbraco.Commerce; *@
+@* @using Umbraco.Commerce.Extensions; *@
+@* @using Umbraco.Cms.Core.Models.PublishedContent; *@
+@* @using WRA.Umbraco; *@
+@* @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.MultiVariantProductPage> *@
+@* @using ContentModels = WRA.Umbraco.Models; *@
+@* @{ *@
+@*     Layout = "~/Views/_Layout.cshtml"; *@
+@* } *@
+@* @{ *@
+@*     var multiVariantProductPage = Model as MultiVariantProductPage; *@
+@*     var store = Model.Value<StoreReadOnly>("store", fallback: Fallback.ToAncestors); *@
+@*     var addedProductReference = TempData["addedProductReference"]?.ToString(); *@
+@*     var parentPages = Model.Ancestors().Reverse(); *@
+@* *@
+@*     var startDate = @String.Format("{0:MMMM d}", Model.StartDate) ?? string.Empty; *@
+@*     var startTime = @String.Format("{0:h:mm tt}", Model.StartDate) ?? string.Empty; *@
+@*     var endDate = @String.Format("{0:MMMM d}", Model.EndDate) ?? string.Empty; *@
+@*     var endTime = @String.Format("{0:h:mm tt}", Model.EndDate) ?? string.Empty; *@
+@* *@
+@*     var productType = Model.Parent.Name; //Events, Products, Courses *@
+@* } *@
+@* *@
+@* *@
+@* @if (multiVariantProductPage != null && multiVariantProductPage.Variants != null && multiVariantProductPage.Variants.Count > 0) *@
+@* { *@
+@*     <script> *@
+@* *@
+@*         // Create JS function to update variant info dynamically *@
+@*         var updateProductVariantInfo = function () { *@
+@* *@
+@*             // Convert selected values into a key value collection *@
+@*             var attributeValues = Array.from($("select[data-attribute]")).reduce(function (accumulator, currentValue) { *@
+@*                 accumulator[currentValue.dataset.attribute] = currentValue.value; *@
+@*                 return accumulator; *@
+@*             }, {}); *@
+@* *@
+@*             // Construct the post data to pass to the API controller *@
+@*             var postData = { *@
+@*                 productNodeId: @Model.Id, *@
+@*                 attributes: attributeValues *@
+@*             } *@
+@* *@
+@*             // Disable the add to cart button while loading *@
+@*             $("#add-to-cart").prop('disabled', true).css({ opacity: 0.2 }); *@
+@* *@
+@*             // Fetch the variant data for the given attribute combination and update the UI accordingly *@
+@*             $.ajax({ *@
+@*                 url: "/umbraco/api/productapi/getproductvariant", *@
+@*                 type: "POST", *@
+@*                 data: JSON.stringify(postData), *@
+@*                 contentType: "application/json; charset=utf-8", *@
+@*                 dataType: "json", *@
+@*                 success: function (data) { *@
+@*                     if (data) { *@
+@*                         $("[data-variant-price]").text(data.priceFormatted); *@
+@*                         $("[name=productVariantReference]").val(data.productVariantReference); *@
+@*                         $(".product-image").attr("src", data.imageUrl); *@
+@*                         $("#add-to-cart").prop('disabled', false).css({ opacity: 1 }); *@
+@*                     } else { *@
+@*                         $("[data-variant-price]").text("Unavailable"); *@
+@*                         $("[name=productVariantReference]").val(""); *@
+@*                         $(".product-image").attr("src", $(".product-image").data("defaultUrl")); *@
+@*                     } *@
+@*                 } *@
+@*             }); *@
+@* *@
+@*             return false; *@
+@*         } *@
+@* *@
+@*         // Update variant info on load *@
+@*         updateProductVariantInfo(); *@
+@* *@
+@*     </script> *@
+@* } *@
+@* *@
+@* <div class="py-3"> *@
+@*     @await Html.PartialAsync("_breadcrumbs") *@
+@* </div> *@
+@* *@
+@* <div class="container"> *@
+@*     <div class="row gx-lg-12"> *@
+@*         <div class="col-12 col-lg-6 mb-6 mb-lg-0"> *@
+@*             @if (Model.Images.Count() > 0) *@
+@*             { *@
+@*                 var mainImage = Model.Images.FirstOrDefault(); *@
+@*                 <img class="img-fluid img-curved img-curved--large" src="@mainImage.GetCropUrl(552, 552).ToString()" alt="@(mainImage.Value("altText") ?? "")" /> *@
+@*             } *@
+@*         </div> *@
+@*         <div class="col-12 col-lg-6"> *@
+@*              *@
+@*             @if (startDate != null && Model.StartDate > DateTime.Today && productType != "Products") *@
+@*             { *@
+@*                 <p class="mb-4 fs-sm"> *@
+@*                     @startDate *@
+@*                     @if (startDate != endDate) *@
+@*                     { *@
+@*                         <span>@endDate</span> *@
+@*                     } *@
+@*                     <text>&nbsp;&nbsp;</text> *@
+@*                     <span class="fw-bold">@startTime</span> *@
+@*                     @if (startTime != endTime) *@
+@*                     { *@
+@*                         <span class="fw-bold"> &ndash; @endTime</span> *@
+@*                     } *@
+@*                 </p> *@
+@*             } *@
+@* *@
+@*             @if (!String.IsNullOrEmpty(Model.Taxonomy)) *@
+@*             { *@
+@*                 <p class="d-inline-block mb-2 px-2 py-1 bg-light fw-semibold text-uppercase">@Model.Taxonomy</p> *@
+@*             } *@
+@* *@
+@*             @using (Html.BeginUmbracoForm("AddToCart", "CartSurface")) *@
+@*             { *@
+@*                 <h1 class="h3 mb-4">@Model.Name</h1> *@
+@*                 RenderVariants(store, Model, addedProductReference); *@
+@* *@
+@*                 <button id="add-to-cart" class="btn btn-primary mt-4 mb-6" type="submit">@(productType != "Products" ? "Register" : "Add to Card")</button> *@
+@*             } *@
+@* *@
+@*             @if (!String.IsNullOrEmpty(Model.LongDescription.ToString())) *@
+@*             { *@
+@*                 @Html.Raw(Model.LongDescription) *@
+@*             } *@
+@*         </div> *@
+@*     </div> *@
+@* *@
+@*     @if (!String.IsNullOrEmpty(Model.CourseInfo.ToString()) || !String.IsNullOrEmpty(Model.TrainingTakeaways.ToString()) || !String.IsNullOrEmpty(Model.CourseDetails.ToString()) || !String.IsNullOrEmpty(Model.MoreInfo.ToString())) *@
+@*     { *@
+@*         <div style="height: 64px;"></div> *@
+@* *@
+@*         <div class="tabs tabs--mobile-dropdown tabs--vertical js-tabs"> *@
+@*             <div class=""> *@
+@*                 <ul role="tablist" class="tabs__tabs-list"> *@
+@* *@
+@*                     @if (!String.IsNullOrEmpty(Model.CourseInfo.ToString())) *@
+@*                     { *@
+@*                         <li role="presentation"> *@
+@*                             <a id="tab-1" class="tabs__trigger js-tabs-trigger" href="#tab-section-1" role="tab" aria-controls="tab-section-1" aria-selected="false">Course Info</a> *@
+@*                         </li> *@
+@*                     } *@
+@*                     @if (!String.IsNullOrEmpty(Model.TrainingTakeaways.ToString())) *@
+@*                     { *@
+@*                         <li role="presentation"> *@
+@*                             <a id="tab-2" class="tabs__trigger js-tabs-trigger" href="#tab-section-2" role="tab" aria-controls="tab-section-2" aria-selected="false">Training Takeaways</a> *@
+@*                         </li> *@
+@*                     } *@
+@*                     @if (!String.IsNullOrEmpty(Model.CourseDetails.ToString())) *@
+@*                     { *@
+@*                         <li role="presentation"> *@
+@*                             <a id="tab-3" class="tabs__trigger js-tabs-trigger" href="#tab-section-3" role="tab" aria-controls="tab-section-3" aria-selected="false">Course Details</a> *@
+@*                         </li> *@
+@*                     } *@
+@*                     @if (!String.IsNullOrEmpty(Model.MoreInfo.ToString())) *@
+@*                     { *@
+@*                         <li role="presentation"> *@
+@*                             <a id="tab-4" class="tabs__trigger js-tabs-trigger" href="#tab-section-4" role="tab" aria-controls="tab-section-4" aria-selected="false">More @Model.Name Info</a> *@
+@*                         </li> *@
+@*                     } *@
+@*                 </ul> *@
+@*             </div> *@
+@*             <select class="tabs__dropdown js-tabs-dropdown" aria-label="Select a tab"> *@
+@*                 @if (!String.IsNullOrEmpty(Model.CourseInfo.ToString())) *@
+@*                 { *@
+@*                     <option value="#tab-section-1">Course Info</option> *@
+@*                 } *@
+@*                 @if (!String.IsNullOrEmpty(Model.TrainingTakeaways.ToString())) *@
+@*                 { *@
+@*                     <option value="#tab-section-2">Training Takeaways</option> *@
+@*                 } *@
+@*                 @if (!String.IsNullOrEmpty(Model.CourseDetails.ToString())) *@
+@*                 { *@
+@*                     <option value="#tab-section-3">Course Details</option> *@
+@*                 } *@
+@*                 @if (!String.IsNullOrEmpty(Model.MoreInfo.ToString())) *@
+@*                 { *@
+@*                     <option value="#tab-section-4">More @Model.Name Info</option> *@
+@*                 } *@
+@*             </select> *@
+@*             @if (!String.IsNullOrEmpty(Model.CourseInfo.ToString())) *@
+@*             { *@
+@*                 <section id="tab-section-1" class="tabs__panel px-4 js-tabs-panel" role="tabpanel" aria-labelledby="tab-1" tabindex="0"> *@
+@*                     <div class="tabs__accordion-trigger js-accordion-trigger" aria-controls="tab-section-1" aria-expanded="false" tabindex="0"></div> *@
+@*                     <div class="content" aria-hidden="true"> *@
+@*                         @Html.Raw(Model.CourseInfo) *@
+@*                     </div> *@
+@*                 </section> *@
+@*             } *@
+@*             @if (!String.IsNullOrEmpty(Model.TrainingTakeaways.ToString())) *@
+@*             { *@
+@*                 <section id="tab-section-2" class="tabs__panel px-4 js-tabs-panel" role="tabpanel" aria-labelledby="tab-2" tabindex="0"> *@
+@*                     <div class="tabs__accordion-trigger js-accordion-trigger" aria-controls="tab-section-2" aria-expanded="false" tabindex="0"></div> *@
+@*                     <div class="content" aria-hidden="true"> *@
+@*                         @Html.Raw(Model.TrainingTakeaways) *@
+@*                     </div> *@
+@*                 </section> *@
+@*             } *@
+@*             @if (!String.IsNullOrEmpty(Model.CourseDetails.ToString())) *@
+@*             { *@
+@*                 <section id="tab-section-3" class="tabs__panel px-4 js-tabs-panel" role="tabpanel" aria-labelledby="tab-3" tabindex="0"> *@
+@*                     <div class="tabs__accordion-trigger js-accordion-trigger" aria-controls="tab-section-3" aria-expanded="false" tabindex="0"></div> *@
+@*                     <div class="content" aria-hidden="true"> *@
+@*                         @Html.Raw(Model.CourseDetails) *@
+@*                     </div> *@
+@*                 </section> *@
+@*             } *@
+@*             @if (!String.IsNullOrEmpty(Model.MoreInfo.ToString())) *@
+@*             { *@
+@*                 <section id="tab-section-4" class="tabs__panel px-4 js-tabs-panel" role="tabpanel" aria-labelledby="tab-4" tabindex="0"> *@
+@*                     <div class="tabs__accordion-trigger js-accordion-trigger" aria-controls="tab-section-4" aria-expanded="false" tabindex="0"></div> *@
+@*                     <div class="content" aria-hidden="true"> *@
+@*                         @Html.Raw(Model.MoreInfo) *@
+@*                     </div> *@
+@*                 </section> *@
+@*             } *@
+@*         </div> *@
+@* *@
+@*     } *@
+@*     <div style="height: 96px;"></div> *@
+@* </div> *@
+@* *@
+@* *@
+@* *@
+@* @{ *@
+@*     void RenderVariants(StoreReadOnly store, ProductPage product, string addedProductReference) *@
+@*     { *@
+@*         var multiVariantProductPage = Model as MultiVariantProductPage; *@
+@* *@
+@*         if (multiVariantProductPage != null && multiVariantProductPage.Variants != null && multiVariantProductPage.Variants.Count > 0) *@
+@*         { *@
+@*             @Html.Hidden("productReference", Model.GetProductReference()) *@
+@*             @Html.Hidden("productVariantReference", "") *@
+@* *@
+@*             var attrs = multiVariantProductPage.Variants.GetInUseProductAttributes(); *@
+@* *@
+@*             foreach (var attr in attrs) *@
+@*             { *@
+@*                 <p class="mt-4">@(attr.Name)</p> *@
+@*                 <select class="w-full border border-gray-300 p-2 mt-1" data-attribute="@(attr.Alias)" data-attribute-name="@(attr.Name)" onchange="updateProductVariantInfo()"> *@
+@*                     @foreach (var val in attr.Values) *@
+@*                     { *@
+@*                         <!option value="@val.Alias">@(val.Name)</!option> *@
+@*                     } *@
+@*                 </select> *@
+@*             } *@
+@* *@
+@*             <p class="mt-4" data-variant-price></p> *@
+@*         } *@
+@*         else if (product.ChildVariants.Any()) *@
+@*         { *@
+@*             @* if (product.IsGiftCard) *@
+@*             { *@
+@*                 var selectedReference = addedProductReference ?? product.ChildVariants.FirstOrDefault()?.GetProductReference(); *@
+@* *@
+@*                 <div class="gift-cards flex justify-start space-x-2 mt-4"> *@
+@*                     @foreach (var variant in product.ChildVariants) *@
+@*                     { *@
+@*                         var productReference = variant.GetProductReference(); *@
+@* *@
+@*                         <span class="relative"> *@
+@*                             <input type="radio" class="form-radio absolute w-0 h-0" name="productReference" id="giftcard-@productReference" value="@productReference" @Html.Raw(selectedReference == productReference ? "checked=\"checked\"" : "") /> *@
+@*                             <label class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 cursor-pointer" for="giftcard-@productReference">@(variant.CalculatePrice()?.Formatted())</label> *@
+@*                         </span> *@
+@*                     } *@
+@*                 </div> *@
+@*             } *@
+@*             else *@
+@*             { *@ 
+@*             <select name="productReference" class="w-full border border-gray-300 p-2 mt-1"> *@
+@*                 @foreach (var variant in product.ChildVariants) *@
+@*                 { *@
+@*                     var productReference = variant.GetProductReference(); *@
+@* *@
+@*                     <!option value="@productReference" @Html.Raw(addedProductReference == productReference ? "selected=\" selected\"" : "" )>@(variant.Name) - @(variant.CalculatePrice()?.Formatted())</!option> *@
+@*                 } *@
+@*             </select> *@
+@*             $1$ } #1# *@
+@*         } *@
+@*         else *@
+@*         { *@
+@*             @Html.Hidden("productReference", product.GetProductReference()) *@
+@* *@
+@*             <p>@(product.CalculatePrice()?.Formatted())</p> *@
+@*         } *@
+@*     } *@
+@* } *@

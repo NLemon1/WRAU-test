@@ -182,7 +182,7 @@ public class WRAMemberManagementService
     /// <exception cref="InvalidOperationException"></exception>
     public async Task<(IdentityResult, MemberIdentityUser)> AddMember(RegisterModel model, string memberGroup = "Visitor")
     {
-        using ICoreScope scope = _coreScopeProvider.CreateCoreScope(autoComplete: true);
+        using var scope = _coreScopeProvider.CreateCoreScope(autoComplete: true);
 
 
         if (string.IsNullOrEmpty(model.Name) && string.IsNullOrEmpty(model.Email) == false)
@@ -195,26 +195,28 @@ public class WRAMemberManagementService
         var identityUser =
             MemberIdentityUser.CreateNew(model.Username, model.Email, model.MemberTypeAlias, true, model.Name);
 
-        IdentityResult identityResult = await _memberManager.CreateAsync(
-            identityUser, model.Password);
+        var identityResult = await _memberManager.CreateAsync(
+            identityUser);
+        
+        if (!identityResult.Succeeded) return (identityResult, identityUser);
+        
+        var passwordSetResult = _memberManager.AddPasswordAsync(identityUser, model.Password);
 
-        if (identityResult.Succeeded)
+        if (!identityResult.Succeeded && !passwordSetResult.Result.Succeeded) return (identityResult, identityUser);
+        
+        var member = _memberService.GetByKey(identityUser.Key);
+        if (member == null)
         {
 
-            IMember? member = _memberService.GetByKey(identityUser.Key);
-            if (member == null)
-            {
-
-                throw new InvalidOperationException($"Could not find a member with key: {member?.Key}.");
-            }
-
-            SetMemberProperties(model.MemberProperties, member);
-
-            //Before we save the member we make sure to assign the group, for this the "Group" must exist in the backoffice.
-            _memberService.AssignRole(model.Email, memberGroup);
-
-            _memberService.Save(member);
+            throw new InvalidOperationException($"Could not find a member with key: {member?.Key}.");
         }
+
+        SetMemberProperties(model.MemberProperties, member);
+
+        //Before we save the member we make sure to assign the group, for this the "Group" must exist in the backoffice.
+        _memberService.AssignRole(model.Email, memberGroup);
+
+        _memberService.Save(member);
 
         return (identityResult, identityUser);
     }

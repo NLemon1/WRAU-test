@@ -59,7 +59,7 @@ public class MemberRegisterController : SurfaceController
 
         MergeRouteValuesToModel(model);
 
-        IdentityResult result = await RegisterMemberAsync(model);
+        var result = await RegisterMemberAsync(model);
         if (result.Succeeded)
         {
             TempData["FormSuccess"] = true;
@@ -135,13 +135,13 @@ public class MemberRegisterController : SurfaceController
 
     private async Task<IdentityResult> RegisterMemberAsync(RegisterModel model, bool logMemberIn = true)
     {
-        var (result, user) = await _WRAMemberManagementService.AddMember(model);
+        var (identityResult,identityUser)= await _WRAMemberManagementService.AddMember(model);
 
-        if (logMemberIn)
+        if (logMemberIn && identityResult.Succeeded)
         {
-            await _memberSignInManager.SignInAsync(user, false);
+            await _memberSignInManager.SignInAsync(identityUser, false);
         }
-        return result;
+        return identityResult;
     }
 }
 

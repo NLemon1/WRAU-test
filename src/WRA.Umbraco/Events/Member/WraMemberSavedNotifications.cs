@@ -22,14 +22,16 @@ public class WraMemberNotifications : INotificationHandler<MemberSavedNotificati
 
     public async void Handle(MemberSavedNotification notification)
     {
+        if (notification == null) throw new ArgumentNullException(nameof(notification));
 
-        foreach (IMember memberNotif in notification.SavedEntities)
+        foreach (var memberNotif in notification.SavedEntities)
         {
             // convert to DTO
-            MemberDto member = memberNotif.AsDto();
+            var member = memberNotif.AsDto();
 
             // Write to the logs every time a member is saved.
-            _logger.LogInformation($"Member ({member.FullName}) has been saved and notification published! name: {member.FullName} WraID: {member.ExternalId} umbracoId: {member.UmbracoId} email: {member.Email}");
+            _logger.LogInformation("Member ({FullName}) has been saved and notification published! name: {FullName} WraID: {ExternalId} umbracoId: {UmbracoId} email: {Email}",
+                member.FullName, member.FullName, member.ExternalId, member.UmbracoId, member.Email);
 
             // we need to send passsword hash as well. 
             // WRA deserializes this and adds it to their system so that user do not have out of sync passwords

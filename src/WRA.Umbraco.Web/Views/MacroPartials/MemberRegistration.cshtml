@@ -1,17 +1,14 @@
 ﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
-
-@using Microsoft.AspNetCore.Http.Extensions
 @using Umbraco.Cms.Core
 @using Umbraco.Cms.Core.Security
-@using Umbraco.Cms.Web.Website.Controllers
 @using Umbraco.Cms.Web.Website.Models
-@using Umbraco.Extensions
 @using WRA.Umbraco.Controllers;
-@inject MemberModelBuilderFactory memberModelBuilderFactory;
-
+@inject MemberModelBuilderFactory MemberModelBuilderFactory;
+@inject IMemberManager MemberManager;
 @{
+    
     // Build a registration model with parameters
-    var registerModel = memberModelBuilderFactory
+    var registerModel = MemberModelBuilderFactory
     .CreateRegisterModel()
     // Set the member type alias to use for the new member
     .WithMemberTypeAlias(Constants.Conventions.MemberTypes.DefaultAlias)
@@ -25,6 +22,7 @@
     .WithAutomaticLogIn(true)
     .Build();
 
+    var currentMember = await MemberManager.GetCurrentMemberAsync();
     var success = TempData["FormSuccess"] != null;
 }
 
@@ -32,61 +30,65 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
 
-@if (success)
+@* Don't show anything if a member is already logged in. *@
+@if (currentMember == null)
 {
-    @* This message will show if registerModel.RedirectUrl is not defined (default) *@
-    <p class="text-success">Registration succeeded.</p>
-}
-else
-{
-    using (Html.BeginUmbracoForm<MemberRegisterController>("HandleRegisterMember", new {
-        MemberTypeAlias = registerModel.MemberTypeAlias,
-        UsernameIsEmail = registerModel.UsernameIsEmail,
-        RedirectUrl = registerModel.RedirectUrl,
-        AutomaticLogIn = registerModel.AutomaticLogIn
-    }))
+    @if (success)
     {
-        <div class="row">
-            <div class="col-12 col-md-6 col-lg-5">
-                <h1>Create Account</h1>
-                <div asp-validation-summary="All" class="text-danger"></div>
-                <div class="mb-3">
-                    <label asp-for="@registerModel.Name" class="form-label"></label>
-                    <input asp-for="@registerModel.Name" class="form-control" aria-required="true" />
-                    <span asp-validation-for="@registerModel.Name" class="form-text text-danger"></span>
-                </div>
-                <div class="mb-3">
-                    <label asp-for="@registerModel.Email" class="form-label"></label>
-                    <input asp-for="@registerModel.Email" class="form-control" autocomplete="username" aria-required="true" />
-                    <span asp-validation-for="@registerModel.Email" class="form-text text-danger"></span>
-                </div>
-                <div class="mb-3">
-                    <label asp-for="@registerModel.Password" class="form-label"></label>
-                    <input asp-for="@registerModel.Password" class="form-control" autocomplete="new-password" aria-required="true" />
-                    <span asp-validation-for="@registerModel.Password" class="form-text text-danger"></span>
-                </div>
-                <div class="mb-3">
-                    <label asp-for="@registerModel.ConfirmPassword" class="form-label"></label>
-                    <input asp-for="@registerModel.ConfirmPassword" class="form-control" autocomplete="new-password"
-                        aria-required="true" />
-                    <span asp-validation-for="@registerModel.ConfirmPassword" class="form-text text-danger"></span>
-                </div>
+        @* This message will show if registerModel.RedirectUrl is not defined (default) *@
+        <p class="text-success">Registration succeeded.</p>
+    }
+    else
+    {
+        using (Html.BeginUmbracoForm<MemberRegisterController>("HandleRegisterMember", new {
+            MemberTypeAlias = registerModel.MemberTypeAlias,
+            UsernameIsEmail = registerModel.UsernameIsEmail,
+            RedirectUrl = registerModel.RedirectUrl,
+            AutomaticLogIn = registerModel.AutomaticLogIn
+        }))
+        {
+            <div class="row">
+                <div class="col-12 col-md-6 col-lg-5">
+                    <h1>Create Account</h1>
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="mb-3">
+                        <label asp-for="@registerModel.Name" class="form-label"></label>
+                        <input asp-for="@registerModel.Name" class="form-control" aria-required="true" />
+                        <span asp-validation-for="@registerModel.Name" class="form-text text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="@registerModel.Email" class="form-label"></label>
+                        <input asp-for="@registerModel.Email" class="form-control" autocomplete="username" aria-required="true" />
+                        <span asp-validation-for="@registerModel.Email" class="form-text text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="@registerModel.Password" class="form-label"></label>
+                        <input asp-for="@registerModel.Password" class="form-control" autocomplete="new-password" aria-required="true" />
+                        <span asp-validation-for="@registerModel.Password" class="form-text text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="@registerModel.ConfirmPassword" class="form-label"></label>
+                        <input asp-for="@registerModel.ConfirmPassword" class="form-control" autocomplete="new-password"
+                            aria-required="true" />
+                        <span asp-validation-for="@registerModel.ConfirmPassword" class="form-text text-danger"></span>
+                    </div>
 
-                @if (registerModel.MemberProperties != null)
-                {
-                    for (var i = 0; i < registerModel.MemberProperties.Count; i++)
+                    @if (registerModel.MemberProperties != null)
                     {
-                        <div class="mb-3">
-                            @Html.LabelFor(m => registerModel.MemberProperties[i].Value, registerModel.MemberProperties[i].Name)
-                            <input asp-for="@registerModel.MemberProperties[i].Value" class="form-control" />
-                            @Html.HiddenFor(m => registerModel.MemberProperties[i].Alias)
-                            <span asp-validation-for="@registerModel.MemberProperties[i].Value" class="form-text text-danger"></span>
-                        </div>
+                        for (var i = 0; i < registerModel.MemberProperties.Count; i++)
+                        {
+                            <div class="mb-3">
+                                @Html.LabelFor(m => registerModel.MemberProperties[i].Value, registerModel.MemberProperties[i].Name)
+                                <input asp-for="@registerModel.MemberProperties[i].Value" class="form-control" />
+                                @Html.HiddenFor(m => registerModel.MemberProperties[i].Alias)
+                                <span asp-validation-for="@registerModel.MemberProperties[i].Value" class="form-text text-danger"></span>
+                            </div>
+                        }
                     }
-                }
 
-                <button type="submit" class="btn btn-primary">Register</button>
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </div>
             </div>
-        </div>
+        }
     }
 }

@@ -1,5 +1,4 @@
 ﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
-@using ContentModels = WRA.Umbraco.Models;
 
 @{
     IEnumerable<IPublishedContent> myWraNavItems = Model.SiblingsAndSelf().Where(x => x.IsVisible() && x.IsPublished());
@@ -19,6 +18,7 @@
                     }
                 </select>
             }
+            <a href="/" class="btn-mywra btn btn-close btn-sm mt-3 d-inline-block p-2" style="color: var(--bs-red)">Log Out</a>
         </div>
         <div class="d-none d-lg-block">
             @if (myWraNavItems.Any())
@@ -35,6 +35,5 @@
             <div class="border-top border-dark d-block w-100"></div>
             <a href="/" class="btn-mywra mt-3" style="color: var(--bs-red)">Log Out</a>
         </div>
-
     </div>
 </div>

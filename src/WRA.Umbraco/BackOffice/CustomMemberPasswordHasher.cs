@@ -28,8 +28,7 @@ public class CustomMemberPasswordHasher<Tuser> : UmbracoPasswordHasher<Tuser> wh
         try
         {
             // get salt
-            string saltStr;
-            saltStr = Guid.NewGuid().ToString().Replace("-", string.Empty);
+            var saltStr = Guid.NewGuid().ToString().Replace("-", string.Empty);
 
             byte[] salt = Encoding.UTF8.GetBytes(saltStr);
 
@@ -40,22 +39,20 @@ public class CustomMemberPasswordHasher<Tuser> : UmbracoPasswordHasher<Tuser> wh
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Error hashing password user email: {member.Email} - {ex.Message}");
+            _logger.LogError("Error hashing password user email: {Email} - {Message}", member.Email, ex.Message);
             throw ex;
         }
     }
 
     private void SetSaltPropertyOnMember(Tuser member, string salt)
     {
-        if (member?.Key != null && member?.Key != Guid.Empty)
-        {
-            var memberIdentity = _memberService.GetByKey(member.Key);
-            memberIdentity.SetValue("token", salt);
-            _memberService.Save(memberIdentity);
-        }
+        if (member?.Key == null || member?.Key == Guid.Empty) return;
+        var memberIdentity = _memberService.GetByKey(member.Key);
+        memberIdentity?.SetValue("token", salt);
+        if (memberIdentity != null) _memberService.Save(memberIdentity);
     }
 
-    private string HashPw(string password, byte[] salt)
+    private static string HashPw(string password, byte[] salt)
     {
         byte[] passByteArray = Encoding.UTF8.GetBytes(password);
         byte[] saltedHash = GenerateSaltedHash(passByteArray, salt);

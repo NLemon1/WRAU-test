@@ -2,8 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Umbraco.Cms.Core.Security;
 
-namespace WRA.Umbraco.Extensions
-{
+namespace WRA.Umbraco.UmbracoExtensions;
     public static class WraPasswordHashingBuilderExtension
     {
         public static IUmbracoBuilder AddWraPasswordHashing(this IUmbracoBuilder umbracoBuilder)
@@ -13,4 +12,3 @@ namespace WRA.Umbraco.Extensions
             return umbracoBuilder;
         }
     }
-}

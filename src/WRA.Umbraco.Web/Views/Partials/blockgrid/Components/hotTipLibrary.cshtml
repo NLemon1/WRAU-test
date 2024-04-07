@@ -62,7 +62,7 @@
                     @foreach (var subcategory in subcategories)
                     {
                         <div class="form-check py-2 border-bottom fs-sm">
-                            <!input id="subcategory-@subcategory.Id" class="form-check-input js-desktop-subcategory-filter" type="radio" name="hot-tip-subcategory" value="@subcategory.Name" @(selectedSubcategory == subcategory.Name ? "checked" : "")>
+                            <!input id="subcategory-@subcategory.Id" class="form-check-input js-desktop-subcategory-filter" type="radio" name="hot-tip-subcategory" value="@subcategory.Name" @(selectedSubcategory == subcategory.Name ? "checked" : "")/>
                             <label for="subcategory-@subcategory.Id" class="form-check-label">
                                 @subcategory.Name
                             </label>
