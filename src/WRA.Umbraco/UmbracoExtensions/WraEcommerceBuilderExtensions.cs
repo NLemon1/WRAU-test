@@ -1,15 +1,7 @@
-using Umbraco.Commerce.Core.Events.Notification;
-using Umbraco.Commerce.Cms.Extractors;
-using Umbraco.Commerce.Extensions;
-using Umbraco.Cms.Core.DependencyInjection;
-using Umbraco.Extensions;
-using Umbraco.Cms.Core.Notifications;
 using Umbraco.Commerce.Core.Adapters;
-using Umbraco.Commerce.Cms.Adapters;
-using WRA.Umbraco.Services;
-using WRA.Umbraco.Events;
+using Umbraco.Commerce.Extensions;
 
-namespace WRA.Umbraco.Extensions;
+namespace WRA.Umbraco.UmbracoExtensions;
 
 public static class WraEcommerceBuilderExtensions
 {

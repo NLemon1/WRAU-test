@@ -62,9 +62,8 @@ public class WRAProductManagementService : IProductManagementService
             using var _ = scope.Notifications.Suppress();
 
             // now we need the product's parent node to place these products under...
-            var collectionPages = siteRoot.Children
-                .Where(c => c.ContentType.Alias == ProductsPage.ModelTypeAlias)
-                .FirstOrDefault()?.Children
+            var collectionPages = (siteRoot?.Children)
+                .FirstOrDefault(c => c.ContentType.Alias == ProductsPage.ModelTypeAlias)?.Children
                 .Where(c => c.ContentType.Alias == CollectionPage.ModelTypeAlias);
 
 

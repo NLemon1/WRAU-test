@@ -1,10 +1,9 @@
 using WRA.Umbraco.Configurations;
 using WRA.Umbraco.Services;
-using WRA.Umbraco.Extensions;
 using WRA.Umbraco.Events.ServiceBusSubscriptions;
-using Umbraco.Commerce.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Umbraco.Cms.Core.Security;
+using WRA.Umbraco.UmbracoExtensions;
 
 namespace WRA.Umbraco.Web
 {

@@ -16,28 +16,17 @@ using WRA.Umbraco.Models;
 
 namespace WRA.Umbraco.Services;
 
-public class WraProductService
+public class WraProductService(
+    IUmbracoCommerceApi umbracoCommerceApi,
+    IProductService productService,
+    IUmbracoContextAccessor umbracoContextAccessor,
+    SearchService searchService)
 {
-    private readonly IUmbracoCommerceApi _commerceApi;
-    private readonly IProductService _productService;
-    private readonly IUmbracoContextAccessor _umbracoContextAccessor;
-    private readonly SearchService _searchService;
-
-    public WraProductService(
-        IUmbracoCommerceApi umbracoCommerceApi,
-        IProductService productService,
-        IUmbracoContextAccessor umbracoContextAccessor,
-        SearchService searchService)
-    {
-        _commerceApi = umbracoCommerceApi;
-        _productService = productService;
-        _umbracoContextAccessor = umbracoContextAccessor;
-        _searchService = searchService;
-    }
+    private readonly IProductService _productService = productService;
 
     public IEnumerable<ProductPage> GetProducts(ProductsRequestDto request)
     {
-        IEnumerable<ProductPage> products = _searchService.Search(ProductPage.ModelTypeAlias)
+        var products = searchService.Search(ProductPage.ModelTypeAlias)
             .Select(p => new ProductPage(p.Content, new NoopPublishedValueFallback()));
 
         // first, lets apply the product type filter
@@ -46,15 +35,15 @@ public class WraProductService
             products = products.Where(p => string.Equals(p.Collection.Name, request.ProductType, StringComparison.OrdinalIgnoreCase));
         }
         // now lets apply category and sub-category filters if they are requested
-        if (!string.IsNullOrEmpty(request.Category))
+        if (request.Categories.Any())
         {
             products = products
-                .Where(p => p.Categories.ContainsProductCategory(request.Category));
+                .Where(p => p.Categories.ContainsCategories(request.Categories));
         }
-        if (!string.IsNullOrEmpty(request.SubCategory))
+        if (request.SubCategories.Any())
         {
             products = products
-                .Where(p => p.SubCategories.ContainsProductCategory(request.SubCategory));
+                .Where(p => p.SubCategories.ContainsCategories(request.SubCategories));
         }
         // finally, lets apply a taxonmy filter if it is requested
         if (!string.IsNullOrEmpty(request.Taxonomy))
@@ -67,26 +56,26 @@ public class WraProductService
 
     public IEnumerable<BundlePage> GetProductBundles(ProductBundlesRequestDto request)
     {
-        IEnumerable<BundlePage> bundles = _searchService.SearchBySubCategory(request.SubCategory, BundlePage.ModelTypeAlias)
+        IEnumerable<BundlePage> bundles = searchService.SearchBySubCategory(request.SubCategory, BundlePage.ModelTypeAlias)
             .Select(p => new BundlePage(p.Content, new NoopPublishedValueFallback()));
         return bundles;
     }
     public IEnumerable<BundlePage> GetProductBundlesBySubCategory(Guid subCategoryUdi)
     {
         GuidUdi udi = new GuidUdi("document", subCategoryUdi);
-        return _searchService.SearchBySubCategory(udi, BundlePage.ModelTypeAlias)
+        return searchService.SearchBySubCategory(udi, BundlePage.ModelTypeAlias)
             .Select(p => new BundlePage(p.Content, new NoopPublishedValueFallback()));
     }
     public IEnumerable<ProductPage> GetProductsBySubCategory(Guid subCategoryUdi)
     {
         GuidUdi udi = new GuidUdi("document", subCategoryUdi);
-        return _searchService.SearchBySubCategory(udi, ProductPage.ModelTypeAlias)
+        return searchService.SearchBySubCategory(udi, ProductPage.ModelTypeAlias)
             .Select(p => new ProductPage(p.Content, new NoopPublishedValueFallback()));
     }
 
     public IEnumerable<TimeBasedDiscountDto?> GetTimeBasedDiscounts(IProductComp content)
     {
-        if (_umbracoContextAccessor.TryGetUmbracoContext(out IUmbracoContext? context) == false) { return null; }
+        if (umbracoContextAccessor.TryGetUmbracoContext(out IUmbracoContext? context) == false) { return null; }
 
         var product = content.AsProduct();
         if (product == null)
@@ -96,7 +85,7 @@ public class WraProductService
 
         // Get specific discount that holds the rules for "time based discounts"
         string timeBasedDiscountAlias = "timeBasedDiscount";
-        var TimeBasedDiscount = _commerceApi.GetDiscount(product.StoreId, timeBasedDiscountAlias);
+        var TimeBasedDiscount = umbracoCommerceApi.GetDiscount(product.StoreId, timeBasedDiscountAlias);
 
         if (TimeBasedDiscount == null || !TimeBasedDiscount.IsActive)
             return [];

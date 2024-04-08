@@ -19,29 +19,18 @@ namespace WRA.Umbraco.Controllers;
 
 [ApiController]
 [MapToApi("product-api")]
-public class ProductApiController : UmbracoApiController
+public class ProductApiController(
+    IProductService productService,
+    IPublishedContentQuery publishedContentQuery,
+    SearchService searchService,
+    WraProductService wraProductService)
+    : UmbracoApiController
 {
-    private readonly IProductService _productService;
-    private readonly WraProductService _wraProductService;
-    private readonly IPublishedContentQuery _publishedContentQuery;
-    private readonly SearchService _searchService;
-
-    public ProductApiController(IProductService productService,
-        IPublishedContentQuery publishedContentQuery,
-        SearchService searchService,
-        WraProductService wraProductService)
-    {
-        _productService = productService;
-        _publishedContentQuery = publishedContentQuery;
-        _searchService = searchService;
-        _wraProductService = wraProductService;
-    }
-
     [HttpPost]
     [Route("GetProducts")]
     public IEnumerable<ProductPageResponseDto> GetProducts([FromBody] ProductsRequestDto request)
     {
-        var products = _wraProductService.GetProducts(request);
+        var products = wraProductService.GetProducts(request);
         var responseItems = products.Select(p => p.AsDto());
         return responseItems;
 
@@ -53,7 +42,7 @@ public class ProductApiController : UmbracoApiController
     public object GetProductVariant([FromBody] GetProductVariantDto model)
     {
         // Get the variants for the given node
-        var productNode = _publishedContentQuery.Content(model.ProductNodeId) as MultiVariantProductPage;
+        var productNode = publishedContentQuery.Content(model.ProductNodeId) as MultiVariantProductPage;
         if (productNode == null)
             return null;
 
@@ -67,7 +56,7 @@ public class ProductApiController : UmbracoApiController
         if (variant != null)
         {
             // Convert variant into product snapshot
-            var snapshot = _productService.GetProduct(store.Id, productNode.Key.ToString(), variant.Content.Key.ToString(), Thread.CurrentThread.CurrentCulture.Name);
+            var snapshot = productService.GetProduct(store.Id, productNode.Key.ToString(), variant.Content.Key.ToString(), Thread.CurrentThread.CurrentCulture.Name);
             if (snapshot != null)
             {
                 var multiVariantContent = variant.Content as ProductMultiVariant;

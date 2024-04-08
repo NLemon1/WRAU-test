@@ -310,6 +310,15 @@ namespace WRA.Umbraco
             }
 
             return false;
+        }  public static bool ContainsCategories(this IEnumerable<IPublishedContent>? content, List<string> category)
+        {
+            if (content != null && content.Any())
+            {
+                return category.Any(cat => 
+                    content.Any(c => c.Name.Equals(cat, StringComparison.OrdinalIgnoreCase)));
+            }
+
+            return false;
         }
 
         public static Price CalculatePrice(this IProductComp content)

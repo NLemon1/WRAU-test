@@ -1,5 +1,6 @@
 using Umbraco.Cms.Core.Notifications;
 using WRA.Umbraco.Events;
+namespace WRA.Umbraco.UmbracoExtensions;
 
 public static class UmbracoBuilderNotificationExtensions
 {
