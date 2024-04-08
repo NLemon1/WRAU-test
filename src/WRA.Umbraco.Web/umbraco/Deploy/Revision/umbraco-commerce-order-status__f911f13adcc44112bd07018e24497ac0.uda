@@ -12,5 +12,5 @@
     }
   ],
   "__type": "Umbraco.Commerce.Deploy,Umbraco.Commerce.Deploy.Artifacts.OrderStatusArtifact",
-  "__version": "13.0.4"
+  "__version": "13.1.0"
 }
