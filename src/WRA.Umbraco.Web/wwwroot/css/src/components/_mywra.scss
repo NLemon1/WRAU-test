@@ -91,3 +91,24 @@
     }
 
 }
+
+/*body {
+    overflow: hidden;
+}*/
+
+.mywra-tab__panel {
+    border: solid 1px red;
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    background-color: #FFF;
+    overflow: auto;
+    z-index: 9;
+    width: 100%;
+    height: calc(100% - var(--header-height));
+    padding-bottom: 3rem;
+
+    &[aria-hidden="true"] {
+        display: none;
+    }
+}

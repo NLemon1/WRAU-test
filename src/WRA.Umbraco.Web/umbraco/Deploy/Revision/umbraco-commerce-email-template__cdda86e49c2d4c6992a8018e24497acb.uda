@@ -19,5 +19,5 @@
     }
   ],
   "__type": "Umbraco.Commerce.Deploy,Umbraco.Commerce.Deploy.Artifacts.EmailTemplateArtifact",
-  "__version": "13.1.0"
+  "__version": "13.0.4"
 }

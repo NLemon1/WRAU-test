@@ -22,5 +22,5 @@
     }
   ],
   "__type": "Umbraco.Commerce.Deploy,Umbraco.Commerce.Deploy.Artifacts.CountryArtifact",
-  "__version": "13.1.0"
+  "__version": "13.0.4"
 }

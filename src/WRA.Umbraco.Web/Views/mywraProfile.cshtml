@@ -16,291 +16,349 @@
 
         <div class="col position-relative">
             @await Html.PartialAsync("_mywraHeader", new ViewDataDictionary(this.ViewData) { { "isMobile", false } })
+
             <div class="mywra-right container container--md ms-0 pt-5 pt-lg-11">
+                
+                <div class="pb-2 pb-lg-4 position-relative">
 
-                <div class="w-100 px-2 border border-medium rounded mb-5">
-                    <div class="px-2_5 d-flex flex-column g-4">
-                        <a href="/" class="w-100 py-3 text-body fw-bold text-decoration-none border-bottom border-medium d-flex flex-row align-items-center justify-content-between">
-                            <span>tab</span>
-                            <i class="fas fa-chevron-right" style="color: var(--bs-primary)"></i>
-                        </a>
-                        <a href="/" class="w-100 py-3 text-body fw-bold text-decoration-none border-bottom border-medium d-flex flex-row align-items-center justify-content-between">
-                            <span>tab</span>
-                            <i class="fas fa-chevron-right" style="color: var(--bs-primary)"></i>
-                        </a>
-                        <a href="/" class="w-100 py-3 text-body fw-bold text-decoration-none border-bottom border-medium d-flex flex-row align-items-center justify-content-between">
-                            <span>tab</span>
-                            <i class="fas fa-chevron-right" style="color: var(--bs-primary)"></i>
-                        </a>
-                        <a href="/" class="w-100 py-3 text-body fw-bold text-decoration-none d-flex flex-row align-items-center justify-content-between">
-                            <span>tab</span>
-                            <i class="fas fa-chevron-right" style="color: var(--bs-primary)"></i>
-                        </a>
+
+                    <div class="w-100 px-2 border border-medium rounded mb-5">
+                        <div class="px-2_5 d-flex flex-column g-4">
+                            <a id="tab-personal-information" href="#tabpanel-personal-information" role="tab" aria-selected="false" aria-controls="tabpanel-personal-information" class="js-page-tab w-100 py-3 text-body fw-bold text-decoration-none border-bottom border-medium d-flex flex-row align-items-center justify-content-between">
+                                <span>Personal Information</span>
+                                <i class="fas fa-chevron-right" style="color: var(--bs-primary)"></i>
+                            </a>
+                            <a id="tab-committees" href="#tabpanel-committees" role="tab" aria-selected="false" aria-controls="tabpanel-committees" class="js-page-tab w-100 py-3 text-body fw-bold text-decoration-none border-bottom border-medium d-flex flex-row align-items-center justify-content-between">
+                                <span>Committees</span>
+                                <i class="fas fa-chevron-right" style="color: var(--bs-primary)"></i>
+                            </a>
+                            <a id="tab-donor-status" href="#tabpanel-donor-status" role="tab" aria-selected="false" aria-controls="tabpanel-donor-status" class="js-page-tab w-100 py-3 text-body fw-bold text-decoration-none border-bottom border-medium d-flex flex-row align-items-center justify-content-between">
+                                <span>RPAC & Direct Giver Donor Status</span>
+                                <i class="fas fa-chevron-right" style="color: var(--bs-primary)"></i>
+                            </a>
+                            <a id="tab-donor-subscriptions" href="tabpanel-subscriptions" role="tab" aria-selected="false" aria-controls="tabpanel-subscriptions" class="js-page-tab w-100 py-3 text-body fw-bold text-decoration-none d-flex flex-row align-items-center justify-content-between">
+                                <span>Subscription Preferences</span>
+                                <i class="fas fa-chevron-right" style="color: var(--bs-primary)"></i>
+                            </a>
+                        </div>
                     </div>
-                </div>
 
 
-                <div class="pb-2 pb-lg-4">
-
-                    <!-- TREATING FOLLOWING SECTIONS AS TABS -->
 
                     <!-- PERSONAL INFORMATION TAB -->
+                    <div id="tabpanel-personal-information" tabindex="0" role="tabpanel" aria-labelledby="tab-personal-information" class="js-tabs-panel mywra-tab__panel" aria-hidden="true">
+                        <div class="w-100 h-100">
+                            <div class="row g-0 h-100">
+                                <div class="col-12 col-lg-3" style="background-color: var(--bs-gray-10)">
+                                    <div class="mywra-left px-4 pb-6 pt-5 pt-lg-11">
+                                        <button class="outline-0 border-0 text-link fw-bold text-decoration-none"><i class="fa-solid fa-chevron-left"></i> <span class="fs-lg ps-2">Profile</span></button>
+                                    </div>
+                                </div>
+                                <div class="col position-relative">
+                                    <div class="mywra-right container container--md ms-0 pt-5 pt-lg-11">
 
-                    @if (!String.IsNullOrEmpty(content.PersonalInformationHeadline))
-                    {
-                        <h1 class="h2">@content.PersonalInformationHeadline</h1>
-                    }
+                                        @if (!String.IsNullOrEmpty(content.PersonalInformationHeadline))
+                                        {
+                                            <h1 class="h2">@content.PersonalInformationHeadline</h1>
+                                        }
 
-                    @if (!String.IsNullOrEmpty(content.PersonalInformationIntroContent.ToString()))
-                    {
-                        <div class="rich-text mb-5">
-                            @Html.Raw(content.PersonalInformationIntroContent)
+                                        @if (!String.IsNullOrEmpty(content.PersonalInformationIntroContent.ToString()))
+                                        {
+                                            <div class="rich-text mb-5">
+                                                @Html.Raw(content.PersonalInformationIntroContent)
+                                            </div>
+                                        }
+
+                                        <h3 class="h5 mb-2">Information</h3>
+                                        <div class="w-100 border border-medium rounded mb-5">
+                                            <table class="table-info w-100 fs-sm">
+                                                <thead class="visually-hidden">
+                                                    <tr>
+                                                        <th>Item</th>
+                                                        <th>Value</th>
+                                                        <th>Edit</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody style="color: var(--bs-gray-30)">
+                                                    @for (var i = 1; i < 5; i++)
+                                                    {
+                                                        <tr class="">
+                                                            <td class="py-2">
+                                                                Lorem ipsum dolor @i
+                                                            </td>
+                                                            <td class="py-2 text-body">
+                                                                At eget vulputate sapien duis curabitur
+                                                            </td>
+                                                            <td class="py-2 text-end">
+                                                                <button class="text-link border-0 bg-transparent px-2 py-2">
+                                                                    Edit
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        <h3 class="h5 mb-2">Settings</h3>
+                                        <div class="w-100 border border-medium rounded mb-5">
+                                            <table class="table-info w-100 fs-sm">
+                                                <thead class="visually-hidden">
+                                                    <tr>
+                                                        <th>Item</th>
+                                                        <th>Value</th>
+                                                        <th>Edit</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody style="color: var(--bs-gray-30)">
+                                                    @for (var i = 1; i < 7; i++)
+                                                    {
+                                                        <tr class="">
+                                                            <td class="py-2">
+                                                                Lorem ipsum dolor @i
+                                                            </td>
+                                                            <td class="py-2 text-body">
+                                                                At eget vulputate sapien duis curabitur
+                                                            </td>
+                                                            <td class="py-2 text-end">
+                                                                <button class="text-link border-0 bg-transparent px-2 py-2">
+                                                                    Edit
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    }
+                    </div> 
 
-                    <h3 class="h5 mb-2">Information</h3>
-                    <div class="w-100 border border-medium rounded mb-5">
-                        <table class="table-info w-100 fs-sm">
-                            <thead class="visually-hidden">
-                                <tr>
-                                    <th>Item</th>
-                                    <th>Value</th>
-                                    <th>Edit</th>
-                                </tr>
-                            </thead>
-                            <tbody style="color: var(--bs-gray-30)">
-                                @for (var i = 1; i < 5; i++)
-                                {
-                                    <tr class="">
-                                        <td class="py-2">
-                                            Lorem ipsum dolor @i
-                                        </td>
-                                        <td class="py-2 text-body">
-                                            At eget vulputate sapien duis curabitur
-                                        </td>
-                                        <td class="py-2 text-end">
-                                            <button class="text-link border-0 bg-transparent px-2 py-2">
-                                                Edit
-                                            </button>
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <h3 class="h5 mb-2">Settings</h3>
-                    <div class="w-100 border border-medium rounded mb-5">
-                        <table class="table-info w-100 fs-sm">
-                            <thead class="visually-hidden">
-                                <tr>
-                                    <th>Item</th>
-                                    <th>Value</th>
-                                    <th>Edit</th>
-                                </tr>
-                            </thead>
-                            <tbody style="color: var(--bs-gray-30)">
-                                @for (var i = 1; i < 7; i++)
-                                {
-                                    <tr class="">
-                                        <td class="py-2">
-                                            Lorem ipsum dolor @i
-                                        </td>
-                                        <td class="py-2 text-body">
-                                            At eget vulputate sapien duis curabitur
-                                        </td>
-                                        <td class="py-2 text-end">
-                                            <button class="text-link border-0 bg-transparent px-2 py-2">
-                                                Edit
-                                            </button>
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
 
 
                     <!-- COMMITTEES TAB -->
-
-                    @if (!String.IsNullOrEmpty(content.CommitteesHeadline))
-                    {
-                        <h2 class="h2">@content.CommitteesHeadline</h2>
-                    }
-
-                    @if (!String.IsNullOrEmpty(content.CommitteesIntroContent.ToString()))
-                    {
-                        <div class="rich-text mb-5">
-                            @Html.Raw(content.CommitteesIntroContent)
-                        </div>
-                    }
-
-
-                    <!-- CONTRIBUTIONS TAB -->
-
-                    @if (!String.IsNullOrEmpty(content.ContributionsHeadline))
-                    {
-                        <h2 class="h2">@content.ContributionsHeadline</h2>
-                    }
-
-                    @if (!String.IsNullOrEmpty(content.ContributionsIntroContent.ToString()))
-                    {
-                        <div class="rich-text mb-5">
-                            @Html.Raw(content.ContributionsIntroContent)
-                        </div>
-                    }
-
-                    <div class="border border-medium p-4 rounded mb-3">
-                        <h4 class="h6 mb-4 fs-lg">
-                            Make a Contribution
-                        </h4>
-                        <div class="d-flex flex-row gap-3">
-                            <a href="/" class="btn btn-primary">Contribute To RPAC</a>
-                            <a href="/" class="btn btn-primary">Contribute To Direct Giver</a>
-                        </div>
-                    </div>
-                    <div class="border border-medium p-4 rounded mb-3">
-                        <h4 class="h6 mb-4 fs-lg">
-                            Contribution History
-                        </h4>
-
-                        <table class="table-info w-100 fs-sm">
-                            <thead>
-                                <tr>
-                                    <th>Year</th>
-                                    <th>RPAC</th>
-                                    <th>Direct Giver</th>
-                                    <th>NARLIFE</th>
-                                </tr>
-                            </thead>
-                            <tbody style="color: var(--bs-gray-30)" class="text-body">
-                                @for (var i = 1; i < 6; i++)
-                                {
-                                    <tr class="">
-                                        <td class="py-2">
-                                            202@(i)
-                                        </td>
-                                        <td class="py-2">
-                                            $100.00
-                                        </td>
-                                        <td class="py-2">
-                                            $50.00
-                                        </td>
-                                        <td class="py-2">
-                                            $20.00
-                                        </td>
-                                    </tr>
-                                }
-                                <tr class="fw-bold">
-                                    <td class="py-2">
-                                        Total
-                                    </td>
-                                    <td class="py-2">
-                                        $200.00
-                                    </td>
-                                    <td class="py-2">
-                                        $150.00
-                                    </td>
-                                    <td class="py-2">
-                                        $60.00
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-
-
-                    <!-- SUBSCRIPTIONS TAB -->
-
-                    @if (!String.IsNullOrEmpty(content.SubscriptionsHeadline))
-                    {
-                        <h2 class="h2">@content.SubscriptionsHeadline</h2>
-                    }
-
-                    @if (!String.IsNullOrEmpty(content.SubscriptionsIntroContent.ToString()))
-                    {
-                        <div class="rich-text mb-5">
-                            @Html.Raw(content.SubscriptionsIntroContent)
-                        </div>
-                    }
-
-                    <h3 class="h5">Inman Select</h3>
-
-                    <div class="border border-medium p-4 rounded mb-5">
-                        <h4 class="h6 mb-4 fs-lg">
-                            Free Inman Select Membership Sign Up
-                        </h4>
-                        <div class="rich-text">
-                            The WRA's partnership with Inman News gives you access to exclusive news, in-depth reporting and thorough analysis with Inman Select. Inman Select gives you everything you need to know to be smarter about real estate, such as daily news, award-winning commentary, special reports, webinars and more. With Inman Select, you're connected to the latest news, relevant insights, and a community of real estate leaders.
-                        </div>
-                        <a href="/" class="btn btn-primary">Sign up for Inman Select</a>
-                    </div>
-
-                    <!-- Text Box Field -->
-                    <h4 class="h5">Wisconsin Real Estate Magazine</h4>
-                    <div class="border border-medium p-4 rounded mb-5">
-                        <!-- Text Box Field -->
-                        <h4 class="h6 mb-4 fs-lg">
-                            myWRA Wisconsin Real Estate Magazine Delivery Preferences
-                        </h4>
-                        <!-- Rich Text Field -->
-                        <div class="rich-text">
-                            Select how you would like to receive Wisconsin Real Estate Magazine.
-                        </div>
-                        <div class="form-group">
-                            <div class="d-flex flex-row mb-3">
-                                <input id="wranews" class="form-check-input" type="checkbox">
-                                <div class="ps-2">
-                                    <label for="wranews" class="form-check-label fw-bold">WRA News Email</label>
-                                    <p>Receive the WRA Real Estate News weekly email notifying you when the magazine is online.</p>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-row">
-                                <input id="wranews" class="form-check-input" type="checkbox">
-                                <div class="ps-2">
-                                    <label for="wranews" class="form-check-label fw-bold">WRA News Email</label>
-                                    <p>Receive the WRA Real Estate News weekly email notifying you when the magazine is online.</p>
-                                </div>
-                            </div>
-                            <button class="btn btn-primary btn-sm mt-3">Save Preferences</button>
-                        </div>
-                    </div>
-
-                    <!-- Text Box Field -->
-                    <h4 class="h5">Email Newsletters</h4>
-                    <div class="border border-medium p-4 rounded mb-5">
-                        <!-- Text Box Field -->
-                        <h4 class="h6 mb-4 fs-lg">
-                            myWRA Email Delivery Preferences
-                        </h4>
-                        <!-- Rich Text Field -->
-                        <div class="rich-text">
-                            Select e-mails from the list below that you wish to receive. You will not receive emails that are not selected.
-                        </div>
-                        <div class="form-group">
-                            @for (var i = 1; i < 8; i++)
-                            {
-                                <div class="d-flex flex-row mb-3">
-                                    <input id="email@(i)" class="form-check-input" type="checkbox">
-                                    <div class="ps-2">
-                                        <label for="email@(i)" class="form-check-label fw-bold">Lorem Ipsum (weekly)</label>
-                                        <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                        <p><a href="/">See Sample</a></p>
+                    <div id="tabpanel-committees" tabindex="0" role="tabpanel" aria-labelledby="tab-committees" class="js-tabs-panel mywra-tab__panel" aria-hidden="true">
+                        <div class="w-100 h-100">
+                            <div class="row g-0 h-100">
+                                <div class="col-12 col-lg-3" style="background-color: var(--bs-gray-10)">
+                                    <div class="mywra-left px-4 pb-6 pt-5 pt-lg-11">
+                                        <button class="outline-0 border-0 text-link fw-bold text-decoration-none"><i class="fa-solid fa-chevron-left"></i> <span class="fs-lg ps-2">Profile</span></button>
                                     </div>
                                 </div>
-                            }
-                            <button class="btn btn-primary btn-sm mt-3">Save Preferences</button>
+                                <div class="col position-relative">
+                                    <div class="mywra-right container container--md ms-0 pt-5 pt-lg-11">
+                                        @if (!String.IsNullOrEmpty(content.CommitteesHeadline))
+                                        {
+                                            <h2 class="h2">@content.CommitteesHeadline</h2>
+                                        }
+
+                                        @if (!String.IsNullOrEmpty(content.CommitteesIntroContent.ToString()))
+                                        {
+                                            <div class="rich-text mb-5">
+                                                @Html.Raw(content.CommitteesIntroContent)
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
+                   
+   
+                    <!-- CONTRIBUTIONS TAB -->
+                    <div id="tabpanel-donor-status" tabindex="0" role="tabpanel" aria-labelledby="tab-donor-status" class="js-tabs-panel mywra-tab__panel" aria-hidden="true">
+                        <div class="w-100 h-100">
+                            <div class="row g-0 h-100">
+                                <div class="col-12 col-lg-3" style="background-color: var(--bs-gray-10)">
+                                    <div class="mywra-left px-4 pb-6 pt-5 pt-lg-11">
+                                        <button class="outline-0 border-0 text-link fw-bold text-decoration-none"><i class="fa-solid fa-chevron-left"></i> <span class="fs-lg ps-2">Profile</span></button>
+                                    </div>
+                                </div>
+                                <div class="col position-relative">
+                                    <div class="mywra-right container container--md ms-0 pt-5 pt-lg-11">
 
+                                        @if (!String.IsNullOrEmpty(content.ContributionsHeadline))
+                                        {
+                                            <h2 class="h2">@content.ContributionsHeadline</h2>
+                                        }
 
+                                        @if (!String.IsNullOrEmpty(content.ContributionsIntroContent.ToString()))
+                                        {
+                                            <div class="rich-text mb-5">
+                                                @Html.Raw(content.ContributionsIntroContent)
+                                            </div>
+                                        }
 
+                                        <div class="border border-medium p-4 rounded mb-3">
+                                            <h4 class="h6 mb-4 fs-lg">
+                                                Make a Contribution
+                                            </h4>
+                                            <div class="d-flex flex-row gap-3">
+                                                <a href="/" class="btn btn-primary">Contribute To RPAC</a>
+                                                <a href="/" class="btn btn-primary">Contribute To Direct Giver</a>
+                                            </div>
+                                        </div>
+                                        <div class="border border-medium p-4 rounded mb-3">
+                                            <h4 class="h6 mb-4 fs-lg">
+                                                Contribution History
+                                            </h4>
+
+                                            <table class="table-info w-100 fs-sm">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Year</th>
+                                                        <th>RPAC</th>
+                                                        <th>Direct Giver</th>
+                                                        <th>NARLIFE</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody style="color: var(--bs-gray-30)" class="text-body">
+                                                    @for (var i = 1; i < 6; i++)
+                                                    {
+                                                        <tr class="">
+                                                            <td class="py-2">
+                                                                202@(i)
+                                                            </td>
+                                                            <td class="py-2">
+                                                                $100.00
+                                                            </td>
+                                                            <td class="py-2">
+                                                                $50.00
+                                                            </td>
+                                                            <td class="py-2">
+                                                                $20.00
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                    <tr class="fw-bold">
+                                                        <td class="py-2">
+                                                            Total
+                                                        </td>
+                                                        <td class="py-2">
+                                                            $200.00
+                                                        </td>
+                                                        <td class="py-2">
+                                                            $150.00
+                                                        </td>
+                                                        <td class="py-2">
+                                                            $60.00
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                  
+                    <!-- SUBSCRIPTIONS TAB -->
+                    <div id="tabpanel-subscriptions" tabindex="0" role="tabpanel" aria-labelledby="tab-subscriptions" class="js-tabs-panel mywra-tab__panel" aria-hidden="true">
+                        <div class="w-100 h-100">
+                            <div class="row g-0 h-100">
+                                <div class="col-12 col-lg-3" style="background-color: var(--bs-gray-10)">
+                                    <div class="mywra-left px-4 pb-6 pt-5 pt-lg-11">
+                                        <button class="outline-0 border-0 text-link fw-bold text-decoration-none"><i class="fa-solid fa-chevron-left"></i> <span class="fs-lg ps-2">Profile</span></button>
+                                    </div>
+                                </div>
+                                <div class="col position-relative">
+                                    <div class="mywra-right container container--md ms-0 pt-5 pt-lg-11">
+
+                                        @if (!String.IsNullOrEmpty(content.SubscriptionsHeadline))
+                                        {
+                                            <h2 class="h2">@content.SubscriptionsHeadline</h2>
+                                        }
+
+                                        @if (!String.IsNullOrEmpty(content.SubscriptionsIntroContent.ToString()))
+                                        {
+                                            <div class="rich-text mb-5">
+                                                @Html.Raw(content.SubscriptionsIntroContent)
+                                            </div>
+                                        }
+
+                                        <h3 class="h5">Inman Select</h3>
+
+                                        <div class="border border-medium p-4 rounded mb-5">
+                                            <h4 class="h6 mb-4 fs-lg">
+                                                Free Inman Select Membership Sign Up
+                                            </h4>
+                                            <div class="rich-text">
+                                                The WRA's partnership with Inman News gives you access to exclusive news, in-depth reporting and thorough analysis with Inman Select. Inman Select gives you everything you need to know to be smarter about real estate, such as daily news, award-winning commentary, special reports, webinars and more. With Inman Select, you're connected to the latest news, relevant insights, and a community of real estate leaders.
+                                            </div>
+                                            <a href="/" class="btn btn-primary">Sign up for Inman Select</a>
+                                        </div>
+
+                                        <!-- Text Box Field -->
+                                        <h4 class="h5">Wisconsin Real Estate Magazine</h4>
+                                        <div class="border border-medium p-4 rounded mb-5">
+                                            <!-- Text Box Field -->
+                                            <h4 class="h6 mb-4 fs-lg">
+                                                myWRA Wisconsin Real Estate Magazine Delivery Preferences
+                                            </h4>
+                                            <!-- Rich Text Field -->
+                                            <div class="rich-text">
+                                                Select how you would like to receive Wisconsin Real Estate Magazine.
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="d-flex flex-row mb-3">
+                                                    <input id="wranews" class="form-check-input" type="checkbox">
+                                                    <div class="ps-2">
+                                                        <label for="wranews" class="form-check-label fw-bold">WRA News Email</label>
+                                                        <p>Receive the WRA Real Estate News weekly email notifying you when the magazine is online.</p>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex flex-row">
+                                                    <input id="wranews" class="form-check-input" type="checkbox">
+                                                    <div class="ps-2">
+                                                        <label for="wranews" class="form-check-label fw-bold">WRA News Email</label>
+                                                        <p>Receive the WRA Real Estate News weekly email notifying you when the magazine is online.</p>
+                                                    </div>
+                                                </div>
+                                                <button class="btn btn-primary btn-sm mt-3">Save Preferences</button>
+                                            </div>
+                                        </div>
+
+                                        <!-- Text Box Field -->
+                                        <h4 class="h5">Email Newsletters</h4>
+                                        <div class="border border-medium p-4 rounded mb-5">
+                                            <!-- Text Box Field -->
+                                            <h4 class="h6 mb-4 fs-lg">
+                                                myWRA Email Delivery Preferences
+                                            </h4>
+                                            <!-- Rich Text Field -->
+                                            <div class="rich-text">
+                                                Select e-mails from the list below that you wish to receive. You will not receive emails that are not selected.
+                                            </div>
+                                            <div class="form-group">
+                                                @for (var i = 1; i < 8; i++)
+                                                {
+                                                    <div class="d-flex flex-row mb-3">
+                                                        <input id="email@(i)" class="form-check-input" type="checkbox">
+                                                        <div class="ps-2">
+                                                            <label for="email@(i)" class="form-check-label fw-bold">Lorem Ipsum (weekly)</label>
+                                                            <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                                            <p><a href="/">See Sample</a></p>
+                                                        </div>
+                                                    </div>
+                                                }
+                                                <button class="btn btn-primary btn-sm mt-3">Save Preferences</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+ 
 
                 </div>
-
-
             </div>
         </div>
     </div>

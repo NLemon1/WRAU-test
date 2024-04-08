@@ -18,6 +18,7 @@ import courseSearch from './components/course-search';
 import bundles from './components/bundles';
 import popModal from './components/popmodal';
 import print from './components/print';
+import pageTabs from './components/page-tabs';
 
 expandableTextCards();
 header();
@@ -53,3 +54,7 @@ if (document.body.classList.contains("page-template-bundlePage")) {
 }
 
 print();
+
+if (document.querySelector(".js-page-tab")) {
+    pageTabs();
+}
