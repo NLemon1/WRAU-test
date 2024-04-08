@@ -14,7 +14,7 @@
        
         @await Html.PartialAsync("_mywraNav", Model)
 
-        <div class="col position-relative">
+        <div class="col position-relative pb-5">
             @await Html.PartialAsync("_mywraHeader", new ViewDataDictionary(this.ViewData) { { "isMobile", false } })
 
             <div class="mywra-right container container--md ms-0 pt-5 pt-lg-11">
@@ -33,11 +33,11 @@
 
                 <div class="w-100 px-2 border border-medium rounded mb-5">
                     <div class="px-2_5 d-flex flex-column g-4">
-                        <a href="/" class="w-100 py-3 text-body fw-bold text-decoration-none border-bottom border-medium d-flex flex-row align-items-center justify-content-between">
+                        <a id="tab-pay-dues" href="#tabpanel-pay-dues" role="tab" aria-selected="false" aria-controls="tabpanel-pay-dues" class="js-page-tab w-100 py-3 text-body fw-bold text-decoration-none border-bottom border-medium d-flex flex-row align-items-center justify-content-between">
                             <span>Pay Dues</span>
                             <i class="fas fa-chevron-right" style="color: var(--bs-primary)"></i>
                         </a>
-                        <a href="/" class="w-100 py-3 text-body fw-bold text-decoration-none d-flex flex-row align-items-center justify-content-between">
+                        <a id="tab-dues-history" href="#tabpanel-dues-history" role="tab" aria-selected="false" aria-controls="tabpanel-dues-history" class="js-page-tab w-100 py-3 text-body fw-bold text-decoration-none border-bottom border-medium d-flex flex-row align-items-center justify-content-between">
                             <span>Dues History</span>
                             <i class="fas fa-chevron-right" style="color: var(--bs-primary)"></i>
                         </a>
@@ -45,213 +45,235 @@
                 </div>
 
 
-
-                <!-- TREATING FOLLOWING SECTIONS AS TABS -->
-
-
-
                 <!-- PAY DUES TAB -->
+                <div id="tabpanel-pay-dues" tabindex="0" role="tabpanel" aria-labelledby="tab-pay-dues" class="js-tabs-panel mywra-tab__panel" aria-hidden="true">
+                    <div class="w-100 h-100">
+                        <div class="row g-0 h-100 align-items-baseline align-content-start align-items-lg-stretch align-content-lg-stretch">
+                            <div class="mywra-tab__panel-return col-12 col-lg-3" style="background-color: var(--bs-gray-10)">
+                                <div class="mywra-left px-4 pb-6 pt-5 pt-lg-11">
+                                    <button class="js-page-tab-return-btn outline-0 border-0 text-link fw-bold text-decoration-none" title="Close Panel"><i class="fa-solid fa-chevron-left"></i> <span class="fs-lg ps-2">Profile</span></button>
+                                </div>
+                            </div>
+                            <div class="col position-relative bg-white pb-5">
+                                <div class="mywra-right container container--md ms-0 pt-5 pt-lg-11">
 
-                @if (!String.IsNullOrEmpty(content.PayDuesHeadline))
-                {
-                    <h2 class="h2">@content.PayDuesHeadline</h2>
-                }
+                                    @if (!String.IsNullOrEmpty(content.PayDuesHeadline))
+                                    {
+                                        <h2 class="h2">@content.PayDuesHeadline</h2>
+                                    }
 
-                @if (!String.IsNullOrEmpty(content.PayDuesIntroContent.ToString()))
-                {
-                    <div class="rich-text mb-5">
-                        @Html.Raw(content.PayDuesIntroContent)
-                    </div>
-                }
-                <h3 class="h5 mb-3">Payment Instructions</h3>
+                                    @if (!String.IsNullOrEmpty(content.PayDuesIntroContent.ToString()))
+                                    {
+                                        <div class="rich-text mb-5">
+                                            @Html.Raw(content.PayDuesIntroContent)
+                                        </div>
+                                    }
+                                    <h3 class="h5 mb-3">Payment Instructions</h3>
 
-                @for (var i = 1; i < 4; i++)
-                {
-                    <div class="border border-medium p-4 rounded mb-3">
-                        <h4 class="h6 mb-4 fs-lg">
-                            Members Of XXXXX:
-                        </h4>
-                        <div class="rich-text">
-                            <ul class="list-unstyled">
-                                <li>Commercial Association of REALTORS® Wisconsin</li>
-                                <li>Jefferson County Board REALTORS®</li>
-                                <li>La Crosse Area REALTORS® Association </li>
-                                <li>Manitowoc County Board of REALTORS®</li>
-                                <li>REALTORS® Association of Northwestern Wisconsin</li>
-                            </ul>
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur. At eget vulputate sapien duis curabitur vulputate morbi feugiat euismod.
-                            </p>
+                                    @for (var i = 1; i < 4; i++)
+                                    {
+                                        <div class="border border-medium p-4 rounded mb-3">
+                                            <h4 class="h6 mb-4 fs-lg">
+                                                Members Of XXXXX:
+                                            </h4>
+                                            <div class="rich-text">
+                                                <ul class="list-unstyled">
+                                                    <li>Commercial Association of REALTORS® Wisconsin</li>
+                                                    <li>Jefferson County Board REALTORS®</li>
+                                                    <li>La Crosse Area REALTORS® Association </li>
+                                                    <li>Manitowoc County Board of REALTORS®</li>
+                                                    <li>REALTORS® Association of Northwestern Wisconsin</li>
+                                                </ul>
+                                                <p>
+                                                    Lorem ipsum dolor sit amet consectetur. At eget vulputate sapien duis curabitur vulputate morbi feugiat euismod.
+                                                </p>
+                                            </div>
+                                            <a href="/" class="btn btn-primary">Pay Dues Now</a>
+                                            <small class="d-block fw-bold fs-xs mt-3">Note: NAR only accepts Visa and Mastercard</small>
+                                        </div>
+                                    }
+
+                                    <h3 class="h5 mb-3">George's Local Board Information</h3>
+                                    <div class="w-100 border border-medium rounded mb-5">
+                                        <table class="table-info w-100 fs-sm">
+                                            <thead class="visually-hidden">
+                                                <tr>
+                                                    <th>Item</th>
+                                                    <th>Value</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody style="color: var(--bs-gray-30)">
+                                                <tr>
+                                                    <td class="py-2">
+                                                        Name
+                                                    </td>
+                                                    <td class="py-2 text-body">
+                                                        Individual Board Members
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="py-2">
+                                                        Address
+                                                    </td>
+                                                    <td class="py-2 text-body">
+                                                        4801 Forest Run RdMadison, WI 53704-7411
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="py-2">
+                                                        Phone
+                                                    </td>
+                                                    <td class="py-2 text-body">
+                                                        (608) 241-2047
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="py-2">
+                                                        Fax
+                                                    </td>
+                                                    <td class="py-2 text-body">
+                                                        (608) 241-2901
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="py-2">
+                                                        Email
+                                                    </td>
+                                                    <td class="py-2 text-body">
+                                                        lan@wra.org
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="py-2">
+                                                        Website
+                                                    </td>
+                                                    <td class="py-2 text-body">
+                                                        www.wra.org
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
                         </div>
-                        <a href="/" class="btn btn-primary">Pay Dues Now</a>
-                        <small class="d-block fw-bold fs-xs mt-3">Note: NAR only accepts Visa and Mastercard</small>
                     </div>
-                }
-
-                <h3 class="h5 mb-3">George's Local Board Information</h3>
-                <div class="w-100 border border-medium rounded mb-5">
-                    <table class="table-info w-100 fs-sm">
-                        <thead class="visually-hidden">
-                            <tr>
-                                <th>Item</th>
-                                <th>Value</th>
-                            </tr>
-                        </thead>
-                        <tbody style="color: var(--bs-gray-30)">
-                            <tr>
-                                <td class="py-2">
-                                    Name
-                                </td>
-                                <td class="py-2 text-body">
-                                    Individual Board Members
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="py-2">
-                                    Address
-                                </td>
-                                <td class="py-2 text-body">
-                                    4801 Forest Run RdMadison, WI 53704-7411
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="py-2">
-                                    Phone
-                                </td>
-                                <td class="py-2 text-body">
-                                    (608) 241-2047
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="py-2">
-                                    Fax
-                                </td>
-                                <td class="py-2 text-body">
-                                    (608) 241-2901
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="py-2">
-                                    Email
-                                </td>
-                                <td class="py-2 text-body">
-                                    lan@wra.org
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="py-2">
-                                    Website
-                                </td>
-                                <td class="py-2 text-body">
-                                    www.wra.org
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
                 </div>
-
 
 
 
                 <!-- DUES HISTORY TAB -->
-
-                @if (!String.IsNullOrEmpty(content.DuesHistoryHeadline))
-                {
-                    <h2 class="h2">@content.DuesHistoryHeadline</h2>
-                }
-
-                @if (!String.IsNullOrEmpty(content.DuesHistoryIntroContent.ToString()))
-                {
-                    <div class="rich-text mb-5">
-                        @Html.Raw(content.DuesHistoryIntroContent)
-                    </div>
-                }
-
-                <div class="w-100 border border-medium rounded mb-5">
-                    <table class="table-info w-100 fs-sm">
-                        <thead class="fw-bold border-bottom border-medium">
-                            <tr>
-                                <th class="py-2">Transaction Date</th>
-                                <th class="py-2">Total Amount</th>
-                                <th class="visually-hidden">View or Print</th>
-                            </tr>
-                        </thead>
-                        <tbody style="color: var(--bs-gray-30)" class="text-body">
-                            @for (var i = 1; i < 4; i++)
-                            {
-                                <tr>
-                                    <td class="py-2">
-                                        @(i)/10/2022
-                                    </td>
-                                    <td class="py-2">
-                                        $869.00
-                                    </td>
-                                    <td class="py-2 text-end">
-                                        <button class="js-pop-btn text-link" aria-controls="dues@(i)">View/Print</button>
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-
-                    <!-- View/Print Modals -->
-                    @for (var i = 1; i < 4; i++)
-                    {
-                        <div id="dues@(i)" name="dues@(i)" aria-hidden="true" class="js-modal modal bundle-modal">
-                            <div class="modal__container">
-                                <div class="modal__header">
-                                    <button aria-controls="dues@(i)" title="Close Modal" class="js-modal-close btn-close border-0"><i class="fal fa-times"></i></button>
+                <div id="tabpanel-dues-history" tabindex="0" role="tabpanel" aria-labelledby="tab-dues-history" class="js-tabs-panel mywra-tab__panel" aria-hidden="true">
+                    <div class="w-100 h-100">
+                        <div class="row g-0 h-100 align-items-baseline align-content-start align-items-lg-stretch align-content-lg-stretch">
+                            <div class="mywra-tab__panel-return col-12 col-lg-3" style="background-color: var(--bs-gray-10)">
+                                <div class="mywra-left px-4 pb-6 pt-5 pt-lg-11">
+                                    <button class="js-page-tab-return-btn outline-0 border-0 text-link fw-bold text-decoration-none" title="Close Panel"><i class="fa-solid fa-chevron-left"></i> <span class="fs-lg ps-2">Profile</span></button>
                                 </div>
-                                <div class="modal__content">
-                                    <div class="printer_area">
-                                        <p class="h5">REALTORS® Association of @i Lorem</p>
-                                        <p>Dues payment receipt 11/10/2023</p>
-                                        <div id="dues@(i)" class="modal__content__inner  p-0">
-                                            <table class="table-info w-100 fs-sm">
-                                                <thead class="fw-bold border-bottom border-medium">
+                            </div>
+                            <div class="col position-relative bg-white pb-5">
+                                <div class="mywra-right container container--md ms-0 pt-5 pt-lg-11">
+
+                                    @if (!String.IsNullOrEmpty(content.DuesHistoryHeadline))
+                                    {
+                                        <h2 class="h2">@content.DuesHistoryHeadline</h2>
+                                    }
+
+                                    @if (!String.IsNullOrEmpty(content.DuesHistoryIntroContent.ToString()))
+                                    {
+                                        <div class="rich-text mb-5">
+                                            @Html.Raw(content.DuesHistoryIntroContent)
+                                        </div>
+                                    }
+
+                                    <div class="w-100 border border-medium rounded mb-5">
+                                        <table class="table-info w-100 fs-sm">
+                                            <thead class="fw-bold border-bottom border-medium">
+                                                <tr>
+                                                    <th class="py-2">Transaction Date</th>
+                                                    <th class="py-2">Total Amount</th>
+                                                    <th class="visually-hidden">View or Print</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody style="color: var(--bs-gray-30)" class="text-body">
+                                                @for (var i = 1; i < 4; i++)
+                                                {
                                                     <tr>
-                                                        <th class="py-2 text-start fw-bold">Item</th>
-                                                        <th class="py-2 text-end fw-bold">Amount Paid</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody style="color: var(--bs-gray-30)" class="text-body">
-                                                    @for (var ii = 1; ii < 7; ii++)
-                                                    {
-                                                        <tr>
-                                                            <td class="py-2 text-start">
-                                                                Lorem Ipsum
-                                                            </td>
-                                                            <td class="py-2 text-end">
-                                                                $@(ii)00.00
-                                                            </td>
-                                                        </tr>
-                                                    }
-                                                </tbody>
-                                                <tfoot class="fw-bold">
-                                                    <tr>
-                                                        <td class="py-2 text-start">
-                                                            Total
+                                                        <td class="py-2">
+                                                            @(i)/10/2022
+                                                        </td>
+                                                        <td class="py-2">
+                                                            $869.00
                                                         </td>
                                                         <td class="py-2 text-end">
-                                                            $XXXX.00
+                                                            <button class="js-pop-btn text-link" aria-controls="dues@(i)">View/Print</button>
                                                         </td>
                                                     </tr>
-                                                </tfoot>
-                                            </table>
-                                        </div>
+                                                }
+                                            </tbody>
+                                        </table>
+
+                                        <!-- View/Print Modals -->
+                                        @for (var i = 1; i < 4; i++)
+                                        {
+                                            <div id="dues@(i)" name="dues@(i)" aria-hidden="true" class="js-modal modal bundle-modal">
+                                                <div class="modal__container">
+                                                    <div class="modal__header">
+                                                        <button aria-controls="dues@(i)" title="Close Modal" class="js-modal-close btn-close border-0"><i class="fal fa-times"></i></button>
+                                                    </div>
+                                                    <div class="modal__content">
+                                                        <div class="printer_area">
+                                                            <p class="h5">REALTORS® Association of @i Lorem</p>
+                                                            <p>Dues payment receipt 11/10/2023</p>
+                                                            <div id="dues@(i)" class="modal__content__inner  p-0">
+                                                                <table class="table-info w-100 fs-sm">
+                                                                    <thead class="fw-bold border-bottom border-medium">
+                                                                        <tr>
+                                                                            <th class="py-2 text-start fw-bold">Item</th>
+                                                                            <th class="py-2 text-end fw-bold">Amount Paid</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody style="color: var(--bs-gray-30)" class="text-body">
+                                                                        @for (var ii = 1; ii < 7; ii++)
+                                                                        {
+                                                                            <tr>
+                                                                                <td class="py-2 text-start">
+                                                                                    Lorem Ipsum
+                                                                                </td>
+                                                                                <td class="py-2 text-end">
+                                                                                    $@(ii)00.00
+                                                                                </td>
+                                                                            </tr>
+                                                                        }
+                                                                    </tbody>
+                                                                    <tfoot class="fw-bold">
+                                                                        <tr>
+                                                                            <td class="py-2 text-start">
+                                                                                Total
+                                                                            </td>
+                                                                            <td class="py-2 text-end">
+                                                                                $XXXX.00
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tfoot>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                        <a href="#" onclick="javascript: return false;" data-printid="dues@(i)" class="js-print d-print-none mt-4 btn btn-primary btn-sm">
+                                                            Print
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
                                     </div>
-                                    <a href="#" onclick="javascript: return false;" data-printid="dues@(i)" class="js-print d-print-none mt-4 btn btn-primary btn-sm">
-                                        Print
-                                    </a>
+
                                 </div>
                             </div>
                         </div>
-                    }
-
+                    </div>
                 </div>
-
-
-
 
 
 

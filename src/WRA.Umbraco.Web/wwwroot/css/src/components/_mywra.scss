@@ -92,12 +92,7 @@
 
 }
 
-/*body {
-    overflow: hidden;
-}*/
-
 .mywra-tab__panel {
-    border: solid 1px red;
     position: fixed;
     top: var(--header-height);
     left: 0;
@@ -106,9 +101,13 @@
     z-index: 9;
     width: 100%;
     height: calc(100% - var(--header-height));
-    padding-bottom: 3rem;
+    transform: translateX(0%);
+
+    &.has-animate {
+        transition: transform 300ms ease-out 0s;
+    }
 
     &[aria-hidden="true"] {
-        display: none;
+        transform: translateX(100%);
     }
 }

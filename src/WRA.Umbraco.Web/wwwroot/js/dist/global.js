@@ -7618,6 +7618,7 @@
     let bodyObject = {
       "productType": "Events",
       "category": "",
+      //NEED to allow ARRAY "Conferences and Conventions", "Real Estate Webinars and Forums", "Broker Licensing"
       "subCategory": "",
       "taxonomy": "",
       "pagination": {
@@ -7692,7 +7693,6 @@
       },
       loading: function(isLoading) {
         if (isLoading == false) {
-          console.log("loading done");
           calendarFilters.innerHTML = "";
           setResources.forEach((resource) => {
             calendarFilters.innerHTML += `
@@ -8173,6 +8173,71 @@
   };
   var print_default = print;
 
+  // wwwroot/js/src/components/page-tabs.js
+  var pageTabs = () => {
+    const pageTabs2 = document.querySelectorAll(".js-page-tab");
+    const pageTabsReturnBtns = document.querySelectorAll(".js-page-tab-return-btn");
+    const pageTabPanels = document.querySelectorAll(".js-tabs-panel");
+    pageTabs2.forEach((tab) => {
+      tab.addEventListener("click", (e) => {
+        e.preventDefault();
+        const tabPanelId = tab.getAttribute("aria-controls");
+        const tabPanelTarget = document.getElementById(tabPanelId);
+        tabPanelTarget.ariaHidden = false;
+        document.documentElement.classList.add("overflow-hidden");
+      });
+    });
+    const attachedAnimation = (isDirectLoad) => {
+      if (!isDirectLoad) {
+        pageTabPanels.forEach((pageTabPanel) => {
+          pageTabPanel.classList.add("has-animate");
+        });
+      }
+    };
+    const removeLocationHash = () => {
+      const noHashURL = window.location.href.replace(/#.*$/, "");
+      window.history.replaceState("", document.title, noHashURL);
+    };
+    const closePanels = () => {
+      pageTabPanels.forEach((pageTabPanel) => {
+        pageTabPanel.ariaHidden = true;
+      });
+      document.documentElement.classList.remove("overflow-hidden");
+      removeLocationHash();
+      attachedAnimation(false);
+    };
+    pageTabsReturnBtns.forEach((returnBtn) => {
+      returnBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        closePanels();
+      });
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        closePanels();
+      }
+    });
+    document.querySelectorAll(".js-page-tab").forEach((item) => {
+      item.addEventListener("click", () => {
+        window.history.pushState("", "", `#${item.getAttribute("aria-controls")}`);
+      });
+    });
+    if (window.location.hash) {
+      const activeTabsTrigger = document.querySelector(`.js-page-tab[href="${window.location.hash}"]`);
+      console.log(window.location.hash);
+      if (activeTabsTrigger) {
+        window.addEventListener("DOMContentLoaded", () => {
+          activeTabsTrigger.click();
+          activeTabsTrigger.blur();
+        });
+      }
+      attachedAnimation(true);
+    } else {
+      attachedAnimation(false);
+    }
+  };
+  var page_tabs_default = pageTabs;
+
   // wwwroot/js/src/global.js
   expandable_text_cards_default();
   header_default();
@@ -8203,4 +8268,7 @@
     bundles_default();
   }
   print_default();
+  if (document.querySelector(".js-page-tab")) {
+    page_tabs_default();
+  }
 })();

@@ -14,13 +14,11 @@
         @await Html.PartialAsync("_mywraHeader", new ViewDataDictionary(this.ViewData) { { "isMobile", true } })
         @await Html.PartialAsync("_mywraNav")
 
-        <div class="col position-relative">
+        <div class="col position-relative pb-5">
             @await Html.PartialAsync("_mywraHeader", new ViewDataDictionary(this.ViewData) { { "isMobile", false } })
 
             <div class="mywra-right container container--md ms-0 pt-5 pt-lg-11">
-                
                 <div class="pb-2 pb-lg-4 position-relative">
-
 
                     <div class="w-100 px-2 border border-medium rounded mb-5">
                         <div class="px-2_5 d-flex flex-column g-4">
@@ -36,25 +34,23 @@
                                 <span>RPAC & Direct Giver Donor Status</span>
                                 <i class="fas fa-chevron-right" style="color: var(--bs-primary)"></i>
                             </a>
-                            <a id="tab-donor-subscriptions" href="tabpanel-subscriptions" role="tab" aria-selected="false" aria-controls="tabpanel-subscriptions" class="js-page-tab w-100 py-3 text-body fw-bold text-decoration-none d-flex flex-row align-items-center justify-content-between">
+                            <a id="tab-subscriptions" href="#tabpanel-subscriptions" role="tab" aria-selected="false" aria-controls="tabpanel-subscriptions" class="js-page-tab w-100 py-3 text-body fw-bold text-decoration-none d-flex flex-row align-items-center justify-content-between">
                                 <span>Subscription Preferences</span>
                                 <i class="fas fa-chevron-right" style="color: var(--bs-primary)"></i>
                             </a>
                         </div>
                     </div>
 
-
-
                     <!-- PERSONAL INFORMATION TAB -->
                     <div id="tabpanel-personal-information" tabindex="0" role="tabpanel" aria-labelledby="tab-personal-information" class="js-tabs-panel mywra-tab__panel" aria-hidden="true">
                         <div class="w-100 h-100">
-                            <div class="row g-0 h-100">
-                                <div class="col-12 col-lg-3" style="background-color: var(--bs-gray-10)">
+                            <div class="row g-0 h-100 align-items-baseline align-content-start align-items-lg-stretch align-content-lg-stretch">
+                                <div class="mywra-tab__panel-return col-12 col-lg-3" style="background-color: var(--bs-gray-10)">
                                     <div class="mywra-left px-4 pb-6 pt-5 pt-lg-11">
-                                        <button class="outline-0 border-0 text-link fw-bold text-decoration-none"><i class="fa-solid fa-chevron-left"></i> <span class="fs-lg ps-2">Profile</span></button>
+                                        <button class="js-page-tab-return-btn outline-0 border-0 text-link fw-bold text-decoration-none" title="Close Panel"><i class="fa-solid fa-chevron-left"></i> <span class="fs-lg ps-2">Profile</span></button>
                                     </div>
                                 </div>
-                                <div class="col position-relative">
+                                <div class="col position-relative bg-white pb-5">
                                     <div class="mywra-right container container--md ms-0 pt-5 pt-lg-11">
 
                                         @if (!String.IsNullOrEmpty(content.PersonalInformationHeadline))
@@ -136,18 +132,16 @@
                         </div>
                     </div> 
 
-
-
                     <!-- COMMITTEES TAB -->
                     <div id="tabpanel-committees" tabindex="0" role="tabpanel" aria-labelledby="tab-committees" class="js-tabs-panel mywra-tab__panel" aria-hidden="true">
                         <div class="w-100 h-100">
-                            <div class="row g-0 h-100">
-                                <div class="col-12 col-lg-3" style="background-color: var(--bs-gray-10)">
+                            <div class="row g-0 h-100 align-items-baseline align-content-start align-items-lg-stretch align-content-lg-stretch">
+                                <div class="mywra-tab__panel-return col-12 col-lg-3" style="background-color: var(--bs-gray-10)">
                                     <div class="mywra-left px-4 pb-6 pt-5 pt-lg-11">
-                                        <button class="outline-0 border-0 text-link fw-bold text-decoration-none"><i class="fa-solid fa-chevron-left"></i> <span class="fs-lg ps-2">Profile</span></button>
+                                        <button class="js-page-tab-return-btn outline-0 border-0 text-link fw-bold text-decoration-none" title="Close Panel"><i class="fa-solid fa-chevron-left"></i> <span class="fs-lg ps-2">Profile</span></button>
                                     </div>
                                 </div>
-                                <div class="col position-relative">
+                                <div class="col position-relative bg-white pb-5">
                                     <div class="mywra-right container container--md ms-0 pt-5 pt-lg-11">
                                         @if (!String.IsNullOrEmpty(content.CommitteesHeadline))
                                         {
@@ -166,18 +160,16 @@
                         </div>
                     </div>
 
-                   
-   
                     <!-- CONTRIBUTIONS TAB -->
                     <div id="tabpanel-donor-status" tabindex="0" role="tabpanel" aria-labelledby="tab-donor-status" class="js-tabs-panel mywra-tab__panel" aria-hidden="true">
                         <div class="w-100 h-100">
-                            <div class="row g-0 h-100">
-                                <div class="col-12 col-lg-3" style="background-color: var(--bs-gray-10)">
+                            <div class="row g-0 h-100 align-items-baseline align-content-start align-items-lg-stretch align-content-lg-stretch">
+                                <div class="mywra-tab__panel-return col-12 col-lg-3" style="background-color: var(--bs-gray-10)">
                                     <div class="mywra-left px-4 pb-6 pt-5 pt-lg-11">
-                                        <button class="outline-0 border-0 text-link fw-bold text-decoration-none"><i class="fa-solid fa-chevron-left"></i> <span class="fs-lg ps-2">Profile</span></button>
+                                        <button class="js-page-tab-return-btn outline-0 border-0 text-link fw-bold text-decoration-none" title="Close Panel"><i class="fa-solid fa-chevron-left"></i> <span class="fs-lg ps-2">Profile</span></button>
                                     </div>
                                 </div>
-                                <div class="col position-relative">
+                                <div class="col position-relative bg-white pb-5">
                                     <div class="mywra-right container container--md ms-0 pt-5 pt-lg-11">
 
                                         @if (!String.IsNullOrEmpty(content.ContributionsHeadline))
@@ -255,19 +247,17 @@
                             </div>
                         </div>
                     </div>
-                    
-
                   
                     <!-- SUBSCRIPTIONS TAB -->
                     <div id="tabpanel-subscriptions" tabindex="0" role="tabpanel" aria-labelledby="tab-subscriptions" class="js-tabs-panel mywra-tab__panel" aria-hidden="true">
                         <div class="w-100 h-100">
-                            <div class="row g-0 h-100">
-                                <div class="col-12 col-lg-3" style="background-color: var(--bs-gray-10)">
+                            <div class="row g-0 h-100 align-items-baseline align-content-start align-items-lg-stretch align-content-lg-stretch">
+                                <div class="mywra-tab__panel-return col-12 col-lg-3" style="background-color: var(--bs-gray-10)">
                                     <div class="mywra-left px-4 pb-6 pt-5 pt-lg-11">
-                                        <button class="outline-0 border-0 text-link fw-bold text-decoration-none"><i class="fa-solid fa-chevron-left"></i> <span class="fs-lg ps-2">Profile</span></button>
+                                        <button class="js-page-tab-return-btn outline-0 border-0 text-link fw-bold text-decoration-none" title="Close Panel"><i class="fa-solid fa-chevron-left"></i> <span class="fs-lg ps-2">Profile</span></button>
                                     </div>
                                 </div>
-                                <div class="col position-relative">
+                                <div class="col position-relative bg-white pb-5">
                                     <div class="mywra-right container container--md ms-0 pt-5 pt-lg-11">
 
                                         @if (!String.IsNullOrEmpty(content.SubscriptionsHeadline))
@@ -355,8 +345,6 @@
                             </div>
                         </div>
                     </div>
-
- 
 
                 </div>
             </div>
