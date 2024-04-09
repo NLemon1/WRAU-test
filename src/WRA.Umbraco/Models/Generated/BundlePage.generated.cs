@@ -73,14 +73,6 @@ namespace WRA.Umbraco.Models
 		public virtual global::Umbraco.Cms.Core.Strings.IHtmlEncodedString IntroContent => this.Value<global::Umbraco.Cms.Core.Strings.IHtmlEncodedString>(_publishedValueFallback, "introContent");
 
 		///<summary>
-		/// Short Description
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.2.2+79d241a")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("shortDescription")]
-		public virtual string ShortDescription => this.Value<string>(_publishedValueFallback, "shortDescription");
-
-		///<summary>
 		/// Sub Categories
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.2.2+79d241a")]

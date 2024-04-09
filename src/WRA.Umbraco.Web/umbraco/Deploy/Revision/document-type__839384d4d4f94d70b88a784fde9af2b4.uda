@@ -47,13 +47,6 @@
       "Alias": "properties",
       "PropertyTypes": [
         {
-          "Key": "004943f1-3d03-4e1b-a27c-1a1c7367769e",
-          "Alias": "shortDescription",
-          "DataType": "umb://data-type/c6bac0dd4ab945b18e30e4b619ee5da3",
-          "Name": "Short Description",
-          "SortOrder": 2
-        },
-        {
           "Key": "570463ef-02d9-4a86-a6f1-2aa1b2ffd573",
           "Alias": "bundledProducts",
           "DataType": "umb://data-type/1db19b70214c448dbbf7dc848a144056",
@@ -81,10 +74,6 @@
       "Ordering": true
     },
     {
-      "Udi": "umb://data-type/c6bac0dd4ab945b18e30e4b619ee5da3",
-      "Ordering": true
-    },
-    {
       "Udi": "umb://data-type/c86a5f22a7634f198a5ac17da1aad381",
       "Ordering": true
     },
@@ -106,5 +95,5 @@
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
-  "__version": "13.0.4"
+  "__version": "13.1.0"
 }

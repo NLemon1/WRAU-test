@@ -17,7 +17,7 @@
         <div class="col position-relative pb-5">
             @await Html.PartialAsync("_mywraHeader", new ViewDataDictionary(this.ViewData) { { "isMobile", false } })
 
-            <div class="mywra-right container container--md ms-0 pt-5 pt-lg-9">
+            <div class="mywra-right container container--md ms-0 pt-5 pt-lg-11">
 
                 @if (!String.IsNullOrEmpty(content.Headline))
                 {
@@ -55,7 +55,7 @@
                                 </div>
                             </div>
                             <div class="col position-relative bg-white pb-5">
-                                <div class="mywra-right container container--md ms-0 pt-5 pt-lg-9">
+                                <div class="mywra-right container container--md ms-0 pt-5 pt-lg-11">
 
                                     @if (!String.IsNullOrEmpty(content.PayDuesHeadline))
                                     {
@@ -173,7 +173,7 @@
                                 </div>
                             </div>
                             <div class="col position-relative bg-white pb-5">
-                                <div class="mywra-right container container--md ms-0 pt-5 pt-lg-9">
+                                <div class="mywra-right container container--md ms-0 pt-5 pt-lg-11">
 
                                     @if (!String.IsNullOrEmpty(content.DuesHistoryHeadline))
                                     {

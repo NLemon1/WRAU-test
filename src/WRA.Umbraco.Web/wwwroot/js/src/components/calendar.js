@@ -11,15 +11,15 @@ const calendar = () => {
 
     let bodyObject = {
         "productType": "Events",
-        "category": "", //NEED to allow ARRAY "Conferences and Conventions", "Real Estate Webinars and Forums", "Broker Licensing"
-        "subCategory": "",
+        "categories": Array.from(window.setResources, (x) => x.title),
+        "subCategories": [],
         "taxonomy": "",
         "pagination": {
             "pageNumber": 1,
             "pageSize": 100
         }
     };
-   
+
     const bodyRequest = JSON.stringify(bodyObject);
 
     const getValue = (checkBoxes) => {
