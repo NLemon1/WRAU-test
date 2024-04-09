@@ -1,11 +1,14 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
 @using ContentModels = WRA.Umbraco.Models;
 @using WRA.Umbraco.Controllers;
+@using Umbraco.Cms.Core.Models.Blocks;
 
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.BundlePage>
 
 @{
     Layout = "~/Views/_Layout.cshtml";
+    var content = (ContentModels.BundlePage)Model;
+    var sections = content.Value<IEnumerable<BlockGridItem>>("blockContent");
 }
 
 <header class="page-header page-header--no-accent">
@@ -33,69 +36,86 @@
             </div>
         }
 
+        @await Html.PartialAsync("blockgrid/default", sections)
+
+
         <h2 class="h3 w-100 pt-4 pb-1 border-top border-medium">Selected Courses to Bundle</h2>
 
         @using (Html.BeginUmbracoForm<CartSurfaceController>("AddBundleToCart"))
         {
+            var bundleCollection = Model?.BundledProducts?.Select((p, i) => new { Product = p, Index = i });
+
             <input type="hidden" name="BundleReference" value="@Model.BundleReferece" />
 
             <div class="row gy-3">
-			    @foreach (var bundleItem in Model.BundledProducts.Select((p, i) => new { Product = p, Index = i }))
+                @if (bundleCollection != null)
                 {
-                    var objectIndexKey = $"BundledProducts[{bundleItem.Index}]";
+                    foreach (var bundleItem in bundleCollection)
+                    {
+                        var objectIndexKey = $"BundledProducts[{bundleItem.Index}]";
 
-                    <div class="col-md-6 col-lg-4 col-bundle">
-                        <input type="checkbox" class="js-bundle-checkbox input-bundle" name="@objectIndexKey" id="@bundleItem.Product.Id" value="@bundleItem.Product.Key" />
-                        <div class="card card-bundle">
-                            @if (bundleItem.Product.HasValue("creditHours"))
-                            {
-                                <p class="mb-3 fs-xs">Class <span class="ms-3 fw-semibold">Credit Hours: @bundleItem.Product.GetProperty("creditHours").GetSourceValue()</span></p>
-                            }
-                            <h3 class="fw-bold fs-lg text-capitalize mb2_5">
-                                @if (bundleItem.Product.HasValue("alternateTitle"))
+                        <div class="col-md-6 col-lg-4 col-bundle">
+                            <input type="checkbox" class="js-bundle-checkbox input-bundle" name="@objectIndexKey" id="@bundleItem.Product.Id" value="@bundleItem.Product.Key" />
+                            <div class="card card-bundle">
+                                @if (bundleItem.Product.HasValue("creditHours"))
                                 {
-                                    @bundleItem.Product.Value("alternateTitle")
-                                } 
-                                else
-                                {
-                                    @bundleItem.Product.Name
+                                    <p class="mb-3 fs-xs">Class <span class="ms-3 fw-semibold">Credit Hours: @bundleItem.Product.GetProperty("creditHours").GetSourceValue()</span></p>
                                 }
-                            </h3>
+                                <h3 class="fw-bold fs-lg text-capitalize mb2_5">
+                                    @if (bundleItem.Product.HasValue("alternateTitle"))
+                                    {
+                                        @bundleItem.Product.Value("alternateTitle")
+                                    }
+                                    else
+                                    {
+                                        @bundleItem.Product.Name
+                                    }
+                                </h3>
 
-                            <div class="d-flex flex-row gap-3 mt-auto">
-                                <label for="@bundleItem.Product.Id" class="js-bundle-select btn btn-primary btn-sm w-50 py-3 d-flex flex-column justify-content-center" tabindex="1" role="button" aria-haspopup="dialog" aria-controls="bundleSelected" style="cursor:pointer">
-                                    <span class="btn__select">Select</span>
-                                    <span class="visually-hidden">OR</span>
-                                    <span class="btn__deselect">Deselect</span>
-                                </label>
+                                <div class="d-flex flex-row gap-3 mt-auto">
+                                    <label for="@bundleItem.Product.Id" class="js-bundle-select btn btn-primary btn-sm w-50 py-3 d-flex flex-column justify-content-center" tabindex="1" role="button" aria-haspopup="dialog" aria-controls="bundleSelected" style="cursor:pointer">
+                                        <span class="btn__select">Select</span>
+                                        <span class="visually-hidden">OR</span>
+                                        <span class="btn__deselect">Deselect</span>
+                                    </label>
+                                    @if (bundleItem.Product.HasValue("ShortDescription"))
+                                    {
+                                        <button class="js-pop-btn btn btn-secondary btn-sm w-50 py-3" aria-controls="@(bundleItem.Product.Id)moreDetails">View Details</button>
+                                    }
+                                </div>
                                 @if (bundleItem.Product.HasValue("ShortDescription"))
                                 {
-                                    <button class="js-pop-btn btn btn-secondary btn-sm w-50 py-3" aria-controls="@(bundleItem.Product.Id)moreDetails">View Details</button>
-                                }
-                            </div>
-                            @if (bundleItem.Product.HasValue("ShortDescription"))
-                            {
-                                <div id="@(bundleItem.Product.Id)moreDetails" name="@(bundleItem.Product.Id)moreDetails" aria-hidden="true" class="js-modal modal bundle-modal">
-                                    <div class="modal__container">
-                                        <div class="modal__header">
-                                            <button aria-controls="@(bundleItem.Product.Id)moreDetails" title="Close Modal" class="js-modal-close btn-close border-0"><i class="fal fa-times"></i></button>
-                                        </div>
-                                        <div class="modal__content">
-                                            <p class="h5">Course #</p>
-                                            <div class="modal__content__inner">
-                                                <span class="h3 d-block fw-bold fs-lg text-capitalize mb2_5">@bundleItem.Product.Name</span>
-                                                @Html.Raw(bundleItem.Product.Value<string>("ShortDescription"))
+                                    <div id="@(bundleItem.Product.Id)moreDetails" name="@(bundleItem.Product.Id)moreDetails" aria-hidden="true" class="js-modal modal bundle-modal">
+                                        <div class="modal__container">
+                                            <div class="modal__header">
+                                                <button aria-controls="@(bundleItem.Product.Id)moreDetails" title="Close Modal" class="js-modal-close btn-close border-0"><i class="fal fa-times"></i></button>
                                             </div>
-                                            <a href="@bundleItem.Product.Url()" target="_blank" class="mt-4 btn btn-primary btn-sm">
-                                                Full Details
-                                            </a>
+                                            <div class="modal__content">
+                                                <p class="h5">Course #</p>
+                                                <div class="modal__content__inner">
+                                                    <span class="h3 d-block fw-bold fs-lg text-capitalize mb2_5">
+                                                        @if (bundleItem.Product.HasValue("alternateTitle"))
+                                                        {
+                                                            @bundleItem.Product.Value("alternateTitle")
+                                                        }
+                                                        else
+                                                        {
+                                                            @bundleItem.Product.Name
+                                                        }
+                                                     </span>
+                                                    @Html.Raw(bundleItem.Product.Value<string>("ShortDescription"))
+                                                </div>
+                                                <a href="@bundleItem.Product.Url()" target="_blank" class="mt-4 btn btn-primary btn-sm">
+                                                    Full Details
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            }
+                                }
+                            </div>
                         </div>
-                    </div>
-			    }
+                    }
+                }
 	        </div>
             <div id="bundleSelected" class="js-bundle-bag position-fixed bottom-0 start-0 w-100 p-3 p-md-4 bg-white shadow-lg" role="dialog" hidden name="bundleSelected">
                 <div class="container d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-end gap-2 gap-md-4">
