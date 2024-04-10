@@ -18,6 +18,7 @@
       "umb://document-type/82d3a04a3a4c4dd0b6ae3e6eed740e2c"
     ]
   },
+  "Parent": "umb://document-type-container/6510c64e8e964c8a8e5eeb229c79fd30",
   "CompositionContentTypes": [
     "umb://document-type/14d24fc815e945d6baa835eae09a1d7f",
     "umb://document-type/7cc368ff00cb4264ad60f52a76c3a911",
@@ -27,6 +28,10 @@
   "PropertyTypes": [],
   "Udi": "umb://document-type/0e4fbf4835e74e70ba66c619e70242a4",
   "Dependencies": [
+    {
+      "Udi": "umb://document-type-container/6510c64e8e964c8a8e5eeb229c79fd30",
+      "Ordering": true
+    },
     {
       "Udi": "umb://document-type/14d24fc815e945d6baa835eae09a1d7f",
       "Ordering": true

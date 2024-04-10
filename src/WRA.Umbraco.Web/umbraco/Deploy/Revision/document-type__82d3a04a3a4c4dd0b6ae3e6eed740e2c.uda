@@ -11,6 +11,7 @@
   "Permissions": {
     "AllowedChildContentTypes": []
   },
+  "Parent": "umb://document-type-container/6510c64e8e964c8a8e5eeb229c79fd30",
   "CompositionContentTypes": [
     "umb://document-type/14d24fc815e945d6baa835eae09a1d7f",
     "umb://document-type/7cc368ff00cb4264ad60f52a76c3a911",
@@ -18,25 +19,163 @@
   ],
   "PropertyGroups": [
     {
+      "Key": "2334afaf-f7a9-44c4-8392-cbbdb0b5fa11",
+      "Name": "PDF Forms Library Subscription",
+      "SortOrder": 5,
+      "Type": 1,
+      "Alias": "pdfFormsLibrarySubscription",
+      "PropertyTypes": [
+        {
+          "Key": "7c4bd5b4-5fbf-4d0a-b8af-77307f8fa68d",
+          "Alias": "introContentPdfFormsLibrary",
+          "DataType": "umb://data-type/9001e1a4d3d940178577caf42c500db5",
+          "Name": "Intro Content",
+          "SortOrder": 1
+        },
+        {
+          "Key": "ceb61db8-83a1-421e-b5e9-9252e9952b43",
+          "Alias": "headlinePdfFormsLibrary",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Headline"
+        }
+      ]
+    },
+    {
       "Key": "23c6c24b-3640-4844-ad01-94f010c70e9c",
       "Name": "Content",
       "SortOrder": 1000,
+      "Alias": "agentEducationHistory/content",
+      "PropertyTypes": [
+        {
+          "Key": "05ac9b0c-ac22-4edc-8dfa-b28823c554db",
+          "Alias": "headlineAgentEdHist",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Headline"
+        },
+        {
+          "Key": "32d93013-a47a-49af-8fdd-0af6a7123436",
+          "Alias": "introContentAgentEdHist",
+          "DataType": "umb://data-type/9001e1a4d3d940178577caf42c500db5",
+          "Name": "Intro Content",
+          "SortOrder": 1
+        }
+      ]
+    },
+    {
+      "Key": "31d812d9-cf3b-4920-94af-7842a57e7355",
+      "Name": "Agent Event registration",
+      "SortOrder": 2,
+      "Type": 1,
+      "Alias": "agentEventRegistration",
+      "PropertyTypes": [
+        {
+          "Key": "73dff13d-1841-499f-bc4d-7e2c81025614",
+          "Alias": "headlineEventRegistration",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Headline"
+        },
+        {
+          "Key": "80dbf064-ac1d-4ce3-b540-dfe9ee09bbfa",
+          "Alias": "introContentEventRegistration",
+          "DataType": "umb://data-type/9001e1a4d3d940178577caf42c500db5",
+          "Name": "Intro Content",
+          "SortOrder": 1
+        }
+      ]
+    },
+    {
+      "Key": "731f7f07-cd65-44e4-9b8b-e7723f0a362f",
+      "Name": "Content",
+      "SortOrder": 6,
       "Alias": "content",
       "PropertyTypes": [
         {
-          "Key": "22e3e98a-8130-4841-8aac-f66832eaf0b8",
+          "Key": "101f4a66-1ab6-43e6-87ee-aeafb7aa5801",
           "Alias": "headline",
           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
           "Name": "Headline"
         },
         {
-          "Key": "ef686602-d2c1-4037-ba89-aba22702ca71",
+          "Key": "3184d9ee-e051-48b9-9079-b2adb412aa9d",
           "Alias": "introContent",
           "DataType": "umb://data-type/9001e1a4d3d940178577caf42c500db5",
           "Name": "Intro Content",
           "SortOrder": 1
         }
       ]
+    },
+    {
+      "Key": "8db1a218-9e13-4748-a262-ee679c106fb3",
+      "Name": "Agent ethics training status",
+      "SortOrder": 1,
+      "Type": 1,
+      "Alias": "agentEthicsTrainingStatus",
+      "PropertyTypes": [
+        {
+          "Key": "1fcdd400-122a-49a4-ab0d-0bb54587466c",
+          "Alias": "headlineAgentTrainingStatus",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Headline"
+        },
+        {
+          "Key": "76af7708-e7ec-4b9c-b439-3840ccfb48d2",
+          "Alias": "introContentAgentTrainingStatus",
+          "DataType": "umb://data-type/9001e1a4d3d940178577caf42c500db5",
+          "Name": "Intro Content",
+          "SortOrder": 1
+        }
+      ]
+    },
+    {
+      "Key": "a7265f4e-f06f-43c9-b7b3-0cf4201e3c3e",
+      "Name": "Company Education Programs",
+      "SortOrder": 4,
+      "Type": 1,
+      "Alias": "companyEducationPrograms",
+      "PropertyTypes": [
+        {
+          "Key": "622f5713-6161-4885-b537-e47064bc1942",
+          "Alias": "introContentCompanyEducationPrograms",
+          "DataType": "umb://data-type/9001e1a4d3d940178577caf42c500db5",
+          "Name": "Intro Content",
+          "SortOrder": 1
+        },
+        {
+          "Key": "a883c1b5-8f51-4502-af80-d4675d2ba692",
+          "Alias": "headlineCompanyEducationPrograms",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Headline"
+        }
+      ]
+    },
+    {
+      "Key": "b531e30e-a2ef-460c-967c-7995d8682879",
+      "Name": "Company Information Change Form",
+      "SortOrder": 3,
+      "Type": 1,
+      "Alias": "companyInformationChangeForm",
+      "PropertyTypes": [
+        {
+          "Key": "c9b91800-acc1-4ce4-8b58-d3cc9a5e466a",
+          "Alias": "introContentCompanyInfoChangeForm",
+          "DataType": "umb://data-type/9001e1a4d3d940178577caf42c500db5",
+          "Name": "Intro Content",
+          "SortOrder": 1
+        },
+        {
+          "Key": "dcf19a02-6922-4fe5-841f-db5c9897de01",
+          "Alias": "headlineCompanyInfoChangeForm",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Headline"
+        }
+      ]
+    },
+    {
+      "Key": "d1fe6f7e-d080-40ce-b68f-dff9fb8233ca",
+      "Name": "Agent Education History",
+      "Type": 1,
+      "Alias": "agentEducationHistory",
+      "PropertyTypes": []
     }
   ],
   "PropertyTypes": [],
@@ -48,6 +187,10 @@
     },
     {
       "Udi": "umb://data-type/9001e1a4d3d940178577caf42c500db5",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type-container/6510c64e8e964c8a8e5eeb229c79fd30",
       "Ordering": true
     },
     {

@@ -1,8 +1,10 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.MywraCompany>
 @using ContentModels = WRA.Umbraco.Models;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<WRA.Umbraco.Models.MywraCompany>
+
 @{
     Layout = "~/Views/_Layout.cshtml";
+    var content = (ContentModels.MywraCompany)Model;
 }
 
 <div class="w-100">
@@ -15,7 +17,222 @@
             @await Html.PartialAsync("_mywraHeader", new ViewDataDictionary(this.ViewData) { { "isMobile", false } })
             <div class="mywra-right container container--md ms-0 pt-5 pt-lg-11">
 
-                Company
+                @if (!String.IsNullOrEmpty(content.Headline))
+                {
+                    <h1 class="h2">@content.Headline</h1>
+                }
+
+                @if (!String.IsNullOrEmpty(content?.IntroContent?.ToString()))
+                {
+                    <div class="rich-text mb-5">
+                        @Html.Raw(content.IntroContent)
+                    </div>
+                }
+
+                 <div class="pb-2 pb-lg-4 position-relative">
+
+
+                    <div class="w-100 px-2 border border-medium rounded mb-5">
+                        <div class="px-2_5 d-flex flex-column g-4">
+                            <a id="tab-education-history" href="#tabpanel-education-history" role="tab" aria-selected="false" aria-controls="tabpanel-education-history" class="js-page-tab w-100 py-3 text-body fw-bold text-decoration-none border-bottom border-medium d-flex flex-row align-items-center justify-content-between">
+                                <span>Agent Education History</span>
+                                <i class="fas fa-chevron-right" style="color: var(--bs-primary)"></i>
+                            </a>
+                            <a id="tab-ethics-training" href="#tabpanel-ethics-training" role="tab" aria-selected="false" aria-controls="tabpanel-ethics-training" class="js-page-tab w-100 py-3 text-body fw-bold text-decoration-none border-bottom border-medium d-flex flex-row align-items-center justify-content-between">
+                                <span>Agent Ethics Training Status</span>
+                                <i class="fas fa-chevron-right" style="color: var(--bs-primary)"></i>
+                            </a>
+                            <a id="tab-event-registrations" href="#tabpanel-event-registrations" role="tab" aria-selected="false" aria-controls="tabpanel-event-registrations" class="js-page-tab w-100 py-3 text-body fw-bold text-decoration-none border-bottom border-medium d-flex flex-row align-items-center justify-content-between">
+                                <span>Agent Event Registrations</span>
+                                <i class="fas fa-chevron-right" style="color: var(--bs-primary)"></i>
+                            </a>
+                            <a id="tab-info-change" href="#tabpanel-info-change" role="tab" aria-selected="false" aria-controls="tabpanel-info-change" class="js-page-tab w-100 py-3 text-body fw-bold text-decoration-none border-bottom border-medium d-flex flex-row align-items-center justify-content-between">
+                                <span>Company Information Change Form</span>
+                                <i class="fas fa-chevron-right" style="color: var(--bs-primary)"></i>
+                            </a>
+                            <a id="tab-education-programs" href="#tabpanel-education-programs" role="tab" aria-selected="false" aria-controls="tabpanel-education-programs" class="js-page-tab w-100 py-3 text-body fw-bold text-decoration-none border-bottom border-medium d-flex flex-row align-items-center justify-content-between">
+                                <span>Company Education Programs</span>
+                                <i class="fas fa-chevron-right" style="color: var(--bs-primary)"></i>
+                            </a>
+                            <a id="tab-library-subscriptions" href="#tabpanel-library-subscriptions" role="tab" aria-selected="false" aria-controls="tabpanel-library-subscriptions" class="js-page-tab w-100 py-3 text-body fw-bold text-decoration-none border-bottom border-medium d-flex flex-row align-items-center justify-content-between">
+                                <span>WRA PDF Forms Library Subscription</span>
+                                <i class="fas fa-chevron-right" style="color: var(--bs-primary)"></i>
+                            </a>
+                        </div>
+                    </div>
+
+
+
+                    <!-- Agent Education History TAB -->
+                    <div id="tabpanel-education-history" tabindex="0" role="tabpanel" aria-labelledby="tab-education-history" class="js-tabs-panel mywra-tab__panel" aria-hidden="true">
+                        <div class="w-100 h-100">
+                            <div class="row g-0 h-100 align-items-baseline align-content-start align-items-lg-stretch align-content-lg-stretch">
+                                <div class="mywra-tab__panel-return col-12 col-lg-3" style="background-color: var(--bs-gray-10)">
+                                    <div class="mywra-left px-4 pb-6 pt-5 pt-lg-9">
+                                        <button class="js-page-tab-return-btn outline-0 border-0 text-link fw-bold text-decoration-none" title="Close Panel"><i class="fa-solid fa-chevron-left"></i> <span class="fs-lg ps-2">Profile</span></button>
+                                    </div>
+                                </div>
+                                <div class="col position-relative bg-white pb-5">
+                                    <div class="mywra-right container container--md ms-0 pt-5 pt-lg-11">
+                                        @if (!String.IsNullOrEmpty(content?.HeadlineAgentEdHist))
+                                        {
+                                            <h2 class="h2">@content.HeadlineAgentEdHist</h2>
+                                        }
+
+                                        @if (!String.IsNullOrEmpty(content?.IntroContentAgentEdHist?.ToString()))
+                                        {
+                                            <div class="rich-text mb-5">
+                                                @Html.Raw(content.IntroContentAgentEdHist)
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Agent Ethics Training Status TAB -->
+                    <div id="tabpanel-ethics-training" tabindex="0" role="tabpanel" aria-labelledby="tab-ethics-training" class="js-tabs-panel mywra-tab__panel" aria-hidden="true">
+                        <div class="w-100 h-100">
+                            <div class="row g-0 h-100 align-items-baseline align-content-start align-items-lg-stretch align-content-lg-stretch">
+                                <div class="mywra-tab__panel-return col-12 col-lg-3" style="background-color: var(--bs-gray-10)">
+                                    <div class="mywra-left px-4 pb-6 pt-5 pt-lg-9">
+                                        <button class="js-page-tab-return-btn outline-0 border-0 text-link fw-bold text-decoration-none" title="Close Panel"><i class="fa-solid fa-chevron-left"></i> <span class="fs-lg ps-2">Profile</span></button>
+                                    </div>
+                                </div>
+                                <div class="col position-relative bg-white pb-5">
+                                    <div class="mywra-right container container--md ms-0 pt-5 pt-lg-11">
+                                        @if (!String.IsNullOrEmpty(content?.HeadlineAgentTrainingStatus))
+                                        {
+                                            <h2 class="h2">@content.HeadlineAgentTrainingStatus</h2>
+                                        }
+
+                                        @if (!String.IsNullOrEmpty(content?.IntroContentAgentTrainingStatus?.ToString()))
+                                        {
+                                            <div class="rich-text mb-5">
+                                                @Html.Raw(content.IntroContentAgentTrainingStatus)
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Agent Event Registrations TAB -->
+                    <div id="tabpanel-event-registrations" tabindex="0" role="tabpanel" aria-labelledby="tab-event-registrations" class="js-tabs-panel mywra-tab__panel" aria-hidden="true">
+                        <div class="w-100 h-100">
+                            <div class="row g-0 h-100 align-items-baseline align-content-start align-items-lg-stretch align-content-lg-stretch">
+                                <div class="mywra-tab__panel-return col-12 col-lg-3" style="background-color: var(--bs-gray-10)">
+                                    <div class="mywra-left px-4 pb-6 pt-5 pt-lg-9">
+                                        <button class="js-page-tab-return-btn outline-0 border-0 text-link fw-bold text-decoration-none" title="Close Panel"><i class="fa-solid fa-chevron-left"></i> <span class="fs-lg ps-2">Profile</span></button>
+                                    </div>
+                                </div>
+                                <div class="col position-relative bg-white pb-5">
+                                    <div class="mywra-right container container--md ms-0 pt-5 pt-lg-11">
+                                        @if (!String.IsNullOrEmpty(content?.HeadlineEventRegistration))
+                                        {
+                                            <h2 class="h2">@content.HeadlineEventRegistration</h2>
+                                        }
+
+                                        @if (!String.IsNullOrEmpty(content?.IntroContentEventRegistration?.ToString()))
+                                        {
+                                            <div class="rich-text mb-5">
+                                                @Html.Raw(content.IntroContentEventRegistration)
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <!-- Company Information Change Form TAB -->
+                    <div id="tabpanel-info-change" tabindex="0" role="tabpanel" aria-labelledby="tab-info-change" class="js-tabs-panel mywra-tab__panel" aria-hidden="true">
+                        <div class="w-100 h-100">
+                            <div class="row g-0 h-100 align-items-baseline align-content-start align-items-lg-stretch align-content-lg-stretch">
+                                <div class="mywra-tab__panel-return col-12 col-lg-3" style="background-color: var(--bs-gray-10)">
+                                    <div class="mywra-left px-4 pb-6 pt-5 pt-lg-9">
+                                        <button class="js-page-tab-return-btn outline-0 border-0 text-link fw-bold text-decoration-none" title="Close Panel"><i class="fa-solid fa-chevron-left"></i> <span class="fs-lg ps-2">Profile</span></button>
+                                    </div>
+                                </div>
+                                <div class="col position-relative bg-white pb-5">
+                                    <div class="mywra-right container container--md ms-0 pt-5 pt-lg-11">
+                                        @if (!String.IsNullOrEmpty(content?.HeadlineCompanyInfoChangeForm))
+                                        {
+                                            <h2 class="h2">@content.HeadlineCompanyInfoChangeForm</h2>
+                                        }
+
+                                        @if (!String.IsNullOrEmpty(content?.IntroContentCompanyInfoChangeForm?.ToString()))
+                                        {
+                                            <div class="rich-text mb-5">
+                                                @Html.Raw(content.IntroContentCompanyInfoChangeForm)
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Company Education Programs TAB -->
+                    <div id="tabpanel-education-programs" tabindex="0" role="tabpanel" aria-labelledby="tab-education-programs" class="js-tabs-panel mywra-tab__panel" aria-hidden="true">
+                        <div class="w-100 h-100">
+                            <div class="row g-0 h-100 align-items-baseline align-content-start align-items-lg-stretch align-content-lg-stretch">
+                                <div class="mywra-tab__panel-return col-12 col-lg-3" style="background-color: var(--bs-gray-10)">
+                                    <div class="mywra-left px-4 pb-6 pt-5 pt-lg-9">
+                                        <button class="js-page-tab-return-btn outline-0 border-0 text-link fw-bold text-decoration-none" title="Close Panel"><i class="fa-solid fa-chevron-left"></i> <span class="fs-lg ps-2">Profile</span></button>
+                                    </div>
+                                </div>
+                                <div class="col position-relative bg-white pb-5">
+                                    <div class="mywra-right container container--md ms-0 pt-5 pt-lg-11">
+                                        @if (!String.IsNullOrEmpty(content?.HeadlineCompanyEducationPrograms))
+                                        {
+                                            <h2 class="h2">@content.HeadlineCompanyEducationPrograms</h2>
+                                        }
+
+                                        @if (!String.IsNullOrEmpty(content?.IntroContentCompanyEducationPrograms?.ToString()))
+                                        {
+                                            <div class="rich-text mb-5">
+                                                @Html.Raw(content.IntroContentCompanyEducationPrograms)
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                                        
+                    <!-- WRA PDF Forms Library Subscription TAB -->
+                    <div id="tabpanel-library-subscriptions" tabindex="0" role="tabpanel" aria-labelledby="tab-library-subscriptions" class="js-tabs-panel mywra-tab__panel" aria-hidden="true">
+                        <div class="w-100 h-100">
+                            <div class="row g-0 h-100 align-items-baseline align-content-start align-items-lg-stretch align-content-lg-stretch">
+                                <div class="mywra-tab__panel-return col-12 col-lg-3" style="background-color: var(--bs-gray-10)">
+                                    <div class="mywra-left px-4 pb-6 pt-5 pt-lg-9">
+                                        <button class="js-page-tab-return-btn outline-0 border-0 text-link fw-bold text-decoration-none" title="Close Panel"><i class="fa-solid fa-chevron-left"></i> <span class="fs-lg ps-2">Profile</span></button>
+                                    </div>
+                                </div>
+                                <div class="col position-relative bg-white pb-5">
+                                    <div class="mywra-right container container--md ms-0 pt-5 pt-lg-11">
+                                        @if (!String.IsNullOrEmpty(content?.HeadlinePdfFormsLibrary))
+                                        {
+                                            <h2 class="h2">@content.HeadlinePdfFormsLibrary</h2>
+                                        }
+
+                                        @if (!String.IsNullOrEmpty(content?.IntroContentPdfFormsLibrary?.ToString()))
+                                        {
+                                            <div class="rich-text mb-5">
+                                                @Html.Raw(content.IntroContentPdfFormsLibrary)
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
 
             </div>
         </div>

@@ -58,12 +58,108 @@ namespace WRA.Umbraco.Models
 		public virtual string Headline => this.Value<string>(_publishedValueFallback, "headline");
 
 		///<summary>
+		/// Headline
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.2.2+79d241a")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("headlineAgentEdHist")]
+		public virtual string HeadlineAgentEdHist => this.Value<string>(_publishedValueFallback, "headlineAgentEdHist");
+
+		///<summary>
+		/// Headline
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.2.2+79d241a")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("headlineAgentTrainingStatus")]
+		public virtual string HeadlineAgentTrainingStatus => this.Value<string>(_publishedValueFallback, "headlineAgentTrainingStatus");
+
+		///<summary>
+		/// Headline
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.2.2+79d241a")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("headlineCompanyEducationPrograms")]
+		public virtual string HeadlineCompanyEducationPrograms => this.Value<string>(_publishedValueFallback, "headlineCompanyEducationPrograms");
+
+		///<summary>
+		/// Headline
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.2.2+79d241a")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("headlineCompanyInfoChangeForm")]
+		public virtual string HeadlineCompanyInfoChangeForm => this.Value<string>(_publishedValueFallback, "headlineCompanyInfoChangeForm");
+
+		///<summary>
+		/// Headline
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.2.2+79d241a")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("headlineEventRegistration")]
+		public virtual string HeadlineEventRegistration => this.Value<string>(_publishedValueFallback, "headlineEventRegistration");
+
+		///<summary>
+		/// Headline
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.2.2+79d241a")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("headlinePdfFormsLibrary")]
+		public virtual string HeadlinePdfFormsLibrary => this.Value<string>(_publishedValueFallback, "headlinePdfFormsLibrary");
+
+		///<summary>
 		/// Intro Content
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.2.2+79d241a")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("introContent")]
 		public virtual global::Umbraco.Cms.Core.Strings.IHtmlEncodedString IntroContent => this.Value<global::Umbraco.Cms.Core.Strings.IHtmlEncodedString>(_publishedValueFallback, "introContent");
+
+		///<summary>
+		/// Intro Content
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.2.2+79d241a")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("introContentAgentEdHist")]
+		public virtual global::Umbraco.Cms.Core.Strings.IHtmlEncodedString IntroContentAgentEdHist => this.Value<global::Umbraco.Cms.Core.Strings.IHtmlEncodedString>(_publishedValueFallback, "introContentAgentEdHist");
+
+		///<summary>
+		/// Intro Content
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.2.2+79d241a")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("introContentAgentTrainingStatus")]
+		public virtual global::Umbraco.Cms.Core.Strings.IHtmlEncodedString IntroContentAgentTrainingStatus => this.Value<global::Umbraco.Cms.Core.Strings.IHtmlEncodedString>(_publishedValueFallback, "introContentAgentTrainingStatus");
+
+		///<summary>
+		/// Intro Content
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.2.2+79d241a")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("introContentCompanyEducationPrograms")]
+		public virtual global::Umbraco.Cms.Core.Strings.IHtmlEncodedString IntroContentCompanyEducationPrograms => this.Value<global::Umbraco.Cms.Core.Strings.IHtmlEncodedString>(_publishedValueFallback, "introContentCompanyEducationPrograms");
+
+		///<summary>
+		/// Intro Content
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.2.2+79d241a")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("introContentCompanyInfoChangeForm")]
+		public virtual global::Umbraco.Cms.Core.Strings.IHtmlEncodedString IntroContentCompanyInfoChangeForm => this.Value<global::Umbraco.Cms.Core.Strings.IHtmlEncodedString>(_publishedValueFallback, "introContentCompanyInfoChangeForm");
+
+		///<summary>
+		/// Intro Content
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.2.2+79d241a")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("introContentEventRegistration")]
+		public virtual global::Umbraco.Cms.Core.Strings.IHtmlEncodedString IntroContentEventRegistration => this.Value<global::Umbraco.Cms.Core.Strings.IHtmlEncodedString>(_publishedValueFallback, "introContentEventRegistration");
+
+		///<summary>
+		/// Intro Content
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.2.2+79d241a")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("introContentPdfFormsLibrary")]
+		public virtual global::Umbraco.Cms.Core.Strings.IHtmlEncodedString IntroContentPdfFormsLibrary => this.Value<global::Umbraco.Cms.Core.Strings.IHtmlEncodedString>(_publishedValueFallback, "introContentPdfFormsLibrary");
 
 		///<summary>
 		/// Meta Description: Enter meta description if desired.
