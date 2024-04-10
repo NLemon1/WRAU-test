@@ -1,13 +1,15 @@
-using Umbraco.Cms.Core.Models.PublishedContent;
-using Umbraco.Commerce.Core.Models;
-using Umbraco.Commerce.Core.Api;
-using WRA.Umbraco.Models;
-using Umbraco.Commerce.Extensions;
-using WRA.Umbraco.Dtos;
-using Umbraco.Cms.Core.Models;
+using System.Reflection;
 using System.Text;
 using Umbraco.Cms.Core;
-namespace WRA.Umbraco
+using Umbraco.Cms.Core.Models;
+using Umbraco.Cms.Core.Models.PublishedContent;
+using Umbraco.Commerce.Core.Api;
+using Umbraco.Commerce.Core.Models;
+using Umbraco.Commerce.Extensions;
+using WRA.Umbraco.Dtos;
+using WRA.Umbraco.Models;
+
+namespace WRA.Umbraco.Extensions
 {
     public static class PublishedContentExtensions
     {
@@ -110,43 +112,6 @@ namespace WRA.Umbraco
             );
         }
 
-        public static MemberDto AsDto(this IMember m)
-        {
-            MemberDto mdto = new MemberDto
-            {
-                ExternalId = m.GetValue<string>("externalId"),
-                Email = m.Email,
-                BrokerFullName = m.GetValue<string>("brokerFullName").SafeString(),
-                BrokerEmail = m.GetValue<string>("brokerEmail").SafeString(),
-                Address1 = m.GetValue<string>("address1").SafeString(),
-                Address2 = m.GetValue<string>("address2").SafeString(),
-                Address3 = m.GetValue<string>("address3").SafeString(),
-                City = m.GetValue<string>("city").SafeString(),
-                CellPhone = m.GetValue<string>("cellPhone").SafeString(),
-                CanUseHotline = m.GetValue<bool>("canUseHotline"),
-                CompanyLogoUrl = m.GetValue<string>("companyLogoUrl").SafeString(),
-                CompanyId = m.GetValue<string>("companyId"),
-                CompanyName = m.GetValue<string>("companyName").SafeString(),
-                //Getber.SetValue("companySubscriptions", mdto.CompanySubscriptions);
-                Fax = m.GetValue<string>("fax").SafeString(),
-                FirstName = m.GetValue<string>("firstName").SafeString(),
-                LastName = m.GetValue<string>("lastName").SafeString(),
-                Gender = m.GetValue<string>("gender").SafeString(),
-                HomePhone = m.GetValue<string>("homePhone").SafeString(),
-                ImageUrl = m.GetValue<string>("imageUrl").SafeString(),
-                JoinDate = m.GetValue<DateTime>("joinDate"),
-                MandatoryHotlineLetter = m.GetValue<bool>("mandatoryHotlineLetter"),
-                NRDSId = m.GetValue<string>("nrdsId").SafeString(),
-                PaidThruDate = m.GetValue<DateTime>("paidThruDate"),
-                Prefix = m.GetValue<string>("prefix").SafeString(),
-                Suffix = m.GetValue<string>("suffix").SafeString(),
-                StateProvince = m.GetValue<string>("stateProvince").SafeString(),
-                Zip = m.GetValue<string>("zip").SafeString()
-            };
-
-            return mdto;
-        }
-
         public static WraProductDto AsWraProductDto(this IContent c)
         {
             WraProductDto pdto = new WraProductDto
@@ -188,62 +153,23 @@ namespace WRA.Umbraco
         {
             var address = new StringBuilder();
 
-            var Line1 = order.Properties["shippingAddressLine1"].SafeString();
-            var Line2 = order.Properties["shippingAddressLine2"].SafeString();
-            var City = order.Properties["shippingCity"].SafeString();
-            var State = order.Properties["shippingState"].SafeString();
-            var ZipCode = order.Properties["shippingZipCode"].SafeString();
+            var line1 = order.Properties["shippingAddressLine1"].SafeString();
+            var line2 = order.Properties["shippingAddressLine2"].SafeString();
+            var city = order.Properties["shippingCity"].SafeString();
+            var state = order.Properties["shippingState"].SafeString();
+            var zipCode = order.Properties["shippingZipCode"].SafeString();
 
-            address.Append($"{Line1} ");
-            if (!string.IsNullOrEmpty(Line2))
+            address.Append($"{line1} ");
+            if (!string.IsNullOrEmpty(line2))
             {
-                address.Append($"{Line2}, ");
+                address.Append($"{line2}, ");
             }
-            address.Append($"{City} {State} {ZipCode}");
+            address.Append($"{city} {state} {zipCode}");
 
             return address.ToString();
         }
+        
 
-        /// <summary>
-        /// Member Specific Extensions
-        /// </summary>
-        /// <param name="member"></param>
-        /// <param name="mdto"></param>
-        /// <returns></returns>
-        public static IMember? UpdateWRAMemberProperties(this IMember member, MemberDto mdto)
-        {
-            member.SetValue("externalId", mdto.ExternalId);
-            member.SetValue("brokerFullName", mdto.BrokerFullName);
-            member.SetValue("brokerEmail", mdto.BrokerEmail);
-            member.SetValue("address1", mdto.Address1);
-            member.SetValue("address2", mdto.Address2);
-            member.SetValue("address3", mdto.Address3);
-            member.SetValue("city", mdto.City);
-            member.SetValue("cellPhone", mdto.CellPhone);
-            member.SetValue("canUseHotline", mdto.CanUseHotline);
-            member.SetValue("companyLogoUrl", mdto.CompanyLogoUrl);
-            member.SetValue("companyId", mdto.CompanyId);
-            member.SetValue("companyName", mdto.CompanyName);
-            //member.SetValue("companySubscriptions", mdto.CompanySubscriptions);
-            member.SetValue("fax", mdto.Fax);
-            member.SetValue("firstName", mdto.FirstName);
-            member.SetValue("lastName", mdto.LastName);
-            member.SetValue("gender", mdto.Gender);
-            member.SetValue("homePhone", mdto.HomePhone);
-            member.SetValue("imageUrl", mdto.ImageUrl);
-            member.SetValue("joinDate", mdto.JoinDate);
-            member.SetValue("mandatoryHotlineLetter", mdto.MandatoryHotlineLetter);
-            member.SetValue("nrdsId", mdto.NRDSId);
-            member.SetValue("paidThruDate", mdto.PaidThruDate);
-            member.SetValue("prefix", mdto.Prefix);
-            member.SetValue("suffix", mdto.Suffix);
-            member.SetValue("stateProvince", mdto.StateProvince);
-            member.SetValue("zip", mdto.Zip);
-
-
-
-            return member;
-        }
 
         /// <summary>
         /// Commerce Specific Extensions
@@ -338,20 +264,22 @@ namespace WRA.Umbraco
         {
             return variant?.AsProduct(parent)?.CalculatePrice();
         }
-
         public static CheckoutPage? GetCheckoutPage(this CheckoutStepPage content)
         {
             return content!.AncestorOrSelf<CheckoutPage>();
         }
-
         public static Home? GetHome(this IPublishedContent checkoutStepPage)
         {
             return checkoutStepPage.Ancestor<Home>();
         }
-
         public static string SafeString(this object? item)
         {
             return item?.ToString() ?? string.Empty;
+        }
+        public static Guid SafeGuid(this object? item)
+        {
+            var value = item?.ToString();
+            return Guid.TryParse(value, out var guid) ? guid : Guid.Empty;
         }
         public static Udi? GetUdi(this IContent content)
         {
@@ -359,7 +287,7 @@ namespace WRA.Umbraco
         }
         public static Udi? GetUdi(this IPublishedContent content)
         {
-            return Udi.Create(Constants.UdiEntityType.Document, content.Key);
+            return content == null ? null : Udi.Create(Constants.UdiEntityType.Document, content.Key);
         }
     }
 }

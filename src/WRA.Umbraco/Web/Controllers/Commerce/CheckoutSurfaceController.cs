@@ -13,6 +13,8 @@ using WRA.Umbraco.Dtos;
 using Umbraco.Commerce.Extensions;
 using Umbraco.Commerce.Core.Models;
 using WRA.Umbraco;
+using WRA.Umbraco.Extensions;
+
 //using GlobalPayments.Api.Services;
 //using GlobalPayments.Api;
 

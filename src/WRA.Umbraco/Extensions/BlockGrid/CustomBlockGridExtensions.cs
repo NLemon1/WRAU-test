@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Umbraco.Cms.Core.Models.Blocks;
-using WRA.Umbraco.Services;
 
 namespace WRA.Umbraco.Web.Extensions
 {

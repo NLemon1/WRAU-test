@@ -9,13 +9,13 @@ using Umbraco.Commerce.Common.Events;
 using Umbraco.Commerce.Core.Api;
 using Umbraco.Commerce.Core.Events.Notification;
 using Umbraco.Commerce.Core.Models;
-using WRA.Umbraco.Services;
+using WRA.Umbraco.Web.Services;
 
 namespace WRA.Umbraco.Events;
-public class CartCreatingNotifiction(ILogger<CartCreatingNotifiction> logger, WRAMemberManagementService WRAMemberManagementService) : NotificationEventHandlerBase<OrderCreatingNotification>
+public class CartCreatingNotifiction(ILogger<CartCreatingNotifiction> logger, WraMemberManagementService WRAMemberManagementService) : NotificationEventHandlerBase<OrderCreatingNotification>
 {
     readonly ILogger<CartCreatingNotifiction> _logger = logger;
-    readonly WRAMemberManagementService _WRAMemberManagementService = WRAMemberManagementService;
+    readonly WraMemberManagementService _WRAMemberManagementService = WRAMemberManagementService;
 
     public override void Handle(OrderCreatingNotification evt)
     {

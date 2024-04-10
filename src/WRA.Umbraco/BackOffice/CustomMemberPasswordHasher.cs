@@ -1,36 +1,64 @@
 using System.Security.Cryptography;
 using System.Text;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
-using Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Core.Security;
 using Umbraco.Cms.Core.Serialization;
 using Umbraco.Cms.Core.Services;
-using Umbraco.Cms.Core.Web;
 
-public class CustomMemberPasswordHasher<Tuser> : UmbracoPasswordHasher<Tuser> where Tuser : MemberIdentityUser
+public class CustomMemberPasswordHasher<TUser>(
+    LegacyPasswordSecurity legacyPasswordSecurity,
+    IJsonSerializer jsonSerializer,
+    IMemberService memberService,
+    ILogger<CustomMemberPasswordHasher<TUser>> logger)
+    : UmbracoPasswordHasher<TUser>(legacyPasswordSecurity, jsonSerializer)
+        where TUser : MemberIdentityUser
 {
-    private readonly IMemberService _memberService;
-    private readonly ILogger<CustomMemberPasswordHasher<Tuser>> _logger;
-
-    public CustomMemberPasswordHasher(
-        LegacyPasswordSecurity legacyPasswordSecurity,
-        IJsonSerializer jsonSerializer,
-        IMemberService memberService,
-        ILogger<CustomMemberPasswordHasher<Tuser>> logger)
-        : base(legacyPasswordSecurity, jsonSerializer)
+    public override PasswordVerificationResult VerifyHashedPassword(TUser user, string hashedPassword, string providedPassword)
     {
-        _memberService = memberService;
-        _logger = logger;
+        // first try the upstream password hasher
+        var upstreamResult = base.VerifyHashedPassword(user, hashedPassword, providedPassword);
+        if (upstreamResult == PasswordVerificationResult.Failed)
+        {
+            // try out own comparison
+            // Get member
+            var memberIdentity = memberService.GetByKey(user.Key);
+            if (memberIdentity == null)
+            {
+                logger.LogError("Member not found for key in password verification");
+                return upstreamResult;
+            }
+            // get salt
+            var memberSalt = memberIdentity.GetValue<string>("token");
+            if (memberSalt != null)
+            {
+                var salt = Encoding.UTF8.GetBytes(memberSalt);
+
+                var passHash = HashPw(providedPassword, salt);
+                if (passHash == hashedPassword)
+                {
+                    return PasswordVerificationResult.Success;
+                }
+            }
+        }
+        return upstreamResult;
     }
 
-    public override string HashPassword(Tuser member, string password)
+
+    public override string HashPassword(TUser member, string password)
     {
         try
         {
+            if (member.Key == Guid.Empty)
+            {
+                // if the key doesn't exist, the user is being created via back office
+                // for now - we will a pass them to the base class to handle hashing
+                return base.HashPassword(member, password);
+            }
             // get salt
             var saltStr = Guid.NewGuid().ToString().Replace("-", string.Empty);
 
-            byte[] salt = Encoding.UTF8.GetBytes(saltStr);
+            var salt = Encoding.UTF8.GetBytes(saltStr);
 
             //hash password
             var passHash = HashPw(password, salt);
@@ -39,17 +67,17 @@ public class CustomMemberPasswordHasher<Tuser> : UmbracoPasswordHasher<Tuser> wh
         }
         catch (Exception ex)
         {
-            _logger.LogError("Error hashing password user email: {Email} - {Message}", member.Email, ex.Message);
-            throw ex;
+            logger.LogError("Error hashing password user email: {Email} - {Message}", member.Email, ex.Message);
+            throw;
         }
     }
 
-    private void SetSaltPropertyOnMember(Tuser member, string salt)
+    private void SetSaltPropertyOnMember(TUser member, string salt)
     {
         if (member?.Key == null || member?.Key == Guid.Empty) return;
-        var memberIdentity = _memberService.GetByKey(member.Key);
+        var memberIdentity = memberService.GetByKey(member.Key);
         memberIdentity?.SetValue("token", salt);
-        if (memberIdentity != null) _memberService.Save(memberIdentity);
+        if (memberIdentity != null) memberService.Save(memberIdentity);
     }
 
     private static string HashPw(string password, byte[] salt)

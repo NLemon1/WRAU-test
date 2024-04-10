@@ -5,6 +5,7 @@ using Umbraco.Cms.Core.Security;
 using Umbraco.Cms.Core.Services;
 using Umbraco.Commerce.Core.Api;
 using Umbraco.Commerce.Core.Models;
+using WRA.Umbraco.Extensions;
 
 namespace WRA.Umbraco.Models;
 

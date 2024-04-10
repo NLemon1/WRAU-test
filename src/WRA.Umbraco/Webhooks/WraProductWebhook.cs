@@ -10,7 +10,6 @@ using Umbraco.Cms.Core.Sync;
 using Umbraco.Cms.Core.Webhooks;
 using WRA.Umbraco.Dtos;
 using WRA.Umbraco.Models;
-using WRA.Umbraco.Services;
 
 namespace WRA.Umbraco.Webhooks;
 
@@ -18,21 +17,18 @@ namespace WRA.Umbraco.Webhooks;
 public class WraProductWebhook : WebhookEventContentBase<ContentPublishedNotification, IContent>
 {
     private readonly ILogger<WraProductWebhook> _logger;
-    private readonly QueueService _queueService;
     // private readonly WRAProductManagementService _WRAProductManagementService;
     public WraProductWebhook(
         IWebhookFiringService webhookFiringService,
         IWebhookService webhookService,
         IOptionsMonitor<WebhookSettings> webhookSettings,
         IServerRoleAccessor serverRoleAccessor,
-        ILogger<WraProductWebhook> logger,
-        QueueService queueService
+        ILogger<WraProductWebhook> logger
         // WRAProductManagementService wraProdService
         )
         : base(webhookFiringService, webhookService, webhookSettings, serverRoleAccessor)
     {
         _logger = logger;
-        _queueService = queueService;
         // _WRAProductManagementService = wraProdService;
     }
 

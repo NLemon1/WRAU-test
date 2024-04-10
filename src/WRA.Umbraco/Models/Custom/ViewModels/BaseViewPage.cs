@@ -1,7 +1,7 @@
 using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Cms.Core.Security;
 using Umbraco.Cms.Web.Common.Views;
-using WRA.Umbraco.Services;
+using WRA.Umbraco.Web.Services;
 
 public abstract class WRAViewPage<T>(GatedContentService gcs, IMemberManager memberManager) : UmbracoViewPage<T>
 {

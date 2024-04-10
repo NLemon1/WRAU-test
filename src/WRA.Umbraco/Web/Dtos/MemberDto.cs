@@ -1,9 +1,12 @@
 using System.Text.Json.Serialization;
 
-namespace WRA.Umbraco.Dtos
-{
+namespace WRA.Umbraco.Dtos;
+
     public class MemberDto
     {
+
+        public string? EntityName { get; set; } = "Member";
+        public Guid Id { get; set; }
 
         [JsonPropertyName("id")]
         public string ExternalId { get; set; }
@@ -20,11 +23,11 @@ namespace WRA.Umbraco.Dtos
         [JsonPropertyName("commonId")]
         public int CommonId { get; set; }
 
-        [JsonPropertyName("passwordHash")]
-        public string PasswordHash { get; set; }
-
-        [JsonPropertyName("passwordSalt")]
-        public string PasswordSalt { get; set; }
+        // [JsonPropertyName("passwordHash")]
+        // public string PasswordHash { get; set; }
+        //
+        // [JsonPropertyName("passwordSalt")]
+        // public string PasswordSalt { get; set; }
 
         [JsonPropertyName("userName")]
         public string UserName { get; set; }
@@ -111,7 +114,7 @@ namespace WRA.Umbraco.Dtos
         public string CompanyLogoUrl { get; set; }
 
         [JsonPropertyName("memberTypeId")]
-        public string MemberTypeId { get; set; }
+        public Guid MemberTypeId { get; set; }
 
         [JsonPropertyName("memberTypeCode")]
         public string MemberTypeCode { get; set; }
@@ -137,4 +140,3 @@ namespace WRA.Umbraco.Dtos
         [JsonPropertyName("fairhavenDate")]
         public DateTime? FairhavenDate { get; set; }
     }
-}

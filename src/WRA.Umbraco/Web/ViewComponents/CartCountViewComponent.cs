@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Commerce.Core.Api;
+using WRA.Umbraco.Extensions;
 using WRA.Umbraco.Models;
 
 namespace WRA.Umbraco.ViewComponents;

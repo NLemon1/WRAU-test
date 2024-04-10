@@ -1,5 +1,6 @@
 
 using Umbraco.Cms.Core.Models.PublishedContent;
+using Umbraco.Cms.Core.Scoping;
 using Umbraco.Commerce.Cms.Adapters;
 using Umbraco.Commerce.Core.Models;
 using WRA.Umbraco.Models;
@@ -8,6 +9,7 @@ public class CustomProductSnapshot : UmbracoProductSnapshot
 {
     private readonly UmbracoProductSnapshot _snapshot;
     private List<ProductPrice> memberPricing;
+    private ICoreScopeProvider coreScopeProvider;
 
     public CustomProductSnapshot(
         IPublishedContent content,
@@ -36,6 +38,8 @@ public class CustomProductSnapshot : UmbracoProductSnapshot
         // If the product adapter requests member pricing...
         if (memberPrice)
         {
+            using var scope = coreScopeProvider.CreateCoreScope(autoComplete: true);
+
             // cast as our product composition..
             var product = content as IProductComp;
             // for all pricing pairs (currencyid : amount), 

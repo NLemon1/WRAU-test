@@ -10,6 +10,7 @@ using Umbraco.Commerce.Common.Validation;
 using Umbraco.Commerce.Core.Api;
 using WRA.Umbraco.Dtos;
 using Umbraco.Commerce.Extensions;
+using WRA.Umbraco.Extensions;
 
 namespace WRA.Umbraco.Controllers
 {

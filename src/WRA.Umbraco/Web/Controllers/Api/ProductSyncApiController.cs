@@ -1,26 +1,20 @@
-
-using System.Web.Http;
 using System.Text.Json;
+using System.Web.Http;
+using Microsoft.AspNetCore.Http.Timeouts;
 using Microsoft.AspNetCore.Mvc;
 using Umbraco.Cms.Api.Common.Attributes;
 using Umbraco.Cms.Core;
 using Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Cms.Core.Services;
-
+using Umbraco.Cms.Infrastructure.HostedServices;
 using Umbraco.Commerce.Core.Models;
 using Umbraco.Commerce.Core.Services;
-
 using WRA.Umbraco.Dtos;
 using WRA.Umbraco.Models;
-using WRA.Umbraco.Services;
-using Umbraco.Cms.Infrastructure.Examine;
-using NPoco.Expressions;
-using Umbraco.Cms.Infrastructure.HostedServices;
-using Microsoft.AspNetCore.Http.Timeouts;
+using WRA.Umbraco.Web.Services;
 
-
-namespace WRA.Umbraco.Controllers;
+namespace WRA.Umbraco.Web.Controllers.Api;
 
 [ApiController]
 [MapToApi("product-api")]
@@ -29,7 +23,7 @@ namespace WRA.Umbraco.Controllers;
 public class ProductSyncApiController : ApiController
 {
     private readonly SearchService _searchService;
-    private readonly WRAExternalApiService _wraExternalApiService;
+    private readonly WraExternalApiService _wraExternalApiService;
     private readonly IContentService _contentService;
     private readonly ICurrencyService _currencyService;
     private IProductManagementService _productManagementService;
@@ -37,7 +31,7 @@ public class ProductSyncApiController : ApiController
 
     public ProductSyncApiController(
         SearchService searchService,
-        WRAExternalApiService wRAExternalApiService,
+        WraExternalApiService wRAExternalApiService,
         IProductService productService,
         IContentService contentService,
         ICurrencyService currencyService,

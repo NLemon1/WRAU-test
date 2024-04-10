@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <PackageId>WRA.Umbraco.Contracts</PackageId>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>8.0.3</Version>
+    <Authors>Eric Solari</Authors>
+    <Company>Wisconsin Realtors® Association</Company>
+    <PackageTags>Azure;ServiceBus;Contracts;MassTransit;WRA.Umbraco;Umbraco</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageDescription>WRA Service Bus Contracts for Umbraco Website Integration</PackageDescription>
+    <RepositoryUrl>https://github.com/wirealtors/WRA.Umbraco.Contracts</RepositoryUrl>
+    <PackageReadmeFile>readme.nuget.md</PackageReadmeFile>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="MassTransit.Abstractions" Version="8.2.0" />
+    <PackageReference Include="MediatR.Contracts" Version="2.0.1" />
+  </ItemGroup>
+   <ItemGroup>
+        <!-- Define the global DefaultIdType here. -->
+       <Using Include="System.Guid" Alias="DefaultIdType" />
+   </ItemGroup>
+    <ItemGroup>
+        <None Include="readme.nuget.md" Pack="true" PackagePath="/" />
+    </ItemGroup>
+</Project>

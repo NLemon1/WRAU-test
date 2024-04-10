@@ -9,24 +9,25 @@ using Umbraco.Cms.Core.Services;
 using Umbraco.Cms.Core.Web;
 using Umbraco.Commerce.Core.Models;
 using Umbraco.Commerce.Core.Services;
+using WRA.Umbraco.Extensions;
 using WRA.Umbraco.Models;
 
-namespace WRA.Umbraco.Services;
-public class WRAProductManagementService : IProductManagementService
+namespace WRA.Umbraco.Web.Services;
+public class WraProductManagementService : IProductManagementService
 {
 
-    readonly ILogger<WRAProductManagementService> _logger;
+    readonly ILogger<WraProductManagementService> _logger;
     readonly IContentService _contentService;
     readonly ICurrencyService _currencyService;
     readonly ICoreScopeProvider _coreScopeProvider;
     private readonly IUmbracoContextFactory _umbracoContextFactory;
 
 
-    public WRAProductManagementService(
+    public WraProductManagementService(
 
         ICurrencyService currencyService,
         IContentService contentService,
-        ILogger<WRAProductManagementService> logger,
+        ILogger<WraProductManagementService> logger,
         ICoreScopeProvider coreScopeProvider,
         IUmbracoContextFactory umbracoContextFactory
 
@@ -86,7 +87,7 @@ public class WRAProductManagementService : IProductManagementService
 
             //set properties on our product
             await SetProductProperties(productPage, product, store);
-
+            // productPage.TemplateId = Home?.ProductPageTemplate?.Id ?? 0;
             // save and publish the product! Wow! 
             _contentService.SaveAndPublish(productPage);
         }
@@ -95,6 +96,26 @@ public class WRAProductManagementService : IProductManagementService
             _logger.LogError(ex, $"Error creating product: sku - {product.Sku}");
             throw ex;
         }
+    }
+
+    public IPublishedContent? GetProductById(string productId)
+    {
+        var contentCache = GetContentCache();
+        var siteRoot = contentCache?.GetAtRoot().FirstOrDefault();
+
+        var collectionPages = siteRoot?.Children
+            .Where(c => c.ContentType.Alias == ProductsPage.ModelTypeAlias)
+            .FirstOrDefault()?.Children
+            .Where(c => c.ContentType.Alias == CollectionPage.ModelTypeAlias);
+
+        IPublishedContent? subscriptionProduct = null;
+        foreach (var collection in collectionPages)
+        {
+            subscriptionProduct = collection.Children
+                .FirstOrDefault(x => x.Value("productId").Equals(productId));
+            if (subscriptionProduct != null) { break; }
+        }
+        return subscriptionProduct;
     }
 
     public async Task UpdateProduct(WraProductDto product)
@@ -222,6 +243,7 @@ public class WRAProductManagementService : IProductManagementService
         content.SetValue("longDescription", productDto.Description);
         content.SetValue("location", productDto.Location);
     }
+
 
     private (IPublishedContent?, IPublishedContent?) GetCategories(string categoryName, string subCategoryName)
     {

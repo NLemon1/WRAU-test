@@ -1,9 +1,23 @@
+using MassTransit;
+using NPoco.FluentMappings;
 using WRA.Umbraco.Configurations;
-using WRA.Umbraco.Services;
-using WRA.Umbraco.Events.ServiceBusSubscriptions;
-using Microsoft.AspNetCore.Identity;
-using Umbraco.Cms.Core.Security;
+using WRA.Umbraco.Contracts;
+using WRA.Umbraco.Events.ServiceBusSubscriptions.Consumers;
+using WRA.Umbraco.Events.ServiceBusSubscriptions.Publisher;
+using WRA.Umbraco.Extensions.ServiceBus;
+using WRA.Umbraco.Infrastructure.Messaging;
 using WRA.Umbraco.UmbracoExtensions;
+using WRA.Umbraco.Models.Custom.Events;
+using WRA.Umbraco.Web.Services;
+using Serilog;
+using WRA.Umbraco.Events.ServiceBusSubscriptions;
+using WRA.Umbraco.Helpers;
+using WRA.Umbraco.Repositories;
+using ILogger = Serilog.ILogger;
+using IMemberEvent = WRA.Umbraco.Contracts.IMember;
+using MemberEvent = WRA.Umbraco.Models.Custom.Events.Member;
+
+
 
 namespace WRA.Umbraco.Web
 {
@@ -11,6 +25,8 @@ namespace WRA.Umbraco.Web
     {
         private readonly IWebHostEnvironment _env;
         private readonly IConfiguration _config;
+        private static readonly ILogger _logger = Log.ForContext(typeof(Startup));
+
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Startup" /> class.
@@ -38,21 +54,30 @@ namespace WRA.Umbraco.Web
         {
             // custom services
             services.AddScoped<GatedContentService>();
-            services.AddScoped<WRAExternalApiService>();
-            services.AddScoped<WRAMemberManagementService>();
+            services.AddScoped<WraExternalApiService>();
+            services.AddScoped<WraMemberManagementService>();
+            services.AddScoped<IMemberEvent, MemberEvent>();
+            
+            services.AddSingleton<IProductManagementService, WraProductManagementService>();
+            services.AddSingleton<IBusEndpointProvider, SubscriptionEndpointProvider>();
 
+            services.AddTransient<MemberHelper>();
             services.AddTransient<SearchService>();
-            services.AddSingleton<IProductManagementService, WRAProductManagementService>();
-            services.AddTransient<QueueService>();
             services.AddTransient<WraProductService>();
+            services.AddTransient<MemberEventPublisher>();
+            services.AddTransient<TopicEndpointProvider>();
+            
+            // repositories
+            services.AddTransient<CompanyRepository>();
+            services.AddTransient<BoardRepository>();
+            services.AddTransient<CompanyRepository>();
 
-            services.Configure<MemberSubscriptionServiceSettings>(_config.GetSection("SubscriptionServiceSettings:MemberSubscriptionSettings"));
-            services.AddSingleton<IHostedService, WraMemberSubscriptionService>();
+            var settings = _config.GetSection(nameof(MessagingSettings)).Get<MessagingSettings>();
 
-            // services.Configure<ProductSubscriptionServiceSettings>(_config.GetSection("SubscriptionServiceSettings:ProductSubscriptionSettings"));
-            // services.AddSingleton<IHostedService, WraProductSubscriptionService>();
-
-
+            if (settings != null)
+            {
+                services.AddSingleton(settings);
+            }
             // umbraco services
             services.AddUmbraco(_env, _config)
                 .AddBackOffice()
@@ -62,9 +87,58 @@ namespace WRA.Umbraco.Web
                 .AddComposers()
                 .AddWraNotifications()
                 .ConfigureMySwaggerGen()
+                .AddWraPasswordHashing()
                 .Build();
 
-            services.AddSingleton<IPasswordHasher<MemberIdentityUser>, CustomMemberPasswordHasher<MemberIdentityUser>>();
+            // services.AddSingleton<IPasswordHasher<MemberIdentityUser>, CustomMemberPasswordHasher<MemberIdentityUser>>();
+            // services.AddHostedService<EntityEvent<MemberDto>>();
+            services.AddMassTransit(x =>
+            {
+                var memberEndpointSettings = settings.GetEndPointSettings<Member>();
+
+                x.SetKebabCaseEndpointNameFormatter();
+
+                if (memberEndpointSettings?.Enabled == true)
+                {
+                    _logger.Information("Added {Consumer} Consumer", typeof(MemberUpdateConsumer).GetGenericTypeName());
+                    x.AddConsumer<MemberUpdateConsumer>();
+                }
+
+                x.UsingAzureServiceBus((context, cfg) =>
+                {
+                    if (settings != null)
+                    {
+                        cfg.Host(settings.BusConnectionString);
+                        // cfg.ConfigureEndpoints(context);
+                        // Base Service Bus connection string.
+                        // Global Retry policy
+                        cfg.UseMessageRetry(r => r.Interval(settings.GlobalRetryCount, TimeSpan.FromSeconds(settings.GlobalRetryDelaySeconds)));
+                        // Global Exception handling
+                        cfg.UseScheduledRedelivery(r => r.Intervals(settings.GetSchedulerRetryIntervals()));
+                        cfg.UseMessageScheduler(settings.GetSchedulerSendEndpointUri());
+
+                        // Member Subscription
+                    }
+                    var busEndpointProvider = new SubscriptionEndpointProvider(settings);
+                    var subscription = busEndpointProvider.GetSubscriptionEndpoint<IEntityEvent<IMemberEvent>>();
+                    
+                    var memberSettings = settings.GetEndPointSettings<MemberEvent>();
+                    if (memberSettings is { Enabled: true })
+                    {
+                        cfg.SubscriptionEndpoint<IEntityEvent<IMemberEvent>>(subscription, e =>
+                        {
+                            e.ConfigureConsumer<MemberUpdateConsumer>(context);
+                            e.UseRateLimit(1000, TimeSpan.FromSeconds(5));
+                            e.UseConcurrencyLimit(1);
+                        });
+                    }
+
+                    // It's a good practice to also configure a message scheduler for scheduled delivery
+                    cfg.UseServiceBusMessageScheduler();
+                    cfg.ConfigureEndpoints(context);
+                });
+
+            });
         }
 
         /// <summary>
@@ -96,6 +170,7 @@ namespace WRA.Umbraco.Web
                     u.UseBackOfficeEndpoints();
                     u.UseWebsiteEndpoints();
                 });
+
         }
     }
 }

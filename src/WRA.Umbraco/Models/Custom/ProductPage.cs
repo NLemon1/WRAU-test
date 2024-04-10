@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Commerce.Cms.Models;
 using Umbraco.Commerce.Core.Models;
+using WRA.Umbraco.Extensions;
 
 namespace WRA.Umbraco.Models
 {

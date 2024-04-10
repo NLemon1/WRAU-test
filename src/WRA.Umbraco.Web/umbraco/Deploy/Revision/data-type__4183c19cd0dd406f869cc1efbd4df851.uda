@@ -1,0 +1,13 @@
+{
+  "Name": "Member - Marketing Email - Email address",
+  "Alias": "",
+  "EditorAlias": "Umbraco.EmailAddress",
+  "DatabaseType": "Nvarchar",
+  "Configuration": {
+    "IsRequired": false
+  },
+  "Udi": "umb://data-type/4183c19cd0dd406f869cc1efbd4df851",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
+  "__version": "13.1.0"
+}

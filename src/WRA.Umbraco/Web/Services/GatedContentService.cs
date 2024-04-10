@@ -1,16 +1,12 @@
-
-
-using System.Collections;
-using K4os.Compression.LZ4.Internal;
-using NUglify.Helpers;
 using Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Core.Models.Blocks;
 using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Cms.Core.Security;
 using Umbraco.Cms.Core.Services;
 using Umbraco.Cms.Core.Web;
+using WRA.Umbraco.Extensions;
 
-namespace WRA.Umbraco.Services
+namespace WRA.Umbraco.Web.Services
 {
     public class GatedContentService
     {

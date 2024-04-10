@@ -1,14 +1,12 @@
 using Examine;
 using Examine.Search;
-using MailKit.Search;
-using Microsoft.AspNetCore.Http;
 using Umbraco.Cms.Core;
 using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Cms.Infrastructure.Examine;
 using Umbraco.Cms.Web.Common;
 using WRA.Umbraco.Models;
 
-namespace WRA.Umbraco.Services;
+namespace WRA.Umbraco.Web.Services;
 public class SearchService
 {
     private readonly IPublishedContentQuery _publishedContentQuery;

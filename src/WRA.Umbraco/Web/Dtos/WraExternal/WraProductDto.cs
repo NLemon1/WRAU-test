@@ -66,7 +66,7 @@ public class WraProductDto
     public bool IsTaxable { get; set; }
 
     [JsonPropertyName("startDate")]
-    public DateTime StartDate { get; set; }
+    public DateTime? StartDate { get; set; }
 
     [JsonPropertyName("endDate")]
     public DateTime? EndDate { get; set; }

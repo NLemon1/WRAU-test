@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Umbraco.Cms.Core.Web;
 using Microsoft.AspNetCore.Mvc;
 using WRA.Umbraco.Models.ViewModels;
-using WRA.Umbraco.Services;
 using Umbraco.Cms.Core.Models.PublishedContent;
+using WRA.Umbraco.Web.Services;
 
 namespace UmbracoProject.Controller;
 

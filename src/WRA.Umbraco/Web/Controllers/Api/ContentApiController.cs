@@ -1,18 +1,15 @@
-using System.Collections.Immutable;
-using System.Diagnostics;
 using System.Web.Http;
 using Microsoft.AspNetCore.Mvc;
-using NUglify.JavaScript.Syntax;
-using Org.BouncyCastle.Asn1.Pkcs;
 using Umbraco.Cms.Api.Common.Attributes;
 using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Cms.Core.Web;
 using Umbraco.Cms.Web.Common;
-using Umbraco.Cms.Web.Common.Controllers;
 using WRA.Umbraco.Dtos;
+using WRA.Umbraco.Extensions;
 using WRA.Umbraco.Models;
-using WRA.Umbraco.Services;
-namespace WRA.Umbraco.Controllers;
+using WRA.Umbraco.Web.Services;
+
+namespace WRA.Umbraco.Web.Controllers.Api;
 
 [ApiController]
 [MapToApi("content-api")]

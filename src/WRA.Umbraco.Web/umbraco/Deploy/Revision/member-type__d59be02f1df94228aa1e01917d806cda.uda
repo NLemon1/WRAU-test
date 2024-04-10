@@ -149,6 +149,13 @@
           "SortOrder": 13
         },
         {
+          "Key": "8b8c49c8-b04e-466e-8403-a35ea2c4c72b",
+          "Alias": "marketingEmail",
+          "DataType": "umb://data-type/4183c19cd0dd406f869cc1efbd4df851",
+          "Name": "Marketing Email",
+          "SortOrder": 32
+        },
+        {
           "Key": "96a2455e-b75b-409c-a8a9-0647d3af6656",
           "Alias": "stateProvince",
           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
@@ -264,6 +271,10 @@
       "Ordering": true
     },
     {
+      "Udi": "umb://data-type/4183c19cd0dd406f869cc1efbd4df851",
+      "Ordering": true
+    },
+    {
       "Udi": "umb://data-type/83289ee15c5e48aba8b52fe1bb3c9838",
       "Ordering": true
     },
@@ -293,5 +304,5 @@
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.MemberTypeArtifact",
-  "__version": "13.0.4"
+  "__version": "13.1.0"
 }

@@ -1,20 +1,14 @@
-
-
-using Microsoft.Extensions.Azure;
-using Smidge.Models;
 using Umbraco.Cms.Core;
 using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Cms.Core.Web;
-using Umbraco.Commerce.Cms.Discounts.Rewards;
-// using Umbraco.Commerce.Cms.Helpers;
 using Umbraco.Commerce.Core.Api;
-using Umbraco.Commerce.Core.Discounts.Rules;
-using Umbraco.Commerce.Core.Models;
 using Umbraco.Commerce.Core.Services;
 using WRA.Umbraco.Dtos;
+using WRA.Umbraco.Extensions;
 using WRA.Umbraco.Models;
+// using Umbraco.Commerce.Cms.Helpers;
 
-namespace WRA.Umbraco.Services;
+namespace WRA.Umbraco.Web.Services;
 
 public class WraProductService(
     IUmbracoCommerceApi umbracoCommerceApi,
@@ -52,6 +46,16 @@ public class WraProductService(
                 .Where(p => p.Taxonomy.Contains(request.Taxonomy));
         }
         return products;
+    }
+
+    public ProductPage? GetProductById(string productId)
+    {
+
+        var product = searchService.Search(ProductPage.ModelTypeAlias)
+            .Select(p => new ProductPage(p.Content, new NoopPublishedValueFallback()))
+            .FirstOrDefault(p => p.ProductId == productId);
+
+        return product;
     }
 
     public IEnumerable<BundlePage> GetProductBundles(ProductBundlesRequestDto request)

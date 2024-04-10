@@ -1,25 +1,16 @@
-using Lucene.Net.Analysis.Core;
+using System.Text.Json;
 using RestSharp;
-using RestSharp.Authenticators;
 
-
-namespace WRA.Umbraco.Services;
-public class WRAExternalApiService
+namespace WRA.Umbraco.Web.Services;
+public class WraExternalApiService
 {
-    private readonly string _token;
-
-
-    public WRAExternalApiService()
-    {
-        _token = "sJWH7cFR6rSVVYMjrxYAIY0ZrhW7SVJYik5qTUb";
-    }
-
+    private const string Token = "sJWH7cFR6rSVVYMjrxYAIY0ZrhW7SVJYik5qTUb";
     public async Task<RestResponse> GetProductCategories()
     {
         var options = new RestClientOptions("https://app2.wra.org/umbraco/api/v1");
         var client = new RestClient(options);
         var request = new RestRequest("productcategory");
-        request.AddHeader("X-API-KEY", _token);
+        request.AddHeader("X-API-KEY", Token);
         var response = await client.GetAsync(request);
 
         return response;
@@ -29,7 +20,7 @@ public class WRAExternalApiService
         var options = new RestClientOptions("https://app2.wra.org/umbraco/api/v1");
         var client = new RestClient(options);
         var request = new RestRequest("productSubcategory");
-        request.AddHeader("X-API-KEY", _token);
+        request.AddHeader("X-API-KEY", Token);
         var response = await client.GetAsync(request);
 
         return response;
@@ -39,7 +30,7 @@ public class WRAExternalApiService
         var options = new RestClientOptions("https://app2.wra.org/umbraco/api/v1");
         var client = new RestClient(options);
         var request = new RestRequest("product");
-        request.AddHeader("X-API-KEY", _token);
+        request.AddHeader("X-API-KEY", Token);
         var response = await client.GetAsync(request);
 
         return response;
@@ -50,7 +41,7 @@ public class WRAExternalApiService
         var options = new RestClientOptions("https://app2.wra.org/umbraco/api/v1");
         var client = new RestClient(options);
         var request = new RestRequest("localboard");
-        request.AddHeader("X-API-KEY", _token);
+        request.AddHeader("X-API-KEY", Token);
         var response = await client.GetAsync(request);
 
         return response;
@@ -59,8 +50,8 @@ public class WRAExternalApiService
     {
         var options = new RestClientOptions("https://app2.wra.org/umbraco/api/v1");
         var client = new RestClient(options);
-        var request = new RestRequest("member/search").AddBody(new { keyword = "", pageSize = 50, pageNumber = 1 });
-        request.AddHeader("X-API-KEY", _token);
+        var request = new RestRequest("member/search").AddBody(new { keyword = "", pageSize = amount, pageNumber = 1 });
+        request.AddHeader("X-API-KEY", Token);
         var response = await client.PostAsync(request);
 
         return response;
@@ -70,7 +61,7 @@ public class WRAExternalApiService
         var options = new RestClientOptions("https://app2.wra.org/umbraco/api/v1");
         var client = new RestClient(options);
         var request = new RestRequest("company/search").AddBody(new { keyword = "", pageSize = amount, pageNumber = 1 });
-        request.AddHeader("X-API-KEY", _token);
+        request.AddHeader("X-API-KEY", Token);
         var response = await client.PostAsync(request);
 
         return response;

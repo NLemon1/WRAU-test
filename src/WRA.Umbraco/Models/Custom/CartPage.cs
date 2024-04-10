@@ -1,4 +1,5 @@
 using Umbraco.Commerce.Core.Models;
+using WRA.Umbraco.Extensions;
 
 namespace WRA.Umbraco.Models
 {

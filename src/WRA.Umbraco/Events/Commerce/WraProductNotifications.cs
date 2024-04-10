@@ -2,14 +2,13 @@ using System.Text.Json;
 using Umbraco.Cms.Core.Events;
 using Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Core.Notifications;
-using WRA.Umbraco.Services;
+using WRA.Umbraco.Web.Services;
 
 namespace WRA.Umbraco.Events;
 
 public class WraProductNotifications : INotificationHandler<ContentPublishedNotification>
 {
     readonly IProductManagementService _productManagementService;
-    readonly QueueService _queueService;
     public WraProductNotifications(IProductManagementService WRAProductManagementService) : base()
     {
         _productManagementService = WRAProductManagementService;

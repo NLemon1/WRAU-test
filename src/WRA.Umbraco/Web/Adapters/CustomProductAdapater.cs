@@ -18,7 +18,6 @@ using Umbraco.Commerce.Core.Services;
 using Umbraco.Commerce.Extensions;
 using WRA.Umbraco;
 using WRA.Umbraco.Models;
-using WRA.Umbraco.Services;
 
 public class CustomProductAdapater : UmbracoProductAdapter
 {

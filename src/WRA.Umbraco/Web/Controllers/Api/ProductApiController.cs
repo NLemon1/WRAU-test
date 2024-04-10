@@ -1,28 +1,21 @@
 using Microsoft.AspNetCore.Mvc;
-using System.Threading;
-using System.Linq;
+using Umbraco.Cms.Api.Common.Attributes;
 using Umbraco.Cms.Core;
 using Umbraco.Cms.Web.Common.Controllers;
-using Umbraco.Extensions;
 using Umbraco.Commerce.Core.Services;
-using WRA.Umbraco.Models;
-using WRA.Umbraco.Dtos;
 using Umbraco.Commerce.Extensions;
-using WRA.Umbraco;
-using Umbraco.Cms.Api.Common.Attributes;
-using WRA.Umbraco.Services;
-using Umbraco.Cms.Core.Models.PublishedContent;
-using Umbraco.Commerce.Core.Api;
-using Umbraco.Commerce.Core.Models;
+using WRA.Umbraco.Dtos;
+using WRA.Umbraco.Extensions;
+using WRA.Umbraco.Models;
+using WRA.Umbraco.Web.Services;
 
-namespace WRA.Umbraco.Controllers;
+namespace WRA.Umbraco.Web.Controllers.Api;
 
 [ApiController]
 [MapToApi("product-api")]
 public class ProductApiController(
     IProductService productService,
     IPublishedContentQuery publishedContentQuery,
-    SearchService searchService,
     WraProductService wraProductService)
     : UmbracoApiController
 {
@@ -34,6 +27,14 @@ public class ProductApiController(
         var responseItems = products.Select(p => p.AsDto());
         return responseItems;
 
+    }
+
+    [HttpGet]
+    [Route("GetProductByExternalID")]
+    public ProductPageResponseDto GetProductByExternalID(string id)
+    {
+        var product = wraProductService.GetProductById(id);
+        return product.AsDto();
     }
 
 

@@ -1,89 +1,74 @@
-
-
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Web.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using SqlKata;
 using Umbraco.Cms.Api.Common.Attributes;
-using Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Core.Scoping;
 using Umbraco.Cms.Core.Services;
+using Umbraco.Cms.Core.Web;
 using WRA.Umbraco.Dtos;
-using WRA.Umbraco.Models;
-using WRA.Umbraco.Services;
-using System.Text.Json.Serialization;
+using WRA.Umbraco.Helpers;
+using WRA.Umbraco.Repositories;
+using WRA.Umbraco.Web.Services;
 
-
-namespace WRA.Umbraco.Controllers;
+namespace WRA.Umbraco.Web.Controllers.Api;
 
 [ApiController]
 [MapToApi("member-api")]
 [Route("WraMemberApi")]
-public class MemberSyncApiController : ApiController
+public class MemberSyncApiController(
+    WraMemberManagementService wraMemberManagementService,
+    ICoreScopeProvider coreScopeProvider,
+    WraExternalApiService wraExternalApiService,
+    IMemberService memberService,
+    IUmbracoContextFactory umbracoContextFactory,
+    BoardRepository boardRepository,
+    CompanyRepository   companyRepository,
+    ILogger<MemberSyncApiController> logger)
+    : ApiController
 {
-    private readonly IMemberService _memberService;
-    private readonly IContentService _contentService;
-    private readonly SearchService _searchService;
-    private readonly ICoreScopeProvider _coreScopeProvider;
-    private readonly WRAMemberManagementService _WRAMemberManagementService;
-    private readonly WRAExternalApiService _wraExternalApiService;
-    private readonly ILogger<MemberSyncApiController> _logger;
-
-
-    public MemberSyncApiController(
-        WRAMemberManagementService WRAMemberManagementService,
-        ICoreScopeProvider coreScopeProvider,
-        IContentService contentService,
-        SearchService searchService,
-        WRAExternalApiService wraExternalApiService,
-        ILogger<MemberSyncApiController> logger
-    )
+    private static readonly JsonSerializerOptions SerializationOptions = new()
     {
-        _WRAMemberManagementService = WRAMemberManagementService;
-        _coreScopeProvider = coreScopeProvider;
-        _contentService = contentService;
-        _searchService = searchService;
-        _wraExternalApiService = wraExternalApiService;
-        _logger = logger;
-    }
+        PropertyNameCaseInsensitive = true
+    };
 
 
     [HttpPost]
     [Route("Create")]
-    public async Task<IActionResult> Create(MemberDto newMemberRequest)
+    public Task<IActionResult> Create(IMemberEvent newMemberRequest)
     {
 
-        var result = _WRAMemberManagementService.Create(newMemberRequest);
+        var result = wraMemberManagementService.CreateOrUpdate(newMemberRequest);
         if (result == null)
         {
-            return StatusCode(System.Net.HttpStatusCode.InternalServerError);
+            return Task.FromResult<IActionResult>(StatusCode(System.Net.HttpStatusCode.InternalServerError));
         }
-        return Ok(result.Id);
+        return Task.FromResult<IActionResult>(Ok(result.Id));
     }
 
     [HttpPost]
     [Route("Update")]
-    public async Task<IActionResult> Update(MemberDto updateMemberRequest)
+    public Task<IActionResult> Update(IMemberEvent updateMemberRequest)
     {
-        var result = _WRAMemberManagementService.Update(updateMemberRequest);
+        var result = wraMemberManagementService.Update(updateMemberRequest);
         if (result == null)
         {
-            return StatusCode(System.Net.HttpStatusCode.InternalServerError);
+            return Task.FromResult<IActionResult>(StatusCode(System.Net.HttpStatusCode.InternalServerError));
         }
-        return Ok(result.Id);
+        return Task.FromResult<IActionResult>(Ok(result.Id));
     }
 
     [HttpPost]
     [Route("Delete")]
-    public async Task<IActionResult> Delete(MemberDto updateMemberRequest)
+    public Task<IActionResult> Delete(IMemberEvent updateMemberRequest)
     {
-        var result = _WRAMemberManagementService.Delete(updateMemberRequest);
+        var result = wraMemberManagementService.Delete(updateMemberRequest);
         if (result == null)
         {
-            return StatusCode(System.Net.HttpStatusCode.InternalServerError);
+            return Task.FromResult<IActionResult>(StatusCode(System.Net.HttpStatusCode.InternalServerError));
         }
-        return Ok(result.IsCompletedSuccessfully);
+        return Task.FromResult<IActionResult>(Ok(result.IsCompletedSuccessfully));
     }
 
     [HttpPost]
@@ -94,7 +79,7 @@ public class MemberSyncApiController : ApiController
 
         try
         {
-            _memberService.AddRole(RoleName);
+            memberService.AddRole(RoleName);
             return Ok();
 
         }
@@ -109,26 +94,30 @@ public class MemberSyncApiController : ApiController
 
     [HttpPost]
     [Route("CreateBoard")]
-    public async Task<IActionResult> CreateBoard(MemberBoardDto mb)
+    public Task<IActionResult> CreateBoard(MemberBoardDto mb)
     {
-        var result = _WRAMemberManagementService.CreateBoard(mb);
-        if (result == null)
-        {
-            return StatusCode(System.Net.HttpStatusCode.InternalServerError);
-        }
-        return Ok(result.Id);
+        using var umbracoContextReference = umbracoContextFactory.EnsureUmbracoContext();
+        var contentQuery = umbracoContextReference.UmbracoContext.Content;
+        if (contentQuery == null) return Task.FromResult<IActionResult>(InternalServerError(new Exception("Could not get content cache")));
+
+        var result = boardRepository.CreateOrUpdateBoard(mb, contentQuery);
+        return Task.FromResult<IActionResult>(Ok(result.Id));
     }
 
     [HttpPost]
     [Route("SyncAllBoards")]
     public async Task<IActionResult> SyncAllBoards()
     {
-        var productsResp = await _wraExternalApiService.GetBoards();
+        using var umbracoContextReference = umbracoContextFactory.EnsureUmbracoContext();
+        var contentQuery = umbracoContextReference.UmbracoContext.Content;
+        if (contentQuery == null) return InternalServerError(new Exception("Could not get content cache"));
+        
+        var productsResp = await wraExternalApiService.GetBoards();
         var localBoards = JsonSerializer.Deserialize<List<MemberBoardDto>>(productsResp.Content);
 
         foreach (var board in localBoards)
         {
-            await _WRAMemberManagementService.CreateBoard(board);
+            boardRepository.CreateOrUpdateBoard(board, contentQuery);
         }
         return Ok();
 
@@ -145,24 +134,21 @@ public class MemberSyncApiController : ApiController
                 await SyncAllBoards();
                 await SyncAllCompanies();
             }
-            var membersResp = await _wraExternalApiService.GetMembers(limit);
-            var members = JsonSerializer.Deserialize<SearchResponse<MemberDto>>(membersResp.Content);
+            var membersResp = await wraExternalApiService.GetMembers(limit);
+            if (membersResp.Content == null) return Ok();
+            var members = JsonSerializer.Deserialize<SearchResponse<MemberEvent>>(membersResp.Content, SerializationOptions);
 
-            // crate a scope
-            using ICoreScope scope = _coreScopeProvider.CreateCoreScope(autoComplete: true);
-
-            // supress any notification to prevent our listener from firing an "updated member" webhook back at the queue
-            using var _ = scope.Notifications.Suppress();
-
+            if (members?.Data == null) return InternalServerError(new Exception("No members returned from API."));
             foreach (var member in members.Data)
             {
-                _WRAMemberManagementService.Create(member);
+                await wraMemberManagementService.CreateOrUpdate(member);
             }
+
             return Ok();
         }
-        catch (System.Exception ex)
+        catch (Exception ex)
         {
-            _logger.LogError($"Error syncing members from API. error: {ex.Message}");
+            logger.LogError($"Error syncing members from API. error: {ex.Message}");
             throw;
         }
     }
@@ -174,54 +160,56 @@ public class MemberSyncApiController : ApiController
     {
         try
         {
-            var companiesResp = await _wraExternalApiService.GetCompanies();
+            var companiesResp = await wraExternalApiService.GetCompanies();
+            if (companiesResp.Content == null) return InternalServerError(new Exception("Bad response from API."));
             var companies = JsonSerializer.Deserialize<SearchResponse<CompanyDto>>(companiesResp.Content);
-
+            
+            using var umbracoContextReference = umbracoContextFactory.EnsureUmbracoContext();
+            var contentQuery = umbracoContextReference.UmbracoContext.Content;
+            if (companies?.Data == null) return InternalServerError(new Exception("No companies returned from API."));
             foreach (var company in companies.Data)
             {
-                await _WRAMemberManagementService.CreateCompany(company);
+                companyRepository.Create(company, contentQuery);
             }
+
             return Ok();
         }
         catch (System.Exception ex)
         {
-            _logger.LogError($"Error syncing companies from API. error: {ex.Message}");
+            logger.LogError($"Error syncing companies from API. error: {ex.Message}");
             throw;
         }
     }
 
     [HttpPost]
     [Route("CreateCompany")]
-    public async Task<IActionResult> CreateCompany(CompanyDto company)
+    public Task<IActionResult> CreateCompany(CompanyDto company)
     {
+        using var umbracoContextReference = umbracoContextFactory.EnsureUmbracoContext();
+        var contentQuery = umbracoContextReference.UmbracoContext.Content;
+        if (contentQuery == null) return Task.FromResult<IActionResult>(InternalServerError(new Exception("Could not get content cache")));
 
-        var result = await _WRAMemberManagementService.CreateCompany(company);
-        if (result == null)
-        {
-            return StatusCode(System.Net.HttpStatusCode.InternalServerError);
-        }
-        return Ok(result.Id);
+        var result = companyRepository.Create(company, contentQuery);
+        return Task.FromResult<IActionResult>(Ok(result.Id));
     }
 
-    [HttpPost]
-    [Route("CreateActiveCompanySubscription")]
-    public async Task<IActionResult> CreateActiveCompanySubscription(WraCompanySubscriptionDto companySubscription)
-    {
-        var result = _WRAMemberManagementService.CreateActiveCompanySubscription(companySubscription);
-        if (result == null)
-        {
-            return StatusCode(System.Net.HttpStatusCode.InternalServerError);
-        }
-        return Ok(result.Id);
-    }
-
-
+    // [HttpPost]
+    // [Route("CreateActiveCompanySubscription")]
+    // public async Task<IActionResult> CreateActiveCompanySubscription(WraCompanySubscriptionDto companySubscription)
+    // {
+    //     var result = wraMemberManagementService.CreateActiveCompanySubscription(companySubscription);
+    //     if (result == null)
+    //     {
+    //         return StatusCode(System.Net.HttpStatusCode.InternalServerError);
+    //     }
+    //     return Ok(result.Id);
+    // }
 }
 
-class SearchResponse<T>
+internal class SearchResponse<T>
 {
     [JsonPropertyName("data")]
-    public IEnumerable<T> Data { get; set; }
+    public IEnumerable<T>? Data { get; set; }
     public int CurrentPage { get; set; }
     public int TotalPages { get; set; }
     public int TotalCount { get; set; }

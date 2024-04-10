@@ -13,8 +13,7 @@ using Umbraco.Cms.Web.Common.Filters;
 using Umbraco.Cms.Web.Common.Security;
 using Umbraco.Cms.Web.Website.Controllers;
 using Umbraco.Cms.Web.Website.Models;
-
-using WRA.Umbraco.Services;
+using WRA.Umbraco.Web.Services;
 
 namespace WRA.Umbraco.Controllers;
 
@@ -24,12 +23,12 @@ public class MemberRegisterController : SurfaceController
     private readonly IMemberService _memberService;
     private readonly IMemberSignInManager _memberSignInManager;
     private readonly ICoreScopeProvider _coreScopeProvider;
-    private readonly WRAMemberManagementService _WRAMemberManagementService;
+    private readonly WraMemberManagementService _WRAMemberManagementService;
 
     public MemberRegisterController(
         IMemberManager memberManager,
         IMemberService memberService,
-        WRAMemberManagementService WRAMemberManagementService,
+        WraMemberManagementService WRAMemberManagementService,
         IUmbracoContextAccessor umbracoContextAccessor,
         IUmbracoDatabaseFactory databaseFactory,
         ServiceContext services,
@@ -135,7 +134,7 @@ public class MemberRegisterController : SurfaceController
 
     private async Task<IdentityResult> RegisterMemberAsync(RegisterModel model, bool logMemberIn = true)
     {
-        var (identityResult,identityUser)= await _WRAMemberManagementService.AddMember(model);
+        var (identityResult,identityUser)= await _WRAMemberManagementService.RegisterMember(model);
 
         if (logMemberIn && identityResult.Succeeded)
         {

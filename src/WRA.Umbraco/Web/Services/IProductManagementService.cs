@@ -1,6 +1,4 @@
-using Umbraco.Cms.Core.Models.PublishedContent;
-
-namespace WRA.Umbraco.Services;
+namespace WRA.Umbraco.Web.Services;
 
 public interface IProductManagementService
 {
