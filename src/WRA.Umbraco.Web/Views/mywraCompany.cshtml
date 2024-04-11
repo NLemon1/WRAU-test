@@ -54,7 +54,7 @@
                                 <span>Company Education Programs</span>
                                 <i class="fas fa-chevron-right" style="color: var(--bs-primary)"></i>
                             </a>
-                            <a id="tab-library-subscriptions" href="#tabpanel-library-subscriptions" role="tab" aria-selected="false" aria-controls="tabpanel-library-subscriptions" class="js-page-tab w-100 py-3 text-body fw-bold text-decoration-none border-bottom border-medium d-flex flex-row align-items-center justify-content-between">
+                            <a id="tab-library-subscriptions" href="#tabpanel-library-subscriptions" role="tab" aria-selected="false" aria-controls="tabpanel-library-subscriptions" class="js-page-tab w-100 py-3 text-body fw-bold text-decoration-none d-flex flex-row align-items-center justify-content-between">
                                 <span>WRA PDF Forms Library Subscription</span>
                                 <i class="fas fa-chevron-right" style="color: var(--bs-primary)"></i>
                             </a>
@@ -68,12 +68,12 @@
                         <div class="w-100 h-100">
                             <div class="row g-0 h-100 align-items-baseline align-content-start align-items-lg-stretch align-content-lg-stretch">
                                 <div class="mywra-tab__panel-return col-12 col-lg-3" style="background-color: var(--bs-gray-10)">
-                                    <div class="mywra-left px-4 pb-6 pt-5 pt-lg-9">
-                                        <button class="js-page-tab-return-btn outline-0 border-0 text-link fw-bold text-decoration-none" title="Close Panel"><i class="fa-solid fa-chevron-left"></i> <span class="fs-lg ps-2">My Company</span></button>
+                                    <div class="mywra-left px-4 pb-6 pt-5 pt-lg-9 h-100">
+                                        <button class="js-page-tab-return-btn page-tab-return-btn  outline-0 border-0 text-link fw-bold text-decoration-none" title="Close Panel"><i class="fa-solid fa-chevron-left"></i> <span class="fs-lg ps-2">My Company</span></button>
                                     </div>
                                 </div>
                                 <div class="col position-relative bg-white pb-5">
-                                    <div class="mywra-right container container--sm ms-0 pt-5 pt-lg-11">
+                                    <div class="mywra-right container container--sm ms-0 pt-5 pt-lg-9">
                                         @if (!String.IsNullOrEmpty(content?.HeadlineAgentEdHist))
                                         {
                                             <h2 class="h2">@content.HeadlineAgentEdHist</h2>
@@ -115,12 +115,12 @@
                         <div class="w-100 h-100">
                             <div class="row g-0 h-100 align-items-baseline align-content-start align-items-lg-stretch align-content-lg-stretch">
                                 <div class="mywra-tab__panel-return col-12 col-lg-3" style="background-color: var(--bs-gray-10)">
-                                    <div class="mywra-left px-4 pb-6 pt-5 pt-lg-9">
-                                        <button class="js-page-tab-return-btn outline-0 border-0 text-link fw-bold text-decoration-none" title="Close Panel"><i class="fa-solid fa-chevron-left"></i> <span class="fs-lg ps-2">My Company</span></button>
+                                    <div class="mywra-left px-4 pb-6 pt-5 pt-lg-9 h-100">
+                                        <button class="js-page-tab-return-btn page-tab-return-btn  outline-0 border-0 text-link fw-bold text-decoration-none" title="Close Panel"><i class="fa-solid fa-chevron-left"></i> <span class="fs-lg ps-2">My Company</span></button>
                                     </div>
                                 </div>
                                 <div class="col position-relative bg-white pb-5">
-                                    <div class="mywra-right container container--sm ms-0 pt-5 pt-lg-11">
+                                    <div class="mywra-right container container--sm ms-0 pt-5 pt-lg-9">
                                         @if (!String.IsNullOrEmpty(content?.HeadlineAgentTrainingStatus))
                                         {
                                             <h2 class="h2">@content.HeadlineAgentTrainingStatus</h2>
@@ -143,12 +143,12 @@
                         <div class="w-100 h-100">
                             <div class="row g-0 h-100 align-items-baseline align-content-start align-items-lg-stretch align-content-lg-stretch">
                                 <div class="mywra-tab__panel-return col-12 col-lg-3" style="background-color: var(--bs-gray-10)">
-                                    <div class="mywra-left px-4 pb-6 pt-5 pt-lg-9">
-                                        <button class="js-page-tab-return-btn outline-0 border-0 text-link fw-bold text-decoration-none" title="Close Panel"><i class="fa-solid fa-chevron-left"></i> <span class="fs-lg ps-2">My Company</span></button>
+                                    <div class="mywra-left px-4 pb-6 pt-5 pt-lg-9 h-100">
+                                        <button class="js-page-tab-return-btn page-tab-return-btn outline-0 border-0 text-link fw-bold text-decoration-none" title="Close Panel"><i class="fa-solid fa-chevron-left"></i> <span class="fs-lg ps-2">My Company</span></button>
                                     </div>
                                 </div>
                                 <div class="col position-relative bg-white pb-5">
-                                    <div class="mywra-right container container--sm ms-0 pt-5 pt-lg-11">
+                                    <div class="mywra-right container container--sm ms-0 pt-5 pt-lg-9">
                                         @if (!String.IsNullOrEmpty(content?.HeadlineEventRegistration))
                                         {
                                             <h2 class="h2">@content.HeadlineEventRegistration</h2>
@@ -193,9 +193,11 @@
 
                                                 <table border="0" class="w-100 fs-sm fw-400">
                                                     <thead class="visually-hidden">
-                                                        <th scope="col">Name</th>
-                                                        <th scope="col">Title</th>
-                                                        <th scope="col">Status</th>
+                                                        <tr>
+                                                            <th scope="col">Name</th>
+                                                            <th scope="col">Title</th>
+                                                            <th scope="col">Status</th>
+                                                        </tr>
                                                     </thead>
                                                     <tbody>
                                                         @for(int n = 0; n < 3; n++)
@@ -208,13 +210,12 @@
                                                         }
                                                     </tbody>
                                                 </table>
-
                                             }
-
                                         </div>
-
-
                                     </div>
+                                    <button class="js-scroll-top btn-scroll-top" data-target="" title="Back to Top">
+                                        <i class="fa-solid fa-arrow-up"></i>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -225,12 +226,12 @@
                         <div class="w-100 h-100">
                             <div class="row g-0 h-100 align-items-baseline align-content-start align-items-lg-stretch align-content-lg-stretch">
                                 <div class="mywra-tab__panel-return col-12 col-lg-3" style="background-color: var(--bs-gray-10)">
-                                    <div class="mywra-left px-4 pb-6 pt-5 pt-lg-9">
-                                        <button class="js-page-tab-return-btn outline-0 border-0 text-link fw-bold text-decoration-none" title="Close Panel"><i class="fa-solid fa-chevron-left"></i> <span class="fs-lg ps-2">My Company</span></button>
+                                    <div class="mywra-left px-4 pb-6 pt-5 pt-lg-9 h-100">
+                                        <button class="js-page-tab-return-btn page-tab-return-btn  outline-0 border-0 text-link fw-bold text-decoration-none" title="Close Panel"><i class="fa-solid fa-chevron-left"></i> <span class="fs-lg ps-2">My Company</span></button>
                                     </div>
                                 </div>
                                 <div class="col position-relative bg-white pb-5">
-                                    <div class="mywra-right container container--sm ms-0 pt-5 pt-lg-11">
+                                    <div class="mywra-right container container--sm ms-0 pt-5 pt-lg-9">
                                         @if (!String.IsNullOrEmpty(content?.HeadlineCompanyInfoChangeForm))
                                         {
                                             <h2 class="h2">@content.HeadlineCompanyInfoChangeForm</h2>
@@ -242,6 +243,51 @@
                                                 @Html.Raw(content.IntroContentCompanyInfoChangeForm)
                                             </div>
                                         }
+
+                                        <form class="mb-5">
+                                            <div class="mb-3">
+                                                <label for="company-name" class="fs-xs">Company Name</label>
+                                                <input id="company-name" class="form-control" type="text" required placeholder="Company Name" />
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="address" class="fs-xs">Address</label>
+                                                <input id="address" class="form-control" type="text" required placeholder="Address" />
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="city" class="fs-xs">City</label>
+                                                <input id="city" class="form-control" type="text" required placeholder="City" />
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="state" class="fs-xs">State</label>
+                                                <input id="state" class="form-control" type="text" required placeholder="State" />
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="zipcode" class="fs-xs">Zip Code</label>
+                                                <input id="zipcode" class="form-control" type="number" maxlength="5" required placeholder="Zip Code" />
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="business-phone" class="fs-xs">Business Phone</label>
+                                                <input id="business-phone" class="form-control" type="number" maxlength="10" placeholder="Business Phone" />
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="tollfree-phone" class="fs-xs">Toll Free</label>
+                                                <input id="tollfree-phone" class="form-control" type="number" maxlength="10" placeholder="Toll Free" />
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="fax" class="fs-xs">Fax</label>
+                                                <input id="fax" class="form-control" type="number" maxlength="10" placeholder="Fax" />
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="email" class="fs-xs">Email Address</label>
+                                                <input id="email" class="form-control" type="email" placeholder="Email Address" />
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="website" class="fs-xs">Website</label>
+                                                <input id="website" class="form-control" type="url" required placeholder="Website" />
+                                            </div>
+                                            <button class="btn btn-primary" type="submit">Submit</button>
+                                        </form>
+
                                     </div>
                                 </div>
                             </div>
@@ -253,12 +299,12 @@
                         <div class="w-100 h-100">
                             <div class="row g-0 h-100 align-items-baseline align-content-start align-items-lg-stretch align-content-lg-stretch">
                                 <div class="mywra-tab__panel-return col-12 col-lg-3" style="background-color: var(--bs-gray-10)">
-                                    <div class="mywra-left px-4 pb-6 pt-5 pt-lg-9">
-                                        <button class="js-page-tab-return-btn outline-0 border-0 text-link fw-bold text-decoration-none" title="Close Panel"><i class="fa-solid fa-chevron-left"></i> <span class="fs-lg ps-2">My Company</span></button>
+                                    <div class="mywra-left px-4 pb-6 pt-5 pt-lg-9 h-100">
+                                        <button class="js-page-tab-return-btn page-tab-return-btn  outline-0 border-0 text-link fw-bold text-decoration-none" title="Close Panel"><i class="fa-solid fa-chevron-left"></i> <span class="fs-lg ps-2">My Company</span></button>
                                     </div>
                                 </div>
                                 <div class="col position-relative bg-white pb-5">
-                                    <div class="mywra-right container container--sm ms-0 pt-5 pt-lg-11">
+                                    <div class="mywra-right container container--sm ms-0 pt-5 pt-lg-9">
                                         @if (!String.IsNullOrEmpty(content?.HeadlineCompanyEducationPrograms))
                                         {
                                             <h2 class="h2">@content.HeadlineCompanyEducationPrograms</h2>
@@ -281,12 +327,12 @@
                         <div class="w-100 h-100">
                             <div class="row g-0 h-100 align-items-baseline align-content-start align-items-lg-stretch align-content-lg-stretch">
                                 <div class="mywra-tab__panel-return col-12 col-lg-3" style="background-color: var(--bs-gray-10)">
-                                    <div class="mywra-left px-4 pb-6 pt-5 pt-lg-9">
-                                        <button class="js-page-tab-return-btn outline-0 border-0 text-link fw-bold text-decoration-none" title="Close Panel"><i class="fa-solid fa-chevron-left"></i> <span class="fs-lg ps-2">My Company</span></button>
+                                    <div class="mywra-left px-4 pb-6 pt-5 pt-lg-9 h-100">
+                                        <button class="js-page-tab-return-btn page-tab-return-btn  outline-0 border-0 text-link fw-bold text-decoration-none" title="Close Panel"><i class="fa-solid fa-chevron-left"></i> <span class="fs-lg ps-2">My Company</span></button>
                                     </div>
                                 </div>
                                 <div class="col position-relative bg-white pb-5">
-                                    <div class="mywra-right container container--sm ms-0 pt-5 pt-lg-11">
+                                    <div class="mywra-right container container--sm ms-0 pt-5 pt-lg-9">
                                         @if (!String.IsNullOrEmpty(content?.HeadlinePdfFormsLibrary))
                                         {
                                             <h2 class="h2">@content.HeadlinePdfFormsLibrary</h2>
@@ -307,7 +353,11 @@
 
                 </div>
 
+
+
             </div>
+
         </div>
     </div>
+
 </div>

@@ -445,3 +445,18 @@
 .btn-prev {
     transform: rotate(180deg);
 }
+
+.btn-scroll-top {
+    color: #FFF;
+    background-color: $btn-color;
+    padding: 1rem;
+    width: 48px;
+    height: 48px;
+    border-radius: 4px;
+    text-align: center;
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    z-index:30;
+    border: 0;
+}

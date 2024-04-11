@@ -17,6 +17,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Content Remove="Views\MyWRA.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
     <None Remove="gulpfile.js" />
   </ItemGroup>
   

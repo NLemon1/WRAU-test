@@ -14517,6 +14517,20 @@ a.link-hover-inverse:not(:hover),
 .btn-prev {
   transform: rotate(180deg);
 }
+.btn-scroll-top {
+  color: #FFF;
+  background-color: #2560B9;
+  padding: 1rem;
+  width: 48px;
+  height: 48px;
+  border-radius: 4px;
+  text-align: center;
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  z-index: 30;
+  border: 0;
+}
 .card {
   position: relative;
   z-index: 0;
@@ -16201,6 +16215,19 @@ html:not(.has-open-nav) .nav-main-mobile {
 }
 .mywra-tab__panel[aria-hidden=true] {
   transform: translateX(100%);
+}
+.site-header.site-header--show-on-scroll-up:not(.position-sticky) + .site-main .mywra-tab__panel {
+  border: solid 1px green;
+  top: 0;
+  height: 100%;
+}
+.site-header.site-header--show-on-scroll-up.site-header--top + .site-main .mywra-tab__panel {
+  top: var(--header-height);
+  height: calc(100% - var(--header-height));
+}
+.page-tab-return-btn {
+  position: sticky;
+  top: 1rem;
 }
 .gated-block {
   z-index: 1;
