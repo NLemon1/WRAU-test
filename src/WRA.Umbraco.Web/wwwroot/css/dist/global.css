@@ -13588,6 +13588,13 @@ figure:last-child {
     font-size: 1rem;
   }
 }
+.yellow-line::after {
+  content: "";
+  display: block;
+  width: 75px;
+  border-top: solid 1.5px #FFC672;
+  margin: 0.5rem 0;
+}
 blockquote {
   font-weight: 600;
 }

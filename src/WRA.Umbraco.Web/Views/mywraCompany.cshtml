@@ -73,7 +73,7 @@
                                     </div>
                                 </div>
                                 <div class="col position-relative bg-white pb-5">
-                                    <div class="mywra-right container container--md ms-0 pt-5 pt-lg-11">
+                                    <div class="mywra-right container container--sm ms-0 pt-5 pt-lg-11">
                                         @if (!String.IsNullOrEmpty(content?.HeadlineAgentEdHist))
                                         {
                                             <h2 class="h2">@content.HeadlineAgentEdHist</h2>
@@ -120,7 +120,7 @@
                                     </div>
                                 </div>
                                 <div class="col position-relative bg-white pb-5">
-                                    <div class="mywra-right container container--md ms-0 pt-5 pt-lg-11">
+                                    <div class="mywra-right container container--sm ms-0 pt-5 pt-lg-11">
                                         @if (!String.IsNullOrEmpty(content?.HeadlineAgentTrainingStatus))
                                         {
                                             <h2 class="h2">@content.HeadlineAgentTrainingStatus</h2>
@@ -148,7 +148,7 @@
                                     </div>
                                 </div>
                                 <div class="col position-relative bg-white pb-5">
-                                    <div class="mywra-right container container--md ms-0 pt-5 pt-lg-11">
+                                    <div class="mywra-right container container--sm ms-0 pt-5 pt-lg-11">
                                         @if (!String.IsNullOrEmpty(content?.HeadlineEventRegistration))
                                         {
                                             <h2 class="h2">@content.HeadlineEventRegistration</h2>
@@ -179,11 +179,37 @@
                                                     Download CSV
                                                 </button>
                                             </div>
-                                            <h3 class="p-2 d-block mb-3" style="background-color: var(--bs-primary-bg-subtle)">Lorem Convention (00/0/0000)</h3>
+                                            <h3 class="p-2 d-block mt-4 mb-3" style="background-color: var(--bs-primary-bg-subtle)">Lorem Convention (00/0/0000)</h3>
                                             <div class="form-check mt-2">
                                                 <input id="download-csv" class="form-check-input" type="checkbox">
                                                 <label for="download-csv" class="form-check-label">Only show registered agents.</label>
                                             </div>
+
+                                            @for (int i = 0; i < 5; i++)
+                                            {
+
+                                                <h4 class="yellow-line fs-lg fw-bold text-capitalize mt-3 pt-1">Realty Company Lorem</h4>
+                                                <p class="fs-sm mb-2" style="color: var(--bs-gray-30)">5555 W Main Rd Ste 240, Duluth, MN</p>
+
+                                                <table border="0" class="w-100 fs-sm fw-400">
+                                                    <thead class="visually-hidden">
+                                                        <th scope="col">Name</th>
+                                                        <th scope="col">Title</th>
+                                                        <th scope="col">Status</th>
+                                                    </thead>
+                                                    <tbody>
+                                                        @for(int n = 0; n < 3; n++)
+                                                        {
+                                                            <tr>
+                                                                <td class="border-bottom border-light py-1">Lastname, Firstname</td>
+                                                                <td class="border-bottom border-light py-1">RN</td>
+                                                                <td class="border-bottom border-light py-1 text-end">Not Registered</td>
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+
+                                            }
 
                                         </div>
 
@@ -204,7 +230,7 @@
                                     </div>
                                 </div>
                                 <div class="col position-relative bg-white pb-5">
-                                    <div class="mywra-right container container--md ms-0 pt-5 pt-lg-11">
+                                    <div class="mywra-right container container--sm ms-0 pt-5 pt-lg-11">
                                         @if (!String.IsNullOrEmpty(content?.HeadlineCompanyInfoChangeForm))
                                         {
                                             <h2 class="h2">@content.HeadlineCompanyInfoChangeForm</h2>
@@ -232,7 +258,7 @@
                                     </div>
                                 </div>
                                 <div class="col position-relative bg-white pb-5">
-                                    <div class="mywra-right container container--md ms-0 pt-5 pt-lg-11">
+                                    <div class="mywra-right container container--sm ms-0 pt-5 pt-lg-11">
                                         @if (!String.IsNullOrEmpty(content?.HeadlineCompanyEducationPrograms))
                                         {
                                             <h2 class="h2">@content.HeadlineCompanyEducationPrograms</h2>
@@ -260,7 +286,7 @@
                                     </div>
                                 </div>
                                 <div class="col position-relative bg-white pb-5">
-                                    <div class="mywra-right container container--md ms-0 pt-5 pt-lg-11">
+                                    <div class="mywra-right container container--sm ms-0 pt-5 pt-lg-11">
                                         @if (!String.IsNullOrEmpty(content?.HeadlinePdfFormsLibrary))
                                         {
                                             <h2 class="h2">@content.HeadlinePdfFormsLibrary</h2>
