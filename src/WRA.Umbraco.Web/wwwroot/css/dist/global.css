@@ -16217,7 +16217,6 @@ html:not(.has-open-nav) .nav-main-mobile {
   transform: translateX(100%);
 }
 .site-header.site-header--show-on-scroll-up:not(.position-sticky) + .site-main .mywra-tab__panel {
-  border: solid 1px green;
   top: 0;
   height: 100%;
 }

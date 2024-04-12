@@ -1,5 +1,15 @@
-﻿@using WRA.Umbraco.Models;
+﻿@using Umbraco.Cms.Core.Security
+@using WRA.Umbraco.Models;
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<CheckoutInformationPage>
+@inject IMemberManager _memberManager
+@{
+    var email = Model.Order.CustomerInfo.Email;
+    MemberIdentityUser? currentMember = await _memberManager.GetCurrentMemberAsync();
+    if (email == null && currentMember != null && currentMember.Email != null)
+    {
+        email = currentMember.Email;
+    }
+}
 
 @{
     Layout = "CheckoutStepPage.cshtml";
@@ -9,11 +19,11 @@
     @Html.Partial("CheckoutSidebar")
 }
 
-@if(Model.Order.CustomerInfo.Email != null)
+@if(email != null)
 {
     <div class="mb-10">
         <h2 class="h4" style="text-transform: none;">Account Information</h2>
-        <a href="" name="Email">@Model.Order.CustomerInfo.Email</a>
+        <a href="" name="Email">@email</a>
     </div>
 }
 
@@ -25,7 +35,7 @@
     <div class="row g-2">
         <div class="col-12">
             <label for="customer-information-email" class="visually-hidden">Email</label>
-            <input id="customer-information-email" class="form-control" type="text" required name="Email" value="@(Model.Order.CustomerInfo.Email)" placeholder="Email" />
+            <input id="customer-information-email" class="form-control" type="text" required name="Email" value="@(email)" placeholder="Email" />
         </div>
         <div class="col-12 col-md-6">
             <label for="customer-information-fname" class="visually-hidden">First name</label>

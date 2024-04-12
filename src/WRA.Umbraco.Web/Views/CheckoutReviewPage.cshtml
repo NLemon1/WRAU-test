@@ -18,17 +18,17 @@
         <div class="d-flex flex-column flex-sm-row py-2">
             <span style="width: 80px; color: #696f78;">Contact</span>
             <span class="flex-grow-1">@Model.Order.CustomerInfo.Email</span>
-            <a class="text-decoration-none" href="#">Change</a>
+            <a class="text-decoration-none" href="/checkout/customer-information">Change</a>
         </div>
         <div class="d-flex flex-column flex-sm-row py-2 border-top">
             <span style="width: 80px; color: #696f78;">Ship to</span>
             <span class="flex-grow-1">@Model.ReadableShippingAddress</span>
-            <a class="text-decoration-none" href="#">Change</a>
+            <a class="text-decoration-none" href="/checkout/customer-information">Change</a>
         </div>
         <div class="d-flex flex-column flex-sm-row py-2 border-top">
             <span style="width: 80px; color: #696f78;">Shipping method</span>
             <span class="flex-grow-1">@Model.ShippingMethod.Name</span>
-            <a class="text-decoration-none" href="#">Change</a>
+            <a class="text-decoration-none" href="/checkout/shipping-method">Change</a>
         </div>
         <div class="d-flex flex-column flex-sm-row py-2 border-top">
             <span style="width: 80px; color: #696f78;">Payment method</span>
