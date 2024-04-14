@@ -1,9 +1,35 @@
-﻿@using WRA.Umbraco.Models;
+﻿@using Umbraco.Cms.Web.Common.Models
+@using Umbraco.Cms.Web.Website.Controllers
+@using Umbraco.Cms.Web.Website.Models
+@using WRA.Umbraco.Controllers
+@using WRA.Umbraco.Models;
+@using Umbraco.Cms.Core
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<CheckoutAccount>
-
+@inject MemberModelBuilderFactory MemberModelBuilderFactory;
 @{
 	Layout = "CheckoutStepPage.cshtml";
+    var loginModel = new LoginModel();
+    loginModel.RedirectUrl = "/checkout/customer-information";
+
+    // Build a registration model with parameters
+    var registerModel = MemberModelBuilderFactory
+    .CreateRegisterModel()
+    // Set the member type alias to use for the new member
+    .WithMemberTypeAlias(Constants.Conventions.MemberTypes.DefaultAlias)
+    // If null or not set, this will redirect to the current page
+    .WithRedirectUrl("/checkout/customer-information")
+    // Set to true if you want the member editable properties shown.
+    // It will only displays properties marked as "Member can edit" on the "Info" tab of the Member Type.
+    .WithCustomProperties(false)
+    // By default the member will be logged in automatically after registration.
+    // Set this to false if the member should not be logged in automatically.
+    .WithAutomaticLogIn(true)
+    .Build();
 }
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
 
 @section aside {
     @Html.Partial("CheckoutSidebar")
@@ -11,14 +37,15 @@
 
 <div class="js-checkout-sign-in">
     <h2 class="h6 mb-3">Sign In</h2>
-    <form>
+    @using (Html.BeginUmbracoForm<UmbLoginController>("HandleLogin", new { RedirectUrl = loginModel.RedirectUrl }))
+    {
         <div class="mb-2">
-            <label for="checkout-signin-email" class="visually-hidden">Email (required)</label>
-            <input id="checkout-signin-email" class="form-control" type="email" required placeholder="Email" />
+            <label asp-for="@loginModel.Username" class="visually-hidden">Email (required)</label>
+            <input asp-for="@loginModel.Username" class="form-control" type="email" required placeholder="Email" />
         </div>
         <div>
-            <label for="checkout-signin-password" class="visually-hidden">Password (required)</label>
-            <input id="checkout-signin-password" class="form-control" type="password" required placeholder="Password" />
+            <label asp-for="@loginModel.Password" class="visually-hidden">Password (required)</label>
+            <input asp-for="@loginModel.Password" class="form-control" type="password" required placeholder="Password" />
         </div>
         <div class="d-flex flex-column align-items-center justify-content-between flex-sm-row mt-4">
             <a class="btn btn-light px-0" href="@Model.CartPage.Url()">
@@ -30,24 +57,37 @@
                 <button class="btn btn-primary btn-sm" type="submit">Sign In</button>
             </div>
         </div>
-    </form>
+    }
 </div>
 
 <div class="d-none js-checkout-create-account">
     <h2 class="h6 mb-3">Create Account</h2>
-    <form>
+    @using (Html.BeginUmbracoForm<MemberRegisterController>("HandleRegisterMember", new
+    {
+        MemberTypeAlias = registerModel.MemberTypeAlias,
+        UsernameIsEmail = registerModel.UsernameIsEmail,
+        RedirectUrl = registerModel.RedirectUrl,
+        AutomaticLogIn = registerModel.AutomaticLogIn
+    }))
+    {
         <div class="row g-2">
             <div class="col-12 col-lg-6">
-                <label for="checkout-create-account-fname" class="visually-hidden">First Name (required)</label>
-                <input id="checkout-create-account-fname" class="form-control" type="text" required placeholder="First Name" />
-            </div>
-            <div class="col-12 col-lg-6">
-                <label for="checkout-create-account-lname" class="visually-hidden">Last Name (required)</label>
-                <input id="checkout-create-account-lname" class="form-control" type="text" required placeholder="Last Name" />
+                <label asp-for="@registerModel.Name" class="visually-hidden">Name (required)</label>
+                <input asp-for="@registerModel.Name" class="form-control" type="text" required placeholder="Name" />
             </div>
             <div class="col-12">
-                <label for="checkout-create-account-email" class="visually-hidden">Email (required)</label>
-                <input id="checkout-create-account-email" class="form-control" type="email" required placeholder="Email" />
+                <label asp-for="@registerModel.Email" class="visually-hidden">Email (required)</label>
+                <input asp-for="@registerModel.Email" class="form-control" type="email" required placeholder="Email" />
+            </div>
+            <div class="col-12">
+                <label asp-for="@registerModel.Password" class="visually-hidden">Password (required)</label>
+                <input asp-for="@registerModel.Password" class="form-control" type="password" required placeholder="Password" />
+                <span asp-validation-for="@registerModel.Password" class="form-text text-danger"></span>
+            </div>
+            <div class="col-12">
+                <label asp-for="@registerModel.ConfirmPassword" class="visually-hidden">Repeat Password (required)</label>
+                <input asp-for="@registerModel.ConfirmPassword" class="form-control" type="password" required placeholder="Repeat Password" />
+                <span asp-validation-for="@registerModel.ConfirmPassword" class="form-text text-danger"></span>
             </div>
         </div>
         <div class="d-flex flex-column align-items-center justify-content-between flex-sm-row mt-4">
@@ -57,5 +97,5 @@
             </button>
             <button class="btn btn-primary" type="submit">Create Account</button>
         </div>
-    </form>
+    }
 </div>
