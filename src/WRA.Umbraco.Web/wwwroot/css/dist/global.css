@@ -16910,7 +16910,6 @@ html:not(.has-open-nav) .nav-main-mobile {
   }
   #ec .ec-day-grid,
   #ec .ec-time-grid {
-    border: solid 1px red;
     overflow-x: auto;
     min-width: 650px;
   }
