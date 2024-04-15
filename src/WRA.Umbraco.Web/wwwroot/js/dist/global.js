@@ -7615,6 +7615,7 @@
     const calendarFilters = document.querySelector(".js-calendar-filters");
     const apiEndpointUrl = "/GetProducts";
     const styleSet = document.querySelector(".js-filter-styles");
+    let filtersLoaded = false;
     let bodyObject = {
       "productType": "Events",
       "categories": Array.from(window.setResources, (x) => x.title),
@@ -7691,7 +7692,7 @@
         }
       },
       loading: function(isLoading) {
-        if (isLoading == false) {
+        if (isLoading == false && filtersLoaded == false) {
           calendarFilters.innerHTML = "";
           setResources.forEach((resource) => {
             calendarFilters.innerHTML += `
@@ -7704,6 +7705,7 @@
           calendarFilters.addEventListener("change", (e) => {
             getValue(document.querySelectorAll(".js-calendar-filter"));
           });
+          filtersLoaded = true;
         }
       },
       eventClick: function(info) {

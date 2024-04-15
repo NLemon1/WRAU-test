@@ -7,6 +7,8 @@ const calendar = () => {
     const apiEndpointUrl = "/GetProducts";
     const styleSet = document.querySelector('.js-filter-styles');
 
+    let filtersLoaded = false;
+
     //console.log(window.setResources)
 
     let bodyObject = {
@@ -84,6 +86,8 @@ const calendar = () => {
         ],
         eventDidMount: function (info) { //adding data id attribute to each event
 
+           // console.log("eventDidMount")
+
             const getEventsResourceId = info.event.resourceIds[0] !== undefined ? info.event.resourceIds[0].toString() : null;
 
             if (!info.el.getAttribute("data-resource") && getEventsResourceId !== null) {
@@ -93,8 +97,8 @@ const calendar = () => {
         loading: function (isLoading) {
            // console.log(isLoading);
 
-            if (isLoading == false) {
-                //console.log("loading done");
+            if (isLoading == false && filtersLoaded == false) {
+
                 //remove if exists
                 calendarFilters.innerHTML = "";
 
@@ -115,7 +119,10 @@ const calendar = () => {
                     getValue(document.querySelectorAll('.js-calendar-filter'));
                 });
 
+                filtersLoaded = true;
+
             }
+
         },
         eventClick: function (info) { // handles opening event into new tab
             if (info.event.extendedProps !== "" || info.event.extendedProps !== null) {
