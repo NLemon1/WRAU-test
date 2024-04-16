@@ -70,7 +70,7 @@ const pageTabs = () => {
     if (global.location.hash) {
         const activeTabsTrigger = document.querySelector(`.js-page-tab[href="${global.location.hash}"]`);
 
-        console.log(global.location.hash)
+       // console.log(global.location.hash)
 
         if (activeTabsTrigger) {
             global.addEventListener('DOMContentLoaded', () => {

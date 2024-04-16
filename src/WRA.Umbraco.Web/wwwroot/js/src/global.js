@@ -19,6 +19,7 @@ import bundles from './components/bundles';
 import popModal from './components/popmodal';
 import print from './components/print';
 import pageTabs from './components/page-tabs';
+import scrollTop from './components/scroll-top';
 
 expandableTextCards();
 header();
@@ -58,3 +59,5 @@ print();
 if (document.querySelector(".js-page-tab")) {
     pageTabs();
 }
+
+scrollTop();

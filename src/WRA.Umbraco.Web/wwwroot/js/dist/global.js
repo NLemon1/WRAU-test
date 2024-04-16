@@ -930,10 +930,10 @@
     const body = document2.body;
     const clientTop = el.clientTop || body.clientTop || 0;
     const clientLeft = el.clientLeft || body.clientLeft || 0;
-    const scrollTop = el === window2 ? window2.scrollY : el.scrollTop;
+    const scrollTop2 = el === window2 ? window2.scrollY : el.scrollTop;
     const scrollLeft = el === window2 ? window2.scrollX : el.scrollLeft;
     return {
-      top: box.top + scrollTop - clientTop,
+      top: box.top + scrollTop2 - clientTop,
       left: box.left + scrollLeft - clientLeft
     };
   }
@@ -8225,7 +8225,6 @@
     });
     if (window.location.hash) {
       const activeTabsTrigger = document.querySelector(`.js-page-tab[href="${window.location.hash}"]`);
-      console.log(window.location.hash);
       if (activeTabsTrigger) {
         window.addEventListener("DOMContentLoaded", () => {
           activeTabsTrigger.click();
@@ -8238,6 +8237,35 @@
     }
   };
   var page_tabs_default = pageTabs;
+
+  // wwwroot/js/src/components/scroll-top.js
+  var scrollTop = () => {
+    const scrollTopBtns = document.querySelectorAll(".js-scroll-top");
+    const siteHeader = document.querySelector(".js-header");
+    scrollTopBtns.forEach((scrollTopBtn) => {
+      var _a;
+      const scrollTarget = scrollTopBtn.dataset.targetid, targetId = document.getElementById(scrollTarget);
+      const scrollPane = scrollTopBtn.dataset.paneid, scrollPaneElement = scrollPane == "" || scrollPane == void 0 ? window : document.getElementById(scrollPane);
+      const scrollTargetYPos = targetId.offsetTop || 0;
+      const scrollTargetScrollPos = scrollPane ? targetId.offsetTop : scrollTargetYPos;
+      const setOffset = siteHeader.classList.contains("position-sticky") || siteHeader.classList.contains("site-header--top") ? siteHeader.offsetHeight + 50 : 0;
+      scrollTopBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        scrollPaneElement.scrollTo({
+          top: scrollTargetScrollPos - setOffset,
+          left: 0,
+          behavior: "smooth"
+        });
+      });
+      const paneHeight = (_a = scrollPaneElement.scrollHeight) != null ? _a : scrollPaneElement.outerHeight;
+      scrollPaneElement.addEventListener("scroll", (e) => {
+        var _a2;
+        const paneScrollPosition = (_a2 = scrollPaneElement.scrollTop) != null ? _a2 : scrollPaneElement.pageYOffset;
+        console.log(paneScrollPosition / paneHeight * 1);
+      });
+    });
+  };
+  var scroll_top_default = scrollTop;
 
   // wwwroot/js/src/global.js
   expandable_text_cards_default();
@@ -8272,4 +8300,5 @@
   if (document.querySelector(".js-page-tab")) {
     page_tabs_default();
   }
+  scroll_top_default();
 })();

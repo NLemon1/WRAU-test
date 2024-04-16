@@ -14525,9 +14525,9 @@ a.link-hover-inverse:not(:hover),
   height: 48px;
   border-radius: 4px;
   text-align: center;
-  position: absolute;
-  bottom: 30px;
-  right: 30px;
+  position: sticky;
+  left: calc(100vw - 120px);
+  bottom: 40px;
   z-index: 30;
   border: 0;
 }
