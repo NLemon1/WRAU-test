@@ -16870,6 +16870,13 @@ html:not(.has-open-nav) .nav-main-mobile {
   white-space: normal;
   text-overflow: unset;
 }
+@media (max-width: 767.98px) {
+  .ec-event-body .ec-event-time,
+  .ec-event-body .ec-event-title {
+    line-height: 1;
+    font-size: 0.625rem;
+  }
+}
 .ec-button-group:has(.ec-dayGridMonth) {
   background-color: #F4F4F7 !important;
   border-radius: 4px;
@@ -16911,7 +16918,7 @@ html:not(.has-open-nav) .nav-main-mobile {
   #ec .ec-day-grid,
   #ec .ec-time-grid:not(.ec-day-view) {
     overflow-x: auto;
-    min-width: 650px;
+    min-width: 200vw;
   }
   .ec-toolbar {
     position: absolute;

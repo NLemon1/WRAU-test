@@ -17,6 +17,7 @@
         "link",
         "umbmediapicker",
         "umbmacro",
+        "table",
         "hr",
         "subscript",
         "superscript"
@@ -25,6 +26,7 @@
       "maxImageSize": 500,
       "mode": "classic"
     },
+    "blocks": [],
     "useLiveEditing": false,
     "overlaySize": "small",
     "hideLabel": false,
@@ -33,5 +35,5 @@
   "Udi": "umb://data-type/7438330ab6f749d69be1b8a5606cb6c6",
   "Dependencies": [],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
-  "__version": "13.0.4"
+  "__version": "13.1.0"
 }

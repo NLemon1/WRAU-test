@@ -86,8 +86,6 @@ const calendar = () => {
         ],
         eventDidMount: function (info) { //adding data id attribute to each event
 
-           // console.log("eventDidMount")
-
             const getEventsResourceId = info.event.resourceIds[0] !== undefined ? info.event.resourceIds[0].toString() : null;
 
             if (!info.el.getAttribute("data-resource") && getEventsResourceId !== null) {
@@ -95,7 +93,6 @@ const calendar = () => {
             }
         },
         loading: function (isLoading) {
-           // console.log(isLoading);
 
             if (isLoading == false && filtersLoaded == false) {
 
@@ -122,7 +119,6 @@ const calendar = () => {
                 filtersLoaded = true;
 
             }
-
         },
         eventClick: function (info) { // handles opening event into new tab
             if (info.event.extendedProps !== "" || info.event.extendedProps !== null) {
