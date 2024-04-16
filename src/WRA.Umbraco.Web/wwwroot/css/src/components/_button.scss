@@ -454,9 +454,19 @@
     height: 48px;
     border-radius: 4px;
     text-align: center;
-    position: sticky;
-    left: calc(100vw - 120px);
-    bottom: 40px;
-    z-index: 30;
     border: 0;
+    z-index: 30;
+    position: fixed;
+    right: 40px;
+    bottom: 40px;
+
+    &--inset {
+        position: sticky;
+        bottom: 20px;
+        left: calc(100vw - 70px);
+
+        @include media-breakpoint-up(md) {
+            left: calc(100vw - 90px);
+        }
+    }
 }

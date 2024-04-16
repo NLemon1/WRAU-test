@@ -8243,7 +8243,6 @@
     const scrollTopBtns = document.querySelectorAll(".js-scroll-top");
     const siteHeader = document.querySelector(".js-header");
     scrollTopBtns.forEach((scrollTopBtn) => {
-      var _a;
       const scrollTarget = scrollTopBtn.dataset.targetid, targetId = document.getElementById(scrollTarget);
       const scrollPane = scrollTopBtn.dataset.paneid, scrollPaneElement = scrollPane == "" || scrollPane == void 0 ? window : document.getElementById(scrollPane);
       const scrollTargetYPos = targetId.offsetTop || 0;
@@ -8257,12 +8256,18 @@
           behavior: "smooth"
         });
       });
-      const paneHeight = (_a = scrollPaneElement.scrollHeight) != null ? _a : scrollPaneElement.outerHeight;
-      scrollPaneElement.addEventListener("scroll", (e) => {
-        var _a2;
-        const paneScrollPosition = (_a2 = scrollPaneElement.scrollTop) != null ? _a2 : scrollPaneElement.pageYOffset;
-        console.log(paneScrollPosition / paneHeight * 1);
-      });
+      const viewportHeight = window.outerHeight;
+      setTimeout(() => {
+        scrollPaneElement.addEventListener("scroll", (e) => {
+          var _a;
+          const paneScrollPosition = (_a = scrollPaneElement.scrollTop) != null ? _a : scrollPaneElement.pageYOffset;
+          if (paneScrollPosition * 2 > viewportHeight) {
+            scrollTopBtn.hidden = false;
+          } else {
+            scrollTopBtn.hidden = true;
+          }
+        });
+      }, 150);
     });
   };
   var scroll_top_default = scrollTop;

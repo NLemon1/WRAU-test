@@ -1,5 +1,8 @@
 const scrollTop = () => {
 
+    //HTML: <button aria-hidden="true" class="js-scroll-top btn-scroll-top btn-scroll-top--inset" data-targetid="tabpanel-info-change" data-paneid="tabpanel-info-change" title="Back to Top"  hidden>
+    // targetid is required, paneid defaults to window element.
+
     const scrollTopBtns = document.querySelectorAll('.js-scroll-top');
     const siteHeader = document.querySelector('.js-header');
 
@@ -16,9 +19,7 @@ const scrollTop = () => {
 
         const setOffset = siteHeader.classList.contains("position-sticky") || siteHeader.classList.contains("site-header--top") ? siteHeader.offsetHeight + 50 : 0;
 
-
         scrollTopBtn.addEventListener("click", (e) => {
-
             e.preventDefault();
 
             scrollPaneElement.scrollTo({
@@ -26,29 +27,24 @@ const scrollTop = () => {
                 left: 0,
                 behavior: "smooth",
             });
-
         });
 
-        //calculate scroll relative scroll depth to hide/show button
+        const viewportHeight = window.outerHeight;
 
-        const paneHeight = scrollPaneElement.scrollHeight ?? scrollPaneElement.outerHeight;
+        setTimeout(() => {
+            scrollPaneElement.addEventListener('scroll', (e) => {
+                const paneScrollPosition = scrollPaneElement.scrollTop ?? scrollPaneElement.pageYOffset; // div / window
 
+                if ((paneScrollPosition * 2) > viewportHeight) {
+                    scrollTopBtn.hidden = false;
+                } else {
+                    scrollTopBtn.hidden = true;
+                }
 
-        scrollPaneElement.addEventListener('scroll', (e) => { 
-
-            const paneScrollPosition = scrollPaneElement.scrollTop ?? scrollPaneElement.pageYOffset; // div / window
-
-            console.log( (paneScrollPosition / paneHeight) * 1) //percentaged scrolled, need to make it relative to viewport height
-
-
-        });
-
-     //  console.log(scrollPaneElement, paneHeight) //total pane height
-
+            });
+        }, 150);
 
     });
-
-
 };
 
 export default scrollTop;

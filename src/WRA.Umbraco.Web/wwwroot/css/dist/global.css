@@ -14525,11 +14525,21 @@ a.link-hover-inverse:not(:hover),
   height: 48px;
   border-radius: 4px;
   text-align: center;
-  position: sticky;
-  left: calc(100vw - 120px);
-  bottom: 40px;
-  z-index: 30;
   border: 0;
+  z-index: 30;
+  position: fixed;
+  right: 40px;
+  bottom: 40px;
+}
+.btn-scroll-top--inset {
+  position: sticky;
+  bottom: 20px;
+  left: calc(100vw - 70px);
+}
+@media (min-width: 768px) {
+  .btn-scroll-top--inset {
+    left: calc(100vw - 90px);
+  }
 }
 .card {
   position: relative;
@@ -16216,17 +16226,19 @@ html:not(.has-open-nav) .nav-main-mobile {
 .mywra-tab__panel[aria-hidden=true] {
   transform: translateX(100%);
 }
-.site-header.site-header--show-on-scroll-up:not(.position-sticky) + .site-main .mywra-tab__panel {
-  top: 0;
-  height: 100%;
-}
-.site-header.site-header--show-on-scroll-up.site-header--top + .site-main .mywra-tab__panel {
-  top: var(--header-height);
-  height: calc(100% - var(--header-height));
-}
-.page-tab-return-btn {
-  position: sticky;
-  top: 1rem;
+@media (min-width: 992px) {
+  .site-header.site-header--show-on-scroll-up:not(.position-sticky) + .site-main .mywra-tab__panel {
+    top: 0;
+    height: 100%;
+  }
+  .site-header.site-header--show-on-scroll-up.site-header--top + .site-main .mywra-tab__panel {
+    top: var(--header-height);
+    height: calc(100% - var(--header-height));
+  }
+  .page-tab-return-btn {
+    position: sticky;
+    top: 1rem;
+  }
 }
 .gated-block {
   z-index: 1;
