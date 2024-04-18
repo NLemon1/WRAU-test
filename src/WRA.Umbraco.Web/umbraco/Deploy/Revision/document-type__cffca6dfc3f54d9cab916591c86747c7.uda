@@ -72,6 +72,14 @@
           "Mandatory": true,
           "Name": "Image (desktop)",
           "SortOrder": 7
+        },
+        {
+          "Key": "b3d3be4e-6a30-4880-82c7-60125d964747",
+          "Alias": "courseSearchCategories",
+          "DataType": "umb://data-type/b14e9ec8d3fb47ebb062545f97d74e2f",
+          "Description": "Select Categories and Subcategories",
+          "Name": "Course Search Categories/Subcategories",
+          "SortOrder": 5
         }
       ]
     }
@@ -100,6 +108,10 @@
       "Ordering": true
     },
     {
+      "Udi": "umb://data-type/b14e9ec8d3fb47ebb062545f97d74e2f",
+      "Ordering": true
+    },
+    {
       "Udi": "umb://document-type-container/37b4b44f0abc4536af8ed684511c2571",
       "Ordering": true
     },
@@ -109,5 +121,5 @@
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
-  "__version": "13.0.4"
+  "__version": "13.1.0"
 }

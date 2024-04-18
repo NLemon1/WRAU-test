@@ -6,7 +6,7 @@
     "startNode": {
       "type": "content"
     },
-    "filter": "categoryPage",
+    "filter": "categoryPage,subCategoryPage",
     "minNumber": 0,
     "maxNumber": 0,
     "showOpenButton": false,
@@ -15,5 +15,5 @@
   "Udi": "umb://data-type/b14e9ec8d3fb47ebb062545f97d74e2f",
   "Dependencies": [],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
-  "__version": "13.0.4"
+  "__version": "13.1.0"
 }
