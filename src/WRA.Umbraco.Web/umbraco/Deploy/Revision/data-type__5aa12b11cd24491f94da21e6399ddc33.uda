@@ -150,7 +150,7 @@
         "rowMinSpan": 1,
         "rowMaxSpan": 1,
         "allowAtRoot": true,
-        "allowInAreas": false,
+        "allowInAreas": true,
         "areas": [
           {
             "key": "8cccccd7-1a93-40ec-833b-cec08b808e32",
@@ -543,7 +543,7 @@
         "rowMinSpan": 1,
         "rowMaxSpan": 1,
         "allowAtRoot": true,
-        "allowInAreas": false,
+        "allowInAreas": true,
         "areas": [
           {
             "key": "de08acff-cfbb-4b3a-aefb-84ab9bb2931e",
