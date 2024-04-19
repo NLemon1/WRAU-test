@@ -49,7 +49,7 @@ public class CustomServiceComposer : IComposer
         // Register data repositories as transient (different instance every time it's requested).
         builder.Services.AddTransient<CompanyRepository>();
         builder.Services.AddTransient<BoardRepository>();
-        builder.Services.AddTransient<SubscriptionRepository>();
+        // builder.Services.AddTransient<SubscriptionRepository>();
         builder.Services.AddTransient<MemberEventPublisher>();
         builder.Services.AddTransient<ProductEventPublisher>();
         builder.Services.AddTransient<ProductPageRepository>();
