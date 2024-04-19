@@ -1,6 +1,8 @@
+using Microsoft.AspNetCore.Identity;
 using Umbraco.Cms.Core.Cache;
 using Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Core.PublishedCache;
+using Umbraco.Cms.Core.Scoping;
 using Umbraco.Cms.Core.Services;
 using WRA.Umbraco.Contracts;
 using WRA.Umbraco.Extensions;
@@ -13,12 +15,14 @@ public class MemberHelper(
     IMemberService memberService,
     CompanyRepository companyRepository,
     ICacheKeyProvider cacheKeyProvider,
+    ICoreScopeProvider coreScopeProvider,
     AppCaches appCache,
     bool autoSave = true)
 : ContentHelperBase<IMember, MemberEvent>(cacheKeyProvider, appCache)
 {
-    public void update(IMember target, MemberEvent source)
+    public IMember update(IMember target, MemberEvent source)
     {
+        using var scope = coreScopeProvider.CreateCoreScope();
         DynamicUpdate(target, source);
         SetProperty(target, "ExternalId", source.Id);
         SetSensitiveData(source.PasswordHash, source.PasswordSalt, target);
@@ -27,12 +31,14 @@ public class MemberHelper(
         {
             memberService.Save(target);
         }
+
+        scope.Complete();
+        return target;
     }
 
     private static void SetSensitiveData(string hash, string salt, IMember existingMember)
     {
         SetProperty(existingMember, "token", salt);
-        SetProperty(existingMember, "ExternalId", existingMember.Id);
         existingMember.RawPasswordValue = hash;
     }
 

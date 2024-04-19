@@ -24,9 +24,9 @@ public class MemberEntityEventConsumer(ILogger<MemberEntityEventConsumer> logger
                     logger.LogInformation("Updating member: {Member}.", member.iMISId);
 
                     // Assuming IMemberUpdateService is properly registered with your DI container.
-                    var xyz = BackgroundJob.Enqueue<WraMemberManagementService>(x => x.CreateOrUpdate(member));
+                    BackgroundJob.Enqueue<WraMemberManagementService>(x => x.CreateOrUpdate(member));
+                    logger.LogInformation("Member update task queued.");
                     await Task.CompletedTask;
-                    logger.LogInformation("Member updated.");
                     break;
             }
         }

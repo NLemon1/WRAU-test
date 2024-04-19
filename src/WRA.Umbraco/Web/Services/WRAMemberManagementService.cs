@@ -1,3 +1,4 @@
+using System.Formats.Asn1;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using Umbraco.Cms.Core.Models;
@@ -13,6 +14,7 @@ using Umbraco.Commerce.Core.Models;
 using WRA.Umbraco.Contracts;
 using WRA.Umbraco.Helpers;
 using WRA.Umbraco.Models;
+using WRA.Umbraco.Shared.Extensions;
 
 namespace WRA.Umbraco.Web.Services;
 
@@ -34,17 +36,16 @@ public class WraMemberManagementService(
     {
         try
         {
-            using var scope = coreScopeProvider.CreateCoreScope();
-            scope.Notifications.Suppress();
-
-            using var umbracoContextReference = umbracoContextFactory.EnsureUmbracoContext();
-            var contentQuery = umbracoContextReference.UmbracoContext.Content;
-
             // first check if the member already exists in the database
             var existingMember = memberService.GetByEmail(memberEvent.Email);
 
             // if one exists, send to update method
             if (existingMember != null) { return Update(memberEvent); }
+
+            using var scope = coreScopeProvider.CreateCoreScope();
+
+            using var umbracoContextReference = umbracoContextFactory.EnsureUmbracoContext();
+            var contentQuery = umbracoContextReference.UmbracoContext.Content;
 
             // spin up an Imember rather than memberIdentity to avoid db locks.
             string memberName = $"{memberEvent.FirstName} {memberEvent.LastName}";
@@ -53,11 +54,12 @@ public class WraMemberManagementService(
                 memberName = memberEvent.Email;
             }
 
+            const string defaultMemberType = "Member";
             var newMember = memberService.CreateMember(
                 memberEvent.Email,
                 memberEvent.Email,
                 memberName,
-                "Member");
+                defaultMemberType);
 
             // updates all the fields on the member
             memberHelper.update(newMember, memberEvent);
@@ -85,25 +87,29 @@ public class WraMemberManagementService(
         }
     }
 
-    public IMember? Update(MemberEvent memberEvent)
+    public IMember? Update(MemberEvent memberEvent, IMember? targetMember = null)
     {
         // Create a scope
         // suppress any notification to prevent our listener from firing an "updated member" webhook back at the queue
-        // using var _ = scope.Notifications.Suppress();
+        using var scope = coreScopeProvider.CreateCoreScope();
         using var umbracoContextReference = umbracoContextFactory.EnsureUmbracoContext();
         var contentQuery = umbracoContextReference.UmbracoContext.Content;
 
+        var existingMember = targetMember ?? memberService.GetByEmail(memberEvent.Email);
+
         // Query by email as they are unique in this site and in WRA's records.
-        var existingMember = memberService.GetByEmail(memberEvent.Email);
-        if (existingMember == null) { return null; }
+
+        if (existingMember == null) return null;
 
         memberHelper.update(existingMember, memberEvent);
-        memberHelper.SetCompanyOnMember(existingMember, memberEvent, contentQuery);
+        if (contentQuery != null) memberHelper.SetCompanyOnMember(existingMember, memberEvent, contentQuery);
         // MemberHelper.AssignMemberToMemberGroup(existingMember, memberEvent);
 
-        memberService.Save(existingMember);
+        // memberService.Save(existingMember);
         logger.LogInformation("Updated member: {Member} - {Email}", existingMember.Id, existingMember.Email);
+        scope.Complete();
         return existingMember;
+
     }
 
     public Task Delete(MemberEvent reqMember)
@@ -124,13 +130,7 @@ public class WraMemberManagementService(
         return Task.CompletedTask;
     }
 
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="model"></param>
-    /// <param name="memberGroup"></param>
-    /// <returns></returns>
-    /// <exception cref="InvalidOperationException"></exception>
+
     public async Task<(IdentityResult, MemberIdentityUser)> RegisterMember(RegisterModel model, string memberGroup = "Visitor")
     {
         using var scope = coreScopeProvider.CreateCoreScope(autoComplete: true);
@@ -200,6 +200,7 @@ public class WraMemberManagementService(
         }
 
         memberService.Save(existingMember);
+        await memberManager.UpdateAsync(identityUser);
     }
 
     private void SetMemberProperties(List<MemberPropertyModel> properties, IMember member)
