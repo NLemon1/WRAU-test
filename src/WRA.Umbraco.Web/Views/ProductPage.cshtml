@@ -2,7 +2,6 @@
 @using Umbraco.Commerce;
 @using Umbraco.Commerce.Extensions;
 @using Umbraco.Cms.Core.Models.PublishedContent;
-@using WRA.Umbraco;
 @using Umbraco.Cms.Core.Models.Blocks;
 @using WRA.Umbraco.Extensions
 @using WRA.Umbraco.Web.Services
@@ -15,7 +14,7 @@
     var sections = Model.Value<IEnumerable<BlockGridItem>>("blockContent");
     var settings = Umbraco.ContentAtRoot().FirstOrDefault(x => x.ContentType.Alias == "siteSettings");
 
-    var discountsAttchedToProduct = _wraProductService.GetTimeBasedDiscounts(Model) ?? [];
+    var discountsAttachedToProduct = _wraProductService.GetTimeBasedDiscounts(Model) ?? [];
     var multiVariantProductPage = Model as ProductPage;
 
     var store = Model.Value<StoreReadOnly>("store", fallback: Fallback.ToAncestors);
@@ -182,8 +181,8 @@
         {
             @Html.Hidden("productReference", product.GetProductReference())
 
-            @if(discountsAttchedToProduct?.Any() ?? false){
-                @foreach (var discount in discountsAttchedToProduct)
+            @if(discountsAttachedToProduct?.Any() ?? false){
+                @foreach (var discount in discountsAttachedToProduct)
                 {
                     if(discount.Active){
                         <div class="d-flex flex-row align-items-baseline w-100 mb-1">

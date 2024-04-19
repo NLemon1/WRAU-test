@@ -1,9 +1,10 @@
-
 using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Cms.Core.Scoping;
 using Umbraco.Commerce.Cms.Adapters;
 using Umbraco.Commerce.Core.Models;
 using WRA.Umbraco.Models;
+
+namespace WRA.Umbraco.Web.Adapters;
 
 public class CustomProductSnapshot : UmbracoProductSnapshot
 {
@@ -18,8 +19,7 @@ public class CustomProductSnapshot : UmbracoProductSnapshot
         string productReference,
         string productVariantReference,
         Guid storeId,
-        bool memberPrice = false
-        )
+        bool memberPrice = false)
              : base(
                 content,
                 variantContent,
@@ -42,7 +42,8 @@ public class CustomProductSnapshot : UmbracoProductSnapshot
 
             // cast as our product composition..
             var product = content as IProductComp;
-            // for all pricing pairs (currencyid : amount), 
+
+            // for all pricing pairs (currencyid : amount),
             // remove and replace with the MemberPrice field that exists on product compositions
             foreach (ProductPrice productPrice in snapshot.Prices)
             {
@@ -56,6 +57,3 @@ public class CustomProductSnapshot : UmbracoProductSnapshot
 
     public override IEnumerable<ProductPrice> Prices => memberPricing.Any() ? memberPricing : _snapshot.Prices;
 }
-
-
-

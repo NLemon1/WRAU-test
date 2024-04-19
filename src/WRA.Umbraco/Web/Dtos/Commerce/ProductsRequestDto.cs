@@ -1,3 +1,4 @@
+using WRA.Umbraco.Models.Custom;
 
 namespace WRA.Umbraco.Dtos;
 

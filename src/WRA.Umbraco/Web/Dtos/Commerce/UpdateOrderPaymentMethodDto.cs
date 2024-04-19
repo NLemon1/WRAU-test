@@ -1,5 +1,3 @@
-using System;
-
 namespace WRA.Umbraco.Dtos;
 public class UpdateOrderPaymentMethodDto
 {

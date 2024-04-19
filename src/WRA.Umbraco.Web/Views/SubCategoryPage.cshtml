@@ -1,21 +1,17 @@
-﻿@using Umbraco.Cms.Web.Common.PublishedModels;
-@using WRA.Umbraco;
-@using System.Linq;
+﻿@using System.Linq;
 @using Umbraco.Commerce.Extensions;
 @using Umbraco.Cms.Core.Models.Blocks
-@using Umbraco.Cms.Core.Models.PublishedContent;
 @using WRA.Umbraco.Extensions
 
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.SubCategoryPage>
-@using ContentModels = WRA.Umbraco.Models;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<WRA.Umbraco.Models.SubCategoryPage>
 
 @{
 	Layout = "~/Views/_Layout.cshtml";
     var sectionsTop = Model.Value<IEnumerable<BlockGridItem>>("sectionsTop");
     var sectionsBottom = Model.Value<IEnumerable<BlockGridItem>>("sectionsBottom");
-   
+
     IEnumerable<IPublishedContent> siblingSubcategories = Model.SiblingsAndSelf().Where(x => x.IsVisible() && x.IsPublished() && x.Value<bool>("hideSubcategory") != true).OrderBy(p => p.Name);
-    
+
     var currency = Model.GetStore().BaseCurrencyId ?? Guid.Empty;
 }
 
@@ -131,7 +127,7 @@
         @if (!String.IsNullOrEmpty(Model.ResultsHeadline))
         {
             @Model.ResultsHeadline
-        } 
+        }
         else
         {
             <text>Products</text>

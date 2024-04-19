@@ -1,7 +1,9 @@
 using Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Cms.Core.PublishedCache;
+using Umbraco.Cms.Core.Scoping;
 using Umbraco.Cms.Core.Services;
+using Umbraco.Cms.Core.Web;
 using Umbraco.Commerce.Common.Logging;
 using WRA.Umbraco.Dtos;
 using WRA.Umbraco.Models;
@@ -10,46 +12,60 @@ namespace WRA.Umbraco.Repositories;
 
 public class CompanyRepository(
     IContentService contentService,
-    ILogger<CompanyRepository> logger)
+    ILogger<CompanyRepository> logger,
+    ICoreScopeProvider coreScopeProvider,
+    IUmbracoContextFactory umbracoContextFactory
+    )
 {
-    public IPublishedContent? GetCompany(Guid? companyId, IPublishedCache? contentCache)
+    public IPublishedContent? Get(Guid? companyId, IPublishedCache? contentCache)
     {
         if (companyId == null || contentCache == null || companyId == Guid.Empty)
         {
             return null;
         }
+
         // IPublishedContent? siteRoot;
         var siteRoot = contentCache.GetAtRoot();
         var companies = siteRoot?.FirstOrDefault(x => x.ContentType.Alias == Companies.ModelTypeAlias)?
             .Children
             .Where(x => x.ContentType.Alias == Company.ModelTypeAlias);
 
-        var company = companies?.FirstOrDefault(x => 
+        var company = companies?.FirstOrDefault(x =>
             x.Value<string>("externalId")!.Equals(companyId.ToString()));
 
         return company;
     }
-    public IContent Create(CompanyDto companyDto, IPublishedCache? contentCache)
+
+    public IContent Create(CompanyDto companyDto)
     {
         try
         {
+            using var scope = coreScopeProvider.CreateCoreScope();
+            scope.Notifications.Suppress();
+
+            using var umbracoContextReference = umbracoContextFactory.EnsureUmbracoContext();
+            var contentCache = umbracoContextReference.UmbracoContext.Content;
+
             var siteRoot = contentCache?.GetAtRoot().FirstOrDefault();
             var companiesContainer = siteRoot?.Children
                 .FirstOrDefault(x => x.ContentType.Alias == Companies.ModelTypeAlias);
-            
+
             var externalId = Guid.Parse(companyDto.ExternalId);
-            var existingCompany = GetCompany(externalId, contentCache);
+            var existingCompany = Get(externalId, contentCache);
             if (existingCompany != null)
             {
                 // update the company
                 var existingCompanyContent = contentService.GetById(existingCompany.Id);
                 SetCompanyProperties(existingCompanyContent!, companyDto);
                 contentService.SaveAndPublish(existingCompanyContent);
+                scope.Complete();
                 return existingCompanyContent;
+
                 // _contentService.SaveAndPublish(existingCompany);
 
             }
-            logger.Info("Creating company: {name} - {ExternalId}", 
+
+            logger.Info("Creating company: {name} - {ExternalId}",
                 companyDto.name, companyDto.ExternalId);
             if (string.IsNullOrEmpty(companyDto?.name) || string.IsNullOrEmpty(companyDto?.ExternalId))
             {
@@ -70,6 +86,7 @@ public class CompanyRepository(
             throw;
         }
     }
+
     private IContent SetCompanyProperties(IContent company, CompanyDto companyDto)
     {
         company.SetValue("externalId", companyDto.ExternalId);

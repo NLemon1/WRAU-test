@@ -1,5 +1,3 @@
-
-
 namespace WRA.Umbraco.Web.Dtos;
 public record ResetPasswordDto
 {

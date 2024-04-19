@@ -1,20 +1,31 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <Configurations>Debug;Release;Local</Configurations>
   </PropertyGroup>
-
+  <ItemGroup>
+    <Compile Remove="Events\ServiceBusSubscriptions\**" />
+    <Compile Remove="Models\Custom\Events\**" />
+    <EmbeddedResource Remove="Events\ServiceBusSubscriptions\**" />
+    <EmbeddedResource Remove="Models\Custom\Events\**" />
+    <None Remove="Events\ServiceBusSubscriptions\**" />
+    <None Remove="Models\Custom\Events\**" />
+  </ItemGroup>
   <ItemGroup>
     <!-- CoreCompat is deprecated and unmaintained but is require for the Global Payments SDK /shrug -->
     <!-- <PackageReference Include="Azure.Messaging.ServiceBus" Version="7.17.2" /> -->
     <PackageReference Include="CoreCompat.System.Drawing" Version="1.0.0-beta006" />
-    <PackageReference Include="GlobalPayments.Api" Version="8.0.4" />
-    <PackageReference Include="MassTransit" Version="8.2.0" />
-    <PackageReference Include="MassTransit.Azure.ServiceBus.Core" Version="8.2.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Cultiv.Hangfire" Version="3.1.2" />
+    <PackageReference Include="GlobalPayments.Api" Version="8.0.7" />
+    <PackageReference Include="Hangfire.Core" Version="1.8.5" />
+    <PackageReference Include="Mapster" Version="7.4.0" />
+    <PackageReference Include="MassTransit" Version="8.2.1" />
+    <PackageReference Include="MassTransit.Azure.ServiceBus.Core" Version="8.2.1" />
+    <PackageReference Include="MassTransit.Newtonsoft" Version="8.2.0" />
+    <PackageReference Include="Microsoft.Extensions.ApiDescription.Client" Version="7.0.2"/>
+
     <PackageReference Include="RestSharp" Version="110.2.0" />
     <PackageReference Include="System.Drawing.Common" Version="8.0.1" />
     <PackageReference Include="Umbraco.Cms" Version="13.2.2" />
@@ -30,10 +41,13 @@
     <PackageReference Include="Umbraco.Commerce.Persistence.Sqlite" Version="13.1.0" />
     <PackageReference Include="Umbraco.Commerce.Persistence.SqlServer" Version="13.1.0" />
     <PackageReference Include="Umbraco.Commerce.Web" Version="13.1.0" />
+    <PackageReference Include="WRA.Umbraco.Contracts" Version="8.1.0" />
+    <PackageReference Include="wra.umbraco.shared" Version="8.1.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WRA.Umbraco.Contracts\WRA.Umbraco.Contracts.csproj" />
+    <Compile Update="Models\Generated\**">
+      <NoWarn>1570</NoWarn>
+    </Compile>
   </ItemGroup>
-
 </Project>

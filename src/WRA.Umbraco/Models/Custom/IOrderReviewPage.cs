@@ -6,7 +6,7 @@ public interface IOrderReviewPage
 {
     OrderReadOnly Order { get; }
 
-    CountryReadOnly PaymentCountry { get; }
+    CountryReadOnly? PaymentCountry { get; }
 
-    CountryReadOnly ShippingCountry { get; }
+    CountryReadOnly? ShippingCountry { get; }
 }

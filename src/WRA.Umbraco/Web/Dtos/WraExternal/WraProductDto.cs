@@ -1,7 +1,6 @@
-
-
-// Root myDeserializedClass = JsonSerializer.Deserialize<Root>(myJsonResponse);
 using System.Text.Json.Serialization;
+
+namespace WRA.Umbraco.Web.Dtos.WraExternal;
 
 public class ProductStage
 {
@@ -18,7 +17,7 @@ public class ProductStage
 public class WraProductDto
 {
     [JsonPropertyName("id")]
-    public string Id { get; set; }
+    public Guid Id { get; set; }
 
     [JsonPropertyName("name")]
     public string Name { get; set; }

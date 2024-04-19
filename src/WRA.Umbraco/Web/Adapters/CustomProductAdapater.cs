@@ -1,36 +1,24 @@
 using Examine;
 using Microsoft.Extensions.DependencyInjection;
-using Umbraco.Cms.Core;
-using Umbraco.Cms.Core.Models;
-using Umbraco.Cms.Core.Models.PublishedContent;
-using Umbraco.Cms.Core.PublishedCache;
 using Umbraco.Cms.Core.Security;
 using Umbraco.Cms.Core.Services;
 using Umbraco.Cms.Core.Web;
-using Umbraco.Cms.Web.Common.Security;
 using Umbraco.Commerce.Cms.Adapters;
 using Umbraco.Commerce.Cms.Content;
-using Umbraco.Commerce.Cms.Models;
-using Umbraco.Commerce.Core.Adapters;
-using Umbraco.Commerce.Core.Api;
 using Umbraco.Commerce.Core.Models;
-using Umbraco.Commerce.Core.Services;
-using Umbraco.Commerce.Extensions;
-using WRA.Umbraco;
-using WRA.Umbraco.Models;
 
-public class CustomProductAdapater : UmbracoProductAdapter
+namespace WRA.Umbraco.Web.Adapters;
+
+public class CustomProductAdapter : UmbracoProductAdapter
 {
     private readonly IServiceScopeFactory _scopeFactory;
 
-
-    public CustomProductAdapater(
+    public CustomProductAdapter(
         IUmbracoContextFactory umbracoContextFactory,
         IContentService contentService,
         PublishedContentWrapperFactory publishedContentWrapperFactory,
         IExamineManager examineManager,
-        IServiceScopeFactory scopeFactory
-)
+        IServiceScopeFactory scopeFactory)
      : base(umbracoContextFactory, contentService, publishedContentWrapperFactory, examineManager)
     {
         _scopeFactory = scopeFactory;
@@ -57,13 +45,14 @@ public class CustomProductAdapater : UmbracoProductAdapter
         {
             // get all member groups (roles) tied to the request user.
             var memberRoles = mm.GetRolesAsync(member).GetAwaiter().GetResult();
+
             // if they are part of the "member pricing" group, then pass the idicator.
             if (memberRoles.Any(r => r.Equals("Member Pricing", StringComparison.OrdinalIgnoreCase)))
             {
                 useMemberPricing = true;
             }
-
         }
+
         // now generate the snapshow based on our custom implementation..
         return new CustomProductSnapshot(
             productNode,
@@ -72,17 +61,11 @@ public class CustomProductAdapater : UmbracoProductAdapter
             productReference,
             productVariantReference,
             storeId,
-            memberPrice: useMemberPricing
-            );
+            memberPrice: useMemberPricing);
     }
+
     public override IProductSnapshot GetProductSnapshot(Guid storeId, string productReference, string languageIsoCode)
     {
         return GetProductSnapshot(storeId, productReference, null, languageIsoCode);
     }
-
-
-
-
-
-
 }

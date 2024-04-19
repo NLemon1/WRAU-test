@@ -26,7 +26,6 @@ public class ProductApiController(
         var products = wraProductService.GetProducts(request);
         var responseItems = products.Select(p => p.AsDto());
         return responseItems;
-
     }
 
     [HttpGet]
@@ -36,7 +35,6 @@ public class ProductApiController(
         var product = wraProductService.GetProductById(id);
         return product.AsDto();
     }
-
 
     [HttpPost]
     [Route("GetProductVariant")]
@@ -66,7 +64,7 @@ public class ProductApiController(
                 {
                     ProductVariantReference = variant.Content.Key.ToString(),
                     Sku = snapshot.Sku,
-                    PriceFormatted = snapshot.CalculatePrice()?.Formatted(),
+                    PriceFormatted = snapshot.TryCalculatePrice().ResultOr(null)?.Formatted(),
                     ImageUrl = multiVariantContent?.Image.GetCropUrl(500, 500),
                     ThumbnailImageUrl = multiVariantContent?.Image.GetCropUrl(150, 150)
                 };

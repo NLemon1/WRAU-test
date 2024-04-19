@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Umbraco.Cms.Core.Cache;
 using Umbraco.Cms.Core.Logging;
-using Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Core.Routing;
 using Umbraco.Cms.Core.Scoping;
 using Umbraco.Cms.Core.Security;
@@ -63,12 +62,10 @@ public class MemberRegisterController : SurfaceController
         {
             TempData["FormSuccess"] = true;
 
-
             if (model.RedirectUrl.IsNullOrWhiteSpace() == false)
             {
                 return Redirect(model.RedirectUrl!);
             }
-
 
             return RedirectToCurrentUmbracoPage();
         }
@@ -78,7 +75,7 @@ public class MemberRegisterController : SurfaceController
     }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="model"></param>
     private void MergeRouteValuesToModel(RegisterModel model)
@@ -109,38 +106,35 @@ public class MemberRegisterController : SurfaceController
         }
     }
 
-    //Here we created a helper Method to assign a MemberGroup to a member.
+    // Here we created a helper Method to assign a MemberGroup to a member.
     private void AssignMemberGroup(string email, string group)
     {
         try
         {
             _memberService.AssignRole(email, group);
         }
-        catch (Exception ex)
+        catch (Exception)
         {
-            //handle the exception
-        }
 
+            // handle the exception
+        }
     }
 
-
     /// <summary>
-
+    /// Registers a member with the system.
     /// </summary>
     /// <param name="model">Register member model.</param>
     /// <param name="logMemberIn">Flag for whether to log the member in upon successful registration.</param>
     /// <returns>Result of registration operation.</returns>
-    /// 
-
     private async Task<IdentityResult> RegisterMemberAsync(RegisterModel model, bool logMemberIn = true)
     {
-        var (identityResult,identityUser)= await _WRAMemberManagementService.RegisterMember(model);
+        var (identityResult, identityUser) = await _WRAMemberManagementService.RegisterMember(model);
 
         if (logMemberIn && identityResult.Succeeded)
         {
             await _memberSignInManager.SignInAsync(identityUser, false);
         }
+
         return identityResult;
     }
 }
-

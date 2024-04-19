@@ -3,6 +3,8 @@ using Umbraco.Cms.Core.Security;
 using Umbraco.Cms.Web.Common.Views;
 using WRA.Umbraco.Web.Services;
 
+namespace WRA.Umbraco.Models.Custom.ViewModels;
+
 public abstract class WRAViewPage<T>(GatedContentService gcs, IMemberManager memberManager) : UmbracoViewPage<T>
 {
     readonly GatedContentService _gcs;
@@ -14,5 +16,4 @@ public abstract class WRAViewPage<T>(GatedContentService gcs, IMemberManager mem
         var publishedContent = ViewData.Model as IPublishedContent;
         return await _gcs.MemberCanViewPage(publishedContent, member);
     }
-
 }

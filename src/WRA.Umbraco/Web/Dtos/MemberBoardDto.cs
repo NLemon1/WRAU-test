@@ -1,4 +1,3 @@
-using System;
 using System.Text.Json.Serialization;
 
 namespace WRA.Umbraco.Dtos
@@ -21,4 +20,3 @@ namespace WRA.Umbraco.Dtos
         public DateTime? RosterOptInDate { get; set; }
     }
 }
-

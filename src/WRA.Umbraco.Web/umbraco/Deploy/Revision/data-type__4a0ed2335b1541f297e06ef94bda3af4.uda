@@ -16,5 +16,5 @@
   "Udi": "umb://data-type/4a0ed2335b1541f297e06ef94bda3af4",
   "Dependencies": [],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
-  "__version": "13.0.4"
+  "__version": "13.1.0"
 }

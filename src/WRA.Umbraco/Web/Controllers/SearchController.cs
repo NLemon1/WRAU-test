@@ -1,11 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Cms.Core.Web;
 using Umbraco.Cms.Web.Common.Controllers;
@@ -14,8 +9,6 @@ using WRA.Umbraco.Web.Services;
 
 namespace WRA.Umbraco.Web.Controllers
 {
-    
-
     public class SearchResultsController : RenderController
     {
         private readonly SearchService _searchService;

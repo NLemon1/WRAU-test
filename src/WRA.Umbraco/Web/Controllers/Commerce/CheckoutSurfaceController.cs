@@ -11,12 +11,10 @@ using Umbraco.Commerce.Core;
 using Umbraco.Commerce.Core.Api;
 using WRA.Umbraco.Dtos;
 using Umbraco.Commerce.Extensions;
-using Umbraco.Commerce.Core.Models;
-using WRA.Umbraco;
 using WRA.Umbraco.Extensions;
 
-//using GlobalPayments.Api.Services;
-//using GlobalPayments.Api;
+// using GlobalPayments.Api.Services;
+// using GlobalPayments.Api;
 
 namespace WRA.Umbraco.Controllers;
 
@@ -48,9 +46,9 @@ public class CheckoutSurfaceController : SurfaceController
                 uow.Complete();
             });
         }
-        catch (ValidationException ex)
+        catch (ValidationException)
         {
-            ModelState.AddModelError("", "Failed to redeem discount code");
+            ModelState.AddModelError(string.Empty, "Failed to redeem discount code");
 
             return CurrentUmbracoPage();
         }
@@ -74,9 +72,9 @@ public class CheckoutSurfaceController : SurfaceController
                 uow.Complete();
             });
         }
-        catch (ValidationException ex)
+        catch (ValidationException)
         {
-            ModelState.AddModelError("", "Failed to redeem discount code");
+            ModelState.AddModelError(string.Empty, "Failed to redeem discount code");
 
             return CurrentUmbracoPage();
         }
@@ -88,7 +86,7 @@ public class CheckoutSurfaceController : SurfaceController
     {
         if (model.ShippingAddress == null)
         {
-            ModelState.AddModelError("", "No shipping information provided.");
+            ModelState.AddModelError(string.Empty, "No shipping information provided.");
 
             return CurrentUmbracoPage();
         }
@@ -111,14 +109,15 @@ public class CheckoutSurfaceController : SurfaceController
                     order.SetProperties(CreateShippingInfo(model.ShippingAddress));
                     order.SetShippingCountryRegion(model.ShippingAddress.Country, null);
                 }
+
                 _commerceApi.SaveOrder(order);
 
                 uow.Complete();
             });
         }
-        catch (ValidationException ex)
+        catch (ValidationException)
         {
-            ModelState.AddModelError("", "Failed to update information");
+            ModelState.AddModelError(string.Empty, "Failed to update information");
 
             return CurrentUmbracoPage();
         }
@@ -148,9 +147,9 @@ public class CheckoutSurfaceController : SurfaceController
                 uow.Complete();
             });
         }
-        catch (ValidationException ex)
+        catch (ValidationException)
         {
-            ModelState.AddModelError("", "Failed to update billing address");
+            ModelState.AddModelError(string.Empty, "Failed to update billing address");
 
             return CurrentUmbracoPage();
         }
@@ -176,8 +175,8 @@ public class CheckoutSurfaceController : SurfaceController
                     { "shippingFirstName", address.FirstName },
                     { "shippingLastName", address.LastName }
             };
-
     }
+
     private Dictionary<string, string> CreateBillingInfo(OrderAddressDto address)
     {
         return new Dictionary<string, string>
@@ -192,9 +191,9 @@ public class CheckoutSurfaceController : SurfaceController
                     { "billingZipCode", address.ZipCode },
                     { "billingFirstName", address.FirstName },
                     { "billingLastName", address.LastName },
-                    //{ "billingTelephone", model.BillingAddress.Telephone },
-            };
 
+                    // { "billingTelephone", model.BillingAddress.Telephone },
+            };
     }
 
     public IActionResult UpdateOrderShippingMethod(UpdateOrderShippingMethodDto model)
@@ -214,9 +213,9 @@ public class CheckoutSurfaceController : SurfaceController
                 uow.Complete();
             });
         }
-        catch (ValidationException ex)
+        catch (ValidationException)
         {
-            ModelState.AddModelError("", "Failed to set order shipping method");
+            ModelState.AddModelError(string.Empty, "Failed to set order shipping method");
 
             return CurrentUmbracoPage();
         }
@@ -249,9 +248,9 @@ public class CheckoutSurfaceController : SurfaceController
                 uow.Complete();
             });
         }
-        catch (ValidationException ex)
+        catch (ValidationException)
         {
-            ModelState.AddModelError("", "Failed to set order payment method");
+            ModelState.AddModelError(string.Empty, "Failed to set order payment method");
 
             return CurrentUmbracoPage();
         }
@@ -261,5 +260,4 @@ public class CheckoutSurfaceController : SurfaceController
 
         return RedirectToCurrentUmbracoPage();
     }
-
 }

@@ -10,6 +10,7 @@ using Umbraco.Cms.Core.Web;
 using Umbraco.Cms.Web.Website.Models;
 using Umbraco.Commerce.Core.Api;
 using Umbraco.Commerce.Core.Models;
+using WRA.Umbraco.Contracts;
 using WRA.Umbraco.Helpers;
 using WRA.Umbraco.Models;
 
@@ -20,35 +21,38 @@ public class WraMemberManagementService(
     IMemberManager memberManager,
     ICoreScopeProvider coreScopeProvider,
     IUmbracoCommerceApi commerceApi,
-    IUmbracoContextAccessor umbracoContextAccessor, 
+    IUmbracoContextAccessor umbracoContextAccessor,
     IUmbracoContextFactory umbracoContextFactory,
     MemberHelper memberHelper,
     ILogger<WraMemberManagementService> logger)
 {
     /// <summary>
-    /// CRUD Operations for Webhooks
+    /// CRUD Operations for Webhooks.
     /// </summary>
     /// <param name="memberEvent"></param>
-    public async Task<IMember?> CreateOrUpdate(IMemberEvent memberEvent)
+    public async Task<IMember?> CreateOrUpdate(MemberEvent memberEvent)
     {
         try
         {
             using var scope = coreScopeProvider.CreateCoreScope();
             scope.Notifications.Suppress();
-            
+
             using var umbracoContextReference = umbracoContextFactory.EnsureUmbracoContext();
             var contentQuery = umbracoContextReference.UmbracoContext.Content;
-            
+
             // first check if the member already exists in the database
             var existingMember = memberService.GetByEmail(memberEvent.Email);
+
             // if one exists, send to update method
             if (existingMember != null) { return Update(memberEvent); }
+
             // spin up an Imember rather than memberIdentity to avoid db locks.
-            var memberName = $"{memberEvent.FirstName} {memberEvent?.LastName}";
+            string memberName = $"{memberEvent.FirstName} {memberEvent.LastName}";
             if (string.IsNullOrWhiteSpace(memberName))
             {
                 memberName = memberEvent.Email;
             }
+
             var newMember = memberService.CreateMember(
                 memberEvent.Email,
                 memberEvent.Email,
@@ -56,59 +60,58 @@ public class WraMemberManagementService(
                 "Member");
 
             // updates all the fields on the member
-            memberHelper.DynamicUpdate(newMember, memberEvent);
+            memberHelper.update(newMember, memberEvent);
             memberHelper.SetCompanyOnMember(newMember, memberEvent, contentQuery);
-            
-            // newMember.SetValue("subscriptions", member.Subscriptions.Select(s => s.Id).ToArray());
-            // since a new member could potentially not exist in WRA's 
+
+            // since a new member could potentially not exist in WRA's
             newMember.IsApproved = false;
 
             // Must save here so an ID is assigned to the new member.
             // We need the memberId to create a link to member and memberGroups (roles).
-            // scope.WriteLock(Constants.Locks.MemberTree);
             memberService.Save(newMember);
-            logger.LogInformation("Created member: {email} - {Id}", newMember.Email, newMember.Id);
+            logger.LogInformation("Created member: {Email} - {Id}", newMember.Email, newMember.Id);
+
             // assign to relevant memberGroup...
-            memberHelper.AssignMemberToMemberGroup(newMember, memberEvent);
+            // MemberHelper.AssignMemberToMemberGroup(newMember, memberEvent);
+
             // another save?
             scope.Complete();
             return newMember;
         }
         catch (Exception ex)
-        {   
-            logger.LogError($"Error creating member ({memberEvent.Email}) -> {ex.Message}");
+        {
+            logger.LogError(ex, "Error creating member ({Email}) -> {Message}", memberEvent.Email, ex.Message);
             throw;
         }
     }
 
-    public IMember? Update(IMemberEvent memberEvent)
+    public IMember? Update(MemberEvent memberEvent)
     {
-        // // crate a scope
-        // using ICoreScope scope = _coreScopeProvider.CreateCoreScope(autoComplete: true);
-        // // supress any notification to prevent our listener from firing an "updated member" webhook back at the queue
+        // Create a scope
+        // suppress any notification to prevent our listener from firing an "updated member" webhook back at the queue
         // using var _ = scope.Notifications.Suppress();
         using var umbracoContextReference = umbracoContextFactory.EnsureUmbracoContext();
         var contentQuery = umbracoContextReference.UmbracoContext.Content;
-        
+
         // Query by email as they are unique in this site and in WRA's records.
         var existingMember = memberService.GetByEmail(memberEvent.Email);
         if (existingMember == null) { return null; }
-        
-        memberHelper.DynamicUpdate(existingMember, memberEvent);
+
+        memberHelper.update(existingMember, memberEvent);
         memberHelper.SetCompanyOnMember(existingMember, memberEvent, contentQuery);
-        memberHelper.AssignMemberToMemberGroup(existingMember, memberEvent);
+        // MemberHelper.AssignMemberToMemberGroup(existingMember, memberEvent);
 
         memberService.Save(existingMember);
-        logger.LogInformation("Updated member: {member} - {email}", existingMember.Id, existingMember.Email);
+        logger.LogInformation("Updated member: {Member} - {Email}", existingMember.Id, existingMember.Email);
         return existingMember;
     }
 
-    public Task Delete(IMemberEvent reqMember)
+    public Task Delete(MemberEvent reqMember)
     {
-        // crate a scope
+        // Create a scope
         using var scope = coreScopeProvider.CreateCoreScope(autoComplete: true);
-        // suppress any notification to prevent our listener from firing an "updated member" webhook back at the queue
 
+        // suppress any notification to prevent our listener from firing an "updated member" webhook back at the queue
         using var _ = scope.Notifications.Suppress();
 
         var existingMember = memberService.GetByEmail(reqMember.Email);
@@ -116,12 +119,13 @@ public class WraMemberManagementService(
         {
             return Task.CompletedTask;
         }
+
         memberService.Delete(existingMember);
         return Task.CompletedTask;
     }
-    
+
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="model"></param>
     /// <param name="memberGroup"></param>
@@ -130,7 +134,6 @@ public class WraMemberManagementService(
     public async Task<(IdentityResult, MemberIdentityUser)> RegisterMember(RegisterModel model, string memberGroup = "Visitor")
     {
         using var scope = coreScopeProvider.CreateCoreScope(autoComplete: true);
-
 
         if (string.IsNullOrEmpty(model.Name) && string.IsNullOrEmpty(model.Email) == false)
         {
@@ -144,23 +147,22 @@ public class WraMemberManagementService(
 
         var identityResult = await memberManager.CreateAsync(
             identityUser);
-        
+
         if (!identityResult.Succeeded) return (identityResult, identityUser);
-        
+
         var passwordSetResult = memberManager.AddPasswordAsync(identityUser, model.Password);
 
         if (!identityResult.Succeeded && !passwordSetResult.Result.Succeeded) return (identityResult, identityUser);
-        
+
         var member = memberService.GetByKey(identityUser.Key);
         if (member == null)
         {
-
             throw new InvalidOperationException($"Could not find a member with key: {member?.Key}.");
         }
 
         SetMemberProperties(model.MemberProperties, member);
 
-        //Before we save the member we make sure to assign the group, for this the "Group" must exist in the backoffice.
+        // Before we save the member we make sure to assign the group, for this the "Group" must exist in the backoffice.
         memberService.AssignRole(model.Email, memberGroup);
 
         memberService.Save(member);
@@ -168,13 +170,10 @@ public class WraMemberManagementService(
         return (identityResult, identityUser);
     }
 
-
-
-
-
     public async Task UpdateMemberInfo(RegisterModel model, string memberGroup = "")
     {
         using ICoreScope scope = coreScopeProvider.CreateCoreScope(autoComplete: true);
+
         // var existingMember = _memberService.GetByEmail(model.Email);
 
         // generate an "identity user" with the information we have from the request
@@ -195,18 +194,16 @@ public class WraMemberManagementService(
         {
             // remove them from any current roles so a single member does not belong to many member groups
             await memberManager.RemoveFromRolesAsync(identityUser, currentMemberRoles);
+
             // assign to new group!
             memberService.AssignRole(model.Email, memberGroup);
         }
 
         memberService.Save(existingMember);
-
-
     }
 
     private void SetMemberProperties(List<MemberPropertyModel> properties, IMember member)
     {
-
         foreach (MemberPropertyModel property in properties.Where(p => p.Value != null).Where(property => member.Properties.Contains(property.Alias)))
         {
             member.Properties[property.Alias]?.SetValue(property.Value);
@@ -215,34 +212,34 @@ public class WraMemberManagementService(
 
     public bool AttachOrderToMember(Order currentOrder)
     {
-        if (umbracoContextAccessor.TryGetUmbracoContext(out IUmbracoContext? context) == false)
+        if (!umbracoContextAccessor.TryGetUmbracoContext(out IUmbracoContext? context))
         {
             return false;
         }
-        var currentMember = memberManager.GetCurrentMemberAsync();
+
+        Task<MemberIdentityUser?> currentMember = memberManager.GetCurrentMemberAsync();
         if (currentMember != null)
         {
-            var memberKey = currentMember?.Result?.Key.ToString();
+            string? memberKey = currentMember.Result?.Key.ToString();
             commerceApi.Uow.Execute(uow =>
             {
-                var order = commerceApi.GetOrCreateCurrentOrder(currentOrder.StoreId)
+                Order order = commerceApi.GetOrCreateCurrentOrder(currentOrder.StoreId)
                     .AsWritable(uow)
                     .AssignToCustomer(memberKey);
                 commerceApi.SaveOrder(order);
 
                 uow.Complete();
             });
-            // member sucessfully attached to customer
+
+            // member successfully attached to customer
             return true;
         }
+
         // no member attached
         return false;
     }
 
     #region Member Content Items
-    
-
-    
 
     private IPublishedContent? GetProductById(string productId)
     {
@@ -250,34 +247,31 @@ public class WraMemberManagementService(
         var siteRoot = contentCache?.GetAtRoot().FirstOrDefault();
 
         var collectionPages = siteRoot?.Children
-            .Where(c => c.ContentType.Alias == ProductsPage.ModelTypeAlias)
-            .FirstOrDefault()?.Children
-            .Where(c => c.ContentType.Alias == CollectionPage.ModelTypeAlias);
+            .FirstOrDefault(c => c.ContentType.Alias == ProductsPage.ModelTypeAlias)?.Children
+            .Where(c => c.ContentType.Alias == CollectionPage.ModelTypeAlias) ?? [];
 
         IPublishedContent? subscriptionProduct = null;
-        foreach (var collection in collectionPages)
+        foreach (IPublishedContent? collection in collectionPages)
         {
             subscriptionProduct = collection.Children
                 .FirstOrDefault(x => x.Value("productId").Equals(productId));
             if (subscriptionProduct != null) { break; }
         }
+
         return subscriptionProduct;
     }
 
     #region  companies
+
     // private async Task<IContent> TieCompanyToSubscription(string companyId)
     // {
     //     var company = _searchService.Search(Company.ModelTypeAlias)?
     //         .FirstOrDefault(x => x.Content.Value("externalId") == companyId);
 
-    //     company.Content.va("subscriptions", companyId);
+    // company.Content.va("subscriptions", companyId);
 
-    //     return company?.Content as IContent;
+    // return company?.Content as IContent;
     // }
-    
-    
-
-
 
     #endregion
 

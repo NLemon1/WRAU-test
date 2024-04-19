@@ -5,6 +5,7 @@ using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Cms.Core.Web;
 using Umbraco.Cms.Web.Common;
 using WRA.Umbraco.Dtos;
+using WRA.Umbraco.Dtos.Hottips;
 using WRA.Umbraco.Extensions;
 using WRA.Umbraco.Models;
 using WRA.Umbraco.Web.Services;
@@ -26,15 +27,15 @@ public class ContentApiController : ApiController
         _umbracoHelper = umbracoHelper;
         _umbracoContextAccessor = umbracoContextAccessor;
         _searchService = searchService;
-
     }
 
     [HttpPost]
     [Route("NewsAndUpdates")]
     public NewsAndUpdatesResponseDto GetNewsAndUpdates(NewsRecordRequest request)
     {
-        //broad initial search
+        // broad initial search
         var (rawResults, _) = ConductSearch(Article.ModelTypeAlias, request.SearchPhrase);
+
         // cast search to strongly typed object
         var responseResults = rawResults
             .Select(result => new Article(result.Content, new NoopPublishedValueFallback()));
@@ -53,7 +54,6 @@ public class ContentApiController : ApiController
 
         SearchResultsDto SearchInfo = new(responseResults.Count());
         return new NewsAndUpdatesResponseDto(paginatedResults, SearchInfo);
-
     }
 
     [HttpPost]
@@ -84,12 +84,10 @@ public class ContentApiController : ApiController
         return new HotTipResponseDto(paginatedResults, searchInfo);
     }
 
-
     [HttpPost]
     [Route("Multimedia")]
     public MultimediaResponseDto GetMultiMedia(MultimediaRequestDto request)
     {
-
         // conduct search
         var (rawResults, _) = ConductSearch(MultimediaItem.ModelTypeAlias, request.SearchPhrase);
         var responseResults = rawResults
@@ -117,6 +115,7 @@ public class ContentApiController : ApiController
                         childMediaItems.Add(mmChild.AsDto());
                         itemsAddedToCollection.Add(mmChild.Id);
                     }
+
                     mmResponseItems.Add(mmItem.AsDto(childMediaItems));
                 }
                 else
@@ -134,12 +133,10 @@ public class ContentApiController : ApiController
 
             return new MultimediaResponseDto(
                 paginatedResults,
-                new SearchResultsDto(responseResults.Count())
-                );
+                new SearchResultsDto(responseResults.Count()));
         }
         else
         {
-
             // paginate and convert to a DTO
             var paginatedResults = responseResults
                 .OrderByDescending(rr => rr.Date)
@@ -149,10 +146,8 @@ public class ContentApiController : ApiController
 
             return new MultimediaResponseDto(
                 paginatedResults,
-                 new SearchResultsDto(responseResults.Count())
-                 );
+                new SearchResultsDto(responseResults.Count()));
         }
-
     }
 
     // private (List<PlaylistDto>, List<MultimediaDto>) BuildResponseWithPlaylists(
@@ -170,17 +165,17 @@ public class ContentApiController : ApiController
     //                 // get children
     //                 var playlist = mediaItem as MultimediaPlaylist;
 
-    //                 // build playlist dto
+    // // build playlist dto
     //                 var playlistDto = playlist?.AsDto();
 
-    //                 // add to response
+    // // add to response
     //                 playlists.Add(playlistDto);
     //                 break;
     //             case MultimediaItem.ModelTypeAlias:
     //                 //build multimediaitem dto
     //                 var multimediaItem = mediaItem as MultimediaItem;
 
-    //                 // add to response
+    // // add to response
     //                 multiMediaItems.Add(multimediaItem.AsDto());
     //                 break;
     //             default:
@@ -204,12 +199,14 @@ public class ContentApiController : ApiController
         if (resultCategory == null) { return false; }
         return resultCategory.Equals(category, StringComparison.OrdinalIgnoreCase);
     }
+
     private static bool CategoryMatch(IEnumerable<IPublishedContent> resultSubCategories, IEnumerable<string> requestSubcategories)
     {
         if (resultSubCategories == null || !resultSubCategories.Any()) { return false; }
         var subcategories = resultSubCategories.Select(x => x.Name);
         return subcategories.ContainsAny(requestSubcategories);
     }
+
     // [HttpPost]
     // [Route("NewsAndUpdates")]
     // public IEnumerable<NewsRecordDto> Get(NewsRecordRequest request)
@@ -223,7 +220,7 @@ public class ContentApiController : ApiController
     //     catch (System.Exception)
     //     {
 
-    //         throw;
+    // throw;
     //     }
     // }
 }

@@ -1,12 +1,8 @@
-using System.Collections.Generic;
-using System.Linq;
-
 namespace WRA.Umbraco.Models
 {
     public partial class Home
     {
-
-        //public SearchPage SearchPage => this.Children.OfType<SearchPage>().FirstOrDefault();
+        // public SearchPage SearchPage => this.Children.OfType<SearchPage>().FirstOrDefault();
 
         public CartPage CartPage => this.Children.OfType<CartPage>().FirstOrDefault();
 

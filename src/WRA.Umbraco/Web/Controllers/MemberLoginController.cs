@@ -1,4 +1,3 @@
-
 using System.Security.Cryptography;
 using System.Web;
 using Microsoft.AspNetCore.Http;
@@ -7,13 +6,11 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Org.BouncyCastle.Ocsp;
 using Umbraco.Cms.Core;
 using Umbraco.Cms.Core.Cache;
 using Umbraco.Cms.Core.Configuration.Models;
 using Umbraco.Cms.Core.Logging;
 using Umbraco.Cms.Core.Mail;
-using Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Core.Models.Email;
 using Umbraco.Cms.Core.Routing;
 using Umbraco.Cms.Core.Security;
@@ -56,8 +53,7 @@ public class MemberLoginController : UmbLoginController
         ILocalizationService localisation,
         ILogger<MemberLoginController> logger,
         IConfiguration configuration,
-        IMemberService memberService
-        ) : base(
+        IMemberService memberService) : base(
             umbracoContextAccessor,
             databaseFactory,
             services,
@@ -80,7 +76,6 @@ public class MemberLoginController : UmbLoginController
         _memberService = memberService;
     }
 
-
     [HttpPost]
     public async Task<IActionResult> ForgotPassword(ResetPasswordDto model)
     {
@@ -97,39 +92,42 @@ public class MemberLoginController : UmbLoginController
             {
                 ModelState.AddModelError("NoPass", "Password is not valid");
             }
+
             if (string.IsNullOrWhiteSpace(newPassword))
             {
                 ModelState.AddModelError("NoPass", "You must enter a password");
             }
+
             if (newPassword != confirmPass)
             {
                 ModelState.AddModelError("NoMatch", "passwords do not match");
             }
+
             // not sure what this does?
             if (Request.Form["token"][0].Replace(" ", "+") != token)
             {
                 ModelState.AddModelError("TokenInv", "Reset token is invalid");
             }
+
             if (!ModelState.IsValid)
             {
                 TempData["Message"] = "Validation Error";
                 return CurrentUmbracoPage();
             }
+
             var resetSuccess = ResetPassword(model);
             if (resetSuccess)
             {
                 TempData["Message"] = "Reset password error";
                 return CurrentUmbracoPage();
             }
-            //everything ok so redirect to the login page.
-            return Redirect("~/login");
 
+            // everything ok so redirect to the login page.
+            return Redirect("~/login");
         }
         else
         {
             MemberIdentityUser? memberIdentityUser = await _memberManager.FindByEmailAsync(model.email);
-
-
 
             if (memberIdentityUser != null)
             {
@@ -138,6 +136,7 @@ public class MemberLoginController : UmbLoginController
                 var from = _globalSettings.Smtp?.From;
                 var code = await _memberManager.GeneratePasswordResetTokenAsync(memberIdentityUser);
                 var token = HttpUtility.UrlEncode(code);
+
                 // var callbackUrl = ConstructCallbackUrl(memberIdentityUser.Id, code);
 
                 string baseURL = _configuration.GetSection("Umbraco:CMS:WebRouting:UmbracoApplicationUrl").Value ?? string.Empty;
@@ -169,6 +168,7 @@ public class MemberLoginController : UmbLoginController
                 ModelState.AddModelError("ForgotPasswordForm", "Member not found");
             }
         }
+
         return CurrentUmbracoPage();
     }
 
@@ -178,8 +178,8 @@ public class MemberLoginController : UmbLoginController
 
         var result = _memberManager.ResetPasswordAsync(identityUser, model.token, model.NewPassword).Result;
         return result.Succeeded;
-
     }
+
     // private string ConstructCallbackUrl(string userId, string code)
     // {
     //     // Get an mvc helper to get the url
@@ -188,7 +188,7 @@ public class MemberLoginController : UmbLoginController
     //         ControllerExtensions.GetControllerName<MemberController>(),
     //         new { u = userId, r = code });
 
-    //     // Construct full URL using configured application URL (which will fall back to current request)
+    // // Construct full URL using configured application URL (which will fall back to current request)
     //     Uri applicationUri = _httpContextAccessor.GetRequiredHttpContext().Request
     //         .GetApplicationUri(_webRoutingSettings);
     //     var callbackUri = new Uri(applicationUri, action);
@@ -196,5 +196,3 @@ public class MemberLoginController : UmbLoginController
     // }
 
 }
-
-

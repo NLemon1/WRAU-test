@@ -5,7 +5,6 @@ using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Cms.Core.Security;
 using Umbraco.Cms.Core.Web;
 using Umbraco.Cms.Web.Common.Controllers;
-using WRA.Umbraco.Web.Services;
 
 namespace WRA.Umbraco.Web.Controllers
 {

@@ -1,5 +1,6 @@
 using Umbraco.Commerce.Core.Adapters;
 using Umbraco.Commerce.Extensions;
+using WRA.Umbraco.Web.Adapters;
 
 namespace WRA.Umbraco.UmbracoExtensions;
 
@@ -12,8 +13,7 @@ public static class WraEcommerceBuilderExtensions
             // Enable SQLite support
             v.AddSQLite();
             v.AddStorefrontApi();
-            v.Services.AddUnique<IProductAdapter, CustomProductAdapater>();
-
+            v.Services.AddUnique<ProductAdapterBase, CustomProductAdapter>();
 
             // Replace the umbraco product name extractor with one that supports child variants
             // v.Services.AddUnique<IUmbracoProductNameExtractor, CompositeProductNameExtractor>();
@@ -38,7 +38,6 @@ public static class WraEcommerceBuilderExtensions
             //     .RegisterHandler<OrderShippingMethodChangingHandler>();
 
         });
-
 
         return umbracoBuilder;
     }

@@ -480,3 +480,4 @@ appsettings-schema.*.json
 
 /Smidge
 /App_Plugins/cmsimport/*
+*.db

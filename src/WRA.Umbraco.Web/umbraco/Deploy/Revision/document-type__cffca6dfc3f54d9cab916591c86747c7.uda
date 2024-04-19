@@ -72,14 +72,6 @@
           "Mandatory": true,
           "Name": "Image (desktop)",
           "SortOrder": 7
-        },
-        {
-          "Key": "b3d3be4e-6a30-4880-82c7-60125d964747",
-          "Alias": "courseSearchCategories",
-          "DataType": "umb://data-type/b14e9ec8d3fb47ebb062545f97d74e2f",
-          "Description": "Select Categories and Subcategories",
-          "Name": "Course Search Categories/Subcategories",
-          "SortOrder": 5
         }
       ]
     }
@@ -105,10 +97,6 @@
     },
     {
       "Udi": "umb://data-type/ad9f0cf2bda245d59ea1a63cfc873fd3",
-      "Ordering": true
-    },
-    {
-      "Udi": "umb://data-type/b14e9ec8d3fb47ebb062545f97d74e2f",
       "Ordering": true
     },
     {

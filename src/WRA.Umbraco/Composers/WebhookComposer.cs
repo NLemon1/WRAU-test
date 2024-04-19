@@ -1,7 +1,9 @@
 using Umbraco.Cms.Core.Composing;
-using WRA.Umbraco.Webhooks;
 
-public class CustomWebhookComposer : IComposer
+namespace WRA.Umbraco.Composers;
+
+[ComposeAfter(typeof(CacheEventHandlerComposer))]
+public class WebhookComposer : IComposer
 {
     public void Compose(IUmbracoBuilder builder)
     {
@@ -27,7 +29,6 @@ public class CustomWebhookComposer : IComposer
                     .AddRelation()
                     .AddRelationType()
                     .AddUser();
-
             });
     }
 }

@@ -1,9 +1,7 @@
 using Examine;
 using Examine.Search;
-using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Umbraco.Cms.Core.Web;
-using Umbraco.Extensions;
 using Umbraco.Commerce.Common.Models;
 using WRA.Umbraco.Models;
 
@@ -58,4 +56,3 @@ public abstract class ProductViewComponentBase : ViewComponent
         return new PagedResult<ProductPage>(0, page, pageSize);
     }
 }
-

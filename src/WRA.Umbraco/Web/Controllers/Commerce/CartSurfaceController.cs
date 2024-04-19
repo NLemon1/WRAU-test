@@ -12,156 +12,155 @@ using WRA.Umbraco.Dtos;
 using Umbraco.Commerce.Extensions;
 using WRA.Umbraco.Extensions;
 
-namespace WRA.Umbraco.Controllers
+namespace WRA.Umbraco.Controllers;
+
+public class CartSurfaceController : SurfaceController
 {
-    public class CartSurfaceController : SurfaceController
+    private readonly IUmbracoCommerceApi _commerceApi;
+
+    public CartSurfaceController(
+        IUmbracoContextAccessor umbracoContextAccessor,
+        IUmbracoDatabaseFactory databaseFactory,
+        ServiceContext services,
+        AppCaches appCaches,
+        IProfilingLogger profilingLogger,
+        IPublishedUrlProvider publishedUrlProvider,
+        IUmbracoCommerceApi commerceApi)
+        : base(
+            umbracoContextAccessor,
+            databaseFactory,
+            services,
+            appCaches,
+            profilingLogger,
+            publishedUrlProvider)
     {
-        private readonly IUmbracoCommerceApi _commerceApi;
+        _commerceApi = commerceApi;
+    }
 
-        public CartSurfaceController(
-            IUmbracoContextAccessor umbracoContextAccessor,
-            IUmbracoDatabaseFactory databaseFactory,
-            ServiceContext services,
-            AppCaches appCaches,
-            IProfilingLogger profilingLogger,
-            IPublishedUrlProvider publishedUrlProvider,
-            IUmbracoCommerceApi commerceApi
-            )
-            : base(
-                umbracoContextAccessor,
-                databaseFactory,
-                services,
-                appCaches,
-                profilingLogger,
-                publishedUrlProvider)
+    [HttpPost]
+    public IActionResult AddToCart(AddToCartDto postModel)
+    {
+        try
         {
-            _commerceApi = commerceApi;
+            _commerceApi.Uow.Execute(uow =>
+            {
+                var store = CurrentPage!.GetStore();
+                var order = _commerceApi.GetOrCreateCurrentOrder(store.Id)
+                    .AsWritable(uow)
+                    .AddProduct(postModel.ProductReference, postModel.ProductVariantReference, 1);
+
+                _commerceApi.SaveOrder(order);
+
+                uow.Complete();
+            });
+        }
+        catch (ValidationException)
+        {
+            ModelState.AddModelError("productReference", "Failed to add product to cart");
+
+            return CurrentUmbracoPage();
         }
 
-        [HttpPost]
-        public IActionResult AddToCart(AddToCartDto postModel)
+        TempData["addedProductReference"] = postModel.ProductReference;
+
+        return RedirectToCurrentUmbracoPage();
+    }
+
+    [HttpPost]
+    public IActionResult AddBundleToCart(AddBundleToCartDto postModel)
+    {
+        string bundleReference = postModel.BundleReference;
+        int defaultQty = 1;
+        try
         {
-            try
+            _commerceApi.Uow.Execute(uow =>
             {
-                _commerceApi.Uow.Execute(uow =>
+                var store = CurrentPage.GetStore();
+                var order = _commerceApi.GetOrCreateCurrentOrder(store.Id)
+                    .AsWritable(uow)
+                    .AddProduct(bundleReference, defaultQty, bundleReference);
+
+                // the first product is already added as the "main" bundle item, so we skip it here.
+                foreach (string bp in postModel.BundledProducts)
                 {
-                    var store = CurrentPage!.GetStore();
-                    var order = _commerceApi.GetOrCreateCurrentOrder(store.Id)
-                        .AsWritable(uow)
-                        .AddProduct(postModel.ProductReference, postModel.ProductVariantReference, 1);
+                    order.AddProductToBundle(bundleReference, bp, defaultQty);
+                }
 
-                    _commerceApi.SaveOrder(order);
+                _commerceApi.SaveOrder(order);
 
-                    uow.Complete();
-                });
-            }
-            catch (ValidationException ex)
-            {
-                ModelState.AddModelError("productReference", "Failed to add product to cart");
-
-                return CurrentUmbracoPage();
-            }
-
-            TempData["addedProductReference"] = postModel.ProductReference;
-
-            return RedirectToCurrentUmbracoPage();
+                uow.Complete();
+            });
         }
-
-        [HttpPost]
-        public IActionResult AddBundleToCart(AddBundleToCartDto postModel)
+        catch (ValidationException)
         {
-            var bundleReference = postModel.BundleReference;
-            int defaultQty = 1;
-            try
-            {
-                _commerceApi.Uow.Execute(uow =>
-                {
-                    var store = CurrentPage.GetStore();
-                    var order = _commerceApi.GetOrCreateCurrentOrder(store.Id)
-                        .AsWritable(uow)
-                        .AddProduct(bundleReference, defaultQty, bundleReference);
+            ModelState.AddModelError("bundleReference", "Failed to add bundle to cart");
 
-                    // the first product is already added as the "main" bundle item, so we skip it here.
-                    foreach (var bp in postModel.BundledProducts)
-                    {
-                        order.AddProductToBundle(bundleReference, bp, defaultQty);
-                    }
-                    _commerceApi.SaveOrder(order);
-
-                    uow.Complete();
-                });
-            }
-            catch (ValidationException ex)
-            {
-                ModelState.AddModelError("bundleReference", "Failed to add bundle to cart");
-
-                return CurrentUmbracoPage();
-            }
-
-            TempData["addedBundleReference"] = postModel.BundleReference;
-
-            return RedirectToCurrentUmbracoPage();
+            return CurrentUmbracoPage();
         }
 
-        [HttpPost]
-        public IActionResult UpdateCart(UpdateCartDto postModel)
+        TempData["addedBundleReference"] = postModel.BundleReference;
+
+        return RedirectToCurrentUmbracoPage();
+    }
+
+    [HttpPost]
+    public IActionResult UpdateCart(UpdateCartDto postModel)
+    {
+        try
         {
-            try
+            _commerceApi.Uow.Execute(uow =>
             {
-                _commerceApi.Uow.Execute(uow =>
+                var store = CurrentPage.GetStore();
+                var order = _commerceApi.GetOrCreateCurrentOrder(store.Id)
+                    .AsWritable(uow);
+
+                foreach (var orderLine in postModel.OrderLines)
                 {
-                    var store = CurrentPage.GetStore();
-                    var order = _commerceApi.GetOrCreateCurrentOrder(store.Id)
-                        .AsWritable(uow);
+                    order.WithOrderLine(orderLine.Id)
+                        .SetQuantity(orderLine.Quantity);
+                }
 
-                    foreach (var orderLine in postModel.OrderLines)
-                    {
-                        order.WithOrderLine(orderLine.Id)
-                            .SetQuantity(orderLine.Quantity);
-                    }
+                _commerceApi.SaveOrder(order);
 
-                    _commerceApi.SaveOrder(order);
-
-                    uow.Complete();
-                });
-            }
-            catch (ValidationException ex)
-            {
-                ModelState.AddModelError("productReference", "Failed to update cart");
-
-                return CurrentUmbracoPage();
-            }
-
-            TempData["cartUpdated"] = "true";
-
-            return RedirectToCurrentUmbracoPage();
+                uow.Complete();
+            });
         }
-
-        [HttpGet]
-        public IActionResult RemoveFromCart(RemoveFromCartDto postModel)
+        catch (ValidationException)
         {
-            try
-            {
-                _commerceApi.Uow.Execute(uow =>
-                {
-                    var store = CurrentPage.GetStore();
-                    var order = _commerceApi.GetOrCreateCurrentOrder(store.Id)
-                        .AsWritable(uow)
-                        .RemoveOrderLine(postModel.OrderLineId);
+            ModelState.AddModelError("productReference", "Failed to update cart");
 
-                    _commerceApi.SaveOrder(order);
-
-                    uow.Complete();
-                });
-            }
-            catch (ValidationException ex)
-            {
-                ModelState.AddModelError("productReference", "Failed to remove cart item");
-
-                return CurrentUmbracoPage();
-            }
-
-            return RedirectToCurrentUmbracoPage();
+            return CurrentUmbracoPage();
         }
+
+        TempData["cartUpdated"] = "true";
+
+        return RedirectToCurrentUmbracoPage();
+    }
+
+    [HttpGet]
+    public IActionResult RemoveFromCart(RemoveFromCartDto postModel)
+    {
+        try
+        {
+            _commerceApi.Uow.Execute(uow =>
+            {
+                var store = CurrentPage.GetStore();
+                var order = _commerceApi.GetOrCreateCurrentOrder(store.Id)
+                    .AsWritable(uow)
+                    .RemoveOrderLine(postModel.OrderLineId);
+
+                _commerceApi.SaveOrder(order);
+
+                uow.Complete();
+            });
+        }
+        catch (ValidationException)
+        {
+            ModelState.AddModelError("productReference", "Failed to remove cart item");
+
+            return CurrentUmbracoPage();
+        }
+
+        return RedirectToCurrentUmbracoPage();
     }
 }

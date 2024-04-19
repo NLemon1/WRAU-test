@@ -1,6 +1,3 @@
-
-using Umbraco.Cms.Core.Models.PublishedContent;
-
 namespace WRA.Umbraco.Dtos;
 
 public record ProductPageResponseDto(

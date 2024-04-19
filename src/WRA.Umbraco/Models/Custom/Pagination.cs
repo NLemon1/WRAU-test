@@ -1,3 +1,5 @@
+namespace WRA.Umbraco.Models.Custom;
+
 public class Pagination
 {
     public int PageNumber { get; set; }
@@ -7,6 +9,7 @@ public class Pagination
         PageNumber = 1;
         PageSize = 15;
     }
+
     public Pagination(int pageNumber, int pageSize)
     {
         PageNumber = pageNumber < 1 ? 1 : pageNumber;

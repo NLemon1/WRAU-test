@@ -19,13 +19,10 @@ namespace WRA.Umbraco.Web.Extensions
                 var hasVisibilityConditions = blockGridItem.Content.HasValue(_memberGroups);
                 if (hasVisibilityConditions)
                 {
-
                 }
-
             }
+
             return await html.PartialAsync(DefaultFolderTemplate(template), items);
         }
     }
-
-
 }

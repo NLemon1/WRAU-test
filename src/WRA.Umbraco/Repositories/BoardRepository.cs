@@ -1,45 +1,61 @@
+using Microsoft.Extensions.Logging;
 using Umbraco.Cms.Core.Models;
-using Umbraco.Cms.Core.PublishedCache;
+using Umbraco.Cms.Core.Scoping;
 using Umbraco.Cms.Core.Services;
+using Umbraco.Cms.Core.Web;
 using WRA.Umbraco.Dtos;
 using WRA.Umbraco.Models;
 
 namespace WRA.Umbraco.Helpers;
 
-public class BoardRepository(IContentService contentService)
+public class BoardRepository
+    (IContentService contentService,
+    ICoreScopeProvider coreScopeProvider,
+    IUmbracoContextFactory umbracoContextFactory,
+    ILogger<BoardRepository> logger)
 {
-    public IContent CreateOrUpdateBoard(MemberBoardDto mb, IPublishedContentCache contentCache)
+    public IContent CreateOrUpdateBoard(MemberBoardDto mb)
     {
-        var siteRoot = contentCache.GetAtRoot().FirstOrDefault();
+        try
+        {
+            using var scope = coreScopeProvider.CreateCoreScope();
+            scope.Notifications.Suppress();
 
-        // first get the board page that all indivial boards will be under.
-        var BoardsContainer = siteRoot?.Children
-            .FirstOrDefault(x => x.ContentType.Alias == Boards.ModelTypeAlias);
-        // var BoardsContainer = _searchService.Search(Boards.ModelTypeAlias)?
-        //     .FirstOrDefault()?
-        //     .Content as Boards;
+            using var umbracoContextReference = umbracoContextFactory.EnsureUmbracoContext();
+            var contentCache = umbracoContextReference.UmbracoContext.Content;
+            var siteRoot = contentCache.GetAtRoot().FirstOrDefault();
 
-        var existingBoard = siteRoot?.Children
-            .Where(x => x.ContentType.Alias == Board.ModelTypeAlias)
-            .FirstOrDefault(x => x.Value("externalId") == mb.Id);
+            // first get the board page that all indivial boards will be under.
+            var BoardsContainer = siteRoot?.Children
+                .FirstOrDefault(x => x.ContentType.Alias == Boards.ModelTypeAlias);
 
-        // var existingBoard = _searchService.Search(Board.ModelTypeAlias)?
-        //     .FirstOrDefault(x => x.Content.Value("externalId") == mb.Id);
-        bool boardExists = existingBoard != null;
 
-        var board = boardExists ?
-            existingBoard as IContent :
-            contentService.Create(mb.Name, BoardsContainer.Id, Board.ModelTypeAlias);
+            var existingBoardResult = siteRoot?.Children
+                .Where(x => x.ContentType.Alias == Board.ModelTypeAlias)
+                .FirstOrDefault(x => x.Value("externalId") == mb.Id);
 
-        board.SetValue("externalId", mb.Id);
-        board.SetValue("chapterId", mb.Chapter);
-        board.SetValue("rosterOptIn", mb.RosterOptIn);
-        board.SetValue("rosterOptInDate", mb.RosterOptInDate);
+            var board = existingBoardResult != null ?
+                contentService.GetById(existingBoardResult.Id):
+                contentService.Create(mb.Name, BoardsContainer.Id, Board.ModelTypeAlias);
 
-        contentService.SaveAndPublish(board);
 
-        return board;
+            board.SetValue("externalId", mb.Id);
+            board.SetValue("chapterId", mb.Chapter);
+            board.SetValue("rosterOptIn", mb.RosterOptIn);
+            board.SetValue("rosterOptInDate", mb.RosterOptInDate);
+
+            contentService.SaveAndPublish(board);
+            scope.Complete();
+
+            return board;
+        }
+        catch (Exception e)
+        {
+            logger.LogError(e, "Error creating or updating board");
+            throw;
+        }
     }
+
     // add a get
     // add a delete
 

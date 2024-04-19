@@ -1,17 +1,16 @@
 using System.Text.Json;
 using System.Web.Http;
+using Hangfire;
 using Microsoft.AspNetCore.Http.Timeouts;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Umbraco.Cms.Api.Common.Attributes;
-using Umbraco.Cms.Core;
-using Umbraco.Cms.Core.Models;
-using Umbraco.Cms.Core.Models.PublishedContent;
-using Umbraco.Cms.Core.Services;
-using Umbraco.Cms.Infrastructure.HostedServices;
-using Umbraco.Commerce.Core.Models;
-using Umbraco.Commerce.Core.Services;
+using Umbraco.Cms.Core.Mapping;
+using WRA.Umbraco.Contracts;
+using WRA.Umbraco.Contracts.Product;
 using WRA.Umbraco.Dtos;
-using WRA.Umbraco.Models;
+using WRA.Umbraco.Repositories;
+using WRA.Umbraco.Web.Dtos.WraExternal;
 using WRA.Umbraco.Web.Services;
 
 namespace WRA.Umbraco.Web.Controllers.Api;
@@ -20,144 +19,114 @@ namespace WRA.Umbraco.Web.Controllers.Api;
 [MapToApi("product-api")]
 [Route("WraProductApi")]
 
-public class ProductSyncApiController : ApiController
-{
-    private readonly SearchService _searchService;
-    private readonly WraExternalApiService _wraExternalApiService;
-    private readonly IContentService _contentService;
-    private readonly ICurrencyService _currencyService;
-    private IProductManagementService _productManagementService;
-    private readonly IBackgroundTaskQueue _backgroundTaskQueue;
+public class ProductSyncApiController(
+    WraExternalApiService wRAExternalApiService,
+    WraProductManagementService wraProductManagementService,
+    CategoryRepository categoryRepository,
+    IUmbracoMapper mapper,
 
-    public ProductSyncApiController(
-        SearchService searchService,
-        WraExternalApiService wRAExternalApiService,
-        IProductService productService,
-        IContentService contentService,
-        ICurrencyService currencyService,
-        IProductManagementService WRAProductManagementService,
-        IBackgroundTaskQueue backgroundTaskQueue)
+    ILogger<ProductSyncApiController> logger)
+    : ApiController
+{
+    [HttpPost]
+    [Route("SyncAllProductsBackgound")]
+    public void productBackgroundSync()
     {
-        _searchService = searchService;
-        _wraExternalApiService = wRAExternalApiService;
-        _contentService = contentService;
-        _currencyService = currencyService;
-        _productManagementService = WRAProductManagementService;
-        _backgroundTaskQueue = backgroundTaskQueue;
+        BackgroundJob.Enqueue(() => SyncAllProducts());
     }
 
 
     [HttpPost]
+    [Route("SyncCategoriesAndSubCategories")]
+    public async Task<bool> SyncProductCategoriesAndSubCategories()
+    {
+        bool categoriesSuccess =  await SyncSubcategories();
+        if (categoriesSuccess)
+        {
+            bool subCategoriesSuccess = await SyncSubcategories();
+            return categoriesSuccess && subCategoriesSuccess;
+        }
+
+        return false;
+    }
+    [HttpPost]
     [Route("SyncProductCategories")]
-    public async Task<bool> SyncProductCategories()
+    public async Task<bool> SyncCategories()
     {
         try
         {
-
-            var categoriesResp = await _wraExternalApiService.GetProductCategories();
-            var subcategories = await _wraExternalApiService.GetProductSubCategories();
+            var categoriesResp = await wRAExternalApiService.GetProductCategories();
 
             var categoryContent = categoriesResp.Content;
-            var subCategoryContent = subcategories.Content;
-            // we have the content
-            // lets create a category in umbraco with it...
 
-            //first lets deserialize:
-            var categories = JsonSerializer.Deserialize<IEnumerable<WraExternalProductCategoryDto>>(categoryContent);
-            var subCategories = JsonSerializer.Deserialize<IEnumerable<WraExternalProductSubCategoryDto>>(subCategoryContent);
+            // first lets deserialize:
+            var categoriesResponse = JsonSerializer.Deserialize<IEnumerable<ProductCategoryDto>>(categoryContent);
 
-
-            //once we have our categories deserialized, lets make some umbraco content items...
-            // First we get the "categories" page that houes all of the categories and subcategories.
-            var categoriesPageQuery = _searchService.Search(CategoriesPage.ModelTypeAlias);
-            if (categoriesPageQuery == null || !categoriesPageQuery.Any()) { return false; }
-            var categoriesPage = categoriesPageQuery
-                .Select(result => new CategoriesPage(result.Content, new NoopPublishedValueFallback()))
-                .FirstOrDefault();
-
-
-            foreach (var cat in categories)
+            foreach (var categoryResponse in categoriesResponse)
             {
-                // check if it extists first
-                var existingCategoryPages = _searchService.Search(CategoryPage.ModelTypeAlias)
-                    .Where(excat => excat.Content.Value<Guid>("externalId").Equals(cat.ExternalId));
-
-                // category added, now lets check to see if it needs any subcategories
-                var releventSubcategories = subCategories.Where(sub => sub.ExternalCategoryId.Equals(cat.ExternalId));
-
-                if (existingCategoryPages != null && existingCategoryPages.Any())
-                {
-                    // if it does, get the ID, query the content directly, and set the fields again.
-                    var categoryPageSearchResult = existingCategoryPages.FirstOrDefault();
-                    var existingCategoryPage = _contentService.GetById(categoryPageSearchResult.Content.Id);
-                    SetCategoryProperties(existingCategoryPage, cat);
-                    _contentService.SaveAndPublish(existingCategoryPage);
-
-                    // now set subcategories
-                    SetSubCategoryPages(releventSubcategories, existingCategoryPage);
-                }
-                else
-                {
-                    var newCategoryPage = _contentService.Create(cat.Name, categoriesPage.Id, CategoryPage.ModelTypeAlias);
-                    SetCategoryProperties(newCategoryPage, cat);
-                    _contentService.SaveAndPublish(newCategoryPage);
-
-                    // now set subcategories
-                    SetSubCategoryPages(releventSubcategories, newCategoryPage);
-
-                }
-                // _contentService.CreateContent(cat.Name, Udi.Create("", key), CategoryPage.ModelTypeAlias);
-            };
+                await categoryRepository.CreateOrUpdateCategory(categoryResponse);
+            }
 
             return true; // success
         }
-        catch (System.Exception ex)
+        catch (Exception e)
         {
-
-            throw ex;
+            logger.LogError(e, "Error syncing product categories");
+            throw;
+        }
+    }
+    [HttpPost]
+    [Route("SyncSubCategories")]
+    public async Task<bool> SyncSubcategories()
+    {
+        try
+        {
+            var subcategories = await wRAExternalApiService.GetProductSubCategories();
+            var subCategoryContent = subcategories.Content;
+            var subCategoriesResponse = JsonSerializer.Deserialize<IEnumerable<ProductSubCategoryDto>>(subCategoryContent);
+            foreach (var subCategory in subCategoriesResponse)
+            {
+                categoryRepository.CreateOrUpdateSubCategory(subCategory);
+            }
+            return true;
+        }
+        catch (Exception e)
+        {
+            logger.LogError(e, "Error syncing product subcategories");
+            throw;
         }
     }
 
-    private void SetSubCategoryPages(IEnumerable<WraExternalProductSubCategoryDto> subCategories, IContent parentCategory)
-    {
-        // we have our matching sub categories
-        foreach (var subcat in subCategories)
-        {
-            var existingSubCategoryPages = _searchService.Search(SubCategoryPage.ModelTypeAlias)
-                .Where(x => x.Content.Value<Guid>("externalId").Equals(subcat.ExternalId));
+    // private void SetSubCategoryPages(IEnumerable<WraExternalProductSubCategoryDto> subCategories, IContent parentCategory)
+    // {
+    //     // we have our matching sub categories
+    //     foreach (var subcat in subCategories)
+    //     {
+    //         var existingSubCategoryPages = searchService.Search(SubCategoryPage.ModelTypeAlias)
+    //             .Where(x => x.Content.Value<Guid>("externalId").Equals(subcat.ExternalId));
+    //
+    //         // check if any existing subcategory pages exist under the requested Id
+    //         bool anyExist = existingSubCategoryPages?.Any() ?? false;
+    //         if (anyExist)
+    //         {
+    //             // query mathcing page, should only be a 1:1 on external ID and page
+    //             var matchingSubcategoryPage = existingSubCategoryPages.FirstOrDefault();
+    //             var existingCategoryPage = contentService.GetById(matchingSubcategoryPage.Content.Id);
+    //
+    //             SetSubCategoryProperties(existingCategoryPage, subcat);
+    //             contentService.SaveAndPublish(existingCategoryPage);
+    //         }
+    //         else
+    //         {
+    //             // create new
+    //             var newSubcategory = contentService.Create(subcat.Name, parentCategory.Id, SubCategoryPage.ModelTypeAlias);
+    //             SetSubCategoryProperties(newSubcategory, subcat);
+    //             contentService.SaveAndPublish(newSubcategory);
+    //         }
+    //     }
+    // }
 
-            // check if any existing subcategory pages exist under the requested Id
-            bool anyExist = existingSubCategoryPages?.Any() ?? false;
-            if (anyExist)
-            {
-                // query mathcing page, should only be a 1:1 on external ID and page
-                var matchingSubcategoryPage = existingSubCategoryPages.FirstOrDefault();
-                var existingCategoryPage = _contentService.GetById(matchingSubcategoryPage.Content.Id);
 
-                SetSubCategoryProperties(existingCategoryPage, subcat);
-                _contentService.SaveAndPublish(existingCategoryPage);
-            }
-            else
-            {
-                // create new
-                var newSubcategory = _contentService.Create(subcat.Name, parentCategory.Id, SubCategoryPage.ModelTypeAlias);
-                SetSubCategoryProperties(newSubcategory, subcat);
-                _contentService.SaveAndPublish(newSubcategory);
-            }
-        }
-    }
-
-    private void SetCategoryProperties(IContent content, WraExternalProductCategoryDto categoryInfo)
-    {
-        content.SetValue("externalId", categoryInfo.ExternalId);
-        content.SetValue("description", categoryInfo.Description);
-    }
-    private void SetSubCategoryProperties(IContent content, WraExternalProductSubCategoryDto subCategoryInfo)
-    {
-        content.SetValue("externalId", subCategoryInfo.ExternalId);
-        content.SetValue("externalCategoryId", subCategoryInfo.ExternalCategoryId);
-        content.SetValue("description", subCategoryInfo.Description);
-    }
 
     [HttpPost]
     [Route("SyncAllProducts")]
@@ -165,21 +134,23 @@ public class ProductSyncApiController : ApiController
     public async Task SyncAllProducts()
     {
         // first sync all categories and subcategories
-        bool syncCategoriesSuccess = await SyncProductCategories();
+        var syncCategoriesSuccess = await SyncCategories();
         if (!syncCategoriesSuccess)
         {
             throw new Exception("Failed to sync categories");
         }
+
         // Get all products from WRA's ERP
-        var productsResp = await _wraExternalApiService.GetProducts();
+        var productsResp = await wRAExternalApiService.GetProducts();
         var content = productsResp.Content;
 
-        //first lets deserialize:
+        // first lets deserialize:
         var externalProducts = JsonSerializer.Deserialize<List<WraProductDto>>(content);
 
         foreach (WraProductDto p in externalProducts)
         {
-            _productManagementService.CreateProduct(p);
+            var productEvent = mapper.Map<ProductEvent>(p);
+            if (productEvent != null) await wraProductManagementService.CreateOrUpdate(productEvent);
         }
     }
 
@@ -187,66 +158,62 @@ public class ProductSyncApiController : ApiController
     [Route("SyncProduct")]
     public async Task SyncProduct(WraProductDto product)
     {
-        await _productManagementService.CreateProduct(product);
+        var productEvent = mapper.Map<ProductEvent>(product);
+        await wraProductManagementService.CreateOrUpdate(productEvent);
     }
 
-
-    private void SetProductProperties(IContent content, WraProductDto productDto, StoreReadOnly? store)
-    {
-
-        var (categories, subCategories) = GetCategories(productDto.Category, productDto.SubCategory);
-        if (categories != null)
-        {
-            var categoryPageUdi = Udi.Create(Constants.UdiEntityType.Document, categories.Key);
-            List<string> categoryUdis = new() { categoryPageUdi.ToString() };
-            content.SetValue("categories", string.Join(",", categoryUdis));
-        }
-        if (subCategories != null)
-        {
-            var subCategoryPageUdi = Udi.Create(Constants.UdiEntityType.Document, subCategories.Key);
-            List<string> subCategoryIds = new() { subCategoryPageUdi.ToString() };
-            content.SetValue("subCategories", string.Join(",", subCategoryIds));
-        }
-        // pricing is a bit more involved. First, lets get the currencies from our store...
-        // for now we will just support USD
-        CurrencyReadOnly currency = _currencyService.GetCurrencies(store.Id).Where(c => c.Name == "USD").First();
-        // decimal price = Convert.ToDecimal(productDto.Price);
-        var curencyUpdateRequest = JsonSerializer.Serialize(new Dictionary<string, string> {
-            { currency.Id.ToString(), productDto.Price.ToString() }
-        });
-
-        content.SetValue("productId", productDto.Id);
-        content.SetValue("sku", productDto.Sku);
-        content.SetValue("taxonomy", productDto.Taxonomy);
-        content.SetValue("price", curencyUpdateRequest);
-        content.SetValue("startDate", productDto.StartDate);
-        content.SetValue("endDate", productDto.EndDate);
-    }
-
-    private (IPublishedContent?, IPublishedContent?) GetCategories(
-        string categoryName,
-        string subCategoryName
-        )
-    {
-        var idAlias = "externalId";
-        var ignoreCase = StringComparison.OrdinalIgnoreCase;
-
-        var category = _searchService.Search(CategoryPage.ModelTypeAlias)
-            .Where(cat => cat.Content.Name.Equals(categoryName, ignoreCase))
-            .FirstOrDefault()?
-            .Content;
-
-        var subCategory = _searchService.Search(SubCategoryPage.ModelTypeAlias)
-            .Where(sc =>
-                sc.Content.Parent.Value(idAlias) == category.Value(idAlias) &&
-                sc.Content.Name.Equals(subCategoryName, ignoreCase))
-            .FirstOrDefault()?
-            .Content;
-
-        return (category, subCategory);
-    }
-
-
-
-
+    // private void SetProductProperties(IContent content, WraProductDto productDto, StoreReadOnly? store)
+    // {
+    //     var (categories, subCategories) = GetCategories(productDto.Category, productDto.SubCategory);
+    //     if (categories != null)
+    //     {
+    //         var categoryPageUdi = Udi.Create(Constants.UdiEntityType.Document, categories.Key);
+    //         List<string> categoryUdis = new() { categoryPageUdi.ToString() };
+    //         content.SetValue("categories", string.Join(",", categoryUdis));
+    //     }
+    //
+    //     if (subCategories != null)
+    //     {
+    //         var subCategoryPageUdi = Udi.Create(Constants.UdiEntityType.Document, subCategories.Key);
+    //         List<string> subCategoryIds = new() { subCategoryPageUdi.ToString() };
+    //         content.SetValue("subCategories", string.Join(",", subCategoryIds));
+    //     }
+    //
+    //     // pricing is a bit more involved. First, lets get the currencies from our store...
+    //     // for now we will just support USD
+    //     var currency = currencyService.GetCurrencies(store.Id).First(c => c.Name == "USD");
+    //
+    //     string currencyUpdateRequest = JsonSerializer.Serialize(new Dictionary<string, string?>
+    //     {
+    //         { currency.Id.ToString(), productDto.Price.ToString() }
+    //     });
+    //
+    //     content.SetValue("productId", productDto.Id);
+    //     content.SetValue("sku", productDto.Sku);
+    //     content.SetValue("taxonomy", productDto.Taxonomy);
+    //     content.SetValue("price", currencyUpdateRequest);
+    //     content.SetValue("startDate", productDto.StartDate);
+    //     content.SetValue("endDate", productDto.EndDate);
+    // }
+    //
+    // private (IPublishedContent?, IPublishedContent?) GetCategories(
+    //     string categoryName,
+    //     string subCategoryName)
+    // {
+    //     var idAlias = "externalId";
+    //     var ignoreCase = StringComparison.OrdinalIgnoreCase;
+    //
+    //     var category = searchService
+    //         .Search(CategoryPage.ModelTypeAlias)
+    //         .FirstOrDefault(cat => cat.Content.Name.Equals(categoryName, ignoreCase))?
+    //         .Content;
+    //
+    //     var subCategory = searchService
+    //         .Search(SubCategoryPage.ModelTypeAlias)
+    //         .FirstOrDefault(sc => sc.Content.Parent.Value(idAlias) == category.Value(idAlias) &&
+    //                               sc.Content.Name.Equals(subCategoryName, ignoreCase))?
+    //         .Content;
+    //
+    //     return (category, subCategory);
+    // }
 }

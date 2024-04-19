@@ -1,6 +1,3 @@
-using System;
-using System.Text.Json.Serialization;
-
 namespace WRA.Umbraco.Web.Dtos
 {
     [Serializable]

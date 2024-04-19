@@ -5,6 +5,8 @@
     <Nullable>enable</Nullable>
     <Configurations>Debug;Release;Local</Configurations>
   </PropertyGroup>
+  
+ 
  
   <!-- <ItemGroup>
     <None Remove="gulpfile.js" />
@@ -15,12 +17,6 @@
     <Content Include="App_Plugins\CustomBlockView\*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Remove="Views\MyWRA.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove="gulpfile.js" />
   </ItemGroup>
   
   <!-- <ItemGroup>
@@ -50,7 +46,6 @@
 
 
   <ItemGroup>
-    <ProjectReference Include="..\WRA.Umbraco.Contracts\WRA.Umbraco.Contracts.csproj" />
     <ProjectReference Include="..\WRA.Umbraco\WRA.Umbraco.csproj" />
   </ItemGroup>
 

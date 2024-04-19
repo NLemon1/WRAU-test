@@ -1,3 +1,5 @@
+namespace WRA.Umbraco.Models.Custom;
+
 public interface IWraEntity
 {
     string ExternalId { get; set; }

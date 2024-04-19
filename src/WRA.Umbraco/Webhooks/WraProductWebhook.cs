@@ -1,15 +1,11 @@
-using System.Text.Json;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Umbraco.Cms.Core.Configuration.Models;
 using Umbraco.Cms.Core.Models;
-using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Cms.Core.Notifications;
 using Umbraco.Cms.Core.Services;
 using Umbraco.Cms.Core.Sync;
 using Umbraco.Cms.Core.Webhooks;
-using WRA.Umbraco.Dtos;
-using WRA.Umbraco.Models;
 
 namespace WRA.Umbraco.Webhooks;
 
@@ -17,28 +13,29 @@ namespace WRA.Umbraco.Webhooks;
 public class WraProductWebhook : WebhookEventContentBase<ContentPublishedNotification, IContent>
 {
     private readonly ILogger<WraProductWebhook> _logger;
+
     // private readonly WRAProductManagementService _WRAProductManagementService;
     public WraProductWebhook(
         IWebhookFiringService webhookFiringService,
         IWebhookService webhookService,
         IOptionsMonitor<WebhookSettings> webhookSettings,
         IServerRoleAccessor serverRoleAccessor,
-        ILogger<WraProductWebhook> logger
         // WRAProductManagementService wraProdService
-        )
+        ILogger<WraProductWebhook> logger)
         : base(webhookFiringService, webhookService, webhookSettings, serverRoleAccessor)
     {
         _logger = logger;
+
         // _WRAProductManagementService = wraProdService;
     }
 
     public override string Alias => "WraProductUpdate";
+
     // Additional optional overrides
 
     protected override IEnumerable<IContent> GetEntitiesFromNotification(ContentPublishedNotification notification) => notification.PublishedEntities;
     protected override object? ConvertEntityToRequestPayload(IContent contentNotif)
     {
-
         // Custom conversion logic
         if (contentNotif == null ||
             !contentNotif.ContentType.Alias.Equals("productPage") ||
@@ -47,14 +44,13 @@ public class WraProductWebhook : WebhookEventContentBase<ContentPublishedNotific
             return null;
         }
 
-
         // convert to DTO
-
 
         // Write to the logs every time a member is saved.
         _logger.LogInformation($"Product {contentNotif.Id} has been saved and notification published! name: {contentNotif.Name} WraID: {contentNotif.Id}");
         string sku = contentNotif.GetValue<string>("sku") ?? string.Empty;
         return string.Empty;
+
         // var product = _WRAProductManagementService.GetWraProduct(sku);
 
         // //TODO: create static options class
@@ -63,6 +59,7 @@ public class WraProductWebhook : WebhookEventContentBase<ContentPublishedNotific
         // return jsonResponse;
 
     }
+
     public override async Task ProcessWebhooks(ContentPublishedNotification notification, IEnumerable<IWebhook> webhooks, CancellationToken cancellationToken)
     {
         foreach (IWebhook webhook in webhooks)
@@ -78,14 +75,12 @@ public class WraProductWebhook : WebhookEventContentBase<ContentPublishedNotific
                 {
                     continue;
                 }
-                var payload = ConvertEntityToRequestPayload(entity);
-                //await _queueService.SendMessage(payload, "website-prod-product");
-                await WebhookFiringService.FireAsync(webhook, Alias, payload, cancellationToken);
 
+                var payload = ConvertEntityToRequestPayload(entity);
+
+                // await _queueService.SendMessage(payload, "website-prod-product");
+                await WebhookFiringService.FireAsync(webhook, Alias, payload, cancellationToken);
             }
         }
     }
-
-
 }
-

@@ -15,6 +15,7 @@ public class ErrorController : Controller
         {
             return Redirect("/");
         }
+
         return Redirect("/");
     }
 }

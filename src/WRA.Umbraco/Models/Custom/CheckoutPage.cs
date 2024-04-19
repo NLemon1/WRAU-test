@@ -1,4 +1,3 @@
-
 using Umbraco.Commerce.Core.Models;
 using WRA.Umbraco.Extensions;
 

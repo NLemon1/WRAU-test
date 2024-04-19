@@ -6,7 +6,7 @@
     "startNode": {
       "type": "content"
     },
-    "filter": "categoryPage,subCategoryPage",
+    "filter": "categoryPage",
     "minNumber": 0,
     "maxNumber": 0,
     "showOpenButton": false,

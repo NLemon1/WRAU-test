@@ -1,36 +1,51 @@
-using System.Text.Json;
 using RestSharp;
+using WRA.Umbraco.Configuration;
 
 namespace WRA.Umbraco.Web.Services;
 public class WraExternalApiService
 {
-    private const string Token = "sJWH7cFR6rSVVYMjrxYAIY0ZrhW7SVJYik5qTUb";
+
+    private readonly WraExternalApiSettings _settings;
+
+    public WraExternalApiService(WraExternalApiSettings settings)
+    {
+        _settings = settings;
+    }
+
+
     public async Task<RestResponse> GetProductCategories()
     {
-        var options = new RestClientOptions("https://app2.wra.org/umbraco/api/v1");
+        //return await _client.
+
+
+        var options = new RestClientOptions(_settings.VersionedBaseUrl);
         var client = new RestClient(options);
         var request = new RestRequest("productcategory");
-        request.AddHeader("X-API-KEY", Token);
+        request.AddHeader(_settings.ApiKeyHeader, _settings.ApiKey);
         var response = await client.GetAsync(request);
 
         return response;
     }
+
     public async Task<RestResponse> GetProductSubCategories()
     {
-        var options = new RestClientOptions("https://app2.wra.org/umbraco/api/v1");
+        var options = new RestClientOptions(_settings.VersionedBaseUrl);
         var client = new RestClient(options);
         var request = new RestRequest("productSubcategory");
-        request.AddHeader("X-API-KEY", Token);
+        request.AddHeader(_settings.ApiKeyHeader, _settings.ApiKey);
+
         var response = await client.GetAsync(request);
 
         return response;
     }
+
     public async Task<RestResponse> GetProducts()
     {
-        var options = new RestClientOptions("https://app2.wra.org/umbraco/api/v1");
+        var options = new RestClientOptions(_settings.VersionedBaseUrl);
         var client = new RestClient(options);
         var request = new RestRequest("product");
-        request.AddHeader("X-API-KEY", Token);
+        request.AddHeader(_settings.ApiKeyHeader, _settings.ApiKey);
+
         var response = await client.GetAsync(request);
 
         return response;
@@ -38,30 +53,32 @@ public class WraExternalApiService
 
     public async Task<RestResponse> GetBoards()
     {
-        var options = new RestClientOptions("https://app2.wra.org/umbraco/api/v1");
+        var options = new RestClientOptions(_settings.VersionedBaseUrl);
         var client = new RestClient(options);
         var request = new RestRequest("localboard");
-        request.AddHeader("X-API-KEY", Token);
+        request.AddHeader(_settings.ApiKeyHeader, _settings.ApiKey);
         var response = await client.GetAsync(request);
 
         return response;
     }
+
     public async Task<RestResponse> GetMembers(int amount = 10000)
     {
-        var options = new RestClientOptions("https://app2.wra.org/umbraco/api/v1");
+        var options = new RestClientOptions(_settings.VersionedBaseUrl);
         var client = new RestClient(options);
-        var request = new RestRequest("member/search").AddBody(new { keyword = "", pageSize = amount, pageNumber = 1 });
-        request.AddHeader("X-API-KEY", Token);
+        var request = new RestRequest("member/search").AddBody(new { keyword = string.Empty, pageSize = amount, pageNumber = 1 });
+        request.AddHeader(_settings.ApiKeyHeader, _settings.ApiKey);
         var response = await client.PostAsync(request);
 
         return response;
     }
+
     public async Task<RestResponse> GetCompanies(int amount = 20000)
     {
-        var options = new RestClientOptions("https://app2.wra.org/umbraco/api/v1");
+        var options = new RestClientOptions(_settings.VersionedBaseUrl);
         var client = new RestClient(options);
-        var request = new RestRequest("company/search").AddBody(new { keyword = "", pageSize = amount, pageNumber = 1 });
-        request.AddHeader("X-API-KEY", Token);
+        var request = new RestRequest("company/search").AddBody(new { keyword = string.Empty, pageSize = amount, pageNumber = 1 });
+        request.AddHeader(_settings.ApiKeyHeader, _settings.ApiKey);
         var response = await client.PostAsync(request);
 
         return response;

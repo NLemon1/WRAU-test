@@ -1,6 +1,5 @@
 ﻿@using Umbraco.Cms.Core.Models.Blocks
 @using Umbraco.Cms.Core.Security
-@using WRA.Umbraco.Web.Extensions
 @using WRA.Umbraco.Web.Services
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<IEnumerable<BlockGridItem>>
 @inject GatedContentService _gatedContentService
@@ -41,7 +40,8 @@
     var partialViewName = "blockgrid/Components/" + item.Content.ContentType.Alias;
     try
     {
-        if (await _gatedContentService.MemberCanViewBlock(item, currentMember))
+        var  memberCanViewBlock = await _gatedContentService.MemberCanViewBlock(item, currentMember);
+        if (memberCanViewBlock)
         {
             @await Html.PartialAsync(partialViewName, item)
         }

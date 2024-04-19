@@ -1,17 +1,12 @@
-using System.Security.Policy;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Umbraco.Commerce.Core.Api;
 using Umbraco.Commerce.Core.PaymentProviders;
-using GlobalPayments.Api.Services;
 using GlobalPayments.Api;
-using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json.Linq;
 using GlobalPayments.Api.PaymentMethods;
 using GlobalPayments.Api.Entities;
 using Umbraco.Commerce.Core.Models;
 using Microsoft.Extensions.Logging;
 
+namespace WRA.Umbraco.PaymentProviders;
 
 [PaymentProvider("GlobalPayments", "Global Payments", "GlobalPayments. it is what it is..")]
 public class GlobalPaymentsPaymentProvider : PaymentProviderBase<GlobalPaymentsSettings>
@@ -28,6 +23,7 @@ public class GlobalPaymentsPaymentProvider : PaymentProviderBase<GlobalPaymentsS
     {
         return context.Settings.ContinueUrl;
     }
+
     public override string GetCancelUrl(PaymentProviderContext<GlobalPaymentsSettings> context)
     {
         return context.Settings.CancelUrl;
@@ -37,12 +33,6 @@ public class GlobalPaymentsPaymentProvider : PaymentProviderBase<GlobalPaymentsS
     {
         return context.Settings.ErrorUrl;
     }
-    public virtual Task<ApiResult> CapturePaymentAsync(PaymentProviderContext<GlobalPaymentsSettings> context, CancellationToken cancellationToken = default(CancellationToken))
-    {
-        return Task.FromResult<ApiResult>(null);
-    }
-
-
 
     public async override Task<CallbackResult> ProcessCallbackAsync(PaymentProviderContext<GlobalPaymentsSettings> context, CancellationToken token)
     {
@@ -50,7 +40,6 @@ public class GlobalPaymentsPaymentProvider : PaymentProviderBase<GlobalPaymentsS
         {
             if (context.Settings.TestMode)
             {
-
                 ServicesContainer.ConfigureService(new PorticoConfig
                 {
                     SecretApiKey = context.Settings.TestSecretKey,
@@ -71,7 +60,8 @@ public class GlobalPaymentsPaymentProvider : PaymentProviderBase<GlobalPaymentsS
             }
 
             var zip = context.Order.Properties["shippingZipCode"]?.ToString();
-            // this token comes from the Ifram form found on the payment method page. 
+
+            // this token comes from the Ifram form found on the payment method page.
             var paymentToken = context.Order.Properties["paymentReference"]?.ToString();
             var card = new CreditCardData
             {
@@ -83,7 +73,6 @@ public class GlobalPaymentsPaymentProvider : PaymentProviderBase<GlobalPaymentsS
                 PostalCode = zip
             };
             decimal? transactionAmount = AmountToMinorUnits(context.Order.TransactionAmount.Value);
-
 
             // Charge. No auth for now, may change later...
             Transaction? charge = card.Charge(transactionAmount)
@@ -100,6 +89,7 @@ public class GlobalPaymentsPaymentProvider : PaymentProviderBase<GlobalPaymentsS
                     PaymentStatus = PaymentStatus.Captured
                 });
             }
+
             // var captureResponse = Transaction.FromId(charge.TransactionId)
             //     .Capture(transactionAmount)
             //     .Execute();
@@ -110,24 +100,26 @@ public class GlobalPaymentsPaymentProvider : PaymentProviderBase<GlobalPaymentsS
             // }
             // long authorizedAmount = Convert.ToInt64(captureResponse.BalanceAmount);
             return errorResult();
-
         }
         catch (GatewayException e)
         {
             _logger.LogError(e, "GatewayException in CreditCardPaymentProvider.ProcessCallbackAsync");
             return errorResult();
+
             // handle error
         }
         catch (UnsupportedTransactionException e)
         {
             _logger.LogError(e, "UnsupportedTransactionException in CreditCardPaymentProvider.ProcessCallbackAsync");
             return errorResult();
+
             // handle error
         }
         catch (ApiException ex)
         {
             _logger.LogError(ex, "ApiException in CreditCardPaymentProvider.ProcessCallbackAsync");
             return errorResult();
+
             // handle error
 
         }
@@ -148,23 +140,21 @@ public class GlobalPaymentsPaymentProvider : PaymentProviderBase<GlobalPaymentsS
             }
         };
     }
+
     // protected void FinalizeOrUpdateOrder(Order order)
     // {
     //     _commerceApi.Uow.Execute(uow =>{});
     // }
     public override async Task<PaymentFormResult> GenerateFormAsync(PaymentProviderContext<GlobalPaymentsSettings> context, CancellationToken token)
     {
-
         var form = new PaymentForm(context.Urls.ContinueUrl, PaymentFormMethod.Post);
 
         return new PaymentFormResult()
         {
             Form = form
         };
-
     }
 }
-
 
 public class GlobalPaymentsSettings
 {
@@ -203,10 +193,8 @@ public class GlobalPaymentsSettings
         SortOrder = 1300)]
     public string LivePublicKey { get; set; }
 
-
     [PaymentProviderSetting(Name = "Test Mode",
         Description = "Set whether to process payments in test mode.",
         SortOrder = 10000)]
     public bool TestMode { get; set; }
-
 }

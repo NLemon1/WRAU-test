@@ -4,5 +4,5 @@
   "Udi": "umb://template/af275e9702904df2bd09287e1dd0c0ab",
   "Dependencies": [],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.TemplateArtifact",
-  "__version": "13.0.4"
+  "__version": "13.1.0"
 }

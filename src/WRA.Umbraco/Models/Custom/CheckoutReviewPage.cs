@@ -1,14 +1,26 @@
 using Umbraco.Commerce.Core.Api;
 using Umbraco.Commerce.Core.Models;
-using WRA.Umbraco.Extensions;
 
 namespace WRA.Umbraco.Models
 {
     public partial class CheckoutReviewPage : IOrderReviewPage
     {
-        public CartPage CartPage => this.GetHome().CartPage;
-        public CountryReadOnly PaymentCountry => UmbracoCommerceApi.Instance.GetCountry(this.Order.PaymentInfo.CountryId.Value);
+        public CountryReadOnly? PaymentCountry
+        {
+            get
+            {
+                var countryId = Order.PaymentInfo.CountryId;
+                return countryId != null ? UmbracoCommerceApi.Instance.GetCountry(countryId.Value) : null;
+            }
+        }
 
-        public CountryReadOnly ShippingCountry => UmbracoCommerceApi.Instance.GetCountry(this.Order.ShippingInfo.CountryId.Value);
+        public CountryReadOnly? ShippingCountry
+        {
+            get
+            {
+                var shippingInfoCountryId = Order.ShippingInfo.CountryId;
+                return shippingInfoCountryId != null ? UmbracoCommerceApi.Instance.GetCountry(shippingInfoCountryId.Value) : null;
+            }
+        }
     }
 }

@@ -1,8 +1,3 @@
-
-
-using GlobalPayments.Api.Entities;
-using Umbraco.Cms.Core.Security;
-using Umbraco.Cms.Core.Services;
 using Umbraco.Commerce.Core.Api;
 using Umbraco.Commerce.Core.Models;
 using WRA.Umbraco.Extensions;
@@ -28,7 +23,4 @@ public partial class CheckoutStepPage
     public ShippingMethodReadOnly? ShippingMethod => Order?.ShippingInfo.ShippingMethodId != null
         ? UmbracoCommerceApi.Instance.GetShippingMethod(Order.ShippingInfo.ShippingMethodId.Value)
         : null;
-
-
-
 }
