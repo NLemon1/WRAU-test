@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Logging;
 using Umbraco.Cms.Core.Cache;
 using Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Core.Scoping;
@@ -13,13 +14,15 @@ public class MemberHelper(
     ICacheKeyProvider cacheKeyProvider,
     IMemberService memberService,
     ICoreScopeProvider coreScopeProvider,
+    ILogger<MemberHelper> logger,
+    MemberGroupRepository memberGroupRepository,
     CompanyRepository companyRepository,
     BoardRepository boardRepository,
     AppCaches appCache,
     bool autoSave = true)
 : ContentHelperBase<IMember, MemberEvent>(cacheKeyProvider, appCache)
 {
-    public IMember update(IMember target, MemberEvent source)
+    public IMember Update(IMember target, MemberEvent source)
     {
         using var scope = coreScopeProvider.CreateCoreScope();
         DynamicUpdate(target, source);
@@ -27,12 +30,13 @@ public class MemberHelper(
         SetSensitiveData(target, source.PasswordHash, source.PasswordSalt);
         SetCompanyOnMember(target, source);
         SetBoardOnMember(target, source);
+        AssignMemberToGroup(target, source.MemberTypeId);
 
         if (autoSave)
         {
             memberService.Save(target);
         }
-
+        logger.LogInformation("Member updated: {MemberId}", target.Id);
         scope.Complete();
         return target;
     }
@@ -43,7 +47,7 @@ public class MemberHelper(
         existingMember.RawPasswordValue = hash;
     }
 
-    public void SetCompanyOnMember(IMember member, MemberEvent memberEvent)
+    private void SetCompanyOnMember(IMember member, MemberEvent memberEvent)
     {
         var company = companyRepository.Get(memberEvent.CompanyId);
         if (company != null)
@@ -52,7 +56,7 @@ public class MemberHelper(
         }
     }
 
-    public void SetBoardOnMember(IMember member, MemberEvent memberEvent)
+    private void SetBoardOnMember(IMember member, MemberEvent memberEvent)
     {
         if (memberEvent.PrimaryLocalBoardId == null || memberEvent.PrimaryLocalBoardId.Equals(Guid.Empty)) return;
         var board = boardRepository.Get(memberEvent.PrimaryLocalBoardId.Value);
@@ -62,62 +66,9 @@ public class MemberHelper(
         }
     }
 
-    // public static void AssignMemberToMemberGroup(IMember member, MemberEvent mevent)
-    // {
-    //
-    //     // // TODO: make membergroups an array for one to many relationship.
-    //     var memberGroup = mevent.MemberTypeId switch
-    //     {
-    //         "MDR" => "DesignatedRealtor",
-    //         "ST" => "WRA Member",
-    //         "A" => "Affiliate",
-    //         _ => "Visitor"
-    //     };
-    //
-    //     // get current member roles
-    //     var memberRoles = memberService.GetAllRoles(member.Id);
-    //     // if current member role is not part of the incoming update/create, remove them from said role.
-    //     var unmatchedRoles = memberRoles.Where(mr => memberGroup != mr);
-    //     if (unmatchedRoles.Any())
-    //     {
-    //         var identityUser = new MemberIdentityUser(member.Id);
-    //         memberService.DissociateRoles([member.Id], unmatchedRoles.ToArray());
-    //     }
-    //     memberService.AssignRole(member.Id, memberGroup);
-    // }
-
-    public static IMember? UpdateMemberProperties(IMember member, MemberEvent memberEvent)
+    private void AssignMemberToGroup(IMember member, Guid memberTypeId)
     {
-        member.SetValue(GlobalAliases.ExternalId, memberEvent.iMISId);
-        member.SetValue("brokerFullName", memberEvent.BrokerFullName);
-        member.SetValue("brokerEmail", memberEvent.BrokerEmail);
-        member.SetValue("address1", memberEvent.Address1);
-        member.SetValue("address2", memberEvent.Address2);
-        member.SetValue("address3", memberEvent.Address3);
-        member.SetValue("city", memberEvent.City);
-        member.SetValue("cellPhone", memberEvent.CellPhone);
-        member.SetValue("canUseHotline", memberEvent.CanUseHotline);
-        member.SetValue("companyLogoUrl", memberEvent.CompanyLogoUrl);
-        member.SetValue("companyId", memberEvent.CompanyId);
-        member.SetValue("companyName", memberEvent.CompanyName);
-
-        // member.SetValue("companySubscriptions", mdto.CompanySubscriptions);
-        member.SetValue("fax", memberEvent.Fax);
-        member.SetValue("firstName", memberEvent.FirstName);
-        member.SetValue("lastName", memberEvent.LastName);
-        member.SetValue("gender", memberEvent.Gender);
-        member.SetValue("homePhone", memberEvent.HomePhone);
-        member.SetValue("imageUrl", memberEvent.ImageUrl);
-        member.SetValue("joinDate", memberEvent.JoinDate);
-        member.SetValue("mandatoryHotlineLetter", memberEvent.MandatoryHotlineLetter);
-        member.SetValue("nrdsId", memberEvent.NrdsId);
-        member.SetValue("paidThruDate", memberEvent.PaidThruDate);
-        member.SetValue("prefix", memberEvent.Prefix);
-        member.SetValue("suffix", memberEvent.Suffix);
-        member.SetValue("stateProvince", memberEvent.StateProvince);
-        member.SetValue("zip", memberEvent.Zip);
-        member.SetValue("marketingEmail", memberEvent.MarketingEmail);
-
-        return member;
+        var memberGroup = memberGroupRepository.GetMemberGroupByExternalId(memberTypeId);
+        memberService.AssignRole(member.Id, memberGroup.Name);
     }
 }

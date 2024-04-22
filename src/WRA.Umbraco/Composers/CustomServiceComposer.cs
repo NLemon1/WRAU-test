@@ -54,6 +54,7 @@ public class CustomServiceComposer : IComposer
         builder.Services.AddTransient<ProductEventPublisher>();
         builder.Services.AddTransient<ProductPageRepository>();
         builder.Services.AddTransient<CategoryRepository>();
+        builder.Services.AddTransient<MemberGroupRepository>();
 
 
         // Register the Member password hasher as a singleton (one instance per application lifetime).

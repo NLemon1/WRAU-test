@@ -31,7 +31,6 @@ public class StartingNotification(
     public void Handle(UmbracoApplicationStartingNotification notification)
     {
         InitializeExamineIndexes();
-        InitializeMemberGroups();
         // initializeEssentialContent();
     }
 
@@ -100,15 +99,6 @@ public class StartingNotification(
         foreach (var productType in productTypes)
         {
             CreateContent(productType, parent, CollectionPage.ModelTypeAlias);
-        }
-    }
-    private void InitializeMemberGroups()
-    {
-        var roleNames = siteContentSettings.MemberTypes;
-        var allRoles = memberService.GetAllRoles();
-        foreach (var roleName in roleNames.Where(roleName => !allRoles.Any(x => x.Name == roleName)))
-        {
-            memberService.AddRole(roleName);
         }
     }
 

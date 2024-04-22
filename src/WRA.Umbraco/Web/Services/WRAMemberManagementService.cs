@@ -60,7 +60,7 @@ public class WraMemberManagementService(
                 defaultMemberType);
 
             // updates all the fields on the member
-            memberHelper.update(newMember, memberEvent);
+            memberHelper.Update(newMember, memberEvent);
 
             // since a new member could potentially not exist in WRA's
             newMember.IsApproved = false;
@@ -98,7 +98,7 @@ public class WraMemberManagementService(
 
         if (existingMember == null) return null;
 
-        memberHelper.update(existingMember, memberEvent);
+        memberHelper.Update(existingMember, memberEvent);
         // MemberHelper.AssignMemberToMemberGroup(existingMember, memberEvent);
 
         // memberService.Save(existingMember);

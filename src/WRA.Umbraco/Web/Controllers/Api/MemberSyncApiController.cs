@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Umbraco.Cms.Api.Common.Attributes;
 using Umbraco.Cms.Core.Mapping;
+using Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Core.Scoping;
 using Umbraco.Cms.Core.Services;
 using Umbraco.Cms.Core.Web;
@@ -12,6 +13,7 @@ using WRA.Umbraco.Contracts;
 using WRA.Umbraco.Dtos;
 using WRA.Umbraco.Helpers;
 using WRA.Umbraco.Repositories;
+using WRA.Umbraco.Web.Dtos;
 using WRA.Umbraco.Web.Services;
 
 namespace WRA.Umbraco.Web.Controllers.Api;
@@ -21,12 +23,11 @@ namespace WRA.Umbraco.Web.Controllers.Api;
 [Route("WraMemberApi")]
 public class MemberSyncApiController(
     WraMemberManagementService wraMemberManagementService,
-    ICoreScopeProvider coreScopeProvider,
     WraExternalApiService wraExternalApiService,
-    IMemberService memberService,
-    IUmbracoContextFactory umbracoContextFactory,
     BoardRepository boardRepository,
     CompanyRepository companyRepository,
+    MemberGroupRepository memberGroupRepository,
+    IMemberGroupService memberGroupService,
     IUmbracoMapper mapper,
     ILogger<MemberSyncApiController> logger)
     : ApiController
@@ -80,19 +81,46 @@ public class MemberSyncApiController(
 
     [HttpPost]
     [Route("CreateMemberGroup")]
-    public IActionResult CreateMemberGroup(string RoleName)
+    public IActionResult CreateMemberGroup(MemberGroupDto memberTypeDto)
     {
-        // simple enough I guess...
-
         try
         {
-            memberService.AddRole(RoleName);
+            memberGroupRepository.CreateMemberGroup(memberTypeDto);
             return Ok();
         }
         catch (Exception ex)
         {
             // do something here
             throw ex;
+        }
+    }
+
+    public async Task<IActionResult> SyncAllMemberGroups()
+    {
+        try
+        {
+            var memberGroupsResp = await wraExternalApiService.GetMemberGroups();
+            var memberGroups = JsonSerializer.Deserialize<List<MemberGroupDto>>(memberGroupsResp.Content, SerializationOptions) ;
+
+            foreach (var memberGroup in memberGroups)
+            {
+                var existingMemberGroup = memberGroupRepository.GetMemberGroupByExternalId(memberGroup.Id);
+                if (existingMemberGroup != null)
+                {
+                    memberGroupRepository.UpdateMemberGroup(existingMemberGroup, memberGroup);
+                }
+                else
+                {
+                    memberGroupRepository.CreateMemberGroup(memberGroup);
+                }
+            }
+
+            return Ok();
+        }
+        catch (Exception e)
+        {
+            logger.LogError(e, "Error syncing member groups.");
+            throw;
         }
     }
 
@@ -110,7 +138,7 @@ public class MemberSyncApiController(
     {
 
         var productsResp = await wraExternalApiService.GetBoards();
-        var localBoards = JsonSerializer.Deserialize<List<MemberBoardDto>>(productsResp.Content);
+        var localBoards = JsonSerializer.Deserialize<List<MemberBoardDto>>(productsResp.Content, SerializationOptions);
 
         foreach (var board in localBoards)
         {
@@ -161,7 +189,7 @@ public class MemberSyncApiController(
         {
             var companiesResp = await wraExternalApiService.GetCompanies();
             if (companiesResp.Content == null) return InternalServerError(new Exception("Bad response from API."));
-            var companies = JsonSerializer.Deserialize<SearchResponse<CompanyDto>>(companiesResp.Content);
+            var companies = JsonSerializer.Deserialize<SearchResponse<CompanyDto>>(companiesResp.Content, SerializationOptions);
 
             if (companies?.Data == null) return InternalServerError(new Exception("No companies returned from API."));
             foreach (var company in companies.Data)

@@ -1,8 +1,6 @@
 ﻿using Hangfire;
 using Microsoft.Extensions.DependencyInjection;
 using Umbraco.Cms.Core.Composing;
-using Umbraco.Cms.Core.Sync;
-using Umbraco.Cms.Infrastructure.Sync;
 using Cultiv.Hangfire;
 using WRA.Umbraco.Web.Controllers.Api;
 
@@ -16,17 +14,25 @@ public class RecurringJobComposer : IComposer
         // member sync
         builder.Services.AddScoped<MemberSyncApiController>();
         RecurringJob.AddOrUpdate<MemberSyncApiController>(
+            "Sync all Member Groups/Types",
+            x => x.SyncAllMemberGroups(),
+            Cron.Daily);
+
+        RecurringJob.AddOrUpdate<MemberSyncApiController>(
             "Sync all Members",
             x => x.SyncAllMembers(true, 1),
             Cron.Never);
+
         RecurringJob.AddOrUpdate<MemberSyncApiController>(
             "Sync all companies",
             x => x.SyncAllCompanies(),
             Cron.Never);
+
         RecurringJob.AddOrUpdate<MemberSyncApiController>(
             "Sync all Boards",
             x => x.SyncAllBoards(),
             Cron.Never);
+
         RecurringJob.AddOrUpdate<MemberSyncApiController>(
             "Sync Companies And Boards",
             x => x.SyncCompaniesAndBoards(),
