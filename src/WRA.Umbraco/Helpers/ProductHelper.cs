@@ -91,7 +91,7 @@ public class ProductHelper(
 
         // Get Subcategory. Make sure the parent (which should be a category) matches the
         // category we just got back form the previous query.
-        var idAlias = "externalId";
+        var idAlias = GlobalAliases.ExternalId;
         var subCategories = siteRoot.Children
             .Where(c => c.ContentType.Alias == CategoryPage.ModelTypeAlias);
 

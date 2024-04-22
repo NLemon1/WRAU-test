@@ -15,16 +15,16 @@ public class CategoryHelper(
     public void Update(IContent target, ProductCategoryEvent source)
     {
         DynamicUpdate(target, source);
-        SetProperty(target, "ExternalId", source.Id);
+        SetProperty(target, GlobalAliases.ExternalId, source.Id);
     }
     public void SetInitialProperties(IContent content, ProductCategoryDto categoryInfo)
     {
-        content.SetValue("externalId", categoryInfo.ExternalId);
+        content.SetValue(GlobalAliases.ExternalId, categoryInfo.ExternalId);
         content.SetValue("description", categoryInfo.Description);
     }
     public void SetSubCategoryProperties(IContent content, ProductSubCategoryDto subCategoryInfo)
     {
-        content.SetValue("externalId", subCategoryInfo.ExternalId);
+        content.SetValue(GlobalAliases.ExternalId, subCategoryInfo.ExternalId);
         content.SetValue("externalCategoryId", subCategoryInfo.ExternalCategoryId);
         content.SetValue("description", subCategoryInfo.Description);
     }

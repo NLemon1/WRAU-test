@@ -4,6 +4,7 @@ using Microsoft.Extensions.Options;
 using Umbraco.Cms.Core;
 using Umbraco.Cms.Core.Configuration.Models;
 using Umbraco.Cms.Infrastructure.Examine;
+using WRA.Umbraco.Helpers;
 
 namespace WRA.Umbraco.Configuration;
 
@@ -18,7 +19,7 @@ public class ConfigureLuceneIndexOptions(IUmbracoIndexConfig umbracoIndexConfig,
         switch (name)
         {
             case Constants.UmbracoIndexes.MembersIndexName:
-                options.FieldDefinitions.TryAdd(new FieldDefinition("ExternalId", FieldDefinitionTypes.FullText));
+                options.FieldDefinitions.TryAdd(new FieldDefinition(GlobalAliases.ExternalId, FieldDefinitionTypes.FullText));
                 break;
         }
     }

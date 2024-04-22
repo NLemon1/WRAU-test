@@ -19,7 +19,7 @@
 //
 //         var existingSubscription = siteRoot?.Children
 //             .Where(x => x.ContentType.Alias == CompanySubscription.ModelTypeAlias)?
-//             .FirstOrDefault(x => x.Value("externalId") == request.Id);
+//             .FirstOrDefault(x => x.Value(GlobalAliases.ExternalId) == request.Id);
 //
 //         bool subscriptionExists = existingSubscription != null;
 //
@@ -36,7 +36,7 @@
 //         // var subscriptionProduct = GetProductById(request.ProductId) ??
 //         //     throw new InvalidOperationException("Product does not exist in Umbraco.");
 //
-//         // subscription.SetValue("externalId", request.Id);
+//         // subscription.SetValue(GlobalAliases.ExternalId, request.Id);
 //         // subscription.SetValue("company", subscriptionCompany.GetUdi());
 //         // subscription.SetValue("subscriptionProduct", subscriptionProduct.GetUdi());
 //         // subscription.SetValue("beginDate", request.BeginDate);
@@ -58,7 +58,7 @@
 //     //
 //     //     var existingSubscription = siteRoot.Children
 //     //         .Where(x => x.ContentType.Alias == MemberSubscription.ModelTypeAlias)?
-//     //         .FirstOrDefault(x => x.Value("externalId") == request.Id);
+//     //         .FirstOrDefault(x => x.Value(GlobalAliases.ExternalId) == request.Id);
 //     //
 //     //     bool subscriptionExists = existingSubscription != null;
 //     //
@@ -69,11 +69,11 @@
 //     //             ActiveSubscriptionsContainer.Id,
 //     //             MemberSubscription.ModelTypeAlias);
 //     //
-//     //     var subscriptionMember = memberService.GetAllMembers().FirstOrDefault(m => m.GetValue("externalId").Equals(request.MemberId)) ??
+//     //     var subscriptionMember = memberService.GetAllMembers().FirstOrDefault(m => m.GetValue(GlobalAliases.ExternalId).Equals(request.MemberId)) ??
 //     //         throw new InvalidOperationException("Member does not exist in Umbraco.");
 //     //     var subscriptionProduct = GetProductById(request.ProductId) ??
 //     //         throw new InvalidOperationException("Product does not exist in Umbraco.");
-//     //     subscription.SetValue("externalId", request.Id);
+//     //     subscription.SetValue(GlobalAliases.ExternalId, request.Id);
 //     //     subscription.SetValue("member", subscriptionMember.GetUdi());
 //     //     subscription.SetValue("subscriptionProduct", subscriptionProduct.GetUdi());
 //     //     subscription.SetValue("beginDate", request.BeginDate);

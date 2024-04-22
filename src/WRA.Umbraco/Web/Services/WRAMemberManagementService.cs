@@ -1,4 +1,3 @@
-using System.Formats.Asn1;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using Umbraco.Cms.Core.Models;
@@ -14,7 +13,6 @@ using Umbraco.Commerce.Core.Models;
 using WRA.Umbraco.Contracts;
 using WRA.Umbraco.Helpers;
 using WRA.Umbraco.Models;
-using WRA.Umbraco.Shared.Extensions;
 
 namespace WRA.Umbraco.Web.Services;
 
@@ -63,7 +61,6 @@ public class WraMemberManagementService(
 
             // updates all the fields on the member
             memberHelper.update(newMember, memberEvent);
-            memberHelper.SetCompanyOnMember(newMember, memberEvent, contentQuery);
 
             // since a new member could potentially not exist in WRA's
             newMember.IsApproved = false;
@@ -74,7 +71,7 @@ public class WraMemberManagementService(
             logger.LogInformation("Created member: {Email} - {Id}", newMember.Email, newMember.Id);
 
             // assign to relevant memberGroup...
-            // MemberHelper.AssignMemberToMemberGroup(newMember, memberEvent);
+            //MemberHelper.AssignMemberToMemberGroup(newMember, memberEvent);
 
             // another save?
             scope.Complete();
@@ -102,7 +99,6 @@ public class WraMemberManagementService(
         if (existingMember == null) return null;
 
         memberHelper.update(existingMember, memberEvent);
-        if (contentQuery != null) memberHelper.SetCompanyOnMember(existingMember, memberEvent, contentQuery);
         // MemberHelper.AssignMemberToMemberGroup(existingMember, memberEvent);
 
         // memberService.Save(existingMember);
@@ -267,7 +263,7 @@ public class WraMemberManagementService(
     // private async Task<IContent> TieCompanyToSubscription(string companyId)
     // {
     //     var company = _searchService.Search(Company.ModelTypeAlias)?
-    //         .FirstOrDefault(x => x.Content.Value("externalId") == companyId);
+    //         .FirstOrDefault(x => x.Content.Value(GlobalAliases.ExternalId) == companyId);
 
     // company.Content.va("subscriptions", companyId);
 

@@ -18,7 +18,7 @@ public class ProductMapping : IMapDefinition
 
     private void ContentToProductEvent(IContent content, ProductEvent productEvent, MapperContext _)
     {
-        productEvent.Id = content.GetValue<Guid>("ExternalId").SafeGuid();
+        productEvent.Id = content.GetValue<Guid>(GlobalAliases.ExternalId).SafeGuid();
         productEvent.Sku = content.GetValue<string>("sku");
         productEvent.Name = content.Name;
         productEvent.Description = content.GetValue<string>("description");

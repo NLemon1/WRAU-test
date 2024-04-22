@@ -64,7 +64,7 @@ public class ProductSyncApiController(
 
             foreach (var categoryResponse in categoriesResponse)
             {
-                await categoryRepository.CreateOrUpdateCategory(categoryResponse);
+                categoryRepository.CreateOrUpdateCategory(categoryResponse);
             }
 
             return true; // success
@@ -103,7 +103,7 @@ public class ProductSyncApiController(
     //     foreach (var subcat in subCategories)
     //     {
     //         var existingSubCategoryPages = searchService.Search(SubCategoryPage.ModelTypeAlias)
-    //             .Where(x => x.Content.Value<Guid>("externalId").Equals(subcat.ExternalId));
+    //             .Where(x => x.Content.Value<Guid>(GlobalAliases.ExternalId).Equals(subcat.ExternalId));
     //
     //         // check if any existing subcategory pages exist under the requested Id
     //         bool anyExist = existingSubCategoryPages?.Any() ?? false;
@@ -200,7 +200,7 @@ public class ProductSyncApiController(
     //     string categoryName,
     //     string subCategoryName)
     // {
-    //     var idAlias = "externalId";
+    //     var idAlias = GlobalAliases.ExternalId;
     //     var ignoreCase = StringComparison.OrdinalIgnoreCase;
     //
     //     var category = searchService

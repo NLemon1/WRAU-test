@@ -32,14 +32,14 @@ public class BoardRepository
 
             var existingBoardResult = siteRoot?.Children
                 .Where(x => x.ContentType.Alias == Board.ModelTypeAlias)
-                .FirstOrDefault(x => x.Value("externalId") == mb.Id);
+                .FirstOrDefault(x => x.Value<string>(GlobalAliases.ExternalId) == mb.Id);
 
             var board = existingBoardResult != null ?
                 contentService.GetById(existingBoardResult.Id):
                 contentService.Create(mb.Name, BoardsContainer.Id, Board.ModelTypeAlias);
 
 
-            board.SetValue("externalId", mb.Id);
+            board.SetValue(GlobalAliases.ExternalId, mb.Id);
             board.SetValue("chapterId", mb.Chapter);
             board.SetValue("rosterOptIn", mb.RosterOptIn);
             board.SetValue("rosterOptInDate", mb.RosterOptInDate);
@@ -56,7 +56,22 @@ public class BoardRepository
         }
     }
 
-    // add a get
+    // get by external id
+    public IContent? Get(Guid externalId)
+    {
+        using var scope = coreScopeProvider.CreateCoreScope();
+        using var umbracoContextReference = umbracoContextFactory.EnsureUmbracoContext();
+        var content = umbracoContextReference.UmbracoContext.Content.GetAtRoot();
+
+        var boardContainer = content.FirstOrDefault(x =>
+            x.ContentType.Alias == Boards.ModelTypeAlias);
+
+        var board = boardContainer?.Children.FirstOrDefault(x =>
+            x.Value<Guid>(GlobalAliases.ExternalId).Equals(externalId));
+
+        scope.Complete();
+        return board == null ? null : contentService.GetById(board.Id);
+    }
     // add a delete
 
 }

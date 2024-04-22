@@ -1,7 +1,5 @@
-using Microsoft.AspNetCore.Identity;
 using Umbraco.Cms.Core.Cache;
 using Umbraco.Cms.Core.Models;
-using Umbraco.Cms.Core.PublishedCache;
 using Umbraco.Cms.Core.Scoping;
 using Umbraco.Cms.Core.Services;
 using WRA.Umbraco.Contracts;
@@ -12,10 +10,11 @@ using WRA.Umbraco.Services.Caching;
 namespace WRA.Umbraco.Helpers;
 
 public class MemberHelper(
-    IMemberService memberService,
-    CompanyRepository companyRepository,
     ICacheKeyProvider cacheKeyProvider,
+    IMemberService memberService,
     ICoreScopeProvider coreScopeProvider,
+    CompanyRepository companyRepository,
+    BoardRepository boardRepository,
     AppCaches appCache,
     bool autoSave = true)
 : ContentHelperBase<IMember, MemberEvent>(cacheKeyProvider, appCache)
@@ -24,8 +23,10 @@ public class MemberHelper(
     {
         using var scope = coreScopeProvider.CreateCoreScope();
         DynamicUpdate(target, source);
-        SetProperty(target, "ExternalId", source.Id);
-        SetSensitiveData(source.PasswordHash, source.PasswordSalt, target);
+        SetProperty(target, GlobalAliases.ExternalId, source.Id);
+        SetSensitiveData(target, source.PasswordHash, source.PasswordSalt);
+        SetCompanyOnMember(target, source);
+        SetBoardOnMember(target, source);
 
         if (autoSave)
         {
@@ -36,18 +37,28 @@ public class MemberHelper(
         return target;
     }
 
-    private static void SetSensitiveData(string hash, string salt, IMember existingMember)
+    private static void SetSensitiveData(IMember existingMember, string hash, string salt)
     {
-        SetProperty(existingMember, "token", salt);
+        SetProperty(existingMember, GlobalAliases.HashAlias, salt);
         existingMember.RawPasswordValue = hash;
     }
 
-    public void SetCompanyOnMember(IMember member, MemberEvent mevent, IPublishedContentCache content)
+    public void SetCompanyOnMember(IMember member, MemberEvent memberEvent)
     {
-        var company = companyRepository.Get(mevent.CompanyId, content);
+        var company = companyRepository.Get(memberEvent.CompanyId);
         if (company != null)
         {
-            member.SetValue("company", company.GetUdi());
+            member.SetValue(GlobalAliases.Company, company.GetUdi());
+        }
+    }
+
+    public void SetBoardOnMember(IMember member, MemberEvent memberEvent)
+    {
+        if (memberEvent.PrimaryLocalBoardId == null || memberEvent.PrimaryLocalBoardId.Equals(Guid.Empty)) return;
+        var board = boardRepository.Get(memberEvent.PrimaryLocalBoardId.Value);
+        if (board != null)
+        {
+            member.SetValue(GlobalAliases.Board, board.GetUdi());
         }
     }
 
@@ -55,7 +66,7 @@ public class MemberHelper(
     // {
     //
     //     // // TODO: make membergroups an array for one to many relationship.
-    //     var memberGroup = mdto.MemberTypeId switch
+    //     var memberGroup = mevent.MemberTypeId switch
     //     {
     //         "MDR" => "DesignatedRealtor",
     //         "ST" => "WRA Member",
@@ -77,7 +88,7 @@ public class MemberHelper(
 
     public static IMember? UpdateMemberProperties(IMember member, MemberEvent memberEvent)
     {
-        member.SetValue("externalId", memberEvent.iMISId);
+        member.SetValue(GlobalAliases.ExternalId, memberEvent.iMISId);
         member.SetValue("brokerFullName", memberEvent.BrokerFullName);
         member.SetValue("brokerEmail", memberEvent.BrokerEmail);
         member.SetValue("address1", memberEvent.Address1);

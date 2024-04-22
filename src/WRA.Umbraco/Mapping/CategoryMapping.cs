@@ -3,6 +3,7 @@ using Umbraco.Cms.Core.Models;
 using WRA.Umbraco.Contracts.Product;
 using WRA.Umbraco.Dtos;
 using WRA.Umbraco.Extensions;
+using WRA.Umbraco.Helpers;
 
 namespace WRA.Umbraco.Mapping;
 
@@ -18,13 +19,13 @@ public class CategoryMapping: IMapDefinition
 
     private void CategoryContentToDto(IContent source, ProductCategoryDto target, MapperContext _)
     {
-        target.ExternalId = source.GetValue<Guid>("ExternalId").SafeGuid();
+        target.ExternalId = source.GetValue<Guid>(GlobalAliases.ExternalId).SafeGuid();
         target.Name = source.Name;
         target.Description = source.GetValue<string>("description");
     }
     private void CategoryContentToEvent(IContent source, ProductCategoryEvent target, MapperContext _)
     {
-        target.Id = source.GetValue<Guid>("ExternalId").SafeGuid();
+        target.Id = source.GetValue<Guid>(GlobalAliases.ExternalId).SafeGuid();
         target.Name = source.Name;
         target.Description = source.GetValue<string>("description");
     }
