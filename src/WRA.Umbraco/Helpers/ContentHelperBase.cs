@@ -29,12 +29,12 @@ public abstract class ContentHelperBase<TTarget, TSource>(
     }
     protected static string GetPropertyAlias(string propertyName)
     {
-        return char.ToLowerInvariant(propertyName[0]) + propertyName.Substring(1);
+        return System.Text.Json.JsonNamingPolicy.CamelCase.ConvertName(propertyName);
     }
 
     protected static bool IsSimpleType(Type type)
     {
-        return type.IsPrimitive || type.IsEnum || type == typeof(string) || type == typeof(DateTime) || type == typeof(decimal);
+        return type.IsPrimitive || type.IsEnum || type == typeof(string) || type == typeof(DateTime) || type == typeof(DateTime?) || type == typeof(decimal);
     }
 
     protected static void SetProperty(TTarget member, string propertyName, object value)

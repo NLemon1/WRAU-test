@@ -2,16 +2,20 @@ using Microsoft.Extensions.Logging;
 using Umbraco.Cms.Core.Mapping;
 using Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Core.Models.PublishedContent;
+using Umbraco.Cms.Core.Persistence.Repositories;
+using Umbraco.Cms.Core.Services;
 using Umbraco.Cms.Core.Web;
 using WRA.Umbraco.Contracts;
 using WRA.Umbraco.Dtos;
 using WRA.Umbraco.Exceptions;
 using WRA.Umbraco.Extensions;
+using WRA.Umbraco.Repositories;
 
 namespace WRA.Umbraco.Mapping;
 
 public class MemberMapping(
     IUmbracoContextFactory umbracoContextFactory,
+    MemberGroupRepository memberGroupRepository,
     ILogger<MemberMapping> logger) : IMapDefinition
 {
     public void DefineMaps(IUmbracoMapper mapper)
@@ -58,6 +62,14 @@ public class MemberMapping(
         target.ImageUrl = source.GetValue<string>("imageUrl") ?? string.Empty;
         target.CompanyId = GetRelatedContentOnMember(source, "company")?.Value(GlobalAliases.ExternalId).SafeGuid();
         target.PrimaryLocalBoardId = GetRelatedContentOnMember(source, "primaryLocalBoard")?.Value(GlobalAliases.ExternalId).SafeGuid(); // is this correct?
+        target.MemberTypeId = GetMemberGroupKey(source);
+
+    }
+
+    private Guid GetMemberGroupKey(IMember source)
+    {
+        var memberGroups = memberGroupRepository.GetMemberGroupsByMember(source);
+        return memberGroups?.FirstOrDefault().Key ?? Guid.Empty;
     }
 
     private IPublishedContent? GetRelatedContentOnMember(IContentBase source, string alias)
@@ -65,13 +77,12 @@ public class MemberMapping(
 
         using var umbracoContextReference = umbracoContextFactory.EnsureUmbracoContext();
         var contentQuery = umbracoContextReference.UmbracoContext.Content;
-        string? companyId = source.GetValue<string>(alias);
-        if (string.IsNullOrEmpty(companyId)) return null;
-        var companyUdi = companyId.GetUdi();
+        string? content = source.GetValue<string>(alias);
+        if (string.IsNullOrEmpty(content)) return null;
+        var companyUdi = content.GetUdi();
         var contentNode = contentQuery.GetById(companyUdi);
         return contentNode;
     }
-
     private void UmbracoMemberToMemberDto(Models.Member source, MemberDto target, MapperContext context)
     {
         try

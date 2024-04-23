@@ -8,6 +8,7 @@ namespace WRA.Umbraco.Repositories;
 
 public class MemberGroupRepository(
     IMemberGroupService memberGroupService,
+    IMemberService memberService,
     ICoreScopeProvider coreScopeProvider,
     ILogger<MemberGroupRepository> logger)
 {
@@ -57,12 +58,7 @@ public class MemberGroupRepository(
     public IMemberGroup UpdateMemberGroup(MemberGroupDto memberTypeDto)
     {
         var memberGroup = GetMemberGroupByExternalId(memberTypeDto.Id);
-        if (memberGroup == null)
-        {
-            return CreateMemberGroup(memberTypeDto);
-        }
-
-        return UpdateMemberGroup(memberGroup, memberTypeDto);
+        return memberGroup == null ? CreateMemberGroup(memberTypeDto) : UpdateMemberGroup(memberGroup, memberTypeDto);
     }
 
     public IMemberGroup? GetMemberGroupByExternalId(Guid Id)
@@ -74,5 +70,15 @@ public class MemberGroupRepository(
         if (!matchingMemberGroups.Any()) return null;
         var memberGroup = memberGroupService.GetById(matchingMemberGroups.First().Id);
         return memberGroup ?? null;
+    }
+
+    public IEnumerable<IMemberGroup?> GetMemberGroupsByMember(IMember member)
+    {
+        var memberGroups = memberService.GetAllRolesIds(member.Id);
+        foreach (int group in memberGroups)
+        {
+            yield return memberGroupService.GetById(group);
+        }
+
     }
 }

@@ -5,13 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Umbraco.Cms.Api.Common.Attributes;
 using Umbraco.Cms.Core.Mapping;
-using Umbraco.Cms.Core.Models;
-using Umbraco.Cms.Core.Scoping;
 using Umbraco.Cms.Core.Services;
-using Umbraco.Cms.Core.Web;
 using WRA.Umbraco.Contracts;
 using WRA.Umbraco.Dtos;
-using WRA.Umbraco.Helpers;
 using WRA.Umbraco.Repositories;
 using WRA.Umbraco.Web.Dtos;
 using WRA.Umbraco.Web.Services;
@@ -95,6 +91,8 @@ public class MemberSyncApiController(
         }
     }
 
+    [HttpPost]
+    [Route("SyncAllMemberGroups")]
     public async Task<IActionResult> SyncAllMemberGroups()
     {
         try
@@ -194,7 +192,7 @@ public class MemberSyncApiController(
             if (companies?.Data == null) return InternalServerError(new Exception("No companies returned from API."));
             foreach (var company in companies.Data)
             {
-                companyRepository.Create(company);
+                companyRepository.CreateOrUpdate(company);
             }
 
             return Ok();
@@ -210,10 +208,20 @@ public class MemberSyncApiController(
     [Route("CreateCompany")]
     public Task<IActionResult> CreateCompany(CompanyDto company)
     {
-        var result = companyRepository.Create(company);
+        var result = companyRepository.CreateOrUpdate(company);
         return Task.FromResult<IActionResult>(Ok(result.Id));
     }
 
+    // this is temporary
+    [HttpPost]
+    [Route("EmptyRecycleBin")]
+    public async Task EmptyRecycleBin()
+    {
+        await wraMemberManagementService.EmptyBin();
+    }
+
+    [HttpPost]
+    [Route("SyncCompaniesAndBoards")]
     public async Task<IActionResult> SyncCompaniesAndBoards()
     {
         await SyncAllCompanies();

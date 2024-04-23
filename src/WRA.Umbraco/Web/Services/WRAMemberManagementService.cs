@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
+using Umbraco.Cms.Core;
 using Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Cms.Core.PublishedCache;
@@ -23,6 +24,7 @@ public class WraMemberManagementService(
     IUmbracoCommerceApi commerceApi,
     IUmbracoContextAccessor umbracoContextAccessor,
     IUmbracoContextFactory umbracoContextFactory,
+    IContentService contentService,
     MemberHelper memberHelper,
     ILogger<WraMemberManagementService> logger)
 {
@@ -123,6 +125,21 @@ public class WraMemberManagementService(
         }
 
         memberService.Delete(existingMember);
+        return Task.CompletedTask;
+    }
+    public Task EmptyBin()
+    {
+        // Wrap the three content service calls in a scope to do it all in one transaction.
+        using var scope = coreScopeProvider.CreateCoreScope();
+
+        int numberOfThingsInBin = contentService.CountChildren(Constants.System.RecycleBinContent);
+
+        if (contentService.RecycleBinSmells())
+        {
+            contentService.EmptyRecycleBin(userId: -1);
+        }
+        // Remember to complete the scope when done.
+        scope.Complete();
         return Task.CompletedTask;
     }
 

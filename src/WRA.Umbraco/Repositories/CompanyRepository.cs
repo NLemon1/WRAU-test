@@ -17,7 +17,7 @@ public class CompanyRepository(
     IUmbracoContextFactory umbracoContextFactory
     )
 {
-    public IPublishedContent? Get(Guid? externalCompanyId)
+    public IPublishedContent? GetCompany(Guid? externalCompanyId)
     {
         if (externalCompanyId == null || externalCompanyId == Guid.Empty)
         {
@@ -28,20 +28,21 @@ public class CompanyRepository(
         using var umbracoContextReference = umbracoContextFactory.EnsureUmbracoContext();
         var contentCache = umbracoContextReference.UmbracoContext.Content;
         var siteRoot = contentCache.GetAtRoot();
+        var home = siteRoot.First();
 
-        var companies = siteRoot.FirstOrDefault(x =>
-                x.ContentType.Alias == Companies.ModelTypeAlias)?
-            .Children
-            .Where(x => x.ContentType.Alias == Company.ModelTypeAlias);
+        var companiesContainer = home.Children.FirstOrDefault(x =>
+            x.ContentType.Alias == Companies.ModelTypeAlias);
 
-        var company = companies?.FirstOrDefault(x =>
+        if (companiesContainer == null) return null;
+
+        var company = companiesContainer.Children.FirstOrDefault(x =>
             x.Value<string>(GlobalAliases.ExternalId)!.Equals(externalCompanyId.ToString()));
 
         scope.Complete();
         return company;
     }
 
-    public IContent Create(CompanyDto companyDto)
+    public IContent CreateOrUpdate(CompanyDto companyDto)
     {
         try
         {
@@ -55,7 +56,7 @@ public class CompanyRepository(
                 .FirstOrDefault(x => x.ContentType.Alias == Companies.ModelTypeAlias);
 
             var externalId = Guid.Parse(companyDto.ExternalId);
-            var existingCompany = Get(externalId);
+            var existingCompany = GetCompany(externalId);
             if (existingCompany != null)
             {
                 // update the company

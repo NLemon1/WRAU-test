@@ -38,6 +38,11 @@ public class RecurringJobComposer : IComposer
             x => x.SyncCompaniesAndBoards(),
             Cron.Daily);
 
+        RecurringJob.AddOrUpdate<MemberSyncApiController>(
+            "Empty bin",
+            x => x.EmptyRecycleBin(),
+            Cron.Never);
+
         // product sync
         builder.Services.AddScoped<ProductSyncApiController>();
         RecurringJob.AddOrUpdate<ProductSyncApiController>(
