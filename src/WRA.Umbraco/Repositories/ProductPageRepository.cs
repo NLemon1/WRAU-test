@@ -1,14 +1,22 @@
 using Microsoft.Extensions.Logging;
+using Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Cms.Core.PublishedCache;
+using Umbraco.Cms.Core.Scoping;
+using Umbraco.Cms.Core.Services;
+using Umbraco.Cms.Core.Web;
 using Umbraco.Commerce.Core.Models;
 using Umbraco.Commerce.Core.Services;
 using WRA.Umbraco.Models;
+using WRA.Umbraco.Web.Dtos.WraExternal;
 
 namespace WRA.Umbraco.Repositories;
 
 public class ProductPageRepository(
     ICurrencyService currencyService,
+    IUmbracoContextFactory contextFactory,
+    ICoreScopeProvider scopeProvider,
+    IContentService contentService,
     ILogger<ProductPageRepository> logger)
 {
     private CurrencyReadOnly GetCurrency(Guid storeId) => currencyService.GetCurrencies(storeId).First(c => c.Name == "USD");
@@ -52,5 +60,31 @@ public class ProductPageRepository(
             logger.LogError(ex, "Error getting product: sku - {sku}", sku);
             throw;
         }
+    }
+
+    public async Task<IContent?> CreateProductCollectionPage(ProductCollectionDto productCollection)
+    {
+        using var scope = scopeProvider.CreateCoreScope();
+        var context = contextFactory.EnsureUmbracoContext();
+        var contentCache = context.UmbracoContext.Content;
+        var home = contentCache?.GetAtRoot().FirstOrDefault();
+
+        var productsContainer = home.ChildrenOfType(ProductsPage.ModelTypeAlias).First();
+        var productCategoryPages = productsContainer.ChildrenOfType(CollectionPage.ModelTypeAlias)
+            .Where(p => p.Value<Guid>(GlobalAliases.ExternalId).Equals(productCollection.Id));
+        var existingCollectionPage = productCategoryPages.FirstOrDefault();
+
+        var collectionPage = existingCollectionPage != null ?
+            contentService.GetById(existingCollectionPage.Id) :
+            contentService.Create(productCollection.Name, productsContainer.Id, CollectionPage.ModelTypeAlias);
+
+        collectionPage.SetValue(GlobalAliases.ExternalId, productCollection.Id);
+        collectionPage.SetValue("name", productCollection.Name);
+        collectionPage.SetValue("description", productCollection.Description);
+
+        contentService.Save(collectionPage);
+        scope.Complete();
+
+        return collectionPage;
     }
 }

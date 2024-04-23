@@ -61,6 +61,10 @@ public class RecurringJobComposer : IComposer
             "Sync categories and subcategories",
             x => x.SyncProductCategoriesAndSubCategories(),
             Cron.Never);
+        RecurringJob.AddOrUpdate<ProductSyncApiController>(
+            "Sync Product Collections",
+            x => x.SyncProductCollections(),
+            Cron.Never);
     }
 }
 

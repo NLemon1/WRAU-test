@@ -17,12 +17,11 @@ using WRA.Umbraco.Models;
 namespace WRA.Umbraco.Helpers;
 
 public class ProductHelper(
+    AppCaches appCache,
     ICacheKeyProvider cacheKeyProvider,
     IUmbracoContextFactory contextFactory,
-    AppCaches appCache,
     IContentService contentService,
-    ICurrencyService currencyService,
-    bool autoSave = true)
+    ICurrencyService currencyService)
 : ContentHelperBase<IContent, ProductEvent>(cacheKeyProvider, appCache)
 {
     private CurrencyReadOnly GetCurrency(Guid storeId) =>

@@ -51,6 +51,18 @@ public class WraExternalApiService(WraExternalApiSettings settings)
         return response;
     }
 
+    public async Task<RestResponse> GetProductTypes()
+    {
+        var options = new RestClientOptions(settings.VersionedBaseUrl);
+        var client = new RestClient(options);
+        var request = new RestRequest("producttype");
+        request.AddHeader(settings.ApiKeyHeader, settings.ApiKey);
+        var response = await client.GetAsync(request);
+
+        return response;
+    }
+
+
     public async Task<RestResponse> GetMembers(int amount = 10000)
     {
         var options = new RestClientOptions(settings.VersionedBaseUrl);

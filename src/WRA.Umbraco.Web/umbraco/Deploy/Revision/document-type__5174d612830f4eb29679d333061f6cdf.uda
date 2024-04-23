@@ -22,10 +22,28 @@
     "umb://document-type/887a5a0def444bc09b2f7825ac1ebfba",
     "umb://document-type/f0c2133970844a948c095978736296ce"
   ],
-  "PropertyGroups": [],
+  "PropertyGroups": [
+    {
+      "Key": "de591712-beef-4884-9d4e-4bf708169666",
+      "Name": "Content",
+      "Alias": "content",
+      "PropertyTypes": [
+        {
+          "Key": "4a3ca332-5b5b-40f2-baf8-d667ab8d1859",
+          "Alias": "externalId",
+          "DataType": "umb://data-type/f0bc4bfbb49940d6ba86058885a5178c",
+          "Name": "External Id"
+        }
+      ]
+    }
+  ],
   "PropertyTypes": [],
   "Udi": "umb://document-type/5174d612830f4eb29679d333061f6cdf",
   "Dependencies": [
+    {
+      "Udi": "umb://data-type/f0bc4bfbb49940d6ba86058885a5178c",
+      "Ordering": true
+    },
     {
       "Udi": "umb://document-type-container/2443f0d8c7a44e1baa3511778e6789dd",
       "Ordering": true

@@ -1,4 +1,3 @@
-using System.Net;
 using System.Text.Json;
 using System.Web.Http;
 using Hangfire;
@@ -8,7 +7,6 @@ using Microsoft.Extensions.Logging;
 using Umbraco.Cms.Api.Common.Attributes;
 using Umbraco.Cms.Core.Mapping;
 using WRA.Umbraco.Contracts;
-using WRA.Umbraco.Contracts.Product;
 using WRA.Umbraco.Dtos;
 using WRA.Umbraco.Repositories;
 using WRA.Umbraco.Web.Dtos.WraExternal;
@@ -24,6 +22,7 @@ public class ProductSyncApiController(
     WraExternalApiService wRAExternalApiService,
     WraProductManagementService wraProductManagementService,
     CategoryRepository categoryRepository,
+    ProductPageRepository productPageRepository,
     IUmbracoMapper mapper,
 
     ILogger<ProductSyncApiController> logger)
@@ -91,6 +90,29 @@ public class ProductSyncApiController(
         catch (Exception e)
         {
             logger.LogError(e, "Error syncing product subcategories");
+            throw;
+        }
+    }
+    
+    [HttpPost]
+    [Route("SyncProductCollections")]
+    public async Task<IActionResult> SyncProductCollections()
+    {
+        try
+        {
+            var productTypes = await wRAExternalApiService.GetProductTypes();
+            var productTypeContent = productTypes.Content;
+            var productTypesResponse = JsonSerializer.Deserialize<IEnumerable<ProductCollectionDto>>(productTypeContent);
+            foreach (var productType in productTypesResponse)
+            {
+                await productPageRepository.CreateProductCollectionPage(productType);
+            }
+
+            return Ok();
+        }
+        catch (Exception e)
+        {
+            logger.LogError(e, "Error syncing product types");
             throw;
         }
     }
