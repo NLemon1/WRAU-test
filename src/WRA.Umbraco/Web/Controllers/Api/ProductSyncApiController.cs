@@ -1,3 +1,4 @@
+using System.Net;
 using System.Text.Json;
 using System.Web.Http;
 using Hangfire;
@@ -38,20 +39,17 @@ public class ProductSyncApiController(
 
     [HttpPost]
     [Route("SyncCategoriesAndSubCategories")]
-    public async Task<bool> SyncProductCategoriesAndSubCategories()
+    public async Task<IActionResult> SyncProductCategoriesAndSubCategories()
     {
-        bool categoriesSuccess =  await SyncSubcategories();
-        if (categoriesSuccess)
-        {
-            bool subCategoriesSuccess = await SyncSubcategories();
-            return categoriesSuccess && subCategoriesSuccess;
-        }
+        var categoriesSyncResponse =  await SyncSubcategories();
+        if (categoriesSyncResponse != Ok()) return InternalServerError();
+        var subCategoriesResponse = await SyncSubcategories();
+        return subCategoriesResponse;
 
-        return false;
     }
     [HttpPost]
     [Route("SyncProductCategories")]
-    public async Task<bool> SyncCategories()
+    public async Task<IActionResult> SyncCategories()
     {
         try
         {
@@ -64,10 +62,10 @@ public class ProductSyncApiController(
 
             foreach (var categoryResponse in categoriesResponse)
             {
-                categoryRepository.CreateOrUpdateCategory(categoryResponse);
+                await categoryRepository.CreateOrUpdate(categoryResponse);
             }
 
-            return true; // success
+            return Ok(); // success
         }
         catch (Exception e)
         {
@@ -77,7 +75,7 @@ public class ProductSyncApiController(
     }
     [HttpPost]
     [Route("SyncSubCategories")]
-    public async Task<bool> SyncSubcategories()
+    public async Task<IActionResult> SyncSubcategories()
     {
         try
         {
@@ -86,9 +84,9 @@ public class ProductSyncApiController(
             var subCategoriesResponse = JsonSerializer.Deserialize<IEnumerable<ProductSubCategoryDto>>(subCategoryContent);
             foreach (var subCategory in subCategoriesResponse)
             {
-                categoryRepository.CreateOrUpdateSubCategory(subCategory);
+                await categoryRepository.CreateOrUpdateSubCategory(subCategory);
             }
-            return true;
+            return Ok();
         }
         catch (Exception e)
         {
@@ -134,8 +132,8 @@ public class ProductSyncApiController(
     public async Task SyncAllProducts()
     {
         // first sync all categories and subcategories
-        var syncCategoriesSuccess = await SyncCategories();
-        if (!syncCategoriesSuccess)
+        var result = await SyncCategories();
+        if (result != Ok())
         {
             throw new Exception("Failed to sync categories");
         }

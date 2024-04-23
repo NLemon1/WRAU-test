@@ -24,7 +24,7 @@ public class CategoryHelper(
     }
     public void SetSubCategoryProperties(IContent content, ProductSubCategoryDto subCategoryInfo)
     {
-        content.SetValue(GlobalAliases.ExternalId, subCategoryInfo.ExternalId);
+        content.SetValue(GlobalAliases.ExternalId, subCategoryInfo.Id);
         content.SetValue("externalCategoryId", subCategoryInfo.ExternalCategoryId);
         content.SetValue("description", subCategoryInfo.Description);
     }

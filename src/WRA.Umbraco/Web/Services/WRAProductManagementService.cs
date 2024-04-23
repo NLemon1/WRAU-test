@@ -3,10 +3,7 @@ using Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Core.Scoping;
 using Umbraco.Cms.Core.Services;
 using Umbraco.Cms.Core.Web;
-using Umbraco.Commerce.Core.Models;
-using Umbraco.Commerce.Core.Services;
 using WRA.Umbraco.Contracts;
-using WRA.Umbraco.Helpers;
 using WRA.Umbraco.Models;
 using WRA.Umbraco.Repositories;
 
@@ -26,31 +23,31 @@ public class WraProductManagementService(
             // get content cache
             var umbracoContextReference = umbracoContextFactory.EnsureUmbracoContext();
             var contentCache = umbracoContextReference.UmbracoContext.Content;
-            var siteRoot = contentCache?.GetAtRoot().FirstOrDefault();
+            var home = contentCache?.GetAtRoot().FirstOrDefault();
 
             // crate a scope
             using var scope = scopeProvider.CreateCoreScope();
-            scope.Notifications.Suppress();
-            // now we need the product's parent node to place these products under...
-            if (siteRoot?.Children == null) return null;
 
-            var collectionPages = siteRoot.Children
-                .FirstOrDefault(c => c.ContentType.Alias == ProductsPage.ModelTypeAlias)?.Children
-                .Where(c => c.ContentType.Alias == CollectionPage.ModelTypeAlias);
+            // now we need the product's parent node to place these products under...
+            var collectionPages = home?.Children
+                .FirstOrDefault(c => c.ContentType.Alias == ProductsPage.ModelTypeAlias);
 
             if (collectionPages == null)
             {
                 logger.LogError("No collection match for {ProductType}", productEvent.ProductType );
+                scope.Complete();
                 return null;
             }
 
-            var collectionPage = collectionPages.FirstOrDefault(c => c.Name.Equals(productEvent.ProductType));
+            var collectionPage = collectionPages.Children.FirstOrDefault(c =>
+                c.Name.Equals(productEvent.ProductType));
 
             // collection page doesn't exist and needs to be created
             // maybe exception instead?
             if (collectionPage == null)
             {
                 logger.LogError("No collection match for {ProductType}", productEvent.ProductType );
+                scope.Complete();
                 return null;
             }
 
@@ -59,6 +56,7 @@ public class WraProductManagementService(
             var existingProductPage = productPageRepository.Get(productEvent.Sku, contentCache);
             if (existingProductPage != null)
             {
+                scope.Complete();
                 return await Update(productEvent, existingProductPage);
             }
 

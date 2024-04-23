@@ -16,7 +16,7 @@ public class CategoryRepository(
     IContentService contentService,
     ILogger<CategoryRepository> logger)
 {
-    public IContent CreateOrUpdateCategory(ProductCategoryDto categoryInfo)
+    public async Task<IContent> CreateOrUpdate(ProductCategoryDto categoryInfo)
     {
         try
         {
@@ -30,10 +30,11 @@ public class CategoryRepository(
             if (categoriesPage != null)
             {
                 var existingCategories = categoriesPage.ChildrenOfType(CategoryPage.ModelTypeAlias);
-                if (existingCategories?.Any() == true)
+                var existingCategoryPage = existingCategories?
+                    .FirstOrDefault(cat =>
+                        cat.Value<Guid>(GlobalAliases.ExternalId).Equals(categoryInfo.ExternalId));
+                if (existingCategoryPage != null)
                 {
-                    var existingCategoryPage = existingCategories?
-                        .FirstOrDefault(cat => cat.Value<Guid>(GlobalAliases.ExternalId).Equals(categoryInfo.ExternalId));
                     var existingCategoryPageContent = contentService.GetById(existingCategoryPage.Id);
                     SetCategoryProperties(existingCategoryPageContent, categoryInfo);
                     contentService.SaveAndPublish(existingCategoryPageContent);
@@ -53,38 +54,46 @@ public class CategoryRepository(
             throw;
         }
     }
-    public IContent CreateOrUpdateSubCategory(ProductSubCategoryDto subCategoryInfo)
+    public async Task<IContent?> CreateOrUpdateSubCategory(ProductSubCategoryDto subCategoryInfo)
     {
         try
         {
             using var scope = coreScopeProvider.CreateCoreScope();
-            scope.Notifications.Suppress();
 
             using var umbracoContextReference = umbracoContextFactory.EnsureUmbracoContext();
             var contentCache = umbracoContextReference.UmbracoContext.Content;
+            var home = contentCache.GetAtRoot().FirstOrDefault();
 
-            var contentType = contentCache.GetContentType(SubCategoryPage.ModelTypeAlias);
-            var existingCategories = contentCache.GetByContentType(contentType);
-            var existingSubCategoryPage = existingCategories?
-                .First(cat => cat.Value<Guid>(GlobalAliases.ExternalId).Equals(subCategoryInfo.ExternalId));
-            if (existingSubCategoryPage != null)
+            var categoryPages = home.ChildrenOfType(CategoriesPage.ModelTypeAlias)
+                .FirstOrDefault()
+                .ChildrenOfType(CategoryPage.ModelTypeAlias);
+
+            if (categoryPages == null)
             {
-                var existingSubCategoryPageContent = contentService.GetById(existingSubCategoryPage.Id);
-                SetSubCategoryProperties(existingSubCategoryPageContent, subCategoryInfo);
-                // var categoryEvent = mapper.Map<ProductCategoryEvent>(categoryInfo);
-                // categoryHelper.Update(existingCategoryPageContent, categoryEvent);
-                contentService.SaveAndPublish(existingSubCategoryPageContent);
                 scope.Complete();
-                return existingSubCategoryPageContent;
+                return null;
             }
-            var subcategoryParent = GetCategoryPages().First(x =>
-                x.Value<Guid>(GlobalAliases.ExternalId).SafeGuid().Equals(subCategoryInfo.ExternalCategoryId));
 
-            var category = contentService.Create(subCategoryInfo.Name, subcategoryParent.Id, CategoryPage.ModelTypeAlias);
-            SetSubCategoryProperties(category, subCategoryInfo);
-            contentService.SaveAndPublish(category);
+            var parentCategory = categoryPages.First(c =>
+                c.Value<Guid>(GlobalAliases.ExternalId).Equals(subCategoryInfo.ExternalCategoryId));
+
+            var existingSubcategories = categoryPages.SelectMany(sc =>
+                sc.ChildrenOfType(SubCategoryPage.ModelTypeAlias) ?? Array.Empty<IPublishedContent>());
+
+            var existingSubCategoryPageQuery = existingSubcategories
+                .Where(cat => cat.Value<Guid>(GlobalAliases.ExternalId).Equals(subCategoryInfo.Id));
+            var existingPage = existingSubCategoryPageQuery.FirstOrDefault();
+
+            var subCategoryPage = existingPage != null ?
+                contentService.GetById(existingPage.Id) :
+                contentService.Create(subCategoryInfo.Name, parentCategory.Id, SubCategoryPage.ModelTypeAlias);
+
+            SetSubCategoryProperties(subCategoryPage, subCategoryInfo);
+
+            contentService.SaveAndPublish(subCategoryPage);
             scope.Complete();
-            return category;
+            return subCategoryPage;
+
         }
         catch (Exception e)
         {
@@ -135,8 +144,7 @@ public class CategoryRepository(
 
     private void SetSubCategoryProperties(IContent content, ProductSubCategoryDto subCategoryInfo)
     {
-        content.SetValue(GlobalAliases.ExternalId, subCategoryInfo.ExternalId);
-        content.SetValue("externalCategoryId", subCategoryInfo.ExternalCategoryId);
+        content.SetValue(GlobalAliases.ExternalId, subCategoryInfo.Id);
         content.SetValue("description", subCategoryInfo.Description);
     }
 }

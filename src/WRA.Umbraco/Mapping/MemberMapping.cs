@@ -2,8 +2,6 @@ using Microsoft.Extensions.Logging;
 using Umbraco.Cms.Core.Mapping;
 using Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Core.Models.PublishedContent;
-using Umbraco.Cms.Core.Persistence.Repositories;
-using Umbraco.Cms.Core.Services;
 using Umbraco.Cms.Core.Web;
 using WRA.Umbraco.Contracts;
 using WRA.Umbraco.Dtos;

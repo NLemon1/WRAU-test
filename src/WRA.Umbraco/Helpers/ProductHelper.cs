@@ -7,6 +7,7 @@ using Umbraco.Cms.Core.Web;
 using WRA.Umbraco.Contracts;
 using WRA.Umbraco.Services.Caching;
 using System.Text.Json;
+using NUglify.Helpers;
 using Umbraco.Commerce.Core.Models;
 using Umbraco.Commerce.Core.Services;
 using WRA.Umbraco.Extensions;
@@ -24,25 +25,25 @@ public class ProductHelper(
     bool autoSave = true)
 : ContentHelperBase<IContent, ProductEvent>(cacheKeyProvider, appCache)
 {
-    private CurrencyReadOnly GetCurrency(Guid storeId) => currencyService.GetCurrencies(storeId).First(c => c.Name == "USD");
+    private CurrencyReadOnly GetCurrency(Guid storeId) =>
+        currencyService.GetCurrencies(storeId).First(c => c.Name == "USD");
 
     public void Update(IContent target, ProductEvent source)
     {
          DynamicUpdate(target, source);
          SetProductProperties(target, source);
-         if (autoSave)
-         {
-             contentService.Save(target);
-         }
+         contentService.Save(target);
     }
 
     private void SetProductProperties(IContentBase content, ProductEvent productEvent)
     {
         var context = contextFactory.EnsureUmbracoContext();
         var contentCache = context.UmbracoContext.Content;
-        var siteRoot = contentCache?.GetAtRoot().FirstOrDefault();
+        var home = contentCache?.GetAtRoot().FirstOrDefault();
 
-        var (categories, subCategories) = GetCategories(productEvent.Category, productEvent.SubCategory);
+        var (categories, subCategories) = GetCategories(
+            productEvent.ProductCategoryId.SafeGuid(),
+            productEvent.ProductSubcategoryId.SafeGuid());
 
         // if category exists...
         if (categories != null)
@@ -54,18 +55,6 @@ public class ProductHelper(
             // set category uid on content (product)
             content.SetValue("categories", string.Join(",", categoryUdis));
         }
-        // First, lets get the currencies from our store...
-        // for now we will just support USD
-        var store = siteRoot.GetStore();
-        var currency = GetCurrency(store.Id);
-
-        // Curency must be set as a Json object. Serialize dictionary.
-        var basePrice = JsonSerializer.Serialize(new Dictionary<string, string> {
-            { currency.Id.ToString(), productEvent.Price?.ToString() ?? "0"}
-        });
-        var memberPrice = JsonSerializer.Serialize(new Dictionary<string, string> {
-            { currency.Id.ToString(), productEvent.MemberPrice?.ToString() ?? "0" }
-        });
 
         if (subCategories != null)
         {
@@ -74,32 +63,55 @@ public class ProductHelper(
             content.SetValue("subCategories", string.Join(",", subCategoryIds));
         }
 
+        // First, lets get the currencies from our store...
+        // for now we will just support USD
+        if (home == null) return;
+        var store = home.GetStore();
+        var currency = GetCurrency(store.Id);
+
+        // Currency must be set as a Json object. Serialize dictionary.
+        string basePrice = JsonSerializer.Serialize(new Dictionary<string, string>
+        {
+            { currency.Id.ToString(), productEvent.Price?.ToString() ?? "0"}
+        });
+        string memberPrice = JsonSerializer.Serialize(new Dictionary<string, string>
+        {
+            { currency.Id.ToString(), productEvent.MemberPrice?.ToString() ?? "0" }
+        });
+
         content.SetValue("price", basePrice);
         content.SetValue("memberPrice", memberPrice);
     }
 
-    private (IPublishedContent?, IPublishedContent?) GetCategories(string categoryName, string subCategoryName)
+    private (IPublishedContent? Category, IPublishedContent? SubCategory) GetCategories(Guid categoryId, Guid subCategoryId)
     {
         var context = contextFactory.EnsureUmbracoContext();
         var contentCache = context.UmbracoContext.Content;
-        var siteRoot = contentCache?.GetAtRoot().FirstOrDefault();
+        var home = contentCache?.GetAtRoot().FirstOrDefault();
 
-        // get category.
-        var category = siteRoot.Children
-            .Where(c => c.ContentType.Alias == CategoryPage.ModelTypeAlias)
-            .FirstOrDefault(cat => cat.Name.Equals(categoryName, StringComparison.OrdinalIgnoreCase));
+        var categoriesPage = home.Children
+            .First(c => c.ContentType.Alias == CategoriesPage.ModelTypeAlias);
+
+        // get category pages
+        var categoryPages = categoriesPage.Children
+            .Where(c => c.ContentType.Alias == CategoryPage.ModelTypeAlias);
+
+        var category = categoryPages.First(c =>
+            c.Value<Guid>(GlobalAliases.ExternalId).Equals(categoryId));
 
         // Get Subcategory. Make sure the parent (which should be a category) matches the
         // category we just got back form the previous query.
-        var idAlias = GlobalAliases.ExternalId;
-        var subCategories = siteRoot.Children
-            .Where(c => c.ContentType.Alias == CategoryPage.ModelTypeAlias);
+        var subCategory = categoryPages.SelectMany(c => c.Children)
+            .Where(sc =>
+                sc.ContentType.Alias == SubCategoryPage.ModelTypeAlias)
+            .First(x =>
+                x.Parent != null &&
+                x.Value<Guid>(GlobalAliases.ExternalId) == subCategoryId &&
+                x.Parent.Value<Guid>(GlobalAliases.ExternalId) == categoryId);
 
-        var subCategory = subCategories
-            .FirstOrDefault(sc => sc.Parent.Value(idAlias) == category.Value(idAlias) &&
-                                  sc.Name.Equals(subCategoryName, StringComparison.OrdinalIgnoreCase));
 
         // return both.
         return (category, subCategory);
     }
+
 }
