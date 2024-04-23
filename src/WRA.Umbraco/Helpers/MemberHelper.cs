@@ -18,8 +18,7 @@ public class MemberHelper(
     MemberGroupRepository memberGroupRepository,
     CompanyRepository companyRepository,
     BoardRepository boardRepository,
-    AppCaches appCache,
-    bool autoSave = true)
+    AppCaches appCache)
 : ContentHelperBase<IMember, MemberEvent>(cacheKeyProvider, appCache)
 {
     public IMember Update(IMember target, MemberEvent source)
@@ -30,12 +29,12 @@ public class MemberHelper(
         SetSensitiveData(target, source.PasswordHash, source.PasswordSalt);
         SetCompanyOnMember(target, source);
         SetBoardOnMember(target, source);
-        AssignMemberToGroup(target, source.MemberTypeId);
 
-        if (autoSave)
-        {
-            memberService.Save(target);
-        }
+        // save member now so that we can have an Id to assign a group to
+        memberService.Save(target);
+        AssignMemberToGroup(target, source.MemberTypeId);
+        memberService.Save(target);
+
         logger.LogInformation("Member updated: {MemberId}", target.Id);
         scope.Complete();
         return target;
@@ -62,13 +61,16 @@ public class MemberHelper(
         var board = boardRepository.Get(memberEvent.PrimaryLocalBoardId.Value);
         if (board != null)
         {
-            member.SetValue(GlobalAliases.Board, board.GetUdi());
+            member.SetValue(GlobalAliases.LocalBoards, board.GetUdi());
         }
     }
 
     private void AssignMemberToGroup(IMember member, Guid memberTypeId)
     {
         var memberGroup = memberGroupRepository.GetMemberGroupByExternalId(memberTypeId);
-        memberService.AssignRole(member.Id, memberGroup.Name);
+        bool memberIsAlreadyInGroup = memberGroup.Name != null && memberService.GetMembersInRole(memberGroup.Name).Any(x => x.Id == member.Id);
+        if (memberIsAlreadyInGroup) return;
+        memberService.AssignRole(member.Id, memberGroup.Name!);
+        logger.LogInformation("Member assigned to group: {MemberId} - {MemberGroupKey}", member.Id, memberGroup.Key);
     }
 }

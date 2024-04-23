@@ -5,7 +5,7 @@ namespace WRA.Umbraco.Dtos
     public class MemberBoardDto
     {
         [JsonPropertyName("id")]
-        public string Id { get; set; }
+        public Guid Id { get; set; }
 
         [JsonPropertyName("chapter")]
         public string Chapter { get; set; }

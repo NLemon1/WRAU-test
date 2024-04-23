@@ -14,13 +14,11 @@ public class BoardRepository
     IUmbracoContextFactory umbracoContextFactory,
     ILogger<BoardRepository> logger)
 {
-    public IContent CreateOrUpdateBoard(MemberBoardDto mb)
+    public async Task<IContent> CreateOrUpdateBoard(MemberBoardDto mb)
     {
         try
         {
             using var scope = coreScopeProvider.CreateCoreScope();
-            scope.Notifications.Suppress();
-
             using var umbracoContextReference = umbracoContextFactory.EnsureUmbracoContext();
             var contentCache = umbracoContextReference.UmbracoContext.Content;
             var siteRoot = contentCache.GetAtRoot().FirstOrDefault();
@@ -30,9 +28,9 @@ public class BoardRepository
                 .FirstOrDefault(x => x.ContentType.Alias == Boards.ModelTypeAlias);
 
 
-            var existingBoardResult = siteRoot?.Children
+            var existingBoardResult = BoardsContainer?.Children
                 .Where(x => x.ContentType.Alias == Board.ModelTypeAlias)
-                .FirstOrDefault(x => x.Value<string>(GlobalAliases.ExternalId) == mb.Id);
+                .FirstOrDefault(x => x.Value<Guid>(GlobalAliases.ExternalId) == mb.Id);
 
             var board = existingBoardResult != null ?
                 contentService.GetById(existingBoardResult.Id):
@@ -62,16 +60,29 @@ public class BoardRepository
         using var scope = coreScopeProvider.CreateCoreScope();
         using var umbracoContextReference = umbracoContextFactory.EnsureUmbracoContext();
         var content = umbracoContextReference.UmbracoContext.Content.GetAtRoot();
+        var home = content.FirstOrDefault();
+        if (home == null)
+        {
+            scope.Complete();
+            return null;
+        }
 
-        var boardContainer = content.FirstOrDefault(x =>
+        var boardContainer = home.Children.FirstOrDefault(x =>
             x.ContentType.Alias == Boards.ModelTypeAlias);
 
-        var board = boardContainer?.Children.FirstOrDefault(x =>
+        var boardQuery = boardContainer?.Children.FirstOrDefault(x =>
             x.Value<Guid>(GlobalAliases.ExternalId).Equals(externalId));
-
+        if (boardQuery == null)
+        {
+            scope.Complete();
+            return null;
+        }
+        var board = contentService.GetById(boardQuery.Id);
         scope.Complete();
-        return board == null ? null : contentService.GetById(board.Id);
+        return board;
+
     }
+
     // add a delete
 
 }

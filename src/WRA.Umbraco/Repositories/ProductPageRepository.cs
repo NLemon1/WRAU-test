@@ -22,7 +22,7 @@ public class ProductPageRepository(
             // search products
             var productQuery = siteRoot?.Children
                 .Where(c => c.ContentType.Alias == ProductPage.ModelTypeAlias)
-                .FirstOrDefault(c => c.Value<string>("sku") == sku);
+                .FirstOrDefault(c => c.Value<string>(GlobalAliases.Sku) == sku);
             if (productQuery == null)
             {
                 logger.LogInformation("Product not found: sku - {Sku}", sku);

@@ -16,13 +16,15 @@ public class MemberGroupRepository(
         try
         {
             using var scope = coreScopeProvider.CreateCoreScope();
-            var memberGroup = new MemberGroup();
-            memberGroup.AdditionalData.Add(GlobalAliases.ExternalId, memberTypeDto.Id);
-            memberGroup.AdditionalData.Add("type", memberTypeDto.Type);
-            memberGroup.Name = memberTypeDto.Description;
+            var memberGroup = new MemberGroup
+            {
+                Name = memberTypeDto.Description,
+                Key = memberTypeDto.Id
+            };
 
             memberGroupService.Save(memberGroup);
             scope.Complete();
+            logger.LogInformation("Member group created: {MemberGroupKey}", memberGroup.Key);
             return memberGroup;
         }
         catch (Exception ex)
@@ -37,12 +39,12 @@ public class MemberGroupRepository(
         try
         {
             using var scope = coreScopeProvider.CreateCoreScope();
-            memberGroup.AdditionalData.Add(GlobalAliases.ExternalId, memberGroupDto.Id);
-            memberGroup.AdditionalData.Add("type", memberGroupDto.Type);
             memberGroup.Name = memberGroupDto.Description;
+            memberGroup.Key = memberGroupDto.Id;
 
             memberGroupService.Save(memberGroup);
             scope.Complete();
+            logger.LogInformation("Member group updated: {MemberGroupKey}", memberGroup.Key);
             return memberGroup;
         }
         catch (Exception ex)
@@ -68,15 +70,9 @@ public class MemberGroupRepository(
         using var scope = coreScopeProvider.CreateCoreScope(autoComplete: true);
         var allMemberGroups = memberGroupService.GetAll();
         if (!allMemberGroups.Any()) return null;
-        var matchingMemberGroups = allMemberGroups
-            .Where(m => (m.AdditionalData?.GetValue(GlobalAliases.ExternalId) ?? new { }).Equals(Id.ToString()) == true);
-
-        if (matchingMemberGroups == null || !matchingMemberGroups.Any()) return null;
-        var matchingMemberGroup = matchingMemberGroups.First();
-        var memberGroup = memberGroupService.GetById(matchingMemberGroup.Id);
+        var matchingMemberGroups = allMemberGroups.Where(m => m.Key == Id);
+        if (!matchingMemberGroups.Any()) return null;
+        var memberGroup = memberGroupService.GetById(matchingMemberGroups.First().Id);
         return memberGroup ?? null;
-
     }
-
-
 }

@@ -142,7 +142,7 @@ public class MemberSyncApiController(
 
         foreach (var board in localBoards)
         {
-            boardRepository.CreateOrUpdateBoard(board);
+            await boardRepository.CreateOrUpdateBoard(board);
         }
 
         return Ok();

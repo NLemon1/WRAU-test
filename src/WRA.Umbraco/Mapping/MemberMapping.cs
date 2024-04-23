@@ -14,7 +14,6 @@ public class MemberMapping(
     IUmbracoContextFactory umbracoContextFactory,
     ILogger<MemberMapping> logger) : IMapDefinition
 {
-    const string ExternalID = "externalId   ";
     public void DefineMaps(IUmbracoMapper mapper)
     {
         // Dtos
@@ -33,7 +32,7 @@ public class MemberMapping(
         target.Email = source.Email;
         target.PasswordHash = source.RawPasswordValue;
         target.PasswordSalt = source.GetValue<string>("token") ?? string.Empty;
-        target.Id = source.GetValue<Guid>(ExternalID);
+        target.Id = source.GetValue<Guid>(GlobalAliases.ExternalId);
         target.NrdsId = source.GetValue<string>("nrdsId");
         target.CommonId = source.GetValue<int>("commonId");
         target.Prefix = source.GetValue<string>("prefix") ?? string.Empty;
@@ -57,8 +56,8 @@ public class MemberMapping(
         target.CellPhone = source.GetValue<string>("cellPhone") ?? string.Empty;
         target.MemberTypeId = source.GetValue<string>("memberTypeId").SafeGuid();
         target.ImageUrl = source.GetValue<string>("imageUrl") ?? string.Empty;
-        target.CompanyId = GetRelatedContentOnMember(source, "company")?.Value(ExternalID).SafeGuid();
-        target.PrimaryLocalBoardId = GetRelatedContentOnMember(source, "primaryLocalBoard")?.Value(ExternalID).SafeGuid(); // is this correct?
+        target.CompanyId = GetRelatedContentOnMember(source, "company")?.Value(GlobalAliases.ExternalId).SafeGuid();
+        target.PrimaryLocalBoardId = GetRelatedContentOnMember(source, "primaryLocalBoard")?.Value(GlobalAliases.ExternalId).SafeGuid(); // is this correct?
     }
 
     private IPublishedContent? GetRelatedContentOnMember(IContentBase source, string alias)
@@ -121,15 +120,11 @@ public class MemberMapping(
 
     private static void PublishedContentToMemberDto(IMember source, MemberDto target, MapperContext context)
     {
-        // target.Id = source.GetValue(ExternalID).SafeGuid();
-        target.ExternalId = source.GetValue<string>(ExternalID).SafeGuid();
+        target.ExternalId = source.GetValue<string>(GlobalAliases.ExternalId).SafeGuid();
         target.UmbracoId = source.Id.ToString();
-        // target.EntityName = source.ContentType.Alias;
         target.NRDSId = source.GetValue<string>("nrdsId");
         target.CommonId = source.GetValue<int>("commonId");
 
-        // target.PasswordHash = source.GetValue<string>("passwordHash").SafeString();
-        // target.PasswordSalt = source.GetValue<string>("passwordSalt") ?? string.Empty;;
         target.UserName = source.GetValue<string>("userName") ?? string.Empty;
         target.Prefix = source.GetValue<string>("prefix") ?? string.Empty;
         target.FirstName = source.GetValue<string>("firstName") ?? string.Empty;
@@ -160,9 +155,6 @@ public class MemberMapping(
         target.Id = source.ExternalId;
         target.NrdsId = source.NRDSId;
         target.CommonId = source.CommonId;
-
-        // target.PasswordHash = source.PasswordHash;
-        // target.PasswordSalt = source.PasswordSalt;
         target.UserName = source.UserName;
         target.Prefix = source.Prefix;
         target.FirstName = source.FirstName;
@@ -193,11 +185,7 @@ public class MemberMapping(
         target.ExternalId = source.Id;
         target.IMISId = source.iMISId;
         target.NRDSId = source.NrdsId;
-
         target.CommonId = source.CommonId;
-
-        // target.PasswordHash = source.PasswordHash;
-        // target.PasswordSalt = source.PasswordSalt;
         target.UserName = source.UserName;
         target.Prefix = source.Prefix;
         target.FirstName = source.FirstName;
