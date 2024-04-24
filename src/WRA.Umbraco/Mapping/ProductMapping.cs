@@ -28,19 +28,21 @@ public class ProductMapping : IMapDefinition
         productEvent.Taxonomy = content.GetValue<string>("taxonomy");
     }
 
-    private void DtoToEvent(WraProductDto productDto, ProductEvent productEvent, MapperContext _)
+    private void DtoToEvent(WraProductDto source, ProductEvent target, MapperContext _)
     {
-        productEvent.Id = productDto.Id;
-        productEvent.Sku = productDto.Sku;
-        productEvent.Name = productDto.Name;
-        productEvent.Description = productDto.Description;
-        productEvent.Price = productDto.Price;
-        productEvent.MemberPrice = productDto.MemberPrice;
-        productEvent.ImageUrl = productDto.ImageUrl;
-        productEvent.Taxonomy = productDto.Taxonomy;
-        productEvent.ProductType = productDto.ProductType;
-        productEvent.Category = productDto.Category;
-        productEvent.SubCategory = productDto.SubCategory;
+        target.Id = source.Id;
+        target.Sku = source.Sku;
+        target.Name = source.Name;
+        target.Description = source.Description;
+        target.Price = source.Price;
+        target.MemberPrice = source.MemberPrice;
+        target.ImageUrl = source.ImageUrl;
+        target.Taxonomy = source.Taxonomy;
+        target.ProductType = source.ProductType;
+        target.Category = source.Category;
+        target.ProductCategoryId = source.ProductCategoryId;
+        target.SubCategory = source.SubCategory;
+        target.ProductSubcategoryId = source.ProductSubcategoryId;
 
 
     }

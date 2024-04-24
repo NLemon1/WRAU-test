@@ -42,7 +42,7 @@ public class CompanyRepository(
         return company;
     }
 
-    public IContent CreateOrUpdate(CompanyDto companyDto)
+    public IContent? CreateOrUpdate(CompanyDto companyDto)
     {
         try
         {

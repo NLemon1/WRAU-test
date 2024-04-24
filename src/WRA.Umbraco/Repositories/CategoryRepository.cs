@@ -64,6 +64,7 @@ public class CategoryRepository(
             var contentCache = umbracoContextReference.UmbracoContext.Content;
             var home = contentCache.GetAtRoot().FirstOrDefault();
 
+            // get all categories page
             var categoryPages = home.ChildrenOfType(CategoriesPage.ModelTypeAlias)
                 .FirstOrDefault()
                 .ChildrenOfType(CategoryPage.ModelTypeAlias);
@@ -74,14 +75,17 @@ public class CategoryRepository(
                 return null;
             }
 
+            // get all category page that has the Id of the requested subcategory parent
             var parentCategory = categoryPages.First(c =>
                 c.Value<Guid>(GlobalAliases.ExternalId).Equals(subCategoryInfo.ExternalCategoryId));
 
+            // get all possible subcategories under each of the results of the last category query
             var existingSubcategories = categoryPages.SelectMany(sc =>
                 sc.ChildrenOfType(SubCategoryPage.ModelTypeAlias) ?? Array.Empty<IPublishedContent>());
 
+            // query for the subcategory page the has the Id of the subcategory request
             var existingSubCategoryPageQuery = existingSubcategories
-                .Where(cat => cat.Value<Guid>(GlobalAliases.ExternalId).Equals(subCategoryInfo.Id));
+                .Where(sc => sc.Value<Guid>(GlobalAliases.ExternalId).Equals(subCategoryInfo.Id));
             var existingPage = existingSubCategoryPageQuery.FirstOrDefault();
 
             var subCategoryPage = existingPage != null ?
@@ -145,6 +149,7 @@ public class CategoryRepository(
     private void SetSubCategoryProperties(IContent content, ProductSubCategoryDto subCategoryInfo)
     {
         content.SetValue(GlobalAliases.ExternalId, subCategoryInfo.Id);
+        content.SetValue("externalCategoryId", subCategoryInfo.ExternalCategoryId);
         content.SetValue("description", subCategoryInfo.Description);
     }
 }

@@ -57,11 +57,12 @@ public class ProductPageRepository(
         }
         catch (Exception ex)
         {
-            logger.LogError(ex, "Error getting product: sku - {sku}", sku);
+            logger.LogError(ex, "Error getting product: sku - {Sku}", sku);
             throw;
         }
     }
 
+    // TODO move to it's own repository class
     public async Task<IContent?> CreateProductCollectionPage(ProductCollectionDto productCollection)
     {
         using var scope = scopeProvider.CreateCoreScope();
@@ -70,21 +71,28 @@ public class ProductPageRepository(
         var home = contentCache?.GetAtRoot().FirstOrDefault();
 
         var productsContainer = home.ChildrenOfType(ProductsPage.ModelTypeAlias).First();
-        var productCategoryPages = productsContainer.ChildrenOfType(CollectionPage.ModelTypeAlias)
+        var productCategoryPages = productsContainer.ChildrenOfType(CollectionPage.ModelTypeAlias)!
             .Where(p => p.Value<Guid>(GlobalAliases.ExternalId).Equals(productCollection.Id));
+
+        // if one doesn't have an external ID, we will do a name comparison
+        if (!productCategoryPages.Any())
+        {
+            productCategoryPages = productsContainer.ChildrenOfType(CollectionPage.ModelTypeAlias)!
+                .Where(p => p.Name.Equals(productCollection.Name));
+        }
         var existingCollectionPage = productCategoryPages.FirstOrDefault();
 
         var collectionPage = existingCollectionPage != null ?
             contentService.GetById(existingCollectionPage.Id) :
             contentService.Create(productCollection.Name, productsContainer.Id, CollectionPage.ModelTypeAlias);
 
+        collectionPage.Name = productCollection.Name;
         collectionPage.SetValue(GlobalAliases.ExternalId, productCollection.Id);
-        collectionPage.SetValue("name", productCollection.Name);
         collectionPage.SetValue("description", productCollection.Description);
 
-        contentService.Save(collectionPage);
+        contentService.SaveAndPublish(collectionPage);
         scope.Complete();
-
+        logger.LogInformation("Product collection page created: {ProductCollectionId} - {Name}", productCollection.Id, collectionPage.Name);
         return collectionPage;
     }
 }

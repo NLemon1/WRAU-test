@@ -81,21 +81,27 @@ public class WraProductManagementService(
     {
         try
         {
+            using var scope = scopeProvider.CreateCoreScope();
             var umbracoContextReference = umbracoContextFactory.EnsureUmbracoContext();
             var contentCache = umbracoContextReference.UmbracoContext.Content;
 
-            if (contentCache == null) return null;
+            if (contentCache == null)
+            {
+                scope.Complete();
+                return null;
+            }
             var productPage = existingPage ?? productPageRepository.Get(product.Sku, contentCache);
 
             var productContent = contentService.GetById(productPage.Id);
 
             // set properties on our product
             if (productContent != null) productHelper.Update(productContent, product);
+            scope.Complete();
             return productContent;
         }
         catch (Exception e)
         {
-            Console.WriteLine(e);
+            logger.LogError(e, "Error updating product: sku - {Sku}", product.Sku);
             throw;
         }
     }

@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Umbraco.Cms.Core.Composing;
 using Cultiv.Hangfire;
+using WRA.Umbraco.BackgroundJobs;
 using WRA.Umbraco.Web.Controllers.Api;
 
 namespace WRA.Umbraco.Composers;
@@ -11,57 +12,58 @@ public class RecurringJobComposer : IComposer
 {
     public void Compose(IUmbracoBuilder builder)
     {
+        // TODO set limit at a setting
         // member sync
-        builder.Services.AddScoped<MemberSyncApiController>();
-        RecurringJob.AddOrUpdate<MemberSyncApiController>(
+        builder.Services.AddScoped<MemberTasks>();
+        RecurringJob.AddOrUpdate<MemberTasks>(
             "Sync all Member Groups/Types",
             x => x.SyncAllMemberGroups(),
             Cron.Daily);
 
-        RecurringJob.AddOrUpdate<MemberSyncApiController>(
-            "Sync all Members",
-            x => x.SyncAllMembers(true, 1),
+        RecurringJob.AddOrUpdate<MemberTasks>(
+            "Sync all Members (with companies, boards, and groups)",
+            x => x.SyncAllMembers(false, 10000),
             Cron.Never);
 
-        RecurringJob.AddOrUpdate<MemberSyncApiController>(
+        RecurringJob.AddOrUpdate<MemberTasks>(
+            "Sync all Members (only members)",
+            x => x.SyncAllMembers(true, 10000),
+            Cron.Never);
+
+        RecurringJob.AddOrUpdate<MemberTasks>(
             "Sync all companies",
             x => x.SyncAllCompanies(),
             Cron.Never);
 
-        RecurringJob.AddOrUpdate<MemberSyncApiController>(
+        RecurringJob.AddOrUpdate<MemberTasks>(
             "Sync all Boards",
             x => x.SyncAllBoards(),
             Cron.Never);
 
-        RecurringJob.AddOrUpdate<MemberSyncApiController>(
+        RecurringJob.AddOrUpdate<MemberTasks>(
             "Sync Companies And Boards",
             x => x.SyncCompaniesAndBoards(),
             Cron.Daily);
 
-        RecurringJob.AddOrUpdate<MemberSyncApiController>(
-            "Empty bin",
-            x => x.EmptyRecycleBin(),
-            Cron.Never);
-
         // product sync
-        builder.Services.AddScoped<ProductSyncApiController>();
-        RecurringJob.AddOrUpdate<ProductSyncApiController>(
+        builder.Services.AddScoped<ProductTasks>();
+        RecurringJob.AddOrUpdate<ProductTasks>(
             "Sync all Products",
-            x => x.productBackgroundSync(),
+            x => x.SyncAllProducts(),
             Cron.Never);
-        RecurringJob.AddOrUpdate<ProductSyncApiController>(
+        RecurringJob.AddOrUpdate<ProductTasks>(
             "Sync all Categories",
             x => x.SyncCategories(),
             Cron.Never);
-        RecurringJob.AddOrUpdate<ProductSyncApiController>(
+        RecurringJob.AddOrUpdate<ProductTasks>(
             "Sync all SubCategories",
             x => x.SyncSubcategories(),
             Cron.Never);
-        RecurringJob.AddOrUpdate<ProductSyncApiController>(
+        RecurringJob.AddOrUpdate<ProductTasks>(
             "Sync categories and subcategories",
             x => x.SyncProductCategoriesAndSubCategories(),
             Cron.Never);
-        RecurringJob.AddOrUpdate<ProductSyncApiController>(
+        RecurringJob.AddOrUpdate<ProductTasks>(
             "Sync Product Collections",
             x => x.SyncProductCollections(),
             Cron.Never);
