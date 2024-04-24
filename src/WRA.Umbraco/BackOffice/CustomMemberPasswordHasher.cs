@@ -1,5 +1,6 @@
 using System.Security.Cryptography;
 using System.Text;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using Umbraco.Cms.Core.Security;
 using Umbraco.Cms.Core.Serialization;
@@ -8,12 +9,14 @@ using WRA.Umbraco.Exceptions;
 
 namespace WRA.Umbraco.BackOffice;
 
-public class CustomMemberPasswordHasher<TUser>(LegacyPasswordSecurity legacyPasswordSecurity, IJsonSerializer jsonSerializer, IMemberService memberService, ILogger<CustomMemberPasswordHasher<TUser>> logger) : UmbracoPasswordHasher<TUser>(legacyPasswordSecurity, jsonSerializer)
+public class CustomMemberPasswordHasher<TUser>(
+    LegacyPasswordSecurity legacyPasswordSecurity,
+    IJsonSerializer jsonSerializer, IMemberService memberService,
+    ILogger<CustomMemberPasswordHasher<TUser>> logger)
+    : UmbracoPasswordHasher<TUser>(legacyPasswordSecurity, jsonSerializer)
 where TUser : MemberIdentityUser
 {
     private const string _memberSaltPropertyAlias = "token";
-    private readonly IMemberService _memberService = memberService;
-    private readonly ILogger<CustomMemberPasswordHasher<TUser>> _logger = logger;
 
     public override string HashPassword(TUser user, string password)
     {
@@ -23,7 +26,7 @@ where TUser : MemberIdentityUser
 
             var salt = Encoding.UTF8.GetBytes(saltStr);
 
-            string passHash = CustomMemberPasswordHasher<TUser>.HashPw(password, salt);
+            string passHash = HashPw(password, salt);
 
             SetSaltPropertyOnMember(user, saltStr);
 
@@ -31,18 +34,34 @@ where TUser : MemberIdentityUser
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error hashing password user email: {Email} - {Message}", user.Email, ex.Message);
+            logger.LogError(ex, "Error hashing password user email: {Email} - {Message}", user.Email, ex.Message);
             throw new PasswordHasherException($"Error hashing password user email: {user.Email} - {ex.Message}", ex);
         }
+    }
+
+    public override PasswordVerificationResult VerifyHashedPassword(TUser user, string hashedPassword, string providedPassword)
+    {
+        var member = memberService.GetByKey(user.Key);
+        string? saltString = member.GetValue<string>(_memberSaltPropertyAlias);
+        if (string.IsNullOrEmpty(saltString))
+        {
+           return base.VerifyHashedPassword(user, hashedPassword, providedPassword);
+        }
+
+        byte[] salt = Encoding.UTF8.GetBytes(saltString);
+        string verifyHash = HashPw(providedPassword, salt);
+        return verifyHash.Equals(hashedPassword) ?
+            PasswordVerificationResult.Success :
+            base.VerifyHashedPassword(user, hashedPassword, providedPassword);
     }
 
     private void SetSaltPropertyOnMember(TUser member, string salt)
     {
         if (member.Key != Guid.Empty)
         {
-            var memberIdentity = _memberService.GetByKey(member.Key);
+            var memberIdentity = memberService.GetByKey(member.Key);
             memberIdentity.SetValue(_memberSaltPropertyAlias, salt);
-            _memberService.Save(memberIdentity);
+            memberService.Save(memberIdentity);
         }
     }
 
