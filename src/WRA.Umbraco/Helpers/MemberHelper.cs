@@ -21,7 +21,7 @@ public class MemberHelper(
     AppCaches appCache)
 : ContentHelperBase<IMember, MemberEvent>(cacheKeyProvider, appCache)
 {
-    public IMember Update(IMember target, MemberEvent source)
+    public IMember SetProperties(IMember target, MemberEvent source)
     {
         using var scope = coreScopeProvider.CreateCoreScope();
         DynamicUpdate(target, source);
@@ -29,6 +29,7 @@ public class MemberHelper(
         SetSensitiveData(target, source.PasswordHash, source.PasswordSalt);
         SetCompanyOnMember(target, source);
         SetBoardOnMember(target, source);
+        if (target.Key != source.Id) target.Key = source.Id;
 
         // save member now so that we can have an Id to assign a group to
         memberService.Save(target);

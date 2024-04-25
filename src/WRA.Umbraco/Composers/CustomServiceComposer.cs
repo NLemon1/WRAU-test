@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Umbraco.Cms.Core.Composing;
+using Umbraco.Cms.Core.Persistence.Repositories;
 using Umbraco.Cms.Core.Security;
+using Umbraco.Cms.Infrastructure.Persistence.Repositories.Implement;
 using WRA.Umbraco.BackOffice;
 using WRA.Umbraco.Contracts;
 using WRA.Umbraco.Events.Publishers;
@@ -10,6 +12,7 @@ using WRA.Umbraco.Repositories;
 using WRA.Umbraco.Services.Caching;
 using WRA.Umbraco.Shared.Messaging;
 using WRA.Umbraco.Web.Services;
+using MemberRepository = WRA.Umbraco.Repositories.MemberRepository;
 
 namespace WRA.Umbraco.Composers;
 
@@ -32,6 +35,7 @@ public class CustomServiceComposer : IComposer
         builder.Services.AddScoped<MemberHelper>();
         builder.Services.AddScoped<ProductHelper>();
         builder.Services.AddScoped<CategoryHelper>();
+        builder.Services.AddScoped<MappingHelper>();
 
         // Register the WRA external API service as scoped (one instance per request).
         builder.Services.AddScoped<WraMemberManagementService>();
@@ -49,12 +53,16 @@ public class CustomServiceComposer : IComposer
         // Register data repositories as transient (different instance every time it's requested).
         builder.Services.AddTransient<CompanyRepository>();
         builder.Services.AddTransient<BoardRepository>();
-        // builder.Services.AddTransient<SubscriptionRepository>();
-        builder.Services.AddTransient<MemberEventPublisher>();
-        builder.Services.AddTransient<ProductEventPublisher>();
         builder.Services.AddTransient<ProductPageRepository>();
+        builder.Services.AddTransient<MemberRepository>();
+        // builder.Services.AddTransient<SubscriptionRepository>();
         builder.Services.AddTransient<CategoryRepository>();
         builder.Services.AddTransient<MemberGroupRepository>();
+        builder.Services.AddTransient<MemberSubscriptionRepository>();
+
+        builder.Services.AddTransient<MemberEventPublisher>();
+        builder.Services.AddTransient<ProductEventPublisher>();
+        // custom table repositories
 
 
         // Register the Member password hasher as a singleton (one instance per application lifetime).

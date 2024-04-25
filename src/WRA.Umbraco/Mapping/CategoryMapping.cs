@@ -19,7 +19,7 @@ public class CategoryMapping: IMapDefinition
 
     private void CategoryContentToDto(IContent source, ProductCategoryDto target, MapperContext _)
     {
-        target.ExternalId = source.GetValue<Guid>(GlobalAliases.ExternalId).SafeGuid();
+        target.Id = source.GetValue<Guid>(GlobalAliases.ExternalId).SafeGuid();
         target.Name = source.Name;
         target.Description = source.GetValue<string>("description");
     }
@@ -32,7 +32,7 @@ public class CategoryMapping: IMapDefinition
 
     private void CategoryDtoToEvent (ProductCategoryDto source, ProductCategoryEvent Target, MapperContext _)
     {
-        Target.Id = source.ExternalId;
+        Target.Id = source.Id;
         Target.Name = source.Name;
         Target.Description = source.Description;
     }

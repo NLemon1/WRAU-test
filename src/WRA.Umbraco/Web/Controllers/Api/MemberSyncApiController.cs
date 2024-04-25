@@ -19,6 +19,7 @@ public class MemberSyncApiController(
     BoardRepository boardRepository,
     CompanyRepository companyRepository,
     MemberGroupRepository memberGroupRepository,
+    MemberSubscriptionRepository memberSubscriptionRepository,
     IUmbracoMapper mapper,
     ILogger<MemberSyncApiController> logger)
     : ApiController
@@ -58,11 +59,6 @@ public class MemberSyncApiController(
     {
         var memberEvent = mapper.Map<MemberEvent>(updateMemberRequest);
         var result = wraMemberManagementService.Delete(memberEvent);
-        if (result == null)
-        {
-            return Task.FromResult<IActionResult>(StatusCode(System.Net.HttpStatusCode.InternalServerError));
-        }
-
         return Task.FromResult<IActionResult>(Ok(result.IsCompletedSuccessfully));
     }
 
@@ -77,24 +73,54 @@ public class MemberSyncApiController(
         }
         catch (Exception ex)
         {
-            // do something here
-            throw ex;
+            logger.LogError(ex, "Error creating member group of id {Id}", memberTypeDto.Id);
+            throw;
         }
     }
-
     [HttpPost]
-    [Route("CreateBoard")]
-    public Task<IActionResult> CreateBoard(MemberBoardDto mb)
+    [Route("UpdateMemberGroup")]
+    public IActionResult UpdateMemberGroup(MemberGroupDto memberTypeDto)
+    {
+        try
+        {
+            memberGroupRepository.UpdateMemberGroup(memberTypeDto);
+            return Ok();
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Error updating member group of id {Id}", memberTypeDto.Id);
+            throw;
+        }
+    }
+    [HttpPost]
+    [Route("CreateOrUpdateBoard")]
+    public Task<IActionResult> CreateOrUpdateBoard(MemberBoardDto mb)
     {
         var result = boardRepository.CreateOrUpdateBoard(mb);
         return Task.FromResult<IActionResult>(Ok(result.Id));
     }
 
     [HttpPost]
-    [Route("CreateCompany")]
-    public Task<IActionResult> CreateCompany(CompanyDto company)
+    [Route("CreateOrUpdateCompany")]
+    public Task<IActionResult> CreateOrUpdateCompany(CompanyDto company)
     {
         var result = companyRepository.CreateOrUpdate(company);
         return Task.FromResult<IActionResult>(Ok(result.Id));
+    }
+
+    [HttpPost]
+    [Route("CreateMemberSubscription")]
+    public Task<IActionResult> CreateMemberSubscription(MemberSubscriptionDto memberSubscriptionDto)
+    {
+        try
+        {
+            memberSubscriptionRepository.Create(memberSubscriptionDto);
+            return Task.FromResult<IActionResult>(Ok());
+        }
+        catch (Exception e)
+        {
+            logger.LogError(e, "Error creating member subscription for member {MemberId}", memberSubscriptionDto.MemberId);
+            throw;
+        }
     }
 }

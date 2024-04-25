@@ -40,24 +40,33 @@ public class ProductPageRepository(
             // cast as our strongly type product page
             var productPage = new ProductPage(productQuery, new NoopPublishedValueFallback());
 
-            // // get product type, which is always the parent to a product page
-            // var categoryPage = new CategoryPage(productQuery.Parent, new NoopPublishedValueFallback());
-
-            // // get categories and subcategories attached to a page
-            // var category = productPage.Categories?.FirstOrDefault();
-            // var subCategory = productPage.SubCategories?.FirstOrDefault();
-            //
-            // // grab currency
-            // var store = productPage.GetStore();
-            // var currency = GetCurrency(store.Id);
-            // decimal? basePrice = productPage.Price?.GetPriceFor(currency.Id).Value;
-            // decimal? memberPrice = productPage.MemberPrice?.GetPriceFor(currency.Id).Value;
-
             return productPage;
         }
         catch (Exception ex)
         {
             logger.LogError(ex, "Error getting product: sku - {Sku}", sku);
+            throw;
+        }
+    }
+
+    public async Task<IContent?> GetByExternalId(Guid externalId)
+    {
+        try
+        {
+            using var scope = scopeProvider.CreateCoreScope();
+            var context = contextFactory.EnsureUmbracoContext();
+            var contentCache = context.UmbracoContext.Content;
+            var home = contentCache?.GetAtRoot().FirstOrDefault();
+
+            var productPage = home.ChildrenOfType(ProductPage.ModelTypeAlias)
+                .FirstOrDefault(p => p.Value<Guid>(GlobalAliases.ExternalId).Equals(externalId));
+
+            var productPageContent = contentService.GetById(productPage.Id);
+            return productPageContent;
+        }
+        catch (Exception e)
+        {
+            logger.LogError(e, "Error getting product by external ID: {ExternalId}", externalId);
             throw;
         }
     }

@@ -11,7 +11,8 @@ namespace WRA.Umbraco.Composers
             builder.WithCollectionBuilder<MapDefinitionCollectionBuilder>()
                 .Add<MemberMapping>()
                 .Add<ProductMapping>()
-                .Add<CategoryMapping>();
+                .Add<CategoryMapping>()
+                .Add<SubscriptionMapping>();
         }
     }
 }

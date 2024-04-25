@@ -4,7 +4,7 @@ namespace WRA.Umbraco.Dtos;
 public class ProductCategoryDto
 {
     [JsonPropertyName("id")]
-    public Guid ExternalId { get; set; }
+    public Guid Id { get; set; }
 
     [JsonPropertyName("productTypeId")]
     public string ProductTypeId { get; set; }

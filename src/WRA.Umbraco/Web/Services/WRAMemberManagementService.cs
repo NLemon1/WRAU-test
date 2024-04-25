@@ -12,7 +12,6 @@ using Umbraco.Cms.Web.Website.Models;
 using Umbraco.Commerce.Core.Api;
 using Umbraco.Commerce.Core.Models;
 using WRA.Umbraco.Contracts;
-using WRA.Umbraco.Helpers;
 using WRA.Umbraco.Models;
 
 namespace WRA.Umbraco.Web.Services;
@@ -28,10 +27,8 @@ public class WraMemberManagementService(
     MemberHelper memberHelper,
     ILogger<WraMemberManagementService> logger)
 {
-    /// <summary>
-    /// CRUD Operations for Webhooks.
-    /// </summary>
-    /// <param name="memberEvent"></param>
+    private const string DefaultMemberType = "Member";
+
     public async Task<IMember?> CreateOrUpdate(MemberEvent memberEvent)
     {
         try
@@ -54,15 +51,14 @@ public class WraMemberManagementService(
                 memberName = memberEvent.Email;
             }
 
-            const string defaultMemberType = "Member";
             var newMember = memberService.CreateMember(
                 memberEvent.Email,
                 memberEvent.Email,
                 memberName,
-                defaultMemberType);
+                DefaultMemberType);
 
             // updates all the fields on the member
-            memberHelper.Update(newMember, memberEvent);
+            memberHelper.SetProperties(newMember, memberEvent);
 
             // since a new member could potentially not exist in WRA's
             newMember.IsApproved = false;
@@ -71,9 +67,6 @@ public class WraMemberManagementService(
             // We need the memberId to create a link to member and memberGroups (roles).
             memberService.Save(newMember);
             logger.LogInformation("Created member: {Email} - {Id}", newMember.Email, newMember.Id);
-
-            // assign to relevant memberGroup...
-            //MemberHelper.AssignMemberToMemberGroup(newMember, memberEvent);
 
             // another save?
             scope.Complete();
@@ -100,7 +93,7 @@ public class WraMemberManagementService(
 
         if (existingMember == null) return null;
 
-        memberHelper.Update(existingMember, memberEvent);
+        memberHelper.SetProperties(existingMember, memberEvent);
         // MemberHelper.AssignMemberToMemberGroup(existingMember, memberEvent);
 
         // memberService.Save(existingMember);
@@ -125,21 +118,6 @@ public class WraMemberManagementService(
         }
 
         memberService.Delete(existingMember);
-        return Task.CompletedTask;
-    }
-    public Task EmptyBin()
-    {
-        // Wrap the three content service calls in a scope to do it all in one transaction.
-        using var scope = coreScopeProvider.CreateCoreScope();
-
-        int numberOfThingsInBin = contentService.CountChildren(Constants.System.RecycleBinContent);
-
-        if (contentService.RecycleBinSmells())
-        {
-            contentService.EmptyRecycleBin(userId: -1);
-        }
-        // Remember to complete the scope when done.
-        scope.Complete();
         return Task.CompletedTask;
     }
 
@@ -183,38 +161,6 @@ public class WraMemberManagementService(
         return (identityResult, identityUser);
     }
 
-    public async Task UpdateMemberInfo(RegisterModel model, string memberGroup = "")
-    {
-        using ICoreScope scope = coreScopeProvider.CreateCoreScope(autoComplete: true);
-
-        // var existingMember = _memberService.GetByEmail(model.Email);
-
-        // generate an "identity user" with the information we have from the request
-        var identityUser =
-            MemberIdentityUser.CreateNew(model.Username, model.Email, model.MemberTypeAlias, true, model.Name);
-
-        // get get the member based on the identity user we have generated for this session
-        IMember? existingMember = memberService.GetByKey(identityUser.Key);
-
-        // Now set the properties from the request on the matching user...
-        SetMemberProperties(model.MemberProperties, existingMember);
-
-        // now update the role on the user...
-        var currentMemberRoles = await memberManager.GetRolesAsync(identityUser);
-
-        // if a membergroup has been passed to the api AND it does not match a group the current member is a part of...
-        if (!string.IsNullOrEmpty(memberGroup) && !currentMemberRoles.Contains(memberGroup))
-        {
-            // remove them from any current roles so a single member does not belong to many member groups
-            await memberManager.RemoveFromRolesAsync(identityUser, currentMemberRoles);
-
-            // assign to new group!
-            memberService.AssignRole(model.Email, memberGroup);
-        }
-
-        memberService.Save(existingMember);
-        await memberManager.UpdateAsync(identityUser);
-    }
 
     private void SetMemberProperties(List<MemberPropertyModel> properties, IMember member)
     {
@@ -251,50 +197,5 @@ public class WraMemberManagementService(
 
         // no member attached
         return false;
-    }
-
-    #region Member Content Items
-
-    private IPublishedContent? GetProductById(string productId)
-    {
-        var contentCache = GetContentCache();
-        var siteRoot = contentCache?.GetAtRoot().FirstOrDefault();
-
-        var collectionPages = siteRoot?.Children
-            .FirstOrDefault(c => c.ContentType.Alias == ProductsPage.ModelTypeAlias)?.Children
-            .Where(c => c.ContentType.Alias == CollectionPage.ModelTypeAlias) ?? [];
-
-        IPublishedContent? subscriptionProduct = null;
-        foreach (IPublishedContent? collection in collectionPages)
-        {
-            subscriptionProduct = collection.Children
-                .FirstOrDefault(x => x.Value("productId").Equals(productId));
-            if (subscriptionProduct != null) { break; }
-        }
-
-        return subscriptionProduct;
-    }
-
-    #region  companies
-
-    // private async Task<IContent> TieCompanyToSubscription(string companyId)
-    // {
-    //     var company = _searchService.Search(Company.ModelTypeAlias)?
-    //         .FirstOrDefault(x => x.Content.Value(GlobalAliases.ExternalId) == companyId);
-
-    // company.Content.va("subscriptions", companyId);
-
-    // return company?.Content as IContent;
-    // }
-
-    #endregion
-
-    #endregion
-
-    private IPublishedContentCache GetContentCache()
-    {
-        using var umbracoContextReference = umbracoContextFactory.EnsureUmbracoContext();
-        var contentQuery = umbracoContextReference.UmbracoContext.Content;
-        return contentQuery;
     }
 }

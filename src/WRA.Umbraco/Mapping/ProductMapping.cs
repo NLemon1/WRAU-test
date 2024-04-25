@@ -1,7 +1,6 @@
 using Umbraco.Cms.Core.Mapping;
 using Umbraco.Cms.Core.Models;
 using WRA.Umbraco.Contracts;
-using WRA.Umbraco.Contracts.Product;
 using WRA.Umbraco.Extensions;
 using WRA.Umbraco.Web.Dtos.WraExternal;
 

@@ -19,7 +19,7 @@ public class CategoryHelper(
     }
     public void SetInitialProperties(IContent content, ProductCategoryDto categoryInfo)
     {
-        content.SetValue(GlobalAliases.ExternalId, categoryInfo.ExternalId);
+        content.SetValue(GlobalAliases.ExternalId, categoryInfo.Id);
         content.SetValue("description", categoryInfo.Description);
     }
     public void SetSubCategoryProperties(IContent content, ProductSubCategoryDto subCategoryInfo)

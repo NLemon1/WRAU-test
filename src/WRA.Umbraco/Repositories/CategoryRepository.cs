@@ -32,7 +32,7 @@ public class CategoryRepository(
                 var existingCategories = categoriesPage.ChildrenOfType(CategoryPage.ModelTypeAlias);
                 var existingCategoryPage = existingCategories?
                     .FirstOrDefault(cat =>
-                        cat.Value<Guid>(GlobalAliases.ExternalId).Equals(categoryInfo.ExternalId));
+                        cat.Value<Guid>(GlobalAliases.ExternalId).Equals(categoryInfo.Id));
                 if (existingCategoryPage != null)
                 {
                     var existingCategoryPageContent = contentService.GetById(existingCategoryPage.Id);
@@ -142,7 +142,7 @@ public class CategoryRepository(
     }
     private void SetCategoryProperties(IContent content, ProductCategoryDto categoryInfo)
     {
-        content.SetValue(GlobalAliases.ExternalId, categoryInfo.ExternalId);
+        content.SetValue(GlobalAliases.ExternalId, categoryInfo.Id);
         content.SetValue("description", categoryInfo.Description);
     }
 
