@@ -38,6 +38,7 @@ public class ProductMapping : IMapDefinition
         target.ImageUrl = source.ImageUrl;
         target.Taxonomy = source.Taxonomy;
         target.ProductType = source.ProductType;
+        target.ProductTypeId = source.ProductTypeId;
         target.Category = source.Category;
         target.ProductCategoryId = source.ProductCategoryId;
         target.SubCategory = source.SubCategory;

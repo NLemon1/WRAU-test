@@ -20,13 +20,14 @@ public class WraProductManagementService(
     {
         try
         {
+            using var scope = scopeProvider.CreateCoreScope(autoComplete: true);
+
             // get content cache
             var umbracoContextReference = umbracoContextFactory.EnsureUmbracoContext();
             var contentCache = umbracoContextReference.UmbracoContext.Content;
             var home = contentCache?.GetAtRoot().FirstOrDefault();
 
             // crate a scope
-            using var scope = scopeProvider.CreateCoreScope();
 
             // now we need the product's parent node to place these products under...
             var collectionPages = home?.Children
@@ -63,7 +64,7 @@ public class WraProductManagementService(
             var newProductPage = contentService.Create(productEvent.Name, collectionPage.Id, ProductPage.ModelTypeAlias);
 
             // set properties on our product
-            productHelper.Update(newProductPage, productEvent);
+            productHelper.SetProperties(newProductPage, productEvent);
 
             // save and publish the product! Wow!
             contentService.SaveAndPublish(newProductPage);
@@ -95,7 +96,7 @@ public class WraProductManagementService(
             var productContent = contentService.GetById(productPage.Id);
 
             // set properties on our product
-            if (productContent != null) productHelper.Update(productContent, product);
+            if (productContent != null) productHelper.SetProperties(productContent, product);
             scope.Complete();
             return productContent;
         }

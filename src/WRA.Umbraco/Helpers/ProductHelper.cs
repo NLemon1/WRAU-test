@@ -8,6 +8,7 @@ using WRA.Umbraco.Contracts;
 using WRA.Umbraco.Services.Caching;
 using System.Text.Json;
 using NUglify.Helpers;
+using Umbraco.Cms.Core.Scoping;
 using Umbraco.Commerce.Core.Models;
 using Umbraco.Commerce.Core.Services;
 using WRA.Umbraco.Extensions;
@@ -21,17 +22,20 @@ public class ProductHelper(
     ICacheKeyProvider cacheKeyProvider,
     IUmbracoContextFactory contextFactory,
     IContentService contentService,
-    ICurrencyService currencyService)
+    ICurrencyService currencyService,
+    ICoreScopeProvider scopeProvider)
 : ContentHelperBase<IContent, ProductEvent>(cacheKeyProvider, appCache)
 {
     private CurrencyReadOnly GetCurrency(Guid storeId) =>
         currencyService.GetCurrencies(storeId).First(c => c.Name == "USD");
 
-    public void Update(IContent target, ProductEvent source)
+    public void SetProperties(IContent target, ProductEvent source)
     {
-         DynamicUpdate(target, source);
-         SetProductProperties(target, source);
-         contentService.Save(target);
+        using var scope = scopeProvider.CreateCoreScope();
+        DynamicUpdate(target, source);
+        SetProductProperties(target, source);
+        contentService.Save(target);
+        scope.Complete();
     }
 
     private void SetProductProperties(IContentBase content, ProductEvent productEvent)

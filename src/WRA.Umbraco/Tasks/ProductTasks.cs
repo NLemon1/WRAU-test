@@ -1,6 +1,8 @@
 using System.Text.Json;
+using Hangfire;
 using Microsoft.Extensions.Logging;
 using Umbraco.Cms.Core.Mapping;
+using Umbraco.Cms.Core.Scoping;
 using WRA.Umbraco.Contracts;
 using WRA.Umbraco.Dtos;
 using WRA.Umbraco.Repositories;
@@ -14,6 +16,7 @@ public class ProductTasks(
     CategoryRepository categoryRepository,
     ProductPageRepository productPageRepository,
     WraProductManagementService wraProductManagementService,
+    ICoreScopeProvider scopeProvider,
     IUmbracoMapper mapper,
     ILogger<ProductTasks> logger)
 {
@@ -89,6 +92,7 @@ public class ProductTasks(
 
     public async Task<bool> SyncAllProducts()
     {
+        using var scope = scopeProvider.CreateCoreScope();
         bool result = await SyncCategories();
         if (!result) return false;
 
@@ -108,10 +112,23 @@ public class ProductTasks(
 
         foreach (var p in externalProducts)
         {
+            if (p.ProductType == "Discount" )
+            {
+                logger.LogInformation("Skipping product {Sku} because it is a discount", p.Sku);
+                continue;
+            }
+
             var productEvent = mapper.Map<ProductEvent>(p);
-            if (productEvent != null) await wraProductManagementService.CreateOrUpdate(productEvent);
+            if (productEvent == null)
+            {
+                logger.LogInformation("No event data for product {Sku}", p.Sku);
+                continue;
+            };
+            // BackgroundJob.Enqueue(() => wraProductManagementService.CreateOrUpdate(productEvent));
+            await wraProductManagementService.CreateOrUpdate(productEvent);
         }
 
+        scope.Complete();
         return true;
     }
 

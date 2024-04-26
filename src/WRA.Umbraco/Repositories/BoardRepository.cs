@@ -23,18 +23,20 @@ public class BoardRepository
             var contentCache = umbracoContextReference.UmbracoContext.Content;
             var siteRoot = contentCache.GetAtRoot().FirstOrDefault();
 
+            var boardContentType = contentCache.GetContentType(Board.ModelTypeAlias);
+            var allBoars = contentCache.GetByContentType(boardContentType);
+
             // first get the board page that all indivial boards will be under.
-            var BoardsContainer = siteRoot?.Children
+            var boardsContainer = siteRoot?.Children
                 .FirstOrDefault(x => x.ContentType.Alias == Boards.ModelTypeAlias);
 
-
-            var existingBoardResult = BoardsContainer?.Children
+            var existingBoardResult = allBoars
                 .Where(x => x.ContentType.Alias == Board.ModelTypeAlias)
                 .FirstOrDefault(x => x.Value<Guid>(GlobalAliases.ExternalId) == mb.Id);
 
             var board = existingBoardResult != null ?
                 contentService.GetById(existingBoardResult.Id):
-                contentService.Create(mb.Name, BoardsContainer.Id, Board.ModelTypeAlias);
+                contentService.Create(mb.Name, boardsContainer.Id, Board.ModelTypeAlias);
 
 
             board.SetValue(GlobalAliases.ExternalId, mb.Id);

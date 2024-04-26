@@ -25,21 +25,35 @@ public class ProductPageRepository(
     {
         try
         {
+            using var scope = scopeProvider.CreateCoreScope();
             var siteRoot = contentCache.GetAtRoot().FirstOrDefault();
 
+            var productsPage = siteRoot?.ChildrenOfType(ProductsPage.ModelTypeAlias)?.FirstOrDefault();
+            if (productsPage == null)
+            {
+                logger.LogError("Products container page not found");
+                scope.Complete();
+                return null;
+            }
             // search products
-            var productQuery = siteRoot?.Children
-                .Where(c => c.ContentType.Alias == ProductPage.ModelTypeAlias)
-                .FirstOrDefault(c => c.Value<string>(GlobalAliases.Sku) == sku);
-            if (productQuery == null)
+
+            var contentType = contentCache.GetContentType(ProductPage.ModelTypeAlias);
+            var allProducts = contentCache.GetByContentType(contentType);
+            var product = allProducts
+                .FirstOrDefault(p => p.Value(GlobalAliases.Sku).Equals(sku));
+            // var productQuery = productsPage.ChildrenOfType(ProductPage.ModelTypeAlias)
+            //     .Where(c => c.ContentType.Alias == ProductPage.ModelTypeAlias)
+            //     .FirstOrDefault(c => c.Value<string>(GlobalAliases.Sku) == sku);
+            if (product == null)
             {
                 logger.LogInformation("Product not found: sku - {Sku}", sku);
+                scope.Complete();
                 return null;
             }
 
             // cast as our strongly type product page
-            var productPage = new ProductPage(productQuery, new NoopPublishedValueFallback());
-
+            var productPage = new ProductPage(product, new NoopPublishedValueFallback());
+            scope.Complete();
             return productPage;
         }
         catch (Exception ex)
