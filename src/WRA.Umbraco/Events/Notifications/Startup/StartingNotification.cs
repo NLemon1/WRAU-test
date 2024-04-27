@@ -20,7 +20,6 @@ public class StartingNotification(
     IMemberService memberService,
     IContentService contentService,
     ICoreScopeProvider coreScopeProvider,
-    SiteContentSettings siteContentSettings,
     ILogger<TransformExamineValues> transformExamineValuesLogger,
     ILogger<TransformMemberExamineValues> transformMemberValuesLogger,
     ILogger<StartingNotification> logger
@@ -51,20 +50,8 @@ public class StartingNotification(
         var productsPage = home.FirstChild<ProductsPage>();
         if (productsPage == null)
         {
-            var newProductsPage = CreateContent("Products", homeUdi, ProductsPage.ModelTypeAlias);
-            if (newProductsPage != null)
-            {
-                BackgroundJob.Enqueue(() => InitializeProductCollectionPages(newProductsPage.GetUdi()));
-            }
+            CreateContent("Products", homeUdi, ProductsPage.ModelTypeAlias);
         }
-
-        // check for Categories Page
-        var categoriesPage = home.FirstChild<CategoriesPage>();
-        if (categoriesPage == null)
-        {
-            BackgroundJob.Enqueue(() => CreateContent("Categories", homeUdi, CategoryPage.ModelTypeAlias));
-        }
-
         // check fo companies page
         var companiesPage = home.FirstChild<Companies>();
         if (companiesPage == null)
@@ -91,15 +78,6 @@ public class StartingNotification(
         contentService.SaveAndPublish(newContent);
         scope.Complete();
         return newContent;
-    }
-
-    public void InitializeProductCollectionPages(Udi parent)
-    {
-        var productTypes = siteContentSettings.ProductTypes;
-        foreach (var productType in productTypes)
-        {
-            CreateContent(productType, parent, CollectionPage.ModelTypeAlias);
-        }
     }
 
     private void InitializeExamineIndexes()

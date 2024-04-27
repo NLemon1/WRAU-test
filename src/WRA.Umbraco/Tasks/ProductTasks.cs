@@ -90,7 +90,7 @@ public class ProductTasks(
         }
     }
 
-    public async Task<bool> SyncAllProducts()
+    public async Task<bool> SyncProductInfrastructure()
     {
         using var scope = scopeProvider.CreateCoreScope();
         bool result = await SyncCategories();
@@ -102,11 +102,17 @@ public class ProductTasks(
         bool productCollectionsResult = await SyncProductCollections();
         if (!productCollectionsResult) return false;
 
-        // Get all products from WRA's ERP
+        scope.Complete();
+        return true;
+    }
+
+    public async Task<bool> SyncAllProducts()
+    {
+        using var scope = scopeProvider.CreateCoreScope();
+
         var productsResp = await externalApiService.GetProducts();
         string? content = productsResp.Content;
 
-        // first lets deserialize:
         if (content == null) return false;
         var externalProducts = JsonSerializer.Deserialize<List<WraProductDto>>(content, SerializationOptions);
 
@@ -124,8 +130,8 @@ public class ProductTasks(
                 logger.LogInformation("No event data for product {Sku}", p.Sku);
                 continue;
             };
-            // BackgroundJob.Enqueue(() => wraProductManagementService.CreateOrUpdate(productEvent));
-            await wraProductManagementService.CreateOrUpdate(productEvent);
+            BackgroundJob.Enqueue(() => wraProductManagementService.CreateOrUpdate(productEvent));
+            // await wraProductManagementService.CreateOrUpdate(productEvent);
         }
 
         scope.Complete();

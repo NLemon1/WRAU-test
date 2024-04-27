@@ -21,7 +21,6 @@ public class StartedNotification(
     IUmbracoContextFactory umbracoContextFactory,
     IContentService contentService,
     ICoreScopeProvider coreScopeProvider,
-    SiteContentSettings siteContentSettings,
     IBackgroundTaskQueue  backgroundTaskQueue,
     ILogger<StartingNotification> logger) : INotificationHandler<UmbracoApplicationStartedNotification>
 {

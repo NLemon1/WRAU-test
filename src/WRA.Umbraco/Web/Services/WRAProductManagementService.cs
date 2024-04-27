@@ -1,9 +1,11 @@
+using Hangfire;
 using Microsoft.Extensions.Logging;
 using Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Core.Scoping;
 using Umbraco.Cms.Core.Services;
 using Umbraco.Cms.Core.Web;
 using WRA.Umbraco.Contracts;
+using WRA.Umbraco.Extensions;
 using WRA.Umbraco.Models;
 using WRA.Umbraco.Repositories;
 
@@ -16,6 +18,7 @@ public class WraProductManagementService(
     ProductHelper productHelper,
     ProductPageRepository productPageRepository)
 {
+    [DisableConcurrentExecution(10)]
     public async Task<IContent?> CreateOrUpdate(ProductEvent productEvent)
     {
         try
@@ -27,25 +30,37 @@ public class WraProductManagementService(
             var contentCache = umbracoContextReference.UmbracoContext.Content;
             var home = contentCache?.GetAtRoot().FirstOrDefault();
 
-            // crate a scope
-
-            // now we need the product's parent node to place these products under...
-            var collectionPages = home?.Children
-                .FirstOrDefault(c => c.ContentType.Alias == ProductsPage.ModelTypeAlias);
-
-            if (collectionPages == null)
+            var productCollectionPageType = contentCache.GetContentType(CollectionPage.ModelTypeAlias);
+            if (productCollectionPageType == null)
             {
-                logger.LogError("No collection match for {ProductType}", productEvent.ProductType );
+                logger.LogError("No collection page type found");
                 scope.Complete();
                 return null;
             }
 
-            var collectionPage = collectionPages.Children.FirstOrDefault(c =>
-                c.Name.Equals(productEvent.ProductType));
+            var productCollectionPage = contentCache.GetByContentType(productCollectionPageType)?
+                .First(p => p.Value<Guid>(GlobalAliases.ExternalId) == productEvent.ProductTypeId.SafeGuid());
+
+
+            // var productsPageType = contentCache.GetContentType(ProductsPage.ModelTypeAlias);
+            //
+            // // now we need the product's parent node to place these products under...
+            // var collectionPages = home?.Children
+            //     .FirstOrDefault(c => c.ContentType.Alias == ProductsPage.ModelTypeAlias);
+            //
+            // if (collectionPages == null)
+            // {
+            //     logger.LogError("No collection match for {ProductType}", productEvent.ProductType );
+            //     scope.Complete();
+            //     return null;
+            // }
+            //
+            // var collectionPage = collectionPages.Children.FirstOrDefault(c =>
+            //     c.Name.Equals(productEvent.ProductType));
 
             // collection page doesn't exist and needs to be created
             // maybe exception instead?
-            if (collectionPage == null)
+            if (productCollectionPage == null)
             {
                 logger.LogError("No collection match for {ProductType}", productEvent.ProductType );
                 scope.Complete();
@@ -61,7 +76,7 @@ public class WraProductManagementService(
                 return await Update(productEvent, existingProductPage);
             }
 
-            var newProductPage = contentService.Create(productEvent.Name, collectionPage.Id, ProductPage.ModelTypeAlias);
+            var newProductPage = contentService.Create(productEvent.Name, productCollectionPage.Id, ProductPage.ModelTypeAlias);
 
             // set properties on our product
             productHelper.SetProperties(newProductPage, productEvent);
@@ -70,6 +85,7 @@ public class WraProductManagementService(
             contentService.SaveAndPublish(newProductPage);
             scope.Complete();
             return newProductPage;
+
         }
         catch (Exception ex)
         {
@@ -77,7 +93,7 @@ public class WraProductManagementService(
             throw;
         }
     }
-
+    [DisableConcurrentExecution(10)]
     public async Task<IContent?> Update(ProductEvent product, ProductPage? existingPage = null)
     {
         try

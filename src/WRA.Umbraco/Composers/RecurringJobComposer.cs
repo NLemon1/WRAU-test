@@ -48,6 +48,10 @@ public class RecurringJobComposer : IComposer
         // product sync
         builder.Services.AddScoped<ProductTasks>();
         RecurringJob.AddOrUpdate<ProductTasks>(
+            "Sync categories and collections",
+            x => x.SyncProductInfrastructure(),
+            Cron.Never);
+        RecurringJob.AddOrUpdate<ProductTasks>(
             "Sync all Products",
             x => x.SyncAllProducts(),
             Cron.Never);

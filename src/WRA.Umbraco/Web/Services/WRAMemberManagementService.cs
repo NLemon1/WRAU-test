@@ -1,3 +1,4 @@
+using Hangfire;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using Umbraco.Cms.Core;
@@ -29,6 +30,7 @@ public class WraMemberManagementService(
 {
     private const string DefaultMemberType = "Member";
 
+    [DisableConcurrentExecution(10)]
     public async Task<IMember?> CreateOrUpdate(MemberEvent memberEvent)
     {
         try
@@ -78,7 +80,7 @@ public class WraMemberManagementService(
             throw;
         }
     }
-
+    [DisableConcurrentExecution(10)]
     public IMember? Update(MemberEvent memberEvent, IMember? targetMember = null)
     {
         // Create a scope
