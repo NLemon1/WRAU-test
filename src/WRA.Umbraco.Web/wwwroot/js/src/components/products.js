@@ -39,9 +39,10 @@ const products = () => {
         taxonomy = urlParams.get("type");
     }
 
-    let subcategory = window.productDataSubCategory; 
+    let subcategory = window.productDataSubCategory;
+    let category = window.productDataCategory; 
 
-    let category = "";
+    //let category = [];
 
  /*   if (urlParams.has("category")) {
         category = urlParams.get("category");
@@ -217,8 +218,8 @@ const products = () => {
 
         let bodyObject = {
             "productType": decodeURIComponent(type), //Events, Products, Courses
-            "category": decodeURIComponent(category), //Professional Development, Publications, Conferences/Conventions, etc.
-            "subCategory": decodeURIComponent(subcategory),//children of category
+            "categories": [`${decodeURIComponent(category)}`],//[decodeURIComponent(category)], //Professional Development, Publications, Conferences/Conventions, etc.
+            "subCategories": [`${decodeURIComponent(subcategory)}`],//children of category
             "taxonomy": "",//Reference Manuals, Books, Virtual, etc.
             "pagination": {
                 "pageNumber": pageNumber,
@@ -253,17 +254,19 @@ const products = () => {
         handleIndicators(true, resultsLoader);
 
         const checkTax = taxonomy === "All" ? "" : taxonomy; 
-
+        
         let bodyObject = {
             "productType": decodeURIComponent(type), //Events, Products, Courses
-            "category": decodeURIComponent(category), //Professional Development, Publications, Conferences/Conventions, etc.
-            "subCategory": decodeURIComponent(subcategory),//children of category
+            "categories": [`${decodeURIComponent(category)}`], //Professional Development, Publications, Conferences/Conventions, etc.
+            "subCategories": [`${decodeURIComponent(subcategory)}`],//children of category
             "taxonomy": decodeURIComponent(checkTax),//Reference Manuals, Books, Virtual, etc.
             "pagination": {
                 "pageNumber": pageNumber,
                 "pageSize": pageSize
             }
         };
+
+        console.log(bodyObject)
 
         const bodyRequest = JSON.stringify(bodyObject);
 

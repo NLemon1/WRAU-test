@@ -16,6 +16,7 @@
 }
 
 <script type="text/javascript">
+    window.productDataCategory = "@(Model.Parent.Name)";
     window.productDataSubCategory = "@(Model.Name)";
     window.orderId = "@Model.Order.Id";
     window.storeId = "@Model.GetStore().Id"

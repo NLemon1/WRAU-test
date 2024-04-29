@@ -7808,7 +7808,7 @@
       taxonomy = urlParams.get("type");
     }
     let subcategory = window.productDataSubCategory;
-    let category = "";
+    let category = window.productDataCategory;
     const handleIndicators = (show, waitLoaderElement) => {
       if (show == true) {
         waitLoaderElement.hidden = false;
@@ -7938,9 +7938,9 @@
       let bodyObject = {
         "productType": decodeURIComponent(type),
         //Events, Products, Courses
-        "category": decodeURIComponent(category),
-        //Professional Development, Publications, Conferences/Conventions, etc.
-        "subCategory": decodeURIComponent(subcategory),
+        "categories": [`${decodeURIComponent(category)}`],
+        //[decodeURIComponent(category)], //Professional Development, Publications, Conferences/Conventions, etc.
+        "subCategories": [`${decodeURIComponent(subcategory)}`],
         //children of category
         "taxonomy": "",
         //Reference Manuals, Books, Virtual, etc.
@@ -7974,9 +7974,9 @@
       let bodyObject = {
         "productType": decodeURIComponent(type),
         //Events, Products, Courses
-        "category": decodeURIComponent(category),
+        "categories": [`${decodeURIComponent(category)}`],
         //Professional Development, Publications, Conferences/Conventions, etc.
-        "subCategory": decodeURIComponent(subcategory),
+        "subCategories": [`${decodeURIComponent(subcategory)}`],
         //children of category
         "taxonomy": decodeURIComponent(checkTax),
         //Reference Manuals, Books, Virtual, etc.
@@ -7985,6 +7985,7 @@
           "pageSize": pageSize
         }
       };
+      console.log(bodyObject);
       const bodyRequest = JSON.stringify(bodyObject);
       fetch(
         apiEndpointUrl,
