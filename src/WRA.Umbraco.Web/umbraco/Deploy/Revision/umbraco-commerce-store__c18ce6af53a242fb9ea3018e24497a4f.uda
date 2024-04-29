@@ -22,9 +22,6 @@
   "DefaultGiftCardEmailTemplateUdi": "umb://umbraco-commerce-email-template/ec494b4a0e1648c3b22a018e24497acb",
   "ConfirmationEmailTemplateUdi": "umb://umbraco-commerce-email-template/1a60c96b1bd3401cb535018e24497ac1",
   "ErrorEmailTemplateUdi": "umb://umbraco-commerce-email-template/cdda86e49c2d4c6992a8018e24497acb",
-  "AllowedUsers": [
-    "robert@lightburn.co"
-  ],
   "AllowedUserRoles": [
     "admin",
     "commerce"
