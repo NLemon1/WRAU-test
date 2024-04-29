@@ -9,7 +9,7 @@ const calendar = () => {
 
     let filtersLoaded = false;
 
-    //console.log(window.setResources)
+    console.log(window.setResources)
 
     let bodyObject = {
         "productType": "Events",
@@ -22,7 +22,10 @@ const calendar = () => {
         }
     };
 
+
     const bodyRequest = JSON.stringify(bodyObject);
+
+    console.log(bodyObject);
 
     const getValue = (checkBoxes) => {
 
@@ -30,9 +33,9 @@ const calendar = () => {
 
         checkBoxes.forEach((checkBox) => {
             if (!checkBox.checked) {
-                styleSet.innerHTML += (`[data-resource="${checkBox.value}"] { opacity: 0 }`);
+                styleSet.innerHTML += (`[data-resource="${checkBox.value}"] { display: 0; visibility: hidden; }`);
             } else {
-                styleSet.innerHTML += (`[data-resource="${checkBox.value}"] { opacity: 1 }`);
+                styleSet.innerHTML += (`[data-resource="${checkBox.value}"] { opacity: 1; visibility: visible; }`);
             }
         });
     }
@@ -77,7 +80,7 @@ const calendar = () => {
                         }).then(res => {
                             return res.json();
                         }).then(res => {
-                            //console.log(res);
+                            console.log(res);
                             successCallback(res);
                     });
                 }
