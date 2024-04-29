@@ -200,7 +200,9 @@ namespace WRA.Umbraco.Extensions
             }
 
             StoreReadOnly? store = page.GetStore();
-            return UmbracoCommerceApi.Instance.GetProduct(store.Id, content.GetProductReference(), Thread.CurrentThread.CurrentCulture.Name) as CustomProductSnapshot;
+            var product = UmbracoCommerceApi.Instance.GetProduct(store.Id, content.GetProductReference(),
+                Thread.CurrentThread.CurrentCulture.Name);
+            return product;
         }
 
         public static IProductSnapshot? AsProduct(this IProductComp variant, IProductComp parent)

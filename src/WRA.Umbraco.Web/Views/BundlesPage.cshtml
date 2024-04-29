@@ -8,11 +8,13 @@
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.BundlesPage>
 @{
     Layout = "~/Views/_Layout.cshtml";
-    
-    var content = (ContentModels.BundlesPage)Model;
+
+    var content = Model;
 
     var sections = content.Value<IEnumerable<BlockGridItem>>("blockContent");
-    IEnumerable<IPublishedContent> courseBundles = content.Children.DescendantsOrSelfOfType("bundlePage").Where(x => x.IsVisible()).OrderBy(p => p.Name);
+    var courseBundles = content.Bundles
+        .Where(x => x.IsVisible())
+        .OrderBy(p => p.Name);
 
     var currency = content.GetStore().BaseCurrencyId ?? Guid.Empty;
 
@@ -24,28 +26,19 @@
     <div class="container">
         @if (courseBundles.Any())
         {
-            int creditHours = 0;
+            var creditHours = 0;
 
             <div class="row">
                 @foreach (var courseBundle in courseBundles)
                 {
-                    var bundledProducts = courseBundle.Value<IEnumerable<IPublishedContent>>("bundledProducts");
+                    var bundledProducts = content.ProductsOnBundle(courseBundle);
 
-                    if (bundledProducts != null)
-                    {
-                        foreach (var bundledProduct in bundledProducts)
-                        {
-                            if (bundledProduct.HasValue("creditHours"))
-                            {
-                                creditHours += bundledProduct.Value<int>("creditHours");
-                            }
-                        }
-                    }
+                    creditHours += bundledProducts.Where(bundledProduct => bundledProduct.CreditHours != 0).Sum(bundledProduct => bundledProduct.CreditHours);
 
-                    <div class="col-md-6 gy-4 gy-lg-5"> 
+                    <div class="col-md-6 gy-4 gy-lg-5">
                         <div class="card card-bundle p-0">
                             <p class="mb-0 fs-xs px-4 py-1 w-100 d-flex flex-row justify-content-between" style="background: var(--bs-blue-light)">
-                                @if (creditHours != 0)   
+                                @if (creditHours != 0)
                                 {
                                     <span class="py-1">Bundle <span class="ms-3 fw-semibold">Credit Hours: @creditHours</span></span>
                                 }
@@ -61,20 +54,24 @@
                                     <a href="@courseBundle.Url()" id="view-product" class="btn btn-primary border-0">View Bundle</a>
                                     <div class="ps-4">
                                         <div class="d-block mb-1">
-                                            @if (courseBundle.HasValue("memberPrice"))
+                                            @{
+                                                var courseBundlePrice = courseBundle.Price.GetPriceFor(Model.DefaultCurrency);
+                                            }
+                                            @if (courseBundlePrice.Value > 0)
                                             {
                                                 <span class="h3 fw-bold">
-                                                    @courseBundle.GetProperty("memberPrice")?.GetValue()
+                                                    @courseBundle.MemberPrice.GetPriceFor(Model.DefaultCurrency).Formatted()
+
                                                 </span>
                                                 <span class="fs-sm" style="color: var(--bs-gray-30)">
                                                     &nbsp;member pricing
                                                 </span>
-                                                <br />
+                                                <br/>
                                             }
-                                            @if (courseBundle.HasValue("price"))
+                                            @if (courseBundlePrice.Value > 0)
                                             {
                                                 <div class="d-block fs-sm mb-0" style="color: var(--bs-gray-30)">
-                                                    @courseBundle.GetProperty("price")?.GetValue()
+                                                    @courseBundlePrice.Formatted()
                                                     &nbsp;non-member pricing
                                                 </div>
                                             }
