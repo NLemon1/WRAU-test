@@ -41,23 +41,6 @@ public class WraProductManagementService(
             var productCollectionPage = contentCache.GetByContentType(productCollectionPageType)?
                 .First(p => p.Value<Guid>(GlobalAliases.ExternalId) == productEvent.ProductTypeId.SafeGuid());
 
-
-            // var productsPageType = contentCache.GetContentType(ProductsPage.ModelTypeAlias);
-            //
-            // // now we need the product's parent node to place these products under...
-            // var collectionPages = home?.Children
-            //     .FirstOrDefault(c => c.ContentType.Alias == ProductsPage.ModelTypeAlias);
-            //
-            // if (collectionPages == null)
-            // {
-            //     logger.LogError("No collection match for {ProductType}", productEvent.ProductType );
-            //     scope.Complete();
-            //     return null;
-            // }
-            //
-            // var collectionPage = collectionPages.Children.FirstOrDefault(c =>
-            //     c.Name.Equals(productEvent.ProductType));
-
             // collection page doesn't exist and needs to be created
             // maybe exception instead?
             if (productCollectionPage == null)
@@ -122,33 +105,5 @@ public class WraProductManagementService(
             throw;
         }
     }
-
-    // public Task Update(ProductEvent product, ProductPage existingPage)
-    // {
-    //     try
-    //     {
-    //         // might want to make this a parameter in the future
-    //         var umbracoContextReference = umbracoContextFactory.EnsureUmbracoContext();
-    //         var contentCache = umbracoContextReference.UmbracoContext.Content;
-    //         // crate a scope
-    //         using var scope = scopeProvider.CreateCoreScope(autoComplete: true);
-    //
-    //         // suppress any notification to prevent our listener from firing an "updated product" webhook back at the queue
-    //         scope.Notifications.Suppress();
-    //         var productPage = productPageRepository.Get(product.Sku, contentCache);
-    //         var productContent = contentService.GetById(productPage.Id);
-    //
-    //         // set properties on our product
-    //         if (productContent != null) productHelper.Update(productContent, product);
-    //
-    //         scope.Complete();
-    //         return Task.CompletedTask;
-    //     }
-    //     catch (Exception e)
-    //     {
-    //         Console.WriteLine(e);
-    //         throw;
-    //     }
-    // }
 
 }

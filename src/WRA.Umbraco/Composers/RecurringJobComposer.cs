@@ -31,12 +31,12 @@ public class RecurringJobComposer : IComposer
 
         RecurringJob.AddOrUpdate<MemberTasks>(
             "Sync all companies",
-            x => x.SyncAllCompanies(),
+            x => x.QueueCompanySync(),
             Cron.Never);
 
         RecurringJob.AddOrUpdate<MemberTasks>(
             "Sync all Boards",
-            x => x.SyncAllBoards(),
+            x => x.QueueBoardSync(),
             Cron.Never);
 
         RecurringJob.AddOrUpdate<MemberTasks>(
@@ -52,7 +52,7 @@ public class RecurringJobComposer : IComposer
             Cron.Never);
         RecurringJob.AddOrUpdate<ProductTasks>(
             "Sync all Products",
-            x => x.SyncAllProducts(),
+            x => x.QueueProductSync(),
             Cron.Never);
         RecurringJob.AddOrUpdate<ProductTasks>(
             "Sync all Categories",

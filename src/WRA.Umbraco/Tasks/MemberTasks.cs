@@ -55,6 +55,12 @@ public class MemberTasks(
         }
     }
 
+    public async Task<bool> QueueCompanySync()
+    {
+        BackgroundJob.Enqueue(() => SyncAllCompanies());
+        return true;
+    }
+
     public async Task<bool> SyncAllCompanies()
     {
         try
@@ -80,6 +86,12 @@ public class MemberTasks(
         }
     }
 
+    public async Task<bool> QueueBoardSync()
+    {
+        BackgroundJob.Enqueue(() => SyncAllBoards());
+        return true;
+    }
+
     public async Task<bool> SyncAllBoards()
     {
         try
@@ -89,7 +101,7 @@ public class MemberTasks(
 
             foreach (var board in localBoards)
             {
-                BackgroundJob.Enqueue(() => boardRepository.CreateOrUpdateBoard(board));
+               await boardRepository.CreateOrUpdateBoard(board);
             }
 
             return true;

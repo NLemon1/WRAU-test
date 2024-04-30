@@ -40,10 +40,9 @@ public class ProductPageRepository(
             var contentType = contentCache.GetContentType(ProductPage.ModelTypeAlias);
             var allProducts = contentCache.GetByContentType(contentType);
             var product = allProducts
-                .FirstOrDefault(p => p.Value(GlobalAliases.Sku).Equals(sku));
-            // var productQuery = productsPage.ChildrenOfType(ProductPage.ModelTypeAlias)
-            //     .Where(c => c.ContentType.Alias == ProductPage.ModelTypeAlias)
-            //     .FirstOrDefault(c => c.Value<string>(GlobalAliases.Sku) == sku);
+                .FirstOrDefault(p =>
+                    p.Value<string>(GlobalAliases.Sku).Trim().Equals(sku.Trim()));
+
             if (product == null)
             {
                 logger.LogInformation("Product not found: sku - {Sku}", sku);
