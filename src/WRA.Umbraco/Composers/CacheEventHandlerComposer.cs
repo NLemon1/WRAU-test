@@ -14,7 +14,7 @@ public class CacheEventHandlerComposer : IComposer
 {
     public void Compose(IUmbracoBuilder builder)
     {
-        // builder.AddNotificationHandler<ContentPublishedNotification, ContentPublishedCacheNotificationHandler>();
+        builder.AddNotificationHandler<ContentPublishedNotification, ContentPublishedCacheNotificationHandler>();
         builder.AddNotificationHandler<MemberSavedNotification, MemberSavedCacheNotificationHandler>();
     }
 }

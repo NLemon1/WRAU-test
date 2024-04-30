@@ -25,7 +25,7 @@ public class ProductMapping : IMapDefinition
         productEvent.MemberPrice = content.GetValue<decimal>("memberPrice");
         productEvent.ImageUrl = content.GetValue<string>("imageUrl");
         productEvent.Taxonomy = content.GetValue<string>("taxonomy");
-        productEvent.StartDate = content.GetValue<DateTime>("startDate");
+        productEvent.StartDate = GetValidDate(content.GetValue<DateTime>("startDate"));
         productEvent.EndDate = content.GetValue<DateTime>("endDate");
     }
 
@@ -45,9 +45,22 @@ public class ProductMapping : IMapDefinition
         target.ProductCategoryId = source.ProductCategoryId;
         target.SubCategory = source.SubCategory;
         target.ProductSubcategoryId = source.ProductSubcategoryId;
-        target.StartDate = source.StartDate;
-        target.EndDate = source.EndDate;
+        target.StartDate = GetValidDate(source.StartDate);
+        target.EndDate = GetValidDate(source.EndDate);
 
 
+    }
+
+    private DateTime? GetValidDate(DateTime? date)
+    {
+        if (date == null || date <= DateTime.MinValue || date >= DateTime.MaxValue)
+        {
+            return null;
+        }
+        {
+            return null;
+        }
+
+        return date;
     }
 }
