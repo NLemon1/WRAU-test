@@ -218,8 +218,8 @@ const products = () => {
 
         let bodyObject = {
             "productType": decodeURIComponent(type), //Events, Products, Courses
-            "categories": [`${decodeURIComponent(category)}`],//[decodeURIComponent(category)], //Professional Development, Publications, Conferences/Conventions, etc.
-            "subCategories": [`${decodeURIComponent(subcategory)}`],//children of category
+            "categories": [category],//[decodeURIComponent(category)], //Professional Development, Publications, Conferences/Conventions, etc.
+            "subCategories": [subcategory],//children of category
             "taxonomy": "",//Reference Manuals, Books, Virtual, etc.
             "pagination": {
                 "pageNumber": pageNumber,
@@ -257,8 +257,8 @@ const products = () => {
         
         let bodyObject = {
             "productType": decodeURIComponent(type), //Events, Products, Courses
-            "categories": [`${decodeURIComponent(category)}`], //Professional Development, Publications, Conferences/Conventions, etc.
-            "subCategories": [`${decodeURIComponent(subcategory)}`],//children of category
+            "categories": [category], //Professional Development, Publications, Conferences/Conventions, etc.
+            "subCategories": [subcategory],//children of category
             "taxonomy": decodeURIComponent(checkTax),//Reference Manuals, Books, Virtual, etc.
             "pagination": {
                 "pageNumber": pageNumber,

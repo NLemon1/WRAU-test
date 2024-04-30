@@ -7619,7 +7619,7 @@
     console.log(window.setResources);
     let bodyObject = {
       "productType": "Events",
-      "categories": Array.from(window.setResources, (x) => x.title),
+      "categories": Array.from(window.setResources, (x) => x.id),
       "subCategories": [],
       "taxonomy": "",
       "pagination": {
@@ -7941,9 +7941,9 @@
       let bodyObject = {
         "productType": decodeURIComponent(type),
         //Events, Products, Courses
-        "categories": [`${decodeURIComponent(category)}`],
+        "categories": [category],
         //[decodeURIComponent(category)], //Professional Development, Publications, Conferences/Conventions, etc.
-        "subCategories": [`${decodeURIComponent(subcategory)}`],
+        "subCategories": [subcategory],
         //children of category
         "taxonomy": "",
         //Reference Manuals, Books, Virtual, etc.
@@ -7977,9 +7977,9 @@
       let bodyObject = {
         "productType": decodeURIComponent(type),
         //Events, Products, Courses
-        "categories": [`${decodeURIComponent(category)}`],
+        "categories": [category],
         //Professional Development, Publications, Conferences/Conventions, etc.
-        "subCategories": [`${decodeURIComponent(subcategory)}`],
+        "subCategories": [subcategory],
         //children of category
         "taxonomy": decodeURIComponent(checkTax),
         //Reference Manuals, Books, Virtual, etc.

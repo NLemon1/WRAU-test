@@ -13,7 +13,7 @@ const calendar = () => {
 
     let bodyObject = {
         "productType": "Events",
-        "categories": Array.from(window.setResources, (x) => x.title),
+        "categories": Array.from(window.setResources, (x) => x.id),
         "subCategories": [],
         "taxonomy": "",
         "pagination": {
