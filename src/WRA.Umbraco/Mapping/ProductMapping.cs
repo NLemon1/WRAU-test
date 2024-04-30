@@ -57,9 +57,6 @@ public class ProductMapping : IMapDefinition
         {
             return null;
         }
-        {
-            return null;
-        }
 
         return date;
     }

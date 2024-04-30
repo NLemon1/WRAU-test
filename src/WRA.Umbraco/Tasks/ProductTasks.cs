@@ -136,8 +136,15 @@ public class ProductTasks(
                 continue;
             };
             // BackgroundJob.Enqueue(() => wraProductManagementService.CreateOrUpdate(productEvent));
-            await wraProductManagementService.CreateOrUpdate(productEvent);
-            logger.LogInformation("Product {Sku} - {Name} synced", p.Sku, p.Name);
+            var result = await wraProductManagementService.CreateOrUpdate(productEvent);
+            if (result == null)
+            {
+                logger.LogError("could not sync product {Sku} - {Type} - {Name}", p.Sku, p.ProductType, p.Name);
+            }
+            else
+            {
+                logger.LogInformation("Product {Sku} - {Name} synced", result.GetValue(GlobalAliases.Sku), result.Name);
+            }
         }
 
         scope.Complete();
