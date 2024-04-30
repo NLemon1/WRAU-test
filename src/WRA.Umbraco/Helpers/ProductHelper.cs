@@ -34,7 +34,6 @@ public class ProductHelper(
         using var scope = scopeProvider.CreateCoreScope();
         DynamicUpdate(target, source);
         SetProductProperties(target, source);
-        contentService.Save(target);
         scope.Complete();
     }
 
