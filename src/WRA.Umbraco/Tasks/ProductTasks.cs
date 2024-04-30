@@ -135,8 +135,9 @@ public class ProductTasks(
                 logger.LogInformation("No event data for product {Sku}", p.Sku);
                 continue;
             };
-            BackgroundJob.Enqueue(() => wraProductManagementService.CreateOrUpdate(productEvent));
-            // await wraProductManagementService.CreateOrUpdate(productEvent);
+            // BackgroundJob.Enqueue(() => wraProductManagementService.CreateOrUpdate(productEvent));
+            await wraProductManagementService.CreateOrUpdate(productEvent);
+            logger.LogInformation("Product {Sku} - {Name} synced", p.Sku, p.Name);
         }
 
         scope.Complete();

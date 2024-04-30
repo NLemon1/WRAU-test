@@ -66,6 +66,7 @@ public class WraProductManagementService(
 
             // save and publish the product! Wow!
             contentService.SaveAndPublish(newProductPage);
+            logger.LogInformation("Product created: {Name} - {Sku}", newProductPage.GetValue(GlobalAliases.Sku), newProductPage.Name );
             scope.Complete();
             return newProductPage;
 
