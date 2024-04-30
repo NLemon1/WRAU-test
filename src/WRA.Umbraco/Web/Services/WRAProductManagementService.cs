@@ -23,7 +23,7 @@ public class WraProductManagementService(
     {
         try
         {
-            using var scope = scopeProvider.CreateCoreScope(autoComplete: true);
+            using var scope = scopeProvider.CreateCoreScope();
 
             // get content cache
             var umbracoContextReference = umbracoContextFactory.EnsureUmbracoContext();
@@ -97,6 +97,7 @@ public class WraProductManagementService(
 
             // set properties on our product
             if (productContent != null) productHelper.SetProperties(productContent, product);
+            contentService.SaveAndPublish(productContent);
             scope.Complete();
             return productContent;
         }
