@@ -6,27 +6,6 @@
     string testPublicKey = "pkapi_cert_bMg2WpUw7FzvNMaZZF";
 }
 
-@* <div class="mb-5">
-    <div class="row g-2">
-        <div class="col-12">
-            <label for="payment-card-name" class="visually-hidden">Name on card</label>
-            <input id="payment-card-name" class="form-control" type="text" required placeholder="Name on card" />
-        </div>
-        <div class="col-12">
-            <label for="payment-card-number" class="visually-hidden">Card Number</label>
-            <input id="payment-card-numbe1r" class="form-control" type="text" required placeholder="Card Number" />
-        </div>
-        <div class="col-12 col-md-6">
-            <label for="payment-card-expiration" class="visually-hidden">Expiration date</label>
-            <input id="payment-card-expiration" class="form-control" type="text" required placeholder="Expiration date (MM / YY)" />
-        </div>
-        <div class="col-12 col-md-6">
-            <label for="payment-card-code" class="visually-hidden">Security code</label>
-            <input id="payment-card-code" class="form-control" type="text" required placeholder="Security code" />
-        </div>
-    </div>
-</div> *@
-
 <div id="payment-card-number"       class="w-100 px-1"></div>
 <div id="payment-card-name"         class="w-100 px-1"></div>
 <div id="payment-card-expiration"   class="w-50  px-1"></div>
@@ -36,6 +15,14 @@
 <style>
     #payment-form iframe {
         width: 100%;
+    }
+
+    #credit-card-submit {
+        text-align: center;
+    }
+
+    #credit-card-submit iframe {
+        width: auto;
     }
 </style>
 
@@ -66,7 +53,7 @@
                 target: "#payment-card-code"
             },
             "submit": {
-                value: "Submit",
+                value: "Verify Payment",
                 target: "#credit-card-submit"
             }
         },
@@ -79,39 +66,55 @@
                 'font-family': 'Inter, sans-serif',
                 'font-size': '16px',
                 'color': '#050f1e'
+            },
+            'button': {
+                'margin-top': '16px !important',
+                'padding': '1.125rem 1.75rem',
+                'border': '0',
+                'border-radius': '4px',
+                'background-color': '#2560b9',
+                'font-family': 'Poppins, sans-serif',
+                'font-weight': '600',
+                'text-transform': 'uppercase',
+                'letter-spacing': '0.03rem',
+                'color': 'white',
+                'cursor': 'pointer',
+                'transition-property': 'border-radius, background-color, color',
+                'transition-duration': '300ms',
+                'transition-timing-function': 'ease-in-out'
+            },
+            'button:focus,button:hover': {
+                'border-radius': '40px',
+                'background-color': '#ffc672',
+                'color': '#050f1e'
             }
         }
     });
 
-    cardForm.on("token-error", (resp) => {
-        // show error to the consumer
-    });
-
-    // form-level event handlers. examples:
     cardForm.ready(() => {
-        console.log("Registration of all credit card fields occurred");
+        //
     });
 
-    cardForm.on("token-success", (resp) => {
-        // add payment token to form as a hidden input
-        //const token = document.createElement("input");
-        const token = document.getElementById("token");
-        //token.type = "hidden";
-        //token.name = "paymentToken";
+    cardForm.on('token-success', (resp) => {
+        const token = document.getElementById('token');
+        const message = document.querySelector('.js-payment-message');
+        const submitBtn = document.querySelector('.js-payment-validation');
+
         token.value = resp.paymentReference;
-        //alert('Here is a single-use token: ' + token.value);
-        // submit data to the integration's backend for processing
-        const form = document.getElementById("payment-form");
-        //form.submit();
-    });
-    cardForm.on("token-error", (resp) => {
-        // show error to the consumer
-        alert('There was an error: ' + resp.error.message);
+
+        message.classList.remove('d-none');
+        message.textContent = 'Payment validated!';
+
+        submitBtn.removeAttribute('disabled');
     });
 
-    // field-level event handlers. example:
-    cardForm.on("card-number", "register", () => {
-        console.log("Registration of Card Number occurred");
+    cardForm.on('token-error', (resp) => {
+        const message = document.querySelector('.js-payment-message');
+
+        message.classList.remove('d-none');
+        message.textContent = 'Payment not valid!';
     });
+
+
 </script>
 

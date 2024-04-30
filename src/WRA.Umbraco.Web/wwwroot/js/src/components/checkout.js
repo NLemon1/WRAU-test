@@ -39,16 +39,18 @@ const checkout = () => {
 
     ///
 
-    const billingAddressRadio = document.querySelector('.js-alt-billing-address');
-    const billingAddressFields = document.querySelector('.js-alt-billing-address-fields');
+    const billingAddressRadios = document.querySelectorAll('.js-billing-address');
+    const billingAddressFields = document.querySelector('.js-billing-address-fields');
 
-    if (billingAddressRadio) {
-        billingAddressRadio.addEventListener('change', (e) => {
-            if (billingAddressRadio.checked) {
-                billingAddressFields.classList.remove('d-none');
-            } else {
-                billingAddressFields.classList.add('d-none');
-            }
+    if (billingAddressRadios.length) {
+        billingAddressRadios.forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                if (e.target.value == 'different') {
+                    billingAddressFields.classList.remove('d-none');
+                } else {
+                    billingAddressFields.classList.add('d-none');
+                }
+            });
         });
     }
 }
