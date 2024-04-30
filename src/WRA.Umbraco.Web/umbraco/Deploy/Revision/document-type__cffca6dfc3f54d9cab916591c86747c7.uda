@@ -72,6 +72,14 @@
           "Mandatory": true,
           "Name": "Image (desktop)",
           "SortOrder": 7
+        },
+        {
+          "Key": "cb6c9d63-1d28-407d-b086-1f14695b8deb",
+          "Alias": "courseSearchCategories",
+          "DataType": "umb://data-type/b14e9ec8d3fb47ebb062545f97d74e2f",
+          "Description": "Select Categories and Subcategories to populate if \"Show Course Search\" is enabled.",
+          "Name": "Course Categories",
+          "SortOrder": 5
         }
       ]
     }
@@ -97,6 +105,10 @@
     },
     {
       "Udi": "umb://data-type/ad9f0cf2bda245d59ea1a63cfc873fd3",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/b14e9ec8d3fb47ebb062545f97d74e2f",
       "Ordering": true
     },
     {
