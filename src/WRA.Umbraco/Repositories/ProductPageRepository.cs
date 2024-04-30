@@ -21,11 +21,13 @@ public class ProductPageRepository(
 {
     private CurrencyReadOnly GetCurrency(Guid storeId) => currencyService.GetCurrencies(storeId).First(c => c.Name == "USD");
 
-    public ProductPage? Get(string sku, IPublishedContentCache contentCache)
+    public ProductPage? Get(string sku)
     {
         try
         {
             using var scope = scopeProvider.CreateCoreScope();
+            var context = contextFactory.EnsureUmbracoContext();
+            var contentCache = context.UmbracoContext.Content;
             var siteRoot = contentCache.GetAtRoot().FirstOrDefault();
 
             var productsPage = siteRoot?.ChildrenOfType(ProductsPage.ModelTypeAlias)?.FirstOrDefault();
@@ -35,6 +37,7 @@ public class ProductPageRepository(
                 scope.Complete();
                 return null;
             }
+
             // search products
 
             var contentType = contentCache.GetContentType(ProductPage.ModelTypeAlias);
@@ -60,6 +63,19 @@ public class ProductPageRepository(
             logger.LogError(ex, "Error getting product: sku - {Sku}", sku);
             throw;
         }
+    }
+
+    public IEnumerable<ProductPage> GetAll()
+    {
+        using var scope = scopeProvider.CreateCoreScope();
+        var context = contextFactory.EnsureUmbracoContext();
+        var contentCache = context.UmbracoContext.Content;
+        var contentType = contentCache.GetContentType(ProductPage.ModelTypeAlias);
+        var allProducts = contentCache.GetByContentType(contentType).OfType<ProductPage>();
+        return allProducts;
+
+
+
     }
 
     public async Task<IContent?> GetByExternalId(Guid externalId)

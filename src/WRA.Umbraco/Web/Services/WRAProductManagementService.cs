@@ -52,7 +52,7 @@ public class WraProductManagementService(
 
             // We have our collection page, so now lets see if it contains a record that already exists...
             // if it returns nothing (no page exists matching the ID from WRA), we create one.
-            var existingProductPage = productPageRepository.Get(productEvent.Sku, contentCache);
+            var existingProductPage = productPageRepository.Get(productEvent.Sku);
             if (existingProductPage != null)
             {
                 scope.Complete();
@@ -91,7 +91,7 @@ public class WraProductManagementService(
                 scope.Complete();
                 return null;
             }
-            var productPage = existingPage ?? productPageRepository.Get(product.Sku, contentCache);
+            var productPage = existingPage ?? productPageRepository.Get(product.Sku);
 
             var productContent = contentService.GetById(productPage.Id);
 

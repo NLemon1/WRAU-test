@@ -1,27 +1,26 @@
 using Microsoft.Extensions.Logging;
 using Umbraco.Cms.Core;
 using Umbraco.Cms.Core.Models.PublishedContent;
-using Umbraco.Cms.Core.Web;
-using Umbraco.Cms.Web.Common;
 using Umbraco.Commerce.Core.Api;
 using Umbraco.Commerce.Core.Models;
 using WRA.Umbraco.Dtos;
 using WRA.Umbraco.Extensions;
 using WRA.Umbraco.Models;
+using WRA.Umbraco.Repositories;
 
 namespace WRA.Umbraco.Web.Services;
 
 public class WraProductService(
     IUmbracoCommerceApi umbracoCommerceApi,
     SearchService searchService,
+    ProductPageRepository productPageRepository,
     ILogger<WraProductService> logger)
 {
     public IEnumerable<ProductPage> GetProducts(ProductsRequestDto request)
     {
         try
         {
-            var products = searchService.Search(ProductPage.ModelTypeAlias)
-                .Select(p => new ProductPage(p.Content, new NoopPublishedValueFallback()));
+            var products = productPageRepository.GetAll();
 
             // first, lets apply the product type filter
             if (!string.IsNullOrEmpty(request.ProductType))
