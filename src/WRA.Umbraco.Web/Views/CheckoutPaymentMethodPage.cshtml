@@ -39,37 +39,24 @@
     <h2 class="h4" style="text-transform: none;">Payment</h2>
     <div class="d-flex flex-wrap mx-n1 mb-5">
         <partial name="Commerce/GlobalPaymentsForm" />
-        @* <div class="row g-2">
-            <div class="col-12">
-                <label for="payment-card-name" class="visually-hidden">Name on card</label>
-                <input id="payment-card-name" class="form-control" type="text" required placeholder="Name on card" />
-            </div>
-            <div class="col-12 col-md-6">
-                <label for="payment-card-expiration" class="visually-hidden">Expiration date</label>
-                <input id="payment-card-expiration" class="form-control" type="text" required placeholder="Expiration date (MM / YY)" />
-            </div>
-            <div class="col-12 col-md-6">
-                <label for="payment-card-code" class="visually-hidden">Security code</label>
-                <input id="payment-card-code" class="form-control" type="text" required placeholder="Security code" />
-            </div>
-        </div> *@
+        <p class="d-none w-100 text-center js-payment-message"></p>
     </div>
 
     <h2 class="h4" style="text-transform: none;">Billing Address</h2>
     <ul class="list-unstyled mb-0">
         <li class="mb-2 border rounded">
             <label class="d-block px-3 py-2">
-                <input class="form-check-input" type="radio" name="ShippingSameAsBilling" value="true" checked required />
+                <input class="form-check-input js-billing-address" type="radio" name="ShippingSameAsBilling" value="true" checked required />
                 <span class="form-check-label ms-2">Billing same as shipping</span>
             </label>
         </li>
         <li class="mb-2 border rounded">
             <label class="d-block px-3 py-2">
-                <input class="form-check-input js-alt-billing-address" type="radio" name="billingAddress" value="different" />
+                <input class="form-check-input js-billing-address" type="radio" name="ShippingSameAsBilling" value="different" />
                 <span class="form-check-label ms-2">Use a different billing address</span>
             </label>
 
-            <div class="d-none mb-3 px-3 js-alt-billing-address-fields">
+            <div class="d-none mb-3 px-3 js-billing-address-fields">
                 <div class="row g-2">
                     <div class="col-12 col-md-6">
                         <label for="billing-address-fname" class="visually-hidden">First name</label>
