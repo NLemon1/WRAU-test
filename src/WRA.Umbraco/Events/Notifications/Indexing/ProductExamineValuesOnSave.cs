@@ -22,7 +22,7 @@ public class ProductExamineValuesOnSave(
     {
         try
         {
-            _logger.LogInformation("Starting examine values transform on SAVE event");
+            // _logger.LogInformation("Starting examine values transform on SAVE event");
             TransformExamineValues transformExamineValues = new(_examineManager, _umbracoContextFactory, _transformExamineLogger);
             transformExamineValues.SetCategoriesOnProducts();
             transformExamineValues.DisposeIfDisposable();
