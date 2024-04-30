@@ -1,4 +1,5 @@
 using System.Text;
+using System.Web;
 using Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Commerce.Core.Api;
@@ -230,7 +231,18 @@ namespace WRA.Umbraco.Extensions
         {
             if (content?.Any() == true)
             {
-                return category.Exists(cat => content.Any(c => c.Name.Equals(cat, StringComparison.OrdinalIgnoreCase)));
+                return category.Exists(cat => content.Any(c =>
+                    c.Name.Equals(HttpUtility.UrlDecode(cat), StringComparison.OrdinalIgnoreCase)));
+            }
+
+            return false;
+        }
+        public static bool ContainsCategories(this IEnumerable<IPublishedContent>? content, List<int> category)
+        {
+            if (content?.Any() == true)
+            {
+                return category.Exists(cat => content.Any(c =>
+                    c.Id.Equals(cat)));
             }
 
             return false;

@@ -4,8 +4,8 @@ namespace WRA.Umbraco.Dtos;
 
 public record ProductsRequestDto(
     string ProductType,
-    List<string> Categories,
-    List<string> SubCategories,
+    List<int> Categories,
+    List<int> SubCategories,
     string Taxonomy,
     Pagination Pagination
 );
