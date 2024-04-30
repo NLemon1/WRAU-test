@@ -25,6 +25,8 @@ public class ProductMapping : IMapDefinition
         productEvent.MemberPrice = content.GetValue<decimal>("memberPrice");
         productEvent.ImageUrl = content.GetValue<string>("imageUrl");
         productEvent.Taxonomy = content.GetValue<string>("taxonomy");
+        productEvent.StartDate = content.GetValue<DateTime>("startDate");
+        productEvent.EndDate = content.GetValue<DateTime>("endDate");
     }
 
     private void DtoToEvent(WraProductDto source, ProductEvent target, MapperContext _)
@@ -43,6 +45,8 @@ public class ProductMapping : IMapDefinition
         target.ProductCategoryId = source.ProductCategoryId;
         target.SubCategory = source.SubCategory;
         target.ProductSubcategoryId = source.ProductSubcategoryId;
+        target.StartDate = source.StartDate;
+        target.EndDate = source.EndDate;
 
 
     }

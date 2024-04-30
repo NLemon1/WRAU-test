@@ -1,10 +1,10 @@
+using Hangfire;
+using Microsoft.Extensions.Logging;
 using Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Core.Models.PublishedContent;
-using Umbraco.Cms.Core.PublishedCache;
 using Umbraco.Cms.Core.Scoping;
 using Umbraco.Cms.Core.Services;
 using Umbraco.Cms.Core.Web;
-using Umbraco.Commerce.Common.Logging;
 using WRA.Umbraco.Dtos;
 using WRA.Umbraco.Models;
 
@@ -19,29 +19,32 @@ public class CompanyRepository(
 {
     public IPublishedContent? GetCompany(Guid? externalCompanyId)
     {
-        if (externalCompanyId == null || externalCompanyId == Guid.Empty)
+        try
         {
-            return null;
+            using var scope = coreScopeProvider.CreateCoreScope(autoComplete: true);
+            if (externalCompanyId == null || externalCompanyId == Guid.Empty)
+            {
+                return null;
+            }
+
+            using var umbracoContextReference = umbracoContextFactory.EnsureUmbracoContext();
+            var contentCache = umbracoContextReference.UmbracoContext.Content;
+
+            var companyType = contentCache.GetContentType(Company.ModelTypeAlias);
+            var companies = contentCache.GetByContentType(companyType);
+            var company = companies.FirstOrDefault(c =>
+                c.Value<Guid>(GlobalAliases.ExternalId).Equals(externalCompanyId));
+
+            return company;
         }
-
-        using var scope = coreScopeProvider.CreateCoreScope();
-        using var umbracoContextReference = umbracoContextFactory.EnsureUmbracoContext();
-        var contentCache = umbracoContextReference.UmbracoContext.Content;
-        var siteRoot = contentCache.GetAtRoot();
-        var home = siteRoot.First();
-
-        var companiesContainer = home.Children.FirstOrDefault(x =>
-            x.ContentType.Alias == Companies.ModelTypeAlias);
-
-        if (companiesContainer == null) return null;
-
-        var company = companiesContainer.Children.FirstOrDefault(x =>
-            x.Value<string>(GlobalAliases.ExternalId)!.Equals(externalCompanyId.ToString()));
-
-        scope.Complete();
-        return company;
+        catch (Exception e)
+        {
+            logger.LogError(e, "Error getting company by external id: {Id}", externalCompanyId);
+            throw;
+        }
     }
 
+    [DisableConcurrentExecution(10)]
     public IContent? CreateOrUpdate(CompanyDto companyDto)
     {
         try
@@ -51,6 +54,8 @@ public class CompanyRepository(
             using var umbracoContextReference = umbracoContextFactory.EnsureUmbracoContext();
             var contentCache = umbracoContextReference.UmbracoContext.Content;
 
+            var companiesPageType = contentCache.GetContentType(Companies.ModelTypeAlias);
+            contentCache.GetByContentType(companiesPageType);
             var siteRoot = contentCache?.GetAtRoot().FirstOrDefault();
             var companiesContainer = siteRoot?.Children
                 .FirstOrDefault(x => x.ContentType.Alias == Companies.ModelTypeAlias);
@@ -67,11 +72,11 @@ public class CompanyRepository(
                 return existingCompanyContent;
             }
 
-            logger.Info("Creating company: {name} - {ExternalId}",
+            logger.LogInformation("Creating company: {name} - {ExternalId}",
                 companyDto.name, companyDto.ExternalId);
             if (string.IsNullOrEmpty(companyDto?.name) || string.IsNullOrEmpty(companyDto?.ExternalId))
             {
-                logger.Error("Company name or externalId is null. Cannot create company.");
+                logger.LogError("Company name or externalId is null. Cannot create company.");
                 scope.Complete();
                 return null;
             }
@@ -85,7 +90,9 @@ public class CompanyRepository(
         }
         catch (System.Exception ex)
         {
-            logger.Error("Error creating company ({name} - {ExternalId}) -> {Message}",
+            logger.LogError(
+                ex,
+                message: "Error creating company ({Name} - {ExternalId}) -> {Message}",
                 companyDto.name, companyDto.ExternalId, ex.Message);
             throw;
         }

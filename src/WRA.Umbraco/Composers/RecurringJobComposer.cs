@@ -3,7 +3,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Umbraco.Cms.Core.Composing;
 using Cultiv.Hangfire;
 using WRA.Umbraco.BackgroundJobs;
-using WRA.Umbraco.Web.Controllers.Api;
 
 namespace WRA.Umbraco.Composers;
 

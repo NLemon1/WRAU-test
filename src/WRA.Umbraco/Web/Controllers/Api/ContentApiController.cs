@@ -14,20 +14,10 @@ namespace WRA.Umbraco.Web.Controllers.Api;
 
 [ApiController]
 [MapToApi("content-api")]
-public class ContentApiController : ApiController
+public class ContentApiController(
+    SearchService searchService)
+    : ApiController
 {
-    private readonly UmbracoHelper _umbracoHelper;
-    private readonly IUmbracoContextAccessor _umbracoContextAccessor;
-    private readonly SearchService _searchService;
-    public ContentApiController(
-        UmbracoHelper umbracoHelper,
-        IUmbracoContextAccessor umbracoContextAccessor,
-        SearchService searchService)
-    {
-        _umbracoHelper = umbracoHelper;
-        _umbracoContextAccessor = umbracoContextAccessor;
-        _searchService = searchService;
-    }
 
     [HttpPost]
     [Route("NewsAndUpdates")]
@@ -150,46 +140,10 @@ public class ContentApiController : ApiController
         }
     }
 
-    // private (List<PlaylistDto>, List<MultimediaDto>) BuildResponseWithPlaylists(
-    //     IEnumerable<IPublishedContent> allMultimediaItems
-    //     )
-    // {
-    //     List<PlaylistDto> playlists = new();
-    //     List<MultimediaDto> multiMediaItems = new();
-    //     // set up a factory to build the response object
-    //     foreach (IPublishedContent mediaItem in allMultimediaItems)
-    //     {
-    //         switch (mediaItem.ContentType.Alias)
-    //         {
-    //             case MultimediaPlaylist.ModelTypeAlias:
-    //                 // get children
-    //                 var playlist = mediaItem as MultimediaPlaylist;
-
-    // // build playlist dto
-    //                 var playlistDto = playlist?.AsDto();
-
-    // // add to response
-    //                 playlists.Add(playlistDto);
-    //                 break;
-    //             case MultimediaItem.ModelTypeAlias:
-    //                 //build multimediaitem dto
-    //                 var multimediaItem = mediaItem as MultimediaItem;
-
-    // // add to response
-    //                 multiMediaItems.Add(multimediaItem.AsDto());
-    //                 break;
-    //             default:
-    //                 continue;
-    //         }
-    //     }
-    //     var orderedPlaylists = playlists.OrderByDescending(p => p.Date).ToList();
-    //     var orderMultimediaItems = multiMediaItems.OrderByDescending(mmi => mmi.Date).ToList();
-    //     return (orderedPlaylists, multiMediaItems);
-    // }
 
     private (IEnumerable<PublishedSearchResult>, int) ConductSearch(string nodeAlias, string searchPhrase = "")
     {
-        var rawResults = _searchService
+        var rawResults = searchService
                     .Search(nodeAlias, searchPhrase);
         return (rawResults, rawResults.Count());
     }
@@ -207,20 +161,4 @@ public class ContentApiController : ApiController
         return subcategories.ContainsAny(requestSubcategories);
     }
 
-    // [HttpPost]
-    // [Route("NewsAndUpdates")]
-    // public IEnumerable<NewsRecordDto> Get(NewsRecordRequest request)
-    // {
-    //     try
-    //     {
-    //         var results = _searchService.Search(request.SearchPhrase, Article.ModelTypeAlias)
-    //             .Select(result => new Article(result.Content, null).AsDto());
-    //         return results;
-    //     }
-    //     catch (System.Exception)
-    //     {
-
-    // throw;
-    //     }
-    // }
 }

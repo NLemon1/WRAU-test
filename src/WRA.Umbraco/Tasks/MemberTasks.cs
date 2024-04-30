@@ -1,4 +1,5 @@
 using System.Text.Json;
+using Hangfire;
 using Microsoft.Extensions.Logging;
 using Umbraco.Cms.Core.Mapping;
 using WRA.Umbraco.Contracts;
@@ -66,7 +67,8 @@ public class MemberTasks(
             if (companies?.Data == null) return false;
             foreach (var company in companies.Data)
             {
-                companyRepository.CreateOrUpdate(company);
+                BackgroundJob.Enqueue(() => companyRepository.CreateOrUpdate(company));
+
             }
 
             return true;
@@ -87,7 +89,7 @@ public class MemberTasks(
 
             foreach (var board in localBoards)
             {
-                await boardRepository.CreateOrUpdateBoard(board);
+                BackgroundJob.Enqueue(() => boardRepository.CreateOrUpdateBoard(board));
             }
 
             return true;
