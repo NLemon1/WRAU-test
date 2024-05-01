@@ -7,7 +7,9 @@
   "Thumbnail": "folder.png",
   "Description": "Date folder used for automatically organizing content into year and month.",
   "Permissions": {
-    "AllowedChildContentTypes": []
+    "AllowedChildContentTypes": [
+      "umb://document-type/021522c72f164bd8b461ab1a1f5c34b8"
+    ]
   },
   "Parent": "umb://document-type-container/5de99ed69c2445159d69e36d531ca63a",
   "CompositionContentTypes": [],
@@ -18,6 +20,9 @@
     {
       "Udi": "umb://document-type-container/5de99ed69c2445159d69e36d531ca63a",
       "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type/021522c72f164bd8b461ab1a1f5c34b8"
     }
   ],
   "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",

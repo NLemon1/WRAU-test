@@ -1,0 +1,24 @@
+{
+  "Name": "Legal Update Topic",
+  "Alias": "legalUpdateTopic",
+  "AllowedTemplates": [],
+  "HistoryCleanup": {},
+  "Icon": "icon-tag color-black",
+  "Thumbnail": "folder.png",
+  "Permissions": {
+    "AllowedChildContentTypes": []
+  },
+  "Parent": "umb://document-type-container/3767e51e2a094bce91970e131b9932f8",
+  "CompositionContentTypes": [],
+  "PropertyGroups": [],
+  "PropertyTypes": [],
+  "Udi": "umb://document-type/c7e68eed5a134e0d9b4e88c6bd701a34",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type-container/3767e51e2a094bce91970e131b9932f8",
+      "Ordering": true
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
+  "__version": "13.1.0"
+}

@@ -1,9 +1,7 @@
 ﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>;
 @using ContentModels = WRA.Umbraco.Models;
 
-<p>legal update library init</p>
-
-@*{
+@{
     var query = Context.Request.Query;
     var content = (ContentModels.HotTipLibrary)Model.Content;
     var categories = UmbracoContext.Content.GetAtRoot().DescendantsOrSelfOfType("hotTipCategory").Where(x => x.IsVisible());
@@ -93,4 +91,4 @@
             </div>
         </div>
     </div>
-</div>*@
+</div>

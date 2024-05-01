@@ -1,0 +1,29 @@
+{
+  "Name": "Legal Update Groups",
+  "Alias": "legalUpdateGroups",
+  "AllowedTemplates": [],
+  "HistoryCleanup": {},
+  "Icon": "icon-folder-outline color-black",
+  "Thumbnail": "folder.png",
+  "Permissions": {
+    "AllowedChildContentTypes": [
+      "umb://document-type/c7e68eed5a134e0d9b4e88c6bd701a34"
+    ]
+  },
+  "Parent": "umb://document-type-container/3767e51e2a094bce91970e131b9932f8",
+  "CompositionContentTypes": [],
+  "PropertyGroups": [],
+  "PropertyTypes": [],
+  "Udi": "umb://document-type/5fd5ab7ecaf348d981a6b643c8b4e17e",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type-container/3767e51e2a094bce91970e131b9932f8",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type/c7e68eed5a134e0d9b4e88c6bd701a34"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
+  "__version": "13.1.0"
+}

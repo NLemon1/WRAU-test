@@ -1,0 +1,20 @@
+{
+  "Name": "Legal Update - Topic(s) - Multinode Treepicker",
+  "Alias": "",
+  "EditorAlias": "Umbraco.MultiNodeTreePicker",
+  "Configuration": {
+    "startNode": {
+      "type": "content",
+      "id": "umb://document/999da2f6cf2d482d94c34ace3a0b3dc0"
+    },
+    "filter": "legalUpdateTopic",
+    "minNumber": 1,
+    "maxNumber": 0,
+    "showOpenButton": false,
+    "ignoreUserStartNodes": false
+  },
+  "Udi": "umb://data-type/29b9be00b1b0495fad94bfa0c3b5f366",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
+  "__version": "13.1.0"
+}
