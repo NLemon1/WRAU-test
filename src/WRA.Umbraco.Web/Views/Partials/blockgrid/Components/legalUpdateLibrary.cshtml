@@ -3,92 +3,80 @@
 
 @{
     var query = Context.Request.Query;
-    var content = (ContentModels.HotTipLibrary)Model.Content;
-    var categories = UmbracoContext.Content.GetAtRoot().DescendantsOrSelfOfType("hotTipCategory").Where(x => x.IsVisible());
+    var legalUpdates = UmbracoContext.Content.GetAtRoot().DescendantsOrSelfOfType("legalUpdates").Where(x => x.IsVisible());
+    var topicGroups = UmbracoContext.Content.GetAtRoot().DescendantsOrSelfOfType("legalUpdateGroups").Where(x => x.IsVisible());
 
-    string selectedCategory = query["category"];
-    string selectedSubcategory = query["subcategory"];
+    string filterType = query["filterType"];
 }
 
 <div class="container">
     <div class="row">
-        <div class="d-lg-none">
-            <div class="mb-3">
-                <label class="visually-hidden" for="hot-tip-category">Select a category</label>
-                <select id="hot-tip-category" class="form-select js-mobile-hot-tip-category">
-                    <option value="">All Categories</option>
-                    @foreach (var category in categories)
-                    {
-                        <!option value="@category.Name" @(selectedCategory == category.Name ? "selected" : "")>@category.Name</!option>
-                    }
-                </select>
-            </div>
-            @if (!String.IsNullOrEmpty(selectedCategory))
+        <div class="col-12 col-lg-3">
+            @if (filterType == "year")
             {
-                var subcategories = UmbracoContext.Content.GetAtRoot().DescendantsOrSelfOfType("hotTipSubcategory").Where(x => x.Parent.Name == selectedCategory).Where(x => x.IsVisible());
+                <h2 class="h3">Years</h2>
+                @foreach (var legalUpdate in legalUpdates)
+                {
+                    var years = UmbracoContext.Content.GetAtRoot().DescendantsOrSelfOfType("dateFolder").Where(x => x.Parent.Name == legalUpdate.Name).Where(x => x.IsVisible());
 
-                <div class="mb-3">
-                    <label class="visually-hidden" for="hot-tip-subcategory">Select a subcategory</label>
-                    <select id="hot-tip-subcategory" class="form-select js-mobile-hot-tip-subcategory">
-                        <option value="">All Subcategories</option>
-                        @foreach (var subcategory in subcategories)
+                    <label for="legal-updates-year-filter" class="visually-hidden">Filter by year</label>
+                    <select id="legal-updates-year-filter" class="form-select">
+                        @foreach (var year in years)
                         {
-                            <!option value="@subcategory.Name" @(selectedSubcategory == subcategory.Name ? "selected" : "")>@subcategory.Name</!option>
+                            <option value="@year.Name">Legal Updates @year.Name</option>
                         }
                     </select>
-                </div>
-            }
-        </div>
-        <div class="d-none d-lg-block col-12 col-lg-3">
-            @if (String.IsNullOrEmpty(selectedCategory))
-            {
-                <h2 class="h3">All Categories</h2>
-                <ul class="list-unstyled">
-                    @foreach (var category in categories)
-                    {
-                        <li class="border-bottom">
-                            <a href="?category=@category.Name" class="d-block py-2" style="text-decoration: none; font-size: 14px;">@category.Name</a>
-                        </li>
-                    }
-                </ul>
+                }
             }
             else
             {
-                var subcategories = UmbracoContext.Content.GetAtRoot().DescendantsOrSelfOfType("hotTipSubcategory").Where(x => x.Parent.Name == selectedCategory).Where(x => x.IsVisible());
-
-                <div class="mb-3">
-                    <a class="d-inline-block mb-3 fs-sm text-body" style="text-decoration: none;" href="@Context.Request.Path">&lt; Clear Filters</a>
-                    <h2 class="h3">@selectedCategory</h2>
-                    @foreach (var subcategory in subcategories)
+                <h2 class="h3">Topics</h2>
+                <div class="accordions-wrapper">
+                    @foreach (var group in topicGroups)
                     {
-                        <div class="form-check py-2 border-bottom fs-sm">
-                            <!input id="subcategory-@subcategory.Id" class="form-check-input js-desktop-subcategory-filter" type="radio" name="hot-tip-subcategory" value="@subcategory.Name" @(selectedSubcategory == subcategory.Name ? "checked" : "")/>
-                            <label for="subcategory-@subcategory.Id" class="form-check-label">
-                                @subcategory.Name
-                            </label>
-                        </div>
+                        var topics = UmbracoContext.Content.GetAtRoot().DescendantsOrSelfOfType("legalUpdateTopic").Where(x => x.Parent.Name == group.Name).Where(x => x.IsVisible());
+
+                        <details class="accordion border-bottom">
+                            <summary class="accordion__toggle">
+                                @group.Name
+                                <div class="accordion__toggle-icon">
+                                    <i class="fas fa-chevron-down"></i>
+                                    <i class="fas fa-chevron-up"></i>
+                                </div>
+                            </summary>
+                            <div class="accordion__content pb-0">
+                                @foreach (var topic in topics)
+                                {
+                                    <div class="form-check py-2 border-top fs-sm">
+                                        <!input id="@group.Name-@topic.Name" class="form-check-input" type="radio" name="legal-update-topic" value="@topic.Name" />
+                                        <label for="@group.Name-@topic.Name" class="form-check-label">
+                                            @topic.Name
+                                        </label>
+                                    </div>
+                                }
+                            </div>
+                        </details>
                     }
                 </div>
             }
-            <div class="px-4 py-3 bg-tertiary">
-                <a class="btn btn-primary btn-sm w-100" href="@(Context.Request.Path + "question-form/")">Submit a Question</a>
-            </div>
         </div>
-        <div class="col-12 col-lg-8 offset-lg-1">
-            <div class="js-hot-tip-list">
-                <div class="pb-5 pb-lg-10 text-center">
-                    <div class="spinner-border" role="status">
-                        <span class="visually-hidden">Loading...</span>
+        <div class="col-12 col-lg-9">
+            @for (var i = 1; i <= 5; i++)
+            {
+                <div class="mb-4 p-4 bg-light">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <strong>June 2022 Legal Update: Trust Accounts: Unclaimed Earnest Money</strong>
+                        <strong class="fs-xs">
+                            Published <time datetime="2023-10-09">10/9/2023</time>
+                        </strong>
                     </div>
+                    <div class="my-2 fs-sm">
+                        Acceptance, Addendum to Listing Contract, Agency, Broker Responsibilities under WI Law, Buyer Agency, Code of Ethics, Designated Agency, Duties Owed by Brokers, Earnest Money, Email Issues , Email Issues, Fair Housing Law, Forms, Forms Revisions, Listing Protection, Real Estate Condition Report, Residential Listing Contract, Sex Offenders, Termination of Agency Relationships, WB-36, Acceptance, Addendum to Listing Contract, Agency, Broker Responsibilities under WI Law, Buyer Agency, Code of Ethics, Designated Agency, Duties Owed by Brokers, Earnest Money, Email Issues , Email Issues, Fair Housing Law, Forms, Forms Revisions, Listing Protection, Real Estate Condition Report, Residential Listing Contract, Sex Offenders, Termination of Agency Relationships, WB-36
+                    </div>
+                    <a class="text-decoration-none fw-bold" href="#">View PDF</a>
                 </div>
-            </div>
-            <nav class="d-flex align-items-center justify-content-center" aria-label="Pagination">
-                <ul class="js-hot-tip-list-pagination search-pagination list-unstyled d-inline-flex gap-2 mx-2 mb-0"></ul>
-            </nav>
-            <div class="d-flex flex-column flex-lg-row align-items-center justify-content-between px-4 py-3 px-lg-6 py-lg-5 bg-tertiary fw-semibold">
-                <strong>Can't find what you're looking for?</strong>
-                <a class="btn btn-primary btn-sm mt-3 mt-lg-0" href="@(Context.Request.Path + "question-form/")">Submit a Question</a>
-            </div>
+            }
+            <p class="text-center">pagination to do</p>
         </div>
     </div>
 </div>
