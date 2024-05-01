@@ -7822,9 +7822,10 @@
       }
     };
     const formatDateTime = (startDate, endDate, startTime, endTime) => {
+      console.log(startDate, endDate, startTime, endTime);
       let dateString = startDate;
       if (startDate != endDate) {
-        dateString += `<span>${endDate}</span>`;
+        dateString += ` &ndash; <span>${endDate}</span>`;
       }
       dateString += "&nbsp;&nbsp;";
       dateString += ` <span class="fw-normal">${startTime}</span>`;
