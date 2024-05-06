@@ -49,7 +49,7 @@ public class MemberHelper(
 
     private void SetCompanyOnMember(IMember member, MemberEvent memberEvent)
     {
-        var company = companyRepository.GetCompany(memberEvent.CompanyId);
+        var company = companyRepository.GetByExternalId(memberEvent.CompanyId);
         if (company != null)
         {
             member.SetValue(GlobalAliases.Company, company.GetUdi());

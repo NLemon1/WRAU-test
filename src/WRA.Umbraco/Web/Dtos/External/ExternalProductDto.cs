@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace WRA.Umbraco.Web.Dtos.WraExternal;
+namespace WRA.Umbraco.Web.Dtos.External;
 
 public class ProductStage
 {
@@ -14,7 +14,7 @@ public class ProductStage
     public string Description { get; set; }
 }
 
-public class WraProductDto
+public class ExternalProductDto
 {
     [JsonPropertyName("id")]
     public Guid Id { get; set; }

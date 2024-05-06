@@ -1,3 +1,4 @@
+using GlobalPayments.Api.Terminals.PAX;
 using RestSharp;
 using WRA.Umbraco.Configuration;
 
@@ -92,6 +93,28 @@ public class WraExternalApiService(WraExternalApiSettings settings)
         var request = new RestRequest("company/search").AddBody(new { keyword = string.Empty, pageSize = amount, pageNumber = 1 });
         request.AddHeader(settings.ApiKeyHeader, settings.ApiKey);
         var response = await client.PostAsync(request);
+
+        return response;
+    }
+
+    public async Task<RestResponse> GetMemberSubscriptions()
+    {
+        var options = new RestClientOptions(settings.VersionedBaseUrl);
+        var client = new RestClient(options);
+        var request = new RestRequest("membersubscription");
+        request.AddHeader(settings.ApiKeyHeader, settings.ApiKey);
+        var response = await client.GetAsync(request);
+
+        return response;
+    }
+
+    public async Task<RestResponse> GetCompanySubscriptions()
+    {
+        var options = new RestClientOptions(settings.VersionedBaseUrl);
+        var client = new RestClient(options);
+        var request = new RestRequest("companysubscription");
+        request.AddHeader(settings.ApiKeyHeader, settings.ApiKey);
+        var response = await client.GetAsync(request);
 
         return response;
     }

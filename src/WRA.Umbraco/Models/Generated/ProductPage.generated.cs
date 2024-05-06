@@ -96,6 +96,14 @@ namespace WRA.Umbraco.Models
 		public virtual global::System.DateTime EndDate => this.Value<global::System.DateTime>(_publishedValueFallback, "endDate");
 
 		///<summary>
+		/// ExternalId
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.3.0+a325ba3")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("externalId")]
+		public virtual string ExternalId => this.Value<string>(_publishedValueFallback, "externalId");
+
+		///<summary>
 		/// Images
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.3.0+a325ba3")]

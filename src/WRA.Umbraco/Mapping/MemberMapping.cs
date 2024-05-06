@@ -1,31 +1,31 @@
 using Microsoft.Extensions.Logging;
 using Umbraco.Cms.Core.Mapping;
 using Umbraco.Cms.Core.Models;
-using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Cms.Core.Web;
 using WRA.Umbraco.Contracts;
-using WRA.Umbraco.Dtos;
 using WRA.Umbraco.Exceptions;
 using WRA.Umbraco.Extensions;
 using WRA.Umbraco.Repositories;
+using WRA.Umbraco.Web.Dtos.External;
 
 namespace WRA.Umbraco.Mapping;
 
 public class MemberMapping(
     IUmbracoContextFactory umbracoContextFactory,
     MemberGroupRepository memberGroupRepository,
+    MappingHelper mappingHelper,
     ILogger<MemberMapping> logger) : IMapDefinition
 {
     public void DefineMaps(IUmbracoMapper mapper)
     {
         // Dtos
-        mapper.Define<MemberEvent, MemberDto>((_, _) => new MemberDto(), MemberToDto);
-        mapper.Define<IMember, MemberDto>((_, _) => new MemberDto(), PublishedContentToMemberDto);
-        mapper.Define<Models.Member, MemberDto>((_, _) => new MemberDto(), UmbracoMemberToMemberDto);
+        mapper.Define<MemberEvent, ExternalMemberDto>((_, _) => new ExternalMemberDto(), MemberToDto);
+        mapper.Define<IMember, ExternalMemberDto>((_, _) => new ExternalMemberDto(), PublishedContentToMemberDto);
+        mapper.Define<Models.Member, ExternalMemberDto>((_, _) => new ExternalMemberDto(), UmbracoMemberToMemberDto);
 
         // Events
         mapper.Define<IMember, MemberEvent>((_, _) => new MemberEvent(), PublishedContentToMemberEvent);
-        mapper.Define<MemberDto, MemberEvent>((_, _) => new MemberEvent(), DtoToMember);
+        mapper.Define<ExternalMemberDto, MemberEvent>((_, _) => new MemberEvent(), DtoToMember);
     }
 
     private void PublishedContentToMemberEvent(IMember source, MemberEvent target, MapperContext context)
@@ -58,8 +58,8 @@ public class MemberMapping(
         target.CellPhone = source.GetValue<string>("cellPhone") ?? string.Empty;
         target.MemberTypeId = source.GetValue<string>("memberTypeId").SafeGuid();
         target.ImageUrl = source.GetValue<string>("imageUrl") ?? string.Empty;
-        target.CompanyId = GetRelatedContentOnMember(source, "company")?.Value(GlobalAliases.ExternalId).SafeGuid();
-        target.PrimaryLocalBoardId = GetRelatedContentOnMember(source, "primaryLocalBoard")?.Value(GlobalAliases.ExternalId).SafeGuid(); // is this correct?
+        target.CompanyId = mappingHelper.GetRelatedContent(source, "company")?.Value(GlobalAliases.ExternalId).SafeGuid();
+        target.PrimaryLocalBoardId = mappingHelper.GetRelatedContent(source, "primaryLocalBoard")?.Value(GlobalAliases.ExternalId).SafeGuid(); // is this correct?
         target.MemberTypeId = GetMemberGroupKey(source);
 
     }
@@ -70,18 +70,7 @@ public class MemberMapping(
         return memberGroups?.FirstOrDefault().Key ?? Guid.Empty;
     }
 
-    private IPublishedContent? GetRelatedContentOnMember(IContentBase source, string alias)
-    {
-
-        using var umbracoContextReference = umbracoContextFactory.EnsureUmbracoContext();
-        var contentQuery = umbracoContextReference.UmbracoContext.Content;
-        string? content = source.GetValue<string>(alias);
-        if (string.IsNullOrEmpty(content)) return null;
-        var companyUdi = content.GetUdi();
-        var contentNode = contentQuery.GetById(companyUdi);
-        return contentNode;
-    }
-    private void UmbracoMemberToMemberDto(Models.Member source, MemberDto target, MapperContext context)
+    private void UmbracoMemberToMemberDto(Models.Member source, ExternalMemberDto target, MapperContext context)
     {
         try
         {
@@ -127,7 +116,7 @@ public class MemberMapping(
         }
     }
 
-    private static void PublishedContentToMemberDto(IMember source, MemberDto target, MapperContext context)
+    private static void PublishedContentToMemberDto(IMember source, ExternalMemberDto target, MapperContext context)
     {
         target.ExternalId = source.GetValue<string>(GlobalAliases.ExternalId).SafeGuid();
         target.UmbracoId = source.Id.ToString();
@@ -159,7 +148,7 @@ public class MemberMapping(
         target.ImageUrl = source.GetValue<string>("imageUrl") ?? string.Empty;
     }
 
-    private static void DtoToMember(MemberDto source, MemberEvent target, MapperContext context)
+    private static void DtoToMember(ExternalMemberDto source, MemberEvent target, MapperContext context)
     {
         target.Id = source.ExternalId;
         target.NrdsId = source.NRDSId;
@@ -189,7 +178,7 @@ public class MemberMapping(
         target.ImageUrl = source.ImageUrl;
     }
 
-    private static void MemberToDto(MemberEvent source, MemberDto target, MapperContext context)
+    private static void MemberToDto(MemberEvent source, ExternalMemberDto target, MapperContext context)
     {
         target.ExternalId = source.Id;
         target.IMISId = source.iMISId;

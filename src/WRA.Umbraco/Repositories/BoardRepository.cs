@@ -5,6 +5,7 @@ using Umbraco.Cms.Core.Services;
 using Umbraco.Cms.Core.Web;
 using WRA.Umbraco.Dtos;
 using WRA.Umbraco.Models;
+using WRA.Umbraco.Web.Dtos.External;
 
 namespace WRA.Umbraco.Helpers;
 
@@ -14,7 +15,7 @@ public class BoardRepository
     IUmbracoContextFactory umbracoContextFactory,
     ILogger<BoardRepository> logger)
 {
-    public async Task<IContent> CreateOrUpdateBoard(MemberBoardDto mb)
+    public async Task<IContent> CreateOrUpdateBoard(ExternalMemberBoardDto mb)
     {
         try
         {

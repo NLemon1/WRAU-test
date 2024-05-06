@@ -2,7 +2,10 @@
 using Microsoft.Extensions.DependencyInjection;
 using Umbraco.Cms.Core.Composing;
 using Cultiv.Hangfire;
+using Microsoft.Extensions.Configuration;
 using WRA.Umbraco.BackgroundJobs;
+using WRA.Umbraco.Configuration;
+using WRA.Umbraco.Exceptions;
 
 namespace WRA.Umbraco.Composers;
 
@@ -11,13 +14,16 @@ public class RecurringJobComposer : IComposer
 {
     public void Compose(IUmbracoBuilder builder)
     {
-        // TODO set limit at a setting
-        // member sync
+        var recurringJobSettings = builder.Config.GetSection(nameof(RecurringJobSettings)).Get<RecurringJobSettings>()
+                                   ?? throw new ApplicationConfigurationException(nameof(RecurringJobSettings));
+
+        if (recurringJobSettings.DisableJobs) return;
+        bool manual = recurringJobSettings.AllJobsManual;
         builder.Services.AddScoped<MemberTasks>();
         RecurringJob.AddOrUpdate<MemberTasks>(
             "Sync all Member Groups/Types",
             x => x.SyncAllMemberGroups(),
-            Cron.Daily);
+            manual ? Cron.Never : Cron.Daily);
 
         RecurringJob.AddOrUpdate<MemberTasks>(
             "Sync all Members (with companies, boards, and groups)",
@@ -42,7 +48,17 @@ public class RecurringJobComposer : IComposer
         RecurringJob.AddOrUpdate<MemberTasks>(
             "Sync Companies And Boards",
             x => x.SyncCompaniesAndBoards(),
-            Cron.Daily);
+            manual ? Cron.Never : Cron.Daily);
+
+        RecurringJob.AddOrUpdate<MemberTasks>(
+            "Sync all Member Subscriptions",
+            x => x.SyncMemberSubscriptions(),
+            Cron.Never);
+
+        RecurringJob.AddOrUpdate<MemberTasks>(
+            "Sync all Company Subscriptions",
+            x => x.SyncCompanySubscriptions(),
+            Cron.Never);
 
         // product sync
         builder.Services.AddScoped<ProductTasks>();
@@ -73,65 +89,3 @@ public class RecurringJobComposer : IComposer
     }
 }
 
-// public interface IJobs
-// {
-//     void ManipulateContent(PerformContext context);
-// }
-//
-// public class Jobs : IJobs
-// {
-//     private readonly IServiceProvider _serviceProvider;
-//     private readonly IUmbracoContextFactory _umbracoContextFactory;
-//     private readonly IServerMessenger _serverMessenger;
-//     private readonly IContentService _contentService;
-
-    // public Jobs(IServiceProvider serviceProvider,
-    //     IUmbracoContextFactory umbracoContextFactory,
-    //     IServerMessenger serverMessenger,
-    //     IContentService contentService)
-    // {
-    //     _serviceProvider = serviceProvider;
-    //     _umbracoContextFactory = umbracoContextFactory;
-    //     _serverMessenger = serverMessenger;
-    //     _contentService = contentService;
-    // }
-    //
-    // public void ManipulateContent(PerformContext context)
-    // {
-    //     using var backgroundScope = new BackgroundScope(_serverMessenger);
-    //     using var _ = _umbracoContextFactory.EnsureUmbracoContext();
-    //     using var serviceScope = _serviceProvider.CreateScope();
-    //
-    //     var query = serviceScope.ServiceProvider.GetRequiredService<IPublishedContentQuery>();
-    //     var rootNode = query.ContentAtRoot().FirstOrDefault();
-    //
-    //     if (rootNode == null) return;
-    //
-    //     context.WriteLine($"Root node - Id: {rootNode.Id} | Name: {rootNode.Name}");
-    //
-    //     // Do something with ContentService
-    //     var content = _contentService.GetById(rootNode.Id);
-    //     content.Name = "Home " + DateTime.Now.ToUniversalTime();
-    //     _contentService.SaveAndPublish(content);
-    //
-    //     context.WriteLine($"Root node updated - Id: {content.Id} | Name: {content.Name}");
-    // }
-//}
-
-// public class BackgroundScope : IDisposable
-// {
-//     private readonly IServerMessenger _serverMessenger;
-//
-//     public BackgroundScope(IServerMessenger serverMessenger)
-//     {
-//         _serverMessenger = serverMessenger;
-//     }
-//
-//     public void Dispose()
-//     {
-//         if (_serverMessenger is BatchedDatabaseServerMessenger batchedDatabaseServerMessenger)
-//         {
-//             batchedDatabaseServerMessenger.SendMessages();
-//         }
-//     }
-//}

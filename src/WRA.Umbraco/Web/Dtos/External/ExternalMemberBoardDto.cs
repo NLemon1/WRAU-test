@@ -1,8 +1,8 @@
 using System.Text.Json.Serialization;
 
-namespace WRA.Umbraco.Dtos
+namespace WRA.Umbraco.Web.Dtos.External
 {
-    public class MemberBoardDto
+    public class ExternalMemberBoardDto
     {
         [JsonPropertyName("id")]
         public Guid Id { get; set; }

@@ -8,6 +8,7 @@ using Umbraco.Cms.Core.Web;
 using Umbraco.Commerce.Core.Models;
 using Umbraco.Commerce.Core.Services;
 using WRA.Umbraco.Models;
+using WRA.Umbraco.Web.Dtos.External;
 using WRA.Umbraco.Web.Dtos.WraExternal;
 
 namespace WRA.Umbraco.Repositories;
@@ -21,42 +22,21 @@ public class ProductPageRepository(
 {
     private CurrencyReadOnly GetCurrency(Guid storeId) => currencyService.GetCurrencies(storeId).First(c => c.Name == "USD");
 
-    public ProductPage? Get(string sku)
+    public ProductPage? GetBySku(string sku)
     {
         try
         {
-            using var scope = scopeProvider.CreateCoreScope();
+            using var scope = scopeProvider.CreateCoreScope(autoComplete: true);
             var context = contextFactory.EnsureUmbracoContext();
             var contentCache = context.UmbracoContext.Content;
-            var siteRoot = contentCache.GetAtRoot().FirstOrDefault();
+            var productContentType = contentCache.GetContentType(ProductPage.ModelTypeAlias);
+            var productPages = contentCache.GetByContentType(productContentType)
+                .OfType<ProductPage>();
+            var productPage = productPages.FirstOrDefault(p => p.Sku == sku);
+            if (productPage != null) return productPage;
+            logger.LogInformation("Product not found: sku - {Sku}", sku);
+            return null;
 
-            var productsPage = siteRoot?.ChildrenOfType(ProductsPage.ModelTypeAlias)?.FirstOrDefault();
-            if (productsPage == null)
-            {
-                logger.LogError("Products container page not found");
-                scope.Complete();
-                return null;
-            }
-
-            // search products
-
-            var contentType = contentCache.GetContentType(ProductPage.ModelTypeAlias);
-            var allProducts = contentCache.GetByContentType(contentType);
-            var product = allProducts
-                .FirstOrDefault(p =>
-                    p.Value<string>(GlobalAliases.Sku).Trim().Equals(sku.Trim()));
-
-            if (product == null)
-            {
-                logger.LogInformation("Product not found: sku - {Sku}", sku);
-                scope.Complete();
-                return null;
-            }
-
-            // cast as our strongly type product page
-            var productPage = new ProductPage(product, new NoopPublishedValueFallback());
-            scope.Complete();
-            return productPage;
         }
         catch (Exception ex)
         {
@@ -82,13 +62,13 @@ public class ProductPageRepository(
     {
         try
         {
-            using var scope = scopeProvider.CreateCoreScope();
+            using var scope = scopeProvider.CreateCoreScope(autoComplete: true);
             var context = contextFactory.EnsureUmbracoContext();
             var contentCache = context.UmbracoContext.Content;
-            var home = contentCache?.GetAtRoot().FirstOrDefault();
 
-            var productPage = home.ChildrenOfType(ProductPage.ModelTypeAlias)
-                .FirstOrDefault(p => p.Value<Guid>(GlobalAliases.ExternalId).Equals(externalId));
+            var productPageType = contentCache.GetContentType(ProductPage.ModelTypeAlias);
+            var productPage = contentCache.GetByContentType(productPageType)
+                .First(p => p.Value(GlobalAliases.Sku).Equals(externalId));
 
             var productPageContent = contentService.GetById(productPage.Id);
             return productPageContent;
@@ -101,7 +81,7 @@ public class ProductPageRepository(
     }
 
     // TODO move to it's own repository class
-    public async Task<IContent?> CreateProductCollectionPage(ProductCollectionDto productCollection)
+    public async Task<IContent?> CreateProductCollectionPage(ExternalProductCollectionDto productCollection)
     {
         using var scope = scopeProvider.CreateCoreScope();
         var context = contextFactory.EnsureUmbracoContext();

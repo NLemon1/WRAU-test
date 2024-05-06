@@ -7,7 +7,6 @@ using Umbraco.Cms.Core.Web;
 using WRA.Umbraco.Contracts;
 using WRA.Umbraco.Services.Caching;
 using System.Text.Json;
-using NUglify.Helpers;
 using Umbraco.Cms.Core.Scoping;
 using Umbraco.Commerce.Core.Models;
 using Umbraco.Commerce.Core.Services;
@@ -83,6 +82,8 @@ public class ProductHelper(
 
         content.SetValue("price", basePrice);
         content.SetValue("memberPrice", memberPrice);
+        content.SetValue(GlobalAliases.ExternalId, productEvent.Id);
+        content.Name = productEvent.Name;
     }
 
     private (IPublishedContent? Category, IPublishedContent? SubCategory) GetCategories(Guid categoryId, Guid subCategoryId)

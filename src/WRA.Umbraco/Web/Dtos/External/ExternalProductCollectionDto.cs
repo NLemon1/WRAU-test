@@ -1,6 +1,6 @@
-namespace WRA.Umbraco.Web.Dtos.WraExternal;
+namespace WRA.Umbraco.Web.Dtos.External;
 
-public class ProductCollectionDto
+public class ExternalProductCollectionDto
 {
     public Guid Id { get; set; }
     public string Name { get; set; }

@@ -1,4 +1,5 @@
-﻿using MassTransit;
+﻿using Azure.Messaging.ServiceBus.Administration;
+using MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Umbraco.Cms.Core.Composing;
@@ -62,6 +63,11 @@ public class MassTransitComposer : IComposer
                     // Configure the member subscription endpoint.
                     cfg.SubscriptionEndpoint<EntityEvent<MemberEvent>>(subscriptionNameGenerator.GetSubscriptionName<EntityEvent<MemberEvent>>(), e =>
                     {
+                        e.Rule = new CreateRuleOptions
+                        {
+                            Name = $"Filter{settings.BusEventSource}Events",
+                            Filter = new SqlRuleFilter($"{nameof(EntityEvent<MemberEvent>.Source)} <> '{settings.BusEventSource}' AND {nameof(EntityEvent<MemberEvent>.Originator)} <> '{settings.BusEventSource}'")
+                        };
                         e.ConfigureConsumer<MemberEntityEventConsumer>(context);
 
                         // Configure rate limiting if enabled for this subscription endpoint.
@@ -82,6 +88,11 @@ public class MassTransitComposer : IComposer
                 {
                     cfg.SubscriptionEndpoint<EntityEvent<ProductEvent>>(subscriptionNameGenerator.GetSubscriptionName<EntityEvent<ProductEvent>>(), e =>
                     {
+                        e.Rule = new CreateRuleOptions
+                        {
+                            Name = $"Filter{settings.BusEventSource}Products",
+                            Filter = new SqlRuleFilter($"{nameof(EntityEvent<ProductEvent>.Source)} <> '{settings.BusEventSource}' AND {nameof(EntityEvent<ProductEvent>.Originator)} <> '{settings.BusEventSource}'")
+                        };
                         e.ConfigureConsumer<ProductEntityEventConsumer>(context, options =>
                         {
                             options.UseMessageRetry(r => r.Interval(5, 400).Handle<TransientException>());

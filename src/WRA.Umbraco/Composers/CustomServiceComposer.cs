@@ -36,6 +36,7 @@ public class CustomServiceComposer : IComposer
         builder.Services.AddScoped<ProductHelper>();
         builder.Services.AddScoped<CategoryHelper>();
         builder.Services.AddScoped<MappingHelper>();
+        builder.Services.AddScoped<SubscriptionHelper>();
 
         // Register the WRA external API service as scoped (one instance per request).
         builder.Services.AddScoped<WraMemberManagementService>();
@@ -55,10 +56,12 @@ public class CustomServiceComposer : IComposer
         builder.Services.AddTransient<BoardRepository>();
         builder.Services.AddTransient<ProductPageRepository>();
         builder.Services.AddTransient<MemberRepository>();
-        // builder.Services.AddTransient<SubscriptionRepository>();
         builder.Services.AddTransient<CategoryRepository>();
         builder.Services.AddTransient<MemberGroupRepository>();
-        builder.Services.AddTransient<MemberSubscriptionRepository>();
+        // builder.Services.AddTransient<MemberSubscriptionRepository>();
+
+        // generic repositories
+        builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
         builder.Services.AddTransient<MemberEventPublisher>();
         builder.Services.AddTransient<ProductEventPublisher>();

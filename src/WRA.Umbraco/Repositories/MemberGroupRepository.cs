@@ -3,6 +3,7 @@ using Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Core.Scoping;
 using Umbraco.Cms.Core.Services;
 using WRA.Umbraco.Web.Dtos;
+using WRA.Umbraco.Web.Dtos.External;
 
 namespace WRA.Umbraco.Repositories;
 
@@ -12,7 +13,7 @@ public class MemberGroupRepository(
     ICoreScopeProvider coreScopeProvider,
     ILogger<MemberGroupRepository> logger)
 {
-    public MemberGroup CreateMemberGroup(MemberGroupDto memberTypeDto)
+    public MemberGroup CreateMemberGroup(ExternalMemberGroupDto memberTypeDto)
     {
         try
         {
@@ -35,7 +36,7 @@ public class MemberGroupRepository(
         }
     }
 
-    public IMemberGroup UpdateMemberGroup(IMemberGroup memberGroup, MemberGroupDto memberGroupDto)
+    public IMemberGroup UpdateMemberGroup(IMemberGroup memberGroup, ExternalMemberGroupDto memberGroupDto)
     {
         try
         {
@@ -55,7 +56,7 @@ public class MemberGroupRepository(
         }
     }
 
-    public IMemberGroup UpdateMemberGroup(MemberGroupDto memberTypeDto)
+    public IMemberGroup UpdateMemberGroup(ExternalMemberGroupDto memberTypeDto)
     {
         var memberGroup = GetMemberGroupByExternalId(memberTypeDto.Id);
         return memberGroup == null ? CreateMemberGroup(memberTypeDto) : UpdateMemberGroup(memberGroup, memberTypeDto);

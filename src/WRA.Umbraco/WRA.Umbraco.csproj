@@ -43,11 +43,19 @@
     <PackageReference Include="Umbraco.Commerce.Web" Version="13.1.0" />
     <PackageReference Include="WRA.Umbraco.Contracts" Version="8.1.0" />
     <PackageReference Include="wra.umbraco.shared" Version="8.1.1" />
+    <PackageReference Update="Roslynator.Analyzers" Version="4.12.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
     <Compile Update="Models\Generated\**">
       <NoWarn>1570</NoWarn>
     </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Web\Dtos\Member\" />
   </ItemGroup>
 </Project>

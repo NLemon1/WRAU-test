@@ -4,6 +4,7 @@ using WRA.Umbraco.Contracts.Product;
 using WRA.Umbraco.Dtos;
 using WRA.Umbraco.Extensions;
 using WRA.Umbraco.Helpers;
+using WRA.Umbraco.Web.Dtos.External;
 
 namespace WRA.Umbraco.Mapping;
 
@@ -11,13 +12,13 @@ public class CategoryMapping: IMapDefinition
 {
     public void DefineMaps(IUmbracoMapper mapper)
     {
-        mapper.Define<IContent, ProductCategoryDto>((_, _) => new ProductCategoryDto(), CategoryContentToDto);
+        mapper.Define<IContent, ExternalProductCategoryDto>((_, _) => new ExternalProductCategoryDto(), CategoryContentToDto);
         mapper.Define<IContent, ProductCategoryEvent>((_, _) => new ProductCategoryEvent(), CategoryContentToEvent);
 
-        mapper.Define<ProductCategoryDto, ProductCategoryEvent>((_, _) => new ProductCategoryEvent(), CategoryDtoToEvent);
+        mapper.Define<ExternalProductCategoryDto, ProductCategoryEvent>((_, _) => new ProductCategoryEvent(), CategoryDtoToEvent);
     }
 
-    private void CategoryContentToDto(IContent source, ProductCategoryDto target, MapperContext _)
+    private void CategoryContentToDto(IContent source, ExternalProductCategoryDto target, MapperContext _)
     {
         target.Id = source.GetValue<Guid>(GlobalAliases.ExternalId).SafeGuid();
         target.Name = source.Name;
@@ -30,7 +31,7 @@ public class CategoryMapping: IMapDefinition
         target.Description = source.GetValue<string>("description");
     }
 
-    private void CategoryDtoToEvent (ProductCategoryDto source, ProductCategoryEvent Target, MapperContext _)
+    private void CategoryDtoToEvent (ExternalProductCategoryDto source, ProductCategoryEvent Target, MapperContext _)
     {
         Target.Id = source.Id;
         Target.Name = source.Name;

@@ -1,12 +1,13 @@
+using WRA.Umbraco.Web.Dtos.External;
 using WRA.Umbraco.Web.Dtos.WraExternal;
 
 namespace WRA.Umbraco.Web.Services;
 
 public interface IProductManagementService
 {
-    Task CreateProduct(WraProductDto product);
+    Task CreateProduct(ExternalProductDto product);
 
-    Task UpdateProduct(WraProductDto product);
+    Task UpdateProduct(ExternalProductDto product);
 
-    Task<WraProductDto> GetProduct(string sku);
+    Task<ExternalProductDto> GetProduct(string sku);
 }

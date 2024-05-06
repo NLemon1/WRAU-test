@@ -1,10 +1,7 @@
 using Hangfire;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
-using Umbraco.Cms.Core;
 using Umbraco.Cms.Core.Models;
-using Umbraco.Cms.Core.Models.PublishedContent;
-using Umbraco.Cms.Core.PublishedCache;
 using Umbraco.Cms.Core.Scoping;
 using Umbraco.Cms.Core.Security;
 using Umbraco.Cms.Core.Services;
@@ -13,7 +10,6 @@ using Umbraco.Cms.Web.Website.Models;
 using Umbraco.Commerce.Core.Api;
 using Umbraco.Commerce.Core.Models;
 using WRA.Umbraco.Contracts;
-using WRA.Umbraco.Models;
 
 namespace WRA.Umbraco.Web.Services;
 
@@ -30,7 +26,7 @@ public class WraMemberManagementService(
 {
     private const string DefaultMemberType = "Member";
 
-    [DisableConcurrentExecution(10)]
+    [DisableConcurrentExecution(timeoutInSeconds: 5)]
     public async Task<IMember?> CreateOrUpdate(MemberEvent memberEvent)
     {
         try
@@ -63,7 +59,7 @@ public class WraMemberManagementService(
             memberHelper.SetProperties(newMember, memberEvent);
 
             // since a new member could potentially not exist in WRA's
-            newMember.IsApproved = false;
+            newMember.IsApproved = true;
 
             // Must save here so an ID is assigned to the new member.
             // We need the memberId to create a link to member and memberGroups (roles).
@@ -108,23 +104,23 @@ public class WraMemberManagementService(
     public Task Delete(MemberEvent reqMember)
     {
         // Create a scope
-        using var scope = coreScopeProvider.CreateCoreScope(autoComplete: true);
-
-        // suppress any notification to prevent our listener from firing an "updated member" webhook back at the queue
-        using var _ = scope.Notifications.Suppress();
+        using var scope = coreScopeProvider.CreateCoreScope();
 
         var existingMember = memberService.GetByEmail(reqMember.Email);
         if (existingMember == null)
         {
+            logger.LogInformation("Cannot delete member. Member not found: {Email}", reqMember.Email);
+            scope.Complete();
             return Task.CompletedTask;
         }
 
         memberService.Delete(existingMember);
+        scope.Complete();
         return Task.CompletedTask;
     }
 
 
-    public async Task<(IdentityResult, MemberIdentityUser)> RegisterMember(RegisterModel model, string memberGroup = "Visitor")
+    public async Task<(IdentityResult IdentityResult, MemberIdentityUser MemberIdentityUser)> RegisterMember(RegisterModel model, string memberGroup = "Visitor")
     {
         using var scope = coreScopeProvider.CreateCoreScope(autoComplete: true);
 

@@ -1,19 +1,22 @@
 using NPoco;
 using Umbraco.Cms.Infrastructure.Persistence.DatabaseAnnotations;
 
-namespace WRA.Umbraco.CustomTables;
+namespace WRA.Umbraco.CustomTables.Subscriptions;
 
-[TableName("MemberSubscriptions")]
+[TableName("CompanySubscriptions")]
 [PrimaryKey("Id", AutoIncrement = true)]
 [ExplicitColumns]
-public class MemberSubscription
+public class CompanySubscription : IEntity
 {
     [PrimaryKeyColumn(AutoIncrement = true, IdentitySeed = 1)]
     [Column("Id")]
     public int Id { get; set; }
 
-    [Column("MemberId")]
-    public int MemberId { get; set; }
+    [Column("ExternalId")]
+    public Guid ExternalId { get; set; }
+
+    [Column("CompanyId")]
+    public int CompanyId { get; set; }
 
     [Column("ProductId")]
     public int ProductId { get; set; }
@@ -26,6 +29,4 @@ public class MemberSubscription
 
     [Column("IsActive")]
     public bool IsActive { get; set; }
-
-
 }

@@ -2,34 +2,41 @@ using Umbraco.Cms.Core.Mapping;
 using Umbraco.Cms.Core.Models;
 using WRA.Umbraco.Contracts;
 using WRA.Umbraco.Extensions;
-using WRA.Umbraco.Web.Dtos.WraExternal;
+using WRA.Umbraco.Web.Dtos.External;
 
 namespace WRA.Umbraco.Mapping;
 
-public class ProductMapping : IMapDefinition
+public class ProductMapping(
+    MappingHelper mappingHelper)
+    : IMapDefinition
 {
     public void DefineMaps(IUmbracoMapper mapper)
     {
         // Dtos
         mapper.Define<IContent, ProductEvent>((_, _) => new ProductEvent(), ContentToProductEvent);
-        mapper.Define<WraProductDto, ProductEvent>((_, _) => new ProductEvent(), DtoToEvent);
+        mapper.Define<ExternalProductDto, ProductEvent>((_, _) => new ProductEvent(), DtoToEvent);
     }
 
     private void ContentToProductEvent(IContent content, ProductEvent productEvent, MapperContext _)
     {
         productEvent.Id = content.GetValue<Guid>(GlobalAliases.ExternalId);
-        productEvent.Sku = content.GetValue<string>("sku");
+        productEvent.Sku = content.GetValue<string>(GlobalAliases.Sku);
         productEvent.Name = content.Name;
-        productEvent.Description = content.GetValue<string>("description");
+        productEvent.Description = content.GetValue<string>("description").SafeString();
         productEvent.Price = content.GetValue<decimal>("price");
         productEvent.MemberPrice = content.GetValue<decimal>("memberPrice");
-        productEvent.ImageUrl = content.GetValue<string>("imageUrl");
-        productEvent.Taxonomy = content.GetValue<string>("taxonomy");
-        productEvent.StartDate = GetValidDate(content.GetValue<DateTime>("startDate"));
-        productEvent.EndDate = content.GetValue<DateTime>("endDate");
+        productEvent.ImageUrl = content.GetValue<string>("imageUrl").SafeString();
+        productEvent.Taxonomy = content.GetValue<string>("taxonomy").SafeString();
+        productEvent.EventStartDate = GetValidDate(content.GetValue<DateTime>("startDate"));
+        productEvent.EventEndDate = content.GetValue<DateTime>("endDate");
+        productEvent.ProductCategoryId = mappingHelper.GetExternalIdOnContent(content, "categories").ToString();
+        productEvent.ProductSubcategoryId = mappingHelper.GetExternalIdOnContent(content, "subCategories").ToString();
+        productEvent.ProductTypeId = mappingHelper.GetExternalIdOnParent(content).SafeString();
+
+
     }
 
-    private void DtoToEvent(WraProductDto source, ProductEvent target, MapperContext _)
+    private void DtoToEvent(ExternalProductDto source, ProductEvent target, MapperContext _)
     {
         target.Id = source.Id;
         target.Sku = source.Sku;

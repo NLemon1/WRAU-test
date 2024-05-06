@@ -7,6 +7,7 @@ using Umbraco.Cms.Core.Web;
 using WRA.Umbraco.Dtos;
 using WRA.Umbraco.Extensions;
 using WRA.Umbraco.Models;
+using WRA.Umbraco.Web.Dtos.External;
 
 namespace WRA.Umbraco.Repositories;
 
@@ -16,7 +17,7 @@ public class CategoryRepository(
     IContentService contentService,
     ILogger<CategoryRepository> logger)
 {
-    public async Task<IContent> CreateOrUpdate(ProductCategoryDto categoryInfo)
+    public async Task<IContent> CreateOrUpdate(ExternalProductCategoryDto categoryInfo)
     {
         try
         {
@@ -54,7 +55,7 @@ public class CategoryRepository(
             throw;
         }
     }
-    public async Task<IContent?> CreateOrUpdateSubCategory(ProductSubCategoryDto subCategoryInfo)
+    public async Task<IContent?> CreateOrUpdateSubCategory(ExternalProductSubCategoryDto subCategoryInfo)
     {
         try
         {
@@ -140,13 +141,13 @@ public class CategoryRepository(
         var categories = contentCache.GetByContentType(contentType);
         return categories;
     }
-    private void SetCategoryProperties(IContent content, ProductCategoryDto categoryInfo)
+    private void SetCategoryProperties(IContent content, ExternalProductCategoryDto categoryInfo)
     {
         content.SetValue(GlobalAliases.ExternalId, categoryInfo.Id);
         content.SetValue("description", categoryInfo.Description);
     }
 
-    private void SetSubCategoryProperties(IContent content, ProductSubCategoryDto subCategoryInfo)
+    private void SetSubCategoryProperties(IContent content, ExternalProductSubCategoryDto subCategoryInfo)
     {
         content.SetValue(GlobalAliases.ExternalId, subCategoryInfo.Id);
         content.SetValue("externalCategoryId", subCategoryInfo.ExternalCategoryId);

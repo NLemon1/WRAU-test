@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using Umbraco.Cms.Api.Common.Attributes;
 using Umbraco.Cms.Core.Mapping;
 using WRA.Umbraco.Contracts;
+using WRA.Umbraco.Web.Dtos.External;
 using WRA.Umbraco.Web.Dtos.WraExternal;
 using WRA.Umbraco.Web.Services;
 
@@ -21,7 +22,7 @@ public class ProductSyncApiController(
 {
     [HttpPost]
     [Route("CreateProduct")]
-    public async Task SyncProduct(WraProductDto product)
+    public async Task CreateProduct(ExternalProductDto product)
     {
         var productEvent = mapper.Map<ProductEvent>(product);
         await wraProductManagementService.CreateOrUpdate(productEvent);

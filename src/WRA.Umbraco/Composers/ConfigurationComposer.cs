@@ -35,10 +35,5 @@ public class ConfigurationComposer : IComposer
 
         // Bind external API settings as a singleton (one per application lifetime)
         builder.Services.AddSingleton(externalApiSettings);
-
-        // SiteContentSettings  siteContentSettings = builder.Config.GetSection(nameof(SiteContentSettings)).Get<SiteContentSettings>() ?? throw new ApplicationConfigurationException(nameof(SiteContentSettings));
-
-        // builder.Services.AddSingleton(siteContentSettings);
-
     }
 }

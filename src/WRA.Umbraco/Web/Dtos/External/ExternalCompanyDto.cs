@@ -1,8 +1,8 @@
 using System.Text.Json.Serialization;
 
-namespace WRA.Umbraco.Dtos
+namespace WRA.Umbraco.Web.Dtos.External
 {
-    public class CompanyDto
+    public class ExternalCompanyDto
     {
         [JsonPropertyName("id")]
         public string ExternalId { get; set; }

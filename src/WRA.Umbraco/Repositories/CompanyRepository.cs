@@ -7,6 +7,7 @@ using Umbraco.Cms.Core.Services;
 using Umbraco.Cms.Core.Web;
 using WRA.Umbraco.Dtos;
 using WRA.Umbraco.Models;
+using WRA.Umbraco.Web.Dtos.External;
 
 namespace WRA.Umbraco.Repositories;
 
@@ -17,7 +18,7 @@ public class CompanyRepository(
     IUmbracoContextFactory umbracoContextFactory
     )
 {
-    public IPublishedContent? GetCompany(Guid? externalCompanyId)
+    public IPublishedContent? GetByExternalId(Guid? externalCompanyId)
     {
         try
         {
@@ -45,7 +46,7 @@ public class CompanyRepository(
     }
 
     [DisableConcurrentExecution(10)]
-    public IContent? CreateOrUpdate(CompanyDto companyDto)
+    public IContent? CreateOrUpdate(ExternalCompanyDto companyDto)
     {
         try
         {
@@ -61,7 +62,7 @@ public class CompanyRepository(
                 .FirstOrDefault(x => x.ContentType.Alias == Companies.ModelTypeAlias);
 
             var externalId = Guid.Parse(companyDto.ExternalId);
-            var existingCompany = GetCompany(externalId);
+            var existingCompany = GetByExternalId(externalId);
             if (existingCompany != null)
             {
                 // update the company
@@ -98,7 +99,7 @@ public class CompanyRepository(
         }
     }
 
-    private IContent SetCompanyProperties(IContent company, CompanyDto companyDto)
+    private IContent SetCompanyProperties(IContent company, ExternalCompanyDto companyDto)
     {
         company.SetValue(GlobalAliases.ExternalId, companyDto.ExternalId);
         company.SetValue("organizationCode", companyDto.organizationCode);

@@ -1,5 +1,6 @@
 using Hangfire;
 using Microsoft.Extensions.Logging;
+using Umbraco.Cms.Core.Cache;
 using Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Core.Scoping;
 using Umbraco.Cms.Core.Services;
@@ -18,7 +19,7 @@ public class WraProductManagementService(
     ProductHelper productHelper,
     ProductPageRepository productPageRepository)
 {
-    [DisableConcurrentExecution(10)]
+    [DisableConcurrentExecution(timeoutInSeconds: 5)]
     public async Task<IContent?> CreateOrUpdate(ProductEvent productEvent)
     {
         try
@@ -38,35 +39,37 @@ public class WraProductManagementService(
                 return null;
             }
 
-            var productCollectionPage = contentCache.GetByContentType(productCollectionPageType)?
-                .First(p => p.Value<Guid>(GlobalAliases.ExternalId) == productEvent.ProductTypeId.SafeGuid());
+            var collectionPages = contentCache.GetByContentType(productCollectionPageType);
+
+            var collectionPage = collectionPages.FirstOrDefault(c =>
+                c.Value(GlobalAliases.ExternalId).Equals(productEvent.ProductTypeId));
 
             // collection page doesn't exist and needs to be created
             // maybe exception instead?
-            if (productCollectionPage == null)
+            if (collectionPage == null)
             {
-                logger.LogError("No collection match for {ProductType}", productEvent.ProductType );
+                logger.LogError("No collection match for {ProductType}", productEvent.ProductType);
                 scope.Complete();
                 return null;
             }
 
             // We have our collection page, so now lets see if it contains a record that already exists...
             // if it returns nothing (no page exists matching the ID from WRA), we create one.
-            var existingProductPage = productPageRepository.Get(productEvent.Sku);
+            var existingProductPage = productPageRepository.GetBySku(productEvent.Sku);
             if (existingProductPage != null)
             {
                 scope.Complete();
                 return await Update(productEvent, existingProductPage);
             }
 
-            var newProductPage = contentService.Create(productEvent.Name, productCollectionPage.Id, ProductPage.ModelTypeAlias);
+            var newProductPage = contentService.Create(productEvent.Name, collectionPage.Id, ProductPage.ModelTypeAlias);
 
             // set properties on our product
             productHelper.SetProperties(newProductPage, productEvent);
 
             // save and publish the product! Wow!
             contentService.SaveAndPublish(newProductPage);
-            logger.LogInformation("Product created: {Name} - {Sku}", newProductPage.GetValue(GlobalAliases.Sku), newProductPage.Name );
+            logger.LogInformation("Product created: {Name} - {Sku}", newProductPage.GetValue(GlobalAliases.Sku), newProductPage.Name);
             scope.Complete();
             return newProductPage;
 
@@ -91,15 +94,18 @@ public class WraProductManagementService(
                 scope.Complete();
                 return null;
             }
-            var productPage = existingPage ?? productPageRepository.Get(product.Sku);
+            var productPage = existingPage ?? productPageRepository.GetBySku(product.Sku);
 
             var productContent = contentService.GetById(productPage.Id);
 
             // set properties on our product
-            if (productContent != null) productHelper.SetProperties(productContent, product);
+            if (productContent == null) return null;
+            productHelper.SetProperties(productContent, product);
             contentService.SaveAndPublish(productContent);
+            logger.LogInformation("Updated product: sku - {Sku}", product.Sku);
             scope.Complete();
             return productContent;
+
         }
         catch (Exception e)
         {

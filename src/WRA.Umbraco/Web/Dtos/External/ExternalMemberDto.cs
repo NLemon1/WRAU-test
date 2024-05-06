@@ -1,8 +1,8 @@
 using System.Text.Json.Serialization;
 
-namespace WRA.Umbraco.Dtos;
+namespace WRA.Umbraco.Web.Dtos.External;
 
-public class MemberDto
+public class ExternalMemberDto
 {
     [JsonPropertyName("id")]
     public Guid ExternalId { get; set; }
@@ -19,11 +19,11 @@ public class MemberDto
     [JsonPropertyName("commonId")]
     public int CommonId { get; set; }
 
-    // [JsonPropertyName("passwordHash")]
-    // public string PasswordHash { get; set; }
-    //
-    // [JsonPropertyName("passwordSalt")]
-    // public string PasswordSalt { get; set; }
+    [JsonPropertyName("passwordHash")]
+    public string PasswordHash { get; set; }
+
+    [JsonPropertyName("passwordSalt")]
+    public string PasswordSalt { get; set; }
 
     [JsonPropertyName("userName")]
     public string UserName { get; set; }
@@ -119,16 +119,16 @@ public class MemberDto
     public string CompanyId { get; set; }
 
     [JsonPropertyName("companyName")]
-    public string CompanyName { get; set; }
+    public string? CompanyName { get; set; }
 
     [JsonPropertyName("primaryLocalBoardId")]
     public string PrimaryLocalBoardId { get; set; }
 
     [JsonPropertyName("primaryLocalBoardChapter")]
-    public string PrimaryLocalBoardChapter { get; set; }
+    public string? PrimaryLocalBoardChapter { get; set; }
 
     [JsonPropertyName("primaryLocalBoardName")]
-    public string PrimaryLocalBoardName { get; set; }
+    public string? PrimaryLocalBoardName { get; set; }
 
     [JsonPropertyName("paidThruDate")]
     public DateTime? PaidThruDate { get; set; }

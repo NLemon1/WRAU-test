@@ -81,6 +81,13 @@
       "Alias": "content",
       "PropertyTypes": [
         {
+          "Key": "3440fbea-4605-422d-baf7-ba1850b49ac0",
+          "Alias": "externalId",
+          "DataType": "umb://data-type/f0bc4bfbb49940d6ba86058885a5178c",
+          "Name": "ExternalId",
+          "SortOrder": 9
+        },
+        {
           "Key": "409a21f6-17c9-485d-82eb-fef92dc11d72",
           "Alias": "shortDescription",
           "DataType": "umb://data-type/c6bac0dd4ab945b18e30e4b619ee5da3",

@@ -3,6 +3,7 @@ using Umbraco.Cms.Core.Models;
 using WRA.Umbraco.Contracts.Product;
 using WRA.Umbraco.Dtos;
 using WRA.Umbraco.Services.Caching;
+using WRA.Umbraco.Web.Dtos.External;
 
 namespace WRA.Umbraco.Helpers;
 
@@ -17,12 +18,12 @@ public class CategoryHelper(
         DynamicUpdate(target, source);
         SetProperty(target, GlobalAliases.ExternalId, source.Id);
     }
-    public void SetInitialProperties(IContent content, ProductCategoryDto categoryInfo)
+    public void SetInitialProperties(IContent content, ExternalProductCategoryDto categoryInfo)
     {
         content.SetValue(GlobalAliases.ExternalId, categoryInfo.Id);
         content.SetValue("description", categoryInfo.Description);
     }
-    public void SetSubCategoryProperties(IContent content, ProductSubCategoryDto subCategoryInfo)
+    public void SetSubCategoryProperties(IContent content, ExternalProductSubCategoryDto subCategoryInfo)
     {
         content.SetValue(GlobalAliases.ExternalId, subCategoryInfo.Id);
         content.SetValue("externalCategoryId", subCategoryInfo.ExternalCategoryId);

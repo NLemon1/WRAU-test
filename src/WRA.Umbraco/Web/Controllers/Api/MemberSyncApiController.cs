@@ -4,9 +4,13 @@ using Microsoft.Extensions.Logging;
 using Umbraco.Cms.Api.Common.Attributes;
 using Umbraco.Cms.Core.Mapping;
 using WRA.Umbraco.Contracts;
+using WRA.Umbraco.CustomTables;
+using WRA.Umbraco.CustomTables.Subscriptions;
 using WRA.Umbraco.Dtos;
 using WRA.Umbraco.Repositories;
 using WRA.Umbraco.Web.Dtos;
+using WRA.Umbraco.Web.Dtos.External;
+using WRA.Umbraco.Web.Dtos.WraExternal;
 using WRA.Umbraco.Web.Services;
 
 namespace WRA.Umbraco.Web.Controllers.Api;
@@ -19,7 +23,7 @@ public class MemberSyncApiController(
     BoardRepository boardRepository,
     CompanyRepository companyRepository,
     MemberGroupRepository memberGroupRepository,
-    MemberSubscriptionRepository memberSubscriptionRepository,
+    SubscriptionHelper subscriptionHelper,
     IUmbracoMapper mapper,
     ILogger<MemberSyncApiController> logger)
     : ApiController
@@ -27,7 +31,7 @@ public class MemberSyncApiController(
 
     [HttpPost]
     [Route("Create")]
-    public Task<IActionResult> Create(MemberDto newMemberRequest)
+    public Task<IActionResult> Create(ExternalMemberDto newMemberRequest)
     {
         var memberEvent = mapper.Map<MemberEvent>(newMemberRequest);
         var result = wraMemberManagementService.CreateOrUpdate(memberEvent);
@@ -41,7 +45,7 @@ public class MemberSyncApiController(
 
     [HttpPost]
     [Route("Update")]
-    public Task<IActionResult> Update(MemberDto updateMemberRequest)
+    public Task<IActionResult> Update(ExternalMemberDto updateMemberRequest)
     {
         var memberEvent = mapper.Map<MemberEvent>(updateMemberRequest);
         var result = wraMemberManagementService.Update(memberEvent);
@@ -55,7 +59,7 @@ public class MemberSyncApiController(
 
     [HttpPost]
     [Route("Delete")]
-    public Task<IActionResult> Delete(MemberDto updateMemberRequest)
+    public Task<IActionResult> Delete(ExternalMemberDto updateMemberRequest)
     {
         var memberEvent = mapper.Map<MemberEvent>(updateMemberRequest);
         var result = wraMemberManagementService.Delete(memberEvent);
@@ -64,7 +68,7 @@ public class MemberSyncApiController(
 
     [HttpPost]
     [Route("CreateMemberGroup")]
-    public IActionResult CreateMemberGroup(MemberGroupDto memberTypeDto)
+    public IActionResult CreateMemberGroup(ExternalMemberGroupDto memberTypeDto)
     {
         try
         {
@@ -77,9 +81,10 @@ public class MemberSyncApiController(
             throw;
         }
     }
+
     [HttpPost]
     [Route("UpdateMemberGroup")]
-    public IActionResult UpdateMemberGroup(MemberGroupDto memberTypeDto)
+    public IActionResult UpdateMemberGroup(ExternalMemberGroupDto memberTypeDto)
     {
         try
         {
@@ -92,9 +97,10 @@ public class MemberSyncApiController(
             throw;
         }
     }
+
     [HttpPost]
     [Route("CreateOrUpdateBoard")]
-    public Task<IActionResult> CreateOrUpdateBoard(MemberBoardDto mb)
+    public Task<IActionResult> CreateOrUpdateBoard(ExternalMemberBoardDto mb)
     {
         var result = boardRepository.CreateOrUpdateBoard(mb);
         return Task.FromResult<IActionResult>(Ok(result.Id));
@@ -102,24 +108,51 @@ public class MemberSyncApiController(
 
     [HttpPost]
     [Route("CreateOrUpdateCompany")]
-    public Task<IActionResult> CreateOrUpdateCompany(CompanyDto company)
+    public Task<IActionResult> CreateOrUpdateCompany(ExternalCompanyDto company)
     {
         var result = companyRepository.CreateOrUpdate(company);
         return Task.FromResult<IActionResult>(Ok(result.Id));
     }
 
     [HttpPost]
-    [Route("CreateMemberSubscription")]
-    public Task<IActionResult> CreateMemberSubscription(MemberSubscriptionDto memberSubscriptionDto)
+    [Route("CreateOrUpdateMemberSubscription")]
+    public Task<IActionResult> CreateOrUpdateMemberSubscription(ExternalMemberSubscriptionDto memberSubscriptionDto)
     {
         try
         {
-            memberSubscriptionRepository.Create(memberSubscriptionDto);
-            return Task.FromResult<IActionResult>(Ok());
+            var newMemberSubscription = mapper.Map<MemberSubscription>(memberSubscriptionDto);
+            if (newMemberSubscription == null)
+            {
+                return Task.FromResult<IActionResult>(BadRequest());
+            }
+            subscriptionHelper.CreateOrUpdateMemberSubscription(newMemberSubscription);
+            return Task.FromResult<IActionResult>(Ok(newMemberSubscription.Id));
         }
         catch (Exception e)
         {
             logger.LogError(e, "Error creating member subscription for member {MemberId}", memberSubscriptionDto.MemberId);
+            throw;
+        }
+    }
+
+    [HttpPost]
+    [Route("CreateOrUpdateCompanySubscription")]
+    public Task<IActionResult> CreateOrUpdateCompanySubscription(ExternalCompanySubscriptionDto companySubscriptionDto)
+    {
+        try
+        {
+            var newCompanySubscription = mapper.Map<CompanySubscription>(companySubscriptionDto);
+            if (newCompanySubscription == null)
+            {
+                return Task.FromResult<IActionResult>(BadRequest());
+            }
+
+            subscriptionHelper.CreateOrUpdateCompanySubscription(newCompanySubscription);
+            return Task.FromResult<IActionResult>(Ok(newCompanySubscription.Id));
+        }
+        catch (Exception e)
+        {
+            logger.LogError(e, "Error creating company subscription for company {CompanyId}", companySubscriptionDto.CompanyId);
             throw;
         }
     }

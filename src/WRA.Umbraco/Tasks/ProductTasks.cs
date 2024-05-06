@@ -1,11 +1,13 @@
 using System.Text.Json;
 using Hangfire;
 using Microsoft.Extensions.Logging;
+using Umbraco.Cms.Core.Cache;
 using Umbraco.Cms.Core.Mapping;
 using Umbraco.Cms.Core.Scoping;
 using WRA.Umbraco.Contracts;
 using WRA.Umbraco.Dtos;
 using WRA.Umbraco.Repositories;
+using WRA.Umbraco.Web.Dtos.External;
 using WRA.Umbraco.Web.Dtos.WraExternal;
 using WRA.Umbraco.Web.Services;
 
@@ -16,6 +18,7 @@ public class ProductTasks(
     CategoryRepository categoryRepository,
     ProductPageRepository productPageRepository,
     WraProductManagementService wraProductManagementService,
+    AppCaches appCaches,
     ICoreScopeProvider scopeProvider,
     IUmbracoMapper mapper,
     ILogger<ProductTasks> logger)
@@ -32,7 +35,7 @@ public class ProductTasks(
             var categoriesResp = await externalApiService.GetProductCategories();
             string? categoryContent = categoriesResp.Content;
 
-            var categoriesResponse = JsonSerializer.Deserialize<IEnumerable<ProductCategoryDto>>(categoryContent, SerializationOptions);
+            var categoriesResponse = JsonSerializer.Deserialize<IEnumerable<ExternalProductCategoryDto>>(categoryContent, SerializationOptions);
             foreach (var categoryResponse in categoriesResponse)
             {
                 await categoryRepository.CreateOrUpdate(categoryResponse);
@@ -54,7 +57,7 @@ public class ProductTasks(
             var subCategoriesResp = await externalApiService.GetProductSubCategories();
             string? subCategoryContent = subCategoriesResp.Content;
 
-            var subCategoriesResponse = JsonSerializer.Deserialize<IEnumerable<ProductSubCategoryDto>>(subCategoryContent, SerializationOptions);
+            var subCategoriesResponse = JsonSerializer.Deserialize<IEnumerable<ExternalProductSubCategoryDto>>(subCategoryContent, SerializationOptions);
             foreach (var subCategoryResponse in subCategoriesResponse)
             {
                 await categoryRepository.CreateOrUpdateSubCategory(subCategoryResponse);
@@ -75,7 +78,7 @@ public class ProductTasks(
         {
             var productTypes = await externalApiService.GetProductTypes();
             var productTypeContent = productTypes.Content;
-            var productTypesResponse = JsonSerializer.Deserialize<IEnumerable<ProductCollectionDto>>(productTypeContent, SerializationOptions);
+            var productTypesResponse = JsonSerializer.Deserialize<IEnumerable<ExternalProductCollectionDto>>(productTypeContent, SerializationOptions);
             foreach (var productType in productTypesResponse)
             {
                 await productPageRepository.CreateProductCollectionPage(productType);
@@ -115,15 +118,22 @@ public class ProductTasks(
     {
         using var scope = scopeProvider.CreateCoreScope();
 
+        // Suppress notifications in major sync processes only. This will help prevent concurrent lock errors that can occur
+        // when a long-running process fires off faster than a notification handler can complete.
+        // for example, a lock can occur when a product is updated and index build is kicked off. doing these hundreds
+        // at a time causes a lock. After this process finishes, a manual rebuild of the content cache, and indexes will
+        // be necessary. This is a temporary fix until we can figure out a better way to handle this.
+        scope.Notifications.Suppress();
+
         var productsResp = await externalApiService.GetProducts();
         string? content = productsResp.Content;
 
         if (content == null) return false;
-        var externalProducts = JsonSerializer.Deserialize<List<WraProductDto>>(content, SerializationOptions);
+        var externalProducts = JsonSerializer.Deserialize<List<ExternalProductDto>>(content, SerializationOptions);
 
         foreach (var p in externalProducts)
         {
-            if (p.ProductType == "Discount" )
+            if (p.ProductType == "Discount")
             {
                 logger.LogInformation("Skipping product {Sku} because it is a discount", p.Sku);
                 continue;
@@ -134,8 +144,8 @@ public class ProductTasks(
             {
                 logger.LogInformation("No event data for product {Sku}", p.Sku);
                 continue;
-            };
-            // BackgroundJob.Enqueue(() => wraProductManagementService.CreateOrUpdate(productEvent));
+            }
+
             var result = await wraProductManagementService.CreateOrUpdate(productEvent);
             if (result == null)
             {
@@ -147,6 +157,7 @@ public class ProductTasks(
             }
         }
 
+        appCaches.RuntimeCache.Clear();
         scope.Complete();
         return true;
     }

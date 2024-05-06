@@ -31,7 +31,7 @@ public class ProductEventPublisher(
                 Guid.NewGuid(),
                 Guid.NewGuid());
 
-            if (product != null) await publishEndpoint.Publish(productEntityEvent);
+            await publishEndpoint.Publish(productEntityEvent);
         }
     }
 }

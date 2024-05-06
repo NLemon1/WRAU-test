@@ -1,6 +1,6 @@
-namespace WRA.Umbraco.Web.Dtos;
+namespace WRA.Umbraco.Web.Dtos.External;
 
-public class MemberGroupDto
+public class ExternalMemberGroupDto
 {
     public Guid Id { get; set; }
     public string Type { get; set; }
