@@ -2,6 +2,7 @@
 using MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Umbraco.Cms.Core.Composing;
 using WRA.Umbraco.Contracts;
 using WRA.Umbraco.Events.Consumers;
@@ -16,12 +17,12 @@ public class MassTransitComposer : IComposer
 {
     public void Compose(IUmbracoBuilder builder)
     {
+        var logger = builder.BuilderLoggerFactory.CreateLogger<MassTransitComposer>();
         // Retrieve messaging settings
         var settings = builder.Config.GetSection(nameof(MessagingSettings)).Get<MessagingSettings>() ?? throw new ApplicationConfigurationException(nameof(MessagingSettings));
 
         // Bind messaging settings to a singleton
         builder.Services.AddSingleton(settings);
-
         builder.Services.AddMassTransit(x =>
         {
             // Use kebab-case for endpoint names.
@@ -29,15 +30,18 @@ public class MassTransitComposer : IComposer
 
             var memberEndPointSettings = settings.GetEndPointSettings(nameof(MemberEvent));
             var productEndpointSettings = settings.GetEndPointSettings(nameof(ProductEvent));
+            if (!settings.Enabled) return;
 
             // Add the member update consumer if enabled in settings.
             if (memberEndPointSettings is { Enabled: true })
             {
+                logger.LogInformation("Member Consumer Enabled. Adding Consumer...");
                 x.AddConsumer<MemberEntityEventConsumer>();
             }
 
             if (productEndpointSettings is { Enabled: true })
             {
+                logger.LogInformation("Product Consumer Enabled. Adding Consumer...");
                 x.AddConsumer<ProductEntityEventConsumer>();
             }
 
@@ -47,10 +51,13 @@ public class MassTransitComposer : IComposer
                 cfg.Host(settings.BusConnectionString);
 
                 // Message retry settings.
-                cfg.UseMessageRetry(r => r.Interval(settings.GlobalRetryCount, TimeSpan.FromSeconds(settings.GlobalRetryDelaySeconds)));
+                cfg.UseMessageRetry(r => r.Interval(settings.GlobalRetryCount,
+                    TimeSpan.FromSeconds(settings.GlobalRetryDelaySeconds)));
 
                 // Scheduler Redelivery timing.
-                cfg.UseScheduledRedelivery(r => r.Intervals(settings.SchedulerRetryDelaySeconds.Select(z => TimeSpan.FromMinutes(z)).ToArray()));
+                cfg.UseScheduledRedelivery(r =>
+                    r.Intervals(settings.SchedulerRetryDelaySeconds.Select(z => TimeSpan.FromMinutes(z))
+                        .ToArray()));
 
                 // Use configured message scheduler.
                 cfg.UseMessageScheduler(settings.GetSchedulerSendEndpointUri());
@@ -61,55 +68,64 @@ public class MassTransitComposer : IComposer
                 if (memberEndPointSettings is { Enabled: true })
                 {
                     // Configure the member subscription endpoint.
-                    cfg.SubscriptionEndpoint<EntityEvent<MemberEvent>>(subscriptionNameGenerator.GetSubscriptionName<EntityEvent<MemberEvent>>(), e =>
-                    {
-                        e.Rule = new CreateRuleOptions
+                    cfg.SubscriptionEndpoint<EntityEvent<MemberEvent>>(
+                        subscriptionNameGenerator.GetSubscriptionName<EntityEvent<MemberEvent>>(), e =>
                         {
-                            Name = $"Filter{settings.BusEventSource}Events",
-                            Filter = new SqlRuleFilter($"{nameof(EntityEvent<MemberEvent>.Source)} <> '{settings.BusEventSource}' AND {nameof(EntityEvent<MemberEvent>.Originator)} <> '{settings.BusEventSource}'")
-                        };
-                        e.ConfigureConsumer<MemberEntityEventConsumer>(context);
+                            e.Rule = new CreateRuleOptions
+                            {
+                                Name = $"Filter{settings.BusEventSource}Events",
+                                Filter = new SqlRuleFilter(
+                                    $"{nameof(EntityEvent<MemberEvent>.Source)} <> '{settings.BusEventSource}' AND {nameof(EntityEvent<MemberEvent>.Originator)} <> '{settings.BusEventSource}'")
+                            };
+                            e.ConfigureConsumer<MemberEntityEventConsumer>(context);
 
-                        // Configure rate limiting if enabled for this subscription endpoint.
-                        if (memberEndPointSettings.RateLimitSettings is { Enabled: true })
-                        {
-                            e.UseRateLimit(memberEndPointSettings.RateLimitSettings.RateLimit, TimeSpan.FromSeconds(memberEndPointSettings.RateLimitSettings.IntervalSeconds));
-                        }
+                            // Configure rate limiting if enabled for this subscription endpoint.
+                            if (memberEndPointSettings.RateLimitSettings is { Enabled: true })
+                            {
+                                e.UseRateLimit(memberEndPointSettings.RateLimitSettings.RateLimit,
+                                    TimeSpan.FromSeconds(memberEndPointSettings.RateLimitSettings.IntervalSeconds));
+                            }
 
-                        // Configure concurrency limit if enabled for this subscription endpoint.
-                        if (memberEndPointSettings.ConcurrencyLimitSettings is { Enabled: true })
-                        {
-                            e.UseConcurrencyLimit(memberEndPointSettings.ConcurrencyLimitSettings.ConcurrencyLimit);
-                        }
-                    });
+                            // Configure concurrency limit if enabled for this subscription endpoint.
+                            if (memberEndPointSettings.ConcurrencyLimitSettings is { Enabled: true })
+                            {
+                                e.UseConcurrencyLimit(memberEndPointSettings.ConcurrencyLimitSettings
+                                    .ConcurrencyLimit);
+                            }
+                        });
                 }
 
                 if (productEndpointSettings is { Enabled: true })
                 {
-                    cfg.SubscriptionEndpoint<EntityEvent<ProductEvent>>(subscriptionNameGenerator.GetSubscriptionName<EntityEvent<ProductEvent>>(), e =>
-                    {
-                        e.Rule = new CreateRuleOptions
+                    cfg.SubscriptionEndpoint<EntityEvent<ProductEvent>>(
+                        subscriptionNameGenerator.GetSubscriptionName<EntityEvent<ProductEvent>>(), e =>
                         {
-                            Name = $"Filter{settings.BusEventSource}Products",
-                            Filter = new SqlRuleFilter($"{nameof(EntityEvent<ProductEvent>.Source)} <> '{settings.BusEventSource}' AND {nameof(EntityEvent<ProductEvent>.Originator)} <> '{settings.BusEventSource}'")
-                        };
-                        e.ConfigureConsumer<ProductEntityEventConsumer>(context, options =>
-                        {
-                            options.UseMessageRetry(r => r.Interval(5, 400).Handle<TransientException>());
+                            string sqlString = $"{nameof(EntityEvent<ProductEvent>.Source)} <> '{settings.BusEventSource}' AND {nameof(EntityEvent<ProductEvent>.Originator)} <> '{settings.BusEventSource}'";
+                            e.Rule = new CreateRuleOptions
+                            {
+                                Name = $"Filter{settings.BusEventSource}Products",
+                                Filter = new SqlRuleFilter(sqlString)
+                            };
+                            e.ConfigureConsumer<ProductEntityEventConsumer>(context,
+                                options =>
+                                {
+                                    options.UseMessageRetry(r => r.Interval(5, 400).Handle<TransientException>());
+                                });
+
+                            // Configure rate limiting if enabled for this subscription endpoint.
+                            if (productEndpointSettings.RateLimitSettings is { Enabled: true })
+                            {
+                                e.UseRateLimit(productEndpointSettings.RateLimitSettings.RateLimit,
+                                    TimeSpan.FromSeconds(memberEndPointSettings.RateLimitSettings.IntervalSeconds));
+                            }
+
+                            // Configure concurrency limit if enabled for this subscription endpoint.
+                            if (productEndpointSettings.ConcurrencyLimitSettings is { Enabled: true })
+                            {
+                                e.UseConcurrencyLimit(productEndpointSettings.ConcurrencyLimitSettings
+                                    .ConcurrencyLimit);
+                            }
                         });
-
-                        // Configure rate limiting if enabled for this subscription endpoint.
-                        if (productEndpointSettings.RateLimitSettings is { Enabled: true })
-                        {
-                            e.UseRateLimit(productEndpointSettings.RateLimitSettings.RateLimit, TimeSpan.FromSeconds(memberEndPointSettings.RateLimitSettings.IntervalSeconds));
-                        }
-
-                        // Configure concurrency limit if enabled for this subscription endpoint.
-                        if (productEndpointSettings.ConcurrencyLimitSettings is { Enabled: true })
-                        {
-                            e.UseConcurrencyLimit(productEndpointSettings.ConcurrencyLimitSettings.ConcurrencyLimit);
-                        }
-                    });
                 }
 
                 // Use built in message scheduler instead of Quartz

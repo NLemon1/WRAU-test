@@ -31,7 +31,19 @@ public class ProductEventPublisher(
                 Guid.NewGuid(),
                 Guid.NewGuid());
 
-            await publishEndpoint.Publish(productEntityEvent);
+            await publishEndpoint.Publish(
+                productEntityEvent,
+                context =>
+                {
+                    context.InitiatorId = context.MessageId;
+                    context.Headers.Set(MessageHeader.MessageType, typeof(MemberEvent).Name);
+                    context.Headers.Set(MessageHeader.Action, productEntityEvent.Action.ToString());
+                    context.Headers.Set(MessageHeader.Source, productEntityEvent.Source.ToString());
+                    context.Headers.Set(MessageHeader.Originator, productEntityEvent.Originator.ToString());
+                    context.Headers.Set(MessageHeader.CorrelationId, productEntityEvent.CorrelationId.ToString());
+                    context.Headers.Set(MessageHeader.EntityId, productEntityEvent.EventId);
+                    context.Headers.Set(MessageHeader.Timestamp, DateTime.UtcNow.ToString("o"));
+                });
         }
     }
 }
