@@ -244,7 +244,9 @@
                                             </div>
                                         }
 
-                                        <form class="mb-5">
+                                        @await Umbraco.RenderMacroAsync("renderUmbracoForm", new { FormGuid = "a68ab11e-8606-447f-ae7a-d2e7d738f796", FormTheme = "custom", ExcludeScripts = "0" })
+
+                                        @*<form class="mb-5">
                                             <div class="mb-3">
                                                 <label for="company-name" class="fs-xs">Company Name</label>
                                                 <input id="company-name" class="form-control" type="text" required placeholder="Company Name" />
@@ -286,7 +288,7 @@
                                                 <input id="website" class="form-control" type="url" required placeholder="Website" />
                                             </div>
                                             <button class="btn btn-primary" type="submit">Submit</button>
-                                        </form>
+                                        </form>*@
 
                                     </div>
                                     <button aria-hidden="true" class="js-scroll-top btn-scroll-top btn-scroll-top--inset" data-targetid="tabpanel-info-change" data-paneid="tabpanel-info-change" title="Back to Top"  hidden>

@@ -59,7 +59,7 @@
 
                                             @if (!f.HideLabel)
                                             {
-                                                <label for="@f.Id" class="umbraco-forms-label form-label">
+                                                <label for="@f.Id" class="umbraco-forms-label form-label d-flex justify-content-between fs-xs">
                                                     @{
                                                         RenderCaption(f);
                                                     }
@@ -195,7 +195,7 @@
         <text>@field.Caption</text>
         if (field.ShowIndicator)
         {
-            <span class="umbraco-forms-indicator">@Model.Indicator</span>
+            <span class="umbraco-forms-indicator" style="color: var(--bs-red);">@Model.Indicator</span>
         }        
     }
 
