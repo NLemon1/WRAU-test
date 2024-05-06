@@ -29,7 +29,7 @@ public class MemberHelper(
         SetSensitiveData(target, source.PasswordHash, source.PasswordSalt);
         SetCompanyOnMember(target, source);
         SetBoardOnMember(target, source);
-        if (target.Key != source.Id) target.Key = source.Id;
+        target.Name = source.FullName;
 
         // save member now so that we can have an Id to assign a group to
         memberService.Save(target);
