@@ -7877,7 +7877,18 @@
     const renderResults = (results) => {
       if (results.length > 0) {
         results.forEach((result) => {
-          const setCTA = result.productType == "Products" ? `<a href="${result.url}" id="add-to-cart" data-productref="${result.productReference}" class="js-add-cart btn btn-secondary btn-sm border-0 flex-grow-1 py-3">Add To Cart</a>` : `<a href="${result.url}" id="view-product" class="btn btn-primary btn-sm flex-grow-1 py-3">See Details</a><a href="${result.url}" id="view-product" class="btn btn-secondary btn-sm border-0 flex-grow-1 py-3">Register</a>`;
+          let setCTA = `<a href="${result.url}" id="view-product" class="btn btn-primary btn-sm flex-grow-1 py-3">See Details</a>`;
+          if (result.productType == "Materials" || result.productType == "Subscription") {
+            setCTA = `<a href="${result.url}" id="add-to-cart" data-productref="${result.productReference}" class="js-add-cart btn btn-secondary btn-sm border-0 flex-grow-1 py-3">Add To Cart</a>`;
+          }
+          if (result.productType == "Events") {
+            setCTA = `<a href="${result.url}" id="view-product" class="btn btn-primary btn-sm flex-grow-1 py-3">See Details</a>
+                    <a href="${result.url}" id="view-product" data-productref="${result.productReference}" class="js-add-cart btn btn-secondary btn-sm border-0 flex-grow-1 py-3">Register</a>`;
+          }
+          if (result.productType == "Education") {
+            setCTA = `<a href="${result.url}" id="view-product" class="btn btn-primary btn-sm flex-grow-1 py-3">See Details</a>
+                    <a href="${result.url}" id="view-product" data-productref="${result.productReference}" class="js-add-cart btn btn-secondary btn-sm border-0 flex-grow-1 py-3">Add To Cart</a>`;
+          }
           const setDate = (result.productType == "Events" || result.productType == "Courses") && result.start !== null ? `<p class="fs-xs fw-bold mb-1">${formatDateTime(result.startDate, result.endDate, result.startTime, result.endTime)}</p>` : "";
           const setCredits = result.creditHours !== 0 ? `<p class="fs-xs mb-1">Credit Hours: <span class="fw-bold"> ${result.creditHours}</span></p>` : "";
           const setTaxonomy = result.taxonomy !== null ? `<p class="d-inline-block mb-4 mt-2_5 px-2 py-1 bg-white fw-semibold fs-sm text-uppercase">${result.taxonomy}</p>` : "";
