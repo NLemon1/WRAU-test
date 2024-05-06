@@ -4,6 +4,7 @@ using WRA.Umbraco.Mapping;
 
 namespace WRA.Umbraco.Composers
 {
+    [ComposeAfter(typeof(CustomServiceComposer))]
     public class MappingComposer : IComposer
     {
         public void Compose(IUmbracoBuilder builder)

@@ -35,7 +35,7 @@ public class CustomServiceComposer : IComposer
         builder.Services.AddScoped<MemberHelper>();
         builder.Services.AddScoped<ProductHelper>();
         builder.Services.AddScoped<CategoryHelper>();
-        builder.Services.AddScoped<MappingHelper>();
+        builder.Services.AddSingleton<MappingHelper>();
         builder.Services.AddScoped<SubscriptionHelper>();
 
         // Register the WRA external API service as scoped (one instance per request).
