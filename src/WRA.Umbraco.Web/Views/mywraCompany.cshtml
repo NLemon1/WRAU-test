@@ -244,56 +244,7 @@
                                             </div>
                                         }
 
-                                        @{
-                                            // dev:  55f464b9-33cc-4a35-aa23-254a6c3458b5
-                                            // prod: a68ab11e-8606-447f-ae7a-d2e7d738f796
-                                        }
                                         @await Umbraco.RenderMacroAsync("renderUmbracoForm", new { FormGuid = "55f464b9-33cc-4a35-aa23-254a6c3458b5", FormTheme = "custom", ExcludeScripts = "0" })
-
-                                        @*<form class="mb-5">
-                                            <div class="mb-3">
-                                                <label for="company-name" class="fs-xs">Company Name</label>
-                                                <input id="company-name" class="form-control" type="text" required placeholder="Company Name" />
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="address" class="fs-xs">Address</label>
-                                                <input id="address" class="form-control" type="text" required placeholder="Address" />
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="city" class="fs-xs">City</label>
-                                                <input id="city" class="form-control" type="text" required placeholder="City" />
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="state" class="fs-xs">State</label>
-                                                <input id="state" class="form-control" type="text" required placeholder="State" />
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="zipcode" class="fs-xs">Zip Code</label>
-                                                <input id="zipcode" class="form-control" type="number" maxlength="5" required placeholder="Zip Code" />
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="business-phone" class="fs-xs">Business Phone</label>
-                                                <input id="business-phone" class="form-control" type="number" maxlength="10" placeholder="Business Phone" />
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="tollfree-phone" class="fs-xs">Toll Free</label>
-                                                <input id="tollfree-phone" class="form-control" type="number" maxlength="10" placeholder="Toll Free" />
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="fax" class="fs-xs">Fax</label>
-                                                <input id="fax" class="form-control" type="number" maxlength="10" placeholder="Fax" />
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="email" class="fs-xs">Email Address</label>
-                                                <input id="email" class="form-control" type="email" placeholder="Email Address" />
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="website" class="fs-xs">Website</label>
-                                                <input id="website" class="form-control" type="url" required placeholder="Website" />
-                                            </div>
-                                            <button class="btn btn-primary" type="submit">Submit</button>
-                                        </form>*@
-
                                     </div>
                                     <button aria-hidden="true" class="js-scroll-top btn-scroll-top btn-scroll-top--inset" data-targetid="tabpanel-info-change" data-paneid="tabpanel-info-change" title="Back to Top"  hidden>
                                         <i class="fa-solid fa-arrow-up"></i>
