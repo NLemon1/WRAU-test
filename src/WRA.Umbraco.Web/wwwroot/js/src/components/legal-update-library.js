@@ -5,6 +5,8 @@ const legalUpdateLibrary = () => {
 
     if (!containers.length) return;
 
+    handleCardToggles();
+
     containers.forEach(container => {
         const yearFilter = container.querySelector('.js-legal-update-library-year-filter');
         //const mobileTopicGroupFilter = container.querySelector('.js-legal-update-library-mobile-topic-group-filter');
@@ -48,6 +50,24 @@ const legalUpdateLibrary = () => {
         });
     });
 
+    function handleCardToggles() {
+        const toggles = document.querySelectorAll('.legal-update-toggle');
+
+        toggles.forEach(toggle => {
+            toggle.addEventListener('click', (e) => {
+                let toggle = e.target;
+                let content = e.target.previousElementSibling;
+
+                if (content.classList.contains('legal-update-content--expanded')) {
+                    toggle.innerText = 'Show More';
+                    content.classList.remove('legal-update-content--expanded');
+                } else {
+                    toggle.innerText = 'Show Less';
+                    content.classList.add('legal-update-content--expanded');
+                }
+            });
+        });
+    }
 };
 
 export default legalUpdateLibrary;

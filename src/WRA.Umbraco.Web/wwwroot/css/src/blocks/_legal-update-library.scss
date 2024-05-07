@@ -1,11 +1,5 @@
-.hot-tip-content {
+.legal-update-content {
     //
-
-    &__inner {
-        strong, p {
-            display: inline;
-        }
-    }
 
     &:not(&--expanded) {
         display: -webkit-box;
@@ -15,7 +9,7 @@
     }
 }
 
-.hot-tip-toggle {
+.legal-update-toggle {
     all: unset;
     font-weight: 600;
     color: $primary;

@@ -16858,6 +16858,17 @@ html:not(.has-open-nav) .nav-main-mobile {
   font-weight: 600;
   color: #2560B9;
 }
+.legal-update-content:not(.legal-update-content--expanded) {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  overflow: hidden;
+}
+.legal-update-toggle {
+  all: unset;
+  font-weight: 600;
+  color: #2560B9;
+}
 .ec-event.wra-event {
   transition: opacity 200ms ease 0s, visibility 200ms ease 0s;
 }
