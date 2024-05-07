@@ -1226,6 +1226,8 @@
         "allowInAreas": true,
         "areas": [],
         "contentElementTypeKey": "6d74ae17-a24a-4137-ac44-115f283c186c",
+        "view": "~/App_Plugins/CustomBlockView/legalUpdateLibrary.html",
+        "stylesheet": "~/css/dist/global.css",
         "label": "",
         "editorSize": "medium",
         "inlineEditing": false,

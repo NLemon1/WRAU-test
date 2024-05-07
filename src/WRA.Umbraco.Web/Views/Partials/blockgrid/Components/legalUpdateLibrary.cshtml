@@ -6,59 +6,87 @@
     var legalUpdates = UmbracoContext.Content.GetAtRoot().DescendantsOrSelfOfType("legalUpdates").Where(x => x.IsVisible());
     var topicGroups = UmbracoContext.Content.GetAtRoot().DescendantsOrSelfOfType("legalUpdateGroups").Where(x => x.IsVisible());
 
-    string filterType = query["filterType"];
+    string selectedYear = query["year"];
+    string selectedTopic = query["topic"];
+
+    if (selectedTopic == null)
+    {
+        selectedTopic = "";
+    }
 }
 
-<div class="container">
+<div class="container js-legal-update-library">
     <div class="row">
-        <div class="col-12 col-lg-3">
-            @if (filterType == "year")
+        <div class="col-12 col-lg-3 mb-4 mb-lg-0">
+            <h2 class="h3">Years</h2>
+            @foreach (var legalUpdate in legalUpdates)
             {
-                <h2 class="h3">Years</h2>
-                @foreach (var legalUpdate in legalUpdates)
-                {
-                    var years = UmbracoContext.Content.GetAtRoot().DescendantsOrSelfOfType("dateFolder").Where(x => x.Parent.Name == legalUpdate.Name).Where(x => x.IsVisible());
+                var years = UmbracoContext.Content.GetAtRoot().DescendantsOrSelfOfType("dateFolder").Where(x => x.Parent.Name == legalUpdate.Name).Where(x => x.IsVisible());
 
-                    <label for="legal-updates-year-filter" class="visually-hidden">Filter by year</label>
-                    <select id="legal-updates-year-filter" class="form-select">
-                        @foreach (var year in years)
-                        {
-                            <option value="@year.Name">Legal Updates @year.Name</option>
-                        }
-                    </select>
-                }
+                <label for="legal-updates-year-filter" class="visually-hidden">Filter by year</label>
+                <select id="legal-updates-year-filter" class="form-select js-legal-update-library-year-filter">
+                    <option value="">All</option>
+                    @foreach (var year in years)
+                    {
+                        <!option value="@year.Name" @(selectedYear == year.Name ? "selected" : "")>@year.Name</!option>
+                    }
+                </select>
             }
-            else
-            {
-                <h2 class="h3">Topics</h2>
-                <div class="accordions-wrapper">
+
+            <h2 class="h3 mt-3 mt-lg-5 mb-lg-0">Topics</h2>
+
+            @* mobile topic filters *@
+            <div class="d-lg-none">
+                @*<select class="form-select mb-3 js-legal-update-library-mobile-topic-group-filter">
+                    <option value="">A-Z</option>
+                    @foreach (var group in topicGroups)
+                    {
+                        <!option value="@group.Name">@group.Name</!option>
+                    }
+                </select>*@
+
+                <select class="form-select js-legal-update-library-mobile-topic-filter">
+                    <option value="">Select a topic</option>
                     @foreach (var group in topicGroups)
                     {
                         var topics = UmbracoContext.Content.GetAtRoot().DescendantsOrSelfOfType("legalUpdateTopic").Where(x => x.Parent.Name == group.Name).Where(x => x.IsVisible());
 
-                        <details class="accordion border-bottom">
-                            <summary class="accordion__toggle">
-                                @group.Name
-                                <div class="accordion__toggle-icon">
-                                    <i class="fas fa-chevron-down"></i>
-                                    <i class="fas fa-chevron-up"></i>
-                                </div>
-                            </summary>
-                            <div class="accordion__content pb-0">
-                                @foreach (var topic in topics)
-                                {
-                                    <div class="form-check py-2 border-top fs-sm">
-                                        <!input id="@group.Name-@topic.Name" class="form-check-input" type="radio" name="legal-update-topic" value="@topic.Name" />
-                                        <label for="@group.Name-@topic.Name" class="form-check-label">
-                                            @topic.Name
-                                        </label>
-                                    </div>
-                                }
-                            </div>
-                        </details>
+                        foreach (var topic in topics)
+                        {
+                            <!option value="@topic.Name" @(selectedTopic == topic.Name ? "selected" : "")>@topic.Name</!option>
+                        }
                     }
-                </div>
-            }
+                </select>
+            </div>
+
+            @* desktop topic filters *@
+            <div class="d-none d-lg-block accordions-wrapper">
+                @foreach (var group in topicGroups)
+                {
+                    var topics = UmbracoContext.Content.GetAtRoot().DescendantsOrSelfOfType("legalUpdateTopic").Where(x => x.Parent.Name == group.Name).Where(x => x.IsVisible());
+
+                    <details class="accordion border-bottom" @(selectedTopic != "" ? (selectedTopic.Substring(0, 1) == group.Name ? "open" : "") : "")>
+                        <summary class="accordion__toggle">
+                            @group.Name
+                            <div class="accordion__toggle-icon">
+                                <i class="fas fa-chevron-down"></i>
+                                <i class="fas fa-chevron-up"></i>
+                            </div>
+                        </summary>
+                        <div class="accordion__content pb-0">
+                            @foreach (var topic in topics)
+                            {
+                                <div class="form-check py-2 border-top fs-sm">
+                                    <!input id="@group.Name-@topic.Name" class="form-check-input js-legal-update-library-topic-filter" type="radio" name="legal-update-topic" value="@topic.Name" @(selectedTopic == topic.Name ? "checked" : "") />
+                                    <label for="@group.Name-@topic.Name" class="form-check-label">
+                                        @topic.Name
+                                    </label>
+                                </div>
+                            }
+                        </div>
+                    </details>
+                }
+            </div>
         </div>
         <div class="col-12 col-lg-9">
             @for (var i = 1; i <= 5; i++)
