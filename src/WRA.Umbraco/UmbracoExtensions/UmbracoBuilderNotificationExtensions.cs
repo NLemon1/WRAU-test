@@ -19,8 +19,7 @@ public static class UmbracoBuilderNotificationExtensions
             // examine index events
             .AddNotificationHandler<ContentCacheRefresherNotification, ProductExamineValuesOnSave>()
             .AddNotificationHandler<MemberSavedNotification, MemberExamineValuesOnSave>()
-            .AddNotificationHandler<UmbracoApplicationStartingNotification, StartingNotification>()
-            .AddNotificationHandler<UmbracoApplicationStartedNotification, StartedNotification>();
+            .AddNotificationHandler<UmbracoApplicationStartingNotification, StartingNotification>();
 
         return builder;
     }

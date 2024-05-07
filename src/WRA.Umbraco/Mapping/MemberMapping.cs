@@ -67,7 +67,7 @@ public class MemberMapping(
     private Guid GetMemberGroupKey(IMember source)
     {
         var memberGroups = memberGroupRepository.GetMemberGroupsByMember(source);
-        return memberGroups?.FirstOrDefault().Key ?? Guid.Empty;
+        return memberGroups?.FirstOrDefault()?.Key ?? Guid.Empty;
     }
 
     private void UmbracoMemberToMemberDto(Models.Member source, ExternalMemberDto target, MapperContext context)

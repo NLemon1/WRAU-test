@@ -20,17 +20,21 @@ public class StartingNotification(
     IMemberService memberService,
     IContentService contentService,
     ICoreScopeProvider coreScopeProvider,
+    IRuntimeState runtimeState,
     ILogger<TransformExamineValues> transformExamineValuesLogger,
     ILogger<TransformMemberExamineValues> transformMemberValuesLogger,
     ILogger<StartingNotification> logger
     ) : INotificationHandler<UmbracoApplicationStartingNotification>
 {
-    private readonly ILogger<StartingNotification> _logger = logger ?? throw new ArgumentNullException(nameof(logger));
 
     public void Handle(UmbracoApplicationStartingNotification notification)
     {
+        if (runtimeState.Level < RuntimeLevel.Run)
+        {
+            return;
+        }
+        initializeEssentialContent();
         InitializeExamineIndexes();
-        // initializeEssentialContent();
     }
 
     private void initializeEssentialContent()
@@ -51,32 +55,41 @@ public class StartingNotification(
         if (productsPage == null)
         {
             CreateContent("Products", homeUdi, ProductsPage.ModelTypeAlias);
+            logger.LogInformation("Products page created");
         }
+
         // check fo companies page
         var companiesPage = home.FirstChild<Companies>();
         if (companiesPage == null)
         {
-            BackgroundJob.Enqueue(() => CreateContent("Companies", homeUdi, Companies.ModelTypeAlias));
+            CreateContent("Companies", homeUdi, Companies.ModelTypeAlias);
+            logger.LogInformation("Companies page created");
+            // BackgroundJob.Enqueue(() => CreateContent("Companies", homeUdi, Companies.ModelTypeAlias));
         }
 
         // check for boards page
         var boardsPage = home.FirstChild<Boards>();
         if (boardsPage == null)
         {
-            BackgroundJob.Enqueue(() => CreateContent("Boards", homeUdi, Boards.ModelTypeAlias));
+            CreateContent("Boards", homeUdi, Boards.ModelTypeAlias);
+            logger.LogInformation("Boards page created");
+            // BackgroundJob.Enqueue(() => CreateContent("Boards", homeUdi, Boards.ModelTypeAlias));
+        }
+
+        var taxonomyItemsPage = home.FirstChild<TaxonomyItems>();
+        if (taxonomyItemsPage == null)
+        {
+            CreateContent("Taxonomy Items", homeUdi, TaxonomyItems.ModelTypeAlias);
+            logger.LogInformation("Taxonomy Items page created");
+            // BackgroundJob.Enqueue(() => CreateContent("Taxonomy Items", homeUdi, TaxonomyItems.ModelTypeAlias));
         }
     }
 
     public IContent CreateContent(string contentName, Udi parentUdi, string alias)
     {
-        var scope = coreScopeProvider.CreateCoreScope();
-        scope.Notifications.Suppress();
-        scope.WriteLock(Constants.Locks.Domains);
         logger.LogInformation("Creating essential content {Content}...", contentName);
         var newContent = contentService.CreateContent(contentName, parentUdi, alias);
-
         contentService.SaveAndPublish(newContent);
-        scope.Complete();
         return newContent;
     }
 
@@ -93,7 +106,7 @@ public class StartingNotification(
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Exception encountered during examine startup. {Message}", ex.Message);
+            logger.LogError(ex, "Exception encountered during examine startup. {Message}", ex.Message);
             throw;
         }
     }
