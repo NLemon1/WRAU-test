@@ -68,7 +68,7 @@ public class RecurringJobComposer : IComposer
             Cron.Never);
         RecurringJob.AddOrUpdate<ProductTasks>(
             "Sync all Products",
-            x => x.QueueProductSync(),
+            x => x.SyncAllProducts(),
             Cron.Never);
         RecurringJob.AddOrUpdate<ProductTasks>(
             "Sync all Categories",
@@ -90,6 +90,12 @@ public class RecurringJobComposer : IComposer
             "Sync Product Taxonomy",
             x => x.SyncAllTaxonomy(),
             Cron.Never);
+
+        // hangfire specific jobs
+        RecurringJob.AddOrUpdate<HangFireTasks>(
+            "Clean up failed jobs",
+            x => x.CleanFailedJobs(),
+            Cron.Daily);
     }
 }
 
