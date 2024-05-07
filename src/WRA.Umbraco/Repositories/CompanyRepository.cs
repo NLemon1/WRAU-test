@@ -82,6 +82,12 @@ public class CompanyRepository(
                 return null;
             }
 
+            if (companiesContainer == null)
+            {
+                logger.LogInformation("Companies container not found. Cannot create company.");
+                return null;
+            }
+
             var newCompany = contentService.Create(companyDto.name, companiesContainer.Id, Company.ModelTypeAlias);
 
             SetCompanyProperties(newCompany, companyDto);
