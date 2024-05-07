@@ -58,8 +58,7 @@ public class TaxonomyRepository(
 
         var existingTaxonomy = allTaxonomy.FirstOrDefault(t =>
             t.Value<Guid>(GlobalAliases.ExternalId) == externalId);
-
-
+        scope.Complete();
         return existingTaxonomy;
     }
 }

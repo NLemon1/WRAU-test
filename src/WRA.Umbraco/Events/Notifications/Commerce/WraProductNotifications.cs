@@ -49,8 +49,6 @@ public class WraProductNotifications(
                 if (productCreateEvent == null) return;
                 await productEventPublisher.Send(productCreateEvent, EntityEventAction.Create);
                 logger.LogInformation("Message sent for product: {Product} - {Sku}", productCreateEvent.Id, productCreateEvent.Sku);
-                appCaches.RuntimeCache.ClearByKey(productCreateEvent.Id.ToString());
-                appCaches.RuntimeCache.ClearOfType<ProductPage>();
             }
             else
             {
@@ -58,8 +56,6 @@ public class WraProductNotifications(
                 if (productUpdateEvent == null) return;
                 await productEventPublisher.Send(productUpdateEvent, EntityEventAction.Update);
                 logger.LogInformation("Message sent for product: {Product} - {Sku}", productUpdateEvent.Id, productUpdateEvent.Sku);
-                appCaches.RuntimeCache.ClearByKey(productUpdateEvent.Id.ToString());
-                appCaches.RuntimeCache.ClearOfType<ProductPage>();
             }
         }
         catch (Exception e)
