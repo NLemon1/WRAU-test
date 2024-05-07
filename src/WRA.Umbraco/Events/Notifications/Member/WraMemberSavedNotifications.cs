@@ -20,10 +20,22 @@ public class WraMemberNotifications(
         ArgumentNullException.ThrowIfNull(notification);
         foreach (var memberNotification in notification.SavedEntities)
         {
-            var memberEvent = mapper.Map<MemberEvent>(memberNotification);
-            if (memberEvent == null) continue;
-            await memberEventPublisher.Send(memberEvent);
-            logger.LogInformation("Message sent for external memberId: {Member} - {Email}", memberEvent.Id,  memberEvent.Email);
+            var externalId = memberNotification.GetValue<string>(GlobalAliases.ExternalId);
+            if (string.IsNullOrEmpty(externalId))
+            {
+                var memberCreateEvent = mapper.Map<MemberEvent>(memberNotification);
+                if (memberCreateEvent == null) continue;
+                await memberEventPublisher.Send(memberCreateEvent, EntityEventAction.Update);
+                logger.LogInformation("Message sent for external memberId: {Member} - {Email}", memberCreateEvent.Id,  memberCreateEvent.Email);
+            }
+            else
+            {
+                var memberUpdateEvent = mapper.Map<MemberEvent>(memberNotification);
+                if (memberUpdateEvent == null) continue;
+                await memberEventPublisher.Send(memberUpdateEvent, EntityEventAction.Update);
+                logger.LogInformation("Message sent for external memberId: {Member} - {Email}", memberUpdateEvent.Id,  memberUpdateEvent.Email);
+            }
+
         }
     }
 }

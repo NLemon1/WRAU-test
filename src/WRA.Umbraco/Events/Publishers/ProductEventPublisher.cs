@@ -11,7 +11,7 @@ public class ProductEventPublisher(
     ILogger<ProductEventPublisher> logger,
     IPublishEndpoint publishEndpoint)
 {
-    public async Task Send(ProductEvent product)
+    public async Task Send(ProductEvent product, EntityEventAction action)
     {
         var endpointSettings = messagingSettings.GetEndPointSettings<ProductEvent>();
         if (endpointSettings == null)
@@ -26,7 +26,7 @@ public class ProductEventPublisher(
             var productEntityEvent = new EntityEvent<ProductEvent>(
                 EntityEventSource.UmbracoCloud,
                 EntityEventSource.UmbracoCloud,
-                EntityEventAction.Update,
+                action,
                 product,
                 Guid.NewGuid(),
                 Guid.NewGuid());

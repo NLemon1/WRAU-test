@@ -41,6 +41,18 @@ public class WraExternalApiService(WraExternalApiSettings settings)
         return response;
     }
 
+    public async Task<RestResponse> GetProductTaxonomy()
+    {
+        var options = new RestClientOptions(settings.VersionedBaseUrl);
+        var client = new RestClient(options);
+        var request = new RestRequest("producttaxonomy");
+        request.AddHeader(settings.ApiKeyHeader, settings.ApiKey);
+
+        var response = await client.GetAsync(request);
+
+        return response;
+    }
+
     public async Task<RestResponse> GetBoards()
     {
         var options = new RestClientOptions(settings.VersionedBaseUrl);

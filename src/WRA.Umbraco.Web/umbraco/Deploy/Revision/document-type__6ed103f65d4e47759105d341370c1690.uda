@@ -26,13 +26,6 @@
       "Alias": "details/options",
       "PropertyTypes": [
         {
-          "Key": "3eb3016c-8f30-4ae5-9710-ad353760282d",
-          "Alias": "taxonomy",
-          "DataType": "umb://data-type/f0bc4bfbb49940d6ba86058885a5178c",
-          "Name": "Taxonomy",
-          "SortOrder": 2
-        },
-        {
           "Key": "53deb054-8ecf-4eec-920a-6d82b9dc1157",
           "Alias": "endDate",
           "DataType": "umb://data-type/0e9794ebf9b54f20a78893acd233a7e4",
@@ -72,6 +65,13 @@
           "Alias": "categories",
           "DataType": "umb://data-type/f51080043ff644278f33ed62cde56276",
           "Name": "Categories"
+        },
+        {
+          "Key": "d0c81eeb-1330-4b0a-aa34-e07a17441af9",
+          "Alias": "productTaxonomy",
+          "DataType": "umb://data-type/b89e0b865aa44ccfa83e024f8cd2f270",
+          "Name": "Product Taxonomy",
+          "SortOrder": 7
         }
       ]
     },
@@ -180,6 +180,10 @@
     },
     {
       "Udi": "umb://data-type/9b641984c0214315bf3feeff86280582",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/b89e0b865aa44ccfa83e024f8cd2f270",
       "Ordering": true
     },
     {

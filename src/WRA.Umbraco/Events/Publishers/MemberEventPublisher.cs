@@ -11,7 +11,7 @@ public class MemberEventPublisher(
     ILogger<MemberEventPublisher> logger,
     IPublishEndpoint publishEndpoint)
 {
-    public async Task Send(MemberEvent member)
+    public async Task Send(MemberEvent member, EntityEventAction action)
     {
         var endpointSettings = messagingSettings.GetEndPointSettings<MemberEvent>();
         if (endpointSettings == null)
@@ -26,7 +26,7 @@ public class MemberEventPublisher(
             var memberEntityEvent = new EntityEvent<MemberEvent>(
                 EntityEventSource.UmbracoCloud,
                 EntityEventSource.UmbracoCloud,
-                EntityEventAction.Update,
+                action,
                 member,
                 Guid.NewGuid(),
                 Guid.NewGuid());

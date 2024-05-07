@@ -91,14 +91,14 @@
                 var mainImage = Model.Images.FirstOrDefault();
 
                 <img class="img-fluid img-curved img-curved--large" src="@mainImage.GetCropUrl(552, 552).ToString()" alt="@(mainImage.Value("altText") ?? "")" />
-            } 
+            }
             else if (settings.Value<IPublishedContent>("oGImageFallback") != null)
             {
                 <img class="img-fluid img-curved img-curved--large" src="@(settings.Value<IPublishedContent>("oGImageFallback").Url(mode:UrlMode.Absolute))" alt="" />
             }
         </div>
         <div class="col-12 col-lg-6">
-            
+
             @if (startDate != null && Model.StartDate > DateTime.Today && productType != "Products")
             {
                 <p class="mb-4 fs-sm">
@@ -116,9 +116,9 @@
                 </p>
             }
 
-            @if (!String.IsNullOrEmpty(Model.Taxonomy))
+            @if (!String.IsNullOrEmpty(Model.ProductTaxonomy.Name))
             {
-                <p class="d-inline-block mb-2 px-2 py-1 bg-light fw-semibold text-uppercase">@Model.Taxonomy</p>
+                <p class="d-inline-block mb-2 px-2 py-1 bg-light fw-semibold text-uppercase">@Model.ProductTaxonomy.Name</p>
             }
 
             @using (Html.BeginUmbracoForm("AddToCart", "CartSurface"))
@@ -167,7 +167,7 @@
         }
         else if (product.ChildVariants.Any())
         {
-         
+
             <select name="productReference" class="w-full border border-gray-300 p-2 mt-1">
                 @foreach (var variant in product.ChildVariants)
                 {

@@ -18,6 +18,7 @@ public class ProductTasks(
     CategoryRepository categoryRepository,
     ProductPageRepository productPageRepository,
     WraProductManagementService wraProductManagementService,
+    TaxonomyRepository taxonomyRepository,
     AppCaches appCaches,
     ICoreScopeProvider scopeProvider,
     IUmbracoMapper mapper,
@@ -123,7 +124,7 @@ public class ProductTasks(
         // for example, a lock can occur when a product is updated and index build is kicked off. doing these hundreds
         // at a time causes a lock. After this process finishes, a manual rebuild of the content cache, and indexes will
         // be necessary. This is a temporary fix until we can figure out a better way to handle this.
-        scope.Notifications.Suppress();
+        // scope.Notifications.Suppress();
 
         var productsResp = await externalApiService.GetProducts();
         string? content = productsResp.Content;
@@ -159,6 +160,20 @@ public class ProductTasks(
 
         appCaches.RuntimeCache.Clear();
         scope.Complete();
+        return true;
+    }
+
+    public async Task<bool> SyncAllTaxonomy()
+    {
+        var taxonomyResp = await externalApiService.GetProductTaxonomy();
+        string? content = taxonomyResp.Content;
+        if (content == null) return false;
+        var externalTaxonomy = JsonSerializer.Deserialize<List<ExternalTaxonomyDto>>(content, SerializationOptions);
+        foreach (var taxonomy in externalTaxonomy)
+        {
+            await taxonomyRepository.CreateOrUpdateTaxonomy(taxonomy);
+        }
+
         return true;
     }
 

@@ -12,12 +12,14 @@ using Umbraco.Commerce.Core.Models;
 using Umbraco.Commerce.Core.Services;
 using WRA.Umbraco.Extensions;
 using WRA.Umbraco.Models;
+using WRA.Umbraco.Repositories;
 
 
 namespace WRA.Umbraco.Helpers;
 
 public class ProductHelper(
     AppCaches appCache,
+    TaxonomyRepository taxonomyRepository,
     ICacheKeyProvider cacheKeyProvider,
     IUmbracoContextFactory contextFactory,
     IContentService contentService,
@@ -84,6 +86,10 @@ public class ProductHelper(
         content.SetValue("memberPrice", memberPrice);
         content.SetValue(GlobalAliases.ExternalId, productEvent.Id);
         content.Name = productEvent.Name;
+
+        var existingTaxonomy = taxonomyRepository.Get(productEvent.ProductTaxonomyId.SafeGuid());
+        content.SetValue("productTaxonomy", existingTaxonomy.GetUdi());
+
     }
 
     private (IPublishedContent? Category, IPublishedContent? SubCategory) GetCategories(Guid categoryId, Guid subCategoryId)

@@ -81,6 +81,7 @@ namespace WRA.Umbraco.Extensions
                 children ?? []);
         }
 
+        // move to mapper
         public static ProductPageResponseDto AsDto(this ProductPage p)
         {
             DefaultIdType currency = p.GetStore().BaseCurrencyId ?? Guid.Empty;
@@ -88,7 +89,7 @@ namespace WRA.Umbraco.Extensions
                 p.Name,
                 p.Key,
                 p.Collection.Name,
-                p.Taxonomy?.SafeString()!,
+                p.ProductTaxonomy?.Name ?? string.Empty,
                 p.Categories?.First().Name ?? string.Empty,
                 p.SubCategories?.First()?.Name ?? string.Empty,
                 p.Price!.GetPriceFor(currency).Formatted().Value,

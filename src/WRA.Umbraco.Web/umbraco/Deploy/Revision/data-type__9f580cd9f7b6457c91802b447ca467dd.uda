@@ -1,0 +1,14 @@
+{
+  "Name": "Product Page - Product Taxonomy - Content Picker (1)",
+  "Alias": "",
+  "EditorAlias": "Umbraco.ContentPicker",
+  "DatabaseType": "Nvarchar",
+  "Configuration": {
+    "showOpenButton": false,
+    "ignoreUserStartNodes": false
+  },
+  "Udi": "umb://data-type/9f580cd9f7b6457c91802b447ca467dd",
+  "Dependencies": [],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.DataTypeArtifact",
+  "__version": "13.1.0"
+}

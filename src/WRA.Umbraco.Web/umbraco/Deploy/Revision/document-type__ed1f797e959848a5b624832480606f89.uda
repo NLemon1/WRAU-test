@@ -1,0 +1,29 @@
+{
+  "Name": "Taxonomy Items",
+  "Alias": "taxonomyItems",
+  "AllowedTemplates": [],
+  "HistoryCleanup": {},
+  "Icon": "icon-item-arrangement",
+  "Thumbnail": "folder.png",
+  "Permissions": {
+    "AllowedChildContentTypes": [
+      "umb://document-type/27dbda544f594492ab52276b94a120f0"
+    ]
+  },
+  "Parent": "umb://document-type-container/2443f0d8c7a44e1baa3511778e6789dd",
+  "CompositionContentTypes": [],
+  "PropertyGroups": [],
+  "PropertyTypes": [],
+  "Udi": "umb://document-type/ed1f797e959848a5b624832480606f89",
+  "Dependencies": [
+    {
+      "Udi": "umb://document-type-container/2443f0d8c7a44e1baa3511778e6789dd",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type/27dbda544f594492ab52276b94a120f0"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
+  "__version": "13.1.0"
+}

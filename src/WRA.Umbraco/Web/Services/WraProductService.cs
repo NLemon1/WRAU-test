@@ -45,7 +45,7 @@ public class WraProductService(
             if (!string.IsNullOrEmpty(request.Taxonomy))
             {
                 products = products
-                    .Where(p => p.Taxonomy.Contains(request.Taxonomy));
+                    .Where(p => p.ProductTaxonomy.Name.Contains(request.Taxonomy));
             }
 
             return products;

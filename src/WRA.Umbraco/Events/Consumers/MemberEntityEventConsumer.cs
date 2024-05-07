@@ -11,24 +11,38 @@ public class MemberEntityEventConsumer(ILogger<MemberEntityEventConsumer> logger
 {
     public async Task Consume(ConsumeContext<EntityEvent<MemberEvent>> context)
     {
-        var member = context.Message.Entity;
-        if (member is not null)
+        try
         {
-            switch (context.Message.Source)
+            var member = context.Message.Entity;
+            switch (context.Message.Action)
             {
-                case EntityEventSource.UmbracoCloud:
-                    logger.LogInformation("Source is UmbracoCloud. Skipping...");
-                    await Task.CompletedTask;
-                    break;
-                default:
-                    logger.LogInformation("Updating member: {Member}.", member.iMISId);
+                case EntityEventAction.Update:
+                    logger.LogInformation("Updating member: {Member}.", member.Id);
                     BackgroundJob.Enqueue<WraMemberManagementService>(x => x.CreateOrUpdate(member));
                     logger.LogInformation("Member update task queued.");
                     await Task.CompletedTask;
                     break;
+                case EntityEventAction.Create:
+                    logger.LogInformation("Creating member: {Member}.", member.Id);
+                    BackgroundJob.Enqueue<WraMemberManagementService>(x => x.CreateOrUpdate(member));
+                    logger.LogInformation("Member create task queued.");
+                    await Task.CompletedTask;
+                    break;
+                case EntityEventAction.Delete:
+                    logger.LogInformation("Deleting member: {Member}.", member.Id);
+                    BackgroundJob.Enqueue<WraMemberManagementService>(x => x.Delete(member));
+                    logger.LogInformation("Member delete task queued.");
+                    await Task.CompletedTask;
+                    break;
+                default:
+                    logger.LogInformation("Member action not supported: {Action}.", context.Message.Action);
+                    break;
             }
         }
-
-        await Task.CompletedTask;
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
     }
 }

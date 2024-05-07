@@ -86,6 +86,10 @@ public class RecurringJobComposer : IComposer
             "Sync Product Collections",
             x => x.SyncProductCollections(),
             Cron.Never);
+        RecurringJob.AddOrUpdate<ProductTasks>(
+            "Sync Product Taxonomy",
+            x => x.SyncAllTaxonomy(),
+            Cron.Never);
     }
 }
 

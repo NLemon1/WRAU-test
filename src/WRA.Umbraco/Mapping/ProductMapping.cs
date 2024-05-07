@@ -26,11 +26,11 @@ public class ProductMapping(
         productEvent.Price = content.GetValue<decimal>("price");
         productEvent.MemberPrice = content.GetValue<decimal>("memberPrice");
         productEvent.ImageUrl = content.GetValue<string>("imageUrl").SafeString();
-        productEvent.Taxonomy = content.GetValue<string>("taxonomy").SafeString();
         productEvent.EventStartDate = GetValidDate(content.GetValue<DateTime>("startDate"));
-        productEvent.EventEndDate = content.GetValue<DateTime>("endDate");
+        productEvent.EventEndDate = content.GetValue<DateTime>("endDate") <= DateTime.MinValue ? null : content.GetValue<DateTime>("endDate");
         productEvent.ProductCategoryId = mappingHelper.GetExternalIdOnContent(content, "categories").ToString();
         productEvent.ProductSubcategoryId = mappingHelper.GetExternalIdOnContent(content, "subCategories").ToString();
+        productEvent.ProductTaxonomyId = mappingHelper.GetExternalIdOnContent(content, "productTaxonomy").ToString();
         productEvent.ProductTypeId = mappingHelper.GetExternalIdOnParent(content).SafeString();
 
 
@@ -45,7 +45,7 @@ public class ProductMapping(
         target.Price = source.Price;
         target.MemberPrice = source.MemberPrice;
         target.ImageUrl = source.ImageUrl;
-        target.Taxonomy = source.Taxonomy;
+        target.ProductTaxonomyId = source.ProductTaxonomyId;
         target.ProductType = source.ProductType;
         target.ProductTypeId = source.ProductTypeId;
         target.Category = source.Category;

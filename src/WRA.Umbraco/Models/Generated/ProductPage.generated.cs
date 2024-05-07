@@ -136,6 +136,14 @@ namespace WRA.Umbraco.Models
 		public virtual string ProductId => this.Value<string>(_publishedValueFallback, "productId");
 
 		///<summary>
+		/// Product Taxonomy
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.3.0+a325ba3")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("productTaxonomy")]
+		public virtual global::Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent ProductTaxonomy => this.Value<global::Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent>(_publishedValueFallback, "productTaxonomy");
+
+		///<summary>
 		/// Short Description
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.3.0+a325ba3")]
@@ -157,14 +165,6 @@ namespace WRA.Umbraco.Models
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("subCategories")]
 		public virtual global::System.Collections.Generic.IEnumerable<global::Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent> SubCategories => this.Value<global::System.Collections.Generic.IEnumerable<global::Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent>>(_publishedValueFallback, "subCategories");
-
-		///<summary>
-		/// Taxonomy
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.3.0+a325ba3")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("taxonomy")]
-		public virtual string Taxonomy => this.Value<string>(_publishedValueFallback, "taxonomy");
 
 		///<summary>
 		/// Meta Description: Enter meta description if desired.

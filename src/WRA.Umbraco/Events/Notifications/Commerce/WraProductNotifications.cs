@@ -2,6 +2,7 @@ using Microsoft.Extensions.Logging;
 using Umbraco.Cms.Core.Cache;
 using Umbraco.Cms.Core.Events;
 using Umbraco.Cms.Core.Mapping;
+using Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Core.Notifications;
 using WRA.Umbraco.Contracts;
 using WRA.Umbraco.Events.Publishers;
@@ -25,12 +26,7 @@ public class WraProductNotifications(
         {
             if (publishedEntity.ContentType.Alias == ProductPage.ModelTypeAlias)
             {
-                var productEvent = mapper.Map<ProductEvent>(publishedEntity);
-                if (productEvent == null) continue;
-                await productEventPublisher.Send(productEvent);
-                logger.LogInformation("Message sent for product: {Product} - {Sku}", productEvent.Id, productEvent.Sku);
-                runtimeCache.ClearByKey(productEvent.Id.ToString());
-                runtimeCache.ClearOfType<ProductPage>();
+                HandleProductEvent(publishedEntity);
             }
 
             if (publishedEntity.ContentType.Alias is CategoriesPage.ModelTypeAlias or CategoryPage.ModelTypeAlias)
@@ -39,6 +35,37 @@ public class WraProductNotifications(
                 runtimeCache.ClearOfType(typeof(CategoriesPage));
                 runtimeCache.ClearOfType(typeof(CategoryPage));
             }
+        }
+    }
+
+    private async void HandleProductEvent(IContent publishedEntity)
+    {
+        try
+        {
+            var externalId = publishedEntity.GetValue<string>(GlobalAliases.ExternalId);
+            if (string.IsNullOrEmpty(externalId))
+            {
+                var productCreateEvent = mapper.Map<ProductEvent>(publishedEntity);
+                if (productCreateEvent == null) return;
+                await productEventPublisher.Send(productCreateEvent, EntityEventAction.Create);
+                logger.LogInformation("Message sent for product: {Product} - {Sku}", productCreateEvent.Id, productCreateEvent.Sku);
+                appCaches.RuntimeCache.ClearByKey(productCreateEvent.Id.ToString());
+                appCaches.RuntimeCache.ClearOfType<ProductPage>();
+            }
+            else
+            {
+                var productUpdateEvent = mapper.Map<ProductEvent>(publishedEntity);
+                if (productUpdateEvent == null) return;
+                await productEventPublisher.Send(productUpdateEvent, EntityEventAction.Update);
+                logger.LogInformation("Message sent for product: {Product} - {Sku}", productUpdateEvent.Id, productUpdateEvent.Sku);
+                appCaches.RuntimeCache.ClearByKey(productUpdateEvent.Id.ToString());
+                appCaches.RuntimeCache.ClearOfType<ProductPage>();
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
         }
     }
 }

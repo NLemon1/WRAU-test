@@ -113,5 +113,36 @@ public class WraProductManagementService(
             throw;
         }
     }
+    public async Task<IContent?> Delete(ProductEvent product)
+    {
+        try
+        {
+            using var scope = scopeProvider.CreateCoreScope();
+            var umbracoContextReference = umbracoContextFactory.EnsureUmbracoContext();
+            var contentCache = umbracoContextReference.UmbracoContext.Content;
+
+            if (contentCache == null)
+            {
+                scope.Complete();
+                return null;
+            }
+            var productPage = productPageRepository.GetBySku(product.Sku);
+
+            var productContent = contentService.GetById(productPage.Id);
+
+            // set properties on our product
+            if (productContent == null) return null;
+            contentService.Delete(productContent);
+            logger.LogInformation("Deleted product: sku - {Sku}", product.Sku);
+            scope.Complete();
+            return productContent;
+
+        }
+        catch (Exception e)
+        {
+            logger.LogError(e, "Error updating product: sku - {Sku}", product.Sku);
+            throw;
+        }
+    }
 
 }
