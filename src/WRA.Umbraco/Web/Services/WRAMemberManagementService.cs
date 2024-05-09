@@ -92,9 +92,7 @@ public class WraMemberManagementService(
         if (existingMember == null) return null;
 
         memberHelper.SetProperties(existingMember, memberEvent);
-        // MemberHelper.AssignMemberToMemberGroup(existingMember, memberEvent);
 
-        // memberService.Save(existingMember);
         logger.LogInformation("Updated member: {Member} - {Email}", existingMember.Id, existingMember.Email);
         scope.Complete();
         return existingMember;

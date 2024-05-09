@@ -116,7 +116,7 @@
                 </p>
             }
 
-            @if (!String.IsNullOrEmpty(Model.ProductTaxonomy.Name))
+            @if (Model.ProductTaxonomy != null)
             {
                 <p class="d-inline-block mb-2 px-2 py-1 bg-light fw-semibold text-uppercase">@Model.ProductTaxonomy.Name</p>
             }

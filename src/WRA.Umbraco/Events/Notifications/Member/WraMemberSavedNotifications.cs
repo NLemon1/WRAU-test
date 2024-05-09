@@ -25,7 +25,7 @@ public class WraMemberNotifications(
             {
                 var memberCreateEvent = mapper.Map<MemberEvent>(memberNotification);
                 if (memberCreateEvent == null) continue;
-                await memberEventPublisher.Send(memberCreateEvent, EntityEventAction.Update);
+                await memberEventPublisher.Send(memberCreateEvent, EntityEventAction.Create);
                 logger.LogInformation("Message sent for external memberId: {Member} - {Email}", memberCreateEvent.Id,  memberCreateEvent.Email);
             }
             else

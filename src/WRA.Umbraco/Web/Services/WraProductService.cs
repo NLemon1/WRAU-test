@@ -95,30 +95,35 @@ public class WraProductService(
 
         GuidUdi udi = new("document", content.Key);
 
-        // Get specific discount that holds the rules for "time based discounts"
-        const string timeBasedDiscountAlias = "timeBasedDiscount";
-        DiscountReadOnly timeBasedDiscount = umbracoCommerceApi.GetDiscount(product.StoreId, timeBasedDiscountAlias);
-
-        // If the time based discount is not active, return empty list
-        if (timeBasedDiscount?.IsActive != true) return [];
-
-        // Here we will grab the groups on the discount
-        var groupedDiscountRules = timeBasedDiscount.Rules.Children
-            .Where(r => r.RuleProviderAlias == "groupDiscountRule")
-            .Select(x => x);
-
         // Next we will build the kvp that contains our product UDI...
         var productNodeIds = new List<KeyValuePair<string, string>>()
         {
             new("nodeId", udi.ToString()),
         };
 
-        // Filter to single rule automatic discounts that are time based
-        IEnumerable<DiscountRuleConfig>? timeBasedDiscountsOnProduct = groupedDiscountRules.Where(x =>
-            x.Children.Any(c => c.RuleProviderAlias == "orderLineProductDiscountRule" && c.Settings.ContainsAll(productNodeIds)));
+        // Get specific discount that holds the rules for "time based discounts"
+        // TODO cache this
+        const string dateRangeRuleAlias = "DateRangeRule";
+        const string groupDiscountRuleAlias = "groupDiscountRule";
+        var allTimedDiscounts = umbracoCommerceApi.GetActiveDiscounts(product.StoreId)
+            .Where(discount => discount.Rules.Children
+                .Where(discountRule => discountRule.RuleProviderAlias == groupDiscountRuleAlias)
+                .Any(groupDiscountRule => groupDiscountRule.Children
+                    .Any(subRule => subRule.RuleProviderAlias == dateRangeRuleAlias)
+                ));
 
-        // Return empty list if no discount rule configs exist for the above condition.
-        if (!timeBasedDiscountsOnProduct.Any()) return [];
+        var timeDiscountsContainingProduct = allTimedDiscounts.Where(
+            discount => discount.Rules.Children
+                .Where(discountRule => discountRule.RuleProviderAlias == groupDiscountRuleAlias)
+                .Any(groupDiscountRule => groupDiscountRule.Children
+                    .Any(subRule => subRule.RuleProviderAlias is "orderLineProductDiscountRule" &&
+                                    subRule.Settings.ContainsAll(productNodeIds))));
+
+        // DiscountReadOnly timeBasedDiscount = umbracoCommerceApi.GetDiscount(product.StoreId, timeBasedDiscountAlias);
+        // get first for now. User should not create dupliacte discounts
+        var timeBasedDiscount = timeDiscountsContainingProduct.FirstOrDefault();
+        // If the time based discount is not active, return empty list
+        if (timeBasedDiscount?.IsActive != true) return [];
 
         List<TimeBasedDiscountDto> timeBasedDiscounts = [];
 
