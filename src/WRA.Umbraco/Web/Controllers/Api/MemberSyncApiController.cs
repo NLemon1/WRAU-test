@@ -4,13 +4,9 @@ using Microsoft.Extensions.Logging;
 using Umbraco.Cms.Api.Common.Attributes;
 using Umbraco.Cms.Core.Mapping;
 using WRA.Umbraco.Contracts;
-using WRA.Umbraco.CustomTables;
 using WRA.Umbraco.CustomTables.Subscriptions;
-using WRA.Umbraco.Dtos;
 using WRA.Umbraco.Repositories;
-using WRA.Umbraco.Web.Dtos;
 using WRA.Umbraco.Web.Dtos.External;
-using WRA.Umbraco.Web.Dtos.WraExternal;
 using WRA.Umbraco.Web.Services;
 
 namespace WRA.Umbraco.Web.Controllers.Api;

@@ -47,8 +47,8 @@ where TUser : MemberIdentityUser
         {
            return base.VerifyHashedPassword(user, hashedPassword, providedPassword);
         }
-
-        byte[] salt = Encoding.UTF8.GetBytes(saltString);
+        var decodedSalt = DecodeHash(saltString);
+        byte[] salt = Encoding.UTF8.GetBytes(decodedSalt);
         string verifyHash = HashPw(providedPassword, salt);
         return verifyHash.Equals(hashedPassword) ?
             PasswordVerificationResult.Success :
@@ -59,10 +59,22 @@ where TUser : MemberIdentityUser
     {
         if (member.Key != Guid.Empty)
         {
+            var encodedHash = EncodeHash(salt);
             var memberIdentity = memberService.GetByKey(member.Key);
-            memberIdentity.SetValue(_memberSaltPropertyAlias, salt);
+            memberIdentity.SetValue(_memberSaltPropertyAlias, encodedHash);
             memberService.Save(memberIdentity);
         }
+    }
+    private string? EncodeHash(string hash)
+    {
+        byte[] hashBytes = Encoding.UTF8.GetBytes(hash);
+        return Convert.ToBase64String(hashBytes);
+    }
+
+    public string? DecodeHash(string encodedHash)
+    {
+        var encodedBytes = Convert.FromBase64String(encodedHash);
+        return Encoding.UTF8.GetString(encodedBytes);
     }
 
     private static string HashPw(string password, byte[] salt)

@@ -1,3 +1,4 @@
+using System.Text;
 using Microsoft.Extensions.Logging;
 using Umbraco.Cms.Core.Mapping;
 using Umbraco.Cms.Core.Models;
@@ -33,7 +34,7 @@ public class MemberMapping(
         target.UserName = source.Username;
         target.Email = source.Email;
         target.PasswordHash = source.RawPasswordValue;
-        target.PasswordSalt = source.GetValue<string>("token") ?? string.Empty;
+        target.PasswordSalt = (source.GetValue<string>("token")) ?? string.Empty;
         target.Id = source.GetValue<Guid>(GlobalAliases.ExternalId);
         target.NrdsId = source.GetValue<string>("nrdsId");
         target.CommonId = source.GetValue<int>("commonId");
@@ -63,6 +64,7 @@ public class MemberMapping(
         target.MemberTypeId = GetMemberGroupKey(source);
 
     }
+
 
     private Guid GetMemberGroupKey(IMember source)
     {
@@ -176,6 +178,8 @@ public class MemberMapping(
         target.CellPhone = source.CellPhone;
         target.MemberTypeId = source.MemberTypeId;
         target.ImageUrl = source.ImageUrl;
+        target.PasswordHash = source.PasswordHash;
+        target.PasswordSalt = source.PasswordSalt;
     }
 
     private static void MemberToDto(MemberEvent source, ExternalMemberDto target, MapperContext context)

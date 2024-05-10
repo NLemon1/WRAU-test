@@ -53,7 +53,8 @@ public class MemberLoginController : UmbLoginController
         ILocalizationService localisation,
         ILogger<MemberLoginController> logger,
         IConfiguration configuration,
-        IMemberService memberService) : base(
+        IMemberService memberService)
+        : base(
             umbracoContextAccessor,
             databaseFactory,
             services,

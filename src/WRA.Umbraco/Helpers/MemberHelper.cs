@@ -43,7 +43,7 @@ public class MemberHelper(
 
     private static void SetSensitiveData(IMember existingMember, string hash, string salt)
     {
-        SetProperty(existingMember, GlobalAliases.HashAlias, salt);
+        SetProperty(existingMember, "token", salt);
         existingMember.RawPasswordValue = hash;
     }
 

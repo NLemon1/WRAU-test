@@ -5,7 +5,6 @@ using Umbraco.Cms.Api.Common.Attributes;
 using Umbraco.Cms.Core.Mapping;
 using WRA.Umbraco.Contracts;
 using WRA.Umbraco.Web.Dtos.External;
-using WRA.Umbraco.Web.Dtos.WraExternal;
 using WRA.Umbraco.Web.Services;
 
 namespace WRA.Umbraco.Web.Controllers.Api;
@@ -26,6 +25,22 @@ public class ProductSyncApiController(
     {
         var productEvent = mapper.Map<ProductEvent>(product);
         await wraProductManagementService.CreateOrUpdate(productEvent);
+    }
+
+    [HttpPost]
+    [Route("UpdateProduct")]
+    public async Task UpdateProduct(ExternalProductDto product)
+    {
+        var productEvent = mapper.Map<ProductEvent>(product);
+        await wraProductManagementService.CreateOrUpdate(productEvent);
+    }
+
+    [HttpPost]
+    [Route("DeleteProduct")]
+    public async Task DeleteProduct(ExternalProductDto product)
+    {
+        var productEvent = mapper.Map<ProductEvent>(product);
+        await wraProductManagementService.Delete(productEvent);
     }
 
 }

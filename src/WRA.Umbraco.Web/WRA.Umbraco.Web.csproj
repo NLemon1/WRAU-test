@@ -19,6 +19,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Plugins\umbracocommerce\backoffice\views\discount\rewards\labelviews\timebaseddiscountreward.html" />
+    <Content Include="App_Plugins\umbracocommerce\backoffice\views\discount\rules\labelviews\daterangerule.html" />
+    <Content Include="App_Plugins\umbracocommerce\backoffice\views\discount\rules\labelviews\timebaselineitemdiscountrule.html" />
     <Content Include="App_Plugins\UmbracoForms\Assets\Email-Example\WRA-Email-Logo.png" />
   </ItemGroup>
 
@@ -66,6 +69,10 @@
     <None Update="cmsimport.lic">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="App_Plugins\umbracocommerce\backoffice\views\discount\rules\labelviews\membersubscriptionrule.html" />
   </ItemGroup>
 
   <PropertyGroup>
