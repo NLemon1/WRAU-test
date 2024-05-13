@@ -26,6 +26,7 @@
                             @foreach (var item in Model.Order.OrderLines.Select((ol, i) => new { OrderLine = ol, Index = i }))
                             {
                                 var node = Umbraco.Content(Guid.Parse(item.OrderLine.ProductReference));
+                                //TODO Validate line itmes to ensure cart loads when an item doesn't exist anymore but is still in a visitors cart.
                                 var url = node.ContentType.Alias == ProductVariant.ModelTypeAlias ? node.Parent.Url() : node.Url();
                                 var images = node.Value<IEnumerable<MediaWithCrops>>("images");
 
