@@ -11,6 +11,8 @@ using Umbraco.Cms.Core;
 using WRA.Umbraco.Models.Custom;
 using WRA.Umbraco.Web.Dtos.WraExternal;
 using WRA.Umbraco.Web.Adapters;
+using Umbraco.Cms.Infrastructure.Examine;
+using MassTransit.AzureServiceBusTransport.Topology;
 
 namespace WRA.Umbraco.Extensions
 {
@@ -64,6 +66,16 @@ namespace WRA.Umbraco.Extensions
                 content.Question?.ToString() ?? string.Empty,
                 content.Answer?.ToString() ?? string.Empty,
                 content.OriginalPublishedDate.ToString());
+        }
+
+        public static LegalUpdateDto AsDto(this LegalUpdate content)
+        {
+            return new LegalUpdateDto(
+                content.Name,
+                content.Topics == null ? [] : content.Topics!.Select(t => t.Name),
+                content.Content?.ToString() ?? string.Empty,
+                content.PDF != null ? content.PDF.Url() : string.Empty,
+                content.OriginalPublishDate.ToString());
         }
 
         public static MultimediaDto AsDto(this MultimediaItem content, List<MultimediaDto>? children = null)

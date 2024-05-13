@@ -6,6 +6,7 @@ using Umbraco.Cms.Core.Web;
 using Umbraco.Cms.Web.Common;
 using WRA.Umbraco.Dtos;
 using WRA.Umbraco.Dtos.Hottips;
+using WRA.Umbraco.Dtos.LegalUpdates;
 using WRA.Umbraco.Extensions;
 using WRA.Umbraco.Models;
 using WRA.Umbraco.Web.Services;
@@ -72,6 +73,35 @@ public class ContentApiController(
 
         SearchResultsDto searchInfo = new(responseResults.Count());
         return new HotTipResponseDto(paginatedResults, searchInfo);
+    }
+
+    [HttpPost]
+    [Route("LegalUpdates")]
+    public LegalUpdateResponseDto GetLegalUpdates(LegalUpdateRequestDto request)
+    {
+        var (rawResults, _) = ConductSearch(LegalUpdate.ModelTypeAlias);
+
+        var responseResults = rawResults
+            .Select(result => new LegalUpdate(result.Content, new NoopPublishedValueFallback()));
+
+        // check if there are any requested years
+        if (!string.IsNullOrEmpty(request.Year))
+        {
+            // if so, filter by year
+            responseResults = responseResults.Where(r => r.OriginalPublishDate.Year == Convert.ToInt32(request.Year));
+        }
+
+        if (request.Topics?.Any() ?? false)
+        {
+            responseResults = responseResults.Where(r => CategoryMatch(r.Topics, request.Topics));
+        }
+
+        IEnumerable<LegalUpdateDto> paginatedResults = responseResults
+            .Paginate<LegalUpdate>(request.Pagination)
+            .Select(r => r.AsDto());
+
+        SearchResultsDto searchInfo = new(responseResults.Count());
+        return new LegalUpdateResponseDto(paginatedResults, searchInfo);
     }
 
     [HttpPost]
