@@ -41,6 +41,7 @@ public class CustomServiceComposer : IComposer
         // Register the WRA external API service as scoped (one instance per request).
         builder.Services.AddScoped<WraMemberManagementService>();
         builder.Services.AddScoped<WraProductManagementService>();
+        builder.Services.AddScoped<MemberOrderHistoryService>();
 
         // Binds IMember event to APIs member DTO.
         builder.Services.AddScoped<MemberEvent>();
