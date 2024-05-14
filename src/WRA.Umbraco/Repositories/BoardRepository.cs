@@ -86,6 +86,28 @@ public class BoardRepository
 
     }
 
-    // add a delete
+    public bool Delete(ExternalMemberBoardDto mb)
+    {
+        try
+        {
+            using var scope = coreScopeProvider.CreateCoreScope();
+            var exisingBoard = Get(mb.Id);
+
+            if (exisingBoard == null)
+            {
+                scope.Complete();
+                return false;
+            }
+
+            contentService.Delete(exisingBoard);
+            scope.Complete();
+            return true;
+        }
+        catch (Exception e)
+        {
+            logger.LogError(e, "Error deleting board");
+            throw;
+        }
+    }
 
 }

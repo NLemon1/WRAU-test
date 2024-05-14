@@ -11,8 +11,6 @@ namespace WRA.Umbraco.Helpers;
 public class SubscriptionHelper(
     IRepository<MemberSubscription> memberSubscriptionRepository,
     IRepository<CompanySubscription> companySubscriptionRepository,
-    CompanyRepository companyRepository,
-    IContentService contentService,
     ILogger<SubscriptionHelper> logger)
 {
     public void CreateOrUpdateMemberSubscription(MemberSubscription memberSubscription)
@@ -42,6 +40,21 @@ public class SubscriptionHelper(
         }
     }
 
+    public bool DeleteMemberSubscription(MemberSubscription memberSubscription)
+    {
+        try
+        {
+            memberSubscriptionRepository.Delete(memberSubscription);
+            logger.LogInformation("Deleted member subscription: {MemberSubscriptionId}", memberSubscription.Id);
+            return true;
+        }
+        catch (Exception e)
+        {
+            logger.LogError(e, "Error deleting member subscription");
+            return false;
+        }
+    }
+
     public void CreateOrUpdateCompanySubscription(CompanySubscription companySubscription)
     {
         try
@@ -66,6 +79,20 @@ public class SubscriptionHelper(
         catch (Exception e)
         {
             logger.LogError(e, "Error creating company subscription");
+            throw;
+        }
+    }
+    public bool DeleteCompanySubscription(CompanySubscription companySubscription)
+    {
+        try
+        {
+            companySubscriptionRepository.Delete(companySubscription);
+            logger.LogInformation("Deleted company subscription: {CompanySubscriptionId}", companySubscription.Id);
+            return true;
+        }
+        catch (Exception e)
+        {
+            logger.LogError(e, "Error deleting company subscription");
             throw;
         }
     }

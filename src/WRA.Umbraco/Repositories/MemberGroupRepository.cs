@@ -56,6 +56,30 @@ public class MemberGroupRepository(
         }
     }
 
+    public bool DeleteMemberGroup(ExternalMemberGroupDto memberGroupDto)
+    {
+        try
+        {
+            using var scope = coreScopeProvider.CreateCoreScope();
+            var memberGroup = GetMemberGroupByExternalId(memberGroupDto.Id);
+            if (memberGroup == null)
+            {
+                scope.Complete();
+                return false;
+            }
+            memberGroupService.Delete(memberGroup);
+            scope.Complete();
+            logger.LogInformation("Member group deleted: {MemberGroupKey}", memberGroup.Key);
+            return true;
+
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Error updating member group of id {Id}", memberGroupDto.Id);
+            throw;
+        }
+    }
+
     public IMemberGroup UpdateMemberGroup(ExternalMemberGroupDto memberTypeDto)
     {
         var memberGroup = GetMemberGroupByExternalId(memberTypeDto.Id);

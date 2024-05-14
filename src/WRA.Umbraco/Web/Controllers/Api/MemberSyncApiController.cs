@@ -79,6 +79,22 @@ public class MemberSyncApiController(
     }
 
     [HttpPost]
+    [Route("DeleteMemberGroup")]
+    public IActionResult DeleteMemberGroup(ExternalMemberGroupDto memberTypeDto)
+    {
+        try
+        {
+            memberGroupRepository.DeleteMemberGroup(memberTypeDto);
+            return Ok();
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Error creating member group of id {Id}", memberTypeDto.Id);
+            throw;
+        }
+    }
+
+    [HttpPost]
     [Route("UpdateMemberGroup")]
     public IActionResult UpdateMemberGroup(ExternalMemberGroupDto memberTypeDto)
     {
@@ -103,8 +119,24 @@ public class MemberSyncApiController(
     }
 
     [HttpPost]
+    [Route("DeleteBoard")]
+    public Task<IActionResult> DeleteBoard(ExternalMemberBoardDto mb)
+    {
+        bool result = boardRepository.Delete(mb);
+        return Task.FromResult<IActionResult>(Ok(result));
+    }
+
+    [HttpPost]
     [Route("CreateOrUpdateCompany")]
     public Task<IActionResult> CreateOrUpdateCompany(ExternalCompanyDto company)
+    {
+        var result = companyRepository.CreateOrUpdate(company);
+        return Task.FromResult<IActionResult>(Ok(result.Id));
+    }
+
+    [HttpPost]
+    [Route("DeleteCompany")]
+    public Task<IActionResult> DeleteCompany(ExternalCompanyDto company)
     {
         var result = companyRepository.CreateOrUpdate(company);
         return Task.FromResult<IActionResult>(Ok(result.Id));
@@ -132,6 +164,28 @@ public class MemberSyncApiController(
     }
 
     [HttpPost]
+    [Route("DeleteMemberSubscription")]
+    public Task<IActionResult> DeleteMemberSubscription(ExternalMemberSubscriptionDto memberSubscriptionDto)
+    {
+        try
+        {
+            var memberSubscription = mapper.Map<MemberSubscription>(memberSubscriptionDto);
+            if (memberSubscription == null)
+            {
+                return Task.FromResult<IActionResult>(BadRequest());
+            }
+
+            bool result = subscriptionHelper.DeleteMemberSubscription(memberSubscription);
+            return Task.FromResult<IActionResult>(Ok(result));
+        }
+        catch (Exception e)
+        {
+            logger.LogError(e, "Error creating member subscription for member {MemberId}", memberSubscriptionDto.MemberId);
+            throw;
+        }
+    }
+
+    [HttpPost]
     [Route("CreateOrUpdateCompanySubscription")]
     public Task<IActionResult> CreateOrUpdateCompanySubscription(ExternalCompanySubscriptionDto companySubscriptionDto)
     {
@@ -149,6 +203,28 @@ public class MemberSyncApiController(
         catch (Exception e)
         {
             logger.LogError(e, "Error creating company subscription for company {CompanyId}", companySubscriptionDto.CompanyId);
+            throw;
+        }
+    }
+
+    [HttpPost]
+    [Route("DeleteCompanySubscription")]
+    public Task<IActionResult> DeleteCompanySubscription(ExternalCompanySubscriptionDto companySubscriptionDto)
+    {
+        try
+        {
+            var companySubscription = mapper.Map<CompanySubscription>(companySubscriptionDto);
+            if (companySubscription == null)
+            {
+                return Task.FromResult<IActionResult>(BadRequest());
+            }
+
+            bool result = subscriptionHelper.DeleteCompanySubscription(companySubscription);
+            return Task.FromResult<IActionResult>(Ok(result));
+        }
+        catch (Exception e)
+        {
+            logger.LogError(e, "Error deleting company subscription for company {CompanyId}", companySubscriptionDto.CompanyId);
             throw;
         }
     }
