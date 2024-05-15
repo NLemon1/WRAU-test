@@ -6875,10 +6875,9 @@
       if (desktopSubcategoryFilters.length) {
         desktopSubcategoryFilters.forEach((filter) => {
           filter.addEventListener("click", (e) => {
-            if (selectedSubcategory != e.target.value) {
-              params.set("subcategory", e.target.value);
-              window.location.search = params.toString();
-            }
+            selectedSubcategories = e.target.value;
+            params.set("subcategory", e.target.value);
+            window.location.search = params.toString();
           });
         });
       }
