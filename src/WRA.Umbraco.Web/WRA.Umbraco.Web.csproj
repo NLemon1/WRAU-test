@@ -68,6 +68,10 @@
         </None>
     </ItemGroup>
 
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Views\Partials\Forms\Emails\Example-Template.cshtml" />
+    </ItemGroup>
+
 
     <PropertyGroup>
         <!-- Razor files are needed for the backoffice to work correctly -->
