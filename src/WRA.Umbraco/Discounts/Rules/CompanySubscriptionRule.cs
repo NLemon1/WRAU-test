@@ -27,6 +27,7 @@ public class CompanySubscriptionRule(
         // get current member
         var memberManager = scope.ServiceProvider.GetRequiredService<IMemberManager>();
         var currentMember = memberManager.GetCurrentMemberAsync();
+        if(currentMember?.Result == null) return Unfulfilled();
         var member = memberService.GetByKey(currentMember.Result.Key);
 
         // get company member belongs to

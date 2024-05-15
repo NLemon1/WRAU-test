@@ -5,6 +5,7 @@ using Umbraco.Cms.Core.Mapping;
 using Umbraco.Cms.Core.Notifications;
 using WRA.Umbraco.Events.Publishers;
 using WRA.Umbraco.Contracts;
+using WRA.Umbraco.Helpers.Constants;
 using WRA.Umbraco.Models;
 
 namespace WRA.Umbraco.Events.Notifications.Member;
@@ -20,7 +21,7 @@ public class WraMemberNotifications(
         ArgumentNullException.ThrowIfNull(notification);
         foreach (var memberNotification in notification.SavedEntities)
         {
-            var externalId = memberNotification.GetValue<string>(GlobalAliases.ExternalId);
+            var externalId = memberNotification.GetValue<string>(GlobalConstants.ExternalId);
             if (string.IsNullOrEmpty(externalId))
             {
                 var memberCreateEvent = mapper.Map<MemberEvent>(memberNotification);

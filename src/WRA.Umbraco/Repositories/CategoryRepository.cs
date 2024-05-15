@@ -6,6 +6,7 @@ using Umbraco.Cms.Core.Services;
 using Umbraco.Cms.Core.Web;
 using WRA.Umbraco.Dtos;
 using WRA.Umbraco.Extensions;
+using WRA.Umbraco.Helpers.Constants;
 using WRA.Umbraco.Models;
 using WRA.Umbraco.Web.Dtos.External;
 
@@ -33,7 +34,7 @@ public class CategoryRepository(
                 var existingCategories = categoriesPage.ChildrenOfType(CategoryPage.ModelTypeAlias);
                 var existingCategoryPage = existingCategories?
                     .FirstOrDefault(cat =>
-                        cat.Value<Guid>(GlobalAliases.ExternalId).Equals(categoryInfo.Id));
+                        cat.Value<Guid>(GlobalConstants.ExternalId).Equals(categoryInfo.Id));
                 if (existingCategoryPage != null)
                 {
                     var existingCategoryPageContent = contentService.GetById(existingCategoryPage.Id);
@@ -78,7 +79,7 @@ public class CategoryRepository(
 
             // get all category page that has the Id of the requested subcategory parent
             var parentCategory = categoryPages.First(c =>
-                c.Value<Guid>(GlobalAliases.ExternalId).Equals(subCategoryInfo.ExternalCategoryId));
+                c.Value<Guid>(GlobalConstants.ExternalId).Equals(subCategoryInfo.ExternalCategoryId));
 
             // get all possible subcategories under each of the results of the last category query
             var existingSubcategories = categoryPages.SelectMany(sc =>
@@ -86,7 +87,7 @@ public class CategoryRepository(
 
             // query for the subcategory page the has the Id of the subcategory request
             var existingSubCategoryPageQuery = existingSubcategories
-                .Where(sc => sc.Value<Guid>(GlobalAliases.ExternalId).Equals(subCategoryInfo.Id));
+                .Where(sc => sc.Value<Guid>(GlobalConstants.ExternalId).Equals(subCategoryInfo.Id));
             var existingPage = existingSubCategoryPageQuery.FirstOrDefault();
 
             var subCategoryPage = existingPage != null ?
@@ -143,13 +144,13 @@ public class CategoryRepository(
     }
     private void SetCategoryProperties(IContent content, ExternalProductCategoryDto categoryInfo)
     {
-        content.SetValue(GlobalAliases.ExternalId, categoryInfo.Id);
+        content.SetValue(GlobalConstants.ExternalId, categoryInfo.Id);
         content.SetValue("description", categoryInfo.Description);
     }
 
     private void SetSubCategoryProperties(IContent content, ExternalProductSubCategoryDto subCategoryInfo)
     {
-        content.SetValue(GlobalAliases.ExternalId, subCategoryInfo.Id);
+        content.SetValue(GlobalConstants.ExternalId, subCategoryInfo.Id);
         content.SetValue("externalCategoryId", subCategoryInfo.ExternalCategoryId);
         content.SetValue("description", subCategoryInfo.Description);
     }

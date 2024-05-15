@@ -1,5 +1,7 @@
 ﻿using Umbraco.Cms.Core.Composing;
 using Umbraco.Cms.Core.Notifications;
+using Umbraco.Commerce.Core.Events.Notification;
+using Umbraco.Commerce.Extensions;
 using WRA.Umbraco.Events;
 using WRA.Umbraco.Events.Notifications.Commerce;
 using WRA.Umbraco.Events.Notifications.Member;

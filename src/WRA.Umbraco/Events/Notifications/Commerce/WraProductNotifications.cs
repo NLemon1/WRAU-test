@@ -6,6 +6,7 @@ using Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Core.Notifications;
 using WRA.Umbraco.Contracts;
 using WRA.Umbraco.Events.Publishers;
+using WRA.Umbraco.Helpers.Constants;
 using WRA.Umbraco.Models;
 
 namespace WRA.Umbraco.Events.Notifications.Commerce;
@@ -42,7 +43,7 @@ public class WraProductNotifications(
     {
         try
         {
-            var externalId = publishedEntity.GetValue<string>(GlobalAliases.ExternalId);
+            var externalId = publishedEntity.GetValue<string>(GlobalConstants.ExternalId);
             if (string.IsNullOrEmpty(externalId))
             {
                 var productCreateEvent = mapper.Map<ProductEvent>(publishedEntity);

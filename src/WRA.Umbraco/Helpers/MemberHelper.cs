@@ -5,6 +5,7 @@ using Umbraco.Cms.Core.Scoping;
 using Umbraco.Cms.Core.Services;
 using WRA.Umbraco.Contracts;
 using WRA.Umbraco.Extensions;
+using WRA.Umbraco.Helpers.Constants;
 using WRA.Umbraco.Repositories;
 using WRA.Umbraco.Services.Caching;
 
@@ -25,7 +26,7 @@ public class MemberHelper(
     {
         using var scope = coreScopeProvider.CreateCoreScope();
         DynamicUpdate(target, source);
-        SetProperty(target, GlobalAliases.ExternalId, source.Id);
+        SetProperty(target, GlobalConstants.ExternalId, source.Id);
         SetSensitiveData(target, source.PasswordHash, source.PasswordSalt);
         SetCompanyOnMember(target, source);
         SetBoardOnMember(target, source);

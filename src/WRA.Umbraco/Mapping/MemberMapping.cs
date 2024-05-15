@@ -6,6 +6,7 @@ using Umbraco.Cms.Core.Web;
 using WRA.Umbraco.Contracts;
 using WRA.Umbraco.Exceptions;
 using WRA.Umbraco.Extensions;
+using WRA.Umbraco.Helpers.Constants;
 using WRA.Umbraco.Repositories;
 using WRA.Umbraco.Web.Dtos.External;
 
@@ -35,7 +36,7 @@ public class MemberMapping(
         target.Email = source.Email;
         target.PasswordHash = source.RawPasswordValue;
         target.PasswordSalt = (source.GetValue<string>("token")) ?? string.Empty;
-        target.Id = source.GetValue<Guid>(GlobalAliases.ExternalId);
+        target.Id = source.GetValue<Guid>(GlobalConstants.ExternalId);
         target.NrdsId = source.GetValue<string>("nrdsId");
         target.CommonId = source.GetValue<int>("commonId");
         target.Prefix = source.GetValue<string>("prefix") ?? string.Empty;
@@ -59,8 +60,8 @@ public class MemberMapping(
         target.CellPhone = source.GetValue<string>("cellPhone") ?? string.Empty;
         target.MemberTypeId = source.GetValue<string>("memberTypeId").SafeGuid();
         target.ImageUrl = source.GetValue<string>("imageUrl") ?? string.Empty;
-        target.CompanyId = mappingHelper.GetRelatedContent(source, "company")?.Value(GlobalAliases.ExternalId).SafeGuid();
-        target.PrimaryLocalBoardId = mappingHelper.GetRelatedContent(source, "primaryLocalBoard")?.Value(GlobalAliases.ExternalId).SafeGuid(); // is this correct?
+        target.CompanyId = mappingHelper.GetRelatedContent(source, "company")?.Value(GlobalConstants.ExternalId).SafeGuid();
+        target.PrimaryLocalBoardId = mappingHelper.GetRelatedContent(source, "primaryLocalBoard")?.Value(GlobalConstants.ExternalId).SafeGuid(); // is this correct?
         target.MemberTypeId = GetMemberGroupKey(source);
 
     }
@@ -120,7 +121,7 @@ public class MemberMapping(
 
     private static void PublishedContentToMemberDto(IMember source, ExternalMemberDto target, MapperContext context)
     {
-        target.ExternalId = source.GetValue<string>(GlobalAliases.ExternalId).SafeGuid();
+        target.ExternalId = source.GetValue<string>(GlobalConstants.ExternalId).SafeGuid();
         target.UmbracoId = source.Id.ToString();
         target.NRDSId = source.GetValue<string>("nrdsId");
         target.CommonId = source.GetValue<int>("commonId");

@@ -13,6 +13,7 @@ using Umbraco.Cms.Core.Services;
 using Umbraco.Cms.Core.Web;
 using Umbraco.Cms.Web.Common.Controllers;
 using Umbraco.Cms.Web.Common.Security;
+using WRA.Umbraco.Helpers.Constants;
 using WRA.Umbraco.Models;
 using WRA.Umbraco.Web.Dtos.External;
 using WRA.Umbraco.Web.Services;
@@ -47,7 +48,7 @@ public class MyWraEducationController : RenderController
         if (currentMember != null)
         {
             var member = _memberManager.AsPublishedMember(currentMember);
-            var externalID = member.Value(GlobalAliases.ExternalId)?.ToString() ?? string.Empty;
+            var externalID = member.Value(GlobalConstants.ExternalId)?.ToString() ?? string.Empty;
             orderHistory = _memberOrderHistoryService.GetMemberOrderHistory(externalID).GetAwaiter().GetResult();
         }
         else

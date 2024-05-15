@@ -9,6 +9,7 @@ using WRA.Umbraco.Events.Consumers;
 using WRA.Umbraco.Exceptions;
 using WRA.Umbraco.Shared.Exceptions;
 using WRA.Umbraco.Shared.Messaging;
+using WRA.Umbraco.Web.Dtos.External;
 
 namespace WRA.Umbraco.Composers;
 
@@ -28,22 +29,29 @@ public class MassTransitComposer : IComposer
             // Use kebab-case for endpoint names.
             x.SetKebabCaseEndpointNameFormatter();
 
-            var memberEndPointSettings = settings.GetEndPointSettings(nameof(MemberEvent));
-            var productEndpointSettings = settings.GetEndPointSettings(nameof(ProductEvent));
             if (!settings.Enabled) return;
 
             // Add the member update consumer if enabled in settings.
+            var memberEndPointSettings = settings.GetEndPointSettings(nameof(MemberEvent));
             if (memberEndPointSettings is { Enabled: true })
             {
                 logger.LogInformation("Member Consumer Enabled. Adding Consumer...");
                 x.AddConsumer<MemberEntityEventConsumer>();
             }
 
+            var productEndpointSettings = settings.GetEndPointSettings(nameof(ProductEvent));
             if (productEndpointSettings is { Enabled: true })
             {
                 logger.LogInformation("Product Consumer Enabled. Adding Consumer...");
                 x.AddConsumer<ProductEntityEventConsumer>();
             }
+            var orderEndpointSettings = settings.GetEndPointSettings(nameof(OrderEvent));
+            if (orderEndpointSettings is { Enabled: true })
+            {
+                logger.LogInformation("Order Consumer Enabled. Adding Consumer...");
+                x.AddConsumer<OrderEntityEventConsumer>();
+            }
+
 
             x.UsingAzureServiceBus((context, cfg) =>
             {
@@ -123,6 +131,38 @@ public class MassTransitComposer : IComposer
                             if (productEndpointSettings.ConcurrencyLimitSettings is { Enabled: true })
                             {
                                 e.UseConcurrencyLimit(productEndpointSettings.ConcurrencyLimitSettings
+                                    .ConcurrencyLimit);
+                            }
+                        });
+                }
+                if (orderEndpointSettings is { Enabled: true })
+                {
+                    cfg.SubscriptionEndpoint<EntityEvent<OrderEvent>>(
+                        subscriptionNameGenerator.GetSubscriptionName<EntityEvent<OrderEvent>>(), e =>
+                        {
+                            string sqlString = $"{nameof(EntityEvent<OrderEvent>.Source)} <> '{settings.BusEventSource}' AND {nameof(EntityEvent<OrderEvent>.Originator)} <> '{settings.BusEventSource}'";
+                            e.Rule = new CreateRuleOptions
+                            {
+                                Name = $"Filter{settings.BusEventSource}Orders",
+                                Filter = new SqlRuleFilter(sqlString)
+                            };
+                            e.ConfigureConsumer<OrderEntityEventConsumer>(context,
+                                options =>
+                                {
+                                    options.UseMessageRetry(r => r.Interval(5, 400).Handle<TransientException>());
+                                });
+
+                            // Configure rate limiting if enabled for this subscription endpoint.
+                            if (orderEndpointSettings.RateLimitSettings is { Enabled: true })
+                            {
+                                e.UseRateLimit(orderEndpointSettings.RateLimitSettings.RateLimit,
+                                    TimeSpan.FromSeconds(memberEndPointSettings.RateLimitSettings.IntervalSeconds));
+                            }
+
+                            // Configure concurrency limit if enabled for this subscription endpoint.
+                            if (orderEndpointSettings.ConcurrencyLimitSettings is { Enabled: true })
+                            {
+                                e.UseConcurrencyLimit(orderEndpointSettings.ConcurrencyLimitSettings
                                     .ConcurrencyLimit);
                             }
                         });

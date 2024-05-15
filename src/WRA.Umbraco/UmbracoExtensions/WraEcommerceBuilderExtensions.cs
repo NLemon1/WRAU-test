@@ -1,5 +1,7 @@
 using Umbraco.Commerce.Core.Adapters;
+using Umbraco.Commerce.Core.Events.Notification;
 using Umbraco.Commerce.Extensions;
+using WRA.Umbraco.Events.Notifications.Commerce;
 using WRA.Umbraco.Web.Adapters;
 
 namespace WRA.Umbraco.UmbracoExtensions;
@@ -19,6 +21,12 @@ public static class WraEcommerceBuilderExtensions
             // v.Services.AddUnique<IUmbracoProductNameExtractor, CompositeProductNameExtractor>();
 
             // Register event handlers
+            v.WithNotificationEvent<OrderFinalizedNotification>()
+                .RegisterHandler<OrderCompletedNotification>();
+
+            v.WithNotificationEvent<OrderCreatingNotification>()
+                .RegisterHandler<OrderBuiltNotification>();
+
             // v.WithNotificationEvent<OrderProductAddingNotification>()
             //     .RegisterHandler<OrderProductAddingHandler>();
 

@@ -4,6 +4,7 @@ using Umbraco.Cms.Core.Scoping;
 using Umbraco.Cms.Core.Services;
 using Umbraco.Cms.Core.Web;
 using WRA.Umbraco.Dtos;
+using WRA.Umbraco.Helpers.Constants;
 using WRA.Umbraco.Models;
 using WRA.Umbraco.Web.Dtos.External;
 
@@ -33,14 +34,14 @@ public class BoardRepository
 
             var existingBoardResult = allBoars
                 .Where(x => x.ContentType.Alias == Board.ModelTypeAlias)
-                .FirstOrDefault(x => x.Value<Guid>(GlobalAliases.ExternalId) == mb.Id);
+                .FirstOrDefault(x => x.Value<Guid>(GlobalConstants.ExternalId) == mb.Id);
 
             var board = existingBoardResult != null ?
                 contentService.GetById(existingBoardResult.Id):
                 contentService.Create(mb.Name, boardsContainer.Id, Board.ModelTypeAlias);
 
 
-            board.SetValue(GlobalAliases.ExternalId, mb.Id);
+            board.SetValue(GlobalConstants.ExternalId, mb.Id);
             board.SetValue("chapterId", mb.Chapter);
             board.SetValue("rosterOptIn", mb.RosterOptIn);
             board.SetValue("rosterOptInDate", mb.RosterOptInDate);
@@ -74,7 +75,7 @@ public class BoardRepository
             x.ContentType.Alias == Boards.ModelTypeAlias);
 
         var boardQuery = boardContainer?.Children.FirstOrDefault(x =>
-            x.Value<Guid>(GlobalAliases.ExternalId).Equals(externalId));
+            x.Value<Guid>(GlobalConstants.ExternalId).Equals(externalId));
         if (boardQuery == null)
         {
             scope.Complete();

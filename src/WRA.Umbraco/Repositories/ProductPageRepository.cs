@@ -7,6 +7,7 @@ using Umbraco.Cms.Core.Services;
 using Umbraco.Cms.Core.Web;
 using Umbraco.Commerce.Core.Models;
 using Umbraco.Commerce.Core.Services;
+using WRA.Umbraco.Helpers.Constants;
 using WRA.Umbraco.Models;
 using WRA.Umbraco.Web.Dtos.External;
 using WRA.Umbraco.Web.Dtos.WraExternal;
@@ -90,7 +91,7 @@ public class ProductPageRepository(
 
         var productsContainer = home.ChildrenOfType(ProductsPage.ModelTypeAlias).First();
         var productCategoryPages = productsContainer.ChildrenOfType(CollectionPage.ModelTypeAlias)!
-            .Where(p => p.Value<Guid>(GlobalAliases.ExternalId).Equals(productCollection.Id));
+            .Where(p => p.Value<Guid>(GlobalConstants.ExternalId).Equals(productCollection.Id));
 
         // if one doesn't have an external ID, we will do a name comparison
         if (!productCategoryPages.Any())
@@ -105,7 +106,7 @@ public class ProductPageRepository(
             contentService.Create(productCollection.Name, productsContainer.Id, CollectionPage.ModelTypeAlias);
 
         collectionPage.Name = productCollection.Name;
-        collectionPage.SetValue(GlobalAliases.ExternalId, productCollection.Id);
+        collectionPage.SetValue(GlobalConstants.ExternalId, productCollection.Id);
         collectionPage.SetValue("description", productCollection.Description);
 
         contentService.SaveAndPublish(collectionPage);

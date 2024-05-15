@@ -1,4 +1,4 @@
-namespace WRA.Umbraco.Helpers;
+namespace WRA.Umbraco.Helpers.Constants;
 
 public static class GlobalAliases
 {

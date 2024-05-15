@@ -11,6 +11,8 @@ public partial class CheckoutStepPage
     public virtual OrderReadOnly Order => this.GetCurrentOrder();
     public string ReadableShippingAddress => Order.ReadableShippingAddress();
 
+    public string? MemberAttachedToOrder => Order.CustomerInfo.CustomerReference;
+
     public CheckoutStepPage CurrentStep => CheckoutPage.Steps.Where(x => x.Id == this.Id).FirstOrDefault();
 
     public CheckoutStepPage PreviousStep => CheckoutPage.Steps.TakeWhile(x => !x.Id.Equals(this.Id)).LastOrDefault();

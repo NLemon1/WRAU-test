@@ -2,6 +2,7 @@ using Umbraco.Cms.Core.Mapping;
 using Umbraco.Cms.Core.Models;
 using WRA.Umbraco.Contracts;
 using WRA.Umbraco.Extensions;
+using WRA.Umbraco.Helpers.Constants;
 using WRA.Umbraco.Web.Dtos.External;
 
 namespace WRA.Umbraco.Mapping;
@@ -19,7 +20,7 @@ public class ProductMapping(
 
     private void ContentToProductEvent(IContent content, ProductEvent productEvent, MapperContext _)
     {
-        productEvent.Id = content.GetValue<Guid>(GlobalAliases.ExternalId);
+        productEvent.Id = content.GetValue<Guid>(GlobalConstants.ExternalId);
         productEvent.Sku = content.GetValue<string>(GlobalAliases.Sku);
         productEvent.Name = content.Name;
         productEvent.Description = content.GetValue<string>("description").SafeString();

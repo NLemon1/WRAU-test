@@ -4,6 +4,7 @@ using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Cms.Core.Scoping;
 using Umbraco.Cms.Core.Services;
 using Umbraco.Cms.Core.Web;
+using WRA.Umbraco.Helpers.Constants;
 using WRA.Umbraco.Models;
 using WRA.Umbraco.Web.Dtos.External;
 
@@ -33,13 +34,13 @@ public class TaxonomyRepository(
         }
 
         var existingTaxonomy = allTaxonomy.FirstOrDefault(t =>
-            t.Value<Guid>(GlobalAliases.ExternalId) == taxonomyDto.Id);
+            t.Value<Guid>(GlobalConstants.ExternalId) == taxonomyDto.Id);
 
         var taxonomy = existingTaxonomy != null ?
             contentService.GetById(existingTaxonomy.Id) :
             contentService.Create(taxonomyDto.Name, taxonomyContainer.Id, ProductTaxonomy.ModelTypeAlias);
 
-        taxonomy.SetValue(GlobalAliases.ExternalId, taxonomyDto.Id);
+        taxonomy.SetValue(GlobalConstants.ExternalId, taxonomyDto.Id);
         taxonomy.SetValue("description", taxonomyDto.Description);
         contentService.SaveAndPublish(taxonomy);
         scope.Complete();
@@ -57,7 +58,7 @@ public class TaxonomyRepository(
         var allTaxonomy = contentCache.GetByContentType(taxonomyType);
 
         var existingTaxonomy = allTaxonomy.FirstOrDefault(t =>
-            t.Value<Guid>(GlobalAliases.ExternalId) == externalId);
+            t.Value<Guid>(GlobalConstants.ExternalId) == externalId);
         scope.Complete();
         return existingTaxonomy;
     }

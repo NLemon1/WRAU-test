@@ -7,6 +7,7 @@ using Umbraco.Cms.Core.Services;
 using Umbraco.Cms.Core.Web;
 using WRA.Umbraco.Contracts;
 using WRA.Umbraco.Extensions;
+using WRA.Umbraco.Helpers.Constants;
 using WRA.Umbraco.Models;
 using WRA.Umbraco.Repositories;
 
@@ -20,6 +21,7 @@ public class WraProductManagementService(
     ProductPageRepository productPageRepository)
 {
     [DisableConcurrentExecution(timeoutInSeconds: 5)]
+    [AutomaticRetry(Attempts = 1, OnAttemptsExceeded = AttemptsExceededAction.Fail)]
     public async Task<IContent?> CreateOrUpdate(ProductEvent productEvent)
     {
         try
@@ -42,7 +44,7 @@ public class WraProductManagementService(
             var collectionPages = contentCache.GetByContentType(productCollectionPageType);
 
             var collectionPage = collectionPages.FirstOrDefault(c =>
-                c.Value(GlobalAliases.ExternalId).Equals(productEvent.ProductTypeId));
+                c.Value(GlobalConstants.ExternalId).Equals(productEvent.ProductTypeId));
 
             // collection page doesn't exist and needs to be created
             // maybe exception instead?

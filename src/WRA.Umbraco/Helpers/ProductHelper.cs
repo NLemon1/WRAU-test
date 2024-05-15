@@ -11,6 +11,7 @@ using Umbraco.Cms.Core.Scoping;
 using Umbraco.Commerce.Core.Models;
 using Umbraco.Commerce.Core.Services;
 using WRA.Umbraco.Extensions;
+using WRA.Umbraco.Helpers.Constants;
 using WRA.Umbraco.Models;
 using WRA.Umbraco.Repositories;
 
@@ -52,7 +53,7 @@ public class ProductHelper(
         if (categories != null)
         {
             // get category node Udi. This is fully qualified node reference.
-            var categoryPageUdi = Udi.Create(Constants.UdiEntityType.Document, categories.Key);
+            var categoryPageUdi = Udi.Create(umbracoConstants.UdiEntityType.Document, categories.Key);
             List<string> categoryUdis = new() { categoryPageUdi.ToString() };
 
             // set category uid on content (product)
@@ -84,7 +85,7 @@ public class ProductHelper(
 
         content.SetValue("price", basePrice);
         content.SetValue("memberPrice", memberPrice);
-        content.SetValue(GlobalAliases.ExternalId, productEvent.Id);
+        content.SetValue(GlobalConstants.ExternalId, productEvent.Id);
         content.Name = productEvent.Name;
 
         var existingTaxonomy = taxonomyRepository.Get(productEvent.ProductTaxonomyId.SafeGuid());
@@ -106,7 +107,7 @@ public class ProductHelper(
             .Where(c => c.ContentType.Alias == CategoryPage.ModelTypeAlias);
 
         var category = categoryPages.First(c =>
-            c.Value<Guid>(GlobalAliases.ExternalId).Equals(categoryId));
+            c.Value<Guid>(GlobalConstants.ExternalId).Equals(categoryId));
 
         // Get Subcategory. Make sure the parent (which should be a category) matches the
         // category we just got back form the previous query.
@@ -115,8 +116,8 @@ public class ProductHelper(
                 sc.ContentType.Alias == SubCategoryPage.ModelTypeAlias)
             .First(x =>
                 x.Parent != null &&
-                x.Value<Guid>(GlobalAliases.ExternalId) == subCategoryId &&
-                x.Parent.Value<Guid>(GlobalAliases.ExternalId) == categoryId);
+                x.Value<Guid>(GlobalConstants.ExternalId) == subCategoryId &&
+                x.Parent.Value<Guid>(GlobalConstants.ExternalId) == categoryId);
 
 
         // return both.

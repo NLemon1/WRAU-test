@@ -3,6 +3,7 @@ using Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Cms.Core.Web;
 using WRA.Umbraco.Extensions;
+using WRA.Umbraco.Helpers.Constants;
 
 namespace WRA.Umbraco.Helpers;
 
@@ -33,7 +34,7 @@ public class MappingHelper(
     public Guid GetExternalIdOnContent(IContentBase content, string alias)
     {
         var relatedContent = GetRelatedContent(content, alias);
-        return relatedContent?.Value<Guid>(GlobalAliases.ExternalId) ?? Guid.Empty;
+        return relatedContent?.Value<Guid>(GlobalConstants.ExternalId) ?? Guid.Empty;
     }
 
     public Guid GetExternalIdOnParent(IContentBase content)
@@ -42,6 +43,6 @@ public class MappingHelper(
         var contentQuery = umbracoContextReference.UmbracoContext.Content;
         var contentNode = contentQuery.GetById(content.Id);
         var parent = contentNode?.Parent;
-        return parent?.Value<Guid>(GlobalAliases.ExternalId) ?? Guid.Empty;
+        return parent?.Value<Guid>(GlobalConstants.ExternalId) ?? Guid.Empty;
     }
 }

@@ -54,8 +54,4 @@
       <NoWarn>1570</NoWarn>
     </Compile>
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Web\Dtos\Member\" />
-  </ItemGroup>
 </Project>

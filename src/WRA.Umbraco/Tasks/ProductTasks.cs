@@ -6,6 +6,7 @@ using Umbraco.Cms.Core.Mapping;
 using Umbraco.Cms.Core.Scoping;
 using WRA.Umbraco.Contracts;
 using WRA.Umbraco.Dtos;
+using WRA.Umbraco.Helpers.Constants;
 using WRA.Umbraco.Repositories;
 using WRA.Umbraco.Web.Dtos.External;
 using WRA.Umbraco.Web.Dtos.WraExternal;
@@ -124,7 +125,7 @@ public class ProductTasks(
         // for example, a lock can occur when a product is updated and index build is kicked off. doing these hundreds
         // at a time causes a lock. After this process finishes, a manual rebuild of the content cache, and indexes will
         // be necessary. This is a temporary fix until we can figure out a better way to handle this.
-        // scope.Notifications.Suppress();
+        scope.Notifications.Suppress();
 
         var productsResp = await externalApiService.GetProducts();
         string? content = productsResp.Content;

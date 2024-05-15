@@ -67,6 +67,7 @@ public class CustomServiceComposer : IComposer
 
         builder.Services.AddTransient<MemberEventPublisher>();
         builder.Services.AddTransient<ProductEventPublisher>();
+        builder.Services.AddTransient<OrderEventPublisher>();
         // custom table repositories
 
 

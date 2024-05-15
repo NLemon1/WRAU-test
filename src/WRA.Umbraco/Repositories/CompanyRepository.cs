@@ -6,6 +6,8 @@ using Umbraco.Cms.Core.Scoping;
 using Umbraco.Cms.Core.Services;
 using Umbraco.Cms.Core.Web;
 using WRA.Umbraco.Dtos;
+using WRA.Umbraco.Extensions;
+using WRA.Umbraco.Helpers.Constants;
 using WRA.Umbraco.Models;
 using WRA.Umbraco.Web.Dtos.External;
 
@@ -34,7 +36,7 @@ public class CompanyRepository(
             var companyType = contentCache.GetContentType(Company.ModelTypeAlias);
             var companies = contentCache.GetByContentType(companyType);
             var company = companies.FirstOrDefault(c =>
-                c.Value<Guid>(GlobalAliases.ExternalId).Equals(externalCompanyId));
+                c.Value<Guid>(GlobalConstants.ExternalId).Equals(externalCompanyId));
 
             return company;
         }
@@ -46,22 +48,14 @@ public class CompanyRepository(
     }
 
     [DisableConcurrentExecution(10)]
+    [AutomaticRetry(Attempts = 0, OnAttemptsExceeded = AttemptsExceededAction.Fail)]
     public IContent? CreateOrUpdate(ExternalCompanyDto companyDto)
     {
         try
         {
             using var scope = coreScopeProvider.CreateCoreScope();
 
-            using var umbracoContextReference = umbracoContextFactory.EnsureUmbracoContext();
-            var contentCache = umbracoContextReference.UmbracoContext.Content;
-
-            var companiesPageType = contentCache.GetContentType(Companies.ModelTypeAlias);
-            contentCache.GetByContentType(companiesPageType);
-            var siteRoot = contentCache?.GetAtRoot().FirstOrDefault();
-            var companiesContainer = siteRoot?.Children
-                .FirstOrDefault(x => x.ContentType.Alias == Companies.ModelTypeAlias);
-
-            var externalId = Guid.Parse(companyDto.ExternalId);
+            var externalId = companyDto.ExternalId.SafeGuid();
             var existingCompany = GetByExternalId(externalId);
             if (existingCompany != null)
             {
@@ -73,21 +67,19 @@ public class CompanyRepository(
                 return existingCompanyContent;
             }
 
-            logger.LogInformation("Creating company: {name} - {ExternalId}",
-                companyDto.name, companyDto.ExternalId);
-            if (string.IsNullOrEmpty(companyDto?.name) || string.IsNullOrEmpty(companyDto?.ExternalId))
+            if (string.IsNullOrEmpty(companyDto.name) || string.IsNullOrEmpty(companyDto.ExternalId))
             {
                 logger.LogError("Company name or externalId is null. Cannot create company.");
                 scope.Complete();
                 return null;
             }
 
-            if (companiesContainer == null)
-            {
-                logger.LogInformation("Companies container not found. Cannot create company.");
-                return null;
-            }
+            using var umbracoContextReference = umbracoContextFactory.EnsureUmbracoContext();
+            var contentCache = umbracoContextReference.UmbracoContext.Content;
+            var companiesContainerType = contentCache.GetContentType(Companies.ModelTypeAlias);
+            if (companiesContainerType == null) return null;
 
+            var companiesContainer = contentCache.GetByContentType(companiesContainerType)?.FirstOrDefault();
             var newCompany = contentService.Create(companyDto.name, companiesContainer.Id, Company.ModelTypeAlias);
 
             SetCompanyProperties(newCompany, companyDto);
@@ -105,9 +97,36 @@ public class CompanyRepository(
         }
     }
 
+    public bool Delete(ExternalCompanyDto companyDto)
+    {
+        try
+        {
+            using var scope = coreScopeProvider.CreateCoreScope();
+
+            var externalId = companyDto.ExternalId.SafeGuid();
+            var existingCompany = GetByExternalId(externalId);
+            if (existingCompany == null)
+            {
+                logger.LogError("Company with externalId {ExternalId} not found. Cannot delete company.", companyDto.ExternalId);
+                scope.Complete();
+                return false;
+            }
+
+            var contentToDelete = contentService.GetById(existingCompany.Id);
+            contentService.Delete(contentToDelete);
+            scope.Complete();
+            return true;
+        }
+        catch (Exception e)
+        {
+            logger.LogError(e,"Error deleting company with externalId {ExternalId}", companyDto.ExternalId);
+            throw;
+        }
+    }
+
     private IContent SetCompanyProperties(IContent company, ExternalCompanyDto companyDto)
     {
-        company.SetValue(GlobalAliases.ExternalId, companyDto.ExternalId);
+        company.SetValue(GlobalConstants.ExternalId, companyDto.ExternalId);
         company.SetValue("organizationCode", companyDto.organizationCode);
         company.SetValue("memberTypeId", companyDto.memberTypeId.ToString());
         company.SetValue("companyCategory", companyDto.category);

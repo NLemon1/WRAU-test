@@ -13,7 +13,8 @@ namespace WRA.Umbraco.Composers
                 .Add<MemberMapping>()
                 .Add<ProductMapping>()
                 .Add<CategoryMapping>()
-                .Add<SubscriptionMapping>();
+                .Add<SubscriptionMapping>()
+                .Add<OrderMapping>();
         }
     }
 }

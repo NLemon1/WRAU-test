@@ -5,6 +5,7 @@ using Umbraco.Cms.Core.Services;
 using Microsoft.Extensions.Logging;
 using Umbraco.Cms.Core.Models;
 using WRA.Umbraco.Helpers;
+using WRA.Umbraco.Helpers.Constants;
 
 namespace WRA.Umbraco.Events;
 public class TransformMemberExamineValues(IExamineManager examineManager,
@@ -35,8 +36,8 @@ public class TransformMemberExamineValues(IExamineManager examineManager,
                         {
                             int id = int.Parse(memberId);
                             IMember? member = _memberService.GetById(id);
-                            string? externalId = member?.GetValue(GlobalAliases.ExternalId)?.ToString() ?? string.Empty;
-                            SetOrUpdateExamineValue(values, GlobalAliases.ExternalId, externalId);
+                            string? externalId = member?.GetValue(GlobalConstants.ExternalId)?.ToString() ?? string.Empty;
+                            SetOrUpdateExamineValue(values, GlobalConstants.ExternalId, externalId);
                         }
                     }
                 };
