@@ -66,8 +66,6 @@
         <None Update="cmsimport.lic">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
-        <Content Remove="Views\Partials\Forms\Emails\Example-Template.cshtml" />
-        <None Include="Views\Partials\Forms\Emails\Example-Template.cshtml" />
     </ItemGroup>
 
 
