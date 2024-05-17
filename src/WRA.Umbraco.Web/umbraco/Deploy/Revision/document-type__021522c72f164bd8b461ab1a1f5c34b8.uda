@@ -28,7 +28,6 @@
           "Key": "7f5b4eb6-7f31-4e32-b016-127fa56c2532",
           "Alias": "content",
           "DataType": "umb://data-type/9001e1a4d3d940178577caf42c500db5",
-          "Mandatory": true,
           "Name": "Content",
           "SortOrder": 1
         },
