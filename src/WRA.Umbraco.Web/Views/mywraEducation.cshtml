@@ -4,6 +4,7 @@
 @{
     Layout = "~/Views/_Layout.cshtml";
     var content = (ContentModels.MywraEducation)Model;
+    var orders = content.Orders;
 }
 
 <div class="w-100">
@@ -25,6 +26,94 @@
                     {
                         <div class="rich-text mb-5">
                             @Html.Raw(content.IntroContent)
+                        </div>
+                    }
+                </div>
+
+                <!-- Order History -->
+                <div class="w-100 py-4 border border-medium rounded mb-5">
+                    <h3 class="h5 py-2 px-4">Order History</h3>
+                    <table class="table-courses w-100 fs-sm">
+                        <thead class="fw-bold" style="background: var(--bs-gray-10)">
+                            <tr>
+                                <th class="py-2">Order ID</th>
+                                <th class="py-2">Order Date</th>
+                                <th class="py-2">Order Total</th>
+                                <th class="py-2">Order Status</th>
+                            </tr>
+                        </thead>
+                        <tbody style="color: var(--bs-gray-30)">
+                            @foreach (var order in orders)
+                            {
+                                <tr>
+                                    <td class="py-2">
+                                        <button class="px-0 py-2 border-0 bg-transparent text-decoration-underline text-primary" type="button" data-a11y-dialog-show="order-@order.OrderId-details">@order.OrderId</button>
+                                    </td>
+                                    <td class="py-2">@order.OrderDate.ToString("MMM dd, yyyy")</td>
+                                    <td class="py-2">@order.OrderTotal.ToString("C")</td>
+                                    <td class="py-2">@order.OrderStatus</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                    <!-- Order Detail (dialog opened by clicking on order ID above) -->
+                    @foreach (var order in orders)
+                    {
+                        var lineItems = order.OrderLineItems;
+
+                        <div id="order-@order.OrderId-details" class="js-dialog dialog-container" aria-hidden="true">
+                            <div class="dialog-overlay" data-a11y-dialog-hide></div>
+                            <div class="dialog-content-wrapper" style="max-width: 824px; max-height: 75vh;" role="document">
+                                <div class="dialog-content-header">
+                                    <h2 class="h4 mb-0">Order #@order.OrderId</h2>
+                                    <button type="button" data-a11y-dialog-hide aria-label="Close dialog">
+                                        &times;
+                                    </button>
+                                </div>
+                                <div class="dialog-content p-5 pb-3 fs-sm">
+                                    @foreach (var lineItem in lineItems)
+                                    {
+                                        <div class="accordions-wrapper accordions-wrapper--border accordions-wrapper--border--light mb-3">
+                                            <details class="accordion">
+                                                <summary class="accordion__toggle px-3">
+                                                    <span class="flex-grow-1">@lineItem.Title</span>
+                                                    <span class="d-none d-md-inline">Qty: @Math.Round(lineItem.Quantity)</span>
+                                                    <span class="d-none d-md-inline">@lineItem.Price.ToString("C")</span>
+                                                    <div class="accordion__toggle-icon me-1">
+                                                        <i class="fas fa-chevron-down"></i>
+                                                        <i class="fas fa-chevron-up"></i>
+                                                    </div>
+                                                </summary>
+                                                <div class="accordion__content px-3 text-body">
+                                                    <table class="table table-sm table-striped mb-0">
+                                                        <tr>
+                                                            <th>SKU</th>
+                                                            <td>@lineItem.SKU</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Title</th>
+                                                            <td>@lineItem.Title</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Description</th>
+                                                            <td>@lineItem.Description</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Quantity</th>
+                                                            <td>@Math.Round(lineItem.Quantity)</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Price</th>
+                                                            <td>@lineItem.Price.ToString("C")</td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </details>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
                         </div>
                     }
                 </div>
