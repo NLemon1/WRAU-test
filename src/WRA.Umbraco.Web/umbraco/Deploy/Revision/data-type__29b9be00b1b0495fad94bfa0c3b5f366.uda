@@ -5,7 +5,7 @@
   "Configuration": {
     "startNode": {
       "type": "content",
-      "id": "umb://document/999da2f6cf2d482d94c34ace3a0b3dc0"
+      "id": "umb://document/2fad0774afe4448ea512e39299a4ff7d"
     },
     "filter": "legalUpdateTopic",
     "minNumber": 1,
