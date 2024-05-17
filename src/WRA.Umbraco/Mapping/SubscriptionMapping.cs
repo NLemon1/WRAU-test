@@ -33,8 +33,8 @@ public class SubscriptionMapping(
 
     private void DtoToMemberSubscription(ExternalMemberSubscriptionDto source, MemberSubscription target, MapperContext _)
     {
-        target.MemberId = memberRepository.GetByExternalId(source.MemberId).Id;
-        target.ProductId = productPageRepository.GetBySku(source.ProductSku).Id;
+        target.MemberId = memberRepository.GetByExternalId(source.MemberId)?.Id ?? 0;
+        target.ProductId = productPageRepository.GetBySku(source.ProductSku)?.Id ?? 0;
         target.ExternalId = source.Id.SafeGuid();
         target.BeginDate = source.BeginDate;
         target.PaidThruDate = source.PaidThru;

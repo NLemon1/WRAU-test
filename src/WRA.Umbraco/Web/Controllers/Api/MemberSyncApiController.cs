@@ -66,10 +66,10 @@ public class MemberSyncApiController(
 
     [HttpPost]
     [Route("SyncMemberByExternalId")]
-    public Task<IActionResult> SyncMemberByExternalId(Guid externalId)
+    public async Task<IActionResult> SyncMemberByExternalId(Guid externalId)
     {
-        var result = memberTasks.SyncMemberByExternalId(externalId);
-        return Task.FromResult<IActionResult>(Ok(result.IsCompletedSuccessfully));
+        var result = await memberTasks.SyncMemberByExternalId(externalId);
+        return await Task.FromResult<IActionResult>(Ok($"{result.Id} - {result.Name}"));
     }
 
     [HttpPost]
@@ -162,10 +162,10 @@ public class MemberSyncApiController(
 
     [HttpPost]
     [Route("SyncCompanyByExternalId")]
-    public Task<IActionResult> SyncCompanyByExternalId(Guid Id)
+    public async Task<IActionResult> SyncCompanyByExternalId(Guid Id)
     {
-        var result = memberTasks.SyncCompanyByExternalId(Id);
-        return Task.FromResult<IActionResult>(Ok(result.Id));
+        var result = await memberTasks.SyncCompanyByExternalId(Id);
+        return await Task.FromResult<IActionResult>(Ok($"{result.Id} - {result.Name}"));
     }
 
 
@@ -214,12 +214,12 @@ public class MemberSyncApiController(
 
     [HttpPost]
     [Route("SyncMemberSubscriptionByExternalId")]
-    public Task<IActionResult> SyncMemberSubscriptionByExternalId(Guid Id)
+    public async Task<IActionResult> SyncMemberSubscriptionByExternalId(Guid Id)
     {
         try
         {
-            var result = memberTasks.SyncMemberSubscriptionByExternalId(Id);
-            return Task.FromResult<IActionResult>(Ok(result.Id));
+            bool result = await memberTasks.SyncMemberSubscriptionByExternalId(Id);
+            return await Task.FromResult<IActionResult>(Ok(result));
         }
         catch (Exception e)
         {
@@ -252,12 +252,12 @@ public class MemberSyncApiController(
 
     [HttpPost]
     [Route("SyncCompanySubscriptionByExternalId")]
-    public Task<IActionResult> SyncCompanySubscriptionByExternalId(Guid Id)
+    public async Task<IActionResult> SyncCompanySubscriptionByExternalId(Guid Id)
     {
         try
         {
-            var result = memberTasks.SyncCompanyByExternalId(Id);
-            return Task.FromResult<IActionResult>(Ok(result.Id));
+            var result = await memberTasks.SyncCompanyByExternalId(Id);
+            return await Task.FromResult<IActionResult>(Ok($"{result.Id} - {result.Name}"));
         }
         catch (Exception e)
         {

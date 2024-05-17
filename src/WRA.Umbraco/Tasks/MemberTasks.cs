@@ -2,6 +2,7 @@ using System.Text.Json;
 using Hangfire;
 using Microsoft.Extensions.Logging;
 using Umbraco.Cms.Core.Mapping;
+using Umbraco.Cms.Core.Models;
 using WRA.Umbraco.Contracts;
 using WRA.Umbraco.CustomTables.Subscriptions;
 using WRA.Umbraco.Dtos;
@@ -90,20 +91,20 @@ public class MemberTasks(
         }
     }
 
-    public async Task<bool> SyncMemberByExternalId(Guid externalId)
+    public async Task<IMember?> SyncMemberByExternalId(Guid externalId)
     {
         try
         {
             var memberResp = await wraExternalApiService.GetMemberById(externalId);
-            if (memberResp.Content == null) return false;
+            if (memberResp.Content == null) return null;
             var member =
                 JsonSerializer.Deserialize<ExternalMemberDto>(memberResp.Content, SerializationOptions);
 
-            if (member == null) return false;
+            if (member == null) return null;
             var memberEvent = mapper.Map<MemberEvent>(member);
-            await wraMemberManagementService.CreateOrUpdate(memberEvent);
+            var memberResult = await wraMemberManagementService.CreateOrUpdate(memberEvent);
 
-            return true;
+            return memberResult;
         }
         catch (Exception e)
         {
@@ -137,18 +138,18 @@ public class MemberTasks(
             throw;
         }
     }
-    public async Task<bool> SyncCompanyByExternalId(Guid externalId)
+    public async Task<IContent?> SyncCompanyByExternalId(Guid externalId)
     {
         try
         {
             var companyResp = await wraExternalApiService.GetCompanyById(externalId);
-            if (companyResp.Content == null) return false;
+            if (companyResp.Content == null) return null;
             var company =
                 JsonSerializer.Deserialize<ExternalCompanyDto>(companyResp.Content, SerializationOptions);
 
-            if (company == null) return false;
-            companyRepository.CreateOrUpdate(company);
-            return true;
+            if (company == null) return null;
+            var companyResult = companyRepository.CreateOrUpdate(company);
+            return companyResult;
         }
         catch (Exception e)
         {
