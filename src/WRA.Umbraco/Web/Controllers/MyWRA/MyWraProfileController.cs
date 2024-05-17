@@ -13,6 +13,7 @@ using Umbraco.Cms.Core.Services;
 using Umbraco.Cms.Core.Web;
 using Umbraco.Cms.Web.Common.Controllers;
 using Umbraco.Cms.Web.Common.Security;
+using WRA.Umbraco.Helpers.Constants;
 using WRA.Umbraco.Models;
 using WRA.Umbraco.Web.Dtos.External;
 using WRA.Umbraco.Web.Services;
@@ -22,16 +23,19 @@ public class MyWraProfileController : RenderController
 {
     private readonly IMemberManager _memberManager;
     private readonly IPublishedValueFallback _publishedValueFallback;
+    private readonly MemberDonationService _memberDonationService;
     public MyWraProfileController(
         ILogger<RenderController> logger,
         ICompositeViewEngine compositeViewEngine,
         IUmbracoContextAccessor umbracoContextAccessor,
         IMemberManager memberManager,
-        IPublishedValueFallback publishedValueFallback)
+        IPublishedValueFallback publishedValueFallback,
+        MemberDonationService memberDonationService)
         : base(logger, compositeViewEngine, umbracoContextAccessor)
     {
         _memberManager = memberManager;
         _publishedValueFallback = publishedValueFallback;
+        _memberDonationService = memberDonationService;
     }
 
     public override IActionResult Index()
@@ -40,6 +44,15 @@ public class MyWraProfileController : RenderController
         if (currentMember != null)
         {
             MywraProfile viewModel = new(CurrentPage!, _publishedValueFallback);
+            var roles = _memberManager.GetRolesAsync(currentMember).GetAwaiter().GetResult();
+            if (roles.Any(r => r.Equals("WRA Member", StringComparison.OrdinalIgnoreCase)))
+            {
+                viewModel.IsMember = true;
+                var member = _memberManager.AsPublishedMember(currentMember);
+                var externalID = member.Value(GlobalConstants.ExternalId)?.ToString() ?? string.Empty;
+                viewModel.MemberDonations = _memberDonationService.GetMemberDonations(externalID).GetAwaiter().GetResult();
+            }
+
             return CurrentTemplate(viewModel);
         }
         else
