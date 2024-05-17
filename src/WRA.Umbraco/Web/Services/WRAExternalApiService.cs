@@ -64,6 +64,17 @@ public class WraExternalApiService(WraExternalApiSettings settings)
         return response;
     }
 
+    public async Task<RestResponse> GetBoardByID(Guid Id)
+    {
+        var options = new RestClientOptions(settings.VersionedBaseUrl);
+        var client = new RestClient(options);
+        var request = new RestRequest($"localboard/{Id}");
+        request.AddHeader(settings.ApiKeyHeader, settings.ApiKey);
+        var response = await client.GetAsync(request);
+
+        return response;
+    }
+
     public async Task<RestResponse> GetProductTypes()
     {
         var options = new RestClientOptions(settings.VersionedBaseUrl);
@@ -83,6 +94,16 @@ public class WraExternalApiService(WraExternalApiSettings settings)
         var request = new RestRequest("member/search").AddBody(new { keyword = string.Empty, pageSize = amount, pageNumber = 1 });
         request.AddHeader(settings.ApiKeyHeader, settings.ApiKey);
         var response = await client.PostAsync(request);
+
+        return response;
+    }
+    public async Task<RestResponse> GetMemberById(Guid Id)
+    {
+        var options = new RestClientOptions(settings.VersionedBaseUrl);
+        var client = new RestClient(options);
+        var request = new RestRequest($"member/{Id}");
+        request.AddHeader(settings.ApiKeyHeader, settings.ApiKey);
+        var response = await client.GetAsync(request);
 
         return response;
     }
@@ -108,12 +129,32 @@ public class WraExternalApiService(WraExternalApiSettings settings)
 
         return response;
     }
+    public async Task<RestResponse> GetCompanyById(Guid Id)
+    {
+        var options = new RestClientOptions(settings.VersionedBaseUrl);
+        var client = new RestClient(options);
+        var request = new RestRequest($"company/{Id}");
+        request.AddHeader(settings.ApiKeyHeader, settings.ApiKey);
+        var response = await client.GetAsync(request);
+
+        return response;
+    }
 
     public async Task<RestResponse> GetMemberSubscriptions()
     {
         var options = new RestClientOptions(settings.VersionedBaseUrl);
         var client = new RestClient(options);
         var request = new RestRequest("membersubscription");
+        request.AddHeader(settings.ApiKeyHeader, settings.ApiKey);
+        var response = await client.GetAsync(request);
+
+        return response;
+    }
+    public async Task<RestResponse> GetMemberSubscriptionById(Guid Id)
+    {
+        var options = new RestClientOptions(settings.VersionedBaseUrl);
+        var client = new RestClient(options);
+        var request = new RestRequest($"membersubscription/{Id}");
         request.AddHeader(settings.ApiKeyHeader, settings.ApiKey);
         var response = await client.GetAsync(request);
 
@@ -131,6 +172,16 @@ public class WraExternalApiService(WraExternalApiSettings settings)
         return response;
     }
 
+    public async Task<RestResponse> GetCompanySubscriptionById(Guid Id)
+    {
+        var options = new RestClientOptions(settings.VersionedBaseUrl);
+        var client = new RestClient(options);
+        var request = new RestRequest($"companysubscription/{Id}");
+        request.AddHeader(settings.ApiKeyHeader, settings.ApiKey);
+        var response = await client.GetAsync(request);
+
+        return response;
+    }
     public async Task<RestResponse> GetMemberOrderHistory(string id)
     {
         var options = new RestClientOptions(settings.VersionedBaseUrl);

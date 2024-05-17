@@ -38,26 +38,36 @@ public class OrderMapping(
                     source.Properties[CommerceConstants.Billing.State];
                 target.Zip = memberAttachedToOrder.GetValue<string>(GlobalConstants.Member.ZipCode) ??
                               source.Properties[CommerceConstants.Billing.ZipCode];
-                target.Phone = memberAttachedToOrder.GetValue<string>(GlobalConstants.Member.Telephone) ?? string.Empty;
+                target.WorkPhone = memberAttachedToOrder.GetValue<string>(GlobalConstants.Member.WorkPhone) ?? string.Empty;
+                target.CellPhone = memberAttachedToOrder.GetValue<string>(GlobalConstants.Member.CellPhone) ?? string.Empty;
+                target.HomePhone = memberAttachedToOrder.GetValue<string>(GlobalConstants.Member.HomePhone) ?? string.Empty;
             }
         }
 
-        foreach (var adjustment in source.TotalPrice.Adjustments)
+        foreach (var orderLine in source.OrderLines)
         {
-            // if (adjustment.Name == )
-            // {
-            //     target.DiscountAmount = adjustment.Value;
-            // }
-
+            var adjustments = orderLine.TotalPrice.Adjustments;
+            var externalOrderLine = new ExternalOrderLine
+            {
+                Sku = orderLine.Sku,
+                Quantity = orderLine.Quantity,
+                Price = orderLine.TotalPrice.Value,
+                Tax = orderLine.TotalPrice.Value.Tax,
+                Discount = orderLine.TotalPrice.TotalAdjustment.WithoutTax,
+                BasePrice = orderLine.BasePrice,
+                UnitPrice = orderLine.UnitPrice,
+                Total = orderLine.TotalPrice
+            };
+            target.OrderLines.Add(externalOrderLine);
         }
+
         target.Id = source.Id;
         target.OrderDate = source.CreateDate;
-        target.ShippingAddress = OrderHelper.GetShippingAddress(source);
-        target.BillingAddress = OrderHelper.GetBillingAddress(source);
+        target.ShippingAddress = OrderPropertyHelper.GetShippingAddress(source);
+        target.BillingAddress = OrderPropertyHelper.GetBillingAddress(source);
         target.SubTotalAmount = source.SubtotalPrice;
-        target.TaxAmount = source.TaxRate.Value;
+        target.TaxAmount = source.TotalPrice.Value.Tax;
         target.DiscountAmount = source.TotalPrice.TotalAdjustment.WithoutTax;
         target.NetTotalAmount = source.TotalPrice.Value;
     }
-
 }

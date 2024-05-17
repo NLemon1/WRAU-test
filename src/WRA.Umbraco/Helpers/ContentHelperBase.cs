@@ -3,6 +3,7 @@ using Umbraco.Cms.Core.Cache;
 using Umbraco.Cms.Core.Models;
 using WRA.Umbraco.Contracts;
 using WRA.Umbraco.Services.Caching;
+using WRA.Umbraco.Web.Dtos.Member;
 
 namespace WRA.Umbraco.Helpers;
 

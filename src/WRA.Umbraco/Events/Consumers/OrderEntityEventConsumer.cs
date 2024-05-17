@@ -1,14 +1,19 @@
 using Hangfire;
 using MassTransit;
 using Microsoft.Extensions.Logging;
+using Umbraco.Commerce.Core.Api;
+using Umbraco.Commerce.Core.Models;
 using WRA.Umbraco.Contracts;
+using WRA.Umbraco.Helpers.Constants;
+using WRA.Umbraco.Repositories;
 using WRA.Umbraco.Web.Dtos.External;
 using WRA.Umbraco.Web.Services;
 
 namespace WRA.Umbraco.Events.Consumers;
 
 public class OrderEntityEventConsumer(
-    ILogger<OrderEntityEventConsumer> logger)
+    ILogger<OrderEntityEventConsumer> logger,
+    OrderRepository orderRepository)
     : IConsumer<EntityEvent<OrderEvent>>
 {
     public async Task Consume(ConsumeContext<EntityEvent<OrderEvent>> context)
@@ -19,22 +24,10 @@ public class OrderEntityEventConsumer(
             switch (context.Message.Action)
             {
                 case EntityEventAction.Update:
-                   // BackgroundJob.Enqueue<WraMemberManagementService>(x => x.CreateOrUpdate(member));
                     logger.LogInformation("Order update task queued.");
+                    BackgroundJob.Enqueue<OrderRepository>(x => x.Update(order));
                     await Task.CompletedTask;
                     break;
-                // case EntityEventAction.Create:
-                //     logger.LogInformation("Creating member: {Member}.", member.Id);
-                //     BackgroundJob.Enqueue<WraMemberManagementService>(x => x.CreateOrUpdate(member));
-                //     logger.LogInformation("Member create task queued.");
-                //     await Task.CompletedTask;
-                //     break;
-                // case EntityEventAction.Delete:
-                //     logger.LogInformation("Deleting member: {Member}.", member.Id);
-                //     BackgroundJob.Enqueue<WraMemberManagementService>(x => x.Delete(member));
-                //     logger.LogInformation("Member delete task queued.");
-                //     await Task.CompletedTask;
-                //     break;
                 default:
                     logger.LogInformation("Member action not supported: {Action}.", context.Message.Action);
                     break;

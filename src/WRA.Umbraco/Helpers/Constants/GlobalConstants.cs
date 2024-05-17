@@ -12,7 +12,9 @@ public static class GlobalConstants
         public const string FirstName = "firstName";
         public const string LastName = "lastName";
         public const string Email = "email";
-        public const string Telephone = "telephone";
+        public const string WorkPhone = "workPhone";
+        public const string HomePhone = "homePhone";
+        public const string CellPhone = "cellPhone";
         public const string AddressLine1 = "addressLine1";
         public const string AddressLine2 = "addressLine2";
         public const string City = "city";

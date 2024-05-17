@@ -8,6 +8,7 @@ using WRA.Umbraco.Extensions;
 using WRA.Umbraco.Helpers.Constants;
 using WRA.Umbraco.Repositories;
 using WRA.Umbraco.Services.Caching;
+using WRA.Umbraco.Web.Dtos.Member;
 
 namespace WRA.Umbraco.Helpers;
 
@@ -41,6 +42,7 @@ public class MemberHelper(
         scope.Complete();
         return target;
     }
+
 
     private static void SetSensitiveData(IMember existingMember, string hash, string salt)
     {

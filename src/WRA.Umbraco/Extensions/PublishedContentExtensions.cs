@@ -328,5 +328,13 @@ namespace WRA.Umbraco.Extensions
         {
             return content == null ? null : Udi.Create(Constants.UdiEntityType.Document, content.Key);
         }
+
+        public static void SetIfNotEmpty(this IContentBase content, string alias, string value)
+        {
+            if (content.HasProperty(alias) && !string.IsNullOrEmpty(value))
+            {
+                content.SetValue(alias, value);
+            }
+        }
     }
 }

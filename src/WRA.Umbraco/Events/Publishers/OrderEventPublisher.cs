@@ -1,5 +1,8 @@
 using MassTransit;
 using Microsoft.Extensions.Logging;
+using NPoco.FluentMappings;
+using Umbraco.Cms.Core.Mapping;
+using Umbraco.Commerce.Core.Models;
 using WRA.Umbraco.Contracts;
 using WRA.Umbraco.Shared.Messaging;
 using WRA.Umbraco.Web.Dtos.External;
@@ -9,9 +12,16 @@ namespace WRA.Umbraco.Events.Publishers;
 
 public class OrderEventPublisher(
     MessagingSettings messagingSettings,
+    IUmbracoMapper mapper,
     ILogger<OrderEventPublisher> logger,
     IPublishEndpoint publishEndpoint)
 {
+    public async Task Send(OrderReadOnly order, EntityEventAction action)
+    {
+        var orderEvent = mapper.Map<OrderEvent>(order);
+        if (orderEvent != null) _ = Send(orderEvent, action);
+    }
+
     public async Task Send(OrderEvent order, EntityEventAction action)
     {
         var endpointSettings = messagingSettings.GetEndPointSettings<OrderEvent>();

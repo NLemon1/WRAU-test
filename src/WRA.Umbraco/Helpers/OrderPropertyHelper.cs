@@ -5,7 +5,7 @@ using WRA.Umbraco.Helpers.Constants;
 
 namespace WRA.Umbraco.Helpers;
 
-public static class OrderHelper
+public static class OrderPropertyHelper
 {
     #region Shipping
     public static Dictionary<string, string> BuildShippingInfo(OrderAddressDto address)

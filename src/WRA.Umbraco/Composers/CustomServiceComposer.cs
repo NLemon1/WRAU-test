@@ -61,6 +61,7 @@ public class CustomServiceComposer : IComposer
         builder.Services.AddTransient<CategoryRepository>();
         builder.Services.AddTransient<MemberGroupRepository>();
         builder.Services.AddTransient<TaxonomyRepository>();
+        builder.Services.AddTransient<OrderRepository>();
         // builder.Services.AddTransient<MemberSubscriptionRepository>();
 
         // generic repositories

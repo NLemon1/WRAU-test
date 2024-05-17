@@ -101,7 +101,7 @@ public class CheckoutSurfaceController(
                 if (model.ShippingAddress != null)
                 {
                     // set shipping info
-                    order.SetProperties(OrderHelper.BuildShippingInfo(model.ShippingAddress));
+                    order.SetProperties(OrderPropertyHelper.BuildShippingInfo(model.ShippingAddress));
                     order.SetShippingCountryRegion(model.ShippingAddress.Country, null);
                 }
 
@@ -133,7 +133,7 @@ public class CheckoutSurfaceController(
                 var store = CurrentPage.GetStore();
                 var order = commerceApi.GetOrCreateCurrentOrder(store.Id)
                     .AsWritable(uow)
-                    .SetProperties(OrderHelper.BuildBillingInfo(address));
+                    .SetProperties(OrderPropertyHelper.BuildBillingInfo(address));
 
                 order.SetPaymentCountryRegion(address.Country, null);
 
@@ -200,7 +200,7 @@ public class CheckoutSurfaceController(
                     });
 
                 var address = model.ShippingSameAsBilling ? order.ShippingAddressDto() : model.BillingAddress;
-                order.SetProperties(OrderHelper.BuildBillingInfo(address));
+                order.SetProperties(OrderPropertyHelper.BuildBillingInfo(address));
 
                 commerceApi.SaveOrder(order);
 

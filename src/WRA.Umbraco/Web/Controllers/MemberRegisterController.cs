@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Umbraco.Cms.Core.Cache;
 using Umbraco.Cms.Core.Logging;
 using Umbraco.Cms.Core.Routing;
-using Umbraco.Cms.Core.Scoping;
-using Umbraco.Cms.Core.Security;
 using Umbraco.Cms.Core.Services;
 using Umbraco.Cms.Core.Web;
 using Umbraco.Cms.Infrastructure.Persistence;
@@ -16,34 +14,26 @@ using WRA.Umbraco.Web.Services;
 
 namespace WRA.Umbraco.Controllers;
 
-public class MemberRegisterController : SurfaceController
+public class MemberRegisterController(
+    WraMemberManagementService WRAMemberManagementService,
+    IUmbracoContextAccessor umbracoContextAccessor,
+    IUmbracoDatabaseFactory databaseFactory,
+    ServiceContext services,
+    AppCaches appCaches,
+    IProfilingLogger profilingLogger,
+    IPublishedUrlProvider publishedUrlProvider,
+    IMemberSignInManager memberSignInManager)
+    : SurfaceController(
+        umbracoContextAccessor,
+        databaseFactory,
+        services,
+        appCaches,
+        profilingLogger,
+        publishedUrlProvider
+    )
 {
-    private readonly IMemberManager _memberManager;
-    private readonly IMemberService _memberService;
-    private readonly IMemberSignInManager _memberSignInManager;
-    private readonly ICoreScopeProvider _coreScopeProvider;
-    private readonly WraMemberManagementService _WRAMemberManagementService;
 
-    public MemberRegisterController(
-        IMemberManager memberManager,
-        IMemberService memberService,
-        WraMemberManagementService WRAMemberManagementService,
-        IUmbracoContextAccessor umbracoContextAccessor,
-        IUmbracoDatabaseFactory databaseFactory,
-        ServiceContext services,
-        AppCaches appCaches,
-        IProfilingLogger profilingLogger,
-        IPublishedUrlProvider publishedUrlProvider,
-        IMemberSignInManager memberSignInManager,
-        ICoreScopeProvider coreScopeProvider)
-        : base(umbracoContextAccessor, databaseFactory, services, appCaches, profilingLogger, publishedUrlProvider)
-    {
-        _memberManager = memberManager;
-        _memberService = memberService;
-        _memberSignInManager = memberSignInManager;
-        _WRAMemberManagementService = WRAMemberManagementService;
-        _coreScopeProvider = coreScopeProvider;
-    }
+
 
     [HttpPost]
     [ValidateAntiForgeryToken]
@@ -74,10 +64,6 @@ public class MemberRegisterController : SurfaceController
         return CurrentUmbracoPage();
     }
 
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="model"></param>
     private void MergeRouteValuesToModel(RegisterModel model)
     {
         if (RouteData.Values.TryGetValue(nameof(RegisterModel.RedirectUrl), out var redirectUrl) && redirectUrl != null)
@@ -111,7 +97,7 @@ public class MemberRegisterController : SurfaceController
     {
         try
         {
-            _memberService.AssignRole(email, group);
+            Services.MemberService.AssignRole(email, group);
         }
         catch (Exception)
         {
@@ -128,11 +114,11 @@ public class MemberRegisterController : SurfaceController
     /// <returns>Result of registration operation.</returns>
     private async Task<IdentityResult> RegisterMemberAsync(RegisterModel model, bool logMemberIn = true)
     {
-        var (identityResult, identityUser) = await _WRAMemberManagementService.RegisterMember(model);
+        var (identityResult, identityUser) = await WRAMemberManagementService.RegisterMember(model);
 
         if (logMemberIn && identityResult.Succeeded)
         {
-            await _memberSignInManager.SignInAsync(identityUser, false);
+            await memberSignInManager.SignInAsync(identityUser, false);
         }
 
         return identityResult;

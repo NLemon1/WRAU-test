@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Umbraco.Cms.Api.Common.Attributes;
 using Umbraco.Cms.Core.Mapping;
+using WRA.Umbraco.BackgroundJobs;
 using WRA.Umbraco.Contracts;
 using WRA.Umbraco.CustomTables.Subscriptions;
 using WRA.Umbraco.Repositories;
@@ -20,6 +21,7 @@ public class MemberSyncApiController(
     CompanyRepository companyRepository,
     MemberGroupRepository memberGroupRepository,
     SubscriptionHelper subscriptionHelper,
+    MemberTasks memberTasks,
     IUmbracoMapper mapper,
     ILogger<MemberSyncApiController> logger)
     : ApiController
@@ -59,6 +61,14 @@ public class MemberSyncApiController(
     {
         var memberEvent = mapper.Map<MemberEvent>(updateMemberRequest);
         var result = wraMemberManagementService.Delete(memberEvent);
+        return Task.FromResult<IActionResult>(Ok(result.IsCompletedSuccessfully));
+    }
+
+    [HttpPost]
+    [Route("SyncMemberByExternalId")]
+    public Task<IActionResult> SyncMemberByExternalId(Guid externalId)
+    {
+        var result = memberTasks.SyncMemberByExternalId(externalId);
         return Task.FromResult<IActionResult>(Ok(result.IsCompletedSuccessfully));
     }
 
@@ -119,6 +129,14 @@ public class MemberSyncApiController(
     }
 
     [HttpPost]
+    [Route("SyncBoardByExternalId")]
+    public Task<IActionResult> SyncBoardByExternalId(Guid Id)
+    {
+        var result = memberTasks.SyncBoardByExternalId(Id);
+        return Task.FromResult<IActionResult>(Ok(result.Id));
+    }
+
+    [HttpPost]
     [Route("DeleteBoard")]
     public Task<IActionResult> DeleteBoard(ExternalMemberBoardDto mb)
     {
@@ -141,6 +159,15 @@ public class MemberSyncApiController(
         var result = companyRepository.CreateOrUpdate(company);
         return Task.FromResult<IActionResult>(Ok(result.Id));
     }
+
+    [HttpPost]
+    [Route("SyncCompanyByExternalId")]
+    public Task<IActionResult> SyncCompanyByExternalId(Guid Id)
+    {
+        var result = memberTasks.SyncCompanyByExternalId(Id);
+        return Task.FromResult<IActionResult>(Ok(result.Id));
+    }
+
 
     [HttpPost]
     [Route("CreateOrUpdateMemberSubscription")]
@@ -186,6 +213,22 @@ public class MemberSyncApiController(
     }
 
     [HttpPost]
+    [Route("SyncMemberSubscriptionByExternalId")]
+    public Task<IActionResult> SyncMemberSubscriptionByExternalId(Guid Id)
+    {
+        try
+        {
+            var result = memberTasks.SyncMemberSubscriptionByExternalId(Id);
+            return Task.FromResult<IActionResult>(Ok(result.Id));
+        }
+        catch (Exception e)
+        {
+            logger.LogError(e, "Error creating member subscription for member by Id: {Id}", Id);
+            throw;
+        }
+    }
+
+    [HttpPost]
     [Route("CreateOrUpdateCompanySubscription")]
     public Task<IActionResult> CreateOrUpdateCompanySubscription(ExternalCompanySubscriptionDto companySubscriptionDto)
     {
@@ -203,6 +246,22 @@ public class MemberSyncApiController(
         catch (Exception e)
         {
             logger.LogError(e, "Error creating company subscription for company {CompanyId}", companySubscriptionDto.CompanyId);
+            throw;
+        }
+    }
+
+    [HttpPost]
+    [Route("SyncCompanySubscriptionByExternalId")]
+    public Task<IActionResult> SyncCompanySubscriptionByExternalId(Guid Id)
+    {
+        try
+        {
+            var result = memberTasks.SyncCompanyByExternalId(Id);
+            return Task.FromResult<IActionResult>(Ok(result.Id));
+        }
+        catch (Exception e)
+        {
+            logger.LogError(e, "Error creating company subscription for member by ID: {MemberId}", Id);
             throw;
         }
     }

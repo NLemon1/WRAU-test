@@ -28,6 +28,8 @@ public class MemberTasks(
         PropertyNameCaseInsensitive = true
     };
 
+    #region  members
+
     public async Task<bool> SyncAllMemberGroups()
     {
         try
@@ -87,6 +89,29 @@ public class MemberTasks(
             throw;
         }
     }
+
+    public async Task<bool> SyncMemberByExternalId(Guid externalId)
+    {
+        try
+        {
+            var memberResp = await wraExternalApiService.GetMemberById(externalId);
+            if (memberResp.Content == null) return false;
+            var member =
+                JsonSerializer.Deserialize<ExternalMemberDto>(memberResp.Content, SerializationOptions);
+
+            if (member == null) return false;
+            var memberEvent = mapper.Map<MemberEvent>(member);
+            await wraMemberManagementService.CreateOrUpdate(memberEvent);
+
+            return true;
+        }
+        catch (Exception e)
+        {
+            logger.LogError(e, "Task error syncing member from API. error: {Message}", e.Message);
+            throw;
+        }
+    }
+    #endregion
     # region Boards and Companies
     public async Task<bool> SyncAllCompanies()
     {
@@ -112,6 +137,25 @@ public class MemberTasks(
             throw;
         }
     }
+    public async Task<bool> SyncCompanyByExternalId(Guid externalId)
+    {
+        try
+        {
+            var companyResp = await wraExternalApiService.GetCompanyById(externalId);
+            if (companyResp.Content == null) return false;
+            var company =
+                JsonSerializer.Deserialize<ExternalCompanyDto>(companyResp.Content, SerializationOptions);
+
+            if (company == null) return false;
+            companyRepository.CreateOrUpdate(company);
+            return true;
+        }
+        catch (Exception e)
+        {
+            logger.LogError(e, "Task error syncing member from API. error: {Message}", e.Message);
+            throw;
+        }
+    }
 
     public async Task<bool> SyncAllBoards()
     {
@@ -133,6 +177,25 @@ public class MemberTasks(
             throw;
         }
     }
+    public async Task<bool> SyncBoardByExternalId(Guid externalId)
+    {
+        try
+        {
+            var boardResp = await wraExternalApiService.GetCompanyById(externalId);
+            if (boardResp.Content == null) return false;
+            var company =
+                JsonSerializer.Deserialize<ExternalCompanyDto>(boardResp.Content, SerializationOptions);
+
+            if (company == null) return false;
+            companyRepository.CreateOrUpdate(company);
+            return true;
+        }
+        catch (Exception e)
+        {
+            logger.LogError(e, "Task error syncing member from API. error: {Message}", e.Message);
+            throw;
+        }
+    }
 
     public async Task<bool> SyncCompaniesAndBoards()
     {
@@ -142,7 +205,6 @@ public class MemberTasks(
         return boardsResult;
     }
     #endregion
-
     #region Subscriptions
 
     public async Task<bool> SyncMemberSubscriptions()
@@ -161,6 +223,29 @@ public class MemberTasks(
                 var memberSub = mapper.Map<MemberSubscription>(subscriptionDto);
                 if (memberSub != null) subscriptionHelper.CreateOrUpdateMemberSubscription(memberSub);
             }
+        }
+        catch (Exception e)
+        {
+            logger.LogError(e, "Error creating member subscription for member");
+            throw;
+        }
+
+        return true;
+    }
+
+    public async Task<bool> SyncMemberSubscriptionByExternalId(Guid Id)
+    {
+        try
+        {
+            var memberSubscriptionsResp = await wraExternalApiService.GetMemberSubscriptionById(Id);
+            if (memberSubscriptionsResp.Content == null) return false;
+            var memberSubscriptions =
+                JsonSerializer.Deserialize<ExternalMemberSubscriptionDto>(
+                    memberSubscriptionsResp.Content,
+                    SerializationOptions);
+
+            var memberSub = mapper.Map<MemberSubscription>(memberSubscriptions);
+            if (memberSub != null) subscriptionHelper.CreateOrUpdateMemberSubscription(memberSub);
         }
         catch (Exception e)
         {
@@ -190,7 +275,30 @@ public class MemberTasks(
         }
         catch (Exception e)
         {
-            logger.LogError(e, "Error creating member subscription for member");
+            logger.LogError(e, "Error creating company subscription");
+            throw;
+        }
+
+        return true;
+    }
+
+    public async Task<bool> SyncCompanySubscriptionByExternalId(Guid Id)
+    {
+        try
+        {
+            var companySubResp = await wraExternalApiService.GetCompanySubscriptionById(Id);
+            if (companySubResp.Content == null) return false;
+            var companySubscriptions =
+                JsonSerializer.Deserialize<ExternalCompanySubscriptionDto>(
+                    companySubResp.Content,
+                    SerializationOptions);
+
+            var companySub = mapper.Map<CompanySubscription>(companySubscriptions);
+            if (companySub != null) subscriptionHelper.CreateOrUpdateCompanySubscription(companySub);
+        }
+        catch (Exception e)
+        {
+            logger.LogError(e, "Error creating company subscription");
             throw;
         }
 
