@@ -13,7 +13,7 @@ public class MemberGroupRepository(
     ICoreScopeProvider coreScopeProvider,
     ILogger<MemberGroupRepository> logger)
 {
-    public MemberGroup CreateMemberGroup(ExternalMemberGroupDto memberTypeDto)
+    public MemberGroup? CreateMemberGroup(ExternalMemberGroupDto memberTypeDto)
     {
         try
         {
@@ -80,7 +80,7 @@ public class MemberGroupRepository(
         }
     }
 
-    public IMemberGroup UpdateMemberGroup(ExternalMemberGroupDto memberTypeDto)
+    public IMemberGroup? UpdateMemberGroup(ExternalMemberGroupDto memberTypeDto)
     {
         var memberGroup = GetMemberGroupByExternalId(memberTypeDto.Id);
         return memberGroup == null ? CreateMemberGroup(memberTypeDto) : UpdateMemberGroup(memberGroup, memberTypeDto);

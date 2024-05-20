@@ -167,7 +167,7 @@ public class MemberTasks(
 
             foreach (var board in localBoards)
             {
-                await boardRepository.CreateOrUpdateBoard(board);
+                boardRepository.CreateOrUpdateBoard(board);
             }
 
             return true;
@@ -178,18 +178,18 @@ public class MemberTasks(
             throw;
         }
     }
-    public async Task<bool> SyncBoardByExternalId(Guid externalId)
+    public async Task<IContent?> SyncBoardByExternalId(Guid externalId)
     {
         try
         {
             var boardResp = await wraExternalApiService.GetCompanyById(externalId);
-            if (boardResp.Content == null) return false;
+            if (boardResp.Content == null) return null;
             var company =
                 JsonSerializer.Deserialize<ExternalCompanyDto>(boardResp.Content, SerializationOptions);
 
-            if (company == null) return false;
-            companyRepository.CreateOrUpdate(company);
-            return true;
+            if (company == null) return null;
+            var result = companyRepository.CreateOrUpdate(company);
+            return result;
         }
         catch (Exception e)
         {

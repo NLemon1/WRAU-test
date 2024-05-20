@@ -13,7 +13,7 @@ public class SubscriptionHelper(
     IRepository<CompanySubscription> companySubscriptionRepository,
     ILogger<SubscriptionHelper> logger)
 {
-    public void CreateOrUpdateMemberSubscription(MemberSubscription memberSubscription)
+    public bool CreateOrUpdateMemberSubscription(MemberSubscription memberSubscription)
     {
         try
         {
@@ -27,10 +27,12 @@ public class SubscriptionHelper(
                 memberSubscription.Id = existingSub.Id;
                 memberSubscriptionRepository.Update(memberSubscription);
                 logger.LogInformation("Updated member subscription: {MemberSubscriptionId}", memberSubscription.Id);
+                return true;
             }
 
             memberSubscriptionRepository.Create(memberSubscription);
             logger.LogInformation("Created member subscription: {MemberSubscriptionId}", memberSubscription.Id);
+            return true;
 
         }
         catch (Exception e)
@@ -55,7 +57,7 @@ public class SubscriptionHelper(
         }
     }
 
-    public void CreateOrUpdateCompanySubscription(CompanySubscription companySubscription)
+    public bool CreateOrUpdateCompanySubscription(CompanySubscription companySubscription)
     {
         try
         {
@@ -71,10 +73,12 @@ public class SubscriptionHelper(
                 companySubscription.Id = existingSub.Id;
                 companySubscriptionRepository.Update(companySubscription);
                 logger.LogInformation("Updated company subscription: {CompanySubscriptionId}", companySubscription.Id);
+                return true;
             }
 
             companySubscriptionRepository.Create(companySubscription);
             logger.LogInformation("Created company subscription: {CompanySubscriptionId}", companySubscription.Id);
+            return true;
         }
         catch (Exception e)
         {

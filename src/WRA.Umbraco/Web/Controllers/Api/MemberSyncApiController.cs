@@ -33,12 +33,7 @@ public class MemberSyncApiController(
     {
         var memberEvent = mapper.Map<MemberEvent>(newMemberRequest);
         var result = wraMemberManagementService.CreateOrUpdate(memberEvent);
-        if (result == null)
-        {
-            return Task.FromResult<IActionResult>(StatusCode(System.Net.HttpStatusCode.InternalServerError));
-        }
-
-        return Task.FromResult<IActionResult>(Ok(result.Id));
+        return result == null ? Task.FromResult<IActionResult>(InternalServerError()) : Task.FromResult<IActionResult>(Ok(result.Id));
     }
 
     [HttpPost]
@@ -47,12 +42,7 @@ public class MemberSyncApiController(
     {
         var memberEvent = mapper.Map<MemberEvent>(updateMemberRequest);
         var result = wraMemberManagementService.Update(memberEvent);
-        if (result == null)
-        {
-            return Task.FromResult<IActionResult>(StatusCode(System.Net.HttpStatusCode.InternalServerError));
-        }
-
-        return Task.FromResult<IActionResult>(Ok(result.Id));
+        return result == null ? Task.FromResult<IActionResult>(InternalServerError()) : Task.FromResult<IActionResult>(Ok(result.Id));
     }
 
     [HttpPost]
@@ -78,8 +68,8 @@ public class MemberSyncApiController(
     {
         try
         {
-            memberGroupRepository.CreateMemberGroup(memberTypeDto);
-            return Ok();
+            var result = memberGroupRepository.CreateMemberGroup(memberTypeDto);
+            return result == null ? NotFound() : Ok(result.Id);
         }
         catch (Exception ex)
         {
@@ -94,8 +84,8 @@ public class MemberSyncApiController(
     {
         try
         {
-            memberGroupRepository.DeleteMemberGroup(memberTypeDto);
-            return Ok();
+            bool result = memberGroupRepository.DeleteMemberGroup(memberTypeDto);
+            return result ? Ok() : NotFound();
         }
         catch (Exception ex)
         {
@@ -110,8 +100,8 @@ public class MemberSyncApiController(
     {
         try
         {
-            memberGroupRepository.UpdateMemberGroup(memberTypeDto);
-            return Ok();
+            var result = memberGroupRepository.UpdateMemberGroup(memberTypeDto);
+            return result == null ? NotFound() : Ok(result.Id);
         }
         catch (Exception ex)
         {
@@ -125,15 +115,15 @@ public class MemberSyncApiController(
     public Task<IActionResult> CreateOrUpdateBoard(ExternalMemberBoardDto mb)
     {
         var result = boardRepository.CreateOrUpdateBoard(mb);
-        return Task.FromResult<IActionResult>(Ok(result.Id));
+        return result == null ? Task.FromResult<IActionResult>(InternalServerError()) : Task.FromResult<IActionResult>(Ok(result.Id));
     }
 
     [HttpPost]
     [Route("SyncBoardByExternalId")]
-    public Task<IActionResult> SyncBoardByExternalId(Guid Id)
+    public async Task<IActionResult> SyncBoardByExternalId(Guid Id)
     {
-        var result = memberTasks.SyncBoardByExternalId(Id);
-        return Task.FromResult<IActionResult>(Ok(result.Id));
+        var result = await memberTasks.SyncBoardByExternalId(Id);
+        return result == null ? await Task.FromResult<IActionResult>(NotFound()) : await Task.FromResult<IActionResult>(Ok($"{result.Id} - {result.Name}"));
     }
 
     [HttpPost]
@@ -141,15 +131,16 @@ public class MemberSyncApiController(
     public Task<IActionResult> DeleteBoard(ExternalMemberBoardDto mb)
     {
         bool result = boardRepository.Delete(mb);
-        return Task.FromResult<IActionResult>(Ok(result));
+        return result ? Task.FromResult<IActionResult>(Ok()) : Task.FromResult<IActionResult>(InternalServerError());
     }
 
     [HttpPost]
     [Route("CreateOrUpdateCompany")]
     public Task<IActionResult> CreateOrUpdateCompany(ExternalCompanyDto company)
     {
+        if (company?.ExternalId == null) return Task.FromResult<IActionResult>(BadRequest());
         var result = companyRepository.CreateOrUpdate(company);
-        return Task.FromResult<IActionResult>(Ok(result.Id));
+        return result == null ? Task.FromResult<IActionResult>(InternalServerError()) : Task.FromResult<IActionResult>(Ok(result.Id));
     }
 
     [HttpPost]
@@ -157,7 +148,7 @@ public class MemberSyncApiController(
     public Task<IActionResult> DeleteCompany(ExternalCompanyDto company)
     {
         var result = companyRepository.CreateOrUpdate(company);
-        return Task.FromResult<IActionResult>(Ok(result.Id));
+        return result == null ? Task.FromResult<IActionResult>(InternalServerError()) : Task.FromResult<IActionResult>(Ok(result.Id));
     }
 
     [HttpPost]
@@ -165,23 +156,24 @@ public class MemberSyncApiController(
     public async Task<IActionResult> SyncCompanyByExternalId(Guid Id)
     {
         var result = await memberTasks.SyncCompanyByExternalId(Id);
-        return await Task.FromResult<IActionResult>(Ok($"{result.Id} - {result.Name}"));
+        return result == null ? await Task.FromResult<IActionResult>(NotFound()) : await Task.FromResult<IActionResult>(Ok($"{result.Id} - {result.Name}"));
     }
 
 
     [HttpPost]
     [Route("CreateOrUpdateMemberSubscription")]
-    public Task<IActionResult> CreateOrUpdateMemberSubscription(ExternalMemberSubscriptionDto memberSubscriptionDto)
+    public async Task<IActionResult> CreateOrUpdateMemberSubscription(ExternalMemberSubscriptionDto memberSubscriptionDto)
     {
         try
         {
             var newMemberSubscription = mapper.Map<MemberSubscription>(memberSubscriptionDto);
             if (newMemberSubscription == null)
             {
-                return Task.FromResult<IActionResult>(BadRequest());
+                return await Task.FromResult<IActionResult>(BadRequest());
             }
-            subscriptionHelper.CreateOrUpdateMemberSubscription(newMemberSubscription);
-            return Task.FromResult<IActionResult>(Ok(newMemberSubscription.Id));
+
+            bool result = subscriptionHelper.CreateOrUpdateMemberSubscription(newMemberSubscription);
+            return await (result ? Task.FromResult<IActionResult>(Ok(newMemberSubscription.Id)) : Task.FromResult<IActionResult>(InternalServerError()));
         }
         catch (Exception e)
         {
@@ -203,7 +195,7 @@ public class MemberSyncApiController(
             }
 
             bool result = subscriptionHelper.DeleteMemberSubscription(memberSubscription);
-            return Task.FromResult<IActionResult>(Ok(result));
+            return result ? Task.FromResult<IActionResult>(Ok()) : Task.FromResult<IActionResult>(InternalServerError());
         }
         catch (Exception e)
         {
@@ -219,7 +211,7 @@ public class MemberSyncApiController(
         try
         {
             bool result = await memberTasks.SyncMemberSubscriptionByExternalId(Id);
-            return await Task.FromResult<IActionResult>(Ok(result));
+            return result ? await Task.FromResult<IActionResult>(Ok(Id)) : await Task.FromResult<IActionResult>(NotFound());
         }
         catch (Exception e)
         {
@@ -240,8 +232,8 @@ public class MemberSyncApiController(
                 return Task.FromResult<IActionResult>(BadRequest());
             }
 
-            subscriptionHelper.CreateOrUpdateCompanySubscription(newCompanySubscription);
-            return Task.FromResult<IActionResult>(Ok(newCompanySubscription.Id));
+            bool result = subscriptionHelper.CreateOrUpdateCompanySubscription(newCompanySubscription);
+            return result ? Task.FromResult<IActionResult>(Ok(newCompanySubscription.Id)) : Task.FromResult<IActionResult>(InternalServerError());
         }
         catch (Exception e)
         {
@@ -257,7 +249,7 @@ public class MemberSyncApiController(
         try
         {
             var result = await memberTasks.SyncCompanyByExternalId(Id);
-            return await Task.FromResult<IActionResult>(Ok($"{result.Id} - {result.Name}"));
+            return result == null ? await Task.FromResult<IActionResult>(NotFound()) : await Task.FromResult<IActionResult>(Ok($"{result.Id} - {result.Name}"));
         }
         catch (Exception e)
         {
@@ -279,7 +271,7 @@ public class MemberSyncApiController(
             }
 
             bool result = subscriptionHelper.DeleteCompanySubscription(companySubscription);
-            return Task.FromResult<IActionResult>(Ok(result));
+            return result ? Task.FromResult<IActionResult>(Ok()) : Task.FromResult<IActionResult>(InternalServerError());
         }
         catch (Exception e)
         {

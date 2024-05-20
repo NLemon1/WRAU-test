@@ -16,7 +16,7 @@ public class BoardRepository
     IUmbracoContextFactory umbracoContextFactory,
     ILogger<BoardRepository> logger)
 {
-    public async Task<IContent> CreateOrUpdateBoard(ExternalMemberBoardDto mb)
+    public IContent? CreateOrUpdateBoard(ExternalMemberBoardDto mb)
     {
         try
         {
