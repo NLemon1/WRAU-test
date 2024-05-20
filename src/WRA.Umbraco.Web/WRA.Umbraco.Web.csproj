@@ -13,19 +13,19 @@
       <None Remove="VS.vs.zip" />
     </ItemGroup>
      -->
-    <ItemGroup>
-        <Content Include="App_Plugins\umbracocommerce\backoffice\views\discount\rules\labelviews\daterangerule.html" CopyToOutputDirectory="PreserveNewest" />
-        <Content Include="App_Plugins\umbracocommerce\backoffice\views\discount\rewards\labelviews\timebaseddiscountreward.html" CopyToOutputDirectory="PreserveNewest" />
-        <Content Include="App_Plugins\umbracocommerce\backoffice\views\discount\rules\labelviews\timebaselineitemdiscountrule.html" CopyToOutputDirectory="PreserveNewest" />
-        <Content Include="App_Plugins\umbracocommerce\backoffice\views\discount\rules\labelviews\companysubscriptionrule.html" CopyToOutputDirectory="PreserveNewest" />
-        <Content Include="App_Plugins\umbracocommerce\backoffice\views\discount\rules\labelviews\membersubscriptionrule.html" CopyToOutputDirectory="PreserveNewest" />
-        <Content Include="App_Plugins\UmbracoForms\Assets\Email-Example\WRA-Email-Logo.png" CopyToOutputDirectory="PreserveNewest" />
-    </ItemGroup>
+<!--    <ItemGroup>-->
+<!--        <Content Include="App_Plugins\umbracocommerce\backoffice\views\discount\rules\labelviews\daterangerule.html" CopyToOutputDirectory="PreserveNewest" />-->
+<!--        <Content Include="App_Plugins\umbracocommerce\backoffice\views\discount\rewards\labelviews\timebaseddiscountreward.html" CopyToOutputDirectory="PreserveNewest" />-->
+<!--        <Content Include="App_Plugins\umbracocommerce\backoffice\views\discount\rules\labelviews\timebaselineitemdiscountrule.html" CopyToOutputDirectory="PreserveNewest" />-->
+<!--        <Content Include="App_Plugins\umbracocommerce\backoffice\views\discount\rules\labelviews\companysubscriptionrule.html" CopyToOutputDirectory="PreserveNewest" />-->
+<!--        <Content Include="App_Plugins\umbracocommerce\backoffice\views\discount\rules\labelviews\membersubscriptionrule.html" CopyToOutputDirectory="PreserveNewest" />-->
+<!--        <Content Include="App_Plugins\UmbracoForms\Assets\Email-Example\WRA-Email-Logo.png" CopyToOutputDirectory="PreserveNewest" />-->
+<!--    </ItemGroup>-->
 
     <!-- <ItemGroup>
       <Content Remove="Views\Calendar.cshtml" />
     </ItemGroup>
-  
+
     <ItemGroup>
       <Content Include="build.mjs" />
     </ItemGroup> -->
