@@ -80,7 +80,7 @@
 </script>
 
 <div class="py-3">
-    @await Html.PartialAsync("_breadcrumbs")
+    @await Html.PartialAsync("_breadcrumbsProducts", new ViewDataDictionary(this.ViewData) { { "CssClass", "breadcrumbs--dark" } })
 </div>
 
 <div class="container">
