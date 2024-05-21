@@ -1,0 +1,14 @@
+{
+  "Name": "mywraBasicContent",
+  "Alias": "mywraBasicContent",
+  "File": "umb://template-file/mywraBasicContent.cshtml",
+  "Udi": "umb://template/d429c4ac880c4e5a818ee3bcf24e8266",
+  "Dependencies": [
+    {
+      "Udi": "umb://template-file/mywraBasicContent.cshtml",
+      "Ordering": true
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.TemplateArtifact",
+  "__version": "13.1.0"
+}

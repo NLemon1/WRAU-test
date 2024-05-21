@@ -1,0 +1,42 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.MywraBasicContent>
+@using ContentModels = WRA.Umbraco.Models;
+@using Umbraco.Cms.Core.Models.Blocks
+
+@{
+    Layout = "~/Views/_Layout.cshtml";
+    var content = (ContentModels.MywraBasicContent)Model;
+
+    var sections = content.Value<IEnumerable<BlockGridItem>>("sections");
+
+}
+
+<div class="w-100">
+    <div class="row g-0">
+
+        @await Html.PartialAsync("_mywraHeader", new ViewDataDictionary(this.ViewData) { { "isMobile", true } })
+       
+        @await Html.PartialAsync("_mywraNav", Model)
+
+        <div class="col position-relative pb-5">
+            @await Html.PartialAsync("_mywraHeader", new ViewDataDictionary(this.ViewData) { { "isMobile", false } })
+
+            <div class="mywra-right container container--md ms-0 pt-5 pt-lg-11">
+
+                @if (!String.IsNullOrEmpty(content.Headline))
+                {
+                    <h1 class="h2">@content.Headline</h1>
+                }
+
+                @if (!String.IsNullOrEmpty(content.IntroContent.ToString()))
+                {
+                    <div class="rich-text mb-5">
+                        @Html.Raw(content.IntroContent)
+                    </div>
+                }
+
+                @await Html.PartialAsync("blockgrid/default", sections)
+            </div>
+        </div>
+    </div>
+</div>

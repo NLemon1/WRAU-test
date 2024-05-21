@@ -9,7 +9,9 @@
   "Icon": "icon-badge color-black",
   "Thumbnail": "folder.png",
   "Permissions": {
-    "AllowedChildContentTypes": []
+    "AllowedChildContentTypes": [
+      "umb://document-type/0bee23373f3d4724a9425b858900e39f"
+    ]
   },
   "Parent": "umb://document-type-container/6510c64e8e964c8a8e5eeb229c79fd30",
   "CompositionContentTypes": [
@@ -192,6 +194,9 @@
     {
       "Udi": "umb://document-type-container/6510c64e8e964c8a8e5eeb229c79fd30",
       "Ordering": true
+    },
+    {
+      "Udi": "umb://document-type/0bee23373f3d4724a9425b858900e39f"
     },
     {
       "Udi": "umb://document-type/14d24fc815e945d6baa835eae09a1d7f",
