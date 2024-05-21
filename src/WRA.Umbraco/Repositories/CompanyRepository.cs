@@ -114,6 +114,7 @@ public class CompanyRepository(
 
             var contentToDelete = contentService.GetById(existingCompany.Id);
             contentService.Delete(contentToDelete);
+            logger.LogInformation("Deleted company with externalId {ExternalId}", companyDto.ExternalId);
             scope.Complete();
             return true;
         }

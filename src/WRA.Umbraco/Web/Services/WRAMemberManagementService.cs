@@ -40,9 +40,8 @@ public class WraMemberManagementService(
             using var scope = coreScopeProvider.CreateCoreScope();
 
             using var umbracoContextReference = umbracoContextFactory.EnsureUmbracoContext();
-            var contentQuery = umbracoContextReference.UmbracoContext.Content;
 
-            // spin up an Imember rather than memberIdentity to avoid db locks.
+            // spin up an IMember rather than memberIdentity to avoid db locks.
             string memberName = $"{memberEvent.FirstName} {memberEvent.LastName}";
             if (string.IsNullOrWhiteSpace(memberName))
             {
@@ -114,6 +113,7 @@ public class WraMemberManagementService(
 
         memberService.Delete(existingMember);
         scope.Complete();
+        logger.LogInformation("Deleted member: {Email}", reqMember.Email);
         return Task.CompletedTask;
     }
 
@@ -126,7 +126,11 @@ public class WraMemberManagementService(
         {
             model.Name = model.Email;
         }
-
+        var memberExists = memberService.GetByEmail(model.Email);
+        if (memberExists != null)
+        {
+            return (IdentityResult.Failed(new IdentityError { Code = "MemberExists", Description = "Member already exists" }), null);
+        }
         model.Username = model.UsernameIsEmail || model.Username == null ? model.Email : model.Username;
 
         var identityUser =

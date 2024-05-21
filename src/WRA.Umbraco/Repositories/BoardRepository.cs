@@ -101,6 +101,7 @@ public class BoardRepository
             }
 
             contentService.Delete(exisingBoard);
+            logger.LogInformation("Deleted board with externalId {ExternalId}", mb.Id);
             scope.Complete();
             return true;
         }

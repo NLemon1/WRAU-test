@@ -17,6 +17,7 @@ namespace WRA.Umbraco.Web.Controllers.Api;
 [Route("WraMemberApi")]
 public class MemberSyncApiController(
     WraMemberManagementService wraMemberManagementService,
+    MemberRepository memberRepository,
     BoardRepository boardRepository,
     CompanyRepository companyRepository,
     MemberGroupRepository memberGroupRepository,
@@ -52,6 +53,15 @@ public class MemberSyncApiController(
         var memberEvent = mapper.Map<MemberEvent>(updateMemberRequest);
         var result = wraMemberManagementService.Delete(memberEvent);
         return Task.FromResult<IActionResult>(Ok(result.IsCompletedSuccessfully));
+    }
+
+
+    [HttpPost]
+    [Route("GetMemberByExternalId")]
+    public async Task<IActionResult> GetMemberByExternalId(Guid externalId)
+    {
+        var result = memberRepository.GetByExternalId(externalId);
+        return result == null ? await Task.FromResult<IActionResult>(NotFound()) : await Task.FromResult<IActionResult>(Ok(result.Id));
     }
 
     [HttpPost]
@@ -111,6 +121,14 @@ public class MemberSyncApiController(
     }
 
     [HttpPost]
+    [Route("GetBoardByExternalId")]
+    public Task<IActionResult> GetBoardByExternalId(Guid Id )
+    {
+        var result = boardRepository.Get(Id);
+        return result == null ? Task.FromResult<IActionResult>(InternalServerError()) : Task.FromResult<IActionResult>(Ok(result.Id));
+    }
+
+    [HttpPost]
     [Route("CreateOrUpdateBoard")]
     public Task<IActionResult> CreateOrUpdateBoard(ExternalMemberBoardDto mb)
     {
@@ -132,6 +150,14 @@ public class MemberSyncApiController(
     {
         bool result = boardRepository.Delete(mb);
         return result ? Task.FromResult<IActionResult>(Ok()) : Task.FromResult<IActionResult>(InternalServerError());
+    }
+
+    [HttpPost]
+    [Route("GetCompanyByExternalId")]
+    public async Task<IActionResult> GetCompanyByExternalId(Guid Id)
+    {
+        var result = companyRepository.GetByExternalId(Id);
+        return result == null ? await Task.FromResult<IActionResult>(NotFound()) : await Task.FromResult<IActionResult>(Ok($"{result.Id} - {result.Name}"));
     }
 
     [HttpPost]

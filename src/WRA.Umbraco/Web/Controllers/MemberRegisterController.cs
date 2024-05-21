@@ -115,6 +115,10 @@ public class MemberRegisterController(
     private async Task<IdentityResult> RegisterMemberAsync(RegisterModel model, bool logMemberIn = true)
     {
         var (identityResult, identityUser) = await WRAMemberManagementService.RegisterMember(model);
+        if (identityResult.Errors.Any())
+        {
+            return identityResult;
+        }
 
         if (logMemberIn && identityResult.Succeeded)
         {
