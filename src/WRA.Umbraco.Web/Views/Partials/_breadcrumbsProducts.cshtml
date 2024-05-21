@@ -10,15 +10,14 @@
     {
         <nav class="container py-4" aria-label="breadcrumbs">
             <ul class="list-unstyled mb-0 breadcrumbs @(ViewData["CssClass"] != null ? ViewData["CssClass"].ToString() : string.Empty)">
-
                 @if (Model.ContentType.Alias == "productPage")
                 {
-                    var pageFromGui = Umbraco.Content(Guid.Parse("cac993c4-2fe0-42f1-a75b-3a14f4597f3f"));//Categories page
+                    var storeCategoriesGuid = Umbraco.Content(Guid.Parse("cac993c4-2fe0-42f1-a75b-3a14f4597f3f"));//Categories page
                     <li>
                         <a href="@Model.AncestorOrSelf(1).Url()">@Model.AncestorOrSelf(1).Name</a>
                     </li>
                     <li>
-                        <a href="@pageFromGui.Url()">@pageFromGui.Name</a>
+                        <a href="@storeCategoriesGuid.Url()">WRA Store</a>
                     </li>
                 }
                     else
