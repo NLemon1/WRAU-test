@@ -5,6 +5,7 @@
   "Configuration": {
     "startNode": {
       "type": "content",
+      "query": "$root/legalUpdateTopics",
       "id": "umb://document/999da2f6cf2d482d94c34ace3a0b3dc0"
     },
     "filter": "legalUpdateTopic",
