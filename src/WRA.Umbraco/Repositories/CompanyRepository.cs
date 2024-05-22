@@ -97,32 +97,35 @@ public class CompanyRepository(
         }
     }
 
-    public bool Delete(ExternalCompanyDto companyDto)
+    public OperationResult? Delete(ExternalCompanyDto companyDto)
     {
         try
         {
-            using var scope = coreScopeProvider.CreateCoreScope();
-
             var externalId = companyDto.ExternalId.SafeGuid();
-            var existingCompany = GetByExternalId(externalId);
-            if (existingCompany == null)
-            {
-                logger.LogError("Company with externalId {ExternalId} not found. Cannot delete company.", companyDto.ExternalId);
-                scope.Complete();
-                return false;
-            }
-
-            var contentToDelete = contentService.GetById(existingCompany.Id);
-            contentService.Delete(contentToDelete);
-            logger.LogInformation("Deleted company with externalId {ExternalId}", companyDto.ExternalId);
-            scope.Complete();
-            return true;
+            return Delete(externalId);
         }
         catch (Exception e)
         {
             logger.LogError(e,"Error deleting company with externalId {ExternalId}", companyDto.ExternalId);
             throw;
         }
+    }
+
+    public OperationResult? Delete(Guid externalId)
+    {
+        try
+        {
+            using var scope = coreScopeProvider.CreateCoreScope();
+            var existingCompany = GetByExternalId(externalId);
+            var contentToDelete = contentService.GetById(existingCompany.Id);
+            return contentService.Delete(contentToDelete);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+
     }
 
     private IContent SetCompanyProperties(IContent company, ExternalCompanyDto companyDto)

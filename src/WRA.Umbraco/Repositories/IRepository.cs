@@ -1,12 +1,13 @@
 using NPoco.Linq;
+using Umbraco.Cms.Core.Services;
 
 namespace WRA.Umbraco.Repositories;
 
 public interface IRepository<T>
 {
-    void Create(T entity);
-    void Update(T entity);
-    void Delete(T entity);
+    OperationResult Create(T entity);
+    OperationResult Update(T entity);
+    OperationResult Delete(T entity);
     T Get<T>(int id);
     IEnumerable<T> GetAll<T>();
     IQueryProviderWithIncludes<T> GetQueryable();

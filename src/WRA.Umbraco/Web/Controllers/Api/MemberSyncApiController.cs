@@ -148,13 +148,13 @@ public class MemberSyncApiController(
     [Route("DeleteBoard")]
     public Task<IActionResult> DeleteBoard(ExternalMemberBoardDto mb)
     {
-        bool result = boardRepository.Delete(mb);
-        return result ? Task.FromResult<IActionResult>(Ok()) : Task.FromResult<IActionResult>(InternalServerError());
+        var result = boardRepository.Delete(mb);
+        return result.Success ? Task.FromResult<IActionResult>(Ok()) : Task.FromResult<IActionResult>(InternalServerError());
     }
 
     [HttpPost]
-    [Route("GetCompanyByExternalId")]
-    public async Task<IActionResult> GetCompanyByExternalId(Guid Id)
+    [Route("GetExistingCompanyByExternalId")]
+    public async Task<IActionResult> GetExistingCompanyByExternalId(Guid Id)
     {
         var result = companyRepository.GetByExternalId(Id);
         return result == null ? await Task.FromResult<IActionResult>(NotFound()) : await Task.FromResult<IActionResult>(Ok($"{result.Id} - {result.Name}"));
@@ -171,10 +171,10 @@ public class MemberSyncApiController(
 
     [HttpPost]
     [Route("DeleteCompany")]
-    public Task<IActionResult> DeleteCompany(ExternalCompanyDto company)
+    public Task<IActionResult> DeleteCompany(Guid externalId)
     {
-        var result = companyRepository.CreateOrUpdate(company);
-        return result == null ? Task.FromResult<IActionResult>(InternalServerError()) : Task.FromResult<IActionResult>(Ok(result.Id));
+        var result = companyRepository.Delete(externalId);
+        return result.Success ? Task.FromResult<IActionResult>(Ok()) : Task.FromResult<IActionResult>(InternalServerError());
     }
 
     [HttpPost]
@@ -210,22 +210,16 @@ public class MemberSyncApiController(
 
     [HttpPost]
     [Route("DeleteMemberSubscription")]
-    public Task<IActionResult> DeleteMemberSubscription(ExternalMemberSubscriptionDto memberSubscriptionDto)
+    public Task<IActionResult> DeleteMemberSubscription(Guid externalId)
     {
         try
         {
-            var memberSubscription = mapper.Map<MemberSubscription>(memberSubscriptionDto);
-            if (memberSubscription == null)
-            {
-                return Task.FromResult<IActionResult>(BadRequest());
-            }
-
-            bool result = subscriptionHelper.DeleteMemberSubscription(memberSubscription);
-            return result ? Task.FromResult<IActionResult>(Ok()) : Task.FromResult<IActionResult>(InternalServerError());
+            var result = subscriptionHelper.DeleteMemberSubscription(externalId);
+            return result.Success ? Task.FromResult<IActionResult>(Ok()) : Task.FromResult<IActionResult>(InternalServerError());
         }
         catch (Exception e)
         {
-            logger.LogError(e, "Error creating member subscription for member {MemberId}", memberSubscriptionDto.MemberId);
+            logger.LogError(e, "Error creating member subscription {ExternalId}", externalId);
             throw;
         }
     }
@@ -274,8 +268,10 @@ public class MemberSyncApiController(
     {
         try
         {
-            var result = await memberTasks.SyncCompanyByExternalId(Id);
-            return result == null ? await Task.FromResult<IActionResult>(NotFound()) : await Task.FromResult<IActionResult>(Ok($"{result.Id} - {result.Name}"));
+            bool result = await memberTasks.SyncCompanySubscriptionByExternalId(Id);
+            return result ?
+                await Task.FromResult<IActionResult>(NotFound()) :
+                await Task.FromResult<IActionResult>(Ok(Id));
         }
         catch (Exception e)
         {
@@ -286,22 +282,17 @@ public class MemberSyncApiController(
 
     [HttpPost]
     [Route("DeleteCompanySubscription")]
-    public Task<IActionResult> DeleteCompanySubscription(ExternalCompanySubscriptionDto companySubscriptionDto)
+    public async Task<IActionResult> DeleteCompanySubscription(Guid externalId)
     {
         try
         {
-            var companySubscription = mapper.Map<CompanySubscription>(companySubscriptionDto);
-            if (companySubscription == null)
-            {
-                return Task.FromResult<IActionResult>(BadRequest());
-            }
 
-            bool result = subscriptionHelper.DeleteCompanySubscription(companySubscription);
-            return result ? Task.FromResult<IActionResult>(Ok()) : Task.FromResult<IActionResult>(InternalServerError());
+            var deleteResult = subscriptionHelper.DeleteCompanySubscription(externalId);
+            return await (deleteResult.Success ? Task.FromResult<IActionResult>(Ok()) : Task.FromResult<IActionResult>(InternalServerError()));
         }
         catch (Exception e)
         {
-            logger.LogError(e, "Error deleting company subscription for company {CompanyId}", companySubscriptionDto.CompanyId);
+            logger.LogError(e, "Error deleting company subscription for company {ExternalId}", externalId);
             throw;
         }
     }

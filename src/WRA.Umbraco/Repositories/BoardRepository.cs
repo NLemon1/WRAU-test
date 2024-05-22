@@ -87,23 +87,17 @@ public class BoardRepository
 
     }
 
-    public bool Delete(ExternalMemberBoardDto mb)
+    public OperationResult Delete(ExternalMemberBoardDto mb)
     {
         try
         {
             using var scope = coreScopeProvider.CreateCoreScope();
             var exisingBoard = Get(mb.Id);
 
-            if (exisingBoard == null)
-            {
-                scope.Complete();
-                return false;
-            }
-
-            contentService.Delete(exisingBoard);
-            logger.LogInformation("Deleted board with externalId {ExternalId}", mb.Id);
+            var deleteResult = contentService.Delete(exisingBoard);
             scope.Complete();
-            return true;
+            return deleteResult;
+
         }
         catch (Exception e)
         {

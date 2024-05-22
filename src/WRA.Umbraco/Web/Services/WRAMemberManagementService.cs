@@ -100,21 +100,29 @@ public class WraMemberManagementService(
 
     public Task Delete(MemberEvent reqMember)
     {
-        // Create a scope
-        using var scope = coreScopeProvider.CreateCoreScope();
-
-        var existingMember = memberService.GetByEmail(reqMember.Email);
-        if (existingMember == null)
+        try
         {
-            logger.LogInformation("Cannot delete member. Member not found: {Email}", reqMember.Email);
+            // Create a scope
+            using var scope = coreScopeProvider.CreateCoreScope();
+
+            var existingMember = memberService.GetByEmail(reqMember.Email);
+            if (existingMember == null)
+            {
+                logger.LogInformation("Cannot delete member. Member not found: {Email}", reqMember.Email);
+                scope.Complete();
+                return Task.CompletedTask;
+            }
+
+            memberService.Delete(existingMember);
             scope.Complete();
+            logger.LogInformation("Deleted member: {Email}", reqMember.Email);
             return Task.CompletedTask;
         }
-
-        memberService.Delete(existingMember);
-        scope.Complete();
-        logger.LogInformation("Deleted member: {Email}", reqMember.Email);
-        return Task.CompletedTask;
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
     }
 
 

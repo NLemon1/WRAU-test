@@ -182,13 +182,13 @@ public class MemberTasks(
     {
         try
         {
-            var boardResp = await wraExternalApiService.GetCompanyById(externalId);
+            var boardResp = await wraExternalApiService.GetBoardById(externalId);
             if (boardResp.Content == null) return null;
-            var company =
-                JsonSerializer.Deserialize<ExternalCompanyDto>(boardResp.Content, SerializationOptions);
+            var board =
+                JsonSerializer.Deserialize<ExternalMemberBoardDto>(boardResp.Content, SerializationOptions);
 
-            if (company == null) return null;
-            var result = companyRepository.CreateOrUpdate(company);
+            if (board == null) return null;
+            var result = boardRepository.CreateOrUpdateBoard(board);
             return result;
         }
         catch (Exception e)

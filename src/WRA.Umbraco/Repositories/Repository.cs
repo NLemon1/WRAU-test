@@ -1,5 +1,7 @@
 using Microsoft.Extensions.Logging;
 using NPoco.Linq;
+using Umbraco.Cms.Core.Events;
+using Umbraco.Cms.Core.Services;
 using Umbraco.Cms.Infrastructure.Scoping;
 using WRA.Umbraco.CustomTables;
 
@@ -12,28 +14,31 @@ public class Repository<TEntity>(
     where TEntity : IEntity
 
 {
-    public void Create(TEntity entity)
+    public OperationResult Create(TEntity entity)
     {
         using var scope = scopeProvider.CreateScope();
-        scope.Database.Insert<TEntity>(entity);
+        object createResult = scope.Database.Insert<TEntity>(entity);
         scope.Complete();
-        logger.LogInformation("Created entity: {Entity}", entity.Id);
+        return GetResult(createResult);
     }
 
-    public void Update(TEntity entity)
+    public OperationResult Update(TEntity entity)
     {
         using var scope = scopeProvider.CreateScope();
-        scope.Database.Update(entity);
+        int updateResult = scope.Database.Update(entity);
         scope.Complete();
-        logger.LogInformation("Updated entity: {Entity}", entity.Id);
+        return GetResult(updateResult);
     }
 
-    public void Delete(TEntity entity)
+    public OperationResult Delete(TEntity entity)
     {
         using var scope = scopeProvider.CreateScope();
-        scope.Database.Delete(entity);
+        int deleteResult = scope.Database.Delete(entity);
+
+
         scope.Complete();
         logger.LogInformation("Deleted entity: {Entity}", entity.Id);
+        return GetResult(deleteResult);
     }
 
     public IQueryProviderWithIncludes<TEntity> GetQueryable()
@@ -65,6 +70,20 @@ public class Repository<TEntity>(
         scope.Database.Save<TEntity>(entity);
         scope.Complete();
         logger.LogInformation("Saved changes to entity: {Entity}", entity.Id);
+    }
+
+    private OperationResult GetResult(int executionResult)
+    {
+        var eventMessage = new EventMessages();
+        var operationStatus = executionResult == 1 ? OperationResultType.Success : OperationResultType.Failed;
+        return new OperationResult(operationStatus, eventMessage);
+    }
+
+    private OperationResult GetResult(object? executionResult)
+    {
+        var eventMessage = new EventMessages();
+        var operationStatus = executionResult != null ? OperationResultType.Success : OperationResultType.Failed;
+        return new OperationResult(operationStatus, eventMessage);
     }
 
 }

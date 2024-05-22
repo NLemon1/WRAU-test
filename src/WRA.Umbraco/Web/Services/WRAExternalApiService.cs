@@ -64,7 +64,7 @@ public class WraExternalApiService(WraExternalApiSettings settings)
         return response;
     }
 
-    public async Task<RestResponse> GetBoardByID(Guid Id)
+    public async Task<RestResponse> GetBoardById(Guid Id)
     {
         var options = new RestClientOptions(settings.VersionedBaseUrl);
         var client = new RestClient(options);

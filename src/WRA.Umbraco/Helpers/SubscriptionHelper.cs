@@ -42,18 +42,33 @@ public class SubscriptionHelper(
         }
     }
 
-    public bool DeleteMemberSubscription(MemberSubscription memberSubscription)
+    public OperationResult? DeleteMemberSubscription(Guid Id)
+    {
+        var existingMemberSubscription = memberSubscriptionRepository
+            .GetQueryable()
+            .FirstOrDefault(x => x.ExternalId == Id);
+
+        return DeleteMemberSubscription(existingMemberSubscription);
+    }
+
+    public OperationResult? DeleteMemberSubscription(MemberSubscription memberSubscription)
     {
         try
         {
-            memberSubscriptionRepository.Delete(memberSubscription);
-            logger.LogInformation("Deleted member subscription: {MemberSubscriptionId}", memberSubscription.Id);
-            return true;
+             var deleteResult = memberSubscriptionRepository.Delete(memberSubscription);
+             if (!deleteResult.Success)
+             {
+                    logger.LogError("Error deleting member subscription: {MemberSubscriptionId}", memberSubscription.Id);
+                    return deleteResult;
+             }
+
+             logger.LogInformation("Deleted member subscription: {MemberSubscriptionId}", memberSubscription.Id);
+             return deleteResult;
         }
         catch (Exception e)
         {
             logger.LogError(e, "Error deleting member subscription");
-            return false;
+            throw;
         }
     }
 
@@ -86,13 +101,29 @@ public class SubscriptionHelper(
             throw;
         }
     }
-    public bool DeleteCompanySubscription(CompanySubscription companySubscription)
+
+    public OperationResult? DeleteCompanySubscription(Guid Id)
+    {
+        var existingCompany = companySubscriptionRepository
+            .GetQueryable()
+            .FirstOrDefault(x => x.ExternalId == Id);
+
+        return DeleteCompanySubscription(existingCompany);
+    }
+
+    public OperationResult? DeleteCompanySubscription(CompanySubscription companySubscription)
     {
         try
         {
-            companySubscriptionRepository.Delete(companySubscription);
+            var deleteResult = companySubscriptionRepository.Delete(companySubscription);
+            if (!deleteResult.Success)
+            {
+                logger.LogError("Error deleting company subscription: {CompanySubscriptionId}", companySubscription.Id);
+                return deleteResult;
+            }
             logger.LogInformation("Deleted company subscription: {CompanySubscriptionId}", companySubscription.Id);
-            return true;
+            return deleteResult;
+
         }
         catch (Exception e)
         {
