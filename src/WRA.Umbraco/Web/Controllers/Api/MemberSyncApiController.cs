@@ -146,7 +146,7 @@ public class MemberSyncApiController(
 
     [HttpPost]
     [Route("DeleteBoard")]
-    public Task<IActionResult> DeleteBoard(ExternalMemberBoardDto mb)
+    public Task<IActionResult> DeleteBoard(Guid mb)
     {
         var result = boardRepository.Delete(mb);
         return result.Success ? Task.FromResult<IActionResult>(Ok()) : Task.FromResult<IActionResult>(InternalServerError());

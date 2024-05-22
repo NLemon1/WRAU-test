@@ -106,4 +106,23 @@ public class BoardRepository
         }
     }
 
+    public OperationResult Delete(Guid externalId)
+    {
+        try
+        {
+            using var scope = coreScopeProvider.CreateCoreScope();
+            var existingBoard = Get(externalId);
+
+            var deleteResult = contentService.Delete(existingBoard);
+            scope.Complete();
+            return deleteResult;
+
+        }
+        catch (Exception e)
+        {
+            logger.LogError(e, "Error deleting board");
+            throw;
+        }
+    }
+
 }
