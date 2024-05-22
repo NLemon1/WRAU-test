@@ -19,8 +19,8 @@
     // pass this type to the constructor of the strongly typed member model
     var member = new ContentModels.Member(currentMember, new NoopPublishedValueFallback());
 
-    var memeberExternalId = member?.ExternalId;
-    var memberDonationQuery = await _memberDonationService.GetMemberDonations(memeberExternalId);
+    var memberExternalId = member?.ExternalId;
+    var memberDonationQuery = await _memberDonationService.GetMemberDonations(memberExternalId);
 
 }
 
@@ -93,20 +93,46 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody style="color: var(--bs-gray-30)">
-                                                    @for (var i = 1; i < 5; i++)
+                                                    <tr>
+                                                        <td class="py-2">Name</td>
+                                                        <td class="py-2 text-body">@member.FullName</td>
+                                                        <td class="py-2 text-end"><button class="text-link border-0 bg-transparent px-2 py-2">Edit</button></td>
+                                                    </tr>                                                
+                                                    <tr>
+                                                        <td class="py-2">Address</td>
+                                                        <td class="py-2 text-body">@member?.Address1 @member?.Address2 @member?.Address3, @member?.City, @member?.StateProvince</td>
+                                                        <td class="py-2 text-end"><button class="text-link border-0 bg-transparent px-2 py-2">Edit</button></td>
+                                                    </tr>
+                                                    @if (!String.IsNullOrEmpty(member.WorkPhone))
                                                     {
-                                                        <tr class="">
-                                                            <td class="py-2">
-                                                                Lorem ipsum dolor @i
-                                                            </td>
-                                                            <td class="py-2 text-body">
-                                                                At eget vulputate sapien duis curabitur
-                                                            </td>
-                                                            <td class="py-2 text-end">
-                                                                <button class="text-link border-0 bg-transparent px-2 py-2">
-                                                                    Edit
-                                                                </button>
-                                                            </td>
+                                                        <tr>
+                                                            <td class="py-2">Office Phone</td>
+                                                            <td class="py-2 text-body">@member.WorkPhone</td>
+                                                            <td class="py-2 text-end"><button class="text-link border-0 bg-transparent px-2 py-2">Edit</button></td>
+                                                        </tr>
+                                                    }
+                                                    @if (!String.IsNullOrEmpty(member.CellPhone))
+                                                    {
+                                                        <tr>
+                                                            <td class="py-2">Mobile Phone</td>
+                                                            <td class="py-2 text-body">@member.CellPhone</td>
+                                                            <td class="py-2 text-end"><button class="text-link border-0 bg-transparent px-2 py-2">Edit</button></td>
+                                                        </tr>
+                                                    }
+                                                    @if (!String.IsNullOrEmpty(member.HomePhone))
+                                                    {
+                                                        <tr>
+                                                            <td class="py-2">Home Phone</td>
+                                                            <td class="py-2 text-body">@member.HomePhone</td>
+                                                            <td class="py-2 text-end"><button class="text-link border-0 bg-transparent px-2 py-2">Edit</button></td>
+                                                        </tr>
+                                                    }
+                                                    @if (!String.IsNullOrEmpty(member.Fax))
+                                                    {
+                                                        <tr>
+                                                            <td class="py-2">Fax</td>
+                                                            <td class="py-2 text-body">@member.Fax</td>
+                                                            <td class="py-2 text-end"><button class="text-link border-0 bg-transparent px-2 py-2">Edit</button></td>
                                                         </tr>
                                                     }
                                                 </tbody>
@@ -124,22 +150,27 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody style="color: var(--bs-gray-30)">
-                                                    @for (var i = 1; i < 7; i++)
+                                                    <tr>
+                                                        <td class="py-2">Security</td>
+                                                        <td class="py-2 text-body" colspan="2">
+                                                            <button class="text-link border-0 bg-transparent px-2 py-2">Change User Name</button><br />
+                                                            <button class="text-link border-0 bg-transparent px-2 py-2">Change Password</button>
+                                                        </td>
+                                                    </tr>
+
+
+                                                    @if (member.HasProperty("email"))
                                                     {
-                                                        <tr class="">
-                                                            <td class="py-2">
-                                                                Lorem ipsum dolor @i
-                                                            </td>
+                                                        <tr>
+                                                            <td class="py-2">Email</td>
                                                             <td class="py-2 text-body">
-                                                                At eget vulputate sapien duis curabitur
+                                                                @member.GetProperty("email").GetSourceValue()
                                                             </td>
-                                                            <td class="py-2 text-end">
-                                                                <button class="text-link border-0 bg-transparent px-2 py-2">
-                                                                    Edit
-                                                                </button>
-                                                            </td>
+                                                            <td class="py-2 text-end"><button class="text-link border-0 bg-transparent px-2 py-2">Edit</button></td>
                                                         </tr>
                                                     }
+                                                
+                                                   
                                                 </tbody>
                                             </table>
                                         </div>
