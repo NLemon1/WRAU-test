@@ -98,7 +98,8 @@
         margin-bottom: 10px;
     }
     
-    > img {
+    > img,
+    > .svg-wrapper {
         position: relative;
         z-index: 1;
     }

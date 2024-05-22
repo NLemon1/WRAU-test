@@ -13825,7 +13825,8 @@ a.link-hover-inverse:not(:hover),
     margin-bottom: 10px;
   }
 }
-.decorative-img-wrapper > img {
+.decorative-img-wrapper > img,
+.decorative-img-wrapper > .svg-wrapper {
   position: relative;
   z-index: 1;
 }

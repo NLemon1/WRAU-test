@@ -1,12 +1,29 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
 @using ContentModels = WRA.Umbraco.Models;
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using Umbraco.Cms.Core.Security
+@using WRA.Umbraco.Web.Services
+
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<WRA.Umbraco.Models.MywraProfile>
+@inject IMemberManager _memberManager
+@inject MemberDonationService _memberDonationService
 
 @{
     Layout = "~/Views/_Layout.cshtml";
     var content = (ContentModels.MywraProfile)Model;
 
+    // get current member
+    var currentMemberQuery = await _memberManager.GetCurrentMemberAsync();
+    // cast it to a published contnet type
+    var currentMember = _memberManager.AsPublishedMember(currentMemberQuery);
+    // pass this type to the constructor of the strongly typed member model
+    var member = new ContentModels.Member(currentMember, new NoopPublishedValueFallback());
+
+    var memeberExternalId = member?.ExternalId;
+    var memberDonationQuery = await _memberDonationService.GetMemberDonations(memeberExternalId);
+
 }
+
 
 <div class="w-100">
     <div class="row g-0">
@@ -193,55 +210,52 @@
                                                 <a href="/" class="btn btn-primary">Contribute To Direct Giver</a>
                                             </div>
                                         </div>
-                                        <div class="border border-medium p-4 rounded mb-3">
-                                            <h4 class="h6 mb-4 fs-lg">
-                                                Contribution History
-                                            </h4>
 
-                                            <table class="table-info w-100 fs-sm">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Year</th>
-                                                        <th>RPAC</th>
-                                                        <th>Direct Giver</th>
-                                                        <th>NARLIFE</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody style="color: var(--bs-gray-30)" class="text-body">
-                                                    @for (var i = 1; i < 6; i++)
-                                                    {
-                                                        <tr class="">
+                                        @if (memberDonationQuery.Any())
+                                        {
+                                            decimal totalContribution = 0;
+
+                                            <div class="border border-medium p-4 rounded mb-3">
+                                                <h4 class="h6 mb-4 fs-lg">
+                                                    Contribution History
+                                                </h4>
+
+                                                <table class="table-info w-100 fs-sm">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Year</th>
+                                                            <th>Program</th>
+                                                            <th>Amount</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody style="color: var(--bs-gray-30)" class="text-body">
+                                                        @foreach (var memberDonation in memberDonationQuery.OrderBy(p => p.CalendarYear).Reverse())
+                                                        {
+                                                            <tr class="">
+                                                                <td class="py-2">
+                                                                    @memberDonation.CalendarYear
+                                                                </td>
+                                                                <td class="py-2">
+                                                                    @memberDonation.FundLongName
+                                                                </td>
+                                                                <td class="py-2">
+                                                                    @memberDonation.TotalAmount
+                                                                </td>
+                                                            </tr>
+
+                                                            totalContribution += memberDonation.TotalAmount;
+                                                        }
+                                                        <tr class="fw-bold">
+                                                            <td class="py-2" colspan="2">
                                                             <td class="py-2">
-                                                                202@(i)
-                                                            </td>
-                                                            <td class="py-2">
-                                                                $100.00
-                                                            </td>
-                                                            <td class="py-2">
-                                                                $50.00
-                                                            </td>
-                                                            <td class="py-2">
-                                                                $20.00
+                                                                @totalContribution
                                                             </td>
                                                         </tr>
-                                                    }
-                                                    <tr class="fw-bold">
-                                                        <td class="py-2">
-                                                            Total
-                                                        </td>
-                                                        <td class="py-2">
-                                                            $200.00
-                                                        </td>
-                                                        <td class="py-2">
-                                                            $150.00
-                                                        </td>
-                                                        <td class="py-2">
-                                                            $60.00
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        }
+
                                     </div>
                                 </div>
                             </div>
