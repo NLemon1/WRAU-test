@@ -56,6 +56,8 @@ public class ContentApiController(
         var responseResults = rawResults
                 .Select(result => new HotTipEntry(result.Content, new NoopPublishedValueFallback()));
 
+        responseResults = responseResults.OrderByDescending(r => r.OriginalPublishedDate);
+
         // check if there are any requested categories...
         if (request.Categories?.Any() ?? false)
         {
