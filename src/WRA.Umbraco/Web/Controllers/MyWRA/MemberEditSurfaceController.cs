@@ -6,6 +6,7 @@ using Umbraco.Cms.Core.Security;
 using Umbraco.Cms.Core.Services;
 using Umbraco.Cms.Core.Web;
 using Umbraco.Cms.Infrastructure.Persistence;
+using Umbraco.Cms.Web.Common.Filters;
 using Umbraco.Cms.Web.Website.Controllers;
 using WRA.Umbraco.Extensions;
 using WRA.Umbraco.Helpers.Constants;
@@ -30,7 +31,10 @@ public class MemberEditSurfaceController(
         publishedUrlProvider
     )
 {
-    public async Task<IActionResult> HandleMemberEdit(EditMemberDto memberInfo)
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    [ValidateUmbracoFormRouteString]
+    public async Task<IActionResult> HandleMemberEdit([Bind(Prefix = "memberUpdateModel")] EditMemberDto memberInfo)
     {
         try
         {
@@ -39,24 +43,21 @@ public class MemberEditSurfaceController(
                 return CurrentUmbracoPage();
             }
 
-            if (memberInfo == null || string.IsNullOrEmpty(memberInfo.Email))
-            {
-                return CurrentUmbracoPage();
-            }
-
             // Get member
-            var member = services.MemberService.GetByEmail(memberInfo.Email);
+            var member = services.MemberService.GetById(memberInfo.MemberId);
             // update member
-            if (member != null)
-            {
-                if (string.IsNullOrEmpty(memberInfo.FullName)) member.Name = memberInfo.FullName;
-                member.Email = memberInfo.Email;
-                member.SetIfNotEmpty(GlobalConstants.Member.AddressLine1, memberInfo.Address);
-                member.SetIfNotEmpty(GlobalConstants.Member.WorkPhone, memberInfo.WorkPhone);
-                member.SetIfNotEmpty(GlobalConstants.Member.CellPhone, memberInfo.CellPhone);
-                member.SetIfNotEmpty(GlobalConstants.Member.HomePhone, memberInfo.HomePhone);
-                // member.SetIfNotEmpty(GlobalConstants.Member.Website, memberInfo.Website);
-            }
+            if (member == null) return RedirectToCurrentUmbracoPage();
+            if (string.IsNullOrEmpty(memberInfo.FirstName)) member.Name = $"{memberInfo.FirstName} {memberInfo.LastName}";
+            // member.Email = memberInfo.Email;
+            member.SetIfNotEmpty(GlobalConstants.Member.AddressLine1, memberInfo.Address1);
+            member.SetIfNotEmpty(GlobalConstants.Member.AddressLine2, memberInfo.Address2);
+            member.SetIfNotEmpty(GlobalConstants.Member.AddressLine3, memberInfo.Address3);
+            member.SetIfNotEmpty(GlobalConstants.Member.City, memberInfo.City);
+            member.SetIfNotEmpty(GlobalConstants.Member.State, memberInfo.State);
+            member.SetIfNotEmpty(GlobalConstants.Member.ZipCode, memberInfo.ZipCode);
+            member.SetIfNotEmpty(GlobalConstants.Member.WorkPhone, memberInfo.WorkPhone);
+            member.SetIfNotEmpty(GlobalConstants.Member.CellPhone, memberInfo.CellPhone);
+            member.SetIfNotEmpty(GlobalConstants.Member.HomePhone, memberInfo.HomePhone);
 
             return RedirectToCurrentUmbracoPage();
 

@@ -4,7 +4,7 @@
   "SendToCustomer": true,
   "Subject": "Order Confirmation",
   "SenderName": "Umbraco Commerce",
-  "SenderAddress": "postmark@lightburndesigns.com",
+  "SenderAddress": "noreply@umbraco.com",
   "ToAddresses": [],
   "CcAddresses": [],
   "BccAddresses": [],

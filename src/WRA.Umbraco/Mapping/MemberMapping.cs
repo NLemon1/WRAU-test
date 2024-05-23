@@ -1,7 +1,10 @@
 using System.Text;
+using GlobalPayments.Api.Utils;
 using Microsoft.Extensions.Logging;
 using Umbraco.Cms.Core.Mapping;
 using Umbraco.Cms.Core.Models;
+using Umbraco.Cms.Core.Models.PublishedContent;
+using Umbraco.Cms.Core.Security;
 using Umbraco.Cms.Core.Web;
 using WRA.Umbraco.Contracts;
 using WRA.Umbraco.Exceptions;
@@ -9,6 +12,7 @@ using WRA.Umbraco.Extensions;
 using WRA.Umbraco.Helpers.Constants;
 using WRA.Umbraco.Repositories;
 using WRA.Umbraco.Web.Dtos.External;
+using WRA.Umbraco.Web.Dtos.Member;
 
 namespace WRA.Umbraco.Mapping;
 
@@ -24,12 +28,28 @@ public class MemberMapping(
         mapper.Define<MemberEvent, ExternalMemberDto>((_, _) => new ExternalMemberDto(), MemberToDto);
         mapper.Define<IMember, ExternalMemberDto>((_, _) => new ExternalMemberDto(), PublishedContentToMemberDto);
         mapper.Define<Models.Member, ExternalMemberDto>((_, _) => new ExternalMemberDto(), UmbracoMemberToMemberDto);
+        mapper.Define<IPublishedContent, EditMemberDto>((_, _) => new EditMemberDto(), UmbracoMemberToEditMemberDto);
 
         // Events
         mapper.Define<IMember, MemberEvent>((_, _) => new MemberEvent(), PublishedContentToMemberEvent);
         mapper.Define<ExternalMemberDto, MemberEvent>((_, _) => new MemberEvent(), DtoToMember);
     }
 
+    private void UmbracoMemberToEditMemberDto(IPublishedContent source, EditMemberDto target, MapperContext context)
+    {
+        target.MemberId = source.Id;
+        target.Address1 = source.Value<string>(GlobalConstants.Member.AddressLine1) ?? string.Empty;
+        target.Address2 = source.Value<string>(GlobalConstants.Member.AddressLine2) ?? string.Empty;
+        target.City = source.Value<string>(GlobalConstants.Member.City) ?? string.Empty;
+        target.State = source.Value<string>(GlobalConstants.Member.State) ?? string.Empty;
+        target.ZipCode = source.Value<string>(GlobalConstants.Member.ZipCode) ?? string.Empty;
+        target.WorkPhone = source.Value<string>(GlobalConstants.Member.WorkPhone) ?? string.Empty;
+        target.HomePhone = source.Value<string>(GlobalConstants.Member.HomePhone) ?? string.Empty;
+        target.CellPhone = source.Value<string>(GlobalConstants.Member.CellPhone) ?? string.Empty;
+        target.Email = source.Value<string>(GlobalConstants.Member.Email) ?? string.Empty;
+
+
+    }
     private void PublishedContentToMemberEvent(IMember source, MemberEvent target, MapperContext context)
     {
         target.UserName = source.Username;

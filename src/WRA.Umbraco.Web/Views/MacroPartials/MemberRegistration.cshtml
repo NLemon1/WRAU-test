@@ -6,7 +6,7 @@
 @inject MemberModelBuilderFactory MemberModelBuilderFactory;
 @inject IMemberManager MemberManager;
 @{
-    
+
     // Build a registration model with parameters
     var registerModel = MemberModelBuilderFactory
     .CreateRegisterModel()
@@ -40,7 +40,7 @@
     }
     else
     {
-        using (Html.BeginUmbracoForm<MemberRegisterController>("HandleRegisterMember", new {
+        using (Html.BeginUmbracoForm<MemberRegisterController>(nameof(MemberRegisterController.HandleRegisterMember), new {
             MemberTypeAlias = registerModel.MemberTypeAlias,
             UsernameIsEmail = registerModel.UsernameIsEmail,
             RedirectUrl = registerModel.RedirectUrl,

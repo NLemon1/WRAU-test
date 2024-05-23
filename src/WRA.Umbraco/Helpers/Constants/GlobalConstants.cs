@@ -4,6 +4,11 @@ public static class GlobalConstants
 {
     public const string ExternalId = "externalId";
 
+    public static class Product
+    {
+        public const string Sku = "sku";
+    }
+
     public static class Member
     {
         public const string LocalBoards = "localBoards";
@@ -15,11 +20,12 @@ public static class GlobalConstants
         public const string WorkPhone = "workPhone";
         public const string HomePhone = "homePhone";
         public const string CellPhone = "cellPhone";
-        public const string AddressLine1 = "addressLine1";
-        public const string AddressLine2 = "addressLine2";
+        public const string AddressLine1 = "address1";
+        public const string AddressLine2 = "address2";
+        public const string AddressLine3 = "address3";
         public const string City = "city";
         public const string State = "state";
-        public const string ZipCode = "zipCode";
+        public const string ZipCode = "zip";
 
     }
 }

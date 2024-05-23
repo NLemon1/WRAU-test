@@ -69,7 +69,7 @@ public class ProductPageRepository(
 
             var productPageType = contentCache.GetContentType(ProductPage.ModelTypeAlias);
             var productPage = contentCache.GetByContentType(productPageType)
-                .First(p => p.Value(GlobalAliases.Sku).Equals(externalId));
+                .First(p => p.Value(GlobalConstants.Product.Sku).Equals(externalId));
 
             var productPageContent = contentService.GetById(productPage.Id);
             return productPageContent;

@@ -1,7 +1,7 @@
-﻿@using Umbraco.Cms.Web.Common.PublishedModels;
-@using ContentModels = WRA.Umbraco.Models;
+﻿@using ContentModels = WRA.Umbraco.Models;
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using Umbraco.Cms.Core.Security
+@using WRA.Umbraco.Web.Controllers.MyWRA
 @using WRA.Umbraco.Web.Services
 
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<WRA.Umbraco.Models.MywraProfile>
@@ -11,6 +11,7 @@
 @{
     Layout = "~/Views/_Layout.cshtml";
     var content = (ContentModels.MywraProfile)Model;
+    var memberUpdateModel = Model.EditableMember;
 
     // get current member
     var currentMemberQuery = await _memberManager.GetCurrentMemberAsync();
@@ -84,59 +85,101 @@
 
                                         <h3 class="h5 mb-2">Information</h3>
                                         <div class="w-100 border border-medium rounded mb-5">
-                                            <table class="table-info w-100 fs-sm">
-                                                <thead class="visually-hidden">
-                                                    <tr>
-                                                        <th>Item</th>
-                                                        <th>Value</th>
-                                                        <th>Edit</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody style="color: var(--bs-gray-30)">
-                                                    <tr>
-                                                        <td class="py-2">Name</td>
-                                                        <td class="py-2 text-body">@member.FullName</td>
-                                                        <td class="py-2 text-end"><button class="text-link border-0 bg-transparent px-2 py-2">Edit</button></td>
-                                                    </tr>                                                
-                                                    <tr>
-                                                        <td class="py-2">Address</td>
-                                                        <td class="py-2 text-body">@member?.Address1 @member?.Address2 @member?.Address3, @member?.City, @member?.StateProvince</td>
-                                                        <td class="py-2 text-end"><button class="text-link border-0 bg-transparent px-2 py-2">Edit</button></td>
-                                                    </tr>
-                                                    @if (!String.IsNullOrEmpty(member.WorkPhone))
-                                                    {
-                                                        <tr>
-                                                            <td class="py-2">Office Phone</td>
-                                                            <td class="py-2 text-body">@member.WorkPhone</td>
-                                                            <td class="py-2 text-end"><button class="text-link border-0 bg-transparent px-2 py-2">Edit</button></td>
-                                                        </tr>
-                                                    }
-                                                    @if (!String.IsNullOrEmpty(member.CellPhone))
-                                                    {
-                                                        <tr>
-                                                            <td class="py-2">Mobile Phone</td>
-                                                            <td class="py-2 text-body">@member.CellPhone</td>
-                                                            <td class="py-2 text-end"><button class="text-link border-0 bg-transparent px-2 py-2">Edit</button></td>
-                                                        </tr>
-                                                    }
-                                                    @if (!String.IsNullOrEmpty(member.HomePhone))
-                                                    {
-                                                        <tr>
-                                                            <td class="py-2">Home Phone</td>
-                                                            <td class="py-2 text-body">@member.HomePhone</td>
-                                                            <td class="py-2 text-end"><button class="text-link border-0 bg-transparent px-2 py-2">Edit</button></td>
-                                                        </tr>
-                                                    }
-                                                    @if (!String.IsNullOrEmpty(member.Fax))
-                                                    {
-                                                        <tr>
-                                                            <td class="py-2">Fax</td>
-                                                            <td class="py-2 text-body">@member.Fax</td>
-                                                            <td class="py-2 text-end"><button class="text-link border-0 bg-transparent px-2 py-2">Edit</button></td>
-                                                        </tr>
-                                                    }
-                                                </tbody>
-                                            </table>
+                                          @using (Html.BeginUmbracoForm<MemberEditSurfaceController>(nameof(MemberEditSurfaceController.HandleMemberEdit)))
+                                          {
+                                              <table class="table-info w-100 fs-sm">
+                                                  <thead class="visually-hidden">
+                                                  <tr>
+                                                      <th>Item</th>
+                                                      <th>Value</th>
+                                                      <th>Edit</th>
+                                                  </tr>
+                                                  </thead>
+                                                  <tbody style="color: var(--bs-gray-30)">
+                                                  <tr>
+                                                      <td class="py-2">FirstName</td>
+                                                      <td class="py-2 text-body">@memberUpdateModel.FirstName</td>
+                                                      <label asp-for="@memberUpdateModel.FirstName" class="form-label"></label>
+                                                      <input asp-for=@memberUpdateModel.FirstName />
+                                                      <td class="py-2 text-end"><button class="text-link border-0 bg-transparent px-2 py-2">Edit</button></td>
+                                                  </tr>
+                                                  <tr>
+                                                      <td class="py-2">LastName</td>
+                                                      <td class="py-2 text-body">@memberUpdateModel.LastName</td>
+                                                      <label asp-for="@memberUpdateModel.LastName" class="form-label"></label>
+                                                      <input asp-for=@memberUpdateModel.LastName />
+                                                      <td class="py-2 text-end"><button class="text-link border-0 bg-transparent px-2 py-2">Edit</button></td>
+                                                  </tr>
+                                                  <tr>
+                                                      <td class="py-2">Address</td>
+                                                      <td class="py-2 text-body">@memberUpdateModel?.Address1</td>
+                                                      <td class="py-2 text-end"><button class="text-link border-0 bg-transparent px-2 py-2">Edit</button></td>
+                                                      <label asp-for="@memberUpdateModel.Address1" class="form-label"></label>
+                                                      <input asp-for=@memberUpdateModel.Address1 />
+
+                                                  </tr>
+                                                  <tr>
+                                                      <td class="py-2">Address2</td>
+                                                      <td class="py-2 text-body">@memberUpdateModel.Address2</td>
+                                                      <label asp-for="@memberUpdateModel.Address2" class="form-label"></label>
+                                                      <input asp-for=@memberUpdateModel.Address2 />
+                                                      <td class="py-2 text-end"><button class="text-link border-0 bg-transparent px-2 py-2">Edit</button></td>
+                                                  </tr>
+                                                  <tr>
+                                                      <td class="py-2">City</td>
+                                                      <td class="py-2 text-body">@memberUpdateModel.City</td>
+                                                      <label asp-for="@memberUpdateModel.City" class="form-label"></label>
+                                                      <input asp-for=@memberUpdateModel.City />
+                                                      <td class="py-2 text-end"><button class="text-link border-0 bg-transparent px-2 py-2">Edit</button></td>
+                                                  </tr>
+                                                  <tr>
+                                                      <td class="py-2">State</td>
+                                                      <td class="py-2 text-body">@memberUpdateModel.State</td>
+                                                      <label asp-for="@memberUpdateModel.State" class="form-label"></label>
+                                                      <input asp-for=@memberUpdateModel.State />
+                                                      <td class="py-2 text-end"><button class="text-link border-0 bg-transparent px-2 py-2">Edit</button></td>
+                                                  </tr>
+                                                  <tr>
+                                                      <td class="py-2">Zip</td>
+                                                      <td class="py-2 text-body">@memberUpdateModel.ZipCode</td>
+                                                      <label asp-for="@memberUpdateModel.ZipCode" class="form-label"></label>
+                                                      <input asp-for=@memberUpdateModel.ZipCode />
+                                                      <td class="py-2 text-end"><button class="text-link border-0 bg-transparent px-2 py-2">Edit</button></td>
+                                                  </tr>
+                                                  <tr>
+                                                      <td class="py-2">Mobile Phone</td>
+                                                      <td class="py-2 text-body">@memberUpdateModel.CellPhone</td>
+                                                      <label asp-for="@memberUpdateModel.CellPhone" class="form-label"></label>
+                                                      <input asp-for=@memberUpdateModel.CellPhone />
+                                                      <td class="py-2 text-end"><button class="text-link border-0 bg-transparent px-2 py-2">Edit</button></td>
+                                                  </tr>
+                                                  <tr>
+                                                      <td class="py-2">Home Phone</td>
+                                                      <td class="py-2 text-body">@memberUpdateModel.HomePhone</td>
+                                                      <label asp-for="@memberUpdateModel.HomePhone" class="form-label"></label>
+                                                      <input asp-for=@memberUpdateModel.HomePhone />
+                                                      <td class="py-2 text-end"><button class="text-link border-0 bg-transparent px-2 py-2">Edit</button></td>
+                                                  </tr>
+                                                  <tr>
+                                                      <td class="py-2">Work Phone</td>
+                                                      <td class="py-2 text-body">@memberUpdateModel.WorkPhone</td>
+                                                      <label asp-for="@memberUpdateModel.WorkPhone" class="form-label"></label>
+                                                      <input asp-for=@memberUpdateModel.WorkPhone />
+                                                      <td class="py-2 text-end"><button class="text-link border-0 bg-transparent px-2 py-2">Edit</button></td>
+                                                  </tr>
+                                                  @* @if (!String.IsNullOrEmpty(member.Fax)) *@
+                                                  @* { *@
+                                                  @*     <tr> *@
+                                                  @*         <td class="py-2">Fax</td> *@
+                                                  @*         <td class="py-2 text-body">@member.Fax</td> *@
+                                                  @*         <td class="py-2 text-end"><button class="text-link border-0 bg-transparent px-2 py-2">Edit</button></td> *@
+                                                  @*     </tr> *@
+                                                  @* } *@
+                                                  </tbody>
+                                              </table>
+                                              <button type="submit" class="btn btn-primary">Save Changes</button>
+                                          }
+
                                         </div>
 
                                         <h3 class="h5 mb-2">Settings</h3>
@@ -169,8 +212,8 @@
                                                             <td class="py-2 text-end"><button class="text-link border-0 bg-transparent px-2 py-2">Edit</button></td>
                                                         </tr>
                                                     }
-                                                
-                                                   
+
+
                                                 </tbody>
                                             </table>
                                         </div>
@@ -178,7 +221,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div> 
+                    </div>
 
                     <!-- COMMITTEES TAB -->
                     <div id="tabpanel-committees" tabindex="0" role="tabpanel" aria-labelledby="tab-committees" class="js-tabs-panel mywra-tab__panel" aria-hidden="true">
@@ -292,7 +335,7 @@
                             </div>
                         </div>
                     </div>
-                  
+
                     <!-- SUBSCRIPTIONS TAB -->
                     <div id="tabpanel-subscriptions" tabindex="0" role="tabpanel" aria-labelledby="tab-subscriptions" class="js-tabs-panel mywra-tab__panel" aria-hidden="true">
                         <div class="w-100 h-100">
