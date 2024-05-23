@@ -6,81 +6,84 @@
 @{
     // get current member
     var currentMemberQuery = await _memberManager.GetCurrentMemberAsync();
+}
+
+@if (currentMemberQuery != null)
+{
     // cast it to a published contnet type
     var currentMember = _memberManager.AsPublishedMember(currentMemberQuery);
     // pass this type to the constructor of the strongly typed member model
     var member = new ContentModels.Member(currentMember, new NoopPublishedValueFallback());
- 
-}
 
-@if (ViewData["isMobile"].Equals(true))
-{
-    <div class="col position-relative d-lg-none" aria-hidden="true">
-        <header class="page-header page-header--mywra">
-            <div class="container">
-                <div class="d-flex flex-column align-items-center py-4">
-                    <div class="decorative-img-wrapper">
-                        @if (!String.IsNullOrEmpty(member.ImageUrl))
-                        {
-                            <img src="@member.ImageUrl" class="img-fluid fit-cover" width="150" height="150" alt="" />
-                        }
-                        else
-                        {
-                            <div class="svg-wrapper bg-white d-flex flex-column align-items-center justify-content-center" style="width:150px;height:150px;">
-                                <svg width="76" height="84" viewBox="0 0 76 84" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <g clip-path="url(#clip0_7306_24423)">
-                                        <path d="M48.5555 44.1641H27.4444C12.5268 44.1641 0.321289 56.6117 0.321289 71.8263C0.321289 77.9961 5.2709 83.0441 11.321 83.0441H64.6789C70.7285 83.0441 75.6786 77.9961 75.6786 71.8263C75.6786 56.6122 63.473 44.1641 48.5555 44.1641Z" fill="#D7D7DC" />
-                                        <path d="M51.6573 33.8743C59.2002 26.1815 59.2002 13.7091 51.6573 6.01629C44.1144 -1.6765 31.885 -1.6765 24.3422 6.01629C16.7993 13.7091 16.7993 26.1815 24.3422 33.8743C31.885 41.5671 44.1144 41.5671 51.6573 33.8743Z" fill="#D7D7DC" />
-                                    </g>
-                                    <defs>
-                                        <clipPath id="clip0_7306_24423">
-                                            <rect width="75.3573" height="82.8" fill="white" transform="translate(0.321289 0.246094)" />
-                                        </clipPath>
-                                    </defs>
-                                </svg>
-                            </div>
-                        }
+    @if (ViewData["isMobile"].Equals(true))
+    {
+        <div class="col position-relative d-lg-none" aria-hidden="true">
+            <header class="page-header page-header--mywra">
+                <div class="container">
+                    <div class="d-flex flex-column align-items-center py-4">
+                        <div class="decorative-img-wrapper">
+                            @if (!String.IsNullOrEmpty(member.ImageUrl))
+                            {
+                                <img src="@member.ImageUrl" class="img-fluid fit-cover" width="150" height="150" alt="" />
+                            }
+                            else
+                            {
+                                <div class="svg-wrapper bg-white d-flex flex-column align-items-center justify-content-center" style="width:150px;height:150px;">
+                                    <svg width="76" height="84" viewBox="0 0 76 84" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_7306_24423)">
+                                            <path d="M48.5555 44.1641H27.4444C12.5268 44.1641 0.321289 56.6117 0.321289 71.8263C0.321289 77.9961 5.2709 83.0441 11.321 83.0441H64.6789C70.7285 83.0441 75.6786 77.9961 75.6786 71.8263C75.6786 56.6122 63.473 44.1641 48.5555 44.1641Z" fill="#D7D7DC" />
+                                            <path d="M51.6573 33.8743C59.2002 26.1815 59.2002 13.7091 51.6573 6.01629C44.1144 -1.6765 31.885 -1.6765 24.3422 6.01629C16.7993 13.7091 16.7993 26.1815 24.3422 33.8743C31.885 41.5671 44.1144 41.5671 51.6573 33.8743Z" fill="#D7D7DC" />
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0_7306_24423">
+                                                <rect width="75.3573" height="82.8" fill="white" transform="translate(0.321289 0.246094)" />
+                                            </clipPath>
+                                        </defs>
+                                    </svg>
+                                </div>
+                            }
 
+                        </div>
+                        <h2 class="js-collection-title mt-4 mb-0 text-center">
+                            Welcome, @member.FirstName
+                        </h2>
                     </div>
-                    <h2 class="js-collection-title mt-4 mb-0 text-center">
-                        Welcome, @member.FirstName
-                    </h2>
+                </div>
+            </header>
+        </div>
+    } else {
+        <header class="page-header page-header--mywra d-none d-lg-block pt-4">
+            <div class="w-100 ps-5">
+                <div class="container--sm position-relative mb-lg-n12">
+                    <div class="d-flex flex-row align-items-center">
+                        <div class="decorative-img-wrapper">
+                            @if (!String.IsNullOrEmpty(member.ImageUrl))
+                            {
+                                <img src="@member.ImageUrl" class="img-fluid fit-cover" width="150" height="150" alt="" />
+                            }
+                            else
+                            {
+                                <div class="svg-wrapper bg-white d-flex flex-column align-items-center justify-content-center" style="width:150px;height:150px;">
+                                    <svg width="76" height="84" viewBox="0 0 76 84" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_7306_24423)">
+                                            <path d="M48.5555 44.1641H27.4444C12.5268 44.1641 0.321289 56.6117 0.321289 71.8263C0.321289 77.9961 5.2709 83.0441 11.321 83.0441H64.6789C70.7285 83.0441 75.6786 77.9961 75.6786 71.8263C75.6786 56.6122 63.473 44.1641 48.5555 44.1641Z" fill="#D7D7DC" />
+                                            <path d="M51.6573 33.8743C59.2002 26.1815 59.2002 13.7091 51.6573 6.01629C44.1144 -1.6765 31.885 -1.6765 24.3422 6.01629C16.7993 13.7091 16.7993 26.1815 24.3422 33.8743C31.885 41.5671 44.1144 41.5671 51.6573 33.8743Z" fill="#D7D7DC" />
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0_7306_24423">
+                                                <rect width="75.3573" height="82.8" fill="white" transform="translate(0.321289 0.246094)" />
+                                            </clipPath>
+                                        </defs>
+                                    </svg>
+                                </div>
+                            }
+                        </div>
+                        <h2 class="js-collection-title mb-0 ms-6">
+                            Welcome, @member.FirstName
+                        </h2>
+                    </div>
                 </div>
             </div>
         </header>
-    </div>
-} else {
-    <header class="page-header page-header--mywra d-none d-lg-block pt-4">
-        <div class="w-100 ps-5">
-            <div class="container--sm position-relative mb-lg-n12">
-                <div class="d-flex flex-row align-items-center">
-                    <div class="decorative-img-wrapper">
-                        @if (!String.IsNullOrEmpty(member.ImageUrl))
-                        {
-                            <img src="@member.ImageUrl" class="img-fluid fit-cover" width="150" height="150" alt="" />
-                        }
-                        else
-                        {
-                            <div class="svg-wrapper bg-white d-flex flex-column align-items-center justify-content-center" style="width:150px;height:150px;">
-                                <svg width="76" height="84" viewBox="0 0 76 84" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <g clip-path="url(#clip0_7306_24423)">
-                                        <path d="M48.5555 44.1641H27.4444C12.5268 44.1641 0.321289 56.6117 0.321289 71.8263C0.321289 77.9961 5.2709 83.0441 11.321 83.0441H64.6789C70.7285 83.0441 75.6786 77.9961 75.6786 71.8263C75.6786 56.6122 63.473 44.1641 48.5555 44.1641Z" fill="#D7D7DC" />
-                                        <path d="M51.6573 33.8743C59.2002 26.1815 59.2002 13.7091 51.6573 6.01629C44.1144 -1.6765 31.885 -1.6765 24.3422 6.01629C16.7993 13.7091 16.7993 26.1815 24.3422 33.8743C31.885 41.5671 44.1144 41.5671 51.6573 33.8743Z" fill="#D7D7DC" />
-                                    </g>
-                                    <defs>
-                                        <clipPath id="clip0_7306_24423">
-                                            <rect width="75.3573" height="82.8" fill="white" transform="translate(0.321289 0.246094)" />
-                                        </clipPath>
-                                    </defs>
-                                </svg>
-                            </div>
-                        }
-                    </div>
-                    <h2 class="js-collection-title mb-0 ms-6">
-                        Welcome, @member.FirstName
-                    </h2>
-                </div>
-            </div>
-        </div>
-    </header>
+    }
 }
