@@ -118,6 +118,8 @@ public class CompanyRepository(
             using var scope = coreScopeProvider.CreateCoreScope();
             var existingCompany = GetByExternalId(externalId);
             var contentToDelete = contentService.GetById(existingCompany.Id);
+            scope.Complete();
+            logger.LogInformation("Deleting company with externalId {ExternalId}", externalId);
             return contentService.Delete(contentToDelete);
         }
         catch (Exception e)

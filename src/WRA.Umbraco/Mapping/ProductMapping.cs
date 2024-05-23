@@ -24,15 +24,16 @@ public class ProductMapping(
         productEvent.Sku = content.GetValue<string>(GlobalAliases.Sku);
         productEvent.Name = content.Name;
         productEvent.Description = content.GetValue<string>("description").SafeString();
-        productEvent.Price = content.GetValue<decimal>("price");
+        productEvent.NonMemberPrice = content.GetValue<decimal>("price");
         productEvent.MemberPrice = content.GetValue<decimal>("memberPrice");
         productEvent.ImageUrl = content.GetValue<string>("imageUrl").SafeString();
         productEvent.EventStartDate = GetValidDate(content.GetValue<DateTime>("startDate"));
         productEvent.EventEndDate = content.GetValue<DateTime>("endDate") <= DateTime.MinValue ? null : content.GetValue<DateTime>("endDate");
-        productEvent.ProductCategoryId = mappingHelper.GetExternalIdOnContent(content, "categories").ToString();
-        productEvent.ProductSubcategoryId = mappingHelper.GetExternalIdOnContent(content, "subCategories").ToString();
-        productEvent.ProductTaxonomyId = mappingHelper.GetExternalIdOnContent(content, "productTaxonomy").ToString();
-        productEvent.ProductTypeId = mappingHelper.GetExternalIdOnParent(content).SafeString();
+        productEvent.ProductCategoryId = mappingHelper.GetExternalIdOnContent(content, "categories").SafeGuid();
+        productEvent.ProductSubcategoryId = mappingHelper.GetExternalIdOnContent(content, "subCategories").SafeGuid();
+        productEvent.ProductTaxonomyId = mappingHelper.GetExternalIdOnContent(content, "productTaxonomy").SafeGuid();
+        productEvent.ProductTypeId = mappingHelper.GetExternalIdOnParent(content).SafeGuid();
+
 
 
     }
@@ -43,20 +44,16 @@ public class ProductMapping(
         target.Sku = source.Sku;
         target.Name = source.Name;
         target.Description = source.Description;
-        target.Price = source.Price;
+        target.NonMemberPrice = source.Price;
         target.MemberPrice = source.MemberPrice;
         target.ImageUrl = source.ImageUrl;
         target.ProductTaxonomyId = source.ProductTaxonomyId;
-        target.ProductType = source.ProductType;
         target.ProductTypeId = source.ProductTypeId;
         target.Category = source.Category;
         target.ProductCategoryId = source.ProductCategoryId;
-        target.SubCategory = source.SubCategory;
         target.ProductSubcategoryId = source.ProductSubcategoryId;
         target.StartDate = GetValidDate(source.StartDate);
         target.EndDate = GetValidDate(source.EndDate);
-
-
     }
 
     private DateTime? GetValidDate(DateTime? date)

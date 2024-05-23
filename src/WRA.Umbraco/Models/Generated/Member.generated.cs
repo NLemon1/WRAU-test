@@ -262,6 +262,14 @@ namespace WRA.Umbraco.Models
 		public virtual string Prefix => this.Value<string>(_publishedValueFallback, "prefix");
 
 		///<summary>
+		/// Sales Tax Category Code
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.3.1+5f24de3")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("salesTaxCategoryCode")]
+		public virtual string SalesTaxCategoryCode => this.Value<string>(_publishedValueFallback, "salesTaxCategoryCode");
+
+		///<summary>
 		/// State Province
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.3.1+5f24de3")]

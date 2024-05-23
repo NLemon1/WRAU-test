@@ -18,6 +18,6 @@ public class OrderCompletedNotification(
         var order = evt.Order;
         var orderEventPublisher = StaticServiceProvider.Instance.GetService<OrderEventPublisher>() ??
                                   throw new ArgumentNullException("Could not Get OrderEventPublisher from ServiceProvider");
-        BackgroundJob.Enqueue(() => orderEventPublisher.Send(order, EntityEventAction.Create));
+        BackgroundJob.Enqueue(() =>  orderEventPublisher.Send(order, EntityEventAction.Create));
     }
 }

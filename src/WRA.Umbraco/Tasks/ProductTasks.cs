@@ -135,12 +135,6 @@ public class ProductTasks(
 
         foreach (var p in externalProducts)
         {
-            if (p.ProductType == "Discount")
-            {
-                logger.LogInformation("Skipping product {Sku} because it is a discount", p.Sku);
-                continue;
-            }
-
             var productEvent = mapper.Map<ProductEvent>(p);
             if (productEvent == null)
             {

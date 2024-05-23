@@ -1,6 +1,7 @@
 ﻿@using WRA.Umbraco.Models;
 @using Umbraco.Commerce.Extensions;
 @using Umbraco.Commerce.Core.Models;
+@using WRA.Umbraco.Controllers
 
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<CartPage>
 
@@ -8,7 +9,7 @@
 {
     var totalDiscount = Model.Order.GetTotalPriceAdjustmentByType<DiscountAdjustment>();
 
-    using (Html.BeginUmbracoForm("UpdateCart", "CartSurface"))
+    using (Html.BeginUmbracoForm<CartSurfaceController>("UpdateCart"))
     {
         <div class="container py-5 py-lg-9">
             <h1 class="mb-4">Your Cart</h1>

@@ -44,13 +44,13 @@ public class WraProductManagementService(
             var collectionPages = contentCache.GetByContentType(productCollectionPageType);
 
             var collectionPage = collectionPages.FirstOrDefault(c =>
-                c.Value(GlobalConstants.ExternalId).Equals(productEvent.ProductTypeId));
+                c.Value<Guid>(GlobalConstants.ExternalId).Equals(productEvent.ProductTypeId));
 
             // collection page doesn't exist and needs to be created
             // maybe exception instead?
             if (collectionPage == null)
             {
-                logger.LogError("No collection match for {ProductType}", productEvent.ProductType);
+                logger.LogError("No collection match for {ProductType}", productEvent.ProductTypeId);
                 scope.Complete();
                 return null;
             }

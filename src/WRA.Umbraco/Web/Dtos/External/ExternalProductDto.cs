@@ -29,25 +29,25 @@ public class ExternalProductDto
     public string Sku { get; set; }
 
     [JsonPropertyName("productTypeId")]
-    public string ProductTypeId { get; set; }
+    public Guid ProductTypeId { get; set; }
 
     [JsonPropertyName("productTypeName")]
     public string ProductType { get; set; }
 
     [JsonPropertyName("productCategoryId")]
-    public string ProductCategoryId { get; set; }
+    public Guid ProductCategoryId { get; set; }
 
     [JsonPropertyName("productCategoryName")]
     public string Category { get; set; }
 
     [JsonPropertyName("productSubcategoryId")]
-    public string ProductSubcategoryId { get; set; }
+    public Guid ProductSubcategoryId { get; set; }
 
     [JsonPropertyName("productSubcategoryName")]
     public string SubCategory { get; set; }
 
     [JsonPropertyName("productTaxonomyId")]
-    public string ProductTaxonomyId { get; set; }
+    public Guid ProductTaxonomyId { get; set; }
 
     [JsonPropertyName("productTaxonomyName")]
     public string Taxonomy { get; set; }

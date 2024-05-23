@@ -76,7 +76,7 @@ public class ProductHelper(
         // Currency must be set as a Json object. Serialize dictionary.
         string basePrice = JsonSerializer.Serialize(new Dictionary<string, string>
         {
-            { currency.Id.ToString(), productEvent.Price?.ToString() ?? "0"}
+            { currency.Id.ToString(), productEvent.NonMemberPrice?.ToString() ?? "0"}
         });
         string memberPrice = JsonSerializer.Serialize(new Dictionary<string, string>
         {
