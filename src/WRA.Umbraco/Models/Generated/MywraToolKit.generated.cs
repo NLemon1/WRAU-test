@@ -50,6 +50,30 @@ namespace WRA.Umbraco.Models
 		// properties
 
 		///<summary>
+		/// Forms Library Button
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.3.1+5f24de3")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("formsLibraryButton")]
+		public virtual global::Umbraco.Cms.Core.Models.Link FormsLibraryButton => this.Value<global::Umbraco.Cms.Core.Models.Link>(_publishedValueFallback, "formsLibraryButton");
+
+		///<summary>
+		/// Forms Library Content
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.3.1+5f24de3")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("formsLibraryContent")]
+		public virtual global::Umbraco.Cms.Core.Strings.IHtmlEncodedString FormsLibraryContent => this.Value<global::Umbraco.Cms.Core.Strings.IHtmlEncodedString>(_publishedValueFallback, "formsLibraryContent");
+
+		///<summary>
+		/// Forms Library Headline
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.3.1+5f24de3")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("formsLibraryHeadline")]
+		public virtual string FormsLibraryHeadline => this.Value<string>(_publishedValueFallback, "formsLibraryHeadline");
+
+		///<summary>
 		/// Headline
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.3.1+5f24de3")]
@@ -64,6 +88,54 @@ namespace WRA.Umbraco.Models
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("introContent")]
 		public virtual global::Umbraco.Cms.Core.Strings.IHtmlEncodedString IntroContent => this.Value<global::Umbraco.Cms.Core.Strings.IHtmlEncodedString>(_publishedValueFallback, "introContent");
+
+		///<summary>
+		/// Line By Line Button
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.3.1+5f24de3")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("lineByLineButton")]
+		public virtual global::Umbraco.Cms.Core.Models.Link LineByLineButton => this.Value<global::Umbraco.Cms.Core.Models.Link>(_publishedValueFallback, "lineByLineButton");
+
+		///<summary>
+		/// Line By Line Content
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.3.1+5f24de3")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("lineByLineContent")]
+		public virtual global::Umbraco.Cms.Core.Strings.IHtmlEncodedString LineByLineContent => this.Value<global::Umbraco.Cms.Core.Strings.IHtmlEncodedString>(_publishedValueFallback, "lineByLineContent");
+
+		///<summary>
+		/// Line By Line Headline
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.3.1+5f24de3")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("lineByLineHeadline")]
+		public virtual string LineByLineHeadline => this.Value<string>(_publishedValueFallback, "lineByLineHeadline");
+
+		///<summary>
+		/// Zip Form Button
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.3.1+5f24de3")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("zipFormButton")]
+		public virtual global::Umbraco.Cms.Core.Models.Link ZipFormButton => this.Value<global::Umbraco.Cms.Core.Models.Link>(_publishedValueFallback, "zipFormButton");
+
+		///<summary>
+		/// Zip Form Content
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.3.1+5f24de3")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("zipFormContent")]
+		public virtual global::Umbraco.Cms.Core.Strings.IHtmlEncodedString ZipFormContent => this.Value<global::Umbraco.Cms.Core.Strings.IHtmlEncodedString>(_publishedValueFallback, "zipFormContent");
+
+		///<summary>
+		/// Zip Form Headline
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.3.1+5f24de3")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("zipFormHeadline")]
+		public virtual string ZipFormHeadline => this.Value<string>(_publishedValueFallback, "zipFormHeadline");
 
 		///<summary>
 		/// Meta Description: Enter meta description if desired.
