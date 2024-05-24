@@ -44,13 +44,6 @@
           "SortOrder": 9
         },
         {
-          "Key": "1f645aa8-ddc2-48ef-8687-53e0e02c5962",
-          "Alias": "salesTaxCategoryCode",
-          "DataType": "umb://data-type/f0bc4bfbb49940d6ba86058885a5178c",
-          "Name": "Sales Tax Category Code",
-          "SortOrder": 33
-        },
-        {
           "Key": "2c1578a3-b7e9-4cbd-9ccd-00e82ee5d313",
           "Alias": "companyLogoUrl",
           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
