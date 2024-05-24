@@ -14,7 +14,7 @@ namespace WRA.Umbraco.Web.Dtos.External
         public string? ProductTaxonomyId { get; set; }
         public string Status { get; set; }
         public DateTime BeginDate { get; set; }
-        public DateTime PaidThru { get; set; }
+        public DateTime? PaidThru { get; set; }
         public DateTime? ContinuousSince { get; set; }
     }
 }

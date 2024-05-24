@@ -27,7 +27,7 @@ public class SubscriptionMapping(
         target.ProductId = productPageRepository.GetBySku(source.ProductSku).Id;
         target.ExternalId = source.Id.SafeGuid();
         target.BeginDate = source.BeginDate;
-        target.PaidThruDate = source.PaidThru;
+        target.PaidThruDate = source.PaidThru ?? DateTime.MinValue;
         target.IsActive = source.Status == "A";
     }
 
