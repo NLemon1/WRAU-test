@@ -1,3 +1,4 @@
+using System.Net;
 using System.Text.Json;
 using Hangfire;
 using Microsoft.Extensions.Logging;
@@ -96,7 +97,7 @@ public class MemberTasks(
         try
         {
             var memberResp = await wraExternalApiService.GetMemberById(externalId);
-            if (memberResp.Content == null) return null;
+            if (memberResp.Content == null || memberResp.StatusCode != HttpStatusCode.OK) return null;
             var member =
                 JsonSerializer.Deserialize<ExternalMemberDto>(memberResp.Content, SerializationOptions);
 

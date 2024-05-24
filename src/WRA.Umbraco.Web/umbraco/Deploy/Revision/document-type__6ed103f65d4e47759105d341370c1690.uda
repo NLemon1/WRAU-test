@@ -26,6 +26,13 @@
       "Alias": "details/options",
       "PropertyTypes": [
         {
+          "Key": "3b0a7b7c-f4e9-4d61-85bd-69dd493bd37b",
+          "Alias": "salesTaxCategoryCode",
+          "DataType": "umb://data-type/f0bc4bfbb49940d6ba86058885a5178c",
+          "Name": "Sales Tax Category Code",
+          "SortOrder": 8
+        },
+        {
           "Key": "53deb054-8ecf-4eec-920a-6d82b9dc1157",
           "Alias": "endDate",
           "DataType": "umb://data-type/0e9794ebf9b54f20a78893acd233a7e4",

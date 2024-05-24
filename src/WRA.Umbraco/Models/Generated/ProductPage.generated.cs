@@ -144,6 +144,14 @@ namespace WRA.Umbraco.Models
 		public virtual global::Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent ProductTaxonomy => this.Value<global::Umbraco.Cms.Core.Models.PublishedContent.IPublishedContent>(_publishedValueFallback, "productTaxonomy");
 
 		///<summary>
+		/// Sales Tax Category Code
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.3.1+5f24de3")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("salesTaxCategoryCode")]
+		public virtual string SalesTaxCategoryCode => this.Value<string>(_publishedValueFallback, "salesTaxCategoryCode");
+
+		///<summary>
 		/// Short Description
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.3.1+5f24de3")]
