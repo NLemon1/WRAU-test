@@ -1,4 +1,6 @@
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Text;
 using Umbraco.Cms.Core.Cache;
 using Umbraco.Cms.Core.Logging;
 using Umbraco.Cms.Core.Routing;
@@ -59,7 +61,12 @@ public class MemberEditSurfaceController(
             member.SetIfNotEmpty(GlobalConstants.Member.CellPhone, memberInfo.CellPhone);
             member.SetIfNotEmpty(GlobalConstants.Member.HomePhone, memberInfo.HomePhone);
 
-            return RedirectToCurrentUmbracoPage();
+            //return RedirectToCurrentUmbracoPage();
+
+            var paramValue = "tabpanel-personal-information";
+            var queryString = QueryString.Create("#", paramValue);
+            return RedirectToCurrentUmbracoPage(queryString);
+
 
         }
         catch (Exception e)
