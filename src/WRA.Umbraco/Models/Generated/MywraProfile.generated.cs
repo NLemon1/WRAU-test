@@ -82,6 +82,54 @@ namespace WRA.Umbraco.Models
 		public virtual global::Umbraco.Cms.Core.Strings.IHtmlEncodedString ContributionsIntroContent => this.Value<global::Umbraco.Cms.Core.Strings.IHtmlEncodedString>(_publishedValueFallback, "contributionsIntroContent");
 
 		///<summary>
+		/// DirectGiver Button
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.3.1+5f24de3")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("directGiverButton")]
+		public virtual global::Umbraco.Cms.Core.Models.Link DirectGiverButton => this.Value<global::Umbraco.Cms.Core.Models.Link>(_publishedValueFallback, "directGiverButton");
+
+		///<summary>
+		/// Email Newsletters Content
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.3.1+5f24de3")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("emailNewslettersContent")]
+		public virtual global::Umbraco.Cms.Core.Strings.IHtmlEncodedString EmailNewslettersContent => this.Value<global::Umbraco.Cms.Core.Strings.IHtmlEncodedString>(_publishedValueFallback, "emailNewslettersContent");
+
+		///<summary>
+		/// Email Newsletters Headline
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.3.1+5f24de3")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("emailNewslettersHeadline")]
+		public virtual string EmailNewslettersHeadline => this.Value<string>(_publishedValueFallback, "emailNewslettersHeadline");
+
+		///<summary>
+		/// Inman Button
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.3.1+5f24de3")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("inmanButton")]
+		public virtual global::Umbraco.Cms.Core.Models.Link InmanButton => this.Value<global::Umbraco.Cms.Core.Models.Link>(_publishedValueFallback, "inmanButton");
+
+		///<summary>
+		/// Inman Content
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.3.1+5f24de3")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("inmanContent")]
+		public virtual global::Umbraco.Cms.Core.Strings.IHtmlEncodedString InmanContent => this.Value<global::Umbraco.Cms.Core.Strings.IHtmlEncodedString>(_publishedValueFallback, "inmanContent");
+
+		///<summary>
+		/// InmanHeadline
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.3.1+5f24de3")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("inmanHeadline")]
+		public virtual string InmanHeadline => this.Value<string>(_publishedValueFallback, "inmanHeadline");
+
+		///<summary>
 		/// Personal Information Headline
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.3.1+5f24de3")]
@@ -98,6 +146,14 @@ namespace WRA.Umbraco.Models
 		public virtual global::Umbraco.Cms.Core.Strings.IHtmlEncodedString PersonalInformationIntroContent => this.Value<global::Umbraco.Cms.Core.Strings.IHtmlEncodedString>(_publishedValueFallback, "personalInformationIntroContent");
 
 		///<summary>
+		/// RPAC Button
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.3.1+5f24de3")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("rPACButton")]
+		public virtual global::Umbraco.Cms.Core.Models.Link RPacbutton => this.Value<global::Umbraco.Cms.Core.Models.Link>(_publishedValueFallback, "rPACButton");
+
+		///<summary>
 		/// Subscriptions Headline
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.3.1+5f24de3")]
@@ -112,6 +168,22 @@ namespace WRA.Umbraco.Models
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("subscriptionsIntroContent")]
 		public virtual global::Umbraco.Cms.Core.Strings.IHtmlEncodedString SubscriptionsIntroContent => this.Value<global::Umbraco.Cms.Core.Strings.IHtmlEncodedString>(_publishedValueFallback, "subscriptionsIntroContent");
+
+		///<summary>
+		/// WRE Magazine Content
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.3.1+5f24de3")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("wREMagazineContent")]
+		public virtual global::Umbraco.Cms.Core.Strings.IHtmlEncodedString WRemagazineContent => this.Value<global::Umbraco.Cms.Core.Strings.IHtmlEncodedString>(_publishedValueFallback, "wREMagazineContent");
+
+		///<summary>
+		/// WRE Magazine Headline
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.3.1+5f24de3")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("wREMagazineHeadline")]
+		public virtual string WRemagazineHeadline => this.Value<string>(_publishedValueFallback, "wREMagazineHeadline");
 
 		///<summary>
 		/// Meta Description: Enter meta description if desired.

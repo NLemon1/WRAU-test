@@ -19,10 +19,97 @@
   ],
   "PropertyGroups": [
     {
+      "Key": "6be9477c-07c6-451c-85f0-975d08a712f6",
+      "Name": "Email Newsletters",
+      "SortOrder": 2,
+      "Alias": "subscriptionServices/emailNewsletters",
+      "PropertyTypes": [
+        {
+          "Key": "44d76d5a-00b5-41e6-b0d2-a3f4dfb2bcdf",
+          "Alias": "emailNewslettersHeadline",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Email Newsletters Headline"
+        },
+        {
+          "Key": "6bdaf55c-84a8-4df9-87e8-9d46c3374096",
+          "Alias": "emailNewslettersContent",
+          "DataType": "umb://data-type/ca90c9500aff4e72b976a30b1ac57dad",
+          "Name": "Email Newsletters Content"
+        }
+      ]
+    },
+    {
+      "Key": "86d2e302-6a79-4785-95e7-0fe4f36b3f52",
+      "Name": "Subscription Services",
+      "SortOrder": 3,
+      "Type": 1,
+      "Alias": "subscriptionServices",
+      "PropertyTypes": [
+        {
+          "Key": "d27b8026-68aa-4033-8b1b-e8034d6dc135",
+          "Alias": "subscriptionsHeadline",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Subscriptions Headline"
+        },
+        {
+          "Key": "f47d9099-a989-496e-8da4-c142954b4ff9",
+          "Alias": "subscriptionsIntroContent",
+          "DataType": "umb://data-type/9001e1a4d3d940178577caf42c500db5",
+          "Name": "Subscriptions Intro Content",
+          "SortOrder": 1
+        }
+      ]
+    },
+    {
+      "Key": "9e60444b-d935-48ec-886b-0310c8b32b74",
+      "Name": "Inman Subscription",
+      "Alias": "subscriptionServices/inmanSubscription",
+      "PropertyTypes": [
+        {
+          "Key": "4e599b6a-b51b-42ed-9674-88820c6f3b35",
+          "Alias": "inmanContent",
+          "DataType": "umb://data-type/ca90c9500aff4e72b976a30b1ac57dad",
+          "Name": "Inman Content"
+        },
+        {
+          "Key": "b5def13e-412e-46ed-857b-98b670882122",
+          "Alias": "inmanButton",
+          "DataType": "umb://data-type/094ea51013be4f358f03687f54bb9ba2",
+          "Name": "Inman Button"
+        },
+        {
+          "Key": "f30f22ae-c837-4693-8697-b120e8328409",
+          "Alias": "inmanHeadline",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "InmanHeadline"
+        }
+      ]
+    },
+    {
+      "Key": "9e6db9e9-7171-4446-9c11-565c8d3925fd",
+      "Name": "Wisconsin Real Estate Magazine",
+      "SortOrder": 1,
+      "Alias": "subscriptionServices/wisconsinRealEstateMagazine",
+      "PropertyTypes": [
+        {
+          "Key": "1824d78c-b389-4835-8552-581020f5f617",
+          "Alias": "wREMagazineHeadline",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "WRE Magazine Headline"
+        },
+        {
+          "Key": "c1e73e18-9621-4d32-9af7-aeb6d877465a",
+          "Alias": "wREMagazineContent",
+          "DataType": "umb://data-type/ca90c9500aff4e72b976a30b1ac57dad",
+          "Name": "WRE Magazine Content"
+        }
+      ]
+    },
+    {
       "Key": "c7166bca-723d-4dce-a322-d40f3c92db53",
       "Name": "Content",
       "SortOrder": 1000,
-      "Alias": "content",
+      "Alias": "personalInformation/content",
       "PropertyTypes": [
         {
           "Key": "0ff54867-b9e0-4976-83d5-6457f623a6cd",
@@ -31,53 +118,74 @@
           "Name": "Personal Information Headline"
         },
         {
-          "Key": "1894f571-a0fe-469f-b95c-822e75b19f51",
-          "Alias": "contributionsIntroContent",
-          "DataType": "umb://data-type/9001e1a4d3d940178577caf42c500db5",
-          "Name": "Contributions Intro Content",
-          "SortOrder": 5
-        },
-        {
-          "Key": "2f5b94bd-33cc-49a8-98e5-f991609c35e4",
-          "Alias": "committeesIntroContent",
-          "DataType": "umb://data-type/9001e1a4d3d940178577caf42c500db5",
-          "Name": "Committees Intro Content",
-          "SortOrder": 3
-        },
-        {
-          "Key": "3abf6ddc-6cfa-416b-b7a8-f013e5548ad7",
-          "Alias": "committeesHeadline",
-          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
-          "Name": "Committees Headline",
-          "SortOrder": 2
-        },
-        {
           "Key": "3d41438f-23aa-4679-b373-b4c48292b314",
           "Alias": "personalInformationIntroContent",
           "DataType": "umb://data-type/9001e1a4d3d940178577caf42c500db5",
           "Name": "Personal Information Intro Content",
           "SortOrder": 1
+        }
+      ]
+    },
+    {
+      "Key": "cbcb5647-d31a-4b58-8065-a2f956c2a179",
+      "Name": "Committees",
+      "SortOrder": 1,
+      "Type": 1,
+      "Alias": "committees",
+      "PropertyTypes": [
+        {
+          "Key": "2f5b94bd-33cc-49a8-98e5-f991609c35e4",
+          "Alias": "committeesIntroContent",
+          "DataType": "umb://data-type/9001e1a4d3d940178577caf42c500db5",
+          "Name": "Committees Intro Content",
+          "SortOrder": 1
+        },
+        {
+          "Key": "3abf6ddc-6cfa-416b-b7a8-f013e5548ad7",
+          "Alias": "committeesHeadline",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Committees Headline"
+        }
+      ]
+    },
+    {
+      "Key": "e35dfacb-87c0-428f-820e-fc9a7856136c",
+      "Name": "Personal Information",
+      "Type": 1,
+      "Alias": "personalInformation",
+      "PropertyTypes": []
+    },
+    {
+      "Key": "f4095d04-0d36-431f-8139-dcc011665a1a",
+      "Name": "Donor Status",
+      "SortOrder": 2,
+      "Type": 1,
+      "Alias": "donorStatus",
+      "PropertyTypes": [
+        {
+          "Key": "1894f571-a0fe-469f-b95c-822e75b19f51",
+          "Alias": "contributionsIntroContent",
+          "DataType": "umb://data-type/9001e1a4d3d940178577caf42c500db5",
+          "Name": "Contributions Intro Content",
+          "SortOrder": 1
+        },
+        {
+          "Key": "23e21707-e5ad-4700-b2c1-76cf02194e9a",
+          "Alias": "rPACButton",
+          "DataType": "umb://data-type/094ea51013be4f358f03687f54bb9ba2",
+          "Name": "RPAC Button"
+        },
+        {
+          "Key": "bd24a969-2c56-4ff4-9a68-2f35bebfc52f",
+          "Alias": "directGiverButton",
+          "DataType": "umb://data-type/094ea51013be4f358f03687f54bb9ba2",
+          "Name": "DirectGiver Button"
         },
         {
           "Key": "d0d8ddc9-5ef0-4e2d-9a5c-64246948f0a9",
           "Alias": "contributionsHeadline",
           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
-          "Name": "Contributions Headline",
-          "SortOrder": 4
-        },
-        {
-          "Key": "d27b8026-68aa-4033-8b1b-e8034d6dc135",
-          "Alias": "subscriptionsHeadline",
-          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
-          "Name": "Subscriptions Headline",
-          "SortOrder": 6
-        },
-        {
-          "Key": "f47d9099-a989-496e-8da4-c142954b4ff9",
-          "Alias": "subscriptionsIntroContent",
-          "DataType": "umb://data-type/9001e1a4d3d940178577caf42c500db5",
-          "Name": "Subscriptions Intro Content",
-          "SortOrder": 7
+          "Name": "Contributions Headline"
         }
       ]
     }
@@ -86,11 +194,19 @@
   "Udi": "umb://document-type/7e2cf7b031514173a41fffcb53625997",
   "Dependencies": [
     {
+      "Udi": "umb://data-type/094ea51013be4f358f03687f54bb9ba2",
+      "Ordering": true
+    },
+    {
       "Udi": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
       "Ordering": true
     },
     {
       "Udi": "umb://data-type/9001e1a4d3d940178577caf42c500db5",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/ca90c9500aff4e72b976a30b1ac57dad",
       "Ordering": true
     },
     {

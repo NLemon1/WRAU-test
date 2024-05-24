@@ -454,14 +454,23 @@
                                                 @Html.Raw(content.ContributionsIntroContent)
                                             </div>
                                         }
-
+                                        
                                         <div class="border border-medium p-4 rounded mb-3">
                                             <h4 class="h6 mb-4 fs-lg">
                                                 Make a Contribution
                                             </h4>
+                                            @{
+                                                var rpacLink = content.Value<Link>("RPacbutton");
+                                                var ddLink = content.Value<Link>("directGiverButton");
+                                            }
                                             <div class="d-flex flex-row gap-3">
-                                                <a href="/" class="btn btn-primary">Contribute To RPAC</a>
-                                                <a href="/" class="btn btn-primary">Contribute To Direct Giver</a>
+                                                @if (rpacLink != null)
+                                                {
+                                                    <a href="@rpacLink.Url" class="btn btn-primary" target="@rpacLink.Target">@rpacLink.Name</a>
+                                                }
+                                                @if (ddLink != null) {
+                                                    <a href="@ddLink.Url" class="btn btn-primary" target="@ddLink.Target">@ddLink.Name</a>
+                                                }
                                             </div>
                                         </div>
 
@@ -509,6 +518,12 @@
                                                 </table>
                                             </div>
                                         }
+                                        else
+                                        {
+                                            <p class="fs-lg font-italicize">
+                                                Our records show that you have not made any contributions.
+                                            </p>
+                                        }
 
                                     </div>
                                 </div>
@@ -540,29 +555,44 @@
                                             </div>
                                         }
 
+
                                         <h3 class="h5">Inman Select</h3>
 
                                         <div class="border border-medium p-4 rounded mb-5">
-                                            <h4 class="h6 mb-4 fs-lg">
-                                                Free Inman Select Membership Sign Up
-                                            </h4>
-                                            <div class="rich-text">
-                                                The WRA's partnership with Inman News gives you access to exclusive news, in-depth reporting and thorough analysis with Inman Select. Inman Select gives you everything you need to know to be smarter about real estate, such as daily news, award-winning commentary, special reports, webinars and more. With Inman Select, you're connected to the latest news, relevant insights, and a community of real estate leaders.
-                                            </div>
-                                            <a href="/" class="btn btn-primary">Sign up for Inman Select</a>
+                                            @if (!String.IsNullOrEmpty(content.InmanHeadline.ToString()))
+                                            {
+                                                <h4 class="h6 mb-4 fs-lg">
+                                                    @Html.Raw(content.InmanHeadline)
+                                                </h4>
+                                            }
+                                            @if (!String.IsNullOrEmpty(content.InmanContent.ToString()))
+                                            {
+                                                <div class="rich-text">
+                                                    @Html.Raw(content.InmanContent)
+                                                </div>
+                                            }
+                                            @{
+                                                var inmanLink = content.Value<Link>("InmanButton");
+                                            }
+                                            @if (inmanLink != null)
+                                            {
+                                                <a href="@inmanLink.Url" class="btn btn-primary" target="@inmanLink.Target">@inmanLink.Name</a>
+                                            }
                                         </div>
 
-                                        <!-- Text Box Field -->
                                         <h4 class="h5">Wisconsin Real Estate Magazine</h4>
                                         <div class="border border-medium p-4 rounded mb-5">
-                                            <!-- Text Box Field -->
-                                            <h4 class="h6 mb-4 fs-lg">
-                                                myWRA Wisconsin Real Estate Magazine Delivery Preferences
-                                            </h4>
-                                            <!-- Rich Text Field -->
-                                            <div class="rich-text">
-                                                Select how you would like to receive Wisconsin Real Estate Magazine.
-                                            </div>
+                                            @if (!String.IsNullOrEmpty(content.WRemagazineHeadline.ToString()))
+                                            {
+                                                <h4 class="h6 mb-4 fs-lg">
+                                                    @Html.Raw(content.WRemagazineHeadline)
+                                                </h4>
+                                            }
+                                            @if (!String.IsNullOrEmpty(content.InmanContent.ToString())){
+                                                <div class="rich-text">
+                                                    @Html.Raw(content.WRemagazineContent)
+                                                </div>
+                                            }
                                             <div class="form-group">
                                                 <div class="d-flex flex-row mb-3">
                                                     <input id="wranews" class="form-check-input" type="checkbox">
@@ -582,17 +612,20 @@
                                             </div>
                                         </div>
 
-                                        <!-- Text Box Field -->
                                         <h4 class="h5">Email Newsletters</h4>
                                         <div class="border border-medium p-4 rounded mb-5">
-                                            <!-- Text Box Field -->
-                                            <h4 class="h6 mb-4 fs-lg">
-                                                myWRA Email Delivery Preferences
-                                            </h4>
-                                            <!-- Rich Text Field -->
-                                            <div class="rich-text">
-                                                Select e-mails from the list below that you wish to receive. You will not receive emails that are not selected.
-                                            </div>
+                                            @if (!String.IsNullOrEmpty(content.EmailNewslettersHeadline.ToString()))
+                                            {
+                                                <h4 class="h6 mb-4 fs-lg">
+                                                    @Html.Raw(content.EmailNewslettersHeadline)
+                                                </h4>
+                                            }
+                                            @if (!String.IsNullOrEmpty(content.EmailNewslettersContent.ToString()))
+                                            {
+                                                <div class="rich-text">
+                                                    @Html.Raw(content.EmailNewslettersContent)
+                                                </div>
+                                            }
                                             <div class="form-group">
                                                 @for (var i = 1; i < 8; i++)
                                                 {
