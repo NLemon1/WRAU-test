@@ -69,7 +69,7 @@ public class MemberSyncApiController(
     public async Task<IActionResult> SyncMemberByExternalId(Guid externalId)
     {
         var result = await memberTasks.SyncMemberByExternalId(externalId);
-        return await Task.FromResult<IActionResult>(Ok($"{result.Id} - {result.Name}"));
+        return result == null ? await Task.FromResult<IActionResult>(NotFound()) : await Task.FromResult<IActionResult>(Ok(result.Id));
     }
 
     [HttpPost]
