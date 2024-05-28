@@ -1,65 +1,65 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MassTransit.Futures.Contracts;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Umbraco.Cms.Core;
 using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Cms.Core.Security;
 using Umbraco.Cms.Core.Services;
 using Umbraco.Cms.Core.Web;
 using Umbraco.Cms.Web.Common.Controllers;
-using Umbraco.Cms.Web.Common.Security;
+using WRA.Umbraco.Extensions;
 using WRA.Umbraco.Helpers.Constants;
 using WRA.Umbraco.Models;
+using WRA.Umbraco.Repositories;
 using WRA.Umbraco.Web.Dtos.External;
+using WRA.Umbraco.Web.Dtos.Member;
 using WRA.Umbraco.Web.Services;
 
 namespace WRA.Umbraco.Web.Controllers.MyWRA;
-public class MyWraEducationController : RenderController
+public class MyWraEducationController(
+    ILogger<RenderController> logger,
+    ICompositeViewEngine compositeViewEngine,
+    IUmbracoContextAccessor umbracoContextAccessor,
+    IMemberManager memberManager,
+    IPublishedValueFallback publishedValueFallback,
+    MemberRepository memberRepository,
+    CourseService courseService,
+    MemberOrderHistoryService memberOrderHistoryService
+    )
+    : RenderController(logger, compositeViewEngine, umbracoContextAccessor)
 {
-    private readonly IMemberManager _memberManager;
-    private readonly IMemberService _memberService;
-    private readonly MemberOrderHistoryService _memberOrderHistoryService;
-    private readonly IPublishedValueFallback _publishedValueFallback;
-    public MyWraEducationController(
-        ILogger<RenderController> logger,
-        ICompositeViewEngine compositeViewEngine,
-        IUmbracoContextAccessor umbracoContextAccessor,
-        IMemberManager memberManager,
-        IMemberService memberService,
-        IPublishedValueFallback publishedValueFallback,
-        MemberOrderHistoryService memberOrderHistoryService)
-        : base(logger, compositeViewEngine, umbracoContextAccessor)
-    {
-        _memberManager = memberManager;
-        _memberService = memberService;
-        _memberOrderHistoryService = memberOrderHistoryService;
-        _publishedValueFallback = publishedValueFallback;
-    }
 
     public override IActionResult Index()
     {
-        var orderHistory = new List<OrderHistoryDto>();
-        MemberIdentityUser? currentMember = _memberManager.GetCurrentMemberAsync().GetAwaiter().GetResult();
-        if (currentMember != null)
-        {
-            var member = _memberManager.AsPublishedMember(currentMember);
-            var externalID = member.Value(GlobalConstants.ExternalId)?.ToString() ?? string.Empty;
-            orderHistory = _memberOrderHistoryService.GetMemberOrderHistory(externalID).GetAwaiter().GetResult();
-        }
-        else
-        {
-            return Redirect("/login");
-        }
+        List<OrderHistoryDto> orderHistory;
+        var currentMember = memberManager.GetCurrentMemberAsync().GetAwaiter().GetResult();
+        if (currentMember == null) return Redirect("/login");
 
-        MywraEducation viewModel = new(CurrentPage!, _publishedValueFallback)
+        var publishedMember = memberManager.AsPublishedMember(currentMember);
+        var member = new Member(publishedMember, new NoopPublishedValueFallback());
+
+        if (member.ExternalId == null) return Redirect("/login");
+        orderHistory = memberOrderHistoryService.GetMemberOrderHistory(member.ExternalId).GetAwaiter()
+            .GetResult();
+
+        var requiredCourses = GetRequiredCourses(member).GetAwaiter().GetResult();
+
+        MywraEducation viewModel = new(CurrentPage!, publishedValueFallback)
         {
-            Orders = orderHistory
+            Orders = orderHistory,
+            RequiredCourses = requiredCourses
         };
         return CurrentTemplate(viewModel);
+    }
+
+    public async Task<List<CourseDto>> GetRequiredCourses(Member member)
+    {
+
+        // call WRA's api to get member courses
+        var requiredCourses = await courseService.GetRequiredCourses(member.ExternalId);
+        return requiredCourses;
+
+
+
     }
 }

@@ -19,7 +19,7 @@ public class EditMemberDto
     public string? CellPhone { get; set; }
 
     // settings
-    public string Email { get; set; }
+    public string? Email { get; set; }
 
     //  subscriptions?
 

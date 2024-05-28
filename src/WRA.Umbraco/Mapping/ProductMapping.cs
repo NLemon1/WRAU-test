@@ -49,7 +49,6 @@ public class ProductMapping(
         target.ImageUrl = source.ImageUrl;
         target.ProductTaxonomyId = source.ProductTaxonomyId;
         target.ProductTypeId = source.ProductTypeId;
-        target.Category = source.Category;
         target.ProductCategoryId = source.ProductCategoryId;
         target.ProductSubcategoryId = source.ProductSubcategoryId;
         target.StartDate = GetValidDate(source.StartDate);

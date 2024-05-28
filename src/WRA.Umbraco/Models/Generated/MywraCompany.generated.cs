@@ -106,6 +106,22 @@ namespace WRA.Umbraco.Models
 		public virtual string HeadlinePdfFormsLibrary => this.Value<string>(_publishedValueFallback, "headlinePdfFormsLibrary");
 
 		///<summary>
+		/// Individual Agent Headline
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.3.2+696a711")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("individualAgent")]
+		public virtual string IndividualAgent => this.Value<string>(_publishedValueFallback, "individualAgent");
+
+		///<summary>
+		/// Individual Agent Dropdown Label
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.3.2+696a711")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("individualAgentDropdownLabel")]
+		public virtual string IndividualAgentDropdownLabel => this.Value<string>(_publishedValueFallback, "individualAgentDropdownLabel");
+
+		///<summary>
 		/// Intro Content
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.3.2+696a711")]
@@ -160,6 +176,22 @@ namespace WRA.Umbraco.Models
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("introContentPdfFormsLibrary")]
 		public virtual global::Umbraco.Cms.Core.Strings.IHtmlEncodedString IntroContentPdfFormsLibrary => this.Value<global::Umbraco.Cms.Core.Strings.IHtmlEncodedString>(_publishedValueFallback, "introContentPdfFormsLibrary");
+
+		///<summary>
+		/// Multiple Agents Headline
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.3.2+696a711")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("multipleAgents")]
+		public virtual string MultipleAgents => this.Value<string>(_publishedValueFallback, "multipleAgents");
+
+		///<summary>
+		/// Multiple Agents Dropdown Label
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.3.2+696a711")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("multipleAgentsDropdownLabel")]
+		public virtual string MultipleAgentsDropdownLabel => this.Value<string>(_publishedValueFallback, "multipleAgentsDropdownLabel");
 
 		///<summary>
 		/// Meta Description: Enter meta description if desired.

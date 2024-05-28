@@ -30,6 +30,16 @@ public class MappingHelper(
         var contentNode = contentQuery.GetById(Identifier);
         return contentNode;
     }
+    public IPublishedContent? FindRelatedContentByExternalId(Guid externalId, string contentType)
+    {
+        using var umbracoContextReference = umbracoContextFactory.EnsureUmbracoContext();
+        var contentQuery = umbracoContextReference.UmbracoContext.Content;
+        var publishedContentType = contentQuery.GetContentType(contentType);
+        if (publishedContentType == null) return null;
+        var contentNodes = contentQuery.GetByContentType(publishedContentType);
+        var contentNode = contentNodes.FirstOrDefault(x => x.Value<Guid?>(GlobalConstants.ExternalId) == externalId);
+        return contentNode;
+    }
 
     public Guid GetExternalIdOnContent(IContentBase content, string alias)
     {

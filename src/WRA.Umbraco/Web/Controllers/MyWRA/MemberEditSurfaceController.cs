@@ -62,7 +62,7 @@ public class MemberEditSurfaceController(
             member.SetIfNotEmpty(GlobalConstants.Member.WorkPhone, memberInfo.WorkPhone);
             member.SetIfNotEmpty(GlobalConstants.Member.CellPhone, memberInfo.CellPhone);
             member.SetIfNotEmpty(GlobalConstants.Member.HomePhone, memberInfo.HomePhone);
-
+            services.MemberService.Save(member);
             //return RedirectToCurrentUmbracoPage();
             return RedirectToCurrentUmbracoPage(queryString);
         }

@@ -1,6 +1,9 @@
+using System.Net;
 using GlobalPayments.Api.Terminals.PAX;
+using Newtonsoft.Json;
 using RestSharp;
 using WRA.Umbraco.Configuration;
+using WRA.Umbraco.Web.Dtos.External;
 
 namespace WRA.Umbraco.Web.Services;
 public class WraExternalApiService(WraExternalApiSettings settings)
@@ -230,6 +233,17 @@ public class WraExternalApiService(WraExternalApiSettings settings)
         var options = new RestClientOptions(settings.VersionedBaseUrl);
         var client = new RestClient(options);
         var request = new RestRequest("memberCourseProgress/" + id);
+        request.AddHeader(settings.ApiKeyHeader, settings.ApiKey);
+        var response = await client.GetAsync(request);
+
+        return response;
+    }
+
+    public async Task<RestResponse> GetRequiredCourses(string id)
+    {
+        var options = new RestClientOptions(settings.VersionedBaseUrl);
+        var client = new RestClient(options);
+        var request = new RestRequest("memberComponentProgress/" + id);
         request.AddHeader(settings.ApiKeyHeader, settings.ApiKey);
         var response = await client.GetAsync(request);
 
