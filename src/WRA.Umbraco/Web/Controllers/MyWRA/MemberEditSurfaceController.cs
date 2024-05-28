@@ -40,15 +40,17 @@ public class MemberEditSurfaceController(
     {
         try
         {
+            var paramValue = "tabpanel-personal-information";
+            var queryString = QueryString.Create("#", paramValue);
             if (!ModelState.IsValid)
             {
-                return CurrentUmbracoPage();
+                return RedirectToCurrentUmbracoPage(queryString);
             }
 
             // Get member
             var member = services.MemberService.GetById(memberInfo.MemberId);
             // update member
-            if (member == null) return RedirectToCurrentUmbracoPage();
+            if (member == null) return RedirectToCurrentUmbracoPage(queryString);
             if (string.IsNullOrEmpty(memberInfo.FirstName)) member.Name = $"{memberInfo.FirstName} {memberInfo.LastName}";
             // member.Email = memberInfo.Email;
             member.SetIfNotEmpty(GlobalConstants.Member.AddressLine1, memberInfo.Address1);
@@ -62,12 +64,7 @@ public class MemberEditSurfaceController(
             member.SetIfNotEmpty(GlobalConstants.Member.HomePhone, memberInfo.HomePhone);
 
             //return RedirectToCurrentUmbracoPage();
-
-            var paramValue = "tabpanel-personal-information";
-            var queryString = QueryString.Create("#", paramValue);
             return RedirectToCurrentUmbracoPage(queryString);
-
-
         }
         catch (Exception e)
         {

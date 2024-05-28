@@ -1,11 +1,22 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
 @using ContentModels = WRA.Umbraco.Models;
+@using Umbraco.Cms.Core.Security
+@using WRA.Umbraco.Web.Services
+
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<WRA.Umbraco.Models.MywraDues>
+@inject IMemberManager _memberManager
 
 @{
     Layout = "~/Views/_Layout.cshtml";
     var content = (ContentModels.MywraDues)Model;
+    var currentMemberQuery = await _memberManager.GetCurrentMemberAsync();
+    // cast it to a published contnet type
+    var currentMember = _memberManager.AsPublishedMember(currentMemberQuery);
+    // pass this type to the constructor of the strongly typed member model
+    var member = new ContentModels.Member(currentMember, new NoopPublishedValueFallback());
 }
+
+
 
 <div class="w-100">
     <div class="row g-0">
@@ -68,32 +79,39 @@
                                             @Html.Raw(content.PayDuesIntroContent)
                                         </div>
                                     }
+
+
                                     <h3 class="h5 mb-3">Payment Instructions</h3>
 
                                     @for (var i = 1; i < 4; i++)
                                     {
-                                        <div class="border border-medium p-4 rounded mb-3">
-                                            <h4 class="h6 mb-4 fs-lg">
-                                                Members Of XXXXX:
-                                            </h4>
-                                            <div class="rich-text">
-                                                <ul class="list-unstyled">
-                                                    <li>Commercial Association of REALTORS® Wisconsin</li>
-                                                    <li>Jefferson County Board REALTORS®</li>
-                                                    <li>La Crosse Area REALTORS® Association </li>
-                                                    <li>Manitowoc County Board of REALTORS®</li>
-                                                    <li>REALTORS® Association of Northwestern Wisconsin</li>
-                                                </ul>
-                                                <p>
-                                                    Lorem ipsum dolor sit amet consectetur. At eget vulputate sapien duis curabitur vulputate morbi feugiat euismod.
-                                                </p>
+                                        var groupContent = content.GetProperty($"PaymentGroup{i}Content");
+                                        var groupLink = content.Value<Link>($"PaymentGroup{i}Button");
+                                        var groupFooterText = content.GetProperty($"PaymentGroup{i}FooterText");
+
+                                        @if (groupContent.HasValue())
+                                        {
+                                            <div class="border border-medium p-4 rounded mb-3">
+
+                                                <div class="rich-text">
+                                                    @groupContent.GetValue()
+                                                </div>
+
+                                                @if (groupLink != null)
+                                                {
+                                                    <a href="@groupLink.Url" class="btn btn-primary" target="@groupLink.Target">@groupLink.Name</a>
+                                                }
+
+                                                @if (groupFooterText.HasValue())
+                                                {
+                                                    <small class="d-block fw-bold fs-xs mt-3">Note: NAR only accepts Visa and Mastercard</small>
+                                                }
                                             </div>
-                                            <a href="/" class="btn btn-primary">Pay Dues Now</a>
-                                            <small class="d-block fw-bold fs-xs mt-3">Note: NAR only accepts Visa and Mastercard</small>
-                                        </div>
+                                        }
                                     }
 
-                                    <h3 class="h5 mb-3">George's Local Board Information</h3>
+                                    
+                                    <h3 class="h5 my-3">@member.FirstName's Local Board Information</h3>
                                     <div class="w-100 border border-medium rounded mb-5">
                                         <table class="table-info w-100 fs-sm">
                                             <thead class="visually-hidden">
@@ -155,12 +173,12 @@
                                         </table>
                                     </div>
 
+
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
 
 
                 <!-- DUES HISTORY TAB -->

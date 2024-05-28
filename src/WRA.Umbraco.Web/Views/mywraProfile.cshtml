@@ -1,6 +1,7 @@
 ﻿@using ContentModels = WRA.Umbraco.Models;
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using Umbraco.Cms.Core.Security
+@using WRA.Umbraco.Helpers.Constants
 @using WRA.Umbraco.Web.Controllers.MyWRA
 @using WRA.Umbraco.Web.Services
 
@@ -96,7 +97,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody style="color: var(--bs-gray-30)">
-
+                                                <h1> hide this but submit it: @memberUpdateModel.MemberId</h1>
                                                     <tr>
                                                         <td class="py-2">FirstName</td>
                                                         <td class="py-2 text-body">@memberUpdateModel.FirstName</td>
@@ -382,18 +383,31 @@
                                                     </tr>
 
 
-                                                    @if (member.HasProperty("email"))
-                                                    {
-                                                        <tr>
-                                                            <td class="py-2">Email</td>
-                                                            <td class="py-2 text-body">
-                                                                @member.GetProperty("email").GetSourceValue()
-                                                            </td>
-                                                            <td class="py-2 text-end"><button class="text-link border-0 bg-transparent px-2 py-2">Edit</button></td>
-                                                        </tr>
-                                                    }
-
-
+                                                    <tr>
+                                                        <td class="py-2">Email</td>
+                                                        <td class="py-2 text-body">@memberUpdateModel.Email</td>
+                                                        <td class="py-2 text-end">
+                                                            <div id="info_@memberUpdateModel.Email" class="js-dialog dialog-container" aria-hidden="true">
+                                                                <div class="dialog-overlay" data-a11y-dialog-hide></div>
+                                                                <div class="dialog-content-wrapper" style="max-width: 550px; max-height: 75vh;" role="document">
+                                                                    <div class="dialog-content-header p-1 justify-content-end rounded-top" style="background-color: var(--bs-gray-10)">
+                                                                        <h4 class="h4 mb-0 visually-hidden">Edit</h4>
+                                                                        <button onclick="return false;" type="button" data-a11y-dialog-hide aria-label="Close dialog">
+                                                                            &times;
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="dialog-content px-5 py-3 fs-sm">
+                                                                        <div class="d-flex flex-row justify-content-between mb-3">
+                                                                            <label asp-for="@memberUpdateModel.Email" class="text-body"></label>
+                                                                            <input asp-for=@memberUpdateModel.Email />
+                                                                        </div>
+                                                                        <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <button class="text-link border-0 bg-transparent px-2 py-2" onclick="return false;" data-a11y-dialog-show="info_@memberUpdateModel.Email">Edit</button>
+                                                        </td>
+                                                    </tr>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -454,7 +468,7 @@
                                                 @Html.Raw(content.ContributionsIntroContent)
                                             </div>
                                         }
-                                        
+
                                         <div class="border border-medium p-4 rounded mb-3">
                                             <h4 class="h6 mb-4 fs-lg">
                                                 Make a Contribution

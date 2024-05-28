@@ -19,32 +19,81 @@
   ],
   "PropertyGroups": [
     {
-      "Key": "667a6aec-bf13-4226-b21d-63c28045af31",
-      "Name": "Content",
-      "SortOrder": 1000,
-      "Alias": "content",
+      "Key": "090927ac-cfd4-48af-af45-248d7b31ab2a",
+      "Name": "Pay Dues",
+      "Type": 1,
+      "Alias": "payDues",
       "PropertyTypes": [
         {
           "Key": "405e8965-d70d-41ef-9913-c7cd5564035e",
           "Alias": "payDuesHeadline",
           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
-          "Name": "Pay Dues Headline",
-          "SortOrder": 2
+          "Name": "Pay Dues Headline"
         },
+        {
+          "Key": "f7e8edda-9774-46e4-a031-36575e8e0ce9",
+          "Alias": "payDuesIntroContent",
+          "DataType": "umb://data-type/9001e1a4d3d940178577caf42c500db5",
+          "Name": "Pay Dues Intro Content",
+          "SortOrder": 1
+        }
+      ]
+    },
+    {
+      "Key": "4363e7a8-beec-412e-958b-0711947a7711",
+      "Name": "Dues History",
+      "SortOrder": 1,
+      "Type": 1,
+      "Alias": "duesHistory",
+      "PropertyTypes": [
         {
           "Key": "9fb723ea-3eed-4605-bcd5-455703529d4d",
           "Alias": "duesHistoryHeadline",
           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
-          "Name": "Dues History Headline",
-          "SortOrder": 4
+          "Name": "Dues History Headline"
         },
         {
           "Key": "a6bcd824-93d1-47bc-8756-16cea65f7d8b",
           "Alias": "duesHistoryIntroContent",
           "DataType": "umb://data-type/9001e1a4d3d940178577caf42c500db5",
           "Name": "Dues History Intro Content",
-          "SortOrder": 5
+          "SortOrder": 1
+        }
+      ]
+    },
+    {
+      "Key": "70d4dc86-0dff-411b-99aa-441004fcb27e",
+      "Name": "Payment Group 1",
+      "Alias": "payDues/paymentGroup1",
+      "PropertyTypes": [
+        {
+          "Key": "08ff5348-a672-4e05-947a-4f9d07b21137",
+          "Alias": "paymentGroup1Content",
+          "DataType": "umb://data-type/ca90c9500aff4e72b976a30b1ac57dad",
+          "Name": "Payment Group 1 Content"
         },
+        {
+          "Key": "1438db60-5669-4b8d-a1f1-c63a00177a9a",
+          "Alias": "paymentGroup1FooterText",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Payment Group 1 Footer Text",
+          "SortOrder": 2
+        },
+        {
+          "Key": "deeedee4-4a9c-4491-85f9-079d0141207e",
+          "Alias": "paymentGroup1Button",
+          "DataType": "umb://data-type/094ea51013be4f358f03687f54bb9ba2",
+          "Name": "Payment Group 1 Button",
+          "SortOrder": 1
+        }
+      ]
+    },
+    {
+      "Key": "82a0ad9c-bc98-4019-b812-32c1422baf8f",
+      "Name": "Content",
+      "SortOrder": 2,
+      "Alias": "content",
+      "PropertyTypes": [
         {
           "Key": "df6258df-3a28-4607-9f6d-b1c9c466c509",
           "Alias": "headline",
@@ -57,13 +106,62 @@
           "DataType": "umb://data-type/9001e1a4d3d940178577caf42c500db5",
           "Name": "Intro Content",
           "SortOrder": 1
+        }
+      ]
+    },
+    {
+      "Key": "ae045a90-771e-429b-85ab-8187763ad9d7",
+      "Name": "Payment Group 2",
+      "SortOrder": 1,
+      "Alias": "payDues/paymentGroup2",
+      "PropertyTypes": [
+        {
+          "Key": "163943f9-4c52-42b5-83be-406f97d49aed",
+          "Alias": "paymentGroup2Button",
+          "DataType": "umb://data-type/094ea51013be4f358f03687f54bb9ba2",
+          "Name": "Payment Group 2 Button",
+          "SortOrder": 1
         },
         {
-          "Key": "f7e8edda-9774-46e4-a031-36575e8e0ce9",
-          "Alias": "payDuesIntroContent",
-          "DataType": "umb://data-type/9001e1a4d3d940178577caf42c500db5",
-          "Name": "Pay Dues Intro Content",
-          "SortOrder": 3
+          "Key": "a9657450-9526-48fe-beb4-2064628423de",
+          "Alias": "paymentGroup2FooterText",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Payment Group 2 Footer Text",
+          "SortOrder": 2
+        },
+        {
+          "Key": "ef842005-720d-4c0a-be0c-51df7eb451f1",
+          "Alias": "paymentGroup2Content",
+          "DataType": "umb://data-type/ca90c9500aff4e72b976a30b1ac57dad",
+          "Name": "Payment Group 2 Content"
+        }
+      ]
+    },
+    {
+      "Key": "fe4f7ab7-b152-40a2-a3c8-7fb5912ccd06",
+      "Name": "Payment Group 3",
+      "SortOrder": 2,
+      "Alias": "payDues/paymentGroup3",
+      "PropertyTypes": [
+        {
+          "Key": "84088a4d-2ffa-4e44-bfe6-2a1c3731fdb9",
+          "Alias": "paymentGroup3FooterText",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Payment Group 3 Footer Text",
+          "SortOrder": 2
+        },
+        {
+          "Key": "84bc611a-bc6d-475b-9dfc-61dc3fba5d82",
+          "Alias": "paymentGroup3Button",
+          "DataType": "umb://data-type/094ea51013be4f358f03687f54bb9ba2",
+          "Name": "Payment Group 3 Button",
+          "SortOrder": 1
+        },
+        {
+          "Key": "f25b800d-d847-48d2-aa28-57280a2dedbf",
+          "Alias": "paymentGroup3Content",
+          "DataType": "umb://data-type/ca90c9500aff4e72b976a30b1ac57dad",
+          "Name": "Payment Group 3 Content"
         }
       ]
     }
@@ -72,11 +170,19 @@
   "Udi": "umb://document-type/a20f5f80e77b4f2f942094e456697e48",
   "Dependencies": [
     {
+      "Udi": "umb://data-type/094ea51013be4f358f03687f54bb9ba2",
+      "Ordering": true
+    },
+    {
       "Udi": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
       "Ordering": true
     },
     {
       "Udi": "umb://data-type/9001e1a4d3d940178577caf42c500db5",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/ca90c9500aff4e72b976a30b1ac57dad",
       "Ordering": true
     },
     {
