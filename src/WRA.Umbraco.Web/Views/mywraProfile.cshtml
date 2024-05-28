@@ -88,6 +88,9 @@
                                         <div class="w-100 border border-medium rounded mb-5">
                                             @using (Html.BeginUmbracoForm<MemberEditSurfaceController>(nameof(MemberEditSurfaceController.HandleMemberEdit)))
                                             {
+
+                                            <input asp-for=@memberUpdateModel.MemberId type="hidden" />
+                                                
                                             <table class="table-info w-100 fs-sm">
                                                 <thead class="visually-hidden">
                                                     <tr>
@@ -97,7 +100,6 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody style="color: var(--bs-gray-30)">
-                                                <h1> hide this but submit it: @memberUpdateModel.MemberId</h1>
                                                     <tr>
                                                         <td class="py-2">FirstName</td>
                                                         <td class="py-2 text-body">@memberUpdateModel.FirstName</td>
@@ -399,7 +401,7 @@
                                                                     <div class="dialog-content px-5 py-3 fs-sm">
                                                                         <div class="d-flex flex-row justify-content-between mb-3">
                                                                             <label asp-for="@memberUpdateModel.Email" class="text-body"></label>
-                                                                            <input asp-for=@memberUpdateModel.Email />
+                                                                            <input asp-for=@memberUpdateModel.Email required />
                                                                         </div>
                                                                         <button type="submit" class="btn btn-primary btn-sm">Save</button>
                                                                     </div>
