@@ -31,36 +31,69 @@
                 }
 
                 <div class="border border-medium p-4 rounded mb-5">
-                    <h2 class="h6 mb-4 fs-lg">
-                        Zip Form
-                    </h2>
-                    <div class="rich-text">
-                        Lorem ipsum dolor sit amet consectetur. At eget vulputate sapien duis curabitur vulputate morbi feugiat euismod.
-                    </div>
-                    <a href="/" class="btn btn-primary">Access Zip Form</a>
+                    @if (!String.IsNullOrEmpty(content.ZipFormHeadline.ToString()))
+                    {
+                        <h4 class="h6 mb-4 fs-lg">
+                            @Html.Raw(content.ZipFormHeadline)
+                        </h4>
+                    }
+                    @if (!String.IsNullOrEmpty(content.ZipFormContent.ToString()))
+                    {
+                        <div class="rich-text">
+                            @Html.Raw(content.ZipFormContent)
+                        </div>
+                    }
+                    @{
+                        var zipFormLink = content.Value<Link>("ZipFormButton");
+                    }
+                    @if (zipFormLink != null)
+                    {
+                        <a href="@zipFormLink.Url" class="btn btn-primary" target="@zipFormLink.Target">@zipFormLink.Name</a>
+                    }
                 </div>
                 <div class="border border-medium p-4 rounded mb-5">
-                    <h2 class="h6 mb-4 fs-lg">
-                        Forms Library
-                    </h2>
-                    <div class="rich-text">
-                        Lorem ipsum dolor sit amet consectetur. At eget vulputate sapien duis curabitur vulputate morbi feugiat euismod.
-                    </div>
-                    <a href="/" class="btn btn-primary">Access Forms Library</a>
+                    @if (!String.IsNullOrEmpty(content.FormsLibraryHeadline.ToString()))
+                    {
+                        <h4 class="h6 mb-4 fs-lg">
+                            @Html.Raw(content.FormsLibraryHeadline)
+                        </h4>
+                    }
+                    @if (!String.IsNullOrEmpty(content.FormsLibraryContent.ToString()))
+                    {
+                        <div class="rich-text">
+                            @Html.Raw(content.FormsLibraryContent)
+                        </div>
+                    }
+                    @{
+                        var formsLibraryLink = content.Value<Link>("FormsLibraryButton");
+                    }
+                    @if (formsLibraryLink != null)
+                    {
+                        <a href="@formsLibraryLink.Url" class="btn btn-primary" target="@formsLibraryLink.Target">@formsLibraryLink.Name</a>
+                    }
                 </div>
                 <div class="border border-medium p-4 rounded mb-5">
-                    <h2 class="h6 mb-4 fs-lg">
-                        Line By Line Training
-                    </h2>
-                    <div class="rich-text">
-                        Lorem ipsum dolor sit amet consectetur. At eget vulputate sapien duis curabitur vulputate morbi feugiat euismod.
-                    </div>
-                    <a href="/" class="btn btn-primary">Access Line By Line Training</a>
+                    @if (!String.IsNullOrEmpty(content.LineByLineHeadline.ToString()))
+                    {
+                        <h4 class="h6 mb-4 fs-lg">
+                            @Html.Raw(content.LineByLineHeadline)
+                        </h4>
+                    }
+                    @if (!String.IsNullOrEmpty(content.LineByLineContent.ToString()))
+                    {
+                        <div class="rich-text">
+                            @Html.Raw(content.LineByLineContent)
+                        </div>
+                    }
+                    @{
+                        var lineByLineLink = content.Value<Link>("LineByLineButton");
+                    }
+                    @if (lineByLineLink != null)
+                    {
+                        <a href="@lineByLineLink.Url" class="btn btn-primary" target="@lineByLineLink.Target">@lineByLineLink.Name</a>
+                    }
                 </div>
-
-
             </div>
-
         </div>
     </div>
 </div>
