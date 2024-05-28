@@ -84,335 +84,336 @@
                                             </div>
                                         }
 
-                                        <h3 class="h5 mb-2">Information</h3>
-                                        <div class="w-100 border border-medium rounded mb-5">
-                                            @using (Html.BeginUmbracoForm<MemberEditSurfaceController>(nameof(MemberEditSurfaceController.HandleMemberEdit)))
-                                            {
-
+                                        @using (Html.BeginUmbracoForm<MemberEditSurfaceController>(nameof(MemberEditSurfaceController.HandleMemberEdit)))
+                                        {
                                             <input asp-for=@memberUpdateModel.MemberId type="hidden" />
-                                                
-                                            <table class="table-info w-100 fs-sm">
-                                                <thead class="visually-hidden">
-                                                    <tr>
-                                                        <th>Item</th>
-                                                        <th>Value</th>
-                                                        <th>Edit</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody style="color: var(--bs-gray-30)">
-                                                    <tr>
-                                                        <td class="py-2">FirstName</td>
-                                                        <td class="py-2 text-body">@memberUpdateModel.FirstName</td>
-                                                        <td class="py-2 text-end">
-                                                            <div id="info_@memberUpdateModel.FirstName" class="js-dialog dialog-container" aria-hidden="true">
-                                                                <div class="dialog-overlay" data-a11y-dialog-hide></div>
-                                                                <div class="dialog-content-wrapper" style="max-width: 550px; max-height: 75vh;" role="document">
-                                                                    <div class="dialog-content-header p-1 justify-content-end rounded-top" style="background-color: var(--bs-gray-10)">
-                                                                        <h4 class="h4 mb-0 visually-hidden">Edit</h4>
-                                                                        <button onclick="return false;" type="button" data-a11y-dialog-hide aria-label="Close dialog">
-                                                                            &times;
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="dialog-content px-5 py-3 fs-sm">
-                                                                        <div class="d-flex flex-row justify-content-between mb-3">
-                                                                            <label asp-for="@memberUpdateModel.FirstName" class="text-body"></label>
-                                                                            <input asp-for=@memberUpdateModel.FirstName />
+
+                                            <h3 class="h5 mb-2">Information</h3>
+                                            <div class="w-100 border border-medium rounded mb-5">
+                                                <table class="table-info w-100 fs-sm">
+                                                    <thead class="visually-hidden">
+                                                        <tr>
+                                                            <th>Item</th>
+                                                            <th>Value</th>
+                                                            <th>Edit</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody style="color: var(--bs-gray-30)">
+                                                        <tr>
+                                                            <td class="py-2">FirstName</td>
+                                                            <td class="py-2 text-body">@memberUpdateModel.FirstName</td>
+                                                            <td class="py-2 text-end">
+                                                                <div id="info_@memberUpdateModel.FirstName" class="js-dialog dialog-container" aria-hidden="true">
+                                                                    <div class="dialog-overlay" data-a11y-dialog-hide></div>
+                                                                    <div class="dialog-content-wrapper" style="max-width: 550px; max-height: 75vh;" role="document">
+                                                                        <div class="dialog-content-header p-1 justify-content-end rounded-top" style="background-color: var(--bs-gray-10)">
+                                                                            <h4 class="h4 mb-0 visually-hidden">Edit</h4>
+                                                                            <button onclick="return false;" type="button" data-a11y-dialog-hide aria-label="Close dialog">
+                                                                                &times;
+                                                                            </button>
                                                                         </div>
-                                                                        <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                                                                        <div class="dialog-content px-5 py-3 fs-sm">
+                                                                            <div class="d-flex flex-row justify-content-between mb-3">
+                                                                                <label asp-for="@memberUpdateModel.FirstName" class="text-body"></label>
+                                                                                <input asp-for=@memberUpdateModel.FirstName />
+                                                                            </div>
+                                                                            <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                            <button class="text-link border-0 bg-transparent px-2 py-2" onclick="return false;" data-a11y-dialog-show="info_@memberUpdateModel.FirstName">Edit</button>
-                                                        </td>
-                                                    </tr>
+                                                                <button class="text-link border-0 bg-transparent px-2 py-2" onclick="return false;" data-a11y-dialog-show="info_@memberUpdateModel.FirstName">Edit</button>
+                                                            </td>
+                                                        </tr>
 
-                                                    <tr>
-                                                        <td class="py-2">LastName</td>
-                                                        <td class="py-2 text-body">@memberUpdateModel.LastName</td>
-                                                        <td class="py-2 text-end">
-                                                            <div id="info_@memberUpdateModel.LastName" class="js-dialog dialog-container" aria-hidden="true">
-                                                                <div class="dialog-overlay" data-a11y-dialog-hide></div>
-                                                                <div class="dialog-content-wrapper" style="max-width: 550px; max-height: 75vh;" role="document">
-                                                                    <div class="dialog-content-header p-1 justify-content-end rounded-top" style="background-color: var(--bs-gray-10)">
-                                                                        <h4 class="h4 mb-0 visually-hidden">Edit</h4>
-                                                                        <button onclick="return false;" type="button" data-a11y-dialog-hide aria-label="Close dialog">
-                                                                            &times;
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="dialog-content px-5 py-3 fs-sm">
-                                                                        <div class="d-flex flex-row justify-content-between mb-3">
-                                                                            <label asp-for="@memberUpdateModel.LastName" class="text-body"></label>
-                                                                            <input asp-for=@memberUpdateModel.LastName />
+                                                        <tr>
+                                                            <td class="py-2">LastName</td>
+                                                            <td class="py-2 text-body">@memberUpdateModel.LastName</td>
+                                                            <td class="py-2 text-end">
+                                                                <div id="info_@memberUpdateModel.LastName" class="js-dialog dialog-container" aria-hidden="true">
+                                                                    <div class="dialog-overlay" data-a11y-dialog-hide></div>
+                                                                    <div class="dialog-content-wrapper" style="max-width: 550px; max-height: 75vh;" role="document">
+                                                                        <div class="dialog-content-header p-1 justify-content-end rounded-top" style="background-color: var(--bs-gray-10)">
+                                                                            <h4 class="h4 mb-0 visually-hidden">Edit</h4>
+                                                                            <button onclick="return false;" type="button" data-a11y-dialog-hide aria-label="Close dialog">
+                                                                                &times;
+                                                                            </button>
                                                                         </div>
-                                                                        <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                                                                        <div class="dialog-content px-5 py-3 fs-sm">
+                                                                            <div class="d-flex flex-row justify-content-between mb-3">
+                                                                                <label asp-for="@memberUpdateModel.LastName" class="text-body"></label>
+                                                                                <input asp-for=@memberUpdateModel.LastName />
+                                                                            </div>
+                                                                            <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                            <button class="text-link border-0 bg-transparent px-2 py-2" onclick="return false;" data-a11y-dialog-show="info_@memberUpdateModel.LastName">Edit</button>
-                                                        </td>
-                                                    </tr>
+                                                                <button class="text-link border-0 bg-transparent px-2 py-2" onclick="return false;" data-a11y-dialog-show="info_@memberUpdateModel.LastName">Edit</button>
+                                                            </td>
+                                                        </tr>
 
-                                                    <tr>
-                                                        <td class="py-2">Address</td>
-                                                        <td class="py-2 text-body">@memberUpdateModel?.Address1</td>
-                                                        <td class="py-2 text-end">
-                                                            <div id="info_@memberUpdateModel.Address1" class="js-dialog dialog-container" aria-hidden="true">
-                                                                <div class="dialog-overlay" data-a11y-dialog-hide></div>
-                                                                <div class="dialog-content-wrapper" style="max-width: 550px; max-height: 75vh;" role="document">
-                                                                    <div class="dialog-content-header p-1 justify-content-end rounded-top" style="background-color: var(--bs-gray-10)">
-                                                                        <h4 class="h4 mb-0 visually-hidden">Edit</h4>
-                                                                        <button onclick="return false;" type="button" data-a11y-dialog-hide aria-label="Close dialog">
-                                                                            &times;
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="dialog-content px-5 py-3 fs-sm">
-                                                                        <div class="d-flex flex-row justify-content-between mb-3">
-                                                                            <label asp-for="@memberUpdateModel.Address1" class="text-body"></label>
-                                                                            <input asp-for=@memberUpdateModel.Address1 />
+                                                        <tr>
+                                                            <td class="py-2">Address</td>
+                                                            <td class="py-2 text-body">@memberUpdateModel?.Address1</td>
+                                                            <td class="py-2 text-end">
+                                                                <div id="info_@memberUpdateModel.Address1" class="js-dialog dialog-container" aria-hidden="true">
+                                                                    <div class="dialog-overlay" data-a11y-dialog-hide></div>
+                                                                    <div class="dialog-content-wrapper" style="max-width: 550px; max-height: 75vh;" role="document">
+                                                                        <div class="dialog-content-header p-1 justify-content-end rounded-top" style="background-color: var(--bs-gray-10)">
+                                                                            <h4 class="h4 mb-0 visually-hidden">Edit</h4>
+                                                                            <button onclick="return false;" type="button" data-a11y-dialog-hide aria-label="Close dialog">
+                                                                                &times;
+                                                                            </button>
                                                                         </div>
-                                                                        <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                                                                        <div class="dialog-content px-5 py-3 fs-sm">
+                                                                            <div class="d-flex flex-row justify-content-between mb-3">
+                                                                                <label asp-for="@memberUpdateModel.Address1" class="text-body"></label>
+                                                                                <input asp-for=@memberUpdateModel.Address1 />
+                                                                            </div>
+                                                                            <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                            <button class="text-link border-0 bg-transparent px-2 py-2" onclick="return false;" data-a11y-dialog-show="info_@memberUpdateModel.Address1">Edit</button>
-                                                        </td>
-                                                    </tr>
+                                                                <button class="text-link border-0 bg-transparent px-2 py-2" onclick="return false;" data-a11y-dialog-show="info_@memberUpdateModel.Address1">Edit</button>
+                                                            </td>
+                                                        </tr>
 
-                                                    <tr>
-                                                        <td class="py-2">Address2</td>
-                                                        <td class="py-2 text-body">@memberUpdateModel.Address2</td>
-                                                        <td class="py-2 text-end">
-                                                            <div id="info_@memberUpdateModel.Address2" class="js-dialog dialog-container" aria-hidden="true">
-                                                                <div class="dialog-overlay" data-a11y-dialog-hide></div>
-                                                                <div class="dialog-content-wrapper" style="max-width: 550px; max-height: 75vh;" role="document">
-                                                                    <div class="dialog-content-header p-1 justify-content-end rounded-top" style="background-color: var(--bs-gray-10)">
-                                                                        <h4 class="h4 mb-0 visually-hidden">Edit</h4>
-                                                                        <button onclick="return false;" type="button" data-a11y-dialog-hide aria-label="Close dialog">
-                                                                            &times;
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="dialog-content px-5 py-3 fs-sm">
-                                                                        <div class="d-flex flex-row justify-content-between mb-3">
-                                                                            <label asp-for="@memberUpdateModel.Address2" class="text-body"></label>
-                                                                            <input asp-for=@memberUpdateModel.Address2 />
+                                                        <tr>
+                                                            <td class="py-2">Address2</td>
+                                                            <td class="py-2 text-body">@memberUpdateModel.Address2</td>
+                                                            <td class="py-2 text-end">
+                                                                <div id="info_@memberUpdateModel.Address2" class="js-dialog dialog-container" aria-hidden="true">
+                                                                    <div class="dialog-overlay" data-a11y-dialog-hide></div>
+                                                                    <div class="dialog-content-wrapper" style="max-width: 550px; max-height: 75vh;" role="document">
+                                                                        <div class="dialog-content-header p-1 justify-content-end rounded-top" style="background-color: var(--bs-gray-10)">
+                                                                            <h4 class="h4 mb-0 visually-hidden">Edit</h4>
+                                                                            <button onclick="return false;" type="button" data-a11y-dialog-hide aria-label="Close dialog">
+                                                                                &times;
+                                                                            </button>
                                                                         </div>
-                                                                        <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                                                                        <div class="dialog-content px-5 py-3 fs-sm">
+                                                                            <div class="d-flex flex-row justify-content-between mb-3">
+                                                                                <label asp-for="@memberUpdateModel.Address2" class="text-body"></label>
+                                                                                <input asp-for=@memberUpdateModel.Address2 />
+                                                                            </div>
+                                                                            <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                            <button class="text-link border-0 bg-transparent px-2 py-2" onclick="return false;" data-a11y-dialog-show="info_@memberUpdateModel.Address2">Edit</button>
-                                                        </td>
-                                                    </tr>
+                                                                <button class="text-link border-0 bg-transparent px-2 py-2" onclick="return false;" data-a11y-dialog-show="info_@memberUpdateModel.Address2">Edit</button>
+                                                            </td>
+                                                        </tr>
 
-                                                    <tr>
-                                                        <td class="py-2">City</td>
-                                                        <td class="py-2 text-body">@memberUpdateModel.City</td>
-                                                        <td class="py-2 text-end">
-                                                            <div id="info_@memberUpdateModel.City" class="js-dialog dialog-container" aria-hidden="true">
-                                                                <div class="dialog-overlay" data-a11y-dialog-hide></div>
-                                                                <div class="dialog-content-wrapper" style="max-width: 550px; max-height: 75vh;" role="document">
-                                                                    <div class="dialog-content-header p-1 justify-content-end rounded-top" style="background-color: var(--bs-gray-10)">
-                                                                        <h4 class="h4 mb-0 visually-hidden">Edit</h4>
-                                                                        <button onclick="return false;" type="button" data-a11y-dialog-hide aria-label="Close dialog">
-                                                                            &times;
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="dialog-content px-5 py-3 fs-sm">
-                                                                        <div class="d-flex flex-row justify-content-between mb-3">
-                                                                            <label asp-for="@memberUpdateModel.City" class="text-body"></label>
-                                                                            <input asp-for=@memberUpdateModel.City />
+                                                        <tr>
+                                                            <td class="py-2">City</td>
+                                                            <td class="py-2 text-body">@memberUpdateModel.City</td>
+                                                            <td class="py-2 text-end">
+                                                                <div id="info_@memberUpdateModel.City" class="js-dialog dialog-container" aria-hidden="true">
+                                                                    <div class="dialog-overlay" data-a11y-dialog-hide></div>
+                                                                    <div class="dialog-content-wrapper" style="max-width: 550px; max-height: 75vh;" role="document">
+                                                                        <div class="dialog-content-header p-1 justify-content-end rounded-top" style="background-color: var(--bs-gray-10)">
+                                                                            <h4 class="h4 mb-0 visually-hidden">Edit</h4>
+                                                                            <button onclick="return false;" type="button" data-a11y-dialog-hide aria-label="Close dialog">
+                                                                                &times;
+                                                                            </button>
                                                                         </div>
-                                                                        <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                                                                        <div class="dialog-content px-5 py-3 fs-sm">
+                                                                            <div class="d-flex flex-row justify-content-between mb-3">
+                                                                                <label asp-for="@memberUpdateModel.City" class="text-body"></label>
+                                                                                <input asp-for=@memberUpdateModel.City />
+                                                                            </div>
+                                                                            <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                            <button class="text-link border-0 bg-transparent px-2 py-2" onclick="return false;" data-a11y-dialog-show="info_@memberUpdateModel.City">Edit</button>
-                                                        </td>
-                                                    </tr>
+                                                                <button class="text-link border-0 bg-transparent px-2 py-2" onclick="return false;" data-a11y-dialog-show="info_@memberUpdateModel.City">Edit</button>
+                                                            </td>
+                                                        </tr>
 
-                                                    <tr>
-                                                        <td class="py-2">State</td>
-                                                        <td class="py-2 text-body">@memberUpdateModel.State</td>
-                                                        <td class="py-2 text-end">
-                                                            <div id="info_@memberUpdateModel.State" class="js-dialog dialog-container" aria-hidden="true">
-                                                                <div class="dialog-overlay" data-a11y-dialog-hide></div>
-                                                                <div class="dialog-content-wrapper" style="max-width: 550px; max-height: 75vh;" role="document">
-                                                                    <div class="dialog-content-header p-1 justify-content-end rounded-top" style="background-color: var(--bs-gray-10)">
-                                                                        <h4 class="h4 mb-0 visually-hidden">Edit</h4>
-                                                                        <button onclick="return false;" type="button" data-a11y-dialog-hide aria-label="Close dialog">
-                                                                            &times;
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="dialog-content px-5 py-3 fs-sm">
-                                                                        <div class="d-flex flex-row justify-content-between mb-3">
-                                                                            <label asp-for="@memberUpdateModel.State" class="text-body"></label>
-                                                                            <input asp-for=@memberUpdateModel.State />
+                                                        <tr>
+                                                            <td class="py-2">State</td>
+                                                            <td class="py-2 text-body">@memberUpdateModel.State</td>
+                                                            <td class="py-2 text-end">
+                                                                <div id="info_@memberUpdateModel.State" class="js-dialog dialog-container" aria-hidden="true">
+                                                                    <div class="dialog-overlay" data-a11y-dialog-hide></div>
+                                                                    <div class="dialog-content-wrapper" style="max-width: 550px; max-height: 75vh;" role="document">
+                                                                        <div class="dialog-content-header p-1 justify-content-end rounded-top" style="background-color: var(--bs-gray-10)">
+                                                                            <h4 class="h4 mb-0 visually-hidden">Edit</h4>
+                                                                            <button onclick="return false;" type="button" data-a11y-dialog-hide aria-label="Close dialog">
+                                                                                &times;
+                                                                            </button>
                                                                         </div>
-                                                                        <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                                                                        <div class="dialog-content px-5 py-3 fs-sm">
+                                                                            <div class="d-flex flex-row justify-content-between mb-3">
+                                                                                <label asp-for="@memberUpdateModel.State" class="text-body"></label>
+                                                                                <input asp-for=@memberUpdateModel.State />
+                                                                            </div>
+                                                                            <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                            <button class="text-link border-0 bg-transparent px-2 py-2" onclick="return false;" data-a11y-dialog-show="info_@memberUpdateModel.State">Edit</button>
-                                                        </td>
-                                                    </tr>
+                                                                <button class="text-link border-0 bg-transparent px-2 py-2" onclick="return false;" data-a11y-dialog-show="info_@memberUpdateModel.State">Edit</button>
+                                                            </td>
+                                                        </tr>
 
-                                                    <tr>
-                                                        <td class="py-2">Zip</td>
-                                                        <td class="py-2 text-body">@memberUpdateModel.ZipCode</td>
-                                                        <td class="py-2 text-end">
-                                                            <div id="info_@memberUpdateModel.ZipCode" class="js-dialog dialog-container" aria-hidden="true">
-                                                                <div class="dialog-overlay" data-a11y-dialog-hide></div>
-                                                                <div class="dialog-content-wrapper" style="max-width: 550px; max-height: 75vh;" role="document">
-                                                                    <div class="dialog-content-header p-1 justify-content-end rounded-top" style="background-color: var(--bs-gray-10)">
-                                                                        <h4 class="h4 mb-0 visually-hidden">Edit</h4>
-                                                                        <button onclick="return false;" type="button" data-a11y-dialog-hide aria-label="Close dialog">
-                                                                            &times;
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="dialog-content px-5 py-3 fs-sm">
-                                                                        <div class="d-flex flex-row justify-content-between mb-3">
-                                                                            <label asp-for="@memberUpdateModel.ZipCode" class="text-body"></label>
-                                                                            <input asp-for=@memberUpdateModel.ZipCode />
+                                                        <tr>
+                                                            <td class="py-2">Zip</td>
+                                                            <td class="py-2 text-body">@memberUpdateModel.ZipCode</td>
+                                                            <td class="py-2 text-end">
+                                                                <div id="info_@memberUpdateModel.ZipCode" class="js-dialog dialog-container" aria-hidden="true">
+                                                                    <div class="dialog-overlay" data-a11y-dialog-hide></div>
+                                                                    <div class="dialog-content-wrapper" style="max-width: 550px; max-height: 75vh;" role="document">
+                                                                        <div class="dialog-content-header p-1 justify-content-end rounded-top" style="background-color: var(--bs-gray-10)">
+                                                                            <h4 class="h4 mb-0 visually-hidden">Edit</h4>
+                                                                            <button onclick="return false;" type="button" data-a11y-dialog-hide aria-label="Close dialog">
+                                                                                &times;
+                                                                            </button>
                                                                         </div>
-                                                                        <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                                                                        <div class="dialog-content px-5 py-3 fs-sm">
+                                                                            <div class="d-flex flex-row justify-content-between mb-3">
+                                                                                <label asp-for="@memberUpdateModel.ZipCode" class="text-body"></label>
+                                                                                <input asp-for=@memberUpdateModel.ZipCode />
+                                                                            </div>
+                                                                            <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                            <button class="text-link border-0 bg-transparent px-2 py-2" onclick="return false;" data-a11y-dialog-show="info_@memberUpdateModel.ZipCode">Edit</button>
-                                                        </td>
-                                                    </tr>
+                                                                <button class="text-link border-0 bg-transparent px-2 py-2" onclick="return false;" data-a11y-dialog-show="info_@memberUpdateModel.ZipCode">Edit</button>
+                                                            </td>
+                                                        </tr>
 
-                                                    <tr>
-                                                        <td class="py-2">Mobile Phone</td>
-                                                        <td class="py-2 text-body">@memberUpdateModel.CellPhone</td>
-                                                        <td class="py-2 text-end">
-                                                            <div id="info_@memberUpdateModel.CellPhone" class="js-dialog dialog-container" aria-hidden="true">
-                                                                <div class="dialog-overlay" data-a11y-dialog-hide></div>
-                                                                <div class="dialog-content-wrapper" style="max-width: 550px; max-height: 75vh;" role="document">
-                                                                    <div class="dialog-content-header p-1 justify-content-end rounded-top" style="background-color: var(--bs-gray-10)">
-                                                                        <h4 class="h4 mb-0 visually-hidden">Edit</h4>
-                                                                        <button onclick="return false;" type="button" data-a11y-dialog-hide aria-label="Close dialog">
-                                                                            &times;
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="dialog-content px-5 py-3 fs-sm">
-                                                                        <div class="d-flex flex-row justify-content-between mb-3">
-                                                                            <label asp-for="@memberUpdateModel.CellPhone" class="text-body"></label>
-                                                                            <input asp-for=@memberUpdateModel.CellPhone />
+                                                        <tr>
+                                                            <td class="py-2">Mobile Phone</td>
+                                                            <td class="py-2 text-body">@memberUpdateModel.CellPhone</td>
+                                                            <td class="py-2 text-end">
+                                                                <div id="info_@memberUpdateModel.CellPhone" class="js-dialog dialog-container" aria-hidden="true">
+                                                                    <div class="dialog-overlay" data-a11y-dialog-hide></div>
+                                                                    <div class="dialog-content-wrapper" style="max-width: 550px; max-height: 75vh;" role="document">
+                                                                        <div class="dialog-content-header p-1 justify-content-end rounded-top" style="background-color: var(--bs-gray-10)">
+                                                                            <h4 class="h4 mb-0 visually-hidden">Edit</h4>
+                                                                            <button onclick="return false;" type="button" data-a11y-dialog-hide aria-label="Close dialog">
+                                                                                &times;
+                                                                            </button>
                                                                         </div>
-                                                                        <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                                                                        <div class="dialog-content px-5 py-3 fs-sm">
+                                                                            <div class="d-flex flex-row justify-content-between mb-3">
+                                                                                <label asp-for="@memberUpdateModel.CellPhone" class="text-body"></label>
+                                                                                <input asp-for=@memberUpdateModel.CellPhone />
+                                                                            </div>
+                                                                            <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                            <button class="text-link border-0 bg-transparent px-2 py-2" onclick="return false;" data-a11y-dialog-show="info_@memberUpdateModel.CellPhone">Edit</button>
-                                                        </td>
-                                                    </tr>
+                                                                <button class="text-link border-0 bg-transparent px-2 py-2" onclick="return false;" data-a11y-dialog-show="info_@memberUpdateModel.CellPhone">Edit</button>
+                                                            </td>
+                                                        </tr>
 
-                                                    <tr>
-                                                        <td class="py-2">Home Phone</td>
-                                                        <td class="py-2 text-body">@memberUpdateModel.HomePhone</td>
-                                                        <td class="py-2 text-end">
-                                                            <div id="info_@memberUpdateModel.HomePhone" class="js-dialog dialog-container" aria-hidden="true">
-                                                                <div class="dialog-overlay" data-a11y-dialog-hide></div>
-                                                                <div class="dialog-content-wrapper" style="max-width: 550px; max-height: 75vh;" role="document">
-                                                                    <div class="dialog-content-header p-1 justify-content-end rounded-top" style="background-color: var(--bs-gray-10)">
-                                                                        <h4 class="h4 mb-0 visually-hidden">Edit</h4>
-                                                                        <button onclick="return false;" type="button" data-a11y-dialog-hide aria-label="Close dialog">
-                                                                            &times;
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="dialog-content px-5 py-3 fs-sm">
-                                                                        <div class="d-flex flex-row justify-content-between mb-3">
-                                                                            <label asp-for="@memberUpdateModel.HomePhone" class="text-body"></label>
-                                                                            <input asp-for=@memberUpdateModel.HomePhone />
+                                                        <tr>
+                                                            <td class="py-2">Home Phone</td>
+                                                            <td class="py-2 text-body">@memberUpdateModel.HomePhone</td>
+                                                            <td class="py-2 text-end">
+                                                                <div id="info_@memberUpdateModel.HomePhone" class="js-dialog dialog-container" aria-hidden="true">
+                                                                    <div class="dialog-overlay" data-a11y-dialog-hide></div>
+                                                                    <div class="dialog-content-wrapper" style="max-width: 550px; max-height: 75vh;" role="document">
+                                                                        <div class="dialog-content-header p-1 justify-content-end rounded-top" style="background-color: var(--bs-gray-10)">
+                                                                            <h4 class="h4 mb-0 visually-hidden">Edit</h4>
+                                                                            <button onclick="return false;" type="button" data-a11y-dialog-hide aria-label="Close dialog">
+                                                                                &times;
+                                                                            </button>
                                                                         </div>
-                                                                        <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                                                                        <div class="dialog-content px-5 py-3 fs-sm">
+                                                                            <div class="d-flex flex-row justify-content-between mb-3">
+                                                                                <label asp-for="@memberUpdateModel.HomePhone" class="text-body"></label>
+                                                                                <input asp-for=@memberUpdateModel.HomePhone />
+                                                                            </div>
+                                                                            <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                            <button class="text-link border-0 bg-transparent px-2 py-2" onclick="return false;" data-a11y-dialog-show="info_@memberUpdateModel.HomePhone">Edit</button>
-                                                        </td>
-                                                    </tr>
+                                                                <button class="text-link border-0 bg-transparent px-2 py-2" onclick="return false;" data-a11y-dialog-show="info_@memberUpdateModel.HomePhone">Edit</button>
+                                                            </td>
+                                                        </tr>
 
-                                                    <tr>
-                                                        <td class="py-2">Work Phone</td>
-                                                        <td class="py-2 text-body">@member.WorkPhone</td>
-                                                        <td class="py-2 text-end">
-                                                            <div id="info_@memberUpdateModel.WorkPhone" class="js-dialog dialog-container" aria-hidden="true">
-                                                                <div class="dialog-overlay" data-a11y-dialog-hide></div>
-                                                                <div class="dialog-content-wrapper" style="max-width: 550px; max-height: 75vh;" role="document">
-                                                                    <div class="dialog-content-header p-1 justify-content-end rounded-top" style="background-color: var(--bs-gray-10)">
-                                                                        <h4 class="h4 mb-0 visually-hidden">Edit</h4>
-                                                                        <button onclick="return false;" type="button" data-a11y-dialog-hide aria-label="Close dialog">
-                                                                            &times;
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="dialog-content px-5 py-3 fs-sm">
-                                                                        <div class="d-flex flex-row justify-content-between mb-3">
-                                                                            <label asp-for="@memberUpdateModel.WorkPhone" class="text-body"></label>
-                                                                            <input asp-for=@memberUpdateModel.WorkPhone />
+                                                        <tr>
+                                                            <td class="py-2">Work Phone</td>
+                                                            <td class="py-2 text-body">@member.WorkPhone</td>
+                                                            <td class="py-2 text-end">
+                                                                <div id="info_@memberUpdateModel.WorkPhone" class="js-dialog dialog-container" aria-hidden="true">
+                                                                    <div class="dialog-overlay" data-a11y-dialog-hide></div>
+                                                                    <div class="dialog-content-wrapper" style="max-width: 550px; max-height: 75vh;" role="document">
+                                                                        <div class="dialog-content-header p-1 justify-content-end rounded-top" style="background-color: var(--bs-gray-10)">
+                                                                            <h4 class="h4 mb-0 visually-hidden">Edit</h4>
+                                                                            <button onclick="return false;" type="button" data-a11y-dialog-hide aria-label="Close dialog">
+                                                                                &times;
+                                                                            </button>
                                                                         </div>
-                                                                        <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                                                                        <div class="dialog-content px-5 py-3 fs-sm">
+                                                                            <div class="d-flex flex-row justify-content-between mb-3">
+                                                                                <label asp-for="@memberUpdateModel.WorkPhone" class="text-body"></label>
+                                                                                <input asp-for=@memberUpdateModel.WorkPhone />
+                                                                            </div>
+                                                                            <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                            <button class="text-link border-0 bg-transparent px-2 py-2" onclick="return false;" data-a11y-dialog-show="info_@memberUpdateModel.WorkPhone">Edit</button>
-                                                        </td>
-                                                    </tr>
+                                                                <button class="text-link border-0 bg-transparent px-2 py-2" onclick="return false;" data-a11y-dialog-show="info_@memberUpdateModel.WorkPhone">Edit</button>
+                                                            </td>
+                                                        </tr>
 
-                                                </tbody>
-                                            </table>
-                                            }
-                                        </div>
+                                                    </tbody>
+                                                </table>
+                                            </div>
 
-                                        <h3 class="h5 mb-2">Settings</h3>
-                                        <div class="w-100 border border-medium rounded mb-5">
-                                            <table class="table-info w-100 fs-sm">
-                                                <thead class="visually-hidden">
-                                                    <tr>
-                                                        <th>Item</th>
-                                                        <th>Value</th>
-                                                        <th>Edit</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody style="color: var(--bs-gray-30)">
-                                                    <tr>
-                                                        <td class="py-2">Security</td>
-                                                        <td class="py-2 text-body" colspan="2">
-                                                            <button class="text-link border-0 bg-transparent px-2 py-2">Change User Name</button><br />
-                                                            <button class="text-link border-0 bg-transparent px-2 py-2">Change Password</button>
-                                                        </td>
-                                                    </tr>
+                                            <h3 class="h5 mb-2">Settings</h3>
+                                            <div class="w-100 border border-medium rounded mb-5">
+                                                <table class="table-info w-100 fs-sm">
+                                                    <thead class="visually-hidden">
+                                                        <tr>
+                                                            <th>Item</th>
+                                                            <th>Value</th>
+                                                            <th>Edit</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody style="color: var(--bs-gray-30)">
 
+                                                        @* TO DO ?? *@
+                                                        <tr>
+                                                            <td class="py-2">Security</td>
+                                                            <td class="py-2 text-body" colspan="2">
+                                                                <button class="text-link border-0 bg-transparent px-2 py-2">Change User Name</button><br />
+                                                                <button class="text-link border-0 bg-transparent px-2 py-2">Change Password</button>
+                                                            </td>
+                                                        </tr>
 
-                                                    <tr>
-                                                        <td class="py-2">Email</td>
-                                                        <td class="py-2 text-body">@memberUpdateModel.Email</td>
-                                                        <td class="py-2 text-end">
-                                                            <div id="info_@memberUpdateModel.Email" class="js-dialog dialog-container" aria-hidden="true">
-                                                                <div class="dialog-overlay" data-a11y-dialog-hide></div>
-                                                                <div class="dialog-content-wrapper" style="max-width: 550px; max-height: 75vh;" role="document">
-                                                                    <div class="dialog-content-header p-1 justify-content-end rounded-top" style="background-color: var(--bs-gray-10)">
-                                                                        <h4 class="h4 mb-0 visually-hidden">Edit</h4>
-                                                                        <button onclick="return false;" type="button" data-a11y-dialog-hide aria-label="Close dialog">
-                                                                            &times;
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="dialog-content px-5 py-3 fs-sm">
-                                                                        <div class="d-flex flex-row justify-content-between mb-3">
-                                                                            <label asp-for="@memberUpdateModel.Email" class="text-body"></label>
-                                                                            <input asp-for=@memberUpdateModel.Email required />
+                                                        <tr>
+                                                            <td class="py-2">Email</td>
+                                                            <td class="py-2 text-body">@memberUpdateModel.Email</td>
+                                                            <td class="py-2 text-end">
+                                                                <div id="info_@memberUpdateModel.Email" class="js-dialog dialog-container" aria-hidden="true">
+                                                                    <div class="dialog-overlay" data-a11y-dialog-hide></div>
+                                                                    <div class="dialog-content-wrapper" style="max-width: 550px; max-height: 75vh;" role="document">
+                                                                        <div class="dialog-content-header p-1 justify-content-end rounded-top" style="background-color: var(--bs-gray-10)">
+                                                                            <h4 class="h4 mb-0 visually-hidden">Edit</h4>
+                                                                            <button onclick="return false;" type="button" data-a11y-dialog-hide aria-label="Close dialog">
+                                                                                &times;
+                                                                            </button>
                                                                         </div>
-                                                                        <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                                                                        <div class="dialog-content px-5 py-3 fs-sm">
+                                                                            <div class="d-flex flex-row justify-content-between mb-3">
+                                                                                <label asp-for="@memberUpdateModel.Email" class="text-body"></label>
+                                                                                <input asp-for=@memberUpdateModel.Email required />
+                                                                            </div>
+                                                                            <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                            <button class="text-link border-0 bg-transparent px-2 py-2" onclick="return false;" data-a11y-dialog-show="info_@memberUpdateModel.Email">Edit</button>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                                                <button class="text-link border-0 bg-transparent px-2 py-2" onclick="return false;" data-a11y-dialog-show="info_@memberUpdateModel.Email">Edit</button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                        }
                                     </div>
                                 </div>
                             </div>
