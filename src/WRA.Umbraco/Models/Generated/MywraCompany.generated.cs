@@ -50,6 +50,38 @@ namespace WRA.Umbraco.Models
 		// properties
 
 		///<summary>
+		/// Events Status By Agent Headline
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.3.2+696a711")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("eventStatusByAgentHeadline")]
+		public virtual string EventStatusByAgentHeadline => this.Value<string>(_publishedValueFallback, "eventStatusByAgentHeadline");
+
+		///<summary>
+		/// Event Status By Agent Label
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.3.2+696a711")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("eventStatusByAgentLabel")]
+		public virtual string EventStatusByAgentLabel => this.Value<string>(_publishedValueFallback, "eventStatusByAgentLabel");
+
+		///<summary>
+		/// Event Status By Event Headline
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.3.2+696a711")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("eventStatusByEventHeadline")]
+		public virtual string EventStatusByEventHeadline => this.Value<string>(_publishedValueFallback, "eventStatusByEventHeadline");
+
+		///<summary>
+		/// Event Status By Event Label
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.3.2+696a711")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("eventStatusByEventLabel")]
+		public virtual string EventStatusByEventLabel => this.Value<string>(_publishedValueFallback, "eventStatusByEventLabel");
+
+		///<summary>
 		/// Headline
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.3.2+696a711")]

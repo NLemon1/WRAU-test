@@ -13648,15 +13648,15 @@ h6,
     font-size: 1.125rem;
   }
 }
-h1,
-.h1,
-h2,
-.h2,
-h3,
-.h3,
-h4,
-.h4,
-.display-1 {
+h1:not(.text-normal),
+.h1:not(.text-normal),
+h2:not(.text-normal),
+.h2:not(.text-normal),
+h3:not(.text-normal),
+.h3:not(.text-normal),
+h4:not(.text-normal),
+.h4:not(.text-normal),
+.display-1:not(.text-normal) {
   text-transform: uppercase;
   letter-spacing: 0.03rem;
 }
@@ -13721,6 +13721,9 @@ h4,
   .rich-text.rich-text-article {
     font-size: 1.125rem;
   }
+}
+.rich-text.rich-text-inline > * {
+  display: inline;
 }
 .accent-heading {
   display: inline-flex;

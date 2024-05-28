@@ -86,6 +86,75 @@
       ]
     },
     {
+      "Key": "3aee22c3-de1e-4df9-aeb4-3d93c2240c6f",
+      "Name": "Form Sections",
+      "Alias": "agentEventRegistration/formSections",
+      "PropertyTypes": [
+        {
+          "Key": "3f058410-b7a8-42ad-9f31-9a69a44b0729",
+          "Alias": "eventStatusByEventHeadline",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Event Status By Event Headline",
+          "SortOrder": 1
+        },
+        {
+          "Key": "4033608e-dfac-4b84-ae94-840906f9b08f",
+          "Alias": "eventStatusByAgentHeadline",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Events Status By Agent Headline"
+        },
+        {
+          "Key": "4238e3ca-cd86-40de-aff4-46a7492b083a",
+          "Alias": "eventStatusByAgentLabel",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Event Status By Agent Label",
+          "SortOrder": 2
+        },
+        {
+          "Key": "f2056d57-4e29-43a1-9334-29ead6e3012e",
+          "Alias": "eventStatusByEventLabel",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Event Status By Event Label",
+          "SortOrder": 3
+        }
+      ]
+    },
+    {
+      "Key": "4eaccb29-a668-4845-ba64-54d0d7213d25",
+      "Name": "Form Sections",
+      "SortOrder": 1001,
+      "Alias": "agentEducationHistory/formSections",
+      "PropertyTypes": [
+        {
+          "Key": "4d59cef4-cac8-483b-8d54-e459631062cf",
+          "Alias": "individualAgentDropdownLabel",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Individual Agent Dropdown Label",
+          "SortOrder": 1
+        },
+        {
+          "Key": "5d6b5d8c-d86d-45cb-a926-9dace6f8acf1",
+          "Alias": "multipleAgentsDropdownLabel",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Multiple Agents Dropdown Label",
+          "SortOrder": 3
+        },
+        {
+          "Key": "b0b166ce-9c1a-4802-b0dd-2a616ab83638",
+          "Alias": "individualAgent",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Individual Agent Headline"
+        },
+        {
+          "Key": "d1af64d0-746a-4bf8-9143-f20aeb88a99c",
+          "Alias": "multipleAgents",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Multiple Agents Headline",
+          "SortOrder": 2
+        }
+      ]
+    },
+    {
       "Key": "731f7f07-cd65-44e4-9b8b-e7723f0a362f",
       "Name": "Content",
       "SortOrder": 6,

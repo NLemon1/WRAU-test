@@ -1,0 +1,17 @@
+{
+  "Name": "Member Name Text",
+  "Alias": "MemberName",
+  "MacroSource": "~/Views/MacroPartials/MemberNameText.cshtml",
+  "UseInEditor": true,
+  "Properties": [],
+  "Udi": "umb://macro/9c657d9d4386427486aa06f88bd6d2bd",
+  "Dependencies": [
+    {
+      "Udi": "umb://partial-view-macro/MemberNameText.cshtml",
+      "Ordering": true,
+      "Mode": "Exist"
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.MacroArtifact",
+  "__version": "13.1.0"
+}

@@ -1,0 +1,17 @@
+﻿@inherits Umbraco.Cms.Web.Common.Macros.PartialViewMacroPage
+@using Umbraco.Cms.Core.Security;
+@using WRA.Umbraco.Web.Services
+
+@inject IMemberManager _memberManager
+
+@{
+    MemberIdentityUser? currentMember = await _memberManager.GetCurrentMemberAsync();
+}
+
+@if (currentMember != null && currentMember.Email != null)
+{
+    <span class="d-inline">@currentMember.Name</span>
+} else
+{
+    <span class="d-inline">User</span>
+}

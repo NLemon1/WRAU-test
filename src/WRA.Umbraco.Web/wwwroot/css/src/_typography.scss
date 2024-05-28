@@ -125,8 +125,10 @@ h6, .h6 {
 
 
 h1, h2, h3, h4, .display-1 {
-    text-transform: uppercase;
-    letter-spacing: 0.03rem;
+    &:not(.text-normal) {
+        text-transform: uppercase;
+        letter-spacing: 0.03rem;
+    }
 }
 
 .display-1 {
@@ -187,6 +189,12 @@ h1, h2, h3, h4, .display-1 {
     &.rich-text-article {
         @include media-breakpoint-up(md) {
             font-size: math.div(18,16) * 1rem;
+        }
+    }
+
+    &.rich-text-inline {
+        > * {
+            display: inline;
         }
     }
 }
