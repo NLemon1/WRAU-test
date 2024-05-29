@@ -1,5 +1,4 @@
 using Umbraco.Cms.Core.Mapping;
-using Umbraco.Cms.Core.Web;
 using WRA.Umbraco.Models;
 using WRA.Umbraco.Web.Dtos.External;
 using WRA.Umbraco.Web.Dtos.Member;
@@ -7,9 +6,8 @@ using WRA.Umbraco.Web.Dtos.Member;
 namespace WRA.Umbraco.Mapping;
 
 public class CourseMapping(
-    MappingHelper mappingHelper,
-    IUmbracoContextFactory contextFactory
-) : IMapDefinition
+    MappingHelper mappingHelper
+    ) : IMapDefinition
 {
     public void DefineMaps(
         IUmbracoMapper mapper)
@@ -30,4 +28,6 @@ public class CourseMapping(
         target.Status = source.Status;
         target.CourseLauncherUrl = source.CourseLauncherUrl;
     }
+
+
 }

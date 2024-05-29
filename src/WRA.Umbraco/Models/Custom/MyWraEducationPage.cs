@@ -11,4 +11,6 @@ public partial class MywraEducation
 {
     public List<OrderHistoryDto> Orders { get; set; }
     public List<CourseDto> RequiredCourses { get; set; }
+    public List<ExternalCourseProgressDto> CourseProgress { get; set; }
+    public List<ExternalMemberCourseCertificateDto> CompletedCourses { get; set; }
 }

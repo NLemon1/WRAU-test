@@ -37,23 +37,30 @@ public class MyWraEducationController(
             .GetResult();
 
         var requiredCourses = GetRequiredCourses(member).GetAwaiter().GetResult();
+        // var courseProgress = GetCourseProgress(member).GetAwaiter().GetResult();
+        var completedCourses = courseService.GetCompletedCourses(member.ExternalId).GetAwaiter().GetResult();
 
         MywraEducation viewModel = new(CurrentPage!, publishedValueFallback)
         {
             Orders = orderHistory,
-            RequiredCourses = requiredCourses
+            RequiredCourses = requiredCourses ?? [],
+            // CourseProgress = courseProgress,
+            CompletedCourses = completedCourses ?? []
         };
         return CurrentTemplate(viewModel);
     }
 
-    public async Task<List<CourseDto>> GetRequiredCourses(Member member)
+    public async Task<List<CourseDto>?> GetRequiredCourses(Member member)
     {
-
         // call WRA's api to get member courses
         var requiredCourses = await courseService.GetRequiredCourses(member.ExternalId);
         return requiredCourses;
+    }
 
-
-
+    public async Task<List<ExternalCourseProgressDto>> GetCourseProgress(Member member)
+    {
+        // call WRA's api to get member courses
+        var requiredCourses = await courseService.GetCourseProgress(member.ExternalId);
+        return requiredCourses;
     }
 }
