@@ -68,6 +68,13 @@
           "SortOrder": 3
         },
         {
+          "Key": "b4138ecf-3af7-452a-a47f-6eb6997c2440",
+          "Alias": "isTaxable",
+          "DataType": "umb://data-type/ab688ccb058e48f5af3749bc3d7fc69d",
+          "Name": "Is Taxable",
+          "SortOrder": 9
+        },
+        {
           "Key": "c307ec21-ea56-49a7-b67d-140761ba32c2",
           "Alias": "categories",
           "DataType": "umb://data-type/f51080043ff644278f33ed62cde56276",
@@ -187,6 +194,10 @@
     },
     {
       "Udi": "umb://data-type/9b641984c0214315bf3feeff86280582",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/ab688ccb058e48f5af3749bc3d7fc69d",
       "Ordering": true
     },
     {

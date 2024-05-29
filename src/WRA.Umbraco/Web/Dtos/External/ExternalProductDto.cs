@@ -84,4 +84,7 @@ public class ExternalProductDto
 
     [JsonPropertyName("productStages")]
     public List<ProductStage> ProductStages { get; set; }
+
+    [JsonPropertyName("salesTaxCategoryCode")]
+    public string? salesTaxCategoryCode { get; set; }
 }

@@ -51,6 +51,7 @@ public class ProductMapping(
         target.ProductTypeId = source.ProductTypeId;
         target.ProductCategoryId = source.ProductCategoryId;
         target.ProductSubcategoryId = source.ProductSubcategoryId;
+        target.ProductSalesTaxCategoryCode = source.salesTaxCategoryCode ?? string.Empty;
         target.StartDate = GetValidDate(source.StartDate);
         target.EndDate = GetValidDate(source.EndDate);
     }
