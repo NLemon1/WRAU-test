@@ -130,14 +130,14 @@
                             </tr>
                         </thead>
                         <tbody style="color: var(--bs-gray-30)">
-                            @for (var i = 1; i < 6; i++)
+                            @foreach(var requiredCourse in Model.RequiredCourses)
                             {
                                 <tr class="">
                                     <td class="py-2">
-                                        Lorem ipsum dolor @i
+                                        @requiredCourse.Name
                                     </td>
                                     <td class="py-2">
-                                        At eget vulputate sapien duis curabitur
+                                        requiredCourse.Status
                                     </td>
                                     <td class="py-2 text-center">
                                         <button class="border-0 bg-transparent px-2 py-2" title="Download">

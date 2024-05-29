@@ -83,6 +83,7 @@ public class ProductHelper(
             { currency.Id.ToString(), productEvent.MemberPrice?.ToString() ?? "0" }
         });
 
+
         content.SetValue("price", basePrice);
         content.SetValue("memberPrice", memberPrice);
         content.SetValue(GlobalConstants.ExternalId, productEvent.Id);

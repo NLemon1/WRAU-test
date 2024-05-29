@@ -1,6 +1,7 @@
 using System.Net;
 using MapsterMapper;
 using Newtonsoft.Json;
+using Umbraco.Cms.Core.Mapping;
 using WRA.Umbraco.Web.Dtos.External;
 using WRA.Umbraco.Web.Dtos.Member;
 
@@ -8,7 +9,7 @@ namespace WRA.Umbraco.Web.Services;
 
 public class CourseService(
     WraExternalApiService wraExternalApiService,
-    IMapper mapper)
+    IUmbracoMapper mapper)
 {
     public async Task<List<CourseDto>> GetRequiredCourses(string ExternalId)
     {
