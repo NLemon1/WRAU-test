@@ -90,11 +90,13 @@
             {
                 var mainImage = Model.Images.FirstOrDefault();
 
-                <img class="img-fluid img-curved img-curved--large" src="@mainImage.GetCropUrl(552, 552).ToString()" alt="@(mainImage.Value("altText") ?? "")" />
+                <img class="img-fluid img-curved img-curved--large" src="@mainImage?.GetCropUrl(552, 552).ToString()" alt="@(mainImage?.Value("altText") ?? "")" />
             }
-            else if (settings.Value<IPublishedContent>("oGImageFallback") != null)
+            else if (Model.Collection.HasValue("image"))
             {
-                <img class="img-fluid img-curved img-curved--large" src="@(settings.Value<IPublishedContent>("oGImageFallback").Url(mode:UrlMode.Absolute))" alt="" />
+                var fallbackImageSrc = Model.Collection.Value<IPublishedContent>("image");
+
+                <img class="img-fluid img-curved img-curved--large" src="@fallbackImageSrc?.GetCropUrl(552, 552).ToString()" alt="@Model.Collection.Name" />
             }
         </div>
         <div class="col-12 col-lg-6">
