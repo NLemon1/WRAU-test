@@ -51,7 +51,7 @@ public class MemberEditSurfaceController(
             var member = services.MemberService.GetById(memberInfo.MemberId);
             // update member
             if (member == null) return RedirectToCurrentUmbracoPage(queryString);
-            if (string.IsNullOrEmpty(memberInfo.FirstName)) member.Name = $"{memberInfo.FirstName} {memberInfo.LastName}";
+            if (!string.IsNullOrEmpty(memberInfo.FirstName)) member.Name = $"{memberInfo.FirstName} {memberInfo.LastName}";
             // member.Email = memberInfo.Email;
             member.SetIfNotEmpty(GlobalConstants.Member.AddressLine1, memberInfo.Address1);
             member.SetIfNotEmpty(GlobalConstants.Member.AddressLine2, memberInfo.Address2);
