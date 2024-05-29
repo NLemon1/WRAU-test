@@ -137,18 +137,24 @@
                                         @requiredCourse.Name
                                     </td>
                                     <td class="py-2">
-                                        requiredCourse.Status
+                                        @requiredCourse.Status
                                     </td>
                                     <td class="py-2 text-center">
-                                        <button class="border-0 bg-transparent px-2 py-2" title="Download">
-                                            <i class="fa-regular fa-arrow-down-to-bracket text-primary fs-lg"></i>
-                                        </button>
-                                        <button class="border-0 bg-transparent px-2 py-2" title="Buy">
-                                            <i class="far fa-shopping-cart text-primary fs-lg"></i>
-                                        </button>
-                                        <button class="border-0 bg-transparent px-2 py-2" title="External Link">
-                                            <i class="fa-regular fa-arrow-up-right-from-square text-primary fs-lg"></i>
-                                        </button>
+                                        @* <button class="border-0 bg-transparent px-2 py-2" title="Download"> *@
+                                        @*     <i class="fa-regular fa-arrow-down-to-bracket text-primary fs-lg"></i> *@
+                                        @* </button> *@
+                                        @if (requiredCourse.CourseProduct != null)
+                                        {
+                                            <button class="border-0 bg-transparent px-2 py-2" title="Buy">
+                                                <i href="@requiredCourse.CourseProduct.Url()" class="far fa-shopping-cart text-primary fs-lg"></i>
+                                            </button>
+                                        }
+                                        @if (requiredCourse.CourseLauncherUrl != null)
+                                        {
+                                            <button class="border-0 bg-transparent px-2 py-2" title="External Link">
+                                                <i href="@requiredCourse.CourseLauncherUrl" class="fa-regular fa-arrow-up-right-from-square text-primary fs-lg"></i>
+                                            </button>
+                                        }
                                     </td>
                                 </tr>
                             }

@@ -1,16 +1,11 @@
-﻿using MassTransit.Futures.Contracts;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.Extensions.Logging;
 using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Cms.Core.Security;
-using Umbraco.Cms.Core.Services;
 using Umbraco.Cms.Core.Web;
 using Umbraco.Cms.Web.Common.Controllers;
-using WRA.Umbraco.Extensions;
-using WRA.Umbraco.Helpers.Constants;
 using WRA.Umbraco.Models;
-using WRA.Umbraco.Repositories;
 using WRA.Umbraco.Web.Dtos.External;
 using WRA.Umbraco.Web.Dtos.Member;
 using WRA.Umbraco.Web.Services;
@@ -22,7 +17,6 @@ public class MyWraEducationController(
     IUmbracoContextAccessor umbracoContextAccessor,
     IMemberManager memberManager,
     IPublishedValueFallback publishedValueFallback,
-    MemberRepository memberRepository,
     CourseService courseService,
     MemberOrderHistoryService memberOrderHistoryService
     )

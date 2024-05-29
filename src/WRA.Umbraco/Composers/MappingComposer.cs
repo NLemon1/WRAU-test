@@ -14,7 +14,8 @@ namespace WRA.Umbraco.Composers
                 .Add<ProductMapping>()
                 .Add<CategoryMapping>()
                 .Add<SubscriptionMapping>()
-                .Add<OrderMapping>();
+                .Add<OrderMapping>()
+                .Add<CourseMapping>();
         }
     }
 }

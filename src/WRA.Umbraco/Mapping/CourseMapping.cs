@@ -20,12 +20,14 @@ public class CourseMapping(
 
     private void ExternalCourseToCourseDto(ExternalCourseDto source, CourseDto target, MapperContext _)
     {
-        target.CourseProductKey = mappingHelper
-            .FindRelatedContentByExternalId(source.ProductId, ProductPage.ModelTypeAlias)?.Key ?? Guid.Empty;
-        target.GoodThruDate = source.GoodThruDate;
+        target.CourseProduct =
+            mappingHelper.FindRelatedContentByExternalId(source.ProductId, ProductPage.ModelTypeAlias);
+        target.GoodThruDate = source.GoodThruDate ?? DateTime.MinValue;
         target.Name = source.Program;
         target.Location = source.Location;
         target.SortSequence = source.SortSequence;
-        target.UnitsRequired = source.UnitsRequired;
+        target.UnitsRequired = source.UnitsRequired ?? 0;
+        target.Status = source.Status;
+        target.CourseLauncherUrl = source.CourseLauncherUrl;
     }
 }
