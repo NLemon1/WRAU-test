@@ -87,7 +87,8 @@
                                         @using (Html.BeginUmbracoForm<MemberEditSurfaceController>(nameof(MemberEditSurfaceController.HandleMemberEdit)))
                                         {
                                             <input asp-for=@memberUpdateModel.MemberId type="hidden" />
-
+                                            <input asp-for=@memberUpdateModel.RedirectUrl value="@(content.Url().TrimEnd('/'))#tabpanel-personal-information" type="hidden" />
+                                    
                                             <h3 class="h5 mb-2 text-normal">Information</h3>
                                             <div class="w-100 border border-medium rounded mb-5">
                                                 <table class="table-info w-100 fs-sm">

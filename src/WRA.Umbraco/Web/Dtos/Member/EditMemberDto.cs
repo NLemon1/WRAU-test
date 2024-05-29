@@ -23,5 +23,7 @@ public class EditMemberDto
 
     //  subscriptions?
 
+    // form handling
+    public string? RedirectUrl { get; set; }
 
 }

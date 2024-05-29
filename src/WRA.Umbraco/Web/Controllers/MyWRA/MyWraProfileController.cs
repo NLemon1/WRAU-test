@@ -32,7 +32,7 @@ public override IActionResult Index()
             var member = memberManager.AsPublishedMember(currentMember);
             MywraProfile viewModel = new(CurrentPage!, publishedValueFallback);
             var roles = memberManager.GetRolesAsync(currentMember).GetAwaiter().GetResult();
-            if (roles.Any(r => r.Equals("WRA Member", StringComparison.OrdinalIgnoreCase)))
+            if (roles.Any(r => r.Equals("WRA Member", StringComparison.OrdinalIgnoreCase) || r.Equals("WRA Member - Designated REALTOR", StringComparison.OrdinalIgnoreCase)))
             {
                 viewModel.IsMember = true;
                 var externalId = member.Value(GlobalConstants.ExternalId)?.ToString() ?? string.Empty;
