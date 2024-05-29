@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata;
+using NPoco;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,4 +16,22 @@ public class ExternalMemberDuesPaymentStrategyDto
     public string? LocalBoardEmail { get; set; }
     public string? LocalBoardPhone { get; set; }
     public string? LocalBoardWebsite { get; set; }
+    [Ignore]
+    public string PaymentStrategy
+    {
+        get
+        {
+            switch (this.DuesPaymentStrategy)
+            {
+                case 1:
+                    return "Hosted Dues Payment Page";
+                case 2:
+                    return "Contact Local Board";
+                case 3:
+                    return "Contact NAR";
+                default:
+                    return "Undetermined";
+            }
+        }
+    }
 }

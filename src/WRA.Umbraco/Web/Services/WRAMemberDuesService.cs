@@ -37,6 +37,7 @@ public class MemberDuesService
         var memberDues = new MemberDuesDto();
         ExternalMemberDuesPaymentStrategyDto paymentStrategy;
         ExternalMemberDuesInvoiceDto invoice;
+        List<ExternalMemberDuesPaymentHistoryDto> payments;
         try
         {
             paymentStrategy = await GetMemberDuesPaymentStrategy(externalMemberID);
@@ -55,6 +56,16 @@ public class MemberDuesService
         catch (Exception ex)
         {
             _logger.LogError(ex, "Failed to fetch member invoice.");
+        }
+
+        try
+        {
+            payments = await GetMemberPaymentHistory(externalMemberID);
+            memberDues.HistoricalPayments = payments;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to fetch member payment history");
         }
 
         return memberDues;
@@ -94,6 +105,25 @@ public class MemberDuesService
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error calling WRAExternalServiceClient.GetMemberDuesInvoice");
+            throw;
+        }
+    }
+
+    private async Task<List<ExternalMemberDuesPaymentHistoryDto>> GetMemberPaymentHistory(string memberId)
+    {
+        try
+        {
+            var memberPaymentHistoryResponse = await _externalServiceClient.GetMemberPaymentHistory(memberId);
+            if (memberPaymentHistoryResponse.Content == null) return new List<ExternalMemberDuesPaymentHistoryDto>();
+            var memberPaymentHistory =
+                JsonSerializer.Deserialize<List<ExternalMemberDuesPaymentHistoryDto>>(
+                    memberPaymentHistoryResponse.Content,
+                    SerializationOptions);
+            return memberPaymentHistory;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error calling WRAExternalServiceClient.GetMemberPaymentHistory");
             throw;
         }
     }

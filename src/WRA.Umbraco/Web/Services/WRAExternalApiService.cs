@@ -229,6 +229,17 @@ public class WraExternalApiService(WraExternalApiSettings settings)
 
         return response;
     }
+
+    public async Task<RestResponse> GetMemberPaymentHistory(string id)
+    {
+        var options = new RestClientOptions(settings.VersionedBaseUrl);
+        var client = new RestClient(options);
+        var request = new RestRequest("memberdues/history/" + id);
+        request.AddHeader(settings.ApiKeyHeader, settings.ApiKey);
+        var response = await client.GetAsync(request);
+
+        return response;
+    }
     public async Task<RestResponse> GetMemberCourseProgress(string id)
     {
         var options = new RestClientOptions(settings.VersionedBaseUrl);
