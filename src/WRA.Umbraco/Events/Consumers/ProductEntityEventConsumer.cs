@@ -22,7 +22,7 @@ public class ProductEntityEventConsumer(ILogger<ProductEntityEventConsumer> logg
                     logger.LogInformation("Creating product: {Product}.", productEvent.Sku);
                     BackgroundJob.Enqueue<WraProductManagementService>(x => x.CreateOrUpdate(productEvent));
                     await Task.CompletedTask;
-                    logger.LogInformation("Product updated.");
+                    logger.LogInformation("Product created.");
                     break;
                 case EntityEventAction.Update:
                     logger.LogInformation("Updating product: {Product}.", productEvent.Sku);
@@ -34,7 +34,7 @@ public class ProductEntityEventConsumer(ILogger<ProductEntityEventConsumer> logg
                     logger.LogInformation("Deleting product: {Product}.", productEvent.Sku);
                     BackgroundJob.Enqueue<WraProductManagementService>(x => x.Delete(productEvent));
                     await Task.CompletedTask;
-                    logger.LogInformation("Product updated.");
+                    logger.LogInformation("Product Deleted.");
                     break;
                 default:
                     logger.LogInformation("Product action not supported: {Action}.", context.Message.Action);

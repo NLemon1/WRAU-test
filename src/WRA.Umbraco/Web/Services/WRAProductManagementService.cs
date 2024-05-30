@@ -129,6 +129,11 @@ public class WraProductManagementService(
                 return null;
             }
             var productPage = productPageRepository.GetBySku(product.Sku);
+            if (productPage == null)
+            {
+                scope.Complete();
+                return null;
+            }
 
             var productContent = contentService.GetById(productPage.Id);
 

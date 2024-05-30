@@ -116,11 +116,19 @@ public class CompanyRepository(
         try
         {
             using var scope = coreScopeProvider.CreateCoreScope();
+            if (externalId == Guid.Empty)
+            {
+                scope.Complete();
+                logger.LogInformation("ExternalId is empty. Cannot delete company.");
+                return null;
+            }
+
             var existingCompany = GetByExternalId(externalId);
             var contentToDelete = contentService.GetById(existingCompany.Id);
+            var deleteResult = contentService.Delete(contentToDelete);
             scope.Complete();
             logger.LogInformation("Deleting company with externalId {ExternalId}", externalId);
-            return contentService.Delete(contentToDelete);
+            return deleteResult;
         }
         catch (Exception e)
         {

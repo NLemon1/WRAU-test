@@ -9,20 +9,23 @@
 @{
     Layout = "~/Views/_Layout.cshtml";
     var content = (ContentModels.MywraDues)Model;
+
     var currentMemberQuery = await _memberManager.GetCurrentMemberAsync();
     // cast it to a published contnet type
     var currentMember = _memberManager.AsPublishedMember(currentMemberQuery);
     // pass this type to the constructor of the strongly typed member model
     var member = new ContentModels.Member(currentMember, new NoopPublishedValueFallback());
-}
 
+    var memberExternalId = member?.ExternalId;
+    var memberDuesQuery = content.MemberDues;
+    var memberDuesHistory = memberDuesQuery?.HistoricalPayments;
+}
 
 
 <div class="w-100">
     <div class="row g-0">
 
         @await Html.PartialAsync("_mywraHeader", new ViewDataDictionary(this.ViewData) { { "isMobile", true } })
-       
         @await Html.PartialAsync("_mywraNav", Model)
 
         <div class="col position-relative pb-5">
@@ -55,7 +58,6 @@
                     </div>
                 </div>
 
-
                 <!-- PAY DUES TAB -->
                 <div id="tabpanel-pay-dues" tabindex="0" role="tabpanel" aria-labelledby="tab-pay-dues" class="js-tabs-panel mywra-tab__panel" aria-hidden="true">
                     <div class="w-100 h-100">
@@ -79,7 +81,6 @@
                                             @Html.Raw(content.PayDuesIntroContent)
                                         </div>
                                     }
-
 
                                     <h3 class="h5 mb-3 text-normal">Payment Instructions</h3>
 
@@ -110,8 +111,7 @@
                                         }
                                     }
 
-                                    
-                                    <h3 class="h5 my-3 text-normal">@member.FirstName's Local Board Information</h3>
+                                    <h3 class="h5 mt-4 mb-3 text-normal">@member.FirstName's Local Board Information</h3>
                                     <div class="w-100 border border-medium rounded mb-5">
                                         <table class="table-info w-100 fs-sm">
                                             <thead class="visually-hidden">
@@ -204,7 +204,7 @@
                                             @Html.Raw(content.DuesHistoryIntroContent)
                                         </div>
                                     }
-
+                                  
                                     <div class="w-100 border border-medium rounded mb-5">
                                         <table class="table-info w-100 fs-sm">
                                             <thead class="fw-bold border-bottom border-medium">
@@ -215,17 +215,17 @@
                                                 </tr>
                                             </thead>
                                             <tbody style="color: var(--bs-gray-30)" class="text-body">
-                                                @for (var i = 1; i < 4; i++)
+                                                @foreach (var dues in memberDuesHistory)
                                                 {
                                                     <tr>
                                                         <td class="py-2">
-                                                            @(i)/10/2022
+                                                            @dues.PaidDate.ToString("MM/dd/yyyy")
                                                         </td>
                                                         <td class="py-2">
-                                                            $869.00
+                                                            @string.Format("{0:C}", dues.TotalAmount)
                                                         </td>
                                                         <td class="py-2 text-end">
-                                                            <button class="js-pop-btn text-link" aria-controls="dues@(i)">View/Print</button>
+                                                            <button class="js-pop-btn text-link" aria-controls="dues@(dues.Id)">View/Print</button>
                                                         </td>
                                                     </tr>
                                                 }
@@ -233,18 +233,18 @@
                                         </table>
 
                                         <!-- View/Print Modals -->
-                                        @for (var i = 1; i < 4; i++)
+                                        @foreach (var dues in memberDuesHistory)
                                         {
-                                            <div id="dues@(i)" name="dues@(i)" aria-hidden="true" class="js-modal modal bundle-modal">
+                                            <div id="dues@(dues.Id)" name="dues@(dues.Id)" aria-hidden="true" class="js-modal modal bundle-modal">
                                                 <div class="modal__container">
                                                     <div class="modal__header">
-                                                        <button aria-controls="dues@(i)" title="Close Modal" class="js-modal-close btn-close border-0"><i class="fal fa-times"></i></button>
+                                                        <button aria-controls="dues@(dues.Id)" title="Close Modal" class="js-modal-close btn-close border-0"><i class="fal fa-times"></i></button>
                                                     </div>
                                                     <div class="modal__content">
                                                         <div class="printer_area">
-                                                            <p class="h5">REALTORS® Association of @i Lorem</p>
-                                                            <p>Dues payment receipt 11/10/2023</p>
-                                                            <div id="dues@(i)" class="modal__content__inner  p-0">
+                                                            <p class="h5">@dues.CompanyName</p>
+                                                            <p>Dues payment receipt @dues.PaidDate.ToString("MM/dd/yyyy")</p>
+                                                            <div id="dues@(dues.Id)" class="modal__content__inner  p-0">
                                                                 <table class="table-info w-100 fs-sm">
                                                                     <thead class="fw-bold border-bottom border-medium">
                                                                         <tr>
@@ -253,17 +253,18 @@
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody style="color: var(--bs-gray-30)" class="text-body">
-                                                                        @for (var ii = 1; ii < 7; ii++)
+                                                                        @foreach (var line in dues.TransactionLineItems)
                                                                         {
                                                                             <tr>
                                                                                 <td class="py-2 text-start">
-                                                                                    Lorem Ipsum
+                                                                                    @line.Description
                                                                                 </td>
                                                                                 <td class="py-2 text-end">
-                                                                                    $@(ii)00.00
+                                                                                    @string.Format("{0:C}", line.Price)
                                                                                 </td>
                                                                             </tr>
                                                                         }
+                                                                        <tr class="visually-hidden"></tr>
                                                                     </tbody>
                                                                     <tfoot class="fw-bold">
                                                                         <tr>
@@ -271,7 +272,7 @@
                                                                                 Total
                                                                             </td>
                                                                             <td class="py-2 text-end">
-                                                                                $XXXX.00
+                                                                                @string.Format("{0:C}", dues.TotalAmount)
                                                                             </td>
                                                                         </tr>
                                                                     </tfoot>
@@ -279,7 +280,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="text-end">
-                                                            <a href="#" onclick="javascript: return false;" data-printid="dues@(i)" class="js-print d-print-none mt-4 btn btn-primary btn-sm">
+                                                            <a href="#" onclick="javascript: return false;" data-printid="dues@(dues.Id)" class="js-print d-print-none mt-4 btn btn-primary btn-sm">
                                                                 Print
                                                             </a>
                                                         </div>
@@ -287,6 +288,7 @@
                                                 </div>
                                             </div>
                                         }
+                                        
                                     </div>
 
                                 </div>

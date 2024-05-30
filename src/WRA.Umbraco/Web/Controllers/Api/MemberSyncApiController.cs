@@ -171,9 +171,13 @@ public class MemberSyncApiController(
 
     [HttpPost]
     [Route("DeleteCompany")]
-    public Task<IActionResult> DeleteCompany(Guid externalId)
+    public Task<IActionResult> DeleteCompany(Guid Id)
     {
-        var result = companyRepository.Delete(externalId);
+        if (Id == Guid.Empty)
+        {
+            return Task.FromResult<IActionResult>(BadRequest());
+        }
+        var result = companyRepository.Delete(Id);
         return result.Success ? Task.FromResult<IActionResult>(Ok()) : Task.FromResult<IActionResult>(InternalServerError());
     }
 
