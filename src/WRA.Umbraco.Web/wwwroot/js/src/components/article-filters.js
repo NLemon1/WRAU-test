@@ -76,23 +76,26 @@ const articleFilters = () => {
 
     const featuredArticleHandler = (activeFeature, hideAll) => {
 
-        const firstCatSlug = featuredArticles[0].dataset.featuredcat;
+        const firstCatSlug = featuredArticles[0]?.dataset.featuredcat;
 
-        featuredArticles.forEach((featuredArticle) => {
+        if (firstCatSlug !== undefined) {
 
-            if (hideAll) {
-                featuredArticle.hidden = true;
-            } else {
+            featuredArticles.forEach((featuredArticle) => {
 
-                const featureCategory = featuredArticle.dataset.featuredcat;
-
-                if ((featureCategory == activeFeature && featureCategory !== "all") || (featureCategory == "all" && activeFeature == "") || activeFeature == "" && featureCategory == firstCatSlug) {
-                    featuredArticle.hidden = false;
-                } else {
+                if (hideAll) {
                     featuredArticle.hidden = true;
+                } else {
+
+                    const featureCategory = featuredArticle.dataset.featuredcat;
+
+                    if ((featureCategory == activeFeature && featureCategory !== "all") || (featureCategory == "all" && activeFeature == "") || activeFeature == "" && featureCategory == firstCatSlug) {
+                        featuredArticle.hidden = false;
+                    } else {
+                        featuredArticle.hidden = true;
+                    }
                 }
-            }
-        })
+            })
+        }
     }
 
     const renderResults = (results) => {
