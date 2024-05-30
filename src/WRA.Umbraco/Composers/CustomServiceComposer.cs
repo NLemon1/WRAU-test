@@ -45,6 +45,7 @@ public class CustomServiceComposer : IComposer
         builder.Services.AddScoped<MemberOrderHistoryService>();
         builder.Services.AddScoped<MemberDonationService>();
         builder.Services.AddScoped<CourseService>();
+        builder.Services.AddScoped<MemberMarketingSubscriptionService>();
 
         // Binds IMember event to APIs member DTO.
         builder.Services.AddScoped<MemberEvent>();

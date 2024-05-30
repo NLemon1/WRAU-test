@@ -26,6 +26,13 @@
       "Alias": "details/options",
       "PropertyTypes": [
         {
+          "Key": "28bd1633-77ec-4529-8136-0daa830279d9",
+          "Alias": "isShippable",
+          "DataType": "umb://data-type/ee32eebc23b34492b6b42476ee5b8720",
+          "Name": "Is Shippable",
+          "SortOrder": 10
+        },
+        {
           "Key": "3b0a7b7c-f4e9-4d61-85bd-69dd493bd37b",
           "Alias": "salesTaxCategoryCode",
           "DataType": "umb://data-type/f0bc4bfbb49940d6ba86058885a5178c",
@@ -210,6 +217,10 @@
     },
     {
       "Udi": "umb://data-type/cd32dc55ada2469db6c629dc907760c9",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/ee32eebc23b34492b6b42476ee5b8720",
       "Ordering": true
     },
     {

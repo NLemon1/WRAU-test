@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace WRA.Umbraco.Web.Dtos.External;
-public class ExternalMemberDonationdDto
+public class ExternalMemberDonationDto
 {
     public string? MemberID { get; set; }
     public int CalendarYear { get; set; }

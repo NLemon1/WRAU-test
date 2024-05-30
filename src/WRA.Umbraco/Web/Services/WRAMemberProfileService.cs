@@ -30,14 +30,14 @@ public class MemberDonationService
         _logger = logger;
     }
 
-    public async Task<List<ExternalMemberDonationdDto>> GetMemberDonations(string externalMemberID)
+    public async Task<List<ExternalMemberDonationDto>> GetMemberDonations(string externalMemberID)
     {
         try
         {
             var memberDonationResponse = await _externalServiceClient.GetMemberDonations(externalMemberID);
-            if (memberDonationResponse.Content == null) return new List<ExternalMemberDonationdDto>();
+            if (memberDonationResponse.Content == null) return new List<ExternalMemberDonationDto>();
             var memberDonations =
-                JsonSerializer.Deserialize<List<ExternalMemberDonationdDto>>(
+                JsonSerializer.Deserialize<List<ExternalMemberDonationDto>>(
                     memberDonationResponse.Content,
                     SerializationOptions);
             return memberDonations;
@@ -45,7 +45,7 @@ public class MemberDonationService
         catch (Exception ex)
         {
             _logger.LogError(ex, "Failed to fetch member donations.");
-            return new List<ExternalMemberDonationdDto>();
+            return new List<ExternalMemberDonationDto>();
         }
     }
 }

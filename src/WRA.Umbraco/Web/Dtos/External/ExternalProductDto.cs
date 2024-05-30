@@ -87,4 +87,7 @@ public class ExternalProductDto
 
     [JsonPropertyName("salesTaxCategoryCode")]
     public string? salesTaxCategoryCode { get; set; }
+
+    [JsonPropertyName("isShippable")]
+    public bool IsShippable { get; set; }
 }

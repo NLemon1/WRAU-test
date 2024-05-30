@@ -3,6 +3,7 @@
 @using Umbraco.Cms.Core.Security
 @using WRA.Umbraco.Helpers.Constants
 @using WRA.Umbraco.Web.Controllers.MyWRA
+@using WRA.Umbraco.Web.Dtos.MyWRA
 @using WRA.Umbraco.Web.Services
 
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<WRA.Umbraco.Models.MywraProfile>
@@ -10,20 +11,21 @@
 @inject MemberDonationService _memberDonationService
 
 @{
-    Layout = "~/Views/_Layout.cshtml";
-    var content = (ContentModels.MywraProfile)Model;
-    var memberUpdateModel = Model.EditableMember;
+	Layout = "~/Views/_Layout.cshtml";
+	var content = (ContentModels.MywraProfile)Model;
+	var memberUpdateModel = Model.EditableMember;
+	var emailSubscriptionUpdateModel = Model.EmailPreferences;
+	var magazineSubscriptionUpdateModel = Model.MagazinePreferences;
 
-    // get current member
-    var currentMemberQuery = await _memberManager.GetCurrentMemberAsync();
-    // cast it to a published contnet type
-    var currentMember = _memberManager.AsPublishedMember(currentMemberQuery);
-    // pass this type to the constructor of the strongly typed member model
-    var member = new ContentModels.Member(currentMember, new NoopPublishedValueFallback());
+	// get current member
+	var currentMemberQuery = await _memberManager.GetCurrentMemberAsync();
+	// cast it to a published contnet type
+	var currentMember = _memberManager.AsPublishedMember(currentMemberQuery);
+	// pass this type to the constructor of the strongly typed member model
+	var member = new ContentModels.Member(currentMember, new NoopPublishedValueFallback());
 
-    var memberExternalId = member?.ExternalId;
-    var memberDonationQuery = await _memberDonationService.GetMemberDonations(memberExternalId);
-
+	var memberExternalId = member?.ExternalId;
+	var memberDonationQuery = content.MemberDonations;
 }
 
 
@@ -611,23 +613,24 @@
                                                     @Html.Raw(content.WRemagazineContent)
                                                 </div>
                                             }
-                                            <div class="form-group">
-                                                <div class="d-flex flex-row mb-3">
-                                                    <input id="wranews" class="form-check-input" type="checkbox">
-                                                    <div class="ps-2">
-                                                        <label for="wranews" class="form-check-label fw-bold">WRA News Email</label>
-                                                        <p>Receive the WRA Real Estate News weekly email notifying you when the magazine is online.</p>
-                                                    </div>
-                                                </div>
-                                                <div class="d-flex flex-row">
-                                                    <input id="wranews" class="form-check-input" type="checkbox">
-                                                    <div class="ps-2">
-                                                        <label for="wranews" class="form-check-label fw-bold">WRA News Email</label>
-                                                        <p>Receive the WRA Real Estate News weekly email notifying you when the magazine is online.</p>
-                                                    </div>
-                                                </div>
-                                                <button class="btn btn-primary btn-sm mt-3">Save Preferences</button>
-                                            </div>
+											@using (Html.BeginUmbracoForm<MemberMarketingSubscriptionEditSurfaceController>(nameof(MemberMarketingSubscriptionEditSurfaceController.HandleMemberMarketingSubscriptionEdit)))
+											{
+											@for (int i = 0; i < magazineSubscriptionUpdateModel.Count; i++)
+											{
+												<div class="form-group">
+													<div class="d-flex flex-row mb-3">
+															<input asp-for=@magazineSubscriptionUpdateModel[@i].SubscriptionID type="hidden" />
+															<input asp-for=@magazineSubscriptionUpdateModel[@i].PreviousValue type="hidden" />
+															<input asp-for=@magazineSubscriptionUpdateModel[@i].IsActive class="form-check-input" type="checkbox">
+														<div class="ps-2">
+																<label for="wranews" class="form-check-label fw-bold">@magazineSubscriptionUpdateModel[@i].SubscriptionName</label>
+																<p>@magazineSubscriptionUpdateModel[@i].Description</p>
+														</div>
+													</div>
+													<button class="btn btn-primary btn-sm mt-3">Save Preferences</button>
+												</div>
+											}
+											}
                                         </div>
 
                                         <h4 class="h5">Email Newsletters</h4>
@@ -644,20 +647,25 @@
                                                     @Html.Raw(content.EmailNewslettersContent)
                                                 </div>
                                             }
+											@using (Html.BeginUmbracoForm<MemberMarketingSubscriptionEditSurfaceController>(nameof(MemberMarketingSubscriptionEditSurfaceController.HandleMemberMarketingSubscriptionEdit)))
+											{
                                             <div class="form-group">
-                                                @for (var i = 1; i < 8; i++)
+													@for (var i = 1; i < emailSubscriptionUpdateModel.Count; i++)
                                                 {
                                                     <div class="d-flex flex-row mb-3">
-                                                        <input id="email@(i)" class="form-check-input" type="checkbox">
+															<input asp-for=@emailSubscriptionUpdateModel[@i].SubscriptionID type="hidden" />
+															<input asp-for=@emailSubscriptionUpdateModel[@i].PreviousValue type="hidden" />
+															<input asp-for=@emailSubscriptionUpdateModel[@i].IsActive class="form-check-input" type="checkbox">
                                                         <div class="ps-2">
-                                                            <label for="email@(i)" class="form-check-label fw-bold">Lorem Ipsum (weekly)</label>
-                                                            <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+																<label asp-for="@emailSubscriptionUpdateModel[@i].SubscriptionName" class="form-check-label fw-bold">@emailSubscriptionUpdateModel[@i].SubscriptionName</label>
+																<p class="mb-0">@emailSubscriptionUpdateModel[i].Description</p>
                                                             <p><a href="/">See Sample</a></p>
                                                         </div>
                                                     </div>
                                                 }
                                                 <button class="btn btn-primary btn-sm mt-3">Save Preferences</button>
                                             </div>
+											}
                                         </div>
                                     </div>
                                 </div>

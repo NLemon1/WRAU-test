@@ -289,4 +289,41 @@ public class WraExternalApiService(WraExternalApiSettings settings)
             throw e;
         }
     }
+
+    public async Task<RestResponse> GetMemberMarketingSubscriptions(string id)
+    {
+        try
+        {
+            var options = new RestClientOptions(settings.VersionedBaseUrl);
+            var client = new RestClient(options);
+            var request = new RestRequest("membermarketingsubscription/" + id);
+            request.AddHeader(settings.ApiKeyHeader, settings.ApiKey);
+            var response = await client.GetAsync(request);
+
+            return response;
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+    }
+
+    public async Task<RestResponse> UpdateMemberMarketingSubscription(string memberMarketingSubscriptionID, bool isActive)
+    {
+        try
+        {
+            var options = new RestClientOptions(settings.VersionedBaseUrl);
+            var client = new RestClient(options);
+            var request = new RestRequest("membermarketingsubscription", Method.Post);
+            var json = new { id = memberMarketingSubscriptionID, isActive = isActive };
+            request.AddBody(JsonConvert.SerializeObject(json));
+            var response = await client.PostAsync(request);
+
+            return response;
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+    }
 }

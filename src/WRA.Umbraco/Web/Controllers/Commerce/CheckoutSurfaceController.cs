@@ -100,6 +100,7 @@ public class CheckoutSurfaceController(
                 });
                 if (model.ShippingAddress != null)
                 {
+                    
                     // set shipping info
                     order.SetProperties(OrderPropertyHelper.BuildShippingInfo(model.ShippingAddress));
                     order.SetShippingCountryRegion(model.ShippingAddress.Country, null);
