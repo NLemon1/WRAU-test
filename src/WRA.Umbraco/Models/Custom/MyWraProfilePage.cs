@@ -15,4 +15,5 @@ public partial class MywraProfile
     public List<ExternalMemberDonationDto> MemberDonations { get; set; }
     public List<MemberMarketingSubscriptionPreferenceDto>? MagazinePreferences { get; set; }
     public List<MemberMarketingSubscriptionPreferenceDto>? EmailPreferences { get; set; }
+    public List<MemberCommitteeDto> MemberCommittees { get; set; }
 }

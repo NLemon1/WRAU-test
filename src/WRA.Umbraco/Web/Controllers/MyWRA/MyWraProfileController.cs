@@ -22,7 +22,8 @@ public class MyWraProfileController(
     IPublishedValueFallback publishedValueFallback,
     IUmbracoMapper mapper,
     MemberDonationService memberDonationService,
-    MemberMarketingSubscriptionService memberMarketingSubscriptionService)
+    MemberMarketingSubscriptionService memberMarketingSubscriptionService,
+    MemberCommitteesService memberCommitteesService)
     : RenderController(logger, compositeViewEngine, umbracoContextAccessor)
 {
 
@@ -43,6 +44,8 @@ public override IActionResult Index()
                 var preferences = GetMemberMarketingSubscriptions(externalId);
                 viewModel.MagazinePreferences = preferences.MagazinePreferences;
                 viewModel.EmailPreferences = preferences.EmailPreferences;
+
+                viewModel.MemberCommittees = GetMemberCommittees(externalId);
             }
 
             // set editable member
@@ -85,6 +88,29 @@ private MemberMarketingSubscriptionPreferencesDto GetMemberMarketingSubscription
         }
         return results;
 
+    }
+
+private List<MemberCommitteeDto> GetMemberCommittees(string externalId)
+    {
+        var results = new List<MemberCommitteeDto>();
+        var memberCommittees = memberCommitteesService.GetMemberCommittees(externalId).GetAwaiter().GetResult();
+        if (memberCommittees != null && memberCommittees.Any())
+        {
+            foreach (var committee in memberCommittees)
+            {
+                foreach (var position in committee.CommitteeTerms)
+                {
+                    var committeePosition = new MemberCommitteeDto();
+                    committeePosition.FromYear = position.CommitteeTerm.Split('-').First();
+                    committeePosition.ToYear = position.CommitteeTerm.Split('-').Last();
+                    committeePosition.Name = committee.CommitteeName;
+                    committeePosition.Title = position.PositionName;
+                    results.Add(committeePosition);
+                }
+            }
+        }
+        results = results.OrderByDescending(x => x.ToYear).ToList();
+        return results;
     }
 }
 
