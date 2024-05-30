@@ -6965,6 +6965,7 @@
     const yearFilter = document.querySelector(".js-legal-update-library-year-filter");
     const mobileTopicFilter = document.querySelector(".js-legal-update-library-mobile-topic-filter");
     const topicFilters = document.querySelectorAll(".js-legal-update-library-topic-filter");
+    const resetTopicsBtn = document.querySelector(".js-legal-update-library-reset-topics");
     let selectedYear = params.has("year") ? params.get("year") : "";
     let selectedTopic = params.has("topic") ? [params.get("topic")] : [];
     const paginationContainer = document.querySelector(".js-legal-update-library-list-pagination");
@@ -7064,10 +7065,11 @@
       mobileTopicFilter.addEventListener("change", (e) => {
         if (e.target.value === "") {
           params.delete("topic");
+          selectedTopic = [];
         } else {
           params.set("topic", e.target.value);
+          selectedTopic = [e.target.value];
         }
-        selectedTopic = [e.target.value];
         window.history.pushState({ path: window.location.pathname + "?" + params.toString() }, "", window.location.pathname + "?" + params.toString());
         getResults();
       });
@@ -7075,10 +7077,20 @@
         filter.addEventListener("change", (e) => {
           if (e.target.value === "") {
             params.delete("topic");
+            selectedTopic = [];
           } else {
             params.set("topic", e.target.value);
+            selectedTopic = [e.target.value];
           }
-          selectedTopic = [e.target.value];
+          window.history.pushState({ path: window.location.pathname + "?" + params.toString() }, "", window.location.pathname + "?" + params.toString());
+          getResults();
+        });
+      });
+      resetTopicsBtn.addEventListener("click", (e) => {
+        topicFilters.forEach((filter) => {
+          filter.checked = false;
+          params.delete("topic");
+          selectedTopic = [];
           window.history.pushState({ path: window.location.pathname + "?" + params.toString() }, "", window.location.pathname + "?" + params.toString());
           getResults();
         });
