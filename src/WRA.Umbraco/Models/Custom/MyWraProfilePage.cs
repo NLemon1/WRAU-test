@@ -13,6 +13,6 @@ public partial class MywraProfile
     public bool IsMember { get; set; }
     public EditMemberDto? EditableMember { get; set; }
     public List<ExternalMemberDonationDto> MemberDonations { get; set; }
-    public List<MemberMarketingSubscriptionPreferenceDto> MagazinePreferences { get; set; }
-    public List<MemberMarketingSubscriptionPreferenceDto> EmailPreferences { get; set; }
+    public List<MemberMarketingSubscriptionPreferenceDto>? MagazinePreferences { get; set; }
+    public List<MemberMarketingSubscriptionPreferenceDto>? EmailPreferences { get; set; }
 }

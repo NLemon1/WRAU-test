@@ -14,9 +14,9 @@ public class MemberMarketingSubscriptionPreferencesDto
 
 public class MemberMarketingSubscriptionPreferenceDto
 {
-    public string SubscriptionID { get; set; }
-    public string SubscriptionName { get; set; }
+    public string? SubscriptionID { get; set; }
+    public string? SubscriptionName { get; set; }
     public bool IsActive { get; set; }
     public bool PreviousValue { get; set; }
-    public string Description { get; set; }
+    public string? Description { get; set; }
 }

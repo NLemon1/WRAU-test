@@ -39,7 +39,7 @@ public class MemberMarketingSubscriptionEditSurfaceController(
     [HttpPost]
     [ValidateAntiForgeryToken]
     [ValidateUmbracoFormRouteString]
-    public async Task<IActionResult> HandleMemberMarketingSubscriptionEdit([Bind(Prefix = "emailSubscriptionUpdateModel")] IEnumerable<MemberMarketingSubscriptionPreferenceDto> preferences)
+    public async Task<IActionResult> HandleMemberMarketingEmailSubscriptionEdit([Bind(Prefix = "emailSubscriptionUpdateModel")] IEnumerable<MemberMarketingSubscriptionPreferenceDto>? emailSubscriptionUpdateModel)
     {
         try
         {
@@ -47,16 +47,45 @@ public class MemberMarketingSubscriptionEditSurfaceController(
             var queryString = QueryString.Create("#", paramValue);
             if (!ModelState.IsValid)
             {
-                return RedirectToCurrentUmbracoPage(queryString);
+                return Redirect("/mywra/profile#tabpanel-subscriptions");
             }
 
-            foreach(var subscriptionToUpdate in preferences.Where(m => m.IsActive != m.PreviousValue))
+            foreach(var subscriptionToUpdate in emailSubscriptionUpdateModel.Where(m => m.IsActive != m.PreviousValue))
             {
                 // Update magazine subscription
                 memberMarketingSubscriptionService.UpdateMarketingSubscription(subscriptionToUpdate);
             }
 
-            return RedirectToCurrentUmbracoPage(queryString);
+            return Redirect("/mywra/profile#tabpanel-subscriptions");
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    [ValidateUmbracoFormRouteString]
+    public async Task<IActionResult> HandleMemberMarketingMagazineSubscriptionEdit([Bind(Prefix = "magazineSubscriptionUpdateModel")] IEnumerable<MemberMarketingSubscriptionPreferenceDto>? magazineSubscriptionUpdateModel)
+    {
+        try
+        {
+            var paramValue = "tabpanel-subscriptions";
+            var queryString = QueryString.Create("#", paramValue);
+            if (!ModelState.IsValid)
+            {
+                return Redirect("/mywra/profile#tabpanel-subscriptions");
+            }
+
+            foreach (var subscriptionToUpdate in magazineSubscriptionUpdateModel.Where(m => m.IsActive != m.PreviousValue))
+            {
+                // Update magazine subscription
+                memberMarketingSubscriptionService.UpdateMarketingSubscription(subscriptionToUpdate);
+            }
+
+            return Redirect("/mywra/profile#tabpanel-subscriptions");
         }
         catch (Exception e)
         {

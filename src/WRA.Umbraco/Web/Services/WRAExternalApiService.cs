@@ -316,6 +316,7 @@ public class WraExternalApiService(WraExternalApiSettings settings)
             var client = new RestClient(options);
             var request = new RestRequest("membermarketingsubscription", Method.Post);
             var json = new { id = memberMarketingSubscriptionID, isActive = isActive };
+            request.AddHeader(settings.ApiKeyHeader, settings.ApiKey);
             request.AddBody(JsonConvert.SerializeObject(json));
             var response = await client.PostAsync(request);
 

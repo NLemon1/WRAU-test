@@ -613,7 +613,7 @@
                                                     @Html.Raw(content.WRemagazineContent)
                                                 </div>
                                             }
-											@using (Html.BeginUmbracoForm<MemberMarketingSubscriptionEditSurfaceController>(nameof(MemberMarketingSubscriptionEditSurfaceController.HandleMemberMarketingSubscriptionEdit)))
+											@using (Html.BeginUmbracoForm<MemberMarketingSubscriptionEditSurfaceController>(nameof(MemberMarketingSubscriptionEditSurfaceController.HandleMemberMarketingMagazineSubscriptionEdit)))
 											{
 											@for (int i = 0; i < magazineSubscriptionUpdateModel.Count; i++)
 											{
@@ -647,10 +647,10 @@
                                                     @Html.Raw(content.EmailNewslettersContent)
                                                 </div>
                                             }
-											@using (Html.BeginUmbracoForm<MemberMarketingSubscriptionEditSurfaceController>(nameof(MemberMarketingSubscriptionEditSurfaceController.HandleMemberMarketingSubscriptionEdit)))
+											@using (Html.BeginUmbracoForm<MemberMarketingSubscriptionEditSurfaceController>(nameof(MemberMarketingSubscriptionEditSurfaceController.HandleMemberMarketingEmailSubscriptionEdit)))
 											{
                                             <div class="form-group">
-													@for (var i = 1; i < emailSubscriptionUpdateModel.Count; i++)
+													@for (var i = 0; i < emailSubscriptionUpdateModel.Count; i++)
                                                 {
                                                     <div class="d-flex flex-row mb-3">
 															<input asp-for=@emailSubscriptionUpdateModel[@i].SubscriptionID type="hidden" />

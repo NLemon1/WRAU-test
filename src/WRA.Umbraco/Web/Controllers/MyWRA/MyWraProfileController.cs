@@ -68,9 +68,10 @@ private MemberMarketingSubscriptionPreferencesDto GetMemberMarketingSubscription
             {
                 var marketingSubscription = new MemberMarketingSubscriptionPreferenceDto();
                 marketingSubscription.IsActive = subscription.IsActive;
-                marketingSubscription.SubscriptionID = subscription.MarketingSubscriptionID;
+                marketingSubscription.SubscriptionID = subscription.ID;
                 marketingSubscription.Description = subscription.Description;
                 marketingSubscription.PreviousValue = subscription.IsActive;
+                marketingSubscription.SubscriptionName = subscription.Name;
                 if (subscription.SourceSystem == "Hubspot")
                 {
                     results.EmailPreferences.Add(marketingSubscription);
