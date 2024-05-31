@@ -655,21 +655,21 @@
                                             }
 											@using (Html.BeginUmbracoForm<MemberMarketingSubscriptionEditSurfaceController>(nameof(MemberMarketingSubscriptionEditSurfaceController.HandleMemberMarketingMagazineSubscriptionEdit)))
 											{
-											@for (int i = 0; i < magazineSubscriptionUpdateModel.Count; i++)
-											{
-												<div class="form-group">
-													<div class="d-flex flex-row mb-3">
-															<input asp-for=@magazineSubscriptionUpdateModel[@i].SubscriptionID type="hidden" />
-															<input asp-for=@magazineSubscriptionUpdateModel[@i].PreviousValue type="hidden" />
-															<input asp-for=@magazineSubscriptionUpdateModel[@i].IsActive class="form-check-input" type="checkbox">
-														<div class="ps-2">
-																<label for="wranews" class="form-check-label fw-bold">@magazineSubscriptionUpdateModel[@i].SubscriptionName</label>
-																<p>@magazineSubscriptionUpdateModel[@i].Description</p>
-														</div>
-													</div>
-													<button class="btn btn-primary btn-sm mt-3">Save Preferences</button>
-												</div>
-											}
+											    @for (int i = 0; i < magazineSubscriptionUpdateModel.Count; i++)
+											    {
+												    <div class="form-group">
+													    <div class="d-flex flex-row mb-3">
+														    <input asp-for=@magazineSubscriptionUpdateModel[@i].SubscriptionID type="hidden" />
+														    <input asp-for=@magazineSubscriptionUpdateModel[@i].PreviousValue type="hidden" />
+														    <input asp-for=@magazineSubscriptionUpdateModel[@i].IsActive class="form-check-input" type="checkbox">
+														    <div class="ps-2">
+															    <label for="wranews" class="form-check-label fw-bold">@magazineSubscriptionUpdateModel[@i].SubscriptionName</label>
+															    <p>@magazineSubscriptionUpdateModel[@i].Description</p>
+														    </div>
+													    </div>
+													    <button class="btn btn-primary btn-sm mt-3">Save Preferences</button>
+												    </div>
+											    }
 											}
                                         </div>
 
@@ -690,16 +690,16 @@
 											@using (Html.BeginUmbracoForm<MemberMarketingSubscriptionEditSurfaceController>(nameof(MemberMarketingSubscriptionEditSurfaceController.HandleMemberMarketingEmailSubscriptionEdit)))
 											{
                                             <div class="form-group">
-													@for (var i = 0; i < emailSubscriptionUpdateModel.Count; i++)
+												@for (var i = 0; i < emailSubscriptionUpdateModel.Count; i++)
                                                 {
                                                     <div class="d-flex flex-row mb-3">
-															<input asp-for=@emailSubscriptionUpdateModel[@i].SubscriptionID type="hidden" />
-															<input asp-for=@emailSubscriptionUpdateModel[@i].PreviousValue type="hidden" />
-															<input asp-for=@emailSubscriptionUpdateModel[@i].IsActive class="form-check-input" type="checkbox">
+														<input asp-for=@emailSubscriptionUpdateModel[@i].SubscriptionID type="hidden" />
+														<input asp-for=@emailSubscriptionUpdateModel[@i].PreviousValue type="hidden" />
+                                                        <input asp-for=@emailSubscriptionUpdateModel[@i].IsActive class="form-check-input" type="checkbox">
                                                         <div class="ps-2">
-																<label asp-for="@emailSubscriptionUpdateModel[@i].SubscriptionName" class="form-check-label fw-bold">@emailSubscriptionUpdateModel[@i].SubscriptionName</label>
-																<p class="mb-0">@emailSubscriptionUpdateModel[i].Description</p>
-                                                            <p><a href="/">See Sample</a></p>
+                                                            <label asp-for=@emailSubscriptionUpdateModel[@i].IsActive class="form-check-label fw-bold">@emailSubscriptionUpdateModel[@i].SubscriptionName</label>
+															<p class="mb-0">@emailSubscriptionUpdateModel[i].Description</p>
+                                                            @* <p><a href="/">See Sample</a></p> *@
                                                         </div>
                                                     </div>
                                                 }
