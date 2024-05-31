@@ -447,6 +447,44 @@
                                                 @Html.Raw(content.CommitteesIntroContent)
                                             </div>
                                         }
+
+                                        <h3 class="h5 mt-4 mb-3 text-normal">@member.FirstName's Committee Information</h3>
+                                        <div class="w-100 border border-medium rounded mb-5">
+                                            @if (memberCommittees.Any())
+                                            {
+                                                <table class="table-info w-100 fs-sm overflow-hidden">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="py-2" style="background-color: var(--bs-gray-10)">Committee Name</th>
+                                                            <th class="py-2" style="background-color: var(--bs-gray-10)">Service Term</th>
+                                                            <th class="py-2" style="background-color: var(--bs-gray-10)">Position</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody style="color: var(--bs-gray-30)">
+                                                        @foreach (var committee in memberCommittees)
+                                                        {
+                                                            <tr>
+                                                                <td class="py-2 text-body">
+                                                                    @committee.Name
+                                                                </td>
+                                                                <td class="py-2 text-body">
+                                                                    @committee.FromYear &ndash; @committee.ToYear
+                                                                </td>
+                                                                <td class="py-2 text-body">
+                                                                    @committee.Title
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            }
+                                            else
+                                            {
+                                                <p class="p-4 fst-italic">
+                                                    You do not belong to any committees.
+                                                </p>
+                                            }
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -34,8 +34,7 @@
           "Key": "6bdaf55c-84a8-4df9-87e8-9d46c3374096",
           "Alias": "emailNewslettersContent",
           "DataType": "umb://data-type/ca90c9500aff4e72b976a30b1ac57dad",
-          "Name": "Email Newsletters Content",
-          "SortOrder": 1
+          "Name": "Email Newsletters Content"
         }
       ]
     },
@@ -76,15 +75,13 @@
           "Key": "b5def13e-412e-46ed-857b-98b670882122",
           "Alias": "inmanButton",
           "DataType": "umb://data-type/094ea51013be4f358f03687f54bb9ba2",
-          "Name": "Inman Button",
-          "SortOrder": 1
+          "Name": "Inman Button"
         },
         {
           "Key": "f30f22ae-c837-4693-8697-b120e8328409",
           "Alias": "inmanHeadline",
           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
-          "Name": "InmanHeadline",
-          "SortOrder": 2
+          "Name": "InmanHeadline"
         }
       ]
     },
@@ -104,8 +101,7 @@
           "Key": "c1e73e18-9621-4d32-9af7-aeb6d877465a",
           "Alias": "wREMagazineContent",
           "DataType": "umb://data-type/ca90c9500aff4e72b976a30b1ac57dad",
-          "Name": "WRE Magazine Content",
-          "SortOrder": 1
+          "Name": "WRE Magazine Content"
         }
       ]
     },
@@ -183,15 +179,13 @@
           "Key": "bd24a969-2c56-4ff4-9a68-2f35bebfc52f",
           "Alias": "directGiverButton",
           "DataType": "umb://data-type/094ea51013be4f358f03687f54bb9ba2",
-          "Name": "DirectGiver Button",
-          "SortOrder": 2
+          "Name": "DirectGiver Button"
         },
         {
           "Key": "d0d8ddc9-5ef0-4e2d-9a5c-64246948f0a9",
           "Alias": "contributionsHeadline",
           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
-          "Name": "Contributions Headline",
-          "SortOrder": 3
+          "Name": "Contributions Headline"
         }
       ]
     }

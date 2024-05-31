@@ -16,7 +16,6 @@
     // pass this type to the constructor of the strongly typed member model
     var member = new ContentModels.Member(currentMember, new NoopPublishedValueFallback());
 
-    var memberExternalId = member?.ExternalId;
     var memberDuesQuery = content.MemberDues;
     var memberDuesHistory = memberDuesQuery?.HistoricalPayments;
 }
@@ -173,7 +172,6 @@
                                         </table>
                                     </div>
 
-
                                 </div>
                             </div>
                         </div>
@@ -296,9 +294,6 @@
                         </div>
                     </div>
                 </div>
-
-
-
 
             </div>
 
