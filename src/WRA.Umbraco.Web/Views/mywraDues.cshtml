@@ -6,6 +6,7 @@
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<WRA.Umbraco.Models.MywraDues>
 @inject IMemberManager _memberManager
 
+
 @{
     Layout = "~/Views/_Layout.cshtml";
     var content = (ContentModels.MywraDues)Model;
@@ -18,8 +19,9 @@
 
     var memberDuesQuery = content.MemberDues;
     var memberDuesHistory = memberDuesQuery?.HistoricalPayments;
-}
+    var memberBoard = memberDuesQuery.PaymentStrategy;
 
+}
 
 <div class="w-100">
     <div class="row g-0">
@@ -104,7 +106,7 @@
 
                                                 @if (groupFooterText.HasValue())
                                                 {
-                                                    <small class="d-block fw-bold fs-xs mt-3">Note: NAR only accepts Visa and Mastercard</small>
+                                                    <small class="d-block fw-bold fs-xs mt-3">@groupFooterText.GetValue()</small>
                                                 }
                                             </div>
                                         }
@@ -125,7 +127,7 @@
                                                         Name
                                                     </td>
                                                     <td class="py-2 text-body">
-                                                        Individual Board Members
+                                                        @memberBoard.LocalBoard
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -133,7 +135,7 @@
                                                         Address
                                                     </td>
                                                     <td class="py-2 text-body">
-                                                        4801 Forest Run RdMadison, WI 53704-7411
+                                                        (XXX) XXX-XXXXX
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -141,7 +143,7 @@
                                                         Phone
                                                     </td>
                                                     <td class="py-2 text-body">
-                                                        (608) 241-2047
+                                                        @memberBoard.LocalBoardPhone
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -149,7 +151,7 @@
                                                         Fax
                                                     </td>
                                                     <td class="py-2 text-body">
-                                                        (608) 241-2901
+                                                        XXX-XXX-XXXX
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -157,7 +159,7 @@
                                                         Email
                                                     </td>
                                                     <td class="py-2 text-body">
-                                                        lan@wra.org
+                                                        @memberBoard.LocalBoardEmail
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -165,7 +167,7 @@
                                                         Website
                                                     </td>
                                                     <td class="py-2 text-body">
-                                                        www.wra.org
+                                                        @memberBoard.LocalBoardWebsite
                                                     </td>
                                                 </tr>
                                             </tbody>
