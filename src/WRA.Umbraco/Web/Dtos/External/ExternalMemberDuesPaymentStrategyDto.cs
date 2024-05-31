@@ -16,6 +16,13 @@ public class ExternalMemberDuesPaymentStrategyDto
     public string? LocalBoardEmail { get; set; }
     public string? LocalBoardPhone { get; set; }
     public string? LocalBoardWebsite { get; set; }
+    public string? LocalBoardFullAddress { get; set; }
+    public string? LocalBoardAddressLine1 { get; set; }
+    public string? LocalBoardAddressLine2 { get; set; }
+    public string? LocalBoardCity { get; set; }
+    public string? LocalBoardState { get; set; }
+    public string? LocalBoardZip { get; set; }
+
     [Ignore]
     public string PaymentStrategy
     {

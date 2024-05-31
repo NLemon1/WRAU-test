@@ -34,15 +34,13 @@
           "Key": "6dc3c3c7-0c3c-414c-8741-16b915da6555",
           "Alias": "zipFormContent",
           "DataType": "umb://data-type/ca90c9500aff4e72b976a30b1ac57dad",
-          "Name": "Zip Form Content",
-          "SortOrder": 1
+          "Name": "Zip Form Content"
         },
         {
           "Key": "cacbd82f-01da-4ff3-a49b-4add143cb284",
           "Alias": "zipFormButton",
           "DataType": "umb://data-type/094ea51013be4f358f03687f54bb9ba2",
-          "Name": "Zip Form Button",
-          "SortOrder": 2
+          "Name": "Zip Form Button"
         }
       ]
     },
@@ -111,15 +109,13 @@
           "Key": "c0b7c688-d951-4e44-b4d4-75dfba64303d",
           "Alias": "formsLibraryContent",
           "DataType": "umb://data-type/ca90c9500aff4e72b976a30b1ac57dad",
-          "Name": "Forms Library Content",
-          "SortOrder": 1
+          "Name": "Forms Library Content"
         },
         {
           "Key": "d7956aac-f736-489b-8b6a-ebe08c172753",
           "Alias": "formsLibraryHeadline",
           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
-          "Name": "Forms Library Headline",
-          "SortOrder": 2
+          "Name": "Forms Library Headline"
         }
       ]
     }
