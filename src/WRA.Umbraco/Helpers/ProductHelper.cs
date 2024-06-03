@@ -50,6 +50,10 @@ public class ProductHelper(
         var (categories, subCategories) = GetCategories(
             productEvent.ProductCategoryId.SafeGuid(),
             productEvent.ProductSubcategoryId.SafeGuid());
+        if (categories == null || subCategories == null)
+        {
+            logger.LogCritical("Category or Subcategory not found for Product: {Product}.", productEvent.Id);
+        }
 
         // if category exists...
         if (categories != null)

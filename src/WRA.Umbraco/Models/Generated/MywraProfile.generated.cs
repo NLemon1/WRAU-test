@@ -130,6 +130,14 @@ namespace WRA.Umbraco.Models
 		public virtual string InmanHeadline => this.Value<string>(_publishedValueFallback, "inmanHeadline");
 
 		///<summary>
+		/// Password Change Url
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.3.2+696a711")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("passwordChangeUrl")]
+		public virtual global::Umbraco.Cms.Core.Models.Link PasswordChangeUrl => this.Value<global::Umbraco.Cms.Core.Models.Link>(_publishedValueFallback, "passwordChangeUrl");
+
+		///<summary>
 		/// Personal Information Headline
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.3.2+696a711")]
@@ -168,6 +176,14 @@ namespace WRA.Umbraco.Models
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("subscriptionsIntroContent")]
 		public virtual global::Umbraco.Cms.Core.Strings.IHtmlEncodedString SubscriptionsIntroContent => this.Value<global::Umbraco.Cms.Core.Strings.IHtmlEncodedString>(_publishedValueFallback, "subscriptionsIntroContent");
+
+		///<summary>
+		/// Username Change Url
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.3.2+696a711")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("usernameChangeUrl")]
+		public virtual global::Umbraco.Cms.Core.Models.Link UsernameChangeUrl => this.Value<global::Umbraco.Cms.Core.Models.Link>(_publishedValueFallback, "usernameChangeUrl");
 
 		///<summary>
 		/// WRE Magazine Content

@@ -110,6 +110,27 @@
       ]
     },
     {
+      "Key": "a49e1924-70e1-4501-b8cf-5e61788089cd",
+      "Name": "Settings",
+      "SortOrder": 1001,
+      "Alias": "personalInformation/settings",
+      "PropertyTypes": [
+        {
+          "Key": "246b55d3-05a6-44d2-8a92-8af8b9872058",
+          "Alias": "passwordChangeUrl",
+          "DataType": "umb://data-type/094ea51013be4f358f03687f54bb9ba2",
+          "Name": "Password Change Url",
+          "SortOrder": 1
+        },
+        {
+          "Key": "46ac78bf-c820-4bb4-98ed-aa37460e3ebc",
+          "Alias": "usernameChangeUrl",
+          "DataType": "umb://data-type/094ea51013be4f358f03687f54bb9ba2",
+          "Name": "Username Change Url"
+        }
+      ]
+    },
+    {
       "Key": "c7166bca-723d-4dce-a322-d40f3c92db53",
       "Name": "Content",
       "SortOrder": 1000,

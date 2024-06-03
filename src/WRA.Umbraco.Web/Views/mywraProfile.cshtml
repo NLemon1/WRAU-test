@@ -375,49 +375,30 @@
                                                         <tr>
                                                             <th>Item</th>
                                                             <th>Value</th>
-                                                            <th>Edit</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody style="color: var(--bs-gray-30)">
-
-                                                        @* TO DO ?? *@
                                                         <tr>
                                                             <td class="py-2">Security</td>
-                                                            <td class="py-2 text-body" colspan="2">
-                                                                <button class="text-link border-0 bg-transparent px-2 py-2">Change User Name</button><br />
-                                                                <button class="text-link border-0 bg-transparent px-2 py-2">Change Password</button>
+                                                            <td class="py-2 text-body lh-lg">
+                                                                @if (content.HasValue("usernameChangeUrl"))
+                                                                {
+                                                                    <a href="@content.UsernameChangeUrl.Url" target="@(content.UsernameChangeUrl.Target ?? "_blank")" class="text-link border-0 bg-transparent px-2 py-2">@(content.UsernameChangeUrl.Name ?? "Change User Name")</a>
+                                                                    <br />
+                                                                }
+                                                                @if (content.HasValue("passwordChangeUrl"))
+                                                                {
+                                                                    <a href="@content.PasswordChangeUrl.Url" target="@(content.PasswordChangeUrl.Target ?? "_blank")" class="text-link border-0 bg-transparent px-2 py-2">@(content.PasswordChangeUrl.Name ?? "Change Password")</a>
+                                                                }
                                                             </td>
                                                         </tr>
-
                                                         <tr>
                                                             <td class="py-2">Email</td>
                                                             <td class="py-2 text-body">@memberUpdateModel.Email</td>
-                                                            <td class="py-2 text-end">
-                                                                <div id="info_@memberUpdateModel.Email" class="js-dialog dialog-container" aria-hidden="true">
-                                                                    <div class="dialog-overlay" data-a11y-dialog-hide></div>
-                                                                    <div class="dialog-content-wrapper" style="max-width: 550px; max-height: 75vh;" role="document">
-                                                                        <div class="dialog-content-header p-1 justify-content-end rounded-top" style="background-color: var(--bs-gray-10)">
-                                                                            <h4 class="h4 mb-0 visually-hidden">Edit</h4>
-                                                                            <button onclick="return false;" type="button" data-a11y-dialog-hide aria-label="Close dialog">
-                                                                                &times;
-                                                                            </button>
-                                                                        </div>
-                                                                        <div class="dialog-content px-5 py-3 fs-sm">
-                                                                            <div class="d-flex flex-row justify-content-between mb-3">
-                                                                                <label asp-for="@memberUpdateModel.Email" class="text-body"></label>
-                                                                                <input asp-for=@memberUpdateModel.Email required />
-                                                                            </div>
-                                                                            <button type="submit" class="btn btn-primary btn-sm">Save</button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <button class="text-link border-0 bg-transparent px-2 py-2" onclick="return false;" data-a11y-dialog-show="info_@memberUpdateModel.Email">Edit</button>
-                                                            </td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
                                             </div>
-
                                         }
                                     </div>
                                 </div>
