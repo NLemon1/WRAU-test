@@ -122,6 +122,8 @@
                                                 </tr>
                                             </thead>
                                             <tbody style="color: var(--bs-gray-30)">
+                                                @if (!String.IsNullOrEmpty(memberBoard.LocalBoard))
+                                                {
                                                 <tr>
                                                     <td class="py-2">
                                                         Name
@@ -130,46 +132,51 @@
                                                         @memberBoard.LocalBoard
                                                     </td>
                                                 </tr>
+                                                }
+                                                @if (!String.IsNullOrEmpty(memberBoard.LocalBoardFullAddress))
+                                                {
                                                 <tr>
                                                     <td class="py-2">
                                                         Address
                                                     </td>
                                                     <td class="py-2 text-body">
-                                                        (XXX) XXX-XXXXX
+                                                        @memberBoard.LocalBoardFullAddress
                                                     </td>
                                                 </tr>
-                                                <tr>
-                                                    <td class="py-2">
-                                                        Phone
-                                                    </td>
-                                                    <td class="py-2 text-body">
-                                                        @memberBoard.LocalBoardPhone
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="py-2">
-                                                        Fax
-                                                    </td>
-                                                    <td class="py-2 text-body">
-                                                        XXX-XXX-XXXX
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="py-2">
-                                                        Email
-                                                    </td>
-                                                    <td class="py-2 text-body">
-                                                        @memberBoard.LocalBoardEmail
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="py-2">
-                                                        Website
-                                                    </td>
-                                                    <td class="py-2 text-body">
-                                                        @memberBoard.LocalBoardWebsite
-                                                    </td>
-                                                </tr>
+                                                }
+                                                @if (!String.IsNullOrEmpty(memberBoard.LocalBoardPhone))
+                                                {
+                                                    <tr>
+                                                        <td class="py-2">
+                                                            Phone
+                                                        </td>
+                                                        <td class="py-2 text-body">
+                                                            @memberBoard.LocalBoardPhone
+                                                        </td>
+                                                    </tr>
+                                                }
+                                                @if (!String.IsNullOrEmpty(memberBoard.LocalBoardEmail))
+                                                {
+                                                    <tr>
+                                                        <td class="py-2">
+                                                            Email
+                                                        </td>
+                                                        <td class="py-2 text-body">
+                                                            @memberBoard.LocalBoardEmail
+                                                        </td>
+                                                    </tr>
+                                                }
+                                                @if (!String.IsNullOrEmpty(memberBoard.LocalBoardWebsite))
+                                                {
+                                                    <tr>
+                                                        <td class="py-2">
+                                                            Website
+                                                        </td>
+                                                        <td class="py-2 text-body">
+                                                            @memberBoard.LocalBoardWebsite
+                                                        </td>
+                                                    </tr>
+                                                }
                                             </tbody>
                                         </table>
                                     </div>
