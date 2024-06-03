@@ -7,6 +7,7 @@ using Umbraco.Cms.Core.Web;
 using WRA.Umbraco.Contracts;
 using WRA.Umbraco.Services.Caching;
 using System.Text.Json;
+using Microsoft.Extensions.Logging;
 using Umbraco.Cms.Core.Scoping;
 using Umbraco.Commerce.Core.Models;
 using Umbraco.Commerce.Core.Services;
@@ -25,7 +26,8 @@ public class ProductHelper(
     IUmbracoContextFactory contextFactory,
     IContentService contentService,
     ICurrencyService currencyService,
-    ICoreScopeProvider scopeProvider)
+    ICoreScopeProvider scopeProvider,
+    ILogger<ProductHelper> logger)
 : ContentHelperBase<IContent, ProductEvent>(cacheKeyProvider, appCache)
 {
     private CurrencyReadOnly GetCurrency(Guid storeId) =>
@@ -98,33 +100,57 @@ public class ProductHelper(
 
     private (IPublishedContent? Category, IPublishedContent? SubCategory) GetCategories(Guid categoryId, Guid subCategoryId)
     {
-        var context = contextFactory.EnsureUmbracoContext();
-        var contentCache = context.UmbracoContext.Content;
-        var home = contentCache?.GetAtRoot().FirstOrDefault();
+        try
+        {
+            var context = contextFactory.EnsureUmbracoContext();
+            var contentCache = context.UmbracoContext.Content;
+            var home = contentCache?.GetAtRoot().FirstOrDefault();
 
-        var categoriesPage = home.Children
-            .First(c => c.ContentType.Alias == CategoriesPage.ModelTypeAlias);
+            var categoriesPage = home.Children
+                .First(c => c.ContentType.Alias == CategoriesPage.ModelTypeAlias);
 
-        // get category pages
-        var categoryPages = categoriesPage.Children
-            .Where(c => c.ContentType.Alias == CategoryPage.ModelTypeAlias);
+            // get category pages
+            var categoryPages = categoriesPage.Children
+                .Where(c => c.ContentType.Alias == CategoryPage.ModelTypeAlias);
 
-        var category = categoryPages.First(c =>
-            c.Value<Guid>(GlobalConstants.ExternalId).Equals(categoryId));
+            var category = categoryPages.FirstOrDefault(c =>
+                c.Value<Guid>(GlobalConstants.ExternalId).Equals(categoryId));
+            if (category == null)
+            {
+                logger.LogCritical("Category not found. Category ID {Category}, {SubCategoryID}", categoryId, subCategoryId);
+                return (null, null);
+            }
 
-        // Get Subcategory. Make sure the parent (which should be a category) matches the
-        // category we just got back form the previous query.
-        var subCategory = categoryPages.SelectMany(c => c.Children)
-            .Where(sc =>
-                sc.ContentType.Alias == SubCategoryPage.ModelTypeAlias)
-            .First(x =>
+            // Get Subcategory. Make sure the parent (which should be a category) matches the
+            // category we just got back form the previous query.
+            var subcategoryNode = categoryPages.SelectMany(c => c.Children)
+                .Where(sc => sc.ContentType.Alias == SubCategoryPage.ModelTypeAlias &&
+                             sc.Value<Guid>(GlobalConstants.ExternalId) == subCategoryId );
+
+            if (!subcategoryNode.Any())
+            {
+                logger.LogCritical("No subcategories found. Category ID {Category}, {SubCategoryID}", categoryId, subCategoryId);
+                return (category, null);
+            }
+
+            var subCategory = subcategoryNode.FirstOrDefault(x =>
                 x.Parent != null &&
-                x.Value<Guid>(GlobalConstants.ExternalId) == subCategoryId &&
                 x.Parent.Value<Guid>(GlobalConstants.ExternalId) == categoryId);
 
+            if (!subcategoryNode.Any())
+            {
+                logger.LogCritical("Parent Child mismatch for Category and Subcategory! Category ID {Category}, {SubCategoryID}", categoryId, subCategoryId);
+                return (category, null);
+            }
 
-        // return both.
-        return (category, subCategory);
+            // return both.
+            return (category, subCategory);
+        }
+        catch (Exception e)
+        {
+            logger.LogError(e, "Error getting category. Category ID {Category}, {SubCategoryID}", categoryId, subCategoryId);
+            throw;
+        }
     }
 
 }

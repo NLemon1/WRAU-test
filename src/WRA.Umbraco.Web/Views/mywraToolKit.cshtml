@@ -29,70 +29,79 @@
                         @Html.Raw(content.IntroContent)
                     </div>
                 }
-
-                <div class="border border-medium p-4 rounded mb-5">
-                    @if (!String.IsNullOrEmpty(content.ZipFormHeadline.ToString()))
-                    {
-                        <h4 class="h6 mb-4 fs-lg text-normal">
-                            @Html.Raw(content.ZipFormHeadline)
-                        </h4>
-                    }
-                    @if (!String.IsNullOrEmpty(content.ZipFormContent.ToString()))
-                    {
-                        <div class="rich-text mb-4">
-                            @Html.Raw(content.ZipFormContent)
-                        </div>
-                    }
-                    @{
-                        var zipFormLink = content.Value<Link>("ZipFormButton");
-                    }
-                    @if (zipFormLink != null)
-                    {
-                        <a href="@zipFormLink.Url" class="btn btn-primary" target="@zipFormLink.Target">@zipFormLink.Name</a>
-                    }
-                </div>
-                <div class="border border-medium p-4 rounded mb-5">
-                    @if (!String.IsNullOrEmpty(content.FormsLibraryHeadline.ToString()))
-                    {
-                        <h4 class="h6 mb-4 fs-lg text-normal">
-                            @Html.Raw(content.FormsLibraryHeadline)
-                        </h4>
-                    }
-                    @if (!String.IsNullOrEmpty(content.FormsLibraryContent.ToString()))
-                    {
-                        <div class="rich-text mb-4">
-                            @Html.Raw(content.FormsLibraryContent)
-                        </div>
-                    }
-                    @{
-                        var formsLibraryLink = content.Value<Link>("FormsLibraryButton");
-                    }
-                    @if (formsLibraryLink != null)
-                    {
-                        <a href="@formsLibraryLink.Url" class="btn btn-primary" target="@formsLibraryLink.Target">@formsLibraryLink.Name</a>
-                    }
-                </div>
-                <div class="border border-medium p-4 rounded mb-5">
-                    @if (!String.IsNullOrEmpty(content.LineByLineHeadline.ToString()))
-                    {
-                        <h4 class="h6 mb-4 fs-lg text-normal">
-                            @Html.Raw(content.LineByLineHeadline)
-                        </h4>
-                    }
-                    @if (!String.IsNullOrEmpty(content.LineByLineContent.ToString()))
-                    {
-                        <div class="rich-text mb-4">
-                            @Html.Raw(content.LineByLineContent)
-                        </div>
-                    }
-                    @{
-                        var lineByLineLink = content.Value<Link>("LineByLineButton");
-                    }
-                    @if (lineByLineLink != null)
-                    {
-                        <a href="@lineByLineLink.Url" class="btn btn-primary" target="@lineByLineLink.Target">@lineByLineLink.Name</a>
-                    }
-                </div>
+                @if ( (!String.IsNullOrEmpty(content.ZipFormHeadline.ToString())) || (!String.IsNullOrEmpty(content.ZipFormContent.ToString())) )
+                {               
+                    <div class="border border-medium p-4 rounded mb-5">
+                        @if (!String.IsNullOrEmpty(content.ZipFormHeadline.ToString()))
+                        {
+                            <h4 class="h6 mb-4 fs-lg text-normal">
+                                @Html.Raw(content.ZipFormHeadline)
+                            </h4>
+                        }
+                        @if (!String.IsNullOrEmpty(content.ZipFormContent.ToString()))
+                        {
+                            <div class="rich-text mb-4">
+                                @Html.Raw(content.ZipFormContent)
+                            </div>
+                        }
+                        @{
+                            var zipFormLink = content.Value<Link>("ZipFormButton");
+                        }
+                        @if (zipFormLink != null)
+                        {
+                            <a href="@zipFormLink.Url" class="btn btn-primary" target="@zipFormLink.Target">@zipFormLink.Name</a>
+                        }
+                    </div>
+                }
+                @if ((!String.IsNullOrEmpty(content.FormsLibraryHeadline.ToString())) || (!String.IsNullOrEmpty(content.FormsLibraryContent.ToString())))
+                {
+                    <div class="border border-medium p-4 rounded mb-5">
+                        @if (!String.IsNullOrEmpty(content.FormsLibraryHeadline.ToString()))
+                        {
+                            <h4 class="h6 mb-4 fs-lg text-normal">
+                                @Html.Raw(content.FormsLibraryHeadline)
+                            </h4>
+                        }
+                        @if (!String.IsNullOrEmpty(content.FormsLibraryContent.ToString()))
+                        {
+                            <div class="rich-text mb-4">
+                                @Html.Raw(content.FormsLibraryContent)
+                            </div>
+                        }
+                        @{
+                            var formsLibraryLink = content.Value<Link>("FormsLibraryButton");
+                        }
+                        @if (formsLibraryLink != null)
+                        {
+                            <a href="@formsLibraryLink.Url" class="btn btn-primary" target="@formsLibraryLink.Target">@formsLibraryLink.Name</a>
+                        }
+                    </div>
+                }
+                @if ((!String.IsNullOrEmpty(content.LineByLineHeadline.ToString())) || (!String.IsNullOrEmpty(content.LineByLineContent.ToString())))
+                {
+                    <div class="border border-medium p-4 rounded mb-5">
+                        @if (!String.IsNullOrEmpty(content.LineByLineHeadline.ToString()))
+                        {
+                            <h4 class="h6 mb-4 fs-lg text-normal">
+                                @Html.Raw(content.LineByLineHeadline)
+                            </h4>
+                        }
+                        @if (!String.IsNullOrEmpty(content.LineByLineContent.ToString()))
+                        {
+                            <div class="rich-text mb-4">
+                                @Html.Raw(content.LineByLineContent)
+                            </div>
+                        }
+                        @{
+                            var lineByLineLink = content.Value<Link>("LineByLineButton");
+                        }
+                        @if (lineByLineLink != null)
+                        {
+                            <a href="@lineByLineLink.Url" class="btn btn-primary" target="@lineByLineLink.Target">@lineByLineLink.Name</a>
+                        }
+                    </div>
+                }
+                
             </div>
         </div>
     </div>
