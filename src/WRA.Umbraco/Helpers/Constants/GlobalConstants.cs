@@ -26,6 +26,9 @@ public static class GlobalConstants
         public const string City = "city";
         public const string State = "state";
         public const string ZipCode = "zip";
+        public const string PersonalWebSite = "personalWebsite";
+        public const string SecondaryLanguage = "secondaryLanguage";
+        public const string AreaOfSpecialty = "areaOfSpecialty";
 
     }
 }

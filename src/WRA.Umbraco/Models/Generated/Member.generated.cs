@@ -74,6 +74,14 @@ namespace WRA.Umbraco.Models
 		public virtual string Address3 => this.Value<string>(_publishedValueFallback, "address3");
 
 		///<summary>
+		/// Area Of Specialty
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.3.2+696a711")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("areaOfSpecialty")]
+		public virtual string AreaOfSpecialty => this.Value<string>(_publishedValueFallback, "areaOfSpecialty");
+
+		///<summary>
 		/// Broker Email
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.3.2+696a711")]
@@ -254,6 +262,14 @@ namespace WRA.Umbraco.Models
 		public virtual global::System.DateTime PaidThruDate => this.Value<global::System.DateTime>(_publishedValueFallback, "paidThruDate");
 
 		///<summary>
+		/// Personal Website
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.3.2+696a711")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("personalWebsite")]
+		public virtual string PersonalWebsite => this.Value<string>(_publishedValueFallback, "personalWebsite");
+
+		///<summary>
 		/// Prefix
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.3.2+696a711")]
@@ -268,6 +284,14 @@ namespace WRA.Umbraco.Models
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("salesTaxCategoryCode")]
 		public virtual string SalesTaxCategoryCode => this.Value<string>(_publishedValueFallback, "salesTaxCategoryCode");
+
+		///<summary>
+		/// Secondary Language
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.3.2+696a711")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("secondaryLanguage")]
+		public virtual string SecondaryLanguage => this.Value<string>(_publishedValueFallback, "secondaryLanguage");
 
 		///<summary>
 		/// State Province

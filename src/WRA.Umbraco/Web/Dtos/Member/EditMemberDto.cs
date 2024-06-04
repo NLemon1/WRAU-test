@@ -17,6 +17,10 @@ public class EditMemberDto
     public string? WorkPhone { get; set; }
     public string? HomePhone { get; set; }
     public string? CellPhone { get; set; }
+    public string? PersonalWebSite { get; set; }
+    public string? SecondaryLanguage { get; set; }
+    public string? AreaOfSpecialty { get; set; }
+    public string? PrimaryCounties { get; set; }
 
     // settings
     public string? Email { get; set; }

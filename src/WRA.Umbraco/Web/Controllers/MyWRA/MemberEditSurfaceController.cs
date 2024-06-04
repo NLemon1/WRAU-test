@@ -1,10 +1,7 @@
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Text;
 using Umbraco.Cms.Core.Cache;
 using Umbraco.Cms.Core.Logging;
 using Umbraco.Cms.Core.Routing;
-using Umbraco.Cms.Core.Security;
 using Umbraco.Cms.Core.Services;
 using Umbraco.Cms.Core.Web;
 using Umbraco.Cms.Infrastructure.Persistence;
@@ -40,19 +37,20 @@ public class MemberEditSurfaceController(
     {
         try
         {
-
+            string? redirectUrl = memberInfo.RedirectUrl ?? CurrentPage.Url();
             if (!ModelState.IsValid)
             {
-                return Redirect(memberInfo.RedirectUrl);
+                return Redirect(redirectUrl);
             }
 
             // Get member
             var member = services.MemberService.GetById(memberInfo.MemberId);
             // update member
-            if (member == null) return Redirect(memberInfo.RedirectUrl);
+            if (member == null) return Redirect(redirectUrl);
 
             if (!string.IsNullOrEmpty(memberInfo.FirstName)) member.Name = $"{memberInfo.FirstName} {memberInfo.LastName}";
-            // member.Email = memberInfo.Email;
+            member.SetIfNotEmpty(GlobalConstants.Member.FirstName, memberInfo.FirstName);
+            member.SetIfNotEmpty(GlobalConstants.Member.LastName, memberInfo?.LastName);
             member.SetIfNotEmpty(GlobalConstants.Member.AddressLine1, memberInfo.Address1);
             member.SetIfNotEmpty(GlobalConstants.Member.AddressLine2, memberInfo.Address2);
             member.SetIfNotEmpty(GlobalConstants.Member.AddressLine3, memberInfo.Address3);
@@ -62,9 +60,11 @@ public class MemberEditSurfaceController(
             member.SetIfNotEmpty(GlobalConstants.Member.WorkPhone, memberInfo.WorkPhone);
             member.SetIfNotEmpty(GlobalConstants.Member.CellPhone, memberInfo.CellPhone);
             member.SetIfNotEmpty(GlobalConstants.Member.HomePhone, memberInfo.HomePhone);
+            member.SetIfNotEmpty(GlobalConstants.Member.PersonalWebSite, memberInfo.PersonalWebSite);
+            member.SetIfNotEmpty(GlobalConstants.Member.SecondaryLanguage, memberInfo.SecondaryLanguage);
+            member.SetIfNotEmpty(GlobalConstants.Member.AreaOfSpecialty, memberInfo.AreaOfSpecialty);
             services.MemberService.Save(member);
-            //return RedirectToCurrentUmbracoPage();
-            return Redirect(memberInfo.RedirectUrl);
+            return Redirect(redirectUrl);
         }
         catch (Exception e)
         {
@@ -72,8 +72,4 @@ public class MemberEditSurfaceController(
             throw;
         }
     }
-}
-
-public class ModelState
-{
 }

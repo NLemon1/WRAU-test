@@ -37,6 +37,20 @@
           "SortOrder": 2
         },
         {
+          "Key": "0b35bb12-69a2-43ee-88b2-cf71e23a167a",
+          "Alias": "areaOfSpecialty",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Area Of Specialty",
+          "SortOrder": 36
+        },
+        {
+          "Key": "116179d0-9dac-4cdc-a7e7-f454a241afc3",
+          "Alias": "personalWebsite",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Personal Website",
+          "SortOrder": 34
+        },
+        {
           "Key": "1b9dffe2-aeee-4c31-b4e1-1dd139f16eb2",
           "Alias": "companyName",
           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
@@ -196,6 +210,13 @@
           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
           "Name": "NrdsId",
           "SortOrder": 21
+        },
+        {
+          "Key": "afdb9aa1-7f04-4155-8d57-aaf941c954c0",
+          "Alias": "secondaryLanguage",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Secondary Language",
+          "SortOrder": 35
         },
         {
           "Key": "b44911f5-a8c0-416e-9d39-6be77acda068",
