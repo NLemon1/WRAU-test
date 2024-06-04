@@ -105,10 +105,10 @@
                                                     </thead>
                                                     <tbody style="color: var(--bs-gray-30)">
                                                         <tr>
-                                                            <td class="py-2">FirstName</td>
+                                                            <td class="py-2" style="min-width: 150px;">First Name</td>
                                                             <td class="py-2 text-body">@memberUpdateModel.FirstName</td>
                                                             <td class="py-2 text-end">
-                                                                <div id="info_@memberUpdateModel.FirstName" class="js-dialog dialog-container" aria-hidden="true">
+                                                                <div id="info_FirstName" class="js-dialog dialog-container" aria-hidden="true">
                                                                     <div class="dialog-overlay" data-a11y-dialog-hide></div>
                                                                     <div class="dialog-content-wrapper" style="max-width: 550px; max-height: 75vh;" role="document">
                                                                         <div class="dialog-content-header p-1 justify-content-end rounded-top" style="background-color: var(--bs-gray-10)">
@@ -119,22 +119,22 @@
                                                                         </div>
                                                                         <div class="dialog-content px-5 py-3 fs-sm">
                                                                             <div class="d-flex flex-row justify-content-between mb-3">
-                                                                                <label asp-for="@memberUpdateModel.FirstName" class="text-body"></label>
+                                                                                <label asp-for="@memberUpdateModel.FirstName" class="text-body">First Name</label>
                                                                                 <input asp-for=@memberUpdateModel.FirstName />
                                                                             </div>
                                                                             <button type="submit" class="btn btn-primary btn-sm">Save</button>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <button class="text-link border-0 bg-transparent px-2 py-2" onclick="return false;" data-a11y-dialog-show="info_@memberUpdateModel.FirstName">Edit</button>
+                                                                <button class="text-link border-0 bg-transparent px-2 py-2" onclick="return false;" data-a11y-dialog-show="info_FirstName">Edit</button>
                                                             </td>
                                                         </tr>
 
                                                         <tr>
-                                                            <td class="py-2">LastName</td>
+                                                            <td class="py-2">Last Name</td>
                                                             <td class="py-2 text-body">@memberUpdateModel.LastName</td>
                                                             <td class="py-2 text-end">
-                                                                <div id="info_@memberUpdateModel.LastName" class="js-dialog dialog-container" aria-hidden="true">
+                                                                <div id="info_LastName" class="js-dialog dialog-container" aria-hidden="true">
                                                                     <div class="dialog-overlay" data-a11y-dialog-hide></div>
                                                                     <div class="dialog-content-wrapper" style="max-width: 550px; max-height: 75vh;" role="document">
                                                                         <div class="dialog-content-header p-1 justify-content-end rounded-top" style="background-color: var(--bs-gray-10)">
@@ -145,14 +145,14 @@
                                                                         </div>
                                                                         <div class="dialog-content px-5 py-3 fs-sm">
                                                                             <div class="d-flex flex-row justify-content-between mb-3">
-                                                                                <label asp-for="@memberUpdateModel.LastName" class="text-body"></label>
+                                                                                <label asp-for="@memberUpdateModel.LastName" class="text-body">Last Name</label>
                                                                                 <input asp-for=@memberUpdateModel.LastName />
                                                                             </div>
                                                                             <button type="submit" class="btn btn-primary btn-sm">Save</button>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <button class="text-link border-0 bg-transparent px-2 py-2" onclick="return false;" data-a11y-dialog-show="info_@memberUpdateModel.LastName">Edit</button>
+                                                                <button class="text-link border-0 bg-transparent px-2 py-2" onclick="return false;" data-a11y-dialog-show="info_LastName">Edit</button>
                                                             </td>
                                                         </tr>
 
@@ -160,7 +160,7 @@
                                                             <td class="py-2">Address</td>
                                                             <td class="py-2 text-body">@memberUpdateModel?.Address1</td>
                                                             <td class="py-2 text-end">
-                                                                <div id="info_@memberUpdateModel.Address1" class="js-dialog dialog-container" aria-hidden="true">
+                                                                <div id="info_Address1" class="js-dialog dialog-container" aria-hidden="true">
                                                                     <div class="dialog-overlay" data-a11y-dialog-hide></div>
                                                                     <div class="dialog-content-wrapper" style="max-width: 550px; max-height: 75vh;" role="document">
                                                                         <div class="dialog-content-header p-1 justify-content-end rounded-top" style="background-color: var(--bs-gray-10)">
@@ -171,22 +171,22 @@
                                                                         </div>
                                                                         <div class="dialog-content px-5 py-3 fs-sm">
                                                                             <div class="d-flex flex-row justify-content-between mb-3">
-                                                                                <label asp-for="@memberUpdateModel.Address1" class="text-body"></label>
+                                                                                <label asp-for="@memberUpdateModel.Address1" class="text-body">Address</label>
                                                                                 <input asp-for=@memberUpdateModel.Address1 />
                                                                             </div>
                                                                             <button type="submit" class="btn btn-primary btn-sm">Save</button>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <button class="text-link border-0 bg-transparent px-2 py-2" onclick="return false;" data-a11y-dialog-show="info_@memberUpdateModel.Address1">Edit</button>
+                                                                <button class="text-link border-0 bg-transparent px-2 py-2" onclick="return false;" data-a11y-dialog-show="info_Address1">Edit</button>
                                                             </td>
                                                         </tr>
 
                                                         <tr>
-                                                            <td class="py-2">Address2</td>
+                                                            <td class="py-2">Address 2</td>
                                                             <td class="py-2 text-body">@memberUpdateModel.Address2</td>
                                                             <td class="py-2 text-end">
-                                                                <div id="info_@memberUpdateModel.Address2" class="js-dialog dialog-container" aria-hidden="true">
+                                                                <div id="info_Address2" class="js-dialog dialog-container" aria-hidden="true">
                                                                     <div class="dialog-overlay" data-a11y-dialog-hide></div>
                                                                     <div class="dialog-content-wrapper" style="max-width: 550px; max-height: 75vh;" role="document">
                                                                         <div class="dialog-content-header p-1 justify-content-end rounded-top" style="background-color: var(--bs-gray-10)">
@@ -197,14 +197,14 @@
                                                                         </div>
                                                                         <div class="dialog-content px-5 py-3 fs-sm">
                                                                             <div class="d-flex flex-row justify-content-between mb-3">
-                                                                                <label asp-for="@memberUpdateModel.Address2" class="text-body"></label>
+                                                                                <label asp-for="@memberUpdateModel.Address2" class="text-body">Address 2</label>
                                                                                 <input asp-for=@memberUpdateModel.Address2 />
                                                                             </div>
                                                                             <button type="submit" class="btn btn-primary btn-sm">Save</button>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <button class="text-link border-0 bg-transparent px-2 py-2" onclick="return false;" data-a11y-dialog-show="info_@memberUpdateModel.Address2">Edit</button>
+                                                                <button class="text-link border-0 bg-transparent px-2 py-2" onclick="return false;" data-a11y-dialog-show="info_Address2">Edit</button>
                                                             </td>
                                                         </tr>
 
@@ -212,7 +212,7 @@
                                                             <td class="py-2">City</td>
                                                             <td class="py-2 text-body">@memberUpdateModel.City</td>
                                                             <td class="py-2 text-end">
-                                                                <div id="info_@memberUpdateModel.City" class="js-dialog dialog-container" aria-hidden="true">
+                                                                <div id="info_City" class="js-dialog dialog-container" aria-hidden="true">
                                                                     <div class="dialog-overlay" data-a11y-dialog-hide></div>
                                                                     <div class="dialog-content-wrapper" style="max-width: 550px; max-height: 75vh;" role="document">
                                                                         <div class="dialog-content-header p-1 justify-content-end rounded-top" style="background-color: var(--bs-gray-10)">
@@ -223,14 +223,14 @@
                                                                         </div>
                                                                         <div class="dialog-content px-5 py-3 fs-sm">
                                                                             <div class="d-flex flex-row justify-content-between mb-3">
-                                                                                <label asp-for="@memberUpdateModel.City" class="text-body"></label>
+                                                                                <label asp-for="@memberUpdateModel.City" class="text-body">City</label>
                                                                                 <input asp-for=@memberUpdateModel.City />
                                                                             </div>
                                                                             <button type="submit" class="btn btn-primary btn-sm">Save</button>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <button class="text-link border-0 bg-transparent px-2 py-2" onclick="return false;" data-a11y-dialog-show="info_@memberUpdateModel.City">Edit</button>
+                                                                <button class="text-link border-0 bg-transparent px-2 py-2" onclick="return false;" data-a11y-dialog-show="info_City">Edit</button>
                                                             </td>
                                                         </tr>
 
@@ -238,7 +238,7 @@
                                                             <td class="py-2">State</td>
                                                             <td class="py-2 text-body">@memberUpdateModel.State</td>
                                                             <td class="py-2 text-end">
-                                                                <div id="info_@memberUpdateModel.State" class="js-dialog dialog-container" aria-hidden="true">
+                                                                <div id="info_State" class="js-dialog dialog-container" aria-hidden="true">
                                                                     <div class="dialog-overlay" data-a11y-dialog-hide></div>
                                                                     <div class="dialog-content-wrapper" style="max-width: 550px; max-height: 75vh;" role="document">
                                                                         <div class="dialog-content-header p-1 justify-content-end rounded-top" style="background-color: var(--bs-gray-10)">
@@ -249,22 +249,22 @@
                                                                         </div>
                                                                         <div class="dialog-content px-5 py-3 fs-sm">
                                                                             <div class="d-flex flex-row justify-content-between mb-3">
-                                                                                <label asp-for="@memberUpdateModel.State" class="text-body"></label>
+                                                                                <label asp-for="@memberUpdateModel.State" class="text-body">State</label>
                                                                                 <input asp-for=@memberUpdateModel.State />
                                                                             </div>
                                                                             <button type="submit" class="btn btn-primary btn-sm">Save</button>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <button class="text-link border-0 bg-transparent px-2 py-2" onclick="return false;" data-a11y-dialog-show="info_@memberUpdateModel.State">Edit</button>
+                                                                <button class="text-link border-0 bg-transparent px-2 py-2" onclick="return false;" data-a11y-dialog-show="info_State">Edit</button>
                                                             </td>
                                                         </tr>
 
                                                         <tr>
-                                                            <td class="py-2">Zip</td>
+                                                            <td class="py-2">Zip Code</td>
                                                             <td class="py-2 text-body">@memberUpdateModel.ZipCode</td>
                                                             <td class="py-2 text-end">
-                                                                <div id="info_@memberUpdateModel.ZipCode" class="js-dialog dialog-container" aria-hidden="true">
+                                                                <div id="info_ZipCode" class="js-dialog dialog-container" aria-hidden="true">
                                                                     <div class="dialog-overlay" data-a11y-dialog-hide></div>
                                                                     <div class="dialog-content-wrapper" style="max-width: 550px; max-height: 75vh;" role="document">
                                                                         <div class="dialog-content-header p-1 justify-content-end rounded-top" style="background-color: var(--bs-gray-10)">
@@ -275,14 +275,14 @@
                                                                         </div>
                                                                         <div class="dialog-content px-5 py-3 fs-sm">
                                                                             <div class="d-flex flex-row justify-content-between mb-3">
-                                                                                <label asp-for="@memberUpdateModel.ZipCode" class="text-body"></label>
+                                                                                <label asp-for="@memberUpdateModel.ZipCode" class="text-body">Zip Code</label>
                                                                                 <input asp-for=@memberUpdateModel.ZipCode />
                                                                             </div>
                                                                             <button type="submit" class="btn btn-primary btn-sm">Save</button>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <button class="text-link border-0 bg-transparent px-2 py-2" onclick="return false;" data-a11y-dialog-show="info_@memberUpdateModel.ZipCode">Edit</button>
+                                                                <button class="text-link border-0 bg-transparent px-2 py-2" onclick="return false;" data-a11y-dialog-show="info_ZipCode">Edit</button>
                                                             </td>
                                                         </tr>
 
@@ -290,7 +290,7 @@
                                                             <td class="py-2">Mobile Phone</td>
                                                             <td class="py-2 text-body">@memberUpdateModel.CellPhone</td>
                                                             <td class="py-2 text-end">
-                                                                <div id="info_@memberUpdateModel.CellPhone" class="js-dialog dialog-container" aria-hidden="true">
+                                                                <div id="info_CellPhone" class="js-dialog dialog-container" aria-hidden="true">
                                                                     <div class="dialog-overlay" data-a11y-dialog-hide></div>
                                                                     <div class="dialog-content-wrapper" style="max-width: 550px; max-height: 75vh;" role="document">
                                                                         <div class="dialog-content-header p-1 justify-content-end rounded-top" style="background-color: var(--bs-gray-10)">
@@ -301,14 +301,14 @@
                                                                         </div>
                                                                         <div class="dialog-content px-5 py-3 fs-sm">
                                                                             <div class="d-flex flex-row justify-content-between mb-3">
-                                                                                <label asp-for="@memberUpdateModel.CellPhone" class="text-body"></label>
+                                                                                <label asp-for="@memberUpdateModel.CellPhone" class="text-body">Mobile Phone</label>
                                                                                 <input asp-for=@memberUpdateModel.CellPhone />
                                                                             </div>
                                                                             <button type="submit" class="btn btn-primary btn-sm">Save</button>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <button class="text-link border-0 bg-transparent px-2 py-2" onclick="return false;" data-a11y-dialog-show="info_@memberUpdateModel.CellPhone">Edit</button>
+                                                                <button class="text-link border-0 bg-transparent px-2 py-2" onclick="return false;" data-a11y-dialog-show="info_CellPhone">Edit</button>
                                                             </td>
                                                         </tr>
 
@@ -316,7 +316,7 @@
                                                             <td class="py-2">Home Phone</td>
                                                             <td class="py-2 text-body">@memberUpdateModel.HomePhone</td>
                                                             <td class="py-2 text-end">
-                                                                <div id="info_@memberUpdateModel.HomePhone" class="js-dialog dialog-container" aria-hidden="true">
+                                                                <div id="info_HomePhone" class="js-dialog dialog-container" aria-hidden="true">
                                                                     <div class="dialog-overlay" data-a11y-dialog-hide></div>
                                                                     <div class="dialog-content-wrapper" style="max-width: 550px; max-height: 75vh;" role="document">
                                                                         <div class="dialog-content-header p-1 justify-content-end rounded-top" style="background-color: var(--bs-gray-10)">
@@ -327,14 +327,14 @@
                                                                         </div>
                                                                         <div class="dialog-content px-5 py-3 fs-sm">
                                                                             <div class="d-flex flex-row justify-content-between mb-3">
-                                                                                <label asp-for="@memberUpdateModel.HomePhone" class="text-body"></label>
+                                                                                <label asp-for="@memberUpdateModel.HomePhone" class="text-body">Home Phone</label>
                                                                                 <input asp-for=@memberUpdateModel.HomePhone />
                                                                             </div>
                                                                             <button type="submit" class="btn btn-primary btn-sm">Save</button>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <button class="text-link border-0 bg-transparent px-2 py-2" onclick="return false;" data-a11y-dialog-show="info_@memberUpdateModel.HomePhone">Edit</button>
+                                                                <button class="text-link border-0 bg-transparent px-2 py-2" onclick="return false;" data-a11y-dialog-show="info_HomePhone">Edit</button>
                                                             </td>
                                                         </tr>
 
@@ -342,7 +342,7 @@
                                                             <td class="py-2">Work Phone</td>
                                                             <td class="py-2 text-body">@member.WorkPhone</td>
                                                             <td class="py-2 text-end">
-                                                                <div id="info_@memberUpdateModel.WorkPhone" class="js-dialog dialog-container" aria-hidden="true">
+                                                                <div id="info_WorkPhone" class="js-dialog dialog-container" aria-hidden="true">
                                                                     <div class="dialog-overlay" data-a11y-dialog-hide></div>
                                                                     <div class="dialog-content-wrapper" style="max-width: 550px; max-height: 75vh;" role="document">
                                                                         <div class="dialog-content-header p-1 justify-content-end rounded-top" style="background-color: var(--bs-gray-10)">
@@ -353,14 +353,14 @@
                                                                         </div>
                                                                         <div class="dialog-content px-5 py-3 fs-sm">
                                                                             <div class="d-flex flex-row justify-content-between mb-3">
-                                                                                <label asp-for="@memberUpdateModel.WorkPhone" class="text-body"></label>
+                                                                                <label asp-for="@memberUpdateModel.WorkPhone" class="text-body">Work Phone</label>
                                                                                 <input asp-for=@memberUpdateModel.WorkPhone />
                                                                             </div>
                                                                             <button type="submit" class="btn btn-primary btn-sm">Save</button>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <button class="text-link border-0 bg-transparent px-2 py-2" onclick="return false;" data-a11y-dialog-show="info_@memberUpdateModel.WorkPhone">Edit</button>
+                                                                <button class="text-link border-0 bg-transparent px-2 py-2" onclick="return false;" data-a11y-dialog-show="info_WorkPhone">Edit</button>
                                                             </td>
                                                         </tr>
 
@@ -379,28 +379,29 @@
                                                     </thead>
                                                     <tbody style="color: var(--bs-gray-30)">
                                                         <tr>
-                                                            <td class="py-2">Security</td>
-                                                            <td class="py-2 text-body lh-lg">
+                                                            <td class="py-2" style="min-width: 150px;">Security</td>
+                                                            <td class="py-2 text-body lh-lg" colspan="2">
                                                                 @if (content.HasValue("usernameChangeUrl"))
                                                                 {
-                                                                    <a href="@content.UsernameChangeUrl.Url" target="@(content.UsernameChangeUrl.Target ?? "_blank")" class="text-link border-0 bg-transparent px-2 py-2">@(content.UsernameChangeUrl.Name ?? "Change User Name")</a>
+                                                                    <a href="@content.UsernameChangeUrl.Url" target="@(content.UsernameChangeUrl.Target ?? "_blank")" class="text-link border-0 bg-transparent py-2">@(content.UsernameChangeUrl.Name ?? "Change User Name")</a>
                                                                     <br />
                                                                 }
                                                                 @if (content.HasValue("passwordChangeUrl"))
                                                                 {
-                                                                    <a href="@content.PasswordChangeUrl.Url" target="@(content.PasswordChangeUrl.Target ?? "_blank")" class="text-link border-0 bg-transparent px-2 py-2">@(content.PasswordChangeUrl.Name ?? "Change Password")</a>
+                                                                    <a href="@content.PasswordChangeUrl.Url" target="@(content.PasswordChangeUrl.Target ?? "_blank")" class="text-link border-0 bg-transparent py-2">@(content.PasswordChangeUrl.Name ?? "Change Password")</a>
                                                                 }
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td class="py-2">Email</td>
-                                                            <td class="py-2 text-body">@memberUpdateModel.Email</td>
+                                                            <td class="py-2 text-body" colspan="2">@memberUpdateModel.Email</td>
                                                         </tr>
+
                                                         <tr>
                                                             <td class="py-2">Personal Website</td>
                                                             <td class="py-2 text-body">@memberUpdateModel.PersonalWebSite</td>
                                                             <td class="py-2 text-end">
-                                                                <div id="info_@memberUpdateModel.PersonalWebSite" class="js-dialog dialog-container" aria-hidden="true">
+                                                                <div id="info_PersonalWebSite" class="js-dialog dialog-container" aria-hidden="true">
                                                                     <div class="dialog-overlay" data-a11y-dialog-hide></div>
                                                                     <div class="dialog-content-wrapper" style="max-width: 550px; max-height: 75vh;" role="document">
                                                                         <div class="dialog-content-header p-1 justify-content-end rounded-top" style="background-color: var(--bs-gray-10)">
@@ -411,21 +412,22 @@
                                                                         </div>
                                                                         <div class="dialog-content px-5 py-3 fs-sm">
                                                                             <div class="d-flex flex-row justify-content-between mb-3">
-                                                                                <label asp-for="@memberUpdateModel.PersonalWebSite" class="text-body"></label>
+                                                                                <label asp-for="@memberUpdateModel.PersonalWebSite" class="text-body">Personal Website</label>
                                                                                 <input asp-for=@memberUpdateModel.PersonalWebSite />
                                                                             </div>
                                                                             <button type="submit" class="btn btn-primary btn-sm">Save</button>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <button class="text-link border-0 bg-transparent px-2 py-2" onclick="return false;" data-a11y-dialog-show="info_@memberUpdateModel.PersonalWebSite">Edit</button>
+                                                                <button class="text-link border-0 bg-transparent px-2 py-2" onclick="return false;" data-a11y-dialog-show="info_PersonalWebSite">Edit</button>
                                                             </td>
                                                         </tr>
+
                                                         <tr>
                                                             <td class="py-2">Primary Counties</td>
                                                             <td class="py-2 text-body">@memberUpdateModel.PrimaryCounties</td>
                                                             <td class="py-2 text-end">
-                                                                <div id="info_@memberUpdateModel.PrimaryCounties" class="js-dialog dialog-container" aria-hidden="true">
+                                                                <div id="info_PrimaryCounties" class="js-dialog dialog-container" aria-hidden="true">
                                                                     <div class="dialog-overlay" data-a11y-dialog-hide></div>
                                                                     <div class="dialog-content-wrapper" style="max-width: 550px; max-height: 75vh;" role="document">
                                                                         <div class="dialog-content-header p-1 justify-content-end rounded-top" style="background-color: var(--bs-gray-10)">
@@ -436,21 +438,22 @@
                                                                         </div>
                                                                         <div class="dialog-content px-5 py-3 fs-sm">
                                                                             <div class="d-flex flex-row justify-content-between mb-3">
-                                                                                <label asp-for="@memberUpdateModel.PrimaryCounties" class="text-body"></label>
+                                                                                <label asp-for="@memberUpdateModel.PrimaryCounties" class="text-body">Primary Counties</label>
                                                                                 <input asp-for=@memberUpdateModel.PrimaryCounties />
                                                                             </div>
                                                                             <button type="submit" class="btn btn-primary btn-sm">Save</button>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <button class="text-link border-0 bg-transparent px-2 py-2" onclick="return false;" data-a11y-dialog-show="info_@memberUpdateModel.PrimaryCounties">Edit</button>
+                                                                <button class="text-link border-0 bg-transparent px-2 py-2" onclick="return false;" data-a11y-dialog-show="info_PrimaryCounties">Edit</button>
                                                             </td>
                                                         </tr>
+
                                                         <tr>
                                                             <td class="py-2">Secondary Language</td>
                                                             <td class="py-2 text-body">@memberUpdateModel.SecondaryLanguage</td>
                                                             <td class="py-2 text-end">
-                                                                <div id="info_@memberUpdateModel.SecondaryLanguage" class="js-dialog dialog-container" aria-hidden="true">
+                                                                <div id="info_SecondaryLanguage" class="js-dialog dialog-container" aria-hidden="true">
                                                                     <div class="dialog-overlay" data-a11y-dialog-hide></div>
                                                                     <div class="dialog-content-wrapper" style="max-width: 550px; max-height: 75vh;" role="document">
                                                                         <div class="dialog-content-header p-1 justify-content-end rounded-top" style="background-color: var(--bs-gray-10)">
@@ -461,14 +464,14 @@
                                                                         </div>
                                                                         <div class="dialog-content px-5 py-3 fs-sm">
                                                                             <div class="d-flex flex-row justify-content-between mb-3">
-                                                                                <label asp-for="@memberUpdateModel.SecondaryLanguage" class="text-body"></label>
+                                                                                <label asp-for="@memberUpdateModel.SecondaryLanguage" class="text-body">Secondary Language</label>
                                                                                 <input asp-for=@memberUpdateModel.SecondaryLanguage />
                                                                             </div>
                                                                             <button type="submit" class="btn btn-primary btn-sm">Save</button>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <button class="text-link border-0 bg-transparent px-2 py-2" onclick="return false;" data-a11y-dialog-show="info_@memberUpdateModel.SecondaryLanguage">Edit</button>
+                                                                <button class="text-link border-0 bg-transparent px-2 py-2" onclick="return false;" data-a11y-dialog-show="info_SecondaryLanguage">Edit</button>
                                                             </td>
                                                         </tr>
 
