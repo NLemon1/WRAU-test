@@ -40,7 +40,7 @@
     <PackageReference Include="Umbraco.Commerce.Persistence.Sqlite" Version="13.1.4" />
     <PackageReference Include="Umbraco.Commerce.Persistence.SqlServer" Version="13.1.4" />
     <PackageReference Include="Umbraco.Commerce.Web" Version="13.1.4" />
-    <PackageReference Include="WRA.Umbraco.Contracts" Version="8.3.0" />
+    <PackageReference Include="WRA.Umbraco.Contracts" Version="9.0.0" />
     <PackageReference Include="wra.umbraco.shared" Version="8.1.1" />
     <PackageReference Update="Roslynator.Analyzers" Version="4.12.2">
       <PrivateAssets>all</PrivateAssets>

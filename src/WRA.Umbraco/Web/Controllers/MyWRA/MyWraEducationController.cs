@@ -36,16 +36,26 @@ public class MyWraEducationController(
         orderHistory = memberOrderHistoryService.GetMemberOrderHistory(member.ExternalId).GetAwaiter()
             .GetResult();
 
-        var requiredCourses = GetRequiredCourses(member).GetAwaiter().GetResult();
-        // var courseProgress = GetCourseProgress(member).GetAwaiter().GetResult();
-        var completedCourses = courseService.GetCompletedCourses(member.ExternalId).GetAwaiter().GetResult();
+        var courseProgressResponse = GetCourseProgress(member).GetAwaiter().GetResult() ?? [];
+        var requiredCoursesResponse = GetRequiredCourses(member).GetAwaiter().GetResult() ?? [];
+        // var completedCourses = courseService.GetCompletedCourses(member.ExternalId).GetAwaiter().GetResult() ?? [];
+
+        var now = DateTime.Now;
+        const int archivedCourseExpirationThresholdDays = 90;
+        var archivedCourses = courseProgressResponse
+            .Where(cp => !cp.Completed && cp.GoodThroughDate.AddDays(archivedCourseExpirationThresholdDays) < now)
+            .ToList();
+        var currentCourses = courseProgressResponse
+            .Where(c => !c.Completed && c.GoodThroughDate > now)
+            .ToList();
 
         MywraEducation viewModel = new(CurrentPage!, publishedValueFallback)
         {
             Orders = orderHistory,
-            RequiredCourses = requiredCourses ?? [],
-            // CourseProgress = courseProgress,
-            CompletedCourses = completedCourses ?? []
+            RequiredCourses = requiredCoursesResponse,
+            CurrentCourses = currentCourses,
+            // CompletedCourses = completedCourses,
+            ArchivedCourses = archivedCourses
         };
         return CurrentTemplate(viewModel);
     }

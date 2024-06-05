@@ -140,19 +140,19 @@ namespace WRA.Umbraco.Extensions
         //     return wraProductDto;
         // }
 
-        public static OrderAddressDto ShippingAddressDto(this Order order)
-        {
-            return new OrderAddressDto
-            {
-                FirstName = order.CustomerInfo.FirstName,
-                LastName = order.CustomerInfo.LastName,
-                Line1 = order.Properties["shippingAddressLine1"].SafeString(),
-                Line2 = order.Properties["shippingAddressLine2"].SafeString(),
-                City = order.Properties["shippingCity"].SafeString(),
-                State = order.Properties["shippingState"].SafeString(),
-                ZipCode = order.Properties["shippingZipCode"].SafeString()
-            };
-        }
+        // public static OrderAddressDto ShippingAddressDto(this Order order)
+        // {
+        //     return new OrderAddressDto
+        //     {
+        //         FirstName = order.CustomerInfo.FirstName,
+        //         LastName = order.CustomerInfo.LastName,
+        //         Line1 = order.Properties["shippingAddressLine1"].SafeString(),
+        //         Line2 = order.Properties["shippingAddressLine2"].SafeString(),
+        //         City = order.Properties["shippingCity"].SafeString(),
+        //         State = order.Properties["shippingState"].SafeString(),
+        //         ZipCode = order.Properties["shippingZipCode"].SafeString()
+        //     };
+        // }
 
         public static string ReadableShippingAddress(this OrderReadOnly order)
         {

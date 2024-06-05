@@ -26,7 +26,7 @@ public class CourseService(
     // TODO apply translation layer for this
     public async Task<List<ExternalCourseProgressDto>?> GetCourseProgress(string ExternalId)
     {
-        var response = await wraExternalApiService.GetCourseProgress(ExternalId);
+        var response = await wraExternalApiService.GetMemberCourseProgress(ExternalId);
         if (response.StatusCode != HttpStatusCode.OK) return [];
 
         var courses = JsonSerializer.Deserialize<List<ExternalCourseProgressDto>>(response.Content, SerializationOptions);

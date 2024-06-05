@@ -1,5 +1,6 @@
 using Microsoft.Extensions.Logging;
 using Umbraco.Commerce.Core.Api;
+using WRA.Umbraco.Contracts;
 using WRA.Umbraco.Helpers.Constants;
 using WRA.Umbraco.Web.Dtos.External;
 

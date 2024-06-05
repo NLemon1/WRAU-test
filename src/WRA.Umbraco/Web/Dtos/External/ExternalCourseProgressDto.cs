@@ -17,8 +17,8 @@ public class ExternalCourseProgressDto
     public string CourseSubtitle { get; set; }
     public string CourseDescription { get; set; }
     public int CourseSortSequence { get; set; }
-    public DateTime StartDate { get; set; }
-    public DateTime OriginalGoodThroughDate { get; set; }
+    public DateTime? StartDate { get; set; }
+    public DateTime? OriginalGoodThroughDate { get; set; }
     public DateTime GoodThroughDate { get; set; }
     public DateTime? LastAccessedDate { get; set; }
     public int PercentComplete { get; set; }

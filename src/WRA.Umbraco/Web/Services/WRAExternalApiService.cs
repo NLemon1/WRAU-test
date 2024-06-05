@@ -251,16 +251,6 @@ public class WraExternalApiService(WraExternalApiSettings settings)
 
         return response;
     }
-    public async Task<RestResponse> GetMemberCourseProgress(string id)
-    {
-        var options = new RestClientOptions(settings.VersionedBaseUrl);
-        var client = new RestClient(options);
-        var request = new RestRequest("memberCourseProgress/" + id);
-        request.AddHeader(settings.ApiKeyHeader, settings.ApiKey);
-        var response = await client.GetAsync(request);
-
-        return response;
-    }
 
     public async Task<RestResponse> GetRequiredCourses(string id)
     {
@@ -283,7 +273,7 @@ public class WraExternalApiService(WraExternalApiSettings settings)
         return response;
     }
 
-    public async Task<RestResponse> GetCourseProgress(string id)
+    public async Task<RestResponse> GetMemberCourseProgress(string id)
     {
         try
         {

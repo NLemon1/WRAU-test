@@ -1,6 +1,7 @@
 using Umbraco.Cms.Core.Mapping;
 using Umbraco.Commerce.Core.Models;
 using Umbraco.Commerce.Extensions;
+using WRA.Umbraco.Contracts;
 using WRA.Umbraco.Extensions;
 using WRA.Umbraco.Helpers.Constants;
 using WRA.Umbraco.Repositories;
@@ -15,10 +16,10 @@ public class OrderMapping(
 {
     public void DefineMaps(IUmbracoMapper mapper)
     {
-        mapper.Define<OrderReadOnly, OrderEvent>((_, _) => new OrderEvent(), UmbracoOrderToOrderEvent);
+        mapper.Define<OrderReadOnly, UmbracoOrderComplete>((_, _) => new UmbracoOrderComplete(), UmbracoOrderToOrderEvent);
     }
 
-    private void UmbracoOrderToOrderEvent(OrderReadOnly source, OrderEvent target, MapperContext context)
+    private void UmbracoOrderToOrderEvent(OrderReadOnly source, UmbracoOrderComplete target, MapperContext context)
     {
         var memberAttachedToOrder = memberRepository.GetbyKey(source.CustomerInfo.CustomerReference.SafeGuid());
         if (memberAttachedToOrder != null)
@@ -47,7 +48,7 @@ public class OrderMapping(
         foreach (var orderLine in source.OrderLines)
         {
             var adjustments = orderLine.TotalPrice.Adjustments;
-            var externalOrderLine = new ExternalOrderLine
+            var externalOrderLine = new UmbracoOrderLineItemDto
             {
                 Sku = orderLine.Sku,
                 Quantity = orderLine.Quantity,
@@ -60,7 +61,8 @@ public class OrderMapping(
             };
             target.OrderLines.Add(externalOrderLine);
         }
-
+        target.FirstName = source.Properties[umbracoCommerceConstants.Properties.Customer.FirstNamePropertyAlias];
+        target.LastName = source.Properties[umbracoCommerceConstants.Properties.Customer.LastNamePropertyAlias];
         target.Id = source.Id;
         target.OrderDate = source.CreateDate;
         target.ShippingAddress = OrderPropertyHelper.GetShippingAddress(source);

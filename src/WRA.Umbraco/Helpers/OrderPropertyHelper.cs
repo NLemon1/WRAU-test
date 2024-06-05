@@ -1,6 +1,7 @@
 using WRA.Umbraco.Dtos;
 using Umbraco.Commerce.Core;
 using Umbraco.Commerce.Core.Models;
+using WRA.Umbraco.Contracts;
 using WRA.Umbraco.Helpers.Constants;
 
 namespace WRA.Umbraco.Helpers;
@@ -13,10 +14,8 @@ public static class OrderPropertyHelper
         return new Dictionary<string, string>
         {
             // { Constants.Properties.Customer.EmailPropertyAlias, model.Email },
-            // { Constants.Properties.Customer.FirstNamePropertyAlias, address.FirstName },
-            // { Constants.Properties.Customer.LastNamePropertyAlias, address.LastName },
             { CommerceConstants.Shipping.AddressLine1, address.Line1 },
-            { CommerceConstants.Shipping.AddressLine2 , address.Line2 },
+            { CommerceConstants.Shipping.AddressLine2, address.Line2 },
             { CommerceConstants.Shipping.City, address.City },
             { CommerceConstants.Shipping.State, address.State },
             { CommerceConstants.Shipping.ZipCode, address.ZipCode },
@@ -24,9 +23,9 @@ public static class OrderPropertyHelper
             { CommerceConstants.Shipping.LastName, address.LastName }
         };
     }
-    public static OrderAddressDto GetShippingAddress(OrderReadOnly order)
+    public static UmbracoOrderAddressDto GetShippingAddress(OrderReadOnly order)
     {
-        return new OrderAddressDto
+        return new UmbracoOrderAddressDto
         {
             FirstName = order.Properties[CommerceConstants.Shipping.FirstName],
             LastName = order.Properties[CommerceConstants.Shipping.LastName],
@@ -46,23 +45,21 @@ public static class OrderPropertyHelper
         return new Dictionary<string, string>
         {
             // { Constants.Properties.Customer.EmailPropertyAlias, model.Email },
-            { umbracoCommerceConstants.Properties.Customer.FirstNamePropertyAlias, address.FirstName },
-            { umbracoCommerceConstants.Properties.Customer.LastNamePropertyAlias, address.LastName },
+            { CommerceConstants.Billing.FirstName, address.FirstName },
+            { CommerceConstants.Billing.LastName, address.LastName },
             { CommerceConstants.Billing.AddressLine1, address.Line1 },
             { CommerceConstants.Billing.AddressLine2, address.Line2 },
             { CommerceConstants.Billing.City, address.City },
             { CommerceConstants.Billing.State, address.State },
-            { CommerceConstants.Billing.ZipCode, address.ZipCode },
-            { CommerceConstants.Billing.FirstName, address.FirstName },
-            { CommerceConstants.Billing.LastName, address.LastName },
+            { CommerceConstants.Billing.ZipCode, address.ZipCode }
 
             // { "billingTelephone", model.BillingAddress.Telephone },
         };
     }
 
-    public static OrderAddressDto GetBillingAddress(OrderReadOnly order)
+    public static UmbracoOrderAddressDto GetBillingAddress(OrderReadOnly order)
     {
-        return new OrderAddressDto
+        return new UmbracoOrderAddressDto
         {
             FirstName = order.Properties[CommerceConstants.Billing.FirstName],
             LastName = order.Properties[CommerceConstants.Billing.LastName],
@@ -74,4 +71,18 @@ public static class OrderPropertyHelper
         };
     }
     #endregion
+
+    public static OrderAddressDto ShippingAddressToBilling(this Order order)
+    {
+        return new OrderAddressDto
+        {
+            FirstName = order.Properties[CommerceConstants.Shipping.FirstName],
+            LastName = order.Properties[CommerceConstants.Shipping.LastName],
+            Line1 = order.Properties[CommerceConstants.Shipping.AddressLine1],
+            Line2 = order.Properties[CommerceConstants.Shipping.AddressLine2],
+            City = order.Properties[CommerceConstants.Shipping.City],
+            State = order.Properties[CommerceConstants.Shipping.State],
+            ZipCode = order.Properties[CommerceConstants.Shipping.ZipCode]
+        };
+    }
 }

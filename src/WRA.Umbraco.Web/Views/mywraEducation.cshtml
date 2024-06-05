@@ -166,9 +166,43 @@
                 </div>
 
                 <!-- Misc Courses -->
-                <h3 class="h5 py-2 px-4">Completed Courses</h3>
+                <h3 class="h5 py-2 px-4">Current Courses</h3>
                 <div class="accordions-wrapper accordions-wrapper--border accordions-wrapper--border--light mb-5">
-                    @foreach(var course in Model.CompletedCourses)
+                    @foreach(var course in Model.CurrentCourses)
+                    {
+                        var courseUrl = $"https://content.therealestateschool.org/playerselector/api/token/{course.CourseToken}";
+                        <details class="accordion accordion--light">
+                            <summary class="accordion__toggle px-3">
+                                <div class="ps-1">
+                                    @course.CourseTitle
+                                </div>
+                                <div class="accordion__toggle-icon me-1">
+                                    <i class="fas fa-chevron-down"></i>
+                                    <i class="fas fa-chevron-up"></i>
+                                </div>
+
+                            </summary>
+                            <div class="accordion__content px-4 text-body">
+
+                                <div class="border border-medium p-4 rounded mb-3">
+                                    <h4 class="h6">
+                                        @course.CourseTitle
+                                    </h4>
+                                    <p class="fw-light">
+                                        @course.CourseSubtitle
+                                    </p>
+                                    <p>
+                                        <a href="@courseUrl">course link</a>
+                                    </p>
+                                </div>
+
+                            </div>
+                        </details>
+                    }
+                </div>
+                <h3 class="h5 py-2 px-4">Archived Courses</h3>
+                <div class="accordions-wrapper accordions-wrapper--border accordions-wrapper--border--light mb-5">
+                    @foreach(var course in Model.ArchivedCourses)
                     {
                         <details class="accordion accordion--light">
                             <summary class="accordion__toggle px-3">
@@ -188,15 +222,51 @@
                                         @course.CourseTitle
                                     </h4>
                                     <p class="fw-light">
-                                        @course.ProgramTitle
+                                        @course.CourseSubtitle
                                     </p>
                                     <p>
-                                        Completed on: @course.CompletionDate.Value.ToString("yyyy-MM-dd")
+                                        Expired on: @course.GoodThroughDate.AddDays(90).ToString("yyyy-MM-dd")
                                     </p>
                                 </div>
 
                             </div>
                         </details>
+                    }
+                </div>
+                <h3 class="h5 py-2 px-4">Completed Courses</h3>
+                <div class="accordions-wrapper accordions-wrapper--border accordions-wrapper--border--light mb-5">
+                    @if (Model.CompletedCourses == null)
+                    {
+                        @foreach (var course in Model.CompletedCourses)
+                        {
+                            <details class="accordion accordion--light">
+                                <summary class="accordion__toggle px-3">
+                                    <div class="ps-1">
+                                        @course.CourseTitle
+                                    </div>
+                                    <div class="accordion__toggle-icon me-1">
+                                        <i class="fas fa-chevron-down"></i>
+                                        <i class="fas fa-chevron-up"></i>
+                                    </div>
+
+                                </summary>
+                                <div class="accordion__content px-4 text-body">
+
+                                    <div class="border border-medium p-4 rounded mb-3">
+                                        <h4 class="h6">
+                                            @course.CourseTitle
+                                        </h4>
+                                        <p class="fw-light">
+                                            @course.ProgramTitle
+                                        </p>
+                                        <p>
+                                            Completed on: @course.CompletionDate.Value.ToString("yyyy-MM-dd")
+                                        </p>
+                                    </div>
+
+                                </div>
+                            </details>
+                        }
                     }
                 </div>
 

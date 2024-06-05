@@ -18,11 +18,12 @@ public class OrderEventPublisher(
 {
     public async Task Send(OrderReadOnly order, EntityEventAction action)
     {
-        var orderEvent = mapper.Map<OrderEvent>(order);
+
+        var orderEvent = mapper.Map<UmbracoOrderComplete>(order);
         if (orderEvent != null) _ = Send(orderEvent, action);
     }
 
-    public async Task Send(OrderEvent order, EntityEventAction action)
+    public async Task Send(UmbracoOrderComplete order, EntityEventAction action)
     {
         var endpointSettings = messagingSettings.GetEndPointSettings<OrderEvent>();
         switch (endpointSettings)
@@ -33,7 +34,7 @@ public class OrderEventPublisher(
             case { Enabled: true }:
             {
                 logger.LogInformation("Sending order to hub...");
-                var orderEntityEvent = new EntityEvent<OrderEvent>(
+                var orderEntityEvent = new EntityEvent<UmbracoOrderComplete>(
                     EntityEventSource.UmbracoCloud,
                     EntityEventSource.UmbracoCloud,
                     action,
@@ -42,12 +43,11 @@ public class OrderEventPublisher(
                     Guid.NewGuid());
 
                 await publishEndpoint.Publish(
-                    orderEntityEvent,
+                    order,
                     context =>
                     {
                         context.InitiatorId = context.MessageId;
-                        context.Headers.Set(MessageHeader.MessageType, typeof(OrderEvent).Name);
-                        context.Headers.Set(MessageHeader.Action, orderEntityEvent.Action.ToString());
+                        context.Headers.Set(MessageHeader.MessageType, typeof(UmbracoOrderComplete).Name);
                         context.Headers.Set(MessageHeader.Source, orderEntityEvent.Source.ToString());
                         context.Headers.Set(MessageHeader.Originator, orderEntityEvent.Originator.ToString());
                         context.Headers.Set(MessageHeader.CorrelationId, orderEntityEvent.CorrelationId.ToString());
