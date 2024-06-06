@@ -5,7 +5,6 @@ using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Cms.Core.Scoping;
 using Umbraco.Cms.Core.Services;
 using Umbraco.Cms.Core.Web;
-using WRA.Umbraco.Dtos;
 using WRA.Umbraco.Extensions;
 using WRA.Umbraco.Helpers.Constants;
 using WRA.Umbraco.Models;
@@ -47,6 +46,28 @@ public class CompanyRepository(
         }
     }
 
+    public IPublishedContent? GetByID(Guid? companyKey)
+    {
+        try
+        {
+            using var scope = coreScopeProvider.CreateCoreScope(autoComplete: true);
+            if (companyKey == null || companyKey == Guid.Empty)
+            {
+                return null;
+            }
+
+            using var umbracoContextReference = umbracoContextFactory.EnsureUmbracoContext();
+            var contentCache = umbracoContextReference.UmbracoContext.Content;
+            var companyContent = contentCache.GetById(companyKey.Value);
+
+            return companyContent;
+        }
+        catch (Exception e)
+        {
+            logger.LogError(e, "Error getting company by key: {Key}", companyKey);
+            throw;
+        }
+    }
     [DisableConcurrentExecution(10)]
     [AutomaticRetry(Attempts = 0, OnAttemptsExceeded = AttemptsExceededAction.Fail)]
     public IContent? CreateOrUpdate(ExternalCompanyDto companyDto)

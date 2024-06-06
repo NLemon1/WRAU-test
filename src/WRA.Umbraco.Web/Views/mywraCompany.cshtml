@@ -106,7 +106,11 @@
                                                 <label for="agentIndividual" class="mb-3">@content?.IndividualAgentDropdownLabel</label>
                                             }
                                             <select id="agentIndividual" class="form-select">
-                                                <option selected>Select a ...</option>
+                                                <option selected>Select an Agent</option>
+                                                @foreach(var agent in content.MembersInCompany)
+                                                {
+                                                    <option value="@agent.Key">@agent.Name (@agent.Username)</option>
+                                                }
                                             </select>
                                         </div>
 

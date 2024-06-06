@@ -48,11 +48,12 @@ public class MyWraEducationController(
         var currentCourses = courseProgressResponse
             .Where(c => !c.Completed && c.GoodThroughDate > now)
             .ToList();
+        var requiredCourses = requiredCoursesResponse.Where(rq => !rq.Status.Equals("Complete")).ToList();
 
         MywraEducation viewModel = new(CurrentPage!, publishedValueFallback)
         {
             Orders = orderHistory,
-            RequiredCourses = requiredCoursesResponse,
+            RequiredCourses = requiredCourses,
             CurrentCourses = currentCourses,
             // CompletedCourses = completedCourses,
             ArchivedCourses = archivedCourses

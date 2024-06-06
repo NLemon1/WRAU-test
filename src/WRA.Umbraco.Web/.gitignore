@@ -466,6 +466,7 @@ appsettings-schema.*.json
 
 # Temp folder containing Examine indexes, NuCache, MediaCache, etc.
 /umbraco/Data/TEMP/
+/umbraco/Deploy/
 
 # SQLite database files
 /umbraco/Data/*.sqlite.db
