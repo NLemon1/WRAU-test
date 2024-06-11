@@ -4,6 +4,11 @@ public static class GlobalConstants
 {
     public const string ExternalId = "externalId";
 
+    public static class Order
+    {
+        public const string NotShippable = "notShippable";
+    }
+
     public static class Product
     {
         public const string Sku = "sku";
