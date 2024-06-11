@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Umbraco.Cms.Core.Cache;
 using Umbraco.Cms.Core.Logging;
 using Umbraco.Cms.Core.Routing;
@@ -19,8 +20,8 @@ public class MemberEditSurfaceController(
     ServiceContext services,
     AppCaches appCaches,
     IProfilingLogger profilingLogger,
-    IPublishedUrlProvider publishedUrlProvider
-
+    IPublishedUrlProvider publishedUrlProvider,
+    ILogger<MemberEditSurfaceController> logger
     ) : SurfaceController(
         umbracoContextAccessor,
         databaseFactory,
@@ -43,7 +44,7 @@ public class MemberEditSurfaceController(
                 return Redirect(redirectUrl);
             }
 
-            // Get member
+            // Get  member
             var member = services.MemberService.GetById(memberInfo.MemberId);
             // update member
             if (member == null) return Redirect(redirectUrl);
@@ -61,6 +62,7 @@ public class MemberEditSurfaceController(
             member.SetIfNotEmpty(GlobalConstants.Member.CellPhone, memberInfo.CellPhone);
             member.SetIfNotEmpty(GlobalConstants.Member.HomePhone, memberInfo.HomePhone);
             member.SetIfNotEmpty(GlobalConstants.Member.PersonalWebSite, memberInfo.PersonalWebSite);
+            member.SetIfNotEmpty(GlobalConstants.Member.PrimaryCounties, memberInfo.PrimaryCounties);
             member.SetIfNotEmpty(GlobalConstants.Member.SecondaryLanguage, memberInfo.SecondaryLanguage);
             member.SetIfNotEmpty(GlobalConstants.Member.AreaOfSpecialty, memberInfo.AreaOfSpecialty);
             services.MemberService.Save(member);
@@ -68,7 +70,7 @@ public class MemberEditSurfaceController(
         }
         catch (Exception e)
         {
-            Console.WriteLine(e);
+            logger.LogError(e,"Error updating member: {memberInfo}", memberInfo.MemberId);
             throw;
         }
     }

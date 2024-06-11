@@ -29,6 +29,7 @@ public static class GlobalConstants
         public const string PersonalWebSite = "personalWebsite";
         public const string SecondaryLanguage = "secondaryLanguage";
         public const string AreaOfSpecialty = "areaOfSpecialty";
+        public const string PrimaryCounties = "PrimaryCounties";
 
     }
 }

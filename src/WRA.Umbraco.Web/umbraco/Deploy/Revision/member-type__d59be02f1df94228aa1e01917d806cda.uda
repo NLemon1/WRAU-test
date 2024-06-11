@@ -44,6 +44,13 @@
           "SortOrder": 36
         },
         {
+          "Key": "0fc883eb-7c24-4482-ada0-2c0542f119c2",
+          "Alias": "primaryCounties",
+          "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+          "Name": "Primary Counties",
+          "SortOrder": 37
+        },
+        {
           "Key": "116179d0-9dac-4cdc-a7e7-f454a241afc3",
           "Alias": "personalWebsite",
           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",

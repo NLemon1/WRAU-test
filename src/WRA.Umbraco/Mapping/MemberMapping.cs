@@ -35,6 +35,12 @@ public class MemberMapping(
     private void UmbracoMemberToEditMemberDto(IPublishedContent source, EditMemberDto target, MapperContext context)
     {
         target.MemberId = source.Id;
+        target.FirstName = source.Value<string>(GlobalConstants.Member.FirstName) ?? string.Empty;
+        target.LastName = source.Value<string>(GlobalConstants.Member.LastName) ?? string.Empty;
+        target.PrimaryCounties = source.Value<string>(GlobalConstants.Member.PrimaryCounties) ?? string.Empty;
+        target.PersonalWebSite = source.Value<string>(GlobalConstants.Member.PersonalWebSite) ?? string.Empty;
+        target.AreaOfSpecialty = source.Value<string>(GlobalConstants.Member.AreaOfSpecialty) ?? string.Empty;
+        target.SecondaryLanguage = source.Value<string>(GlobalConstants.Member.SecondaryLanguage) ?? string.Empty;
         target.Address1 = source.Value<string>(GlobalConstants.Member.AddressLine1) ?? string.Empty;
         target.Address2 = source.Value<string>(GlobalConstants.Member.AddressLine2) ?? string.Empty;
         target.City = source.Value<string>(GlobalConstants.Member.City) ?? string.Empty;
