@@ -155,6 +155,17 @@
                                                         </td>
                                                     </tr>
                                                 }
+                                                @if (!String.IsNullOrEmpty(memberBoard.LocalBoardFax))
+                                                {
+                                                    <tr>
+                                                        <td class="py-2">
+                                                            Fax
+                                                        </td>
+                                                        <td class="py-2 text-body">
+                                                            @memberBoard.LocalBoardFax
+                                                        </td>
+                                                    </tr>
+                                                }
                                                 @if (!String.IsNullOrEmpty(memberBoard.LocalBoardEmail))
                                                 {
                                                     <tr>
