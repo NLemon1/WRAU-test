@@ -2,7 +2,6 @@
   "Name": "Pickup",
   "Alias": "pickup",
   "Sku": "pickup",
-  "TaxClassUdi": "umb://umbraco-commerce-tax-class/b0e88d0c6c4540dc897d018e24497aaa",
   "CalculationConfig": {
     "Prices": [
       {
@@ -25,10 +24,6 @@
   "Dependencies": [
     {
       "Udi": "umb://umbraco-commerce-store/c18ce6af53a242fb9ea3018e24497a4f",
-      "Mode": "Exist"
-    },
-    {
-      "Udi": "umb://umbraco-commerce-tax-class/b0e88d0c6c4540dc897d018e24497aaa",
       "Mode": "Exist"
     },
     {
