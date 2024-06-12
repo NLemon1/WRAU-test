@@ -11,5 +11,6 @@ namespace WRA.Umbraco.Models
             : null;
 
         public IEnumerable<ShippingMethodReadOnly> ShippingMethods => UmbracoCommerceApi.Instance.GetShippingMethods(this.GetStore().Id);
+        public bool ShippingNotRequired { get; set; }
     }
 }

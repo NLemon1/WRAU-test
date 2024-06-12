@@ -4,7 +4,7 @@
   "BaseCurrencyUdi": "umb://umbraco-commerce-currency/952c300228b84053bc8d018e244a7b6d",
   "DefaultCountryUdi": "umb://umbraco-commerce-country/e3383bdc08f44488b9bb018e2449e808",
   "DefaultTaxClassUdi": "umb://umbraco-commerce-tax-class/b0e88d0c6c4540dc897d018e24497aaa",
-  "DefaultLocationUdi": "umb://umbraco-commerce-location/8715ea41185740a984d2018e24497a78",
+  "DefaultLocationUdi": "umb://umbraco-commerce-location/df1ee2491ced4504b65a0190083c7478",
   "DefaultOrderStatusUdi": "umb://umbraco-commerce-order-status/827e1651ae5448b2acb5018e24497ab8",
   "ErrorOrderStatusUdi": "umb://umbraco-commerce-order-status/f911f13adcc44112bd07018e24497ac0",
   "CookieTimeout": "365.00:00:00",
@@ -41,7 +41,7 @@
       "Mode": "Exist"
     },
     {
-      "Udi": "umb://umbraco-commerce-location/8715ea41185740a984d2018e24497a78",
+      "Udi": "umb://umbraco-commerce-location/df1ee2491ced4504b65a0190083c7478",
       "Mode": "Exist"
     },
     {

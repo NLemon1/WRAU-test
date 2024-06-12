@@ -1,14 +1,15 @@
 ﻿@using Umbraco.Commerce.Extensions;
+@using WRA.Umbraco.Helpers.Constants
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<CheckoutShippingMethodPage>
 
 @{
-    Layout = "CheckoutStepPage.cshtml";
-    var addressLine1 = Model.Order.Properties["shippingLine1"] ?? string.Empty;
-    var city = Model.Order.Properties["shippingCity"] ?? string.Empty;
-    var state = Model.Order.Properties["ShippingState"] ?? string.Empty;
-    var zip = Model.Order.Properties["shippingZip"] ?? string.Empty;
-    var country = Model.Order.Properties["shippingCountry"] ?? string.Empty;
-    var formattedAddress = $"{addressLine1}, {city}, {state}, {zip}, {country}";
+	Layout = "CheckoutStepPage.cshtml";
+	var addressLine1 = Model.Order.Properties["shippingLine1"] ?? string.Empty;
+	var city = Model.Order.Properties["shippingCity"] ?? string.Empty;
+	var state = Model.Order.Properties["ShippingState"] ?? string.Empty;
+	var zip = Model.Order.Properties["shippingZip"] ?? string.Empty;
+	var country = Model.Order.Properties["shippingCountry"] ?? string.Empty;
+	var formattedAddress = $"{addressLine1}, {city}, {state}, {zip}, {country}";
 }
 
 @section aside {
@@ -36,9 +37,11 @@
         </div>
     }
 
+	@if (!Model.ShippingNotRequired)
+	{
     <h2 class="h4" style="text-transform: none;">Shipping Method</h2>
     <ul class="list-unstyled mb-0">
-        @foreach (var item in Model.ShippingMethods.Select((sm, i) => new { ShippingMethod = sm, Index = i }))
+        @foreach (var item in Model.ShippingMethods.Where(m => m.Alias != "noShipping").Select((sm, i) => new { ShippingMethod = sm, Index = i }))
         {
             <li class="mb-2 border rounded">
                 <label class="d-block px-3 py-2">
@@ -47,7 +50,13 @@
                 </label>
             </li>
         }
-    </ul>
+		</ul>
+	}
+	else
+	{
+		<h2 class="h4" style="text-transform: none;">No Shipping Required</h2>
+		<input type="hidden" name="shippingMethod" value="@Model.ShippingMethods.FirstOrDefault(s => s.Alias == "noShipping").Id" />
+	}
 
     @*<h3 class="text-xl font-medium mb-4">Shipping Method</h3>
     <ul class="border border-gray-300 rounded">
