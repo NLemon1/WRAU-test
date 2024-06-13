@@ -4,6 +4,7 @@ using Umbraco.Commerce.Common.Events;
 using Umbraco.Commerce.Core.Events.Notification;
 using WRA.Umbraco.Contracts;
 using WRA.Umbraco.Events.Publishers;
+using WRA.Umbraco.Web.Services;
 
 namespace WRA.Umbraco.Events.Notifications.Commerce;
 

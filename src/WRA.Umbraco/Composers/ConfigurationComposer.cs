@@ -33,7 +33,10 @@ public class ConfigurationComposer : IComposer
         // Retrieve external API settings
         WraExternalApiSettings externalApiSettings = builder.Config.GetSection(nameof(WraExternalApiSettings)).Get<WraExternalApiSettings>() ?? throw new ApplicationConfigurationException(nameof(WraExternalApiSettings));
 
+        TaxJarApiSettings taxJarApiSettings = builder.Config.GetSection(nameof(TaxJarApiSettings)).Get<TaxJarApiSettings>() ?? throw new ApplicationConfigurationException(nameof(TaxJarApiSettings));
+
         // Bind external API settings as a singleton (one per application lifetime)
         builder.Services.AddSingleton(externalApiSettings);
+        builder.Services.AddSingleton(taxJarApiSettings);
     }
 }

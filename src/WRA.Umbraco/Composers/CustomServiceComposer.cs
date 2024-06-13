@@ -4,7 +4,9 @@ using Umbraco.Cms.Core.Composing;
 using Umbraco.Cms.Core.Persistence.Repositories;
 using Umbraco.Cms.Core.Security;
 using Umbraco.Cms.Infrastructure.Persistence.Repositories.Implement;
+using Umbraco.Commerce.Extensions;
 using WRA.Umbraco.BackOffice;
+using WRA.Umbraco.Commerce.Adjustments;
 using WRA.Umbraco.Contracts;
 using WRA.Umbraco.Events.Publishers;
 using WRA.Umbraco.Helpers;
@@ -48,6 +50,9 @@ public class CustomServiceComposer : IComposer
         builder.Services.AddScoped<MemberMarketingSubscriptionService>();
         builder.Services.AddScoped<MemberCommitteesService>();
 
+        // Register the TaxJar API service
+        builder.Services.AddScoped<TaxJarExternalApiService>();
+
         // Binds IMember event to APIs member DTO.
         builder.Services.AddScoped<MemberEvent>();
 
@@ -83,6 +88,7 @@ public class CustomServiceComposer : IComposer
         // Register the Service bus subscription name generator as a singleton (one instance per application lifetime).
         builder.Services.AddSingleton<ISubscriptionNameGenerator, AzureSubscriptionNameGenerator>();
 
-
+        builder.WithPriceAdjusters().Append<TaxJarAdjuster>();
+        builder.Services.AddMemoryCache();
     }
 }
