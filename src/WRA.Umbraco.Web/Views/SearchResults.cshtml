@@ -8,6 +8,13 @@
         <div class="result-card p-4 p-lg-5 position-relative">
             <a href="@content.Url()" class="stretched-link text-body text-decoration-none">
                 <h2 class="h5">@content.Name</h2>
+				@if (content.HasValue("visibleToAll"))
+				{
+					@if (content.Value("visibleToAll").ToString() == "False")
+					{
+						<p>Locked</p>
+					}
+				}
             </a>
             @if (content.HasValue("metaDescription"))
             {
