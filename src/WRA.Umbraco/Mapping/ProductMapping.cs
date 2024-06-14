@@ -34,8 +34,7 @@ public class ProductMapping(
         productEvent.ProductTaxonomyId = mappingHelper.GetExternalIdOnContent(content, "productTaxonomy").SafeGuid();
         productEvent.ProductTypeId = mappingHelper.GetExternalIdOnParent(content).SafeGuid();
         productEvent.IsShippable = content.GetValue<bool>("isShippable");
-
-
+        productEvent.IsTaxable = content.GetValue<bool>("isTaxable");
 
     }
 
@@ -56,6 +55,8 @@ public class ProductMapping(
         target.StartDate = GetValidDate(source.StartDate);
         target.EndDate = GetValidDate(source.EndDate);
         target.IsShippable = source.IsShippable;
+        target.IsTaxable = source.IsTaxable;
+        target.ProductSalesTaxCategoryCode = source.salesTaxCategoryCode ?? string.Empty;
     }
 
     private DateTime? GetValidDate(DateTime? date)

@@ -93,7 +93,6 @@ public class ProductHelper(
         content.SetValue("price", basePrice);
         content.SetValue("memberPrice", memberPrice);
         content.SetValue(GlobalConstants.ExternalId, productEvent.Id);
-        content.SetValue("SalesTaxCategoryCode", productEvent.ProductSalesTaxCategoryCode);
         content.Name = productEvent.Name;
 
         var existingTaxonomy = taxonomyRepository.Get(productEvent.ProductTaxonomyId.SafeGuid());
