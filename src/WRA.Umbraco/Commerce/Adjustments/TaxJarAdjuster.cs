@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Taxjar;
+using Umbraco.Commerce.Common;
 using Umbraco.Commerce.Common.Logging;
 using Umbraco.Commerce.Core.Adjusters;
 using Umbraco.Commerce.Core.Calculators;
@@ -18,13 +19,13 @@ using WRA.Umbraco.Web.Dtos.External;
 using WRA.Umbraco.Web.Services;
 
 namespace WRA.Umbraco.Commerce.Adjustments;
-public class TaxJarAdjuster(IMemoryCache memoryCache, TaxJarExternalApiService taxJarService) : PriceAdjusterBase
+public class TaxJarAdjuster(IMemoryCache memoryCache, TaxJarExternalApiService taxJarService, IUnitOfWorkProvider unitOfWorkProvider) : PriceAdjusterBase
 {
     public override void ApplyPriceAdjustments(PriceAdjusterArgs args)
     {
 
         string address1 = args.Order.Properties["shippingAddressLine1"].SafeString();
-        if (!string.IsNullOrEmpty(address1) && args.Order != null && args.Order.OrderLines.Count > 0)
+        if (!string.IsNullOrEmpty(address1) && args.Order != null && args.Order.OrderLines.Count > 0 && args.Order.ShippingInfo.ShippingMethodId.HasValue)
         {
             // get the rest of the address
 

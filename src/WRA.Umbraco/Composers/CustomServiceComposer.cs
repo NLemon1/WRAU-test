@@ -49,6 +49,7 @@ public class CustomServiceComposer : IComposer
         builder.Services.AddScoped<CourseService>();
         builder.Services.AddScoped<MemberMarketingSubscriptionService>();
         builder.Services.AddScoped<MemberCommitteesService>();
+        builder.Services.AddScoped<WRAShippingService>();
 
         // Register the TaxJar API service
         builder.Services.AddScoped<TaxJarExternalApiService>();

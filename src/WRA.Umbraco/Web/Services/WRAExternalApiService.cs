@@ -328,4 +328,22 @@ public class WraExternalApiService(WraExternalApiSettings settings)
             throw e;
         }
     }
+
+    public async Task<RestResponse> GetShippingRates(ShippingRateRequestDto shippingRequest)
+    {
+        try
+        {
+            var options = new RestClientOptions(settings.VersionedBaseUrl);
+            var client = new RestClient(options);
+            var request = new RestRequest("shipping/ups/rate", Method.Post);
+            request.AddHeader(settings.ApiKeyHeader, settings.ApiKey);
+            request.AddBody(JsonConvert.SerializeObject(shippingRequest));
+            var response = client.Execute(request);
+            return response;
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+    }
 }
