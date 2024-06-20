@@ -1,6 +1,7 @@
 ﻿using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Operations;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,10 +20,12 @@ using WRA.Umbraco.Web.Dtos.External;
 using WRA.Umbraco.Web.Services;
 
 namespace WRA.Umbraco.Commerce.Adjustments;
-public class TaxJarAdjuster(IMemoryCache memoryCache, TaxJarExternalApiService taxJarService, IUnitOfWorkProvider unitOfWorkProvider) : PriceAdjusterBase
+public class TaxJarAdjuster(IMemoryCache memoryCache,  IUnitOfWorkProvider unitOfWorkProvider, IServiceScopeFactory scopeFactory) : PriceAdjusterBase
 {
     public override void ApplyPriceAdjustments(PriceAdjusterArgs args)
     {
+        using var scope = scopeFactory.CreateScope();
+        var taxJarService = scope.ServiceProvider.GetRequiredService<TaxJarExternalApiService>();
 
         string address1 = args.Order.Properties["shippingAddressLine1"].SafeString();
         if (!string.IsNullOrEmpty(address1) && args.Order != null && args.Order.OrderLines.Count > 0 && args.Order.ShippingInfo.ShippingMethodId.HasValue)
