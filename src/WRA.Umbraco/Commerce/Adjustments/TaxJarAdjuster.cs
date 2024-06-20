@@ -24,31 +24,33 @@ public class TaxJarAdjuster(IMemoryCache memoryCache,  IUnitOfWorkProvider unitO
 {
     public override void ApplyPriceAdjustments(PriceAdjusterArgs args)
     {
-        using var scope = scopeFactory.CreateScope();
-        var taxJarService = scope.ServiceProvider.GetRequiredService<TaxJarExternalApiService>();
-
-        string address1 = args.Order.Properties["shippingAddressLine1"].SafeString();
-        if (!string.IsNullOrEmpty(address1) && args.Order != null && args.Order.OrderLines.Count > 0 && args.Order.ShippingInfo.ShippingMethodId.HasValue)
+        using (var scope = scopeFactory.CreateScope())
         {
-            // get the rest of the address
+            var taxJarService = scope.ServiceProvider.GetRequiredService<TaxJarExternalApiService>();
 
-            string zipCode = args.Order.Properties["shippingZipCode"].SafeString();
-            string cacheKey = "Tax-" + args.Order.CartNumber + "-" + zipCode + "-" + args.Order.OrderLines.Sum(s => s.Quantity) + "-" + args.Order.OrderLines.Sum(o => o.BasePrice.WithoutAdjustments.WithoutTax);
-            var cacheData = memoryCache.Get<TaxResponse>(cacheKey);
-            if (cacheData == null || cacheData.Tax == null)
+            string address1 = args.Order.Properties["shippingAddressLine1"].SafeString();
+            if (!string.IsNullOrEmpty(address1) && args.Order != null && args.Order.OrderLines.Count > 0 && args.Order.ShippingInfo.ShippingMethodId.HasValue)
             {
-                var expirationTime = DateTimeOffset.Now.AddMinutes(5.0);
-                cacheData = taxJarService.GetTaxForOrder(args.Order);
-                memoryCache.Set(cacheKey, cacheData, expirationTime);
-            }
+                // get the rest of the address
 
-            if (cacheData != null)
-            {
-                var price = new Price(0, cacheData.Tax.AmountToCollect, args.Order.CurrencyId);
-                var adjustment = new TaxJarAdjustment("Tax", "TAX", price);
+                string zipCode = args.Order.Properties["shippingZipCode"].SafeString();
+                string cacheKey = "Tax-" + args.Order.CartNumber + "-" + zipCode + "-" + args.Order.OrderLines.Sum(s => s.Quantity) + "-" + args.Order.OrderLines.Sum(o => o.BasePrice.WithoutAdjustments.WithoutTax);
+                var cacheData = memoryCache.Get<TaxResponse>(cacheKey);
+                if (cacheData == null || cacheData.Tax == null)
+                {
+                    var expirationTime = DateTimeOffset.Now.AddMinutes(5.0);
+                    cacheData = taxJarService.GetTaxForOrder(args.Order);
+                    memoryCache.Set(cacheKey, cacheData, expirationTime);
+                }
 
-                // Add the adjustment to the total price
-                args.TotalPriceAdjustments.Add(adjustment);
+                if (cacheData != null)
+                {
+                    var price = new Price(0, cacheData.Tax.AmountToCollect, args.Order.CurrencyId);
+                    var adjustment = new TaxJarAdjustment("Tax", "TAX", price);
+
+                    // Add the adjustment to the total price
+                    args.TotalPriceAdjustments.Add(adjustment);
+                }
             }
         }
     }

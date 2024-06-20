@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,12 +15,12 @@ namespace WRA.Umbraco.ShippingProviders;
 [ShippingProvider("upsProvider", "UPS Shipping", "UPS Shipping provider")]
 public class UPSProvider : ShippingProviderBase<UpsProviderSettings>
 {
-    private readonly WRAShippingService _shippingService;
+    private readonly IServiceScopeFactory _scopeFactory;
     public override bool SupportsRealtimeRates => true;
-    public UPSProvider(UmbracoCommerceContext umbracoCommerce, WRAShippingService shippingService)
+    public UPSProvider(UmbracoCommerceContext umbracoCommerce, IServiceScopeFactory scopeFactory)
         : base(umbracoCommerce)
     {
-        _shippingService = shippingService;
+        _scopeFactory = scopeFactory;
     }
 
     public async override Task<ShippingRatesResult> GetShippingRatesAsync(ShippingProviderContext<UpsProviderSettings> context, CancellationToken cancellationToken = default(CancellationToken))
@@ -27,15 +28,19 @@ public class UPSProvider : ShippingProviderBase<UpsProviderSettings>
         var result = new ShippingRatesResult();
         var options = new List<ShippingRate>();
         var currencyID = context.Order.CurrencyId;
-        var response = _shippingService.GetShippingRate(context.Order.AsShippingRateRequestDto()).GetAwaiter().GetResult();
-        var price = context.Settings.FallbackRate;
-        if (response != null && response.ShippingRate.HasValue)
+        using (var scope = _scopeFactory.CreateScope())
         {
-            price = response.ShippingRate.Value;
-        }
+            var shippingService = scope.ServiceProvider.GetRequiredService<WRAShippingService>();
+            var response = await shippingService.GetShippingRate(context.Order.AsShippingRateRequestDto());
+            var price = context.Settings.FallbackRate;
+            if (response != null && response.ShippingRate.HasValue)
+            {
+                price = response.ShippingRate.Value;
+            }
 
-        options.Add(new ShippingRate(new Price(price, 0.00m, currencyID), new ShippingOption("1", "UPS Ground"), null));
-        result.Rates = options;
+            options.Add(new ShippingRate(new Price(price, 0.00m, currencyID), new ShippingOption("1", "UPS Ground"), null));
+            result.Rates = options;
+        }
         return result;
     }
 }
