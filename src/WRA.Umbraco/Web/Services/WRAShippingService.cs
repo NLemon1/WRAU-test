@@ -15,29 +15,33 @@ using WRA.Umbraco.Helpers.Constants;
 using WRA.Umbraco.Models;
 using WRA.Umbraco.Repositories;
 using WRA.Umbraco.Web.Dtos.External;
+using Microsoft.Extensions.DependencyInjection;
+using Umbraco.Commerce.Common;
 
 namespace WRA.Umbraco.Web.Services;
 public class WRAShippingService
 {
-    private readonly WraExternalApiService _externalServiceClient;
     private readonly ILogger<WRAShippingService> _logger;
+    private readonly IServiceScopeFactory _serviceScopeFactory;
 
     private static readonly JsonSerializerOptions SerializationOptions = new()
     {
         PropertyNameCaseInsensitive = true
     };
     public WRAShippingService(
-        WraExternalApiService externalServiceClient,
-        ILogger<WRAShippingService> logger)
+        ILogger<WRAShippingService> logger,
+        IServiceScopeFactory scopeFactory)
     {
-        _externalServiceClient = externalServiceClient;
+        _serviceScopeFactory = scopeFactory;
         _logger = logger;
     }
     public async Task<ExternalShippingRateDto> GetShippingRate(ShippingRateRequestDto request)
     {
+        using var scope = _serviceScopeFactory.CreateScope();
+        var myService = scope.ServiceProvider.GetRequiredService<WraExternalApiService>();
         try
         {
-            var shippingRatesResponse = await _externalServiceClient.GetShippingRates(request);
+            var shippingRatesResponse = await myService.GetShippingRates(request);
             if (shippingRatesResponse.Content == null) return new ExternalShippingRateDto();
             var shippingRate =
                 JsonSerializer.Deserialize<ExternalShippingRateDto>(
