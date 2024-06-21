@@ -48,7 +48,7 @@ public class UPSProvider : ShippingProviderBase<UpsProviderSettings>
 public class UpsProviderSettings
 {
     [ShippingProviderSetting(Name = "Fallback rate",
-        Description = "The price to fallback to if real time rates calculation fails",
+        Description = "The price to fallback to if real time rates calculation fails.",
         SortOrder = 100)]
     public decimal FallbackRate { get; set; }
 }
