@@ -14,7 +14,7 @@
             @foreach (var eventItem in eventsList)
             {
                 <li class="mb-2_5">
-                    <a href="@eventItem.Url()" class="btn btn-link btn-light ms-n2">@eventItem.Name</a>
+                    <a href="@eventItem.Url()" class="btn btn-link btn-light ms-n2 text-start">@eventItem.Name</a>
                     @if (eventItem.HasValue("startDate"))
                     {
                         <p class="mb-0 fs-sm">@String.Format("{0:MMMM d, yyyy}", eventItem.GetProperty("startDate").GetValue())</p>
