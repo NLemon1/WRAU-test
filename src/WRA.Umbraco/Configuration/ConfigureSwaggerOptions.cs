@@ -31,5 +31,12 @@ public class ConfigureSwaggerOptions : IConfigureOptions<SwaggerGenOptions>
                Title = "Member API",
                Version = "1.0",
            });
+        options.SwaggerDoc(
+           "Commerce-api",
+           new OpenApiInfo
+           {
+               Title = "Commerce API",
+               Version = "1.0",
+           });
     }
 }

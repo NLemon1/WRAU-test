@@ -14,6 +14,13 @@ public static class GlobalConstants
         public const string Sku = "sku";
     }
 
+    public static class GatedContent
+    {
+        public const string GatedMemberGroups = "VisibleToMemberGroups";
+        public const string VisibleToAll = "VisibleToAll";
+        public const string AnonymousUserName = "Anonymous";
+    }
+
     public static class Member
     {
         public const string LocalBoards = "localBoards";

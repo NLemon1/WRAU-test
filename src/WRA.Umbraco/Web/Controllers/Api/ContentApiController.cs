@@ -1,9 +1,8 @@
-using System.Web.Http;
 using Microsoft.AspNetCore.Mvc;
 using Umbraco.Cms.Api.Common.Attributes;
 using Umbraco.Cms.Core.Models.PublishedContent;
-using Umbraco.Cms.Core.Web;
-using Umbraco.Cms.Web.Common;
+using Umbraco.Cms.Web.Common.Controllers;
+using Umbraco.Cms.Web.Common.Filters;
 using WRA.Umbraco.Dtos;
 using WRA.Umbraco.Dtos.Hottips;
 using WRA.Umbraco.Dtos.LegalUpdates;
@@ -17,7 +16,7 @@ namespace WRA.Umbraco.Web.Controllers.Api;
 [MapToApi("content-api")]
 public class ContentApiController(
     SearchService searchService)
-    : ApiController
+    : UmbracoApiController
 {
 
     [HttpPost]
@@ -40,15 +39,16 @@ public class ContentApiController(
         // cast and paginate to DTO response
         var paginatedResults = responseResults
             .OrderBy(p => p.Date).Reverse()
-            .Paginate<Article>(request.Pagination)
+            .Paginate<Article>(request.Pagination!)
             .Select(r => r.AsDto());
 
-        SearchResultsDto SearchInfo = new(responseResults.Count());
-        return new NewsAndUpdatesResponseDto(paginatedResults, SearchInfo);
+        SearchResultsDto searchInfo = new(responseResults.Count());
+        return new NewsAndUpdatesResponseDto(paginatedResults, searchInfo);
     }
 
     [HttpPost]
     [Route("HotTips")]
+    [UmbracoMemberAuthorize("", "Legal Section,WRA Member,WRA Member - Designated REALTOR,Affiliated", "")]
     public HotTipResponseDto GetHotTips(HotTipRequestDto request)
     {
         var (rawResults, _) = ConductSearch(HotTipEntry.ModelTypeAlias);
@@ -69,7 +69,7 @@ public class ContentApiController(
             }
         }
 
-        IEnumerable<HotTipDto> paginatedResults = responseResults
+        var paginatedResults = responseResults
             .Paginate<HotTipEntry>(request.Pagination)
             .Select(r => r.AsDto());
 
@@ -79,6 +79,8 @@ public class ContentApiController(
 
     [HttpPost]
     [Route("LegalUpdates")]
+    [UmbracoMemberAuthorize("", "Legal Section,WRA Member,WRA Member - Designated REALTOR,Affiliated", "")]
+
     public LegalUpdateResponseDto GetLegalUpdates(LegalUpdateRequestDto request)
     {
         var (rawResults, _) = ConductSearch(LegalUpdate.ModelTypeAlias);
@@ -95,10 +97,10 @@ public class ContentApiController(
 
         if (request.Topics?.Any() ?? false)
         {
-            responseResults = responseResults.Where(r => CategoryMatch(r.Topics, request.Topics));
+            responseResults = responseResults.Where(r => r.Topics != null && CategoryMatch(r.Topics, request.Topics));
         }
 
-        IEnumerable<LegalUpdateDto> paginatedResults = responseResults
+        var paginatedResults = responseResults
             .Paginate<LegalUpdate>(request.Pagination)
             .Select(r => r.AsDto());
 

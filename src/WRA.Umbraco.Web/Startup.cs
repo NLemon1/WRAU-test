@@ -35,6 +35,10 @@ public class Startup
     /// </remarks>
     public void ConfigureServices(IServiceCollection services)
     {
+        services.AddResponseCompression(options =>
+        {
+            options.EnableForHttps = true;
+        });
         // umbraco services
         services.AddUmbraco(_env, _config)
         .AddBackOffice()
@@ -63,6 +67,7 @@ public class Startup
             app.UseExceptionHandler("/error");
         }
 
+        app.UseResponseCompression();
         app.UseUmbraco()
             .WithMiddleware(u =>
             {

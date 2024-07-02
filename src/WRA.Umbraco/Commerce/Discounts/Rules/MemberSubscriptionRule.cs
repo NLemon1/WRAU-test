@@ -19,11 +19,16 @@ public class MemberSubscriptionRule(
 {
     public override DiscountRuleResult ValidateRule(DiscountRuleContext context, MemberSubscriptionRuleSettings settings)
     {
+        var discountProductUdi = settings?.DiscountProduct;
+        if (discountProductUdi == null)
+        {
+            return Unfulfilled();
+        }
+
         using var scope = serviceScopeFactory.CreateScope();
         var memberManager = scope.ServiceProvider.GetRequiredService<IMemberManager>();
         var currentMember = memberManager.GetCurrentMemberAsync();
         var ctx = umbracoContextFactory.EnsureUmbracoContext();
-        var discountProductUdi = settings.DiscountProduct;
         var discountProduct = ctx.UmbracoContext.Content.GetById(discountProductUdi);
 
         var currentDate = DateTime.Now;

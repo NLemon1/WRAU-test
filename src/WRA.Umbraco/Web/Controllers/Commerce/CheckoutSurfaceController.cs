@@ -200,7 +200,7 @@ public class CheckoutSurfaceController(
                         { "paymentReference", model.PaymentReference }
                     });
 
-                var address = model.BillingAddress;
+                var address = model.ShippingSameAsBilling ? OrderPropertyHelper.GetShippingAddressAsDto(order) : model.BillingAddress;
                 order.SetProperties(OrderPropertyHelper.BuildBillingInfo(address));
 
                 commerceApi.SaveOrder(order);

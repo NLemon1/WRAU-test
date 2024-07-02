@@ -2,6 +2,7 @@ using WRA.Umbraco.Dtos;
 using Umbraco.Commerce.Core;
 using Umbraco.Commerce.Core.Models;
 using WRA.Umbraco.Contracts;
+using WRA.Umbraco.Extensions;
 using WRA.Umbraco.Helpers.Constants;
 
 namespace WRA.Umbraco.Helpers;
@@ -20,7 +21,9 @@ public static class OrderPropertyHelper
             { CommerceConstants.Shipping.State, address.State },
             { CommerceConstants.Shipping.ZipCode, address.ZipCode },
             { CommerceConstants.Shipping.FirstName, address.FirstName },
-            { CommerceConstants.Shipping.LastName, address.LastName }
+            { CommerceConstants.Shipping.LastName, address.LastName },
+            { CommerceConstants.Shipping.Country, address.Country.ToString() }
+
         };
     }
     public static UmbracoOrderAddressDto GetShippingAddress(OrderReadOnly order)
@@ -33,7 +36,24 @@ public static class OrderPropertyHelper
             Line2 = order.Properties[CommerceConstants.Shipping.AddressLine2],
             City = order.Properties[CommerceConstants.Shipping.City],
             State = order.Properties[CommerceConstants.Shipping.State],
-            ZipCode = order.Properties[CommerceConstants.Shipping.ZipCode]
+            ZipCode = order.Properties[CommerceConstants.Shipping.ZipCode],
+            Country = order.Properties[CommerceConstants.Shipping.Country].SafeGuid()
+
+        };
+    }
+
+    public static OrderAddressDto GetShippingAddressAsDto(OrderReadOnly order)
+    {
+        return new OrderAddressDto
+        {
+            FirstName = order.Properties[CommerceConstants.Shipping.FirstName],
+            LastName = order.Properties[CommerceConstants.Shipping.LastName],
+            Line1 = order.Properties[CommerceConstants.Shipping.AddressLine1],
+            Line2 = order.Properties[CommerceConstants.Shipping.AddressLine2],
+            City = order.Properties[CommerceConstants.Shipping.City],
+            State = order.Properties[CommerceConstants.Shipping.State],
+            ZipCode = order.Properties[CommerceConstants.Shipping.ZipCode],
+            Country = order.Properties[CommerceConstants.Shipping.Country].SafeGuid()
         };
     }
     #endregion
@@ -51,8 +71,8 @@ public static class OrderPropertyHelper
             { CommerceConstants.Billing.AddressLine2, address.Line2 },
             { CommerceConstants.Billing.City, address.City },
             { CommerceConstants.Billing.State, address.State },
-            { CommerceConstants.Billing.ZipCode, address.ZipCode }
-
+            { CommerceConstants.Billing.ZipCode, address.ZipCode },
+            { CommerceConstants.Billing.Country, address.Country.ToString() }
             // { "billingTelephone", model.BillingAddress.Telephone },
         };
     }
@@ -67,7 +87,8 @@ public static class OrderPropertyHelper
             Line2 = order.Properties[CommerceConstants.Billing.AddressLine2],
             City = order.Properties[CommerceConstants.Billing.City],
             State = order.Properties[CommerceConstants.Billing.State],
-            ZipCode = order.Properties[CommerceConstants.Billing.ZipCode]
+            ZipCode = order.Properties[CommerceConstants.Billing.ZipCode],
+            Country = order.Properties[CommerceConstants.Billing.Country].SafeGuid()
         };
     }
     #endregion
@@ -82,7 +103,8 @@ public static class OrderPropertyHelper
             Line2 = order.Properties[CommerceConstants.Shipping.AddressLine2],
             City = order.Properties[CommerceConstants.Shipping.City],
             State = order.Properties[CommerceConstants.Shipping.State],
-            ZipCode = order.Properties[CommerceConstants.Shipping.ZipCode]
+            ZipCode = order.Properties[CommerceConstants.Shipping.ZipCode],
+            Country = order.Properties[CommerceConstants.Shipping.Country].SafeGuid()
         };
     }
 }

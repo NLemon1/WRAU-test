@@ -23,6 +23,7 @@ public static class CommerceConstants
         public const string ZipCode = "shippingZipCode";
         public const string FirstName = "shippingFirstName";
         public const string LastName = "shippingLastName";
+        public const string Country = "shippingCountry";
     }
 
     public static class Billing
@@ -34,5 +35,7 @@ public static class CommerceConstants
         public const string ZipCode = "billingZipCode";
         public const string FirstName = "billingFirstName";
         public const string LastName = "billingLastName";
+        public const string Country = "billingCountry";
+
     }
 }

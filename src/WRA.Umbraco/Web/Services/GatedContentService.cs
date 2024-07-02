@@ -6,15 +6,16 @@ using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Cms.Core.Security;
 using Umbraco.Cms.Core.Services;
 using WRA.Umbraco.Exceptions;
+using WRA.Umbraco.Helpers.Constants;
 using WRA.Umbraco.Services.Caching;
 
 namespace WRA.Umbraco.Web.Services;
 
 public class GatedContentService(IMemberManager memberManager, IMemberGroupService memberGroupService, ILogger<GatedContentService> logger, ICacheKeyProvider cacheKeyProvider, AppCaches appCaches)
 {
-    private const string GatedMemberGroups = "VisibleToMemberGroups";
-    private const string VisibleToAll = "VisibleToAll";
-    private const string AnonymousUserName = "Anonymous";
+    private const string GatedMemberGroups = GlobalConstants.GatedContent.GatedMemberGroups;
+    private const string VisibleToAll = GlobalConstants.GatedContent.VisibleToAll;
+    private const string AnonymousUserName = GlobalConstants.GatedContent.AnonymousUserName;
     private const int VisibleToAllSlidingWindow = 240;
     private const int VisibleToMemberSlidingWindow = 30;
     private const int MemberAuthorizedByGroupSlidingWindow = 30;
@@ -77,6 +78,8 @@ public class GatedContentService(IMemberManager memberManager, IMemberGroupServi
             List<string> authorizedMemberGroupIds = authorizedMemberGroupsField?.GetValue(GatedMemberGroups)?.ToString()
                 .Split(CommaSeparator, StringSplitOptions.RemoveEmptyEntries)
                 .ToList() ?? [];
+
+            // var authorizedSubscriptions = page.Properties.FirstOrDefault(p => p.Alias.Equals("authorizedSubscriptions", StringComparison.OrdinalIgnoreCase));
 
             // If there are authorized groups defined and a member is provided, check if the member belongs to any of these groups.
             bool canView = authorizedMemberGroupIds.Count != 0 && member != null && await MemberIsInAuthorizedGroup(authorizedMemberGroupIds, member);

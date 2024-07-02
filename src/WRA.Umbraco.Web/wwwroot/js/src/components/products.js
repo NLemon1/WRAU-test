@@ -40,7 +40,7 @@ const products = () => {
     }
 
     let subcategory = window.productDataSubCategory;
-    let category = window.productDataCategory; 
+    let category = window.productDataCategory;
 
     //let category = [];
 
@@ -87,7 +87,7 @@ const products = () => {
         })
 
     }
-   
+
     const handleAddToCart = (cartCtas) => {
 
         cartCtas.forEach((cartCta) => {
@@ -103,13 +103,11 @@ const products = () => {
                     "quantity": 1
                 }
 
-                fetch(`/umbraco/commerce/storefront/api/v1/order/${window.orderId}`,
+                fetch(`/WraStoreFrontApi/AddToCart?orderId=${window.orderId}`,
                     {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json; charset=utf-8",
-                            "API-Key": "BtwRaJBwxCYe7eBKnbC7",
-                            "Store": window.storeId,
                             "Accept": "application/json; charset=utf-8"
                         },
                         referrerPolicy: "no-referrer",
@@ -151,7 +149,7 @@ const products = () => {
                 if (result.productType == "Education") {
                     setCTA = `<a href="${result.url}" id="view-product" class="btn btn-primary btn-sm flex-grow-1 py-3">See Details</a>
                     <a href="${result.url}" id="view-product" data-productref="${result.productReference}" class="js-add-cart btn btn-secondary btn-sm border-0 flex-grow-1 py-3">Add To Cart</a>`;
-                }            
+                }
 
                 const setDate = (result.productType == "Events" || result.productType == "Courses") && result.start !== null ? `<p class="fs-xs fw-bold mb-1">${formatDateTime(result.startDate, result.endDate, result.startTime, result.endTime)}</p>` : "";
                 const setCredits = result.creditHours !== 0 ? `<p class="fs-xs mb-1">Credit Hours: <span class="fw-bold"> ${result.creditHours}</span></p>` : "";
@@ -266,14 +264,14 @@ const products = () => {
                 loadTaxonomyTerms(res);
             });
     }
-    
+
 
     postResults = () => {
 
         handleIndicators(true, resultsLoader);
 
-        const checkTax = taxonomy === "All" ? "" : taxonomy; 
-        
+        const checkTax = taxonomy === "All" ? "" : taxonomy;
+
         let bodyObject = {
             "productType": decodeURIComponent(type), //Events, Products, Courses
             "categories": [category], //Professional Development, Publications, Conferences/Conventions, etc.
@@ -318,7 +316,7 @@ const products = () => {
             urlParams.set('taxonomy', taxonomy);
             window.history.pushState({ id: `${taxonomy}` }, '', `${location.pathname}?taxonomy=${taxonomy}`);
         }
-       
+
     }
 
     const updateDomElements = (titleText) => {
