@@ -16,10 +16,11 @@ public class StoreFrontWrapperController(
 {
     [HttpPost]
     [Route("AddToCart")]
-    public bool AddToCart(Guid orderId, [FromBody] ProductAddToCartDto postModel)
+    public ProductAddToCartResponseDto AddToCart(Guid orderId, [FromBody] ProductAddToCartDto postModel)
     {
         try
         {
+            ProductAddToCartResponseDto response = new();
             commerceApi.Uow.Execute(uow =>
             {
                 var order = commerceApi.GetOrder(orderId)
@@ -29,8 +30,11 @@ public class StoreFrontWrapperController(
                 commerceApi.SaveOrder(order);
 
                 uow.Complete();
+                response.Success = true;
+                response.TotalQuantity = order.TotalQuantity;
             });
-            return true;
+
+            return response;
         }
         catch (Exception e)
         {
@@ -45,4 +49,10 @@ public class ProductAddToCartDto
     public string ProductReference { get; set; } = string.Empty;
     public decimal Quantity { get; set; } = 1;
 
+}
+
+public class ProductAddToCartResponseDto
+{
+    public bool Success { get; set; }
+    public decimal TotalQuantity { get; set; } = 0;
 }
