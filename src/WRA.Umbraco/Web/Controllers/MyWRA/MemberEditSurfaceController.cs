@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using Umbraco.Cms.Core.Cache;
 using Umbraco.Cms.Core.Logging;
 using Umbraco.Cms.Core.Routing;
+using Umbraco.Cms.Core.Security;
 using Umbraco.Cms.Core.Services;
 using Umbraco.Cms.Core.Web;
 using Umbraco.Cms.Infrastructure.Persistence;
@@ -17,15 +18,16 @@ namespace WRA.Umbraco.Web.Controllers.MyWRA;
 public class MemberEditSurfaceController(
     IUmbracoContextAccessor umbracoContextAccessor,
     IUmbracoDatabaseFactory databaseFactory,
-    ServiceContext services,
+    ServiceContext serviceContext,
     AppCaches appCaches,
     IProfilingLogger profilingLogger,
     IPublishedUrlProvider publishedUrlProvider,
+    IMemberManager memberManager,
     ILogger<MemberEditSurfaceController> logger
     ) : SurfaceController(
         umbracoContextAccessor,
         databaseFactory,
-        services,
+        serviceContext,
         appCaches,
         profilingLogger,
         publishedUrlProvider
@@ -38,14 +40,16 @@ public class MemberEditSurfaceController(
     {
         try
         {
-            string? redirectUrl = memberInfo.RedirectUrl ?? CurrentPage.Url();
-            if (!ModelState.IsValid)
+            string? redirectUrl = memberInfo?.RedirectUrl ?? CurrentPage!.Url();
+            var currentMember = memberManager.GetCurrentMemberAsync().GetAwaiter().GetResult();
+            bool requestMemberMatchesCurrentMember = memberInfo?.MemberId.ToString() == currentMember.Id;
+            if (!ModelState.IsValid && !requestMemberMatchesCurrentMember)
             {
                 return Redirect(redirectUrl);
             }
 
             // Get  member
-            var member = services.MemberService.GetById(memberInfo.MemberId);
+            var member = Services.MemberService.GetById(memberInfo.MemberId);
             // update member
             if (member == null) return Redirect(redirectUrl);
 
@@ -65,12 +69,12 @@ public class MemberEditSurfaceController(
             member.SetIfNotEmpty(GlobalConstants.Member.PrimaryCounties, memberInfo.PrimaryCounties);
             member.SetIfNotEmpty(GlobalConstants.Member.SecondaryLanguage, memberInfo.SecondaryLanguage);
             member.SetIfNotEmpty(GlobalConstants.Member.AreaOfSpecialty, memberInfo.AreaOfSpecialty);
-            services.MemberService.Save(member);
+            Services.MemberService.Save(member);
             return Redirect(redirectUrl);
         }
         catch (Exception e)
         {
-            logger.LogError(e,"Error updating member: {memberInfo}", memberInfo.MemberId);
+            logger.LogError(e, "Error updating member: {memberInfo}", memberInfo.MemberId);
             throw;
         }
     }

@@ -8066,13 +8066,11 @@
             "quantity": 1
           };
           fetch(
-            `/umbraco/commerce/storefront/api/v1/order/${window.orderId}`,
+            `/WraStoreFrontApi/AddToCart?orderId=${window.orderId}`,
             {
               method: "POST",
               headers: {
                 "Content-Type": "application/json; charset=utf-8",
-                "API-Key": "BtwRaJBwxCYe7eBKnbC7",
-                "Store": window.storeId,
                 "Accept": "application/json; charset=utf-8"
               },
               referrerPolicy: "no-referrer",

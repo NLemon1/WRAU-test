@@ -18,8 +18,7 @@ public class OrderCompletedNotification(
         try
         {
             var order = evt.Order;
-            var orderEventPublisher = StaticServiceProvider.Instance.GetService<OrderEventPublisher>() ??
-                                      throw new ArgumentNullException("Could not Get OrderEventPublisher from ServiceProvider");
+            var orderEventPublisher = StaticServiceProvider.Instance.GetService<OrderEventPublisher>() ?? throw new ArgumentNullException(string.Empty, "Could not Get OrderEventPublisher from ServiceProvider");
             _ = orderEventPublisher.Send(order, EntityEventAction.Create);
         }
         catch (Exception e)
