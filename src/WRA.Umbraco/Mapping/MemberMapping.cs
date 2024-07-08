@@ -177,6 +177,7 @@ public class MemberMapping(
     private static void DtoToMember(ExternalMemberDto source, MemberEvent target, MapperContext context)
     {
         target.Id = source.ExternalId;
+        target.iMISId = source.IMISId;
         target.NrdsId = source.NRDSId;
         target.CommonId = source.CommonId;
         target.UserName = source.UserName;

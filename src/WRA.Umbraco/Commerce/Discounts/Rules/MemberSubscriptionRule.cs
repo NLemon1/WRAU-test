@@ -31,6 +31,8 @@ public class MemberSubscriptionRule(
         var ctx = umbracoContextFactory.EnsureUmbracoContext();
         var discountProduct = ctx.UmbracoContext.Content.GetById(discountProductUdi);
 
+        if (currentMember?.Result == null) return Unfulfilled();
+
         var currentDate = DateTime.Now;
         var memberSubscriptionRepository = scope.ServiceProvider.GetRequiredService<IRepository<MemberSubscription>>();
         bool validSubscriptionsOnMember = memberSubscriptionRepository.GetAll<MemberSubscription>()
