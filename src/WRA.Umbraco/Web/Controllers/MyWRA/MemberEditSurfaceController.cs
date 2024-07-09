@@ -36,26 +36,25 @@ public class MemberEditSurfaceController(
     [HttpPost]
     [ValidateAntiForgeryToken]
     [ValidateUmbracoFormRouteString]
-    public async Task<IActionResult> HandleMemberEdit([Bind(Prefix = "memberUpdateModel")] EditMemberDto memberInfo)
+    public IActionResult HandleMemberEdit([Bind(Prefix = "memberUpdateModel")] EditMemberDto memberInfo)
     {
         try
         {
             string? redirectUrl = memberInfo?.RedirectUrl ?? CurrentPage!.Url();
             var currentMember = memberManager.GetCurrentMemberAsync().GetAwaiter().GetResult();
             bool requestMemberMatchesCurrentMember = memberInfo?.MemberId.ToString() == currentMember.Id;
-            if (!ModelState.IsValid && !requestMemberMatchesCurrentMember)
+            if ((!ModelState.IsValid && !requestMemberMatchesCurrentMember) || memberInfo == null)
             {
                 return Redirect(redirectUrl);
             }
 
             // Get  member
             var member = Services.MemberService.GetById(memberInfo.MemberId);
-            // update member
             if (member == null) return Redirect(redirectUrl);
 
             if (!string.IsNullOrEmpty(memberInfo.FirstName)) member.Name = $"{memberInfo.FirstName} {memberInfo.LastName}";
             member.SetIfNotEmpty(GlobalConstants.Member.FirstName, memberInfo.FirstName);
-            member.SetIfNotEmpty(GlobalConstants.Member.LastName, memberInfo?.LastName);
+            member.SetIfNotEmpty(GlobalConstants.Member.LastName, memberInfo.LastName);
             member.SetIfNotEmpty(GlobalConstants.Member.AddressLine1, memberInfo.Address1);
             member.SetIfNotEmpty(GlobalConstants.Member.AddressLine2, memberInfo.Address2);
             member.SetIfNotEmpty(GlobalConstants.Member.AddressLine3, memberInfo.Address3);
@@ -74,7 +73,7 @@ public class MemberEditSurfaceController(
         }
         catch (Exception e)
         {
-            logger.LogError(e, "Error updating member: {memberInfo}", memberInfo.MemberId);
+            logger.LogError(e, "Error updating member: {MemberInfo}", memberInfo.MemberId);
             throw;
         }
     }

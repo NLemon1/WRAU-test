@@ -15,8 +15,7 @@ namespace WRA.Umbraco.Web.Controllers.Api;
 
 public class ProductSyncApiController(
     WraProductManagementService wraProductManagementService,
-    IUmbracoMapper mapper,
-    ILogger<ProductSyncApiController> logger)
+    IUmbracoMapper mapper)
     : ApiController
 {
     [HttpPost]
@@ -24,23 +23,22 @@ public class ProductSyncApiController(
     public async Task CreateProduct(ExternalProductDto product)
     {
         var productEvent = mapper.Map<ProductEvent>(product);
-        await wraProductManagementService.CreateOrUpdate(productEvent);
+        if (productEvent != null) wraProductManagementService.CreateOrUpdate(productEvent);
     }
 
     [HttpPost]
     [Route("UpdateProduct")]
     public async Task UpdateProduct(ExternalProductDto product)
     {
-        var productEvent = mapper.Map<ProductEvent>(product);
-        await wraProductManagementService.CreateOrUpdate(productEvent);
+        await CreateProduct(product);
     }
 
     [HttpPost]
     [Route("DeleteProduct")]
-    public async Task DeleteProduct(ExternalProductDto product)
+    public void DeleteProduct(ExternalProductDto product)
     {
         var productEvent = mapper.Map<ProductEvent>(product);
-        await wraProductManagementService.Delete(productEvent);
+        if (productEvent != null) wraProductManagementService.Delete(productEvent);
     }
 
 }

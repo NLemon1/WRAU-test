@@ -39,7 +39,7 @@ public class MemberDonationService
             var memberDonations =
                 JsonSerializer.Deserialize<List<ExternalMemberDonationDto>>(
                     memberDonationResponse.Content,
-                    SerializationOptions);
+                    SerializationOptions) ?? [];
             return memberDonations;
         }
         catch (Exception ex)

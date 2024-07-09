@@ -20,14 +20,13 @@ public class WraMemberManagementService(
     IUmbracoCommerceApi commerceApi,
     IUmbracoContextAccessor umbracoContextAccessor,
     IUmbracoContextFactory umbracoContextFactory,
-    IContentService contentService,
     MemberHelper memberHelper,
     ILogger<WraMemberManagementService> logger)
 {
     private const string DefaultMemberType = "Member";
 
     [DisableConcurrentExecution(timeoutInSeconds: 5)]
-    public async Task<IMember?> CreateOrUpdate(MemberEvent memberEvent)
+    public IMember? CreateOrUpdate(MemberEvent memberEvent)
     {
         try
         {
@@ -75,6 +74,7 @@ public class WraMemberManagementService(
             throw;
         }
     }
+
     [DisableConcurrentExecution(10)]
     public IMember? Update(MemberEvent memberEvent, IMember? targetMember = null)
     {
@@ -82,7 +82,6 @@ public class WraMemberManagementService(
         // suppress any notification to prevent our listener from firing an "updated member" webhook back at the queue
         using var scope = coreScopeProvider.CreateCoreScope();
         using var umbracoContextReference = umbracoContextFactory.EnsureUmbracoContext();
-        var contentQuery = umbracoContextReference.UmbracoContext.Content;
 
         var existingMember = targetMember ?? memberService.GetByEmail(memberEvent.Email);
 
@@ -125,20 +124,21 @@ public class WraMemberManagementService(
         }
     }
 
-
-    public async Task<(IdentityResult IdentityResult, MemberIdentityUser MemberIdentityUser)> RegisterMember(RegisterModel model, string memberGroup = "Visitor")
+    public async Task<(IdentityResult? IdentityResult, MemberIdentityUser? MemberIdentityUser)> RegisterMember(RegisterModel model, string memberGroup = "Visitor")
     {
         using var scope = coreScopeProvider.CreateCoreScope(autoComplete: true);
 
-        if (string.IsNullOrEmpty(model.Name) && string.IsNullOrEmpty(model.Email) == false)
+        if (string.IsNullOrEmpty(model.Name) && !string.IsNullOrEmpty(model.Email))
         {
             model.Name = model.Email;
         }
+
         var memberExists = memberService.GetByEmail(model.Email);
         if (memberExists != null)
         {
             return (IdentityResult.Failed(new IdentityError { Code = "MemberExists", Description = "Member already exists" }), null);
         }
+
         model.Username = model.UsernameIsEmail || model.Username == null ? model.Email : model.Username;
 
         var identityUser =
@@ -156,7 +156,7 @@ public class WraMemberManagementService(
         var member = memberService.GetByKey(identityUser.Key);
         if (member == null)
         {
-            throw new InvalidOperationException($"Could not find a member with key: {member?.Key}.");
+            throw new InvalidOperationException($"Could not find a member with key: {identityUser.Key}.");
         }
 
         SetMemberProperties(model.MemberProperties, member);
@@ -168,7 +168,6 @@ public class WraMemberManagementService(
 
         return (identityResult, identityUser);
     }
-
 
     private void SetMemberProperties(List<MemberPropertyModel> properties, IMember member)
     {

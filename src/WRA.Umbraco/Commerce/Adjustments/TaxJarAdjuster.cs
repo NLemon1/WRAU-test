@@ -20,7 +20,7 @@ using WRA.Umbraco.Web.Dtos.External;
 using WRA.Umbraco.Web.Services;
 
 namespace WRA.Umbraco.Commerce.Adjustments;
-public class TaxJarAdjuster(IMemoryCache memoryCache,  IUnitOfWorkProvider unitOfWorkProvider, IServiceScopeFactory scopeFactory) : PriceAdjusterBase
+public class TaxJarAdjuster(IMemoryCache memoryCache, IServiceScopeFactory scopeFactory) : PriceAdjusterBase
 {
     public override void ApplyPriceAdjustments(PriceAdjusterArgs args)
     {

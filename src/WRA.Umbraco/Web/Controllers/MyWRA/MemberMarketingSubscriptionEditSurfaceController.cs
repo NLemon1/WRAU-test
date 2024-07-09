@@ -43,9 +43,7 @@ public class MemberMarketingSubscriptionEditSurfaceController(
     {
         try
         {
-            var paramValue = "tabpanel-subscriptions";
-            var queryString = QueryString.Create("#", paramValue);
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid || emailSubscriptionUpdateModel == null)
             {
                 return Redirect("/mywra/profile#tabpanel-subscriptions");
             }
@@ -53,7 +51,7 @@ public class MemberMarketingSubscriptionEditSurfaceController(
             foreach(var subscriptionToUpdate in emailSubscriptionUpdateModel.Where(m => m.IsActive != m.PreviousValue))
             {
                 // Update magazine subscription
-                memberMarketingSubscriptionService.UpdateMarketingSubscription(subscriptionToUpdate);
+                await memberMarketingSubscriptionService.UpdateMarketingSubscription(subscriptionToUpdate);
             }
 
             return Redirect("/mywra/profile#tabpanel-subscriptions");
@@ -72,9 +70,7 @@ public class MemberMarketingSubscriptionEditSurfaceController(
     {
         try
         {
-            var paramValue = "tabpanel-subscriptions";
-            var queryString = QueryString.Create("#", paramValue);
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid || magazineSubscriptionUpdateModel == null)
             {
                 return Redirect("/mywra/profile#tabpanel-subscriptions");
             }
@@ -82,7 +78,7 @@ public class MemberMarketingSubscriptionEditSurfaceController(
             foreach (var subscriptionToUpdate in magazineSubscriptionUpdateModel.Where(m => m.IsActive != m.PreviousValue))
             {
                 // Update magazine subscription
-                memberMarketingSubscriptionService.UpdateMarketingSubscription(subscriptionToUpdate);
+                await memberMarketingSubscriptionService.UpdateMarketingSubscription(subscriptionToUpdate);
             }
 
             return Redirect("/mywra/profile#tabpanel-subscriptions");

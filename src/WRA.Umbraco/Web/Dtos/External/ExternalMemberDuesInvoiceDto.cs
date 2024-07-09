@@ -17,7 +17,7 @@ public class ExternalMemberDuesInvoiceDto
     public string? LocalBoardID { get; set; }
     public string? LocalBoardName { get; set; }
     public int ECControlNumber { get; set; }
-    public int MemberID { get; set;}
+    public int MemberID { get; set; }
     public int Year { get; set; }
     public int DuesBillSeqn { get; set; }
 }

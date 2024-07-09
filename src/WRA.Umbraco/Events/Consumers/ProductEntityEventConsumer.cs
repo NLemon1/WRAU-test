@@ -14,6 +14,7 @@ public class ProductEntityEventConsumer(ILogger<ProductEntityEventConsumer> logg
         try
         {
             var productEvent = context.Message.Entity;
+
             // var message = context.Message
 
             switch (context.Message.Action)
@@ -43,7 +44,7 @@ public class ProductEntityEventConsumer(ILogger<ProductEntityEventConsumer> logg
         }
         catch (Exception e)
         {
-            logger.LogInformation("Cannot consume message");
+            logger.LogInformation(e, "Cannot consume message");
             throw;
         }
     }

@@ -17,6 +17,5 @@ public class OrderBuiltNotification(
         if (currentMember == null) return;
         evt.Order.AssignToCustomer(currentMember.Key.ToString());
 
-
     }
 }

@@ -19,29 +19,22 @@ using Microsoft.Extensions.DependencyInjection;
 using Umbraco.Commerce.Common;
 
 namespace WRA.Umbraco.Web.Services;
-public class WRAShippingService
+public class WraShippingService(
+    ILogger<WraShippingService> logger,
+    IServiceScopeFactory scopeFactory)
 {
-    private readonly ILogger<WRAShippingService> _logger;
-    private readonly IServiceScopeFactory _serviceScopeFactory;
-
     private static readonly JsonSerializerOptions SerializationOptions = new()
     {
         PropertyNameCaseInsensitive = true
     };
-    public WRAShippingService(
-        ILogger<WRAShippingService> logger,
-        IServiceScopeFactory scopeFactory)
+
+    public ExternalShippingRateDto? GetShippingRate(ShippingRateRequestDto request)
     {
-        _serviceScopeFactory = scopeFactory;
-        _logger = logger;
-    }
-    public async Task<ExternalShippingRateDto> GetShippingRate(ShippingRateRequestDto request)
-    {
-        using var scope = _serviceScopeFactory.CreateScope();
+        using var scope = scopeFactory.CreateScope();
         var myService = scope.ServiceProvider.GetRequiredService<WraExternalApiService>();
         try
         {
-            var shippingRatesResponse = await myService.GetShippingRates(request);
+            var shippingRatesResponse = myService.GetShippingRates(request);
             if (shippingRatesResponse.Content == null) return new ExternalShippingRateDto();
             var shippingRate =
                 JsonSerializer.Deserialize<ExternalShippingRateDto>(
@@ -51,7 +44,7 @@ public class WRAShippingService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Failed to fetch shipping rates.");
+            logger.LogError(ex, "Failed to fetch shipping rates.");
             return new ExternalShippingRateDto();
         }
     }

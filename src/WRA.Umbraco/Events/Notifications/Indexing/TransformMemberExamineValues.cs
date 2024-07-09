@@ -9,12 +9,10 @@ using WRA.Umbraco.Helpers.Constants;
 
 namespace WRA.Umbraco.Events;
 public class TransformMemberExamineValues(IExamineManager examineManager,
-    IUmbracoContextFactory umbracoContextFactory,
     IMemberService memberService,
     ILogger<TransformMemberExamineValues> logger)
 {
     private readonly IExamineManager _examineManager = examineManager ?? throw new ArgumentNullException(nameof(examineManager));
-    private readonly IUmbracoContextFactory _umbracoContextFactory = umbracoContextFactory ?? throw new ArgumentNullException(nameof(umbracoContextFactory));
     private readonly IMemberService _memberService = memberService ?? throw new ArgumentNullException(nameof(memberService));
     private readonly ILogger<TransformMemberExamineValues> _logger = logger ?? throw new ArgumentNullException(nameof(logger));
 
@@ -31,7 +29,6 @@ public class TransformMemberExamineValues(IExamineManager examineManager,
                     {
                         string? memberId = e.ValueSet.GetValue("id").ToString();
 
-                        // TODO: Make sure this still makes sense after fixing the null checks.
                         if (memberId is not null)
                         {
                             int id = int.Parse(memberId);
@@ -46,7 +43,6 @@ public class TransformMemberExamineValues(IExamineManager examineManager,
             {
                 _logger.LogError(ex, "Could not get the members index.");
 
-                // TODO: Throw a more specific exception here, with additional context.
                 throw;
             }
         }
@@ -59,10 +55,5 @@ public class TransformMemberExamineValues(IExamineManager examineManager,
     private static void SetOrUpdateExamineValue(Dictionary<string, IEnumerable<object>> values, string key, string value)
     {
         values[key] = [value];
-    }
-
-    private static void SetOrUpdateExamineValue(Dictionary<string, IEnumerable<object>> values, string key, string[] value)
-    {
-        SetOrUpdateExamineValue(values, key, string.Join(" ", value));
     }
 }

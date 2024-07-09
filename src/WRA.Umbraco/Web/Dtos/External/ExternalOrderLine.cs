@@ -2,7 +2,7 @@ namespace WRA.Umbraco.Web.Dtos.External;
 
 public class ExternalOrderLine
 {
-    public string Sku { get; set; }
+    public string Sku { get; set; } = string.Empty;
     public decimal Quantity { get; set; }
     public decimal Price { get; set; }
     public decimal BasePrice { get; set; }

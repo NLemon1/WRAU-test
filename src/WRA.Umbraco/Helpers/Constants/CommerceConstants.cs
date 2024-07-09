@@ -1,6 +1,5 @@
 namespace WRA.Umbraco.Helpers.Constants;
 
-
 public static class CommerceConstants
 {
     public static class Product

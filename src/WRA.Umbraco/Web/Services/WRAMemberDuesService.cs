@@ -13,24 +13,15 @@ using WRA.Umbraco.Web.Dtos.External;
 using WRA.Umbraco.Web.Dtos.MyWRA;
 
 namespace WRA.Umbraco.Web.Services;
-public class MemberDuesService
+public class MemberDuesService(
+    WraExternalApiService externalServiceClient,
+    ILogger<MemberDuesService> logger)
 {
-    private readonly IOrderService _orderService;
-    private readonly WraExternalApiService _externalServiceClient;
-    private readonly ILogger<MemberDuesService> _logger;
 
     private static readonly JsonSerializerOptions SerializationOptions = new()
     {
         PropertyNameCaseInsensitive = true
     };
-    public MemberDuesService(IOrderService orderService,
-                                     WraExternalApiService externalServiceClient,
-                                     ILogger<MemberDuesService> logger)
-    {
-        _orderService = orderService;
-        _externalServiceClient = externalServiceClient;
-        _logger = logger;
-    }
 
     public async Task<MemberDuesDto> GetMemberDues(string externalMemberID)
     {
@@ -45,7 +36,7 @@ public class MemberDuesService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Failed to fetch payment strategy.");
+            logger.LogError(ex, "Failed to fetch payment strategy.");
         }
 
         try
@@ -55,7 +46,7 @@ public class MemberDuesService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Failed to fetch member invoice.");
+            logger.LogError(ex, "Failed to fetch member invoice.");
         }
 
         try
@@ -65,7 +56,7 @@ public class MemberDuesService
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Failed to fetch member payment history");
+            logger.LogError(ex, "Failed to fetch member payment history");
         }
 
         return memberDues;
@@ -75,17 +66,17 @@ public class MemberDuesService
     {
         try
         {
-            var memberDuesPaymentStrategyResponse = await _externalServiceClient.GetMemberDuesPaymentStrategy(memberId);
+            var memberDuesPaymentStrategyResponse = await externalServiceClient.GetMemberDuesPaymentStrategy(memberId);
             if (memberDuesPaymentStrategyResponse.Content == null) return new ExternalMemberDuesPaymentStrategyDto();
             var memberDuesPaymentStrategy =
                 JsonSerializer.Deserialize<ExternalMemberDuesPaymentStrategyDto>(
                     memberDuesPaymentStrategyResponse.Content,
-                    SerializationOptions);
+                    SerializationOptions) ?? new ExternalMemberDuesPaymentStrategyDto();
             return memberDuesPaymentStrategy;
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error calling WRAExternalServiceClient.GetMemberDuesPaymentStrategy");
+            logger.LogError(ex, "Error calling WRAExternalServiceClient.GetMemberDuesPaymentStrategy");
             throw;
         }
     }
@@ -94,17 +85,17 @@ public class MemberDuesService
     {
         try
         {
-            var memberDuesInvoiceResponse = await _externalServiceClient.GetMemberDuesInvoice(memberId);
+            var memberDuesInvoiceResponse = await externalServiceClient.GetMemberDuesInvoice(memberId);
             if (memberDuesInvoiceResponse.Content == null) return new ExternalMemberDuesInvoiceDto();
             var memberDuesInvoice =
                 JsonSerializer.Deserialize<ExternalMemberDuesInvoiceDto>(
                     memberDuesInvoiceResponse.Content,
-                    SerializationOptions);
+                    SerializationOptions) ?? new ExternalMemberDuesInvoiceDto();
             return memberDuesInvoice;
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error calling WRAExternalServiceClient.GetMemberDuesInvoice");
+            logger.LogError(ex, "Error calling WRAExternalServiceClient.GetMemberDuesInvoice");
             throw;
         }
     }
@@ -113,17 +104,17 @@ public class MemberDuesService
     {
         try
         {
-            var memberPaymentHistoryResponse = await _externalServiceClient.GetMemberPaymentHistory(memberId);
+            var memberPaymentHistoryResponse = await externalServiceClient.GetMemberPaymentHistory(memberId);
             if (memberPaymentHistoryResponse.Content == null) return new List<ExternalMemberDuesPaymentHistoryDto>();
             var memberPaymentHistory =
                 JsonSerializer.Deserialize<List<ExternalMemberDuesPaymentHistoryDto>>(
                     memberPaymentHistoryResponse.Content,
-                    SerializationOptions);
+                    SerializationOptions) ?? [];
             return memberPaymentHistory;
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error calling WRAExternalServiceClient.GetMemberPaymentHistory");
+            logger.LogError(ex, "Error calling WRAExternalServiceClient.GetMemberPaymentHistory");
             throw;
         }
     }

@@ -33,14 +33,12 @@ public class MemberRegisterController(
     )
 {
 
-
-
     [HttpPost]
     [ValidateAntiForgeryToken]
     [ValidateUmbracoFormRouteString]
     public async Task<IActionResult> HandleRegisterMember([Bind(Prefix = "registerModel")] RegisterModel model)
     {
-        if (ModelState.IsValid == false)
+        if (!ModelState.IsValid)
         {
             return CurrentUmbracoPage();
         }
@@ -52,7 +50,7 @@ public class MemberRegisterController(
         {
             TempData["FormSuccess"] = true;
 
-            if (model.RedirectUrl.IsNullOrWhiteSpace() == false)
+            if (!model.RedirectUrl.IsNullOrWhiteSpace())
             {
                 return Redirect(model.RedirectUrl!);
             }
@@ -92,20 +90,6 @@ public class MemberRegisterController(
         }
     }
 
-    // Here we created a helper Method to assign a MemberGroup to a member.
-    private void AssignMemberGroup(string email, string group)
-    {
-        try
-        {
-            Services.MemberService.AssignRole(email, group);
-        }
-        catch (Exception)
-        {
-
-            // handle the exception
-        }
-    }
-
     /// <summary>
     /// Registers a member with the system.
     /// </summary>
@@ -115,7 +99,7 @@ public class MemberRegisterController(
     private async Task<IdentityResult> RegisterMemberAsync(RegisterModel model, bool logMemberIn = true)
     {
         var (identityResult, identityUser) = await WRAMemberManagementService.RegisterMember(model);
-        if (identityResult.Errors.Any())
+        if (identityResult.Errors.Any() || identityUser == null)
         {
             return identityResult;
         }

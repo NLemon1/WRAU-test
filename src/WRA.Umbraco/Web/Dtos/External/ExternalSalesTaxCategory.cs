@@ -2,8 +2,8 @@ namespace WRA.Umbraco.Web.Dtos.External;
 
 public class ExternalSalesTaxCategory
 {
-    Guid Id { get; set; }
-    int Code { get; set; }
-    string Name { get; set; }
-    string Description { get; set; }
+    public Guid Id { get; set; } = Guid.Empty;
+    public int Code { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public string Description { get; set; } = string.Empty;
 }

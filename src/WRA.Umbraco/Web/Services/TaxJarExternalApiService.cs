@@ -46,7 +46,7 @@ public class TaxJarExternalApiService(TaxJarApiSettings settings, ILogger<TaxJar
             var taxes =
                 JsonSerializer.Deserialize<TaxResponse>(
                     response.Content,
-                    SerializationOptions);
+                    SerializationOptions) ?? new TaxResponse();
             return taxes;
         }
         catch (Exception ex)
@@ -64,14 +64,17 @@ public class TaxJarExternalApiService(TaxJarApiSettings settings, ILogger<TaxJar
         string city = "Madison";
         string state = "WI";
         string zipCode = "53704";
-        var shippingMethod = commerceApi.GetShippingMethod(order.ShippingInfo.ShippingMethodId.Value);
-
-        if (shippingMethod.Alias != "pickup" && shippingMethod.Alias != "noShipping")
+        if (order.ShippingInfo.ShippingMethodId != null)
         {
-            address1 = order.Properties["shippingAddressLine1"].SafeString();
-            city = order.Properties["shippingCity"].SafeString();
-            state = order.Properties["shippingState"].SafeString();
-            zipCode = order.Properties["shippingZipCode"].SafeString();
+            var shippingMethod = commerceApi.GetShippingMethod(order.ShippingInfo.ShippingMethodId.Value);
+
+            if (shippingMethod.Alias != "pickup" && shippingMethod.Alias != "noShipping")
+            {
+                address1 = order.Properties["shippingAddressLine1"].SafeString();
+                city = order.Properties["shippingCity"].SafeString();
+                state = order.Properties["shippingState"].SafeString();
+                zipCode = order.Properties["shippingZipCode"].SafeString();
+            }
         }
 
         var lines = new List<object>();
@@ -86,6 +89,7 @@ public class TaxJarExternalApiService(TaxJarApiSettings settings, ILogger<TaxJar
                 unit_price = product.BasePrice.WithoutAdjustments.WithoutTax,
             });
         }
+
         var request = new
         {
             from_country = "US",
@@ -100,16 +104,18 @@ public class TaxJarExternalApiService(TaxJarApiSettings settings, ILogger<TaxJar
             to_street = address1,
             amount = order.SubtotalPrice.WithoutAdjustments.WithoutTax,
             shipping = order.ShippingInfo.TotalPrice.WithoutAdjustments.WithoutTax,
-            nexus_addresses = new[] {
-    new {
-      id = "Main Location",
-      country = "US",
-      zip = "53704",
-      state = "WI",
-      city = "Madison",
-      street = "4801 Forest Run Rd.",
-    }
-  },
+            nexus_addresses = new[]
+            {
+                new
+                {
+                  id = "Main Location",
+                  country = "US",
+                  zip = "53704",
+                  state = "WI",
+                  city = "Madison",
+                  street = "4801 Forest Run Rd.",
+                }
+            },
             line_items = lines.ToArray()
         };
         return request;

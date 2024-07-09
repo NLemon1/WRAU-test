@@ -13,7 +13,6 @@ using WRA.Umbraco.Web.Dtos.External;
 namespace WRA.Umbraco.Web.Services;
 public class MemberOrderHistoryService
 {
-    private readonly IOrderService _orderService;
     private readonly WraExternalApiService _externalServiceClient;
     private readonly ILogger<MemberOrderHistoryService> _logger;
 
@@ -21,20 +20,14 @@ public class MemberOrderHistoryService
     {
         PropertyNameCaseInsensitive = true
     };
-    public MemberOrderHistoryService(IOrderService orderService,
-                                     WraExternalApiService externalServiceClient,
-                                     ILogger<MemberOrderHistoryService> logger)
+    public MemberOrderHistoryService(IOrderService orderService, WraExternalApiService externalServiceClient, ILogger<MemberOrderHistoryService> logger)
     {
-        _orderService = orderService;
         _externalServiceClient = externalServiceClient;
         _logger = logger;
     }
 
     public async Task<List<OrderHistoryDto>> GetMemberOrderHistory(string externalMemberID)
     {
-        //var TEMPSTOREID = new Guid();
-        //var completedOrders = _orderService.GetAllOrdersForCustomer(TEMPSTOREID, memberId.ToString());
-
         List<OrderHistoryDto> externalOrders;
         try
         {
@@ -56,10 +49,11 @@ public class MemberOrderHistoryService
         {
             var memberOrderHistoryResponse = await _externalServiceClient.GetMemberOrderHistory(memberId);
             if (memberOrderHistoryResponse.Content == null) return new List<OrderHistoryDto>();
-           var memberOrderHistory =
-               JsonSerializer.Deserialize<List<OrderHistoryDto>>(
-                   memberOrderHistoryResponse.Content,
-                   SerializationOptions);
+            var memberOrderHistory =
+                JsonSerializer.Deserialize<List<OrderHistoryDto>>(
+                    memberOrderHistoryResponse.Content,
+                    SerializationOptions) ?? [];
+
             return memberOrderHistory;
         }
         catch (Exception ex)
@@ -67,18 +61,5 @@ public class MemberOrderHistoryService
             _logger.LogError(ex, "Error calling WRAExternalServiceClient.GetMemberOrders");
             throw;
         }
-    }
-}
-
-public class OrderComparer : IEqualityComparer<Order>
-{
-    public bool Equals(Order x, Order y)
-    {
-        return x.Id == y.Id;
-    }
-
-    public int GetHashCode(Order obj)
-    {
-        return obj.Id.GetHashCode();
     }
 }

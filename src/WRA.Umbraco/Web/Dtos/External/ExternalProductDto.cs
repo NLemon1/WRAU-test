@@ -8,10 +8,10 @@ public class ProductStage
     public int Value { get; set; }
 
     [JsonPropertyName("name")]
-    public string Name { get; set; }
+    public string Name { get; set; } = string.Empty;
 
     [JsonPropertyName("description")]
-    public string Description { get; set; }
+    public string Description { get; set; } = string.Empty;
 }
 
 public class ExternalProductDto
@@ -20,37 +20,37 @@ public class ExternalProductDto
     public Guid Id { get; set; }
 
     [JsonPropertyName("name")]
-    public string Name { get; set; }
+    public string Name { get; set; } = string.Empty;
 
     [JsonPropertyName("description")]
-    public string Description { get; set; }
+    public string Description { get; set; } = string.Empty;
 
     [JsonPropertyName("sku")]
-    public string Sku { get; set; }
+    public string Sku { get; set; } = string.Empty;
 
     [JsonPropertyName("productTypeId")]
     public Guid ProductTypeId { get; set; }
 
     [JsonPropertyName("productTypeName")]
-    public string ProductType { get; set; }
+    public string ProductType { get; set; } = string.Empty;
 
     [JsonPropertyName("productCategoryId")]
     public Guid ProductCategoryId { get; set; }
 
     [JsonPropertyName("productCategoryName")]
-    public string Category { get; set; }
+    public string Category { get; set; } = string.Empty;
 
     [JsonPropertyName("productSubcategoryId")]
     public Guid ProductSubcategoryId { get; set; }
 
     [JsonPropertyName("productSubcategoryName")]
-    public string SubCategory { get; set; }
+    public string SubCategory { get; set; } = string.Empty;
 
     [JsonPropertyName("productTaxonomyId")]
     public Guid ProductTaxonomyId { get; set; }
 
     [JsonPropertyName("productTaxonomyName")]
-    public string Taxonomy { get; set; }
+    public string Taxonomy { get; set; } = string.Empty;
 
     [JsonPropertyName("memberPrice")]
     public decimal? MemberPrice { get; set; }
@@ -59,7 +59,7 @@ public class ExternalProductDto
     public decimal? Price { get; set; }
 
     [JsonPropertyName("imageUrl")]
-    public string ImageUrl { get; set; }
+    public string ImageUrl { get; set; } = string.Empty;
 
     [JsonPropertyName("isTaxable")]
     public bool IsTaxable { get; set; }
@@ -77,16 +77,16 @@ public class ExternalProductDto
     public DateTime? EventEndDate { get; set; }
 
     [JsonPropertyName("location")]
-    public string Location { get; set; }
+    public string Location { get; set; } = string.Empty;
 
     [JsonPropertyName("productStageId")]
     public int ProductStageId { get; set; }
 
     [JsonPropertyName("productStages")]
-    public List<ProductStage> ProductStages { get; set; }
+    public List<ProductStage> ProductStages { get; set; } = [];
 
     [JsonPropertyName("salesTaxCategoryCode")]
-    public string? salesTaxCategoryCode { get; set; }
+    public string? SalesTaxCategoryCode { get; set; }
 
     [JsonPropertyName("isShippable")]
     public bool IsShippable { get; set; }

@@ -7,28 +7,28 @@ using System.Threading.Tasks;
 namespace WRA.Umbraco.Web.Dtos.External;
 public class ExternalMemberDuesPaymentHistoryDto
 {
-    public string Id { get; set; }
+    public string Id { get; set; } = string.Empty;
     public DateTime PaidDate { get; set; }
-    public string MemberID { get; set; }
-    public string IMISID { get; set; }
-    public string LocalBoardID { get; set; }
-    public string LocalBoardName { get; set; }
-    public string CompanyID { get; set; }
-    public string CompanyName { get; set; }
-    public string InvoiceAddress { get; set; }
-    public string FullName { get; set; }
-    public string FullAddress { get; set; }
-    public string WorkPhone { get; set; }
-    public string Fax { get; set;}
-    public string Email { get; set; }
+    public string MemberID { get; set; } = string.Empty;
+    public string IMISID { get; set; } = string.Empty;
+    public string LocalBoardID { get; set; } = string.Empty;
+    public string LocalBoardName { get; set; } = string.Empty;
+    public string CompanyID { get; set; } = string.Empty;
+    public string CompanyName { get; set; } = string.Empty;
+    public string InvoiceAddress { get; set; } = string.Empty;
+    public string FullName { get; set; } = string.Empty;
+    public string FullAddress { get; set; } = string.Empty;
+    public string WorkPhone { get; set; } = string.Empty;
+    public string Fax { get; set; } = string.Empty;
+    public string Email { get; set; } = string.Empty;
     public decimal TotalAmount { get; set; }
-    public List<ExternalMemberDuesPaymentHistoryLineItem> TransactionLineItems { get; set; }
+    public List<ExternalMemberDuesPaymentHistoryLineItem> TransactionLineItems { get; set; } = new List<ExternalMemberDuesPaymentHistoryLineItem>();
 }
 
 public class ExternalMemberDuesPaymentHistoryLineItem
 {
-    public string TransactionID { get; set; }
-    public string TransactionItemID { get; set; }
-    public string Description { get; set; }
+    public string TransactionID { get; set; } = string.Empty;
+    public string TransactionItemID { get; set; } = string.Empty;
+    public string Description { get; set; } = string.Empty;
     public decimal Price { get; set; }
 }

@@ -75,7 +75,7 @@ public class CartSurfaceController : SurfaceController
         {
             _commerceApi.Uow.Execute(uow =>
             {
-                var store = CurrentPage.GetStore();
+                var store = CurrentPage!.GetStore();
                 var order = _commerceApi.GetOrCreateCurrentOrder(store.Id)
                     .AsWritable(uow)
                     .AddProduct(bundleReference, defaultQty, bundleReference);
@@ -110,7 +110,7 @@ public class CartSurfaceController : SurfaceController
         {
             _commerceApi.Uow.Execute(uow =>
             {
-                var store = CurrentPage.GetStore();
+                var store = CurrentPage!.GetStore();
                 var order = _commerceApi.GetOrCreateCurrentOrder(store.Id)
                     .AsWritable(uow);
 
@@ -144,12 +144,15 @@ public class CartSurfaceController : SurfaceController
         {
             _commerceApi.Uow.Execute(uow =>
             {
-                var store = CurrentPage.GetStore();
-                var order = _commerceApi.GetOrCreateCurrentOrder(store.Id)
-                    .AsWritable(uow)
-                    .RemoveOrderLine(postModel.OrderLineId);
+                if (CurrentPage != null)
+                {
+                    var store = CurrentPage.GetStore();
+                    var order = _commerceApi.GetOrCreateCurrentOrder(store.Id)
+                        .AsWritable(uow)
+                        .RemoveOrderLine(postModel.OrderLineId);
 
-                _commerceApi.SaveOrder(order);
+                    _commerceApi.SaveOrder(order);
+                }
 
                 uow.Complete();
             });

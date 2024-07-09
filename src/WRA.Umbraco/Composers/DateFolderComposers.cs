@@ -17,7 +17,6 @@ public class DateFolderComposer : IComposer
 {
     public void Compose(IUmbracoBuilder builder)
     {
-        // TODO: Re-evaluate the need for the Moved and Deleted content handlers. If they are needed fix them, if not delete them.
 
         builder.Services.Configure<DateFolderSettings>(builder.Config.GetSection(nameof(DateFolderSettings)));
 

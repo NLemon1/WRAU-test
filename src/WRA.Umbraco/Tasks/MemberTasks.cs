@@ -37,6 +37,7 @@ public class MemberTasks(
         try
         {
             var memberGroupsResp = await wraExternalApiService.GetMemberGroups();
+            if (memberGroupsResp.Content == null) return true;
             var memberGroups =
                 JsonSerializer.Deserialize<List<ExternalMemberGroupDto>>(memberGroupsResp.Content, SerializationOptions);
 
@@ -81,10 +82,11 @@ public class MemberTasks(
             foreach (var member in members.Data)
             {
                 var memberEvent = mapper.Map<MemberEvent>(member);
-                await wraMemberManagementService.CreateOrUpdate(memberEvent);
+                if (memberEvent != null) wraMemberManagementService.CreateOrUpdate(memberEvent);
             }
 
-            return true;}
+            return true;
+        }
         catch (Exception e)
         {
             logger.LogError(e, "Task error syncing members from API. error: {Message}", e.Message);
@@ -103,7 +105,8 @@ public class MemberTasks(
 
             if (member == null) return null;
             var memberEvent = mapper.Map<MemberEvent>(member);
-            var memberResult = await wraMemberManagementService.CreateOrUpdate(memberEvent);
+            if (memberEvent == null) return null;
+            var memberResult = wraMemberManagementService.CreateOrUpdate(memberEvent);
 
             return memberResult;
         }
@@ -114,7 +117,7 @@ public class MemberTasks(
         }
     }
     #endregion
-    # region Boards and Companies
+    #region Boards and Companies
     public async Task<bool> SyncAllCompanies()
     {
         try
@@ -139,6 +142,7 @@ public class MemberTasks(
             throw;
         }
     }
+
     public async Task<IContent?> SyncCompanyByExternalId(Guid externalId)
     {
         try
@@ -164,6 +168,7 @@ public class MemberTasks(
         try
         {
             var productsResp = await wraExternalApiService.GetBoards();
+            if (productsResp.Content == null) return false;
             var localBoards = JsonSerializer.Deserialize<List<ExternalMemberBoardDto>>(productsResp.Content, SerializationOptions);
 
             foreach (var board in localBoards)
@@ -179,6 +184,7 @@ public class MemberTasks(
             throw;
         }
     }
+
     public async Task<IContent?> SyncBoardByExternalId(Guid externalId)
     {
         try

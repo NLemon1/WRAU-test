@@ -12,8 +12,7 @@ using WRA.Umbraco.Web.Services;
 namespace WRA.Umbraco.Events.Consumers;
 
 public class OrderEntityEventConsumer(
-    ILogger<OrderEntityEventConsumer> logger,
-    OrderRepository orderRepository)
+    ILogger<OrderEntityEventConsumer> logger)
     : IConsumer<EntityEvent<OrderEvent>>
 {
     public async Task Consume(ConsumeContext<EntityEvent<OrderEvent>> context)

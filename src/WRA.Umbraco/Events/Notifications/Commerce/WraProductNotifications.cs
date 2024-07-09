@@ -27,7 +27,7 @@ public class WraProductNotifications(
         {
             if (publishedEntity.ContentType.Alias == ProductPage.ModelTypeAlias)
             {
-                HandleProductEvent(publishedEntity);
+                await HandleProductEvent(publishedEntity);
             }
 
             if (publishedEntity.ContentType.Alias is CategoriesPage.ModelTypeAlias or CategoryPage.ModelTypeAlias)
@@ -39,7 +39,7 @@ public class WraProductNotifications(
         }
     }
 
-    private async void HandleProductEvent(IContent publishedEntity)
+    private async Task HandleProductEvent(IContent publishedEntity)
     {
         try
         {

@@ -7203,7 +7203,7 @@
     const paginationContainer = document.querySelector(".js-articles-pagination");
     const resultsLoader = document.querySelector(".js-results-loader");
     const featuredArticles = document.querySelectorAll(".js-featured-article");
-    const apiEndpointUrl = "/NewsAndUpdates";
+    const apiEndpointUrl = "/Content/NewsAndUpdates";
     let pageNumber = 1;
     const pageSize = 15;
     let totalResults = 0;

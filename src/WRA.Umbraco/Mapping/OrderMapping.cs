@@ -34,6 +34,7 @@ public class OrderMapping(
             {
                 target.CompanyId = companyOnMember.Value(GlobalConstants.ExternalId).SafeGuid();
             }
+
             target.Address1 = memberAttachedToOrder.GetValue<string>(GlobalConstants.Member.AddressLine1) ??
                                   source.Properties[CommerceConstants.Billing.AddressLine1];
             target.Address2 = memberAttachedToOrder.GetValue<string>(GlobalConstants.Member.AddressLine2) ??
@@ -51,7 +52,6 @@ public class OrderMapping(
 
         foreach (var orderLine in source.OrderLines)
         {
-            var adjustments = orderLine.TotalPrice.Adjustments;
             var externalOrderLine = new UmbracoOrderLineItemDto
             {
                 Sku = orderLine.Sku,
@@ -67,12 +67,17 @@ public class OrderMapping(
             };
             target.OrderLines.Add(externalOrderLine);
         }
+
         target.FirstName = source.Properties[umbracoCommerceConstants.Properties.Customer.FirstNamePropertyAlias];
         target.LastName = source.Properties[umbracoCommerceConstants.Properties.Customer.LastNamePropertyAlias];
         target.Id = source.Id;
         target.OrderNumber = source.OrderNumber;
         target.OrderDate = source.CreateDate;
-        target.MemberId = memberAttachedToOrder.GetValue<Guid>(GlobalConstants.ExternalId);
+        if (memberAttachedToOrder != null)
+        {
+            target.MemberId = memberAttachedToOrder.GetValue<Guid>(GlobalConstants.ExternalId);
+        }
+
         target.ShippingAddress = OrderPropertyHelper.GetShippingAddress(source);
         target.ShippingAddress.MemberId = target.MemberId;
         target.BillingAddress = OrderPropertyHelper.GetBillingAddress(source);

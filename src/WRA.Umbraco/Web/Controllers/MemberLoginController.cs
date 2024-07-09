@@ -25,13 +25,8 @@ namespace WRA.Umbraco.Controllers;
 public class MemberLoginController : UmbLoginController
 {
     private readonly IMemberManager _memberManager;
-    private readonly IMemberService _memberService;
     private readonly GlobalSettings _globalSettings;
-    private readonly LinkGenerator _linkGenerator;
-    private readonly IHttpContextAccessor _httpContextAccessor;
-    private readonly ILocalizedTextService _textService;
     private readonly IEmailSender _emailSender;
-    private readonly ILocalizationService _localisation;
     private readonly ILogger<MemberLoginController> _logger;
     private readonly IConfiguration _configuration;
 
@@ -67,14 +62,9 @@ public class MemberLoginController : UmbLoginController
     {
         _memberManager = memberManager;
         _globalSettings = globalSettings.Value;
-        _linkGenerator = linkGenerator;
-        _httpContextAccessor = httpContextAccessor;
-        _textService = textService;
         _emailSender = emailSender;
-        _localisation = localisation;
         _logger = logger;
         _configuration = configuration;
-        _memberService = memberService;
     }
 
     [HttpPost]
@@ -82,9 +72,8 @@ public class MemberLoginController : UmbLoginController
     {
         await Task.Delay(RandomNumberGenerator.GetInt32(400, 2500)); // To randomize response time preventing user enumeration
 
-        if (model.NewPassword != null && model.userid != null)
+        if (model is { NewPassword: not null, userid: not null, email: not null })
         {
-            var member = _memberService.GetById(Convert.ToInt32(model.userid));
             var newPassword = model.NewPassword;
             var token = model.token;
             var confirmPass = model.confirmPassword;
@@ -126,48 +115,46 @@ public class MemberLoginController : UmbLoginController
             // everything ok so redirect to the login page.
             return Redirect("~/login");
         }
-        else
+
+        var memberIdentityUser = await _memberManager.FindByEmailAsync(model.email);
+
+        if (memberIdentityUser != null)
         {
-            MemberIdentityUser? memberIdentityUser = await _memberManager.FindByEmailAsync(model.email);
+            // IUser? user = _userService.GetByEmail(model.Email);
 
-            if (memberIdentityUser != null)
-            {
-                // IUser? user = _userService.GetByEmail(model.Email);
+            var from = _globalSettings.Smtp?.From;
+            var code = await _memberManager.GeneratePasswordResetTokenAsync(memberIdentityUser);
+            var token = HttpUtility.UrlEncode(code);
 
-                var from = _globalSettings.Smtp?.From;
-                var code = await _memberManager.GeneratePasswordResetTokenAsync(memberIdentityUser);
-                var token = HttpUtility.UrlEncode(code);
+            // var callbackUrl = ConstructCallbackUrl(memberIdentityUser.Id, code);
 
-                // var callbackUrl = ConstructCallbackUrl(memberIdentityUser.Id, code);
+            string baseURL = _configuration.GetSection("Umbraco:CMS:WebRouting:UmbracoApplicationUrl").Value ?? string.Empty;
+            var resetUrl = $"{baseURL}/reset-password/?id={memberIdentityUser.Id}&token={token}";
+            var siteName = "WRA";
 
-                string baseURL = _configuration.GetSection("Umbraco:CMS:WebRouting:UmbracoApplicationUrl").Value ?? string.Empty;
-                var resetUrl = $"{baseURL}/reset-password/?id={memberIdentityUser.Id}&token={token}";
-                var siteName = "WRA";
-
-                var messageBody = $@"<p>Hi {memberIdentityUser.Name},</p>
+            var messageBody = $@"<p>Hi {memberIdentityUser.Name},</p>
                     <p>Someone requested a password reset for your account on {siteName}.</p>
                     <p>If this wasn't you then you can ignore this email, otherwise, please click the following password reset link to continue:</p>
                     <p>Please go to <a href='{resetUrl}'>here</a> to reset your password</p>
                     <p>&nnbsp;</p>
                     <p>Kind regards,<br/>The {siteName} Team</p>";
 
-                var subject = "Reset your password";
+            var subject = "Reset your password";
 
-                var mailMessage = new EmailMessage(from, memberIdentityUser.Email, subject, messageBody, true);
-                try
-                {
-                    await _emailSender.SendAsync(mailMessage, Constants.Web.EmailTypes.PasswordReset, true);
-                }
-                catch (Exception ex)
-                {
-                    _logger.LogError(ex, "Error sending email, please check your SMTP configuration: {ErrorMessage}", ex.Message);
-                    return Ok();
-                }
-            }
-            else
+            var mailMessage = new EmailMessage(from, memberIdentityUser.Email, subject, messageBody, true);
+            try
             {
-                ModelState.AddModelError("ForgotPasswordForm", "Member not found");
+                await _emailSender.SendAsync(mailMessage, Constants.Web.EmailTypes.PasswordReset, true);
             }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error sending email, please check your SMTP configuration: {ErrorMessage}", ex.Message);
+                return Ok();
+            }
+        }
+        else
+        {
+            ModelState.AddModelError("ForgotPasswordForm", "Member not found");
         }
 
         return CurrentUmbracoPage();
@@ -175,7 +162,16 @@ public class MemberLoginController : UmbLoginController
 
     private bool ResetPassword(ResetPasswordDto model)
     {
+        if (model.userid == null || model.token == null || model.NewPassword == null)
+        {
+            return false;
+        }
+
         var identityUser = _memberManager.FindByIdAsync(model.userid).Result;
+        if (identityUser == null)
+        {
+            return false;
+        }
 
         var result = _memberManager.ResetPasswordAsync(identityUser, model.token, model.NewPassword).Result;
         return result.Succeeded;

@@ -13,11 +13,11 @@ using WRA.Umbraco.Web.Services;
 
 namespace WRA.Umbraco.ShippingProviders;
 [ShippingProvider("upsProvider", "UPS Shipping", "UPS Shipping provider")]
-public class UPSProvider : ShippingProviderBase<UpsProviderSettings>
+public class UpsProvider : ShippingProviderBase<UpsProviderSettings>
 {
     private readonly IServiceScopeFactory _scopeFactory;
     public override bool SupportsRealtimeRates => true;
-    public UPSProvider(UmbracoCommerceContext umbracoCommerce, IServiceScopeFactory scopeFactory)
+    public UpsProvider(UmbracoCommerceContext umbracoCommerce, IServiceScopeFactory scopeFactory)
         : base(umbracoCommerce)
     {
         _scopeFactory = scopeFactory;
@@ -30,8 +30,8 @@ public class UPSProvider : ShippingProviderBase<UpsProviderSettings>
         var currencyID = context.Order.CurrencyId;
         using (var scope = _scopeFactory.CreateScope())
         {
-            var shippingService = scope.ServiceProvider.GetRequiredService<WRAShippingService>();
-            var response = await shippingService.GetShippingRate(context.Order.AsShippingRateRequestDto());
+            var shippingService = scope.ServiceProvider.GetRequiredService<WraShippingService>();
+            var response = shippingService.GetShippingRate(context.Order.AsShippingRateRequestDto());
             var price = context.Settings.FallbackRate;
             if (response != null && response.ShippingRate.HasValue)
             {
@@ -41,13 +41,15 @@ public class UPSProvider : ShippingProviderBase<UpsProviderSettings>
             options.Add(new ShippingRate(new Price(price, 0.00m, currencyID), new ShippingOption("1", "UPS Ground"), null));
             result.Rates = options;
         }
+
         return result;
     }
 }
 
 public class UpsProviderSettings
 {
-    [ShippingProviderSetting(Name = "Fallback rate",
+    [ShippingProviderSetting(
+        Name = "Fallback rate",
         Description = "The price to fallback to if real time rates calculation fails.",
         SortOrder = 100)]
     public decimal FallbackRate { get; set; }

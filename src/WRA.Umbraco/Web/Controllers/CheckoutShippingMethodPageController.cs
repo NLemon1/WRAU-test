@@ -20,7 +20,6 @@ using WRA.Umbraco.Repositories;
 namespace WRA.Umbraco.Web.Controllers;
 public class CheckoutShippingMethodPageController : RenderController
 {
-    private readonly IUnitOfWorkProvider _unitOfWorkProvider;
     private readonly ProductPageRepository _productRepository;
     private readonly IPublishedValueFallback _publishedValueFallback;
 
@@ -29,13 +28,12 @@ public class CheckoutShippingMethodPageController : RenderController
         ICompositeViewEngine compositeViewEngine,
         IUmbracoContextAccessor umbracoContextAccessor,
         IPublishedValueFallback publishedValueFallback,
-        IUnitOfWorkProvider unitOfWorkProvider,
         ProductPageRepository productPageRepository)
-        : base(logger,
+        : base(
+            logger,
             compositeViewEngine,
             umbracoContextAccessor)
     {
-        _unitOfWorkProvider = unitOfWorkProvider;
         _productRepository = productPageRepository;
         _publishedValueFallback = publishedValueFallback;
     }
@@ -43,7 +41,7 @@ public class CheckoutShippingMethodPageController : RenderController
     public override IActionResult Index()
     {
         var shippingNotRequired = true;
-        var order = CurrentPage.GetOrCreateOrder();
+        var order = CurrentPage!.GetOrCreateOrder();
         foreach (var orderItem in order.OrderLines)
         {
             var productPage = _productRepository.GetBySku(orderItem.Sku);
@@ -56,7 +54,7 @@ public class CheckoutShippingMethodPageController : RenderController
 
         var vm = new CheckoutShippingMethodPage(CurrentPage, _publishedValueFallback);
         vm.ShippingNotRequired = shippingNotRequired;
-        
+
         return CurrentTemplate(vm);
     }
 }

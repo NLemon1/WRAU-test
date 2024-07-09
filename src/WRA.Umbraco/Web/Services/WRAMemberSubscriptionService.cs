@@ -40,7 +40,7 @@ public class MemberMarketingSubscriptionService
             var memberSubscriptions =
                 JsonSerializer.Deserialize<List<ExternalMemberMarketingSubscriptionDto>>(
                     memberSubscriptionResponse.Content,
-                    SerializationOptions);
+                    SerializationOptions) ?? [];
             return memberSubscriptions;
         }
         catch (Exception ex)
@@ -50,12 +50,16 @@ public class MemberMarketingSubscriptionService
         }
     }
 
-    public async void UpdateMarketingSubscription(MemberMarketingSubscriptionPreferenceDto subscription)
+    public async Task UpdateMarketingSubscription(MemberMarketingSubscriptionPreferenceDto subscription)
     {
         try
         {
-            await _externalServiceClient.UpdateMemberMarketingSubscription(subscription.SubscriptionID, subscription.IsActive);
-
+            if (subscription.SubscriptionID != null)
+            {
+                await _externalServiceClient.UpdateMemberMarketingSubscription(
+                    subscription.SubscriptionID,
+                    subscription.IsActive);
+            }
         }
         catch (Exception ex)
         {

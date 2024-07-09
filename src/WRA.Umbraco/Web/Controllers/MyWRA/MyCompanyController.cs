@@ -25,6 +25,7 @@ public class MyWraCompanyController(
     {
         // Get current member and cast it as a Member object
         var currentMember = memberManager.GetCurrentMemberAsync().GetAwaiter().GetResult();
+        if (currentMember == null) return Redirect("/login");
         var publishedMember = memberManager.AsPublishedMember(currentMember);
         var member = new Member(publishedMember, publishedValueFallback);
 
@@ -35,6 +36,7 @@ public class MyWraCompanyController(
         var company = new Company(publishedCompany, publishedValueFallback);
 
         // Get all members of the company
+        if (publishedCompany == null) return Redirect("/login");
         var members = memberRepository.GetMembersByCompany(publishedCompany);
 
         var viewModel = new MywraCompany(CurrentPage!, publishedValueFallback)

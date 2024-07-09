@@ -22,7 +22,7 @@ public class MemberExamineValuesOnSave(
         try
         {
             var transformExamineValues = new TransformExamineValues(examineManager, umbracoContextFactory, transformExamineValuesLogger);
-            var transformMemberExamineValues = new TransformMemberExamineValues(examineManager, umbracoContextFactory, memberService, transformMemberValuesLogger);
+            var transformMemberExamineValues = new TransformMemberExamineValues(examineManager, memberService, transformMemberValuesLogger);
             transformMemberExamineValues.SetMemberCustomFields();
             transformExamineValues.DisposeIfDisposable();
         }

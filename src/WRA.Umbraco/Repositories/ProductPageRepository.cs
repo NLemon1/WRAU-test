@@ -15,14 +15,11 @@ using WRA.Umbraco.Web.Dtos.WraExternal;
 namespace WRA.Umbraco.Repositories;
 
 public class ProductPageRepository(
-    ICurrencyService currencyService,
     IUmbracoContextFactory contextFactory,
     ICoreScopeProvider scopeProvider,
     IContentService contentService,
     ILogger<ProductPageRepository> logger)
 {
-    private CurrencyReadOnly GetCurrency(Guid storeId) => currencyService.GetCurrencies(storeId).First(c => c.Name == "USD");
-
     public ProductPage? GetBySku(string sku)
     {
         try
@@ -31,6 +28,7 @@ public class ProductPageRepository(
             var context = contextFactory.EnsureUmbracoContext();
             var contentCache = context.UmbracoContext.Content;
             var productContentType = contentCache.GetContentType(ProductPage.ModelTypeAlias);
+            if (productContentType == null) return null;
             var productPages = contentCache.GetByContentType(productContentType)
                 .OfType<ProductPage>();
             var productPage = productPages.FirstOrDefault(p => p.Sku == sku);
@@ -52,22 +50,21 @@ public class ProductPageRepository(
         var context = contextFactory.EnsureUmbracoContext();
         var contentCache = context.UmbracoContext.Content;
         var contentType = contentCache.GetContentType(ProductPage.ModelTypeAlias);
+        if (contentType == null) return new List<ProductPage>();
         var allProducts = contentCache.GetByContentType(contentType).OfType<ProductPage>();
         return allProducts;
 
-
-
     }
 
-    public async Task<IContent?> GetByExternalId(Guid externalId)
+    public IContent? GetByExternalId(Guid externalId)
     {
         try
         {
             using var scope = scopeProvider.CreateCoreScope(autoComplete: true);
             var context = contextFactory.EnsureUmbracoContext();
             var contentCache = context.UmbracoContext.Content;
-
             var productPageType = contentCache.GetContentType(ProductPage.ModelTypeAlias);
+            if (productPageType == null) return null;
             var productPage = contentCache.GetByContentType(productPageType)
                 .First(p => p.Value(GlobalConstants.Product.Sku).Equals(externalId));
 
@@ -81,15 +78,14 @@ public class ProductPageRepository(
         }
     }
 
-    // TODO move to it's own repository class
-    public async Task<IContent?> CreateProductCollectionPage(ExternalProductCollectionDto productCollection)
+    public IContent? CreateProductCollectionPage(ExternalProductCollectionDto productCollection)
     {
         using var scope = scopeProvider.CreateCoreScope();
         var context = contextFactory.EnsureUmbracoContext();
         var contentCache = context.UmbracoContext.Content;
         var home = contentCache?.GetAtRoot().FirstOrDefault();
 
-        var productsContainer = home.ChildrenOfType(ProductsPage.ModelTypeAlias).First();
+        var productsContainer = home!.ChildrenOfType(ProductsPage.ModelTypeAlias)!.First();
         var productCategoryPages = productsContainer.ChildrenOfType(CollectionPage.ModelTypeAlias)!
             .Where(p => p.Value<Guid>(GlobalConstants.ExternalId).Equals(productCollection.Id));
 
@@ -99,6 +95,7 @@ public class ProductPageRepository(
             productCategoryPages = productsContainer.ChildrenOfType(CollectionPage.ModelTypeAlias)!
                 .Where(p => p.Name.Equals(productCollection.Name));
         }
+
         var existingCollectionPage = productCategoryPages.FirstOrDefault();
 
         var collectionPage = existingCollectionPage != null ?

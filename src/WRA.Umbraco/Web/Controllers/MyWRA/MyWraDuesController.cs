@@ -41,15 +41,14 @@ public class MyWraDuesController : RenderController
 
     public override IActionResult Index()
     {
-        MemberDuesDto memberDues = new MemberDuesDto();
-        MemberIdentityUser? currentMember = _memberManager.GetCurrentMemberAsync().GetAwaiter().GetResult();
+        var currentMember = _memberManager.GetCurrentMemberAsync().GetAwaiter().GetResult();
         if (currentMember != null)
         {
             var member = _memberManager.AsPublishedMember(currentMember);
-            var externalID = member.Value(GlobalConstants.ExternalId)?.ToString() ?? string.Empty;
+            if (member == null) return Redirect("/login");
+            string externalId = member.Value(GlobalConstants.ExternalId)?.ToString() ?? string.Empty;
             MywraDues viewModel = new(CurrentPage!, _publishedValueFallback);
-            
-            memberDues = _memberDuesService.GetMemberDues(externalID).GetAwaiter().GetResult();
+            var memberDues = _memberDuesService.GetMemberDues(externalId).GetAwaiter().GetResult();
             viewModel.MemberDues = memberDues;
 
             return CurrentTemplate(viewModel);

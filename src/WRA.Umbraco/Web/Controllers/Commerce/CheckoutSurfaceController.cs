@@ -31,7 +31,7 @@ public class CheckoutSurfaceController(
         {
             commerceApi.Uow.Execute(uow =>
             {
-                var store = CurrentPage.GetStore();
+                var store = CurrentPage!.GetStore();
                 var order = commerceApi.GetOrCreateCurrentOrder(store.Id)
                     .AsWritable(uow)
                     .Redeem(model.Code);
@@ -57,7 +57,7 @@ public class CheckoutSurfaceController(
         {
             commerceApi.Uow.Execute(uow =>
             {
-                var store = CurrentPage.GetStore();
+                var store = CurrentPage!.GetStore();
                 var order = commerceApi.GetOrCreateCurrentOrder(store.Id)
                     .AsWritable(uow)
                     .Unredeem(model.Code);
@@ -86,25 +86,21 @@ public class CheckoutSurfaceController(
             return CurrentUmbracoPage();
         }
 
-        bool shippingSameAsBilling = model.ShippingSameAsBilling;
         try
         {
             commerceApi.Uow.Execute(uow =>
             {
-                var store = CurrentPage.GetStore();
+                var store = CurrentPage!.GetStore();
                 var order = commerceApi.GetOrCreateCurrentOrder(store.Id)
                 .AsWritable(uow)
                 .SetProperties(new Dictionary<string, string>
                 {
                     { Constants.Properties.Customer.EmailPropertyAlias, model.Email }
                 });
-                if (model.ShippingAddress != null)
-                {
 
-                    // set shipping info
-                    order.SetProperties(OrderPropertyHelper.BuildShippingInfo(model.ShippingAddress));
-                    order.SetShippingCountryRegion(model.ShippingAddress.Country, null);
-                }
+                // set shipping info
+                order.SetProperties(OrderPropertyHelper.BuildShippingInfo(model.ShippingAddress));
+                order.SetShippingCountryRegion(model.ShippingAddress.Country, null);
 
                 commerceApi.SaveOrder(order);
 
@@ -131,14 +127,17 @@ public class CheckoutSurfaceController(
             var address = shippingSameAsBilling ? model.ShippingAddress : model.BillingAddress;
             commerceApi.Uow.Execute(uow =>
             {
-                var store = CurrentPage.GetStore();
-                var order = commerceApi.GetOrCreateCurrentOrder(store.Id)
-                    .AsWritable(uow)
-                    .SetProperties(OrderPropertyHelper.BuildBillingInfo(address));
+                var store = CurrentPage!.GetStore();
+                if (address != null)
+                {
+                    var order = commerceApi.GetOrCreateCurrentOrder(store.Id)
+                        .AsWritable(uow)
+                        .SetProperties(OrderPropertyHelper.BuildBillingInfo(address));
 
-                order.SetPaymentCountryRegion(address.Country, null);
+                    order.SetPaymentCountryRegion(address.Country, null);
 
-                commerceApi.SaveOrder(order);
+                    commerceApi.SaveOrder(order);
+                }
 
                 uow.Complete();
             });
@@ -150,10 +149,7 @@ public class CheckoutSurfaceController(
             return CurrentUmbracoPage();
         }
 
-        if (model.NextStep.HasValue)
-            return RedirectToUmbracoPage(model.NextStep.Value);
-
-        return RedirectToCurrentUmbracoPage();
+        return model.NextStep.HasValue ? RedirectToUmbracoPage(model.NextStep.Value) : RedirectToCurrentUmbracoPage();
     }
 
     public IActionResult UpdateOrderShippingMethod(UpdateOrderShippingMethodDto model)
@@ -162,7 +158,7 @@ public class CheckoutSurfaceController(
         {
             commerceApi.Uow.Execute(uow =>
             {
-                var store = CurrentPage.GetStore();
+                var store = CurrentPage!.GetStore();
                 var order = commerceApi.GetOrCreateCurrentOrder(store.Id)
                     .AsWritable(uow);
 
@@ -192,11 +188,12 @@ public class CheckoutSurfaceController(
         {
             commerceApi.Uow.Execute(uow =>
             {
-                var store = CurrentPage.GetStore();
+                var store = CurrentPage!.GetStore();
                 var order = commerceApi.GetOrCreateCurrentOrder(store.Id)
                     .AsWritable(uow)
                     .SetPaymentMethod(model.PaymentMethod)
-                    .SetProperties(new Dictionary<string, string>(){
+                    .SetProperties(new Dictionary<string, string>()
+                    {
                         { "paymentReference", model.PaymentReference }
                     });
 

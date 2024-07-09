@@ -11,16 +11,13 @@ public class SearchService
 {
     private readonly IPublishedContentQuery _publishedContentQuery;
     private readonly IExamineManager _examineManager;
-    private readonly UmbracoHelper _umbracoHelper;
 
     public SearchService(
         IPublishedContentQuery publishedContentQuery,
-        IExamineManager examineManager,
-        UmbracoHelper umbracoHelper)
+        IExamineManager examineManager)
     {
         _publishedContentQuery = publishedContentQuery;
         _examineManager = examineManager;
-        _umbracoHelper = umbracoHelper;
     }
 
     public IEnumerable<IPublishedContent> SearchPages(string searchTerm = "")

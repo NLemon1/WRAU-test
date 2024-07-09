@@ -12,7 +12,6 @@ public class Repository<TEntity>(
     ILogger<Repository<TEntity>> logger)
     : IRepository<TEntity>
     where TEntity : IEntity
-
 {
     public OperationResult Create(TEntity entity)
     {
@@ -34,7 +33,6 @@ public class Repository<TEntity>(
     {
         using var scope = scopeProvider.CreateScope();
         int deleteResult = scope.Database.Delete(entity);
-
 
         scope.Complete();
         logger.LogInformation("Deleted entity: {Entity}", entity.Id);
@@ -64,6 +62,7 @@ public class Repository<TEntity>(
         scope.Complete();
         return result;
     }
+
     public void SaveChanges(TEntity entity)
     {
         using var scope = scopeProvider.CreateScope();

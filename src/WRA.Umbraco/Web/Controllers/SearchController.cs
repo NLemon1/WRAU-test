@@ -19,7 +19,8 @@ namespace WRA.Umbraco.Web.Controllers
         IUmbracoContextAccessor umbracoContextAccessor,
         IPublishedValueFallback publishedValueFallback,
         SearchService searchService)
-        : base(logger,
+        : base(
+            logger,
             compositeViewEngine,
             umbracoContextAccessor)
         {
@@ -30,14 +31,14 @@ namespace WRA.Umbraco.Web.Controllers
         public override IActionResult Index()
         {
             // Get the queryString from the request
-            string queryString = HttpContext.Request.Query["q"];
+            string queryString = HttpContext.Request.Query["q"].ToString();
 
             // Create the view model and pass it to the view
             SearchResults viewModel = new(CurrentPage!, _publishedValueFallback)
             {
                 Results = _searchService.SearchPages(queryString),
                 searchTerm = queryString,
-                HasSearched = !String.IsNullOrEmpty(queryString)
+                HasSearched = !string.IsNullOrEmpty(queryString)
             };
 
             return CurrentTemplate(viewModel);

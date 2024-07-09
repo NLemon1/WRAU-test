@@ -22,12 +22,11 @@ public class CourseMapping(
             mappingHelper.FindRelatedContentByExternalId(source.ProductId, ProductPage.ModelTypeAlias);
         target.GoodThruDate = source.GoodThruDate ?? DateTime.MinValue;
         target.Name = source.Program;
-        target.Location = source.Location;
+        target.Location = source.Location ?? string.Empty;
         target.SortSequence = source.SortSequence;
         target.UnitsRequired = source.UnitsRequired ?? 0;
-        target.Status = source.Status;
+        target.Status = source.Status ?? string.Empty;
         target.CourseLauncherUrl = source.CourseLauncherUrl;
     }
-
 
 }

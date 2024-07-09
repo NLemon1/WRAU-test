@@ -20,7 +20,6 @@ public class WraProductWebhook : WebhookEventContentBase<ContentPublishedNotific
         IWebhookService webhookService,
         IOptionsMonitor<WebhookSettings> webhookSettings,
         IServerRoleAccessor serverRoleAccessor,
-        // WRAProductManagementService wraProdService
         ILogger<WraProductWebhook> logger)
         : base(webhookFiringService, webhookService, webhookSettings, serverRoleAccessor)
     {
@@ -47,13 +46,12 @@ public class WraProductWebhook : WebhookEventContentBase<ContentPublishedNotific
         // convert to DTO
 
         // Write to the logs every time a member is saved.
-        _logger.LogInformation($"Product {contentNotif.Id} has been saved and notification published! name: {contentNotif.Name} WraID: {contentNotif.Id}");
-        string sku = contentNotif.GetValue<string>("sku") ?? string.Empty;
+        _logger.LogInformation("Product has been saved and notification published! name: {Name} WraID: {Id}", contentNotif.Name, contentNotif.Id);
         return string.Empty;
 
         // var product = _WRAProductManagementService.GetWraProduct(sku);
 
-        // //TODO: create static options class
+        // /create static options class
         // var options = new JsonSerializerOptions { WriteIndented = false };
         // string jsonResponse = JsonSerializer.Serialize(product, options);
         // return jsonResponse;

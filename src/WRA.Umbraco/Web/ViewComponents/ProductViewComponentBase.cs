@@ -11,7 +11,7 @@ public abstract class ProductViewComponentBase : ViewComponent
     private readonly IExamineManager _examineManager;
     private readonly IUmbracoContextFactory _umbracoContextFactory;
 
-    public ProductViewComponentBase(IExamineManager examineManager, IUmbracoContextFactory umbracoContextFactory)
+    protected ProductViewComponentBase(IExamineManager examineManager, IUmbracoContextFactory umbracoContextFactory)
     {
         _examineManager = examineManager;
         _umbracoContextFactory = umbracoContextFactory;

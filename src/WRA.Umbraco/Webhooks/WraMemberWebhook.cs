@@ -56,8 +56,7 @@
 //         var pw = memberNotif.RawPasswordValue;
 //         member.SecurtyHash = pw;
 
-// //TODO: create static options class
-//         var options = new JsonSerializerOptions { WriteIndented = false };
+// var options = new JsonSerializerOptions { WriteIndented = false };
 //         string jsonResponse = JsonSerializer.Serialize(member, options);
 //         return jsonResponse;
 

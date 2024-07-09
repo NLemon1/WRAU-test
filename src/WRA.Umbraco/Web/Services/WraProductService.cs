@@ -102,15 +102,13 @@ public class WraProductService(
         };
 
         // Get specific discount that holds the rules for "time based discounts"
-        // TODO cache this
         const string dateRangeRuleAlias = "DateRangeRule";
         const string groupDiscountRuleAlias = "groupDiscountRule";
         var allTimedDiscounts = umbracoCommerceApi.GetActiveDiscounts(product.StoreId)
             .Where(discount => discount.Rules.Children
                 .Where(discountRule => discountRule.RuleProviderAlias == groupDiscountRuleAlias)
                 .Any(groupDiscountRule => groupDiscountRule.Children
-                    .Any(subRule => subRule.RuleProviderAlias == dateRangeRuleAlias)
-                ));
+                    .Any(subRule => subRule.RuleProviderAlias == dateRangeRuleAlias)));
 
         var timeDiscountsContainingProduct = allTimedDiscounts.Where(
             discount => discount.Rules.Children
@@ -120,8 +118,10 @@ public class WraProductService(
                                     subRule.Settings.ContainsAll(productNodeIds))));
 
         // DiscountReadOnly timeBasedDiscount = umbracoCommerceApi.GetDiscount(product.StoreId, timeBasedDiscountAlias);
+
         // get first for now. User should not create dupliacte discounts
         var timeBasedDiscount = timeDiscountsContainingProduct.FirstOrDefault();
+
         // If the time based discount is not active, return empty list
         if (timeBasedDiscount?.IsActive != true) return [];
 

@@ -12,7 +12,7 @@ const articleFilters = () => {
     const resultsLoader = document.querySelector('.js-results-loader');
     const featuredArticles = document.querySelectorAll(".js-featured-article");
 
-    const apiEndpointUrl = "/NewsAndUpdates";
+    const apiEndpointUrl = "/Content/NewsAndUpdates";
     let pageNumber = 1;
     const pageSize = 15;
 
@@ -71,7 +71,7 @@ const articleFilters = () => {
         } else {
             filterDropdown.value = "";
         }
-        
+
     }
 
     const featuredArticleHandler = (activeFeature, hideAll) => {
@@ -106,7 +106,7 @@ const articleFilters = () => {
             btnStates(false, category);
         }
 
-        if (results.length > 0) { 
+        if (results.length > 0) {
 
             results.forEach((result) => {
 
@@ -161,7 +161,7 @@ const articleFilters = () => {
 
         paginationElement.innerHTML = "";
 
-    }  
+    }
 
     const createPagination = (paginationElement, resultPageCount) => {
 
@@ -250,7 +250,7 @@ const articleFilters = () => {
         }
 
     }
-    
+
 
     const postResults = () => {
 
@@ -393,7 +393,7 @@ const articleFilters = () => {
         postResults();
 
     });
-    
+
     // onpage load
     if (urlParams.has("search")) {
         killResults();

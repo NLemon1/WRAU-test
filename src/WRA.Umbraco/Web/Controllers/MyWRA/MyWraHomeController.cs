@@ -21,7 +21,6 @@ namespace WRA.Umbraco.Web.Controllers.MyWRA;
 public class MyWraHomeController : RenderController
 {
     private readonly IMemberManager _memberManager;
-    private readonly IPublishedValueFallback _publishedValueFallback;
     public MyWraHomeController(
         ILogger<RenderController> logger,
         ICompositeViewEngine compositeViewEngine,
@@ -32,12 +31,11 @@ public class MyWraHomeController : RenderController
         : base(logger, compositeViewEngine, umbracoContextAccessor)
     {
         _memberManager = memberManager;
-        _publishedValueFallback = publishedValueFallback;
     }
 
     public override IActionResult Index()
     {
-        MemberIdentityUser? currentMember = _memberManager.GetCurrentMemberAsync().GetAwaiter().GetResult();
+        var currentMember = _memberManager.GetCurrentMemberAsync().GetAwaiter().GetResult();
         if (currentMember != null)
         {
             return Redirect("/mywra/profile");

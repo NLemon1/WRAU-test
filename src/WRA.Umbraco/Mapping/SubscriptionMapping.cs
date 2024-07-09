@@ -41,6 +41,4 @@ public class SubscriptionMapping(
         target.IsActive = source.Status == "A";
     }
 
-
-
 }

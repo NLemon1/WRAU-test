@@ -26,6 +26,7 @@ public static class OrderPropertyHelper
 
         };
     }
+
     public static UmbracoOrderAddressDto GetShippingAddress(OrderReadOnly order)
     {
         return new UmbracoOrderAddressDto
@@ -73,7 +74,6 @@ public static class OrderPropertyHelper
             { CommerceConstants.Billing.State, address.State },
             { CommerceConstants.Billing.ZipCode, address.ZipCode },
             { CommerceConstants.Billing.Country, address.Country.ToString() }
-            // { "billingTelephone", model.BillingAddress.Telephone },
         };
     }
 

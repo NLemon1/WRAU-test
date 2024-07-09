@@ -33,12 +33,13 @@ public override IActionResult Index()
         if (currentMember != null)
         {
             var member = memberManager.AsPublishedMember(currentMember);
+            if (member == null) return Redirect("/login");
             MywraProfile viewModel = new(CurrentPage!, publishedValueFallback);
             var roles = memberManager.GetRolesAsync(currentMember).GetAwaiter().GetResult();
             if (roles.Any(r => r.Equals("WRA Member", StringComparison.OrdinalIgnoreCase) || r.Equals("WRA Member - Designated REALTOR", StringComparison.OrdinalIgnoreCase)))
             {
                 viewModel.IsMember = true;
-                var externalId = member.Value(GlobalConstants.ExternalId)?.ToString() ?? string.Empty;
+                string externalId = member.Value(GlobalConstants.ExternalId)?.ToString() ?? string.Empty;
 
                 viewModel.MemberDonations = memberDonationService.GetMemberDonations(externalId).GetAwaiter().GetResult();
                 var preferences = GetMemberMarketingSubscriptions(externalId);
@@ -86,6 +87,7 @@ private MemberMarketingSubscriptionPreferencesDto GetMemberMarketingSubscription
 
             }
         }
+
         return results;
 
     }
@@ -100,15 +102,18 @@ private List<MemberCommitteeDto> GetMemberCommittees(string externalId)
             {
                 foreach (var position in committee.CommitteeTerms)
                 {
-                    var committeePosition = new MemberCommitteeDto();
-                    committeePosition.FromYear = position.CommitteeTerm.Split('-').First();
-                    committeePosition.ToYear = position.CommitteeTerm.Split('-').Last();
-                    committeePosition.Name = committee.CommitteeName;
-                    committeePosition.Title = position.PositionName;
+                    var committeePosition = new MemberCommitteeDto
+                    {
+                        FromYear = Enumerable.First(position.CommitteeTerm.Split('-')),
+                        ToYear = Enumerable.Last(position.CommitteeTerm.Split('-')),
+                        Name = committee.CommitteeName,
+                        Title = position.PositionName
+                    };
                     results.Add(committeePosition);
                 }
             }
         }
+
         results = results.OrderByDescending(x => x.ToYear).ToList();
         return results;
     }

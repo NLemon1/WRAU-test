@@ -122,7 +122,7 @@ public class GatedContentService(IMemberManager memberManager, IMemberGroupServi
                 return memberAuthorizedByGroup.Value;
             }
 
-            // TODO: Not sure exactly how this works for anonymous users so this may need to be adjusted.
+            // Not sure exactly how this works for anonymous users so this may need to be adjusted.
 
             // Retrieve the roles (groups) associated with the member
             IList<string> memberGroups = member is null ? [] : (await _memberManager.GetRolesAsync(member));
@@ -163,6 +163,7 @@ public class GatedContentService(IMemberManager memberManager, IMemberGroupServi
             if (!block.Content.HasProperty(VisibleToAll)) return true;
 
             bool blockVisibleToAll = block.Content.Value<bool>(VisibleToAll);
+
             // Check if the block is visible to all without needing to check member-specific access.
             if (blockVisibleToAll) return true;
 
@@ -194,7 +195,6 @@ public class GatedContentService(IMemberManager memberManager, IMemberGroupServi
         {
             _logger.LogError(ex, "An error occurred while checking if a member can view a block. Block Content Udi: {ContentUdi}, Member ID: {MemberId}", block.ContentUdi, member?.Id ?? AnonymousUserName);
             throw new GatedContentException("An error occurred while checking if a member can view a block.", ex);
-            return false;
         }
     }
 }

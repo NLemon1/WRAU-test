@@ -30,6 +30,7 @@ public class MappingHelper(
         var contentNode = contentQuery.GetById(Identifier);
         return contentNode;
     }
+
     public IPublishedContent? FindRelatedContentByExternalId(Guid externalId, string contentType)
     {
         using var umbracoContextReference = umbracoContextFactory.EnsureUmbracoContext();

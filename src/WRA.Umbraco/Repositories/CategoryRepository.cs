@@ -18,7 +18,7 @@ public class CategoryRepository(
     IContentService contentService,
     ILogger<CategoryRepository> logger)
 {
-    public async Task<IContent> CreateOrUpdate(ExternalProductCategoryDto categoryInfo)
+    public IContent? CreateOrUpdate(ExternalProductCategoryDto categoryInfo)
     {
         try
         {
@@ -26,24 +26,26 @@ public class CategoryRepository(
             using var umbracoContextReference = umbracoContextFactory.EnsureUmbracoContext();
             var contentCache = umbracoContextReference.UmbracoContext.Content;
             var home = contentCache.GetAtRoot().FirstOrDefault();
-            var categoriesPage = home.ChildrenOfType(CategoriesPage.ModelTypeAlias).FirstOrDefault();
+            var categoriesPage = home!.ChildrenOfType(CategoriesPage.ModelTypeAlias)?.FirstOrDefault();
 
+            if (categoriesPage == null) return null;
 
-            if (categoriesPage != null)
+            var existingCategories = categoriesPage.ChildrenOfType(CategoryPage.ModelTypeAlias);
+            var existingCategoryPage = existingCategories?
+                .FirstOrDefault(cat =>
+                    cat.Value<Guid>(GlobalConstants.ExternalId).Equals(categoryInfo.Id));
+            if (existingCategoryPage != null)
             {
-                var existingCategories = categoriesPage.ChildrenOfType(CategoryPage.ModelTypeAlias);
-                var existingCategoryPage = existingCategories?
-                    .FirstOrDefault(cat =>
-                        cat.Value<Guid>(GlobalConstants.ExternalId).Equals(categoryInfo.Id));
-                if (existingCategoryPage != null)
+                var existingCategoryPageContent = contentService.GetById(existingCategoryPage.Id);
+                if (existingCategoryPageContent != null)
                 {
-                    var existingCategoryPageContent = contentService.GetById(existingCategoryPage.Id);
                     SetCategoryProperties(existingCategoryPageContent, categoryInfo);
                     contentService.SaveAndPublish(existingCategoryPageContent);
                     scope.Complete();
                     return existingCategoryPageContent;
                 }
             }
+
             var category = contentService.Create(categoryInfo.Name, categoriesPage.Id, CategoryPage.ModelTypeAlias);
             SetCategoryProperties(category, categoryInfo);
             contentService.SaveAndPublish(category);
@@ -56,7 +58,8 @@ public class CategoryRepository(
             throw;
         }
     }
-    public async Task<IContent?> CreateOrUpdateSubCategory(ExternalProductSubCategoryDto subCategoryInfo)
+
+    public IContent? CreateOrUpdateSubCategory(ExternalProductSubCategoryDto subCategoryInfo)
     {
         try
         {
@@ -67,8 +70,8 @@ public class CategoryRepository(
             var home = contentCache.GetAtRoot().FirstOrDefault();
 
             // get all categories page
-            var categoryPages = home.ChildrenOfType(CategoriesPage.ModelTypeAlias)
-                .FirstOrDefault()
+            var categoryPages = home!.ChildrenOfType(CategoriesPage.ModelTypeAlias)?
+                .FirstOrDefault()?
                 .ChildrenOfType(CategoryPage.ModelTypeAlias);
 
             if (categoryPages == null)
@@ -93,6 +96,11 @@ public class CategoryRepository(
             var subCategoryPage = existingPage != null ?
                 contentService.GetById(existingPage.Id) :
                 contentService.Create(subCategoryInfo.Name, parentCategory.Id, SubCategoryPage.ModelTypeAlias);
+            if (subCategoryPage == null)
+            {
+                scope.Complete();
+                return null;
+            }
 
             SetSubCategoryProperties(subCategoryPage, subCategoryInfo);
 
@@ -107,6 +115,7 @@ public class CategoryRepository(
             throw;
         }
     }
+
     public IPublishedContent? GetCategoriesPage()
     {
         using var umbracoContextReference = umbracoContextFactory.EnsureUmbracoContext();
@@ -142,6 +151,7 @@ public class CategoryRepository(
         var categories = contentCache.GetByContentType(contentType);
         return categories;
     }
+
     private void SetCategoryProperties(IContent content, ExternalProductCategoryDto categoryInfo)
     {
         content.SetValue(GlobalConstants.ExternalId, categoryInfo.Id);

@@ -6,7 +6,7 @@ using WRA.Umbraco.Web.Services;
 
 namespace WRA.Umbraco.Events.Consumers;
 
-public class MemberEntityEventConsumer(ILogger<MemberEntityEventConsumer> logger, WraMemberManagementService memberManagementService)
+public class MemberEntityEventConsumer(ILogger<MemberEntityEventConsumer> logger)
 : IConsumer<EntityEvent<MemberEvent>>
 {
     public async Task Consume(ConsumeContext<EntityEvent<MemberEvent>> context)

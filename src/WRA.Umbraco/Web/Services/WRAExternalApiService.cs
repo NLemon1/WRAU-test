@@ -1,5 +1,3 @@
-using System.Net;
-using GlobalPayments.Api.Terminals.PAX;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using RestSharp;
@@ -7,7 +5,9 @@ using WRA.Umbraco.Configuration;
 using WRA.Umbraco.Web.Dtos.External;
 
 namespace WRA.Umbraco.Web.Services;
-public class WraExternalApiService(WraExternalApiSettings settings)
+public class WraExternalApiService(
+    WraExternalApiSettings settings,
+    ILogger<WraExternalApiService> logger)
 {
     public async Task<RestResponse> GetProductCategories()
     {
@@ -90,7 +90,6 @@ public class WraExternalApiService(WraExternalApiSettings settings)
         return response;
     }
 
-
     public async Task<RestResponse> GetMembers(int amount = 10000)
     {
         var options = new RestClientOptions(settings.VersionedBaseUrl);
@@ -101,6 +100,7 @@ public class WraExternalApiService(WraExternalApiSettings settings)
 
         return response;
     }
+
     public async Task<RestResponse> GetMemberById(Guid Id)
     {
         var options = new RestClientOptions(settings.VersionedBaseUrl);
@@ -133,6 +133,7 @@ public class WraExternalApiService(WraExternalApiSettings settings)
 
         return response;
     }
+
     public async Task<RestResponse> GetCompanyById(Guid Id)
     {
         var options = new RestClientOptions(settings.VersionedBaseUrl);
@@ -154,6 +155,7 @@ public class WraExternalApiService(WraExternalApiSettings settings)
 
         return response;
     }
+
     public async Task<RestResponse> GetMemberSubscriptionById(Guid Id)
     {
         var options = new RestClientOptions(settings.VersionedBaseUrl);
@@ -186,6 +188,7 @@ public class WraExternalApiService(WraExternalApiSettings settings)
 
         return response;
     }
+
     public async Task<RestResponse> GetMemberOrderHistory(string id)
     {
         var options = new RestClientOptions(settings.VersionedBaseUrl);
@@ -262,6 +265,7 @@ public class WraExternalApiService(WraExternalApiSettings settings)
 
         return response;
     }
+
     public async Task<RestResponse> GetMemberCourseCertificates(string id)
     {
         var options = new RestClientOptions(settings.VersionedBaseUrl);
@@ -287,7 +291,8 @@ public class WraExternalApiService(WraExternalApiSettings settings)
         }
         catch (Exception e)
         {
-            throw e;
+            logger.LogError(e, "Error getting member course progress");
+            throw;
         }
     }
 
@@ -305,7 +310,8 @@ public class WraExternalApiService(WraExternalApiSettings settings)
         }
         catch (Exception e)
         {
-            throw e;
+            logger.LogError(e, "Error getting member marketing subscriptions");
+            throw;
         }
     }
 
@@ -325,11 +331,12 @@ public class WraExternalApiService(WraExternalApiSettings settings)
         }
         catch (Exception e)
         {
-            throw e;
+            logger.LogError(e, "Error updating member marketing subscription");
+            throw;
         }
     }
 
-    public async Task<RestResponse> GetShippingRates(ShippingRateRequestDto shippingRequest)
+    public RestResponse GetShippingRates(ShippingRateRequestDto shippingRequest)
     {
         try
         {
@@ -343,7 +350,8 @@ public class WraExternalApiService(WraExternalApiSettings settings)
         }
         catch (Exception ex)
         {
-            throw ex;
+            logger.LogError(ex, "Error getting shipping rates");
+            throw;
         }
     }
 }

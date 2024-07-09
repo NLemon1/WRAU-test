@@ -16,12 +16,18 @@ public class TaxonomyRepository(
     IUmbracoContextFactory umbracoContextFactory,
     ILogger<TaxonomyRepository> logger)
 {
-    public async Task<IContent> CreateOrUpdateTaxonomy(ExternalTaxonomyDto taxonomyDto){
+    public IContent? CreateOrUpdateTaxonomy(ExternalTaxonomyDto taxonomyDto)
+    {
         using var scope = coreScopeProvider.CreateCoreScope();
         using var umbracoContextReference = umbracoContextFactory.EnsureUmbracoContext();
         var contentCache = umbracoContextReference.UmbracoContext.Content;
 
         var taxonomyType = contentCache.GetContentType(ProductTaxonomy.ModelTypeAlias);
+        if (taxonomyType == null)
+        {
+            scope.Complete();
+            return null;
+        }
         var allTaxonomy = contentCache.GetByContentType(taxonomyType);
 
         var siteRoot = contentCache.GetAtRoot().FirstOrDefault();
@@ -48,18 +54,19 @@ public class TaxonomyRepository(
         return taxonomy;
     }
 
-    public IPublishedContent Get(Guid externalId)
+    public IPublishedContent? Get(Guid externalId)
     {
         using var scope = coreScopeProvider.CreateCoreScope();
         using var umbracoContextReference = umbracoContextFactory.EnsureUmbracoContext();
         var contentCache = umbracoContextReference.UmbracoContext.Content;
 
         var taxonomyType = contentCache.GetContentType(ProductTaxonomy.ModelTypeAlias);
+        if (taxonomyType == null) return null;
         var allTaxonomy = contentCache.GetByContentType(taxonomyType);
 
         var existingTaxonomy = allTaxonomy.FirstOrDefault(t =>
             t.Value<Guid>(GlobalConstants.ExternalId) == externalId);
         scope.Complete();
-        return existingTaxonomy;
+        return existingTaxonomy ?? null;
     }
 }

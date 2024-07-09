@@ -14,7 +14,6 @@ using WRA.Umbraco.Web.Dtos.Member;
 namespace WRA.Umbraco.Mapping;
 
 public class MemberMapping(
-    IUmbracoContextFactory umbracoContextFactory,
     MemberGroupRepository memberGroupRepository,
     MappingHelper mappingHelper,
     ILogger<MemberMapping> logger) : IMapDefinition
@@ -51,16 +50,16 @@ public class MemberMapping(
         target.CellPhone = source.Value<string>(GlobalConstants.Member.CellPhone) ?? string.Empty;
         target.Email = source.Value<string>(GlobalConstants.Member.Email) ?? string.Empty;
 
-
     }
+
     private void PublishedContentToMemberEvent(IMember source, MemberEvent target, MapperContext context)
     {
         target.UserName = source.Username;
         target.Email = source.Email;
-        target.PasswordHash = source.RawPasswordValue;
-        target.PasswordSalt = (source.GetValue<string>("token")) ?? string.Empty;
+        target.PasswordHash = source.RawPasswordValue ?? string.Empty;
+        target.PasswordSalt = source.GetValue<string>("token") ?? string.Empty;
         target.Id = source.GetValue<Guid>(GlobalConstants.ExternalId);
-        target.NrdsId = source.GetValue<string>("nrdsId");
+        target.NrdsId = source.GetValue<string>("nrdsId") ?? string.Empty;
         target.CommonId = source.GetValue<int>("commonId");
         target.Prefix = source.GetValue<string>("prefix") ?? string.Empty;
         target.FirstName = source.GetValue<string>("firstName") ?? string.Empty;
@@ -89,7 +88,6 @@ public class MemberMapping(
 
     }
 
-
     private Guid GetMemberGroupKey(IMember source)
     {
         var memberGroups = memberGroupRepository.GetMemberGroupsByMember(source);
@@ -114,7 +112,6 @@ public class MemberMapping(
             if (source.MarketingEmail is not null && target.MarketingEmail?.Equals(source.MarketingEmail) is not true) target.MarketingEmail = source.MarketingEmail;
             if (source.BrokerEmail is not null && target.BrokerEmail?.Equals(source.BrokerEmail) is not true) target.BrokerEmail = source.BrokerEmail;
 
-            // TODO: Unsure what is going on here exactly. Do we just need to add an Email property to source?
             if (source.BrokerEmail is not null && target.Email?.Equals(source.BrokerEmail) is not true) target.Email = source.BrokerEmail;
             if (source.Prefix is not null && target.Prefix?.Equals(source.Prefix) is not true) target.Prefix = source.Prefix;
             if (source.FirstName is not null && target.FirstName?.Equals(source.FirstName) is not true) target.FirstName = source.FirstName;
@@ -146,7 +143,7 @@ public class MemberMapping(
     {
         target.ExternalId = source.GetValue<string>(GlobalConstants.ExternalId).SafeGuid();
         target.UmbracoId = source.Id.ToString();
-        target.NRDSId = source.GetValue<string>("nrdsId");
+        target.NRDSId = source.GetValue<string>("nrdsId") ?? string.Empty;
         target.CommonId = source.GetValue<int>("commonId");
 
         target.UserName = source.GetValue<string>("userName") ?? string.Empty;
@@ -195,7 +192,7 @@ public class MemberMapping(
         target.Zip = source.Zip;
         target.Email = source.Email;
         target.MarketingEmail = source.MarketingEmail;
-        target.CompanyName = source.CompanyName;
+        target.CompanyName = source.CompanyName ?? string.Empty;
         target.BrokerFullName = source.BrokerFullName;
         target.BrokerEmail = source.BrokerEmail;
         target.HomePhone = source.HomePhone;

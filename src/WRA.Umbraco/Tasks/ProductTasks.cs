@@ -36,11 +36,11 @@ public class ProductTasks(
         {
             var categoriesResp = await externalApiService.GetProductCategories();
             string? categoryContent = categoriesResp.Content;
-
+            if (categoryContent == null ) return false; // no content
             var categoriesResponse = JsonSerializer.Deserialize<IEnumerable<ExternalProductCategoryDto>>(categoryContent, SerializationOptions);
             foreach (var categoryResponse in categoriesResponse)
             {
-                await categoryRepository.CreateOrUpdate(categoryResponse);
+                 categoryRepository.CreateOrUpdate(categoryResponse);
             }
 
             return true; // success
@@ -59,10 +59,11 @@ public class ProductTasks(
             var subCategoriesResp = await externalApiService.GetProductSubCategories();
             string? subCategoryContent = subCategoriesResp.Content;
 
+            if (subCategoryContent == null) return false; // no content
             var subCategoriesResponse = JsonSerializer.Deserialize<IEnumerable<ExternalProductSubCategoryDto>>(subCategoryContent, SerializationOptions);
             foreach (var subCategoryResponse in subCategoriesResponse)
             {
-                await categoryRepository.CreateOrUpdateSubCategory(subCategoryResponse);
+                categoryRepository.CreateOrUpdateSubCategory(subCategoryResponse);
             }
 
             return true; // success
@@ -79,11 +80,12 @@ public class ProductTasks(
         try
         {
             var productTypes = await externalApiService.GetProductTypes();
-            var productTypeContent = productTypes.Content;
+            string? productTypeContent = productTypes.Content;
+            if (productTypeContent == null) return false; // no content
             var productTypesResponse = JsonSerializer.Deserialize<IEnumerable<ExternalProductCollectionDto>>(productTypeContent, SerializationOptions);
             foreach (var productType in productTypesResponse)
             {
-                await productPageRepository.CreateProductCollectionPage(productType);
+                productPageRepository.CreateProductCollectionPage(productType);
             }
 
             return true; // success
@@ -111,11 +113,12 @@ public class ProductTasks(
         return true;
     }
 
-    public async Task<bool> QueueProductSync()
+    public bool QueueProductSync()
     {
         BackgroundJob.Enqueue(() => SyncAllProducts());
         return true;
     }
+
     public async Task<bool> SyncAllProducts()
     {
         using var scope = scopeProvider.CreateCoreScope();
@@ -142,7 +145,7 @@ public class ProductTasks(
                 continue;
             }
 
-            var result = await wraProductManagementService.CreateOrUpdate(productEvent);
+            var result = wraProductManagementService.CreateOrUpdate(productEvent);
             if (result == null)
             {
                 logger.LogError("could not sync product {Sku} - {Type} - {Name}", p.Sku, p.ProductType, p.Name);
@@ -166,7 +169,7 @@ public class ProductTasks(
         var externalTaxonomy = JsonSerializer.Deserialize<List<ExternalTaxonomyDto>>(content, SerializationOptions);
         foreach (var taxonomy in externalTaxonomy)
         {
-            await taxonomyRepository.CreateOrUpdateTaxonomy(taxonomy);
+            taxonomyRepository.CreateOrUpdateTaxonomy(taxonomy);
         }
 
         return true;

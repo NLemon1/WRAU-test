@@ -40,6 +40,8 @@ public class CompanySubscriptionRule(
         // get company node
         var companyNode = contentQuery.GetById(contentUdi);
 
+        if (settings?.DiscountProduct == null) return Unfulfilled();
+
         // get discount node
         var discountProduct = contentQuery.GetById(settings.DiscountProduct);
 
@@ -63,6 +65,6 @@ public class CompanySubscriptionRuleSettings
         Description = "The Subscription Product",
         View = "contentpicker",
         Config = "{ startNodeId: -1, multiPicker: false, idType: 'udi' }")]
-    public Udi DiscountProduct { get; set; }
+    public Udi? DiscountProduct { get; set; }
 
 }

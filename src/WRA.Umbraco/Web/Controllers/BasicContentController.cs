@@ -7,18 +7,12 @@ using WRA.Umbraco.Web.Services;
 
 namespace UmbracoProject.Controller;
 
-public class BasicContentController : RenderController
+public class BasicContentController(
+    ILogger<RenderController> logger,
+    ICompositeViewEngine compositeViewEngine,
+    IUmbracoContextAccessor umbracoContextAccessor)
+    : RenderController(logger, compositeViewEngine, umbracoContextAccessor)
 {
-    private readonly GatedContentService _gatedContentService;
-    public BasicContentController(
-        ILogger<RenderController> logger,
-        ICompositeViewEngine compositeViewEngine,
-        IUmbracoContextAccessor umbracoContextAccessor,
-        GatedContentService gatedContentService)
-        : base(logger, compositeViewEngine, umbracoContextAccessor)
-    {
-        _gatedContentService = gatedContentService;
-    }
 
     public override IActionResult Index()
     {

@@ -19,6 +19,7 @@ public class MassTransitComposer : IComposer
     public void Compose(IUmbracoBuilder builder)
     {
         var logger = builder.BuilderLoggerFactory.CreateLogger<MassTransitComposer>();
+
         // Retrieve messaging settings
         var settings = builder.Config.GetSection(nameof(MessagingSettings)).Get<MessagingSettings>() ?? throw new ApplicationConfigurationException(nameof(MessagingSettings));
 
@@ -45,6 +46,7 @@ public class MassTransitComposer : IComposer
                 logger.LogInformation("Product Consumer Enabled. Adding Consumer...");
                 x.AddConsumer<ProductEntityEventConsumer>();
             }
+
             var orderEndpointSettings = settings.GetEndPointSettings(nameof(OrderEvent));
             if (orderEndpointSettings is { Enabled: true })
             {
@@ -52,15 +54,13 @@ public class MassTransitComposer : IComposer
                 x.AddConsumer<OrderEntityEventConsumer>();
             }
 
-
             x.UsingAzureServiceBus((context, cfg) =>
             {
                 // Base connection string for the service bus.
                 cfg.Host(settings.BusConnectionString);
 
                 // Message retry settings.
-                cfg.UseMessageRetry(r => r.Interval(settings.GlobalRetryCount,
-                    TimeSpan.FromSeconds(settings.GlobalRetryDelaySeconds)));
+                cfg.UseMessageRetry(r => r.Interval(settings.GlobalRetryCount, TimeSpan.FromSeconds(settings.GlobalRetryDelaySeconds)));
 
                 // Scheduler Redelivery timing.
                 cfg.UseScheduledRedelivery(r =>
@@ -90,8 +90,7 @@ public class MassTransitComposer : IComposer
                             // Configure rate limiting if enabled for this subscription endpoint.
                             if (memberEndPointSettings.RateLimitSettings is { Enabled: true })
                             {
-                                e.UseRateLimit(memberEndPointSettings.RateLimitSettings.RateLimit,
-                                    TimeSpan.FromSeconds(memberEndPointSettings.RateLimitSettings.IntervalSeconds));
+                                e.UseRateLimit(memberEndPointSettings.RateLimitSettings.RateLimit, TimeSpan.FromSeconds(memberEndPointSettings.RateLimitSettings.IntervalSeconds));
                             }
 
                             // Configure concurrency limit if enabled for this subscription endpoint.
@@ -114,17 +113,12 @@ public class MassTransitComposer : IComposer
                                 Name = $"Filter{settings.BusEventSource}Products",
                                 Filter = new SqlRuleFilter(sqlString)
                             };
-                            e.ConfigureConsumer<ProductEntityEventConsumer>(context,
-                                options =>
-                                {
-                                    options.UseMessageRetry(r => r.Interval(5, 400).Handle<TransientException>());
-                                });
+                            e.ConfigureConsumer<ProductEntityEventConsumer>(context, options => options.UseMessageRetry(r => r.Interval(5, 400).Handle<TransientException>()));
 
                             // Configure rate limiting if enabled for this subscription endpoint.
                             if (productEndpointSettings.RateLimitSettings is { Enabled: true })
                             {
-                                e.UseRateLimit(productEndpointSettings.RateLimitSettings.RateLimit,
-                                    TimeSpan.FromSeconds(memberEndPointSettings.RateLimitSettings.IntervalSeconds));
+                                e.UseRateLimit(productEndpointSettings.RateLimitSettings.RateLimit, TimeSpan.FromSeconds(memberEndPointSettings.RateLimitSettings.IntervalSeconds));
                             }
 
                             // Configure concurrency limit if enabled for this subscription endpoint.
@@ -135,6 +129,7 @@ public class MassTransitComposer : IComposer
                             }
                         });
                 }
+
                 if (orderEndpointSettings is { Enabled: true })
                 {
                     cfg.SubscriptionEndpoint<EntityEvent<OrderEvent>>(
@@ -146,17 +141,12 @@ public class MassTransitComposer : IComposer
                                 Name = $"Filter{settings.BusEventSource}Orders",
                                 Filter = new SqlRuleFilter(sqlString)
                             };
-                            e.ConfigureConsumer<OrderEntityEventConsumer>(context,
-                                options =>
-                                {
-                                    options.UseMessageRetry(r => r.Interval(5, 400).Handle<TransientException>());
-                                });
+                            e.ConfigureConsumer<OrderEntityEventConsumer>(context, options => options.UseMessageRetry(r => r.Interval(5, 400).Handle<TransientException>()));
 
                             // Configure rate limiting if enabled for this subscription endpoint.
                             if (orderEndpointSettings.RateLimitSettings is { Enabled: true })
                             {
-                                e.UseRateLimit(orderEndpointSettings.RateLimitSettings.RateLimit,
-                                    TimeSpan.FromSeconds(memberEndPointSettings.RateLimitSettings.IntervalSeconds));
+                                e.UseRateLimit(orderEndpointSettings.RateLimitSettings.RateLimit, TimeSpan.FromSeconds(memberEndPointSettings.RateLimitSettings.IntervalSeconds));
                             }
 
                             // Configure concurrency limit if enabled for this subscription endpoint.

@@ -9,8 +9,7 @@ namespace WRA.Umbraco.Web.Adapters;
 public class CustomProductSnapshot : UmbracoProductSnapshot
 {
     private readonly UmbracoProductSnapshot _snapshot;
-    private List<ProductPrice> memberPricing;
-    private ICoreScopeProvider coreScopeProvider;
+    private readonly List<ProductPrice> _memberPricing;
 
     public CustomProductSnapshot(
         IPublishedContent content,
@@ -33,27 +32,25 @@ public class CustomProductSnapshot : UmbracoProductSnapshot
 
         // get the default snapshot from the base class to start..
         _snapshot = snapshot;
-        memberPricing = new List<ProductPrice>();
+        _memberPricing = new List<ProductPrice>();
 
         // If the product adapter requests member pricing...
         if (memberPrice)
         {
-            using var scope = coreScopeProvider.CreateCoreScope(autoComplete: true);
-
             // cast as our product composition..
             var product = content as IProductComp;
 
             // for all pricing pairs (currencyid : amount),
             // remove and replace with the MemberPrice field that exists on product compositions
-            foreach (ProductPrice productPrice in snapshot.Prices)
+            foreach (var productPrice in snapshot.Prices)
             {
-                if (product?.MemberPrice != null && product.MemberPrice.Any() && memberPrice)
+                if (product?.MemberPrice != null && product.MemberPrice.Any())
                 {
-                    memberPricing.Add(product.MemberPrice.GetPriceFor(productPrice.CurrencyId));
+                    _memberPricing.Add(product.MemberPrice.GetPriceFor(productPrice.CurrencyId));
                 }
             }
         }
     }
 
-    public override IEnumerable<ProductPrice> Prices => memberPricing.Any() ? memberPricing : _snapshot.Prices;
+    public override IEnumerable<ProductPrice> Prices => _memberPricing.Any() ? _memberPricing : _snapshot.Prices;
 }

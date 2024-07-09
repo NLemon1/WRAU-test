@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using WRA.Umbraco.Web.Dtos.External;
 
-
 namespace WRA.Umbraco.Web.Services;
 public class MemberCommitteesService
 {
@@ -26,6 +25,7 @@ public class MemberCommitteesService
         _externalServiceClient = externalServiceClient;
         _logger = logger;
     }
+
     public async Task<List<ExternalMemberCommitteeDto>> GetMemberCommittees(string externalMemberID)
     {
         try
@@ -35,7 +35,7 @@ public class MemberCommitteesService
             var memberCommittees =
                 JsonSerializer.Deserialize<List<ExternalMemberCommitteeDto>>(
                     memberCommitteeResponse.Content,
-                    SerializationOptions);
+                    SerializationOptions) ?? [];
             return memberCommittees;
         }
         catch (Exception ex)

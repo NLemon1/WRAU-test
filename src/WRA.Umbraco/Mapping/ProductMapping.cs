@@ -21,8 +21,8 @@ public class ProductMapping(
     private void ContentToProductEvent(IContent content, ProductEvent productEvent, MapperContext _)
     {
         productEvent.Id = content.GetValue<Guid>(GlobalConstants.ExternalId);
-        productEvent.Sku = content.GetValue<string>(GlobalAliases.Sku);
-        productEvent.Name = content.Name;
+        productEvent.Sku = content.GetValue<string>(GlobalAliases.Sku) ?? string.Empty;
+        productEvent.Name = content.Name ?? string.Empty;
         productEvent.Description = content.GetValue<string>("description").SafeString();
         productEvent.NonMemberPrice = content.GetValue<decimal>("price");
         productEvent.MemberPrice = content.GetValue<decimal>("memberPrice");
@@ -51,12 +51,12 @@ public class ProductMapping(
         target.ProductTypeId = source.ProductTypeId;
         target.ProductCategoryId = source.ProductCategoryId;
         target.ProductSubcategoryId = source.ProductSubcategoryId;
-        target.ProductSalesTaxCategoryCode = source.salesTaxCategoryCode ?? string.Empty;
+        target.ProductSalesTaxCategoryCode = source.SalesTaxCategoryCode ?? string.Empty;
         target.StartDate = GetValidDate(source.StartDate);
         target.EndDate = GetValidDate(source.EndDate);
         target.IsShippable = source.IsShippable;
         target.IsTaxable = source.IsTaxable;
-        target.ProductSalesTaxCategoryCode = source.salesTaxCategoryCode ?? string.Empty;
+        target.ProductSalesTaxCategoryCode = source.SalesTaxCategoryCode ?? string.Empty;
     }
 
     private DateTime? GetValidDate(DateTime? date)

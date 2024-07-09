@@ -2,7 +2,7 @@ namespace WRA.Umbraco.Dtos;
 
 public class UpdateCartDto
 {
-    public OrderLineQuantityDto[] OrderLines { get; set; }
+    public OrderLineQuantityDto[] OrderLines { get; set; } = [];
 }
 
 public class OrderLineQuantityDto

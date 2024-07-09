@@ -36,6 +36,12 @@ public class MemberGroupRepository(
         }
     }
 
+    public IMemberGroup? UpdateMemberGroup(ExternalMemberGroupDto memberTypeDto)
+    {
+        var memberGroup = GetMemberGroupByExternalId(memberTypeDto.Id);
+        return memberGroup == null ? CreateMemberGroup(memberTypeDto) : UpdateMemberGroup(memberGroup, memberTypeDto);
+    }
+
     public IMemberGroup UpdateMemberGroup(IMemberGroup memberGroup, ExternalMemberGroupDto memberGroupDto)
     {
         try
@@ -67,6 +73,7 @@ public class MemberGroupRepository(
                 scope.Complete();
                 return false;
             }
+
             memberGroupService.Delete(memberGroup);
             scope.Complete();
             logger.LogInformation("Member group deleted: {MemberGroupKey}", memberGroup.Key);
@@ -78,12 +85,6 @@ public class MemberGroupRepository(
             logger.LogError(ex, "Error updating member group of id {Id}", memberGroupDto.Id);
             throw;
         }
-    }
-
-    public IMemberGroup? UpdateMemberGroup(ExternalMemberGroupDto memberTypeDto)
-    {
-        var memberGroup = GetMemberGroupByExternalId(memberTypeDto.Id);
-        return memberGroup == null ? CreateMemberGroup(memberTypeDto) : UpdateMemberGroup(memberGroup, memberTypeDto);
     }
 
     public IMemberGroup? GetMemberGroupByExternalId(Guid Id)

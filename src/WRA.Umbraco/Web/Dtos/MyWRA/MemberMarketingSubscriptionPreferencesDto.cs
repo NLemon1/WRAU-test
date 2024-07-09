@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace WRA.Umbraco.Web.Dtos.MyWRA;
 public class MemberMarketingSubscriptionPreferencesDto
 {
-    public string MemberID { get; set; }
-    public List<MemberMarketingSubscriptionPreferenceDto> MagazinePreferences { get; set; }
-    public List<MemberMarketingSubscriptionPreferenceDto> EmailPreferences { get; set; }
+    public string MemberID { get; set; } = string.Empty;
+    public List<MemberMarketingSubscriptionPreferenceDto> MagazinePreferences { get; set; } = new List<MemberMarketingSubscriptionPreferenceDto>();
+    public List<MemberMarketingSubscriptionPreferenceDto> EmailPreferences { get; set; } = new List<MemberMarketingSubscriptionPreferenceDto>();
 }
 
 public class MemberMarketingSubscriptionPreferenceDto

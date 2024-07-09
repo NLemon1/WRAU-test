@@ -18,17 +18,17 @@ public class CourseService(
     {
         var response = await wraExternalApiService.GetRequiredCourses(ExternalId);
         if (response.StatusCode != HttpStatusCode.OK) return [];
-
+        if (response.Content == null) return [];
         var courses = JsonSerializer.Deserialize<List<ExternalCourseDto>>(response.Content, SerializationOptions);
         return courses.ConvertAll(mapper.Map<CourseDto>);
     }
 
-    // TODO apply translation layer for this
+    // apply translation layer for this
     public async Task<List<ExternalCourseProgressDto>?> GetCourseProgress(string ExternalId)
     {
         var response = await wraExternalApiService.GetMemberCourseProgress(ExternalId);
         if (response.StatusCode != HttpStatusCode.OK) return [];
-
+        if (response.Content == null) return [];
         var courses = JsonSerializer.Deserialize<List<ExternalCourseProgressDto>>(response.Content, SerializationOptions);
         return courses;
     }
@@ -37,7 +37,7 @@ public class CourseService(
     {
         var response = await wraExternalApiService.GetMemberCourseCertificates(ExternalId);
         if (response.StatusCode != HttpStatusCode.OK) return [];
-
+        if (response.Content == null) return [];
         var courses = JsonSerializer.Deserialize<List<ExternalMemberCourseCertificateDto>>(response.Content, SerializationOptions);
         return courses;
     }

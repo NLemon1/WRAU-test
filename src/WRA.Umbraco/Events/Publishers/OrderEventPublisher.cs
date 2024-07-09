@@ -16,7 +16,7 @@ public class OrderEventPublisher(
     ILogger<OrderEventPublisher> logger,
     IPublishEndpoint publishEndpoint)
 {
-    public async Task Send(OrderReadOnly order, EntityEventAction action)
+    public void Send(OrderReadOnly order, EntityEventAction action)
     {
 
         var orderEvent = mapper.Map<UmbracoOrderComplete>(order);

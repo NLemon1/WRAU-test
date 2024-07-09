@@ -31,7 +31,7 @@ public class MemberSubscriptionRule(
         var ctx = umbracoContextFactory.EnsureUmbracoContext();
         var discountProduct = ctx.UmbracoContext.Content.GetById(discountProductUdi);
 
-        if (currentMember?.Result == null) return Unfulfilled();
+        if (currentMember?.Result == null || discountProduct == null) return Unfulfilled();
 
         var currentDate = DateTime.Now;
         var memberSubscriptionRepository = scope.ServiceProvider.GetRequiredService<IRepository<MemberSubscription>>();
@@ -54,6 +54,6 @@ public class MemberSubscriptionRuleSettings
         Description = "The product to discount the price of",
         View = "contentpicker",
         Config = "{ startNodeId: -1, multiPicker: false, idType: 'udi' }")]
-    public Udi DiscountProduct { get; set; }
+    public Udi? DiscountProduct { get; set; }
 
 }

@@ -14,6 +14,7 @@ namespace WRA.Umbraco.Web.Controllers.Api;
 
 [ApiController]
 [MapToApi("content-api")]
+[Route("Content")]
 public class ContentApiController(
     SearchService searchService)
     : UmbracoApiController
@@ -24,7 +25,7 @@ public class ContentApiController(
     public NewsAndUpdatesResponseDto GetNewsAndUpdates(NewsRecordRequest request)
     {
         // broad initial search
-        var (rawResults, _) = ConductSearch(Article.ModelTypeAlias, request.SearchPhrase);
+        var rawResults = ConductSearch(Article.ModelTypeAlias, request.SearchPhrase);
 
         // cast search to strongly typed object
         var responseResults = rawResults
@@ -51,7 +52,7 @@ public class ContentApiController(
     [UmbracoMemberAuthorize("", "Legal Section,WRA Member,WRA Member - Designated REALTOR,Affiliated", "")]
     public HotTipResponseDto GetHotTips(HotTipRequestDto request)
     {
-        var (rawResults, _) = ConductSearch(HotTipEntry.ModelTypeAlias);
+        var rawResults = ConductSearch(HotTipEntry.ModelTypeAlias);
 
         var responseResults = rawResults
                 .Select(result => new HotTipEntry(result.Content, new NoopPublishedValueFallback()));
@@ -62,10 +63,10 @@ public class ContentApiController(
         if (request.Categories?.Any() ?? false)
         {
             // if so, do a match
-            responseResults = responseResults.Where(rr => CategoryMatch(rr.Category, request.Categories));
+            responseResults = responseResults.Where(rr => rr.Category != null && CategoryMatch(rr.Category, request.Categories));
             if (request.SubCategories.Any())
             {
-                responseResults = responseResults.Where(rr => CategoryMatch(rr.Subcategories, request.SubCategories));
+                responseResults = responseResults.Where(rr => rr.Subcategories != null && CategoryMatch(rr.Subcategories, request.SubCategories));
             }
         }
 
@@ -83,7 +84,7 @@ public class ContentApiController(
 
     public LegalUpdateResponseDto GetLegalUpdates(LegalUpdateRequestDto request)
     {
-        var (rawResults, _) = ConductSearch(LegalUpdate.ModelTypeAlias);
+        var rawResults = ConductSearch(LegalUpdate.ModelTypeAlias);
 
         var responseResults = rawResults
             .Select(result => new LegalUpdate(result.Content, new NoopPublishedValueFallback()));
@@ -113,7 +114,7 @@ public class ContentApiController(
     public MultimediaResponseDto GetMultiMedia(MultimediaRequestDto request)
     {
         // conduct search
-        var (rawResults, _) = ConductSearch(MultimediaItem.ModelTypeAlias, request.SearchPhrase);
+        var rawResults = ConductSearch(MultimediaItem.ModelTypeAlias, request.SearchPhrase);
         var responseResults = rawResults
             .Select(result => new MultimediaItem(result.Content, new NoopPublishedValueFallback()));
         if (!string.IsNullOrEmpty(request.MediaType))
@@ -174,12 +175,11 @@ public class ContentApiController(
         }
     }
 
-
-    private (IEnumerable<PublishedSearchResult>, int) ConductSearch(string nodeAlias, string searchPhrase = "")
+    private IEnumerable<PublishedSearchResult> ConductSearch(string nodeAlias, string searchPhrase = "")
     {
         var rawResults = searchService
                     .Search(nodeAlias, searchPhrase);
-        return (rawResults, rawResults.Count());
+        return rawResults;
     }
 
     private static bool CategoryMatch(string? resultCategory, string category)

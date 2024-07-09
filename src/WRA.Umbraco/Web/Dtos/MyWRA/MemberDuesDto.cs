@@ -8,7 +8,7 @@ using WRA.Umbraco.Web.Dtos.External;
 namespace WRA.Umbraco.Web.Dtos.MyWRA;
 public class MemberDuesDto
 {
-    public List<ExternalMemberDuesPaymentHistoryDto> HistoricalPayments { get; set; }
+    public List<ExternalMemberDuesPaymentHistoryDto> HistoricalPayments { get; set; } = [];
     public ExternalMemberDuesPaymentStrategyDto? PaymentStrategy { get; set; }
     public ExternalMemberDuesInvoiceDto? Invoice { get; set; }
 

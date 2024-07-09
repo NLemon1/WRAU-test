@@ -53,8 +53,9 @@ public class TransformExamineValues(IExamineManager examineManager, IUmbracoCont
                             {
                                 foreach (var categoryId in categoryIds)
                                 {
+                                    if (categoryId == null) continue;
                                     var category = ctx.UmbracoContext.Content.GetById(categoryId);
-                                    if (category != null)
+                                    if (category?.UrlSegment != null)
                                     {
                                         categoryAliases.Add(category.UrlSegment);
                                     }

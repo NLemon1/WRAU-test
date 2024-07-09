@@ -16,7 +16,6 @@ using WRA.Umbraco.Helpers.Constants;
 using WRA.Umbraco.Models;
 using WRA.Umbraco.Repositories;
 
-
 namespace WRA.Umbraco.Helpers;
 
 public class ProductHelper(
@@ -24,7 +23,6 @@ public class ProductHelper(
     TaxonomyRepository taxonomyRepository,
     ICacheKeyProvider cacheKeyProvider,
     IUmbracoContextFactory contextFactory,
-    IContentService contentService,
     ICurrencyService currencyService,
     ICoreScopeProvider scopeProvider,
     ILogger<ProductHelper> logger)
@@ -89,7 +87,6 @@ public class ProductHelper(
             { currency.Id.ToString(), productEvent.MemberPrice?.ToString() ?? "0" }
         });
 
-
         content.SetValue("price", basePrice);
         content.SetValue("memberPrice", memberPrice);
         content.SetValue(GlobalConstants.ExternalId, productEvent.Id);
@@ -97,7 +94,6 @@ public class ProductHelper(
 
         var existingTaxonomy = taxonomyRepository.Get(productEvent.ProductTaxonomyId.SafeGuid());
         content.SetValue("productTaxonomy", existingTaxonomy.GetUdi());
-
 
     }
 
@@ -107,8 +103,7 @@ public class ProductHelper(
         {
             var context = contextFactory.EnsureUmbracoContext();
             var contentCache = context.UmbracoContext.Content;
-            var home = contentCache?.GetAtRoot().FirstOrDefault();
-
+            var home = contentCache?.GetAtRoot().FirstOrDefault()!;
             var categoriesPage = home.Children
                 .First(c => c.ContentType.Alias == CategoriesPage.ModelTypeAlias);
 

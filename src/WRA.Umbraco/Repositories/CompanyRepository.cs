@@ -33,6 +33,7 @@ public class CompanyRepository(
             var contentCache = umbracoContextReference.UmbracoContext.Content;
 
             var companyType = contentCache.GetContentType(Company.ModelTypeAlias);
+            if (companyType == null) return null;
             var companies = contentCache.GetByContentType(companyType);
             var company = companies.FirstOrDefault(c =>
                 c.Value<Guid>(GlobalConstants.ExternalId).Equals(externalCompanyId));
@@ -68,6 +69,7 @@ public class CompanyRepository(
             throw;
         }
     }
+
     [DisableConcurrentExecution(10)]
     [AutomaticRetry(Attempts = 0, OnAttemptsExceeded = AttemptsExceededAction.Fail)]
     public IContent? CreateOrUpdate(ExternalCompanyDto companyDto)
@@ -83,6 +85,12 @@ public class CompanyRepository(
                 // update the company
                 var existingCompanyContent = contentService.GetById(existingCompany.Id);
                 SetCompanyProperties(existingCompanyContent!, companyDto);
+                if (existingCompanyContent == null)
+                {
+                    scope.Complete();
+                    return null;
+                }
+
                 contentService.SaveAndPublish(existingCompanyContent);
                 scope.Complete();
                 return existingCompanyContent;
@@ -101,6 +109,7 @@ public class CompanyRepository(
             if (companiesContainerType == null) return null;
 
             var companiesContainer = contentCache.GetByContentType(companiesContainerType)?.FirstOrDefault();
+            if (companiesContainer == null) return null;
             var newCompany = contentService.Create(companyDto.name, companiesContainer.Id, Company.ModelTypeAlias);
 
             SetCompanyProperties(newCompany, companyDto);
@@ -110,10 +119,7 @@ public class CompanyRepository(
         }
         catch (System.Exception ex)
         {
-            logger.LogError(
-                ex,
-                message: "Error creating company ({Name} - {ExternalId}) -> {Message}",
-                companyDto.name, companyDto.ExternalId, ex.Message);
+            logger.LogError(ex, message: "Error creating company ({Name} - {ExternalId}) -> {Message}", companyDto.name, companyDto.ExternalId, ex.Message);
             throw;
         }
     }
@@ -127,7 +133,7 @@ public class CompanyRepository(
         }
         catch (Exception e)
         {
-            logger.LogError(e,"Error deleting company with externalId {ExternalId}", companyDto.ExternalId);
+            logger.LogError(e, "Error deleting company with externalId {ExternalId}", companyDto.ExternalId);
             throw;
         }
     }
@@ -146,6 +152,12 @@ public class CompanyRepository(
 
             var existingCompany = GetByExternalId(externalId);
             var contentToDelete = contentService.GetById(existingCompany.Id);
+            if (contentToDelete == null)
+            {
+                scope.Complete();
+                return null;
+            }
+
             var deleteResult = contentService.Delete(contentToDelete);
             scope.Complete();
             logger.LogInformation("Deleting company with externalId {ExternalId}", externalId);
@@ -159,7 +171,7 @@ public class CompanyRepository(
 
     }
 
-    private IContent SetCompanyProperties(IContent company, ExternalCompanyDto companyDto)
+    private static void SetCompanyProperties(IContent company, ExternalCompanyDto companyDto)
     {
         company.SetValue(GlobalConstants.ExternalId, companyDto.ExternalId);
         company.SetValue("organizationCode", companyDto.organizationCode);
@@ -172,8 +184,6 @@ public class CompanyRepository(
         company.SetValue("zip", companyDto.zip);
         company.SetValue("email", companyDto.email);
         company.SetValue("websiteUrl", companyDto.websiteUrl);
-
-        return company;
 
         // public async Task<IMember> GetMember(string email)
         // {

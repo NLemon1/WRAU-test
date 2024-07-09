@@ -22,7 +22,7 @@ public class WraProductManagementService(
 {
     [DisableConcurrentExecution(timeoutInSeconds: 5)]
     [AutomaticRetry(Attempts = 1, OnAttemptsExceeded = AttemptsExceededAction.Fail)]
-    public async Task<IContent?> CreateOrUpdate(ProductEvent productEvent)
+    public IContent? CreateOrUpdate(ProductEvent productEvent)
     {
         try
         {
@@ -31,7 +31,6 @@ public class WraProductManagementService(
             // get content cache
             var umbracoContextReference = umbracoContextFactory.EnsureUmbracoContext();
             var contentCache = umbracoContextReference.UmbracoContext.Content;
-            var home = contentCache?.GetAtRoot().FirstOrDefault();
 
             var productCollectionPageType = contentCache.GetContentType(CollectionPage.ModelTypeAlias);
             if (productCollectionPageType == null)
@@ -61,7 +60,7 @@ public class WraProductManagementService(
             if (existingProductPage != null)
             {
                 scope.Complete();
-                return await Update(productEvent, existingProductPage);
+                return Update(productEvent, existingProductPage);
             }
 
             var newProductPage = contentService.Create(productEvent.Name, collectionPage.Id, ProductPage.ModelTypeAlias);
@@ -82,8 +81,9 @@ public class WraProductManagementService(
             throw;
         }
     }
+
     [DisableConcurrentExecution(10)]
-    public async Task<IContent?> Update(ProductEvent product, ProductPage? existingPage = null)
+    public IContent? Update(ProductEvent product, ProductPage? existingPage = null)
     {
         try
         {
@@ -96,6 +96,7 @@ public class WraProductManagementService(
                 scope.Complete();
                 return null;
             }
+
             var productPage = existingPage ?? productPageRepository.GetBySku(product.Sku);
 
             var productContent = contentService.GetById(productPage.Id);
@@ -115,7 +116,8 @@ public class WraProductManagementService(
             throw;
         }
     }
-    public async Task<IContent?> Delete(ProductEvent product)
+
+    public IContent? Delete(ProductEvent product)
     {
         try
         {
@@ -128,6 +130,7 @@ public class WraProductManagementService(
                 scope.Complete();
                 return null;
             }
+
             var productPage = productPageRepository.GetBySku(product.Sku);
             if (productPage == null)
             {

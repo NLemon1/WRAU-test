@@ -9,12 +9,8 @@ using WRA.Umbraco.Helpers.Constants;
 
 namespace WRA.Umbraco.Configuration;
 
-public class ConfigureLuceneIndexOptions(IUmbracoIndexConfig umbracoIndexConfig, IOptions<IndexCreatorSettings> settings) : IConfigureNamedOptions<LuceneDirectoryIndexOptions>
+public class ConfigureLuceneIndexOptions() : IConfigureNamedOptions<LuceneDirectoryIndexOptions>
 {
-    // TODO: Remove these if we aren't going to need them.
-    private readonly IUmbracoIndexConfig _umbracoIndexConfig = umbracoIndexConfig;
-    private readonly IOptions<IndexCreatorSettings> _settings = settings;
-
     public void Configure(string? name, LuceneDirectoryIndexOptions options)
     {
         switch (name)

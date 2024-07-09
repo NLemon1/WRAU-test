@@ -10,7 +10,6 @@
 // // handle received messages
 // async Task MessageHandler(ProcessMessageEventArgs args)
 // {
-//     // TODO: Replace the <TOPIC-SUBSCRIPTION-NAME> placeholder
 //     string body = args.Message.Body.ToString();
 //     Console.WriteLine($"Received: {body} from subscription: <TOPIC-SUBSCRIPTION-NAME>");
 

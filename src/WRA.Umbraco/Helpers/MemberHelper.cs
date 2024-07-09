@@ -42,7 +42,6 @@ public class MemberHelper(
         return target;
     }
 
-
     private static void SetSensitiveData(IMember existingMember, string hash, string salt)
     {
         SetProperty(existingMember, "token", salt);

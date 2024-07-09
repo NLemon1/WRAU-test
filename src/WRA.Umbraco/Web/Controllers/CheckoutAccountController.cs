@@ -17,7 +17,8 @@ namespace WRA.Umbraco.Web.Controllers
         IUmbracoContextAccessor umbracoContextAccessor,
         IPublishedValueFallback publishedValueFallback,
         IMemberManager memberManager)
-        : base(logger,
+        : base(
+            logger,
             compositeViewEngine,
             umbracoContextAccessor)
         {
@@ -27,11 +28,13 @@ namespace WRA.Umbraco.Web.Controllers
         public override IActionResult Index()
         {
             MemberIdentityUser? currentMember = _memberManager.GetCurrentMemberAsync().GetAwaiter().GetResult();
+
             // if user is logged in, direct them to the next step
             if (currentMember != null)
             {
                 return Redirect("/checkout/customer-information");
             }
+
             return CurrentTemplate(CurrentPage);
         }
     }

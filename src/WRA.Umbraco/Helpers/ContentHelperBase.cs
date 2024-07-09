@@ -28,6 +28,7 @@ public abstract class ContentHelperBase<TTarget, TSource>(
             target.SetValue(alias, value);
         }
     }
+
     protected static string GetPropertyAlias(string propertyName)
     {
         return System.Text.Json.JsonNamingPolicy.CamelCase.ConvertName(propertyName);

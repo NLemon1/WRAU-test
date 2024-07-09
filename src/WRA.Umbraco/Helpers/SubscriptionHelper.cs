@@ -121,6 +121,7 @@ public class SubscriptionHelper(
                 logger.LogError("Error deleting company subscription: {CompanySubscriptionId}", companySubscription.Id);
                 return deleteResult;
             }
+
             logger.LogInformation("Deleted company subscription: {CompanySubscriptionId}", companySubscription.Id);
             return deleteResult;
 

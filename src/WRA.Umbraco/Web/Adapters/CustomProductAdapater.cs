@@ -24,7 +24,7 @@ public class CustomProductAdapter : UmbracoProductAdapter
         _scopeFactory = scopeFactory;
     }
 
-    public override IProductSnapshot GetProductSnapshot(Guid storeId, string productReference, string productVariantReference, string languageIsoCode)
+    public override IProductSnapshot? GetProductSnapshot(Guid storeId, string productReference, string? productVariantReference, string languageIsoCode)
     {
         if (!TryGetProductNode(productReference, productVariantReference, out var productNode, out var productVariantNode))
         {
@@ -34,8 +34,7 @@ public class CustomProductAdapter : UmbracoProductAdapter
         // you cannot inject scoped services into a singleton (which this class is)..
         // so lets get the services via the base scope provider!
         using var scope = _scopeFactory.CreateScope();
-        IMemberService memberService = scope.ServiceProvider.GetRequiredService<IMemberService>();
-        IMemberManager mm = scope.ServiceProvider.GetRequiredService<IMemberManager>();
+        var mm = scope.ServiceProvider.GetRequiredService<IMemberManager>();
 
         // get the current member (customer/visitor) logged in...
         var member = mm.GetCurrentMemberAsync().GetAwaiter().GetResult();
@@ -59,12 +58,12 @@ public class CustomProductAdapter : UmbracoProductAdapter
             productVariantNode,
             languageIsoCode,
             productReference,
-            productVariantReference,
+            productVariantReference ?? string.Empty,
             storeId,
             memberPrice: useMemberPricing);
     }
 
-    public override IProductSnapshot GetProductSnapshot(Guid storeId, string productReference, string languageIsoCode)
+    public override IProductSnapshot? GetProductSnapshot(Guid storeId, string productReference, string languageIsoCode)
     {
         return GetProductSnapshot(storeId, productReference, null, languageIsoCode);
     }

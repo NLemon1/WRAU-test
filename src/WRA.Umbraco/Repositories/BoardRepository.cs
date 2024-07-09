@@ -26,20 +26,29 @@ public class BoardRepository
             var siteRoot = contentCache.GetAtRoot().FirstOrDefault();
 
             var boardContentType = contentCache.GetContentType(Board.ModelTypeAlias);
+            if (boardContentType == null)
+            {
+                scope.Complete();
+                return null;
+            }
             var allBoars = contentCache.GetByContentType(boardContentType);
 
-            // first get the board page that all indivial boards will be under.
+            // first get the board page that all individual boards will be under.
             var boardsContainer = siteRoot?.Children
                 .FirstOrDefault(x => x.ContentType.Alias == Boards.ModelTypeAlias);
+            if (boardsContainer == null)
+            {
+                scope.Complete();
+                return null;
+            }
 
             var existingBoardResult = allBoars
                 .Where(x => x.ContentType.Alias == Board.ModelTypeAlias)
                 .FirstOrDefault(x => x.Value<Guid>(GlobalConstants.ExternalId) == mb.Id);
 
             var board = existingBoardResult != null ?
-                contentService.GetById(existingBoardResult.Id):
+                contentService.GetById(existingBoardResult.Id) :
                 contentService.Create(mb.Name, boardsContainer.Id, Board.ModelTypeAlias);
-
 
             board.SetValue(GlobalConstants.ExternalId, mb.Id);
             board.SetValue("chapterId", mb.Chapter);
@@ -81,20 +90,25 @@ public class BoardRepository
             scope.Complete();
             return null;
         }
+
         var board = contentService.GetById(boardQuery.Id);
         scope.Complete();
         return board;
 
     }
 
-    public OperationResult Delete(ExternalMemberBoardDto mb)
+    public OperationResult? Delete(ExternalMemberBoardDto mb)
     {
         try
         {
             using var scope = coreScopeProvider.CreateCoreScope();
-            var exisingBoard = Get(mb.Id);
-
-            var deleteResult = contentService.Delete(exisingBoard);
+            var existingBoard = Get(mb.Id);
+            if (existingBoard == null)
+            {
+                scope.Complete();
+                return null;
+            }
+            var deleteResult = contentService.Delete(existingBoard);
             scope.Complete();
             return deleteResult;
 
@@ -106,13 +120,17 @@ public class BoardRepository
         }
     }
 
-    public OperationResult Delete(Guid externalId)
+    public OperationResult? Delete(Guid externalId)
     {
         try
         {
             using var scope = coreScopeProvider.CreateCoreScope();
             var existingBoard = Get(externalId);
-
+            if (existingBoard == null)
+            {
+                scope.Complete();
+                return null;
+            }
             var deleteResult = contentService.Delete(existingBoard);
             scope.Complete();
             return deleteResult;

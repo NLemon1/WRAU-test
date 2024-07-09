@@ -209,13 +209,11 @@ namespace WRA.Umbraco.Extensions
         {
             if (content is not IPublishedContent page)
             {
-                // TODO: Add a static logger so we can log issues.
                 return null;
             }
 
-            StoreReadOnly? store = page.GetStore();
-            var product = UmbracoCommerceApi.Instance.GetProduct(store.Id, content.GetProductReference(),
-                Thread.CurrentThread.CurrentCulture.Name);
+            var store = page.GetStore();
+            var product = UmbracoCommerceApi.Instance.GetProduct(store.Id, content.GetProductReference(), Thread.CurrentThread.CurrentCulture.Name);
             return product;
         }
 
@@ -250,6 +248,7 @@ namespace WRA.Umbraco.Extensions
 
             return false;
         }
+
         public static bool ContainsCategories(this IEnumerable<IPublishedContent>? content, List<int> category)
         {
             if (content?.Any() == true)
@@ -271,7 +270,6 @@ namespace WRA.Umbraco.Extensions
             }
             else
             {
-                // TODO: Probably do logging here as well.
                 return null;
             }
         }
@@ -285,7 +283,6 @@ namespace WRA.Umbraco.Extensions
             }
             else
             {
-                // TODO:  Add logging
                 return null;
             }
         }
@@ -318,6 +315,7 @@ namespace WRA.Umbraco.Extensions
             string? value = item?.ToString();
             return Guid.TryParse(value, out DefaultIdType guid) ? guid : Guid.Empty;
         }
+
         public static Udi? GetUdi(this string content)
         {
             var contentUri = new Uri(content);

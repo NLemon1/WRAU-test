@@ -7,14 +7,14 @@ public class ExternalProductCategoryDto
     public Guid Id { get; set; }
 
     [JsonPropertyName("productTypeId")]
-    public string ProductTypeId { get; set; }
+    public string ProductTypeId { get; set; } = string.Empty;
 
     [JsonPropertyName("productTypeName")]
-    public string ProductTypeName { get; set; }
+    public string ProductTypeName { get; set; } = string.Empty;
 
     [JsonPropertyName("name")]
-    public string Name { get; set; }
+    public string Name { get; set; } = string.Empty;
 
     [JsonPropertyName("description")]
-    public string Description { get; set; }
+    public string Description { get; set; } = string.Empty;
 }

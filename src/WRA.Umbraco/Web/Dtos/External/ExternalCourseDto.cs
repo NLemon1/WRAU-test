@@ -5,8 +5,8 @@ namespace WRA.Umbraco.Web.Dtos.External
     public class ExternalCourseDto
     {
         public Guid MemberId { get; set; }
-        public string IMISId { get; set; }
-        public string Program { get; set; }
+        public string IMISId { get; set; } = string.Empty;
+        public string Program { get; set; } = string.Empty;
         public string? Component { get; set; }
         public string? Status { get; set; }
         public DateTime? StatusDate { get; set; }

@@ -2,20 +2,20 @@ namespace WRA.Umbraco.Dtos;
 
 public class OrderAddressDto
 {
-    public string FirstName { get; set; }
+    public string FirstName { get; set; } = string.Empty;
 
-    public string LastName { get; set; }
+    public string LastName { get; set; } = string.Empty;
 
-    public string Line1 { get; set; }
+    public string Line1 { get; set; } = string.Empty;
 
-    public string Line2 { get; set; }
+    public string Line2 { get; set; } = string.Empty;
 
-    public string ZipCode { get; set; }
+    public string ZipCode { get; set; } = string.Empty;
 
-    public string City { get; set; }
-    public string State { get; set; }
+    public string City { get; set; } = string.Empty;
+    public string State { get; set; } = string.Empty;
 
-    public Guid Country { get; set; }
+    public Guid Country { get; set; } = Guid.Empty;
 
-    public string Telephone { get; set; }
+    public string Telephone { get; set; } = string.Empty;
 }

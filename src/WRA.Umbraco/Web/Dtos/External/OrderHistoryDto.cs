@@ -10,14 +10,17 @@ public class OrderHistoryDto
     public string? OrderStatus { get; set; }
     public List<OrderHistoryLineItem>? OrderLineItems { get; set; }
 
-    public OrderHistoryDto() { }
+    public OrderHistoryDto()
+    {
+    }
+
     public OrderHistoryDto(decimal orderID, DateTime orderDate, decimal orderTotal, string orderStatus, List<OrderLineReadOnly> items)
     {
         this.OrderId = orderID;
         this.OrderDate = orderDate;
         this.OrderTotal = orderTotal;
         this.OrderStatus = orderStatus;
-        this.OrderLineItems = items.Select(i => new OrderHistoryLineItem(orderID, 0, i.Sku, i.Name, "", i.Quantity, i.UnitPrice)).ToList();
+        this.OrderLineItems = items.Select(i => new OrderHistoryLineItem(orderID, 0, i.Sku, i.Name, string.Empty, i.Quantity, i.UnitPrice)).ToList();
     }
 }
 
@@ -30,7 +33,10 @@ public class OrderHistoryLineItem
     public string? Description { get; set; }
     public decimal Quantity { get; set; }
     public decimal Price { get; set; }
-    public OrderHistoryLineItem() { }
+    public OrderHistoryLineItem()
+    {
+    }
+
     public OrderHistoryLineItem(decimal orderID, int lineID, string? sKU, string? title, string? description, decimal quantity, decimal price)
     {
         OrderId = orderID;

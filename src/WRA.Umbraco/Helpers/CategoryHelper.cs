@@ -8,7 +8,6 @@ using WRA.Umbraco.Web.Dtos.External;
 
 namespace WRA.Umbraco.Helpers;
 
-// TODO make an event class for categories
 public class CategoryHelper(
     ICacheKeyProvider cacheKeyProvider,
     AppCaches appCache)
@@ -19,11 +18,13 @@ public class CategoryHelper(
         DynamicUpdate(target, source);
         SetProperty(target, GlobalConstants.ExternalId, source.Id);
     }
+
     public void SetInitialProperties(IContent content, ExternalProductCategoryDto categoryInfo)
     {
         content.SetValue(GlobalConstants.ExternalId, categoryInfo.Id);
         content.SetValue("description", categoryInfo.Description);
     }
+
     public void SetSubCategoryProperties(IContent content, ExternalProductSubCategoryDto subCategoryInfo)
     {
         content.SetValue(GlobalConstants.ExternalId, subCategoryInfo.Id);

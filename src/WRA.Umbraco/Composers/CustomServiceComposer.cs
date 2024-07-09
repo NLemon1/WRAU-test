@@ -23,7 +23,6 @@ public class CustomServiceComposer : IComposer
 {
     public void Compose(IUmbracoBuilder builder)
     {
-        // TODO: Check on the scoping of all these.
 
         // Register the CacheKeyProvider as a singleton one instance per application lifetime.
         builder.Services.AddSingleton<ICacheKeyProvider, CacheKeyProvider>();
@@ -33,6 +32,7 @@ public class CustomServiceComposer : IComposer
 
         // Register the WRA external API service as scoped (one instance per request).
         builder.Services.AddScoped<WraExternalApiService>();
+
         // Register umbraco member helper service as transient (different instance every time it's requested).
         builder.Services.AddScoped<MemberHelper>();
         builder.Services.AddScoped<ProductHelper>();
@@ -49,7 +49,7 @@ public class CustomServiceComposer : IComposer
         builder.Services.AddScoped<CourseService>();
         builder.Services.AddScoped<MemberMarketingSubscriptionService>();
         builder.Services.AddScoped<MemberCommitteesService>();
-        builder.Services.AddScoped<WRAShippingService>();
+        builder.Services.AddScoped<WraShippingService>();
 
         // Register the TaxJar API service
         builder.Services.AddScoped<TaxJarExternalApiService>();
@@ -72,6 +72,7 @@ public class CustomServiceComposer : IComposer
         builder.Services.AddTransient<MemberGroupRepository>();
         builder.Services.AddTransient<TaxonomyRepository>();
         builder.Services.AddTransient<OrderRepository>();
+
         // builder.Services.AddTransient<MemberSubscriptionRepository>();
 
         // generic repositories
@@ -80,8 +81,8 @@ public class CustomServiceComposer : IComposer
         builder.Services.AddTransient<MemberEventPublisher>();
         builder.Services.AddTransient<ProductEventPublisher>();
         builder.Services.AddTransient<OrderEventPublisher>();
-        // custom table repositories
 
+        // custom table repositories
 
         // Register the Member password hasher as a singleton (one instance per application lifetime).
         builder.Services.AddSingleton<IPasswordHasher<MemberIdentityUser>, CustomMemberPasswordHasher<MemberIdentityUser>>();
@@ -89,7 +90,9 @@ public class CustomServiceComposer : IComposer
         // Register the Service bus subscription name generator as a singleton (one instance per application lifetime).
         builder.Services.AddSingleton<ISubscriptionNameGenerator, AzureSubscriptionNameGenerator>();
 
+#pragma warning disable CS0618 // Type or member is obsolete
         builder.WithPriceAdjusters().Append<TaxJarAdjuster>();
+#pragma warning restore CS0618 // Type or member is obsolete
         builder.Services.AddMemoryCache();
     }
 }

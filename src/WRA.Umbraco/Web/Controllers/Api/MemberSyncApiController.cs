@@ -35,6 +35,7 @@ public class MemberSyncApiController(
         try
         {
             var memberEvent = mapper.Map<MemberEvent>(newMemberRequest);
+            if (memberEvent == null) return new Task<IActionResult>(InternalServerError);
             var result = wraMemberManagementService.CreateOrUpdate(memberEvent);
             return Task.FromResult<IActionResult>(Ok(result.Id));
         }
@@ -52,6 +53,7 @@ public class MemberSyncApiController(
         try
         {
             var memberEvent = mapper.Map<MemberEvent>(updateMemberRequest);
+            if (memberEvent == null) return new Task<IActionResult>(InternalServerError);
             var result = wraMemberManagementService.Update(memberEvent);
             return result == null ? Task.FromResult<IActionResult>(InternalServerError()) : Task.FromResult<IActionResult>(Ok(result.Id));
         }
@@ -69,6 +71,7 @@ public class MemberSyncApiController(
         try
         {
             var memberEvent = mapper.Map<MemberEvent>(updateMemberRequest);
+            if (memberEvent == null) return new Task<IActionResult>(InternalServerError);
             var result = wraMemberManagementService.Delete(memberEvent);
             return Task.FromResult<IActionResult>(Ok(result.IsCompletedSuccessfully));
         }
@@ -161,7 +164,7 @@ public class MemberSyncApiController(
 
     [HttpPost]
     [Route("GetBoardByExternalId")]
-    public Task<IActionResult> GetBoardByExternalId(Guid Id )
+    public Task<IActionResult> GetBoardByExternalId(Guid Id)
     {
         try
         {

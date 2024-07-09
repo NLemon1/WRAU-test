@@ -30,19 +30,18 @@ public class ProductApiController(
 
     [HttpGet]
     [Route("GetProductByExternalID")]
-    public ProductPageResponseDto GetProductByExternalID(string id)
+    public ProductPageResponseDto? GetProductByExternalID(string id)
     {
         var product = wraProductService.GetProductById(id);
-        return product.AsDto();
+        return product?.AsDto();
     }
 
     [HttpPost]
     [Route("GetProductVariant")]
-    public object GetProductVariant([FromBody] GetProductVariantDto model)
+    public object? GetProductVariant([FromBody] GetProductVariantDto model)
     {
         // Get the variants for the given node
-        var productNode = publishedContentQuery.Content(model.ProductNodeId) as MultiVariantProductPage;
-        if (productNode == null)
+        if (publishedContentQuery.Content(model.ProductNodeId) is not MultiVariantProductPage productNode)
             return null;
 
         // Get the store from the product node
@@ -52,26 +51,22 @@ public class ProductApiController(
         var variant = productNode.Variants.FindByAttributes(model.Attributes);
 
         // If we have a variant, map it's data to our DTO
-        if (variant != null)
-        {
-            // Convert variant into product snapshot
-            var snapshot = productService.GetProduct(store.Id, productNode.Key.ToString(), variant.Content.Key.ToString(), Thread.CurrentThread.CurrentCulture.Name);
-            if (snapshot != null)
-            {
-                var multiVariantContent = variant.Content as ProductMultiVariant;
+        if (variant == null) return null;
 
-                return new ProductVariantDto
-                {
-                    ProductVariantReference = variant.Content.Key.ToString(),
-                    Sku = snapshot.Sku,
-                    PriceFormatted = snapshot.TryCalculatePrice().ResultOr(null)?.Formatted(),
-                    ImageUrl = multiVariantContent?.Image.GetCropUrl(500, 500),
-                    ThumbnailImageUrl = multiVariantContent?.Image.GetCropUrl(150, 150)
-                };
-            }
-        }
+        // Convert variant into product snapshot
+        var snapshot = productService.GetProduct(store.Id, productNode.Key.ToString(), variant.Content.Key.ToString(), Thread.CurrentThread.CurrentCulture.Name);
+        if (snapshot == null) return null;
+        var multiVariantContent = variant.Content as ProductMultiVariant;
+
+        return new ProductVariantDto
+        {
+            ProductVariantReference = variant.Content.Key.ToString(),
+            Sku = snapshot.Sku,
+            PriceFormatted = snapshot.TryCalculatePrice().ResultOr(null)?.Formatted(),
+            ImageUrl = multiVariantContent?.Image?.GetCropUrl(500, 500) ?? string.Empty,
+            ThumbnailImageUrl = multiVariantContent?.Image?.GetCropUrl(150, 150) ?? string.Empty
+        };
 
         // Couldn't find a variant so return null
-        return null;
     }
 }
