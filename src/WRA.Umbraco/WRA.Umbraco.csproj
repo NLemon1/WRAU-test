@@ -28,8 +28,8 @@
     <PackageReference Include="RestSharp" Version="110.2.0" />
     <PackageReference Include="System.Drawing.Common" Version="8.0.1" />
     <PackageReference Include="TaxJar" Version="4.0.0" />
-    <PackageReference Include="Umbraco.Cms" Version="13.3.1" />
-    <PackageReference Include="Umbraco.Cms.Imaging.ImageSharp" Version="13.3.2" />
+    <PackageReference Include="Umbraco.Cms" Version="13.4.0" />
+    <PackageReference Include="Umbraco.Cms.Imaging.ImageSharp" Version="13.4.0" />
     <PackageReference Include="Umbraco.Code" Version="2.1.0" />
     <PackageReference Include="Umbraco.Commerce" Version="13.1.4" />
     <PackageReference Include="Umbraco.Commerce.Cms" Version=" 13.1.4" />
