@@ -18,6 +18,7 @@
     <!-- <PackageReference Include="Azure.Messaging.ServiceBus" Version="7.17.2" /> -->
     <PackageReference Include="CoreCompat.System.Drawing" Version="1.0.0-beta006" />
     <PackageReference Include="Cultiv.Hangfire" Version="3.1.2" />
+    <PackageReference Include="Examine.Core" Version="3.2.1" />
     <PackageReference Include="GlobalPayments.Api" Version="8.0.7" />
     <PackageReference Include="Hangfire.Core" Version="1.8.5" />
     <PackageReference Include="Mapster" Version="7.4.0" />
