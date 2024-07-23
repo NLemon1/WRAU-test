@@ -90,9 +90,7 @@ public class CustomServiceComposer : IComposer
         // Register the Service bus subscription name generator as a singleton (one instance per application lifetime).
         builder.Services.AddSingleton<ISubscriptionNameGenerator, AzureSubscriptionNameGenerator>();
 
-#pragma warning disable CS0618 // Type or member is obsolete
         builder.WithPriceAdjusters().Append<TaxJarAdjuster>();
-#pragma warning restore CS0618 // Type or member is obsolete
         builder.Services.AddMemoryCache();
     }
 }
