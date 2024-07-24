@@ -66,8 +66,8 @@
                 }
                 @if (content.Pdf != null)
                 {
-                    var pdfFile = content.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("pdf");
-                    <a href="@pdfFile?.GetCropUrl()" target="_blank" class="btn btn-primary">Download PDF</a>
+                    var pdfFile = content.Pdf;
+                    <a href="@pdfFile.Url()" target="_blank" class="btn btn-primary">Download PDF</a>
                 }
             </div>
             <div class="col-lg-8">
