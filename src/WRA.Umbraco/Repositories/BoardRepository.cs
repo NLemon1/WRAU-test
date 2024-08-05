@@ -31,6 +31,7 @@ public class BoardRepository
                 scope.Complete();
                 return null;
             }
+
             var allBoars = contentCache.GetByContentType(boardContentType);
 
             // first get the board page that all individual boards will be under.
@@ -108,6 +109,7 @@ public class BoardRepository
                 scope.Complete();
                 return null;
             }
+
             var deleteResult = contentService.Delete(existingBoard);
             scope.Complete();
             return deleteResult;
@@ -131,6 +133,7 @@ public class BoardRepository
                 scope.Complete();
                 return null;
             }
+
             var deleteResult = contentService.Delete(existingBoard);
             scope.Complete();
             return deleteResult;

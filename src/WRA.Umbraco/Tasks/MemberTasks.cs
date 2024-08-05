@@ -1,6 +1,7 @@
 using System.Net;
 using System.Text.Json;
 using Hangfire;
+using Hangfire.Storage.SQLite.Entities;
 using Microsoft.Extensions.Logging;
 using Umbraco.Cms.Core.Mapping;
 using Umbraco.Cms.Core.Models;
@@ -32,11 +33,11 @@ public class MemberTasks(
 
     #region  members
 
-    public async Task<bool> SyncAllMemberGroups()
+    public bool SyncAllMemberGroups()
     {
         try
         {
-            var memberGroupsResp = await wraExternalApiService.GetMemberGroups();
+            var memberGroupsResp = wraExternalApiService.GetMemberGroups().Result;
             if (memberGroupsResp.Content == null) return true;
             var memberGroups =
                 JsonSerializer.Deserialize<List<ExternalMemberGroupDto>>(memberGroupsResp.Content, SerializationOptions);
@@ -63,26 +64,47 @@ public class MemberTasks(
         }
     }
 
-    public async Task<bool> SyncAllMembers(bool syncOnlyMembers = false, int limit = 10000)
+    public bool SyncAllMembers(bool syncOnlyMembers = false, int limit = 10000)
     {
         try
         {
             if (!syncOnlyMembers)
             {
-                await SyncAllBoards();
-                await SyncAllCompanies();
+                SyncAllBoards();
+                SyncAllCompanies();
             }
 
-            var membersResp = await wraExternalApiService.GetMembers(limit);
-            if (membersResp.Content == null) return false;
-            var members =
-                JsonSerializer.Deserialize<SearchResponse<ExternalMemberDto>>(membersResp.Content, SerializationOptions);
+            int pageNumber = 1;
+            var members = GetMemberPages(pageNumber);
 
             if (members?.Data == null) return false;
-            foreach (var member in members.Data)
+            string? jobId = null;
+            while (members.CurrentPage <= members.TotalPages)
             {
-                var memberEvent = mapper.Map<MemberEvent>(member);
-                if (memberEvent != null) wraMemberManagementService.CreateOrUpdate(memberEvent);
+                var memberEvents = new List<MemberEvent>();
+                foreach (var member in members.Data)
+                {
+                    var memberEvent = mapper.Map<MemberEvent>(member);
+                    if (memberEvent != null ) memberEvents.Add(memberEvent);
+                }
+
+                if (memberEvents.Any())
+                {
+                    if (jobId != null)
+                    {
+                        jobId = BackgroundJob.ContinueJobWith(
+                            jobId,
+                            methodCall: () => wraMemberManagementService.BatchMemberUpdate(memberEvents));
+                    }
+                    else
+                    {
+                        jobId = BackgroundJob.Enqueue(() => wraMemberManagementService.BatchMemberUpdate(memberEvents));
+                    }
+                }
+
+                pageNumber++;
+                members = GetMemberPages(pageNumber);
+                if (members == null) break;
             }
 
             return true;
@@ -94,11 +116,17 @@ public class MemberTasks(
         }
     }
 
-    public async Task<IMember?> SyncMemberByExternalId(Guid externalId)
+    private SearchResponse<ExternalMemberDto>? GetMemberPages(int pageNumber)
+    {
+        var membersResp = wraExternalApiService.GetPagedMembers(pageNumber).Result;
+        return string.IsNullOrEmpty(membersResp.Content) ? null : JsonSerializer.Deserialize<SearchResponse<ExternalMemberDto>>(membersResp.Content, SerializationOptions);
+    }
+
+    public IMember? SyncMemberByExternalId(Guid externalId)
     {
         try
         {
-            var memberResp = await wraExternalApiService.GetMemberById(externalId);
+            var memberResp = wraExternalApiService.GetMemberById(externalId).Result;
             if (memberResp.Content == null || memberResp.StatusCode != HttpStatusCode.OK) return null;
             var member =
                 JsonSerializer.Deserialize<ExternalMemberDto>(memberResp.Content, SerializationOptions);
@@ -118,11 +146,11 @@ public class MemberTasks(
     }
     #endregion
     #region Boards and Companies
-    public async Task<bool> SyncAllCompanies()
+    public bool SyncAllCompanies()
     {
         try
         {
-            var companiesResp = await wraExternalApiService.GetCompanies();
+            var companiesResp = wraExternalApiService.GetCompanies().Result;
             if (companiesResp.Content == null) return false;
             var companies =
                 JsonSerializer.Deserialize<SearchResponse<ExternalCompanyDto>>(companiesResp.Content, SerializationOptions);
@@ -130,7 +158,7 @@ public class MemberTasks(
             if (companies?.Data == null) return false;
             foreach (var company in companies.Data)
             {
-                BackgroundJob.Enqueue(() => companyRepository.CreateOrUpdate(company));
+                companyRepository.CreateOrUpdate(company);
 
             }
 
@@ -163,11 +191,11 @@ public class MemberTasks(
         }
     }
 
-    public async Task<bool> SyncAllBoards()
+    public bool SyncAllBoards()
     {
         try
         {
-            var productsResp = await wraExternalApiService.GetBoards();
+            var productsResp = wraExternalApiService.GetBoards().Result;
             if (productsResp.Content == null) return false;
             var localBoards = JsonSerializer.Deserialize<List<ExternalMemberBoardDto>>(productsResp.Content, SerializationOptions);
 
@@ -207,9 +235,9 @@ public class MemberTasks(
 
     public async Task<bool> SyncCompaniesAndBoards()
     {
-        bool companiesResult = await SyncAllCompanies();
+        bool companiesResult = SyncAllCompanies();
         if (!companiesResult) return false;
-        bool boardsResult = await SyncAllBoards();
+        bool boardsResult = SyncAllBoards();
         return boardsResult;
     }
     #endregion

@@ -21,7 +21,7 @@ public class WraMemberNotifications(
         ArgumentNullException.ThrowIfNull(notification);
         foreach (var memberNotification in notification.SavedEntities)
         {
-            var externalId = memberNotification.GetValue<string>(GlobalConstants.ExternalId);
+            string? externalId = memberNotification.GetValue<string>(GlobalConstants.ExternalId);
             if (string.IsNullOrEmpty(externalId))
             {
                 var memberCreateEvent = mapper.Map<MemberEvent>(memberNotification);

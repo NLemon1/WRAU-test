@@ -28,6 +28,7 @@ public class TaxonomyRepository(
             scope.Complete();
             return null;
         }
+
         var allTaxonomy = contentCache.GetByContentType(taxonomyType);
 
         var siteRoot = contentCache.GetAtRoot().FirstOrDefault();

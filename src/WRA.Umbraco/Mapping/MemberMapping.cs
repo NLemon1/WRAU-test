@@ -85,6 +85,7 @@ public class MemberMapping(
         target.CompanyId = mappingHelper.GetRelatedContent(source, "company")?.Value(GlobalConstants.ExternalId).SafeGuid();
         target.PrimaryLocalBoardId = mappingHelper.GetRelatedContent(source, "primaryLocalBoard")?.Value(GlobalConstants.ExternalId).SafeGuid(); // is this correct?
         target.MemberTypeId = GetMemberGroupKey(source);
+        target.iMISId = source.GetValue<string>("iMISId") ?? string.Empty;
 
     }
 

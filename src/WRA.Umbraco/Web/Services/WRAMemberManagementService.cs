@@ -19,7 +19,6 @@ public class WraMemberManagementService(
     ICoreScopeProvider coreScopeProvider,
     IUmbracoCommerceApi commerceApi,
     IUmbracoContextAccessor umbracoContextAccessor,
-    IUmbracoContextFactory umbracoContextFactory,
     MemberHelper memberHelper,
     ILogger<WraMemberManagementService> logger)
 {
@@ -30,22 +29,21 @@ public class WraMemberManagementService(
     {
         try
         {
+            using var scope = coreScopeProvider.CreateCoreScope();
+
             // first check if the member already exists in the database
             var existingMember = memberService.GetByEmail(memberEvent.Email);
 
             // if one exists, send to update method
-            if (existingMember != null) { return Update(memberEvent); }
-
-            using var scope = coreScopeProvider.CreateCoreScope();
-
-            using var umbracoContextReference = umbracoContextFactory.EnsureUmbracoContext();
+            if (existingMember != null)
+            {
+                scope.Complete();
+                return Update(memberEvent);
+            }
 
             // spin up an IMember rather than memberIdentity to avoid db locks.
-            string memberName = $"{memberEvent.FirstName} {memberEvent.LastName}";
-            if (string.IsNullOrWhiteSpace(memberName))
-            {
-                memberName = memberEvent.Email;
-            }
+            string fullName = $"{memberEvent.FirstName} {memberEvent.LastName}";
+            string memberName = string.IsNullOrWhiteSpace(fullName) ? memberEvent.Email : fullName;
 
             var newMember = memberService.CreateMember(
                 memberEvent.Email,
@@ -75,14 +73,21 @@ public class WraMemberManagementService(
         }
     }
 
+    public void BatchMemberUpdate(List<MemberEvent> memberEvents)
+    {
+        logger.LogInformation("- BatchMemberUpdate of {RecordsCount} -", memberEvents.Count);
+        foreach (var memberEvent in memberEvents)
+        {
+            CreateOrUpdate(memberEvent);
+        }
+    }
+
     [DisableConcurrentExecution(10)]
     public IMember? Update(MemberEvent memberEvent, IMember? targetMember = null)
     {
         // Create a scope
         // suppress any notification to prevent our listener from firing an "updated member" webhook back at the queue
         using var scope = coreScopeProvider.CreateCoreScope();
-        using var umbracoContextReference = umbracoContextFactory.EnsureUmbracoContext();
-
         var existingMember = targetMember ?? memberService.GetByEmail(memberEvent.Email);
 
         // Query by email as they are unique in this site and in WRA's records.

@@ -240,6 +240,13 @@
           "SortOrder": 8
         },
         {
+          "Key": "ba46f553-dcbb-49f8-8d0a-2ee762d4191b",
+          "Alias": "iMISId",
+          "DataType": "umb://data-type/f0bc4bfbb49940d6ba86058885a5178c",
+          "Name": "IMISId",
+          "SortOrder": 38
+        },
+        {
           "Key": "c01fe88a-fde4-4272-91bb-820c18e9461e",
           "Alias": "fax",
           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",

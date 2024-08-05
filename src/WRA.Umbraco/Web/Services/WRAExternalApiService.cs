@@ -101,6 +101,17 @@ public class WraExternalApiService(
         return response;
     }
 
+    public async Task<RestResponse> GetPagedMembers(int pageNumber, int pageSize = 100)
+    {
+        var options = new RestClientOptions(settings.VersionedBaseUrl);
+        var client = new RestClient(options);
+        var request = new RestRequest("member/search").AddBody(new { keyword = string.Empty, pageSize = pageSize, pageNumber = pageNumber });
+        request.AddHeader(settings.ApiKeyHeader, settings.ApiKey);
+        var response = await client.PostAsync(request);
+
+        return response;
+    }
+
     public async Task<RestResponse> GetMemberById(Guid Id)
     {
         var options = new RestClientOptions(settings.VersionedBaseUrl);

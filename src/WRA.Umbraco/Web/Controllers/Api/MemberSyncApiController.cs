@@ -104,7 +104,7 @@ public class MemberSyncApiController(
     {
         try
         {
-            var result = await memberTasks.SyncMemberByExternalId(externalId);
+            var result = memberTasks.SyncMemberByExternalId(externalId);
             return result == null ? await Task.FromResult<IActionResult>(NotFound()) : await Task.FromResult<IActionResult>(Ok(result.Id));
         }
         catch (Exception e)

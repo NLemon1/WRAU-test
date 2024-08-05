@@ -70,7 +70,6 @@ public class CompanyRepository(
         }
     }
 
-    [DisableConcurrentExecution(10)]
     [AutomaticRetry(Attempts = 0, OnAttemptsExceeded = AttemptsExceededAction.Fail)]
     public IContent? CreateOrUpdate(ExternalCompanyDto companyDto)
     {
@@ -106,10 +105,19 @@ public class CompanyRepository(
             using var umbracoContextReference = umbracoContextFactory.EnsureUmbracoContext();
             var contentCache = umbracoContextReference.UmbracoContext.Content;
             var companiesContainerType = contentCache.GetContentType(Companies.ModelTypeAlias);
-            if (companiesContainerType == null) return null;
+            if (companiesContainerType == null)
+            {
+                scope.Complete();
+                return null;
+            }
 
             var companiesContainer = contentCache.GetByContentType(companiesContainerType)?.FirstOrDefault();
-            if (companiesContainer == null) return null;
+            if (companiesContainer == null)
+            {
+                scope.Complete();
+                return null;
+            }
+
             var newCompany = contentService.Create(companyDto.name, companiesContainer.Id, Company.ModelTypeAlias);
 
             SetCompanyProperties(newCompany, companyDto);
