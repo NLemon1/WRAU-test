@@ -34,7 +34,7 @@ public class OrderEntityEventConsumer(
         }
         catch (Exception e)
         {
-            Console.WriteLine(e);
+            logger.LogError(e,"Error consuming order event.");
             throw;
         }
     }

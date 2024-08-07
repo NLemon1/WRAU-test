@@ -41,7 +41,7 @@ public class MemberEntityEventConsumer(ILogger<MemberEntityEventConsumer> logger
         }
         catch (Exception e)
         {
-            Console.WriteLine(e);
+            logger.LogError(e, "Error consuming member event.");
             throw;
         }
     }

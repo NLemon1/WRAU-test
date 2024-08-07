@@ -173,7 +173,7 @@ public class CompanyRepository(
         }
         catch (Exception e)
         {
-            Console.WriteLine(e);
+            logger.LogError(e, "Error deleting company with externalId {ExternalId}", externalId);
             throw;
         }
 

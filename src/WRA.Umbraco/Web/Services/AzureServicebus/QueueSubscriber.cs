@@ -11,7 +11,6 @@
 // async Task MessageHandler(ProcessMessageEventArgs args)
 // {
 //     string body = args.Message.Body.ToString();
-//     Console.WriteLine($"Received: {body} from subscription: <TOPIC-SUBSCRIPTION-NAME>");
 
 // // complete the message. messages is deleted from the subscription.
 //     await args.CompleteMessageAsync(args.Message);

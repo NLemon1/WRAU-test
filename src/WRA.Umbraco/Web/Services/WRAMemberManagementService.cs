@@ -124,7 +124,7 @@ public class WraMemberManagementService(
         }
         catch (Exception e)
         {
-            Console.WriteLine(e);
+            logger.LogError(e, "Error deleting member with email {Email}", reqMember.Email);
             throw;
         }
     }

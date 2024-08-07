@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Text;
+using Microsoft.Extensions.Logging;
 using Umbraco.Cms.Core.Cache;
 using Umbraco.Cms.Core.Logging;
 using Umbraco.Cms.Core.Routing;
@@ -25,6 +26,7 @@ public class MemberMarketingSubscriptionEditSurfaceController(
     AppCaches appCaches,
     IProfilingLogger profilingLogger,
     IPublishedUrlProvider publishedUrlProvider,
+    Logger<MemberMarketingSubscriptionEditSurfaceController> logger,
     MemberMarketingSubscriptionService memberMarketingSubscriptionService
 
     ) : SurfaceController(
@@ -58,7 +60,7 @@ public class MemberMarketingSubscriptionEditSurfaceController(
         }
         catch (Exception e)
         {
-            Console.WriteLine(e);
+            logger.LogError(e, "Error updating email subscription preferences");
             throw;
         }
     }
@@ -85,7 +87,7 @@ public class MemberMarketingSubscriptionEditSurfaceController(
         }
         catch (Exception e)
         {
-            Console.WriteLine(e);
+            logger.LogError(e, "Error updating magazine subscription preferences");
             throw;
         }
     }

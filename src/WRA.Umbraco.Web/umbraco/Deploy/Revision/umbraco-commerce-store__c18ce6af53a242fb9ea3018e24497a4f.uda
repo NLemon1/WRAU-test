@@ -3,7 +3,7 @@
   "Alias": "wisconsinRealtorAssociationStore",
   "BaseCurrencyUdi": "umb://umbraco-commerce-currency/952c300228b84053bc8d018e244a7b6d",
   "DefaultCountryUdi": "umb://umbraco-commerce-country/e3383bdc08f44488b9bb018e2449e808",
-  "DefaultTaxClassUdi": "umb://umbraco-commerce-tax-class/0e1bcca81960427abdf701900838289c",
+  "DefaultTaxClassUdi": "umb://umbraco-commerce-tax-class/51172ffdfd2842a7afd1018facb8b84d",
   "DefaultLocationUdi": "umb://umbraco-commerce-location/8715ea41185740a984d2018e24497a78",
   "DefaultOrderStatusUdi": "umb://umbraco-commerce-order-status/827e1651ae5448b2acb5018e24497ab8",
   "ErrorOrderStatusUdi": "umb://umbraco-commerce-order-status/f911f13adcc44112bd07018e24497ac0",
@@ -37,7 +37,7 @@
       "Mode": "Exist"
     },
     {
-      "Udi": "umb://umbraco-commerce-tax-class/0e1bcca81960427abdf701900838289c",
+      "Udi": "umb://umbraco-commerce-tax-class/51172ffdfd2842a7afd1018facb8b84d",
       "Mode": "Exist"
     },
     {

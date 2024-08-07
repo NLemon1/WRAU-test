@@ -61,7 +61,7 @@ public class WraProductNotifications(
         }
         catch (Exception e)
         {
-            Console.WriteLine(e);
+            logger.LogError(e,"Error handling product event.");
             throw;
         }
     }
