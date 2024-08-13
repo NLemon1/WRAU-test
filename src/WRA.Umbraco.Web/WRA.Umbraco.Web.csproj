@@ -41,10 +41,10 @@
         <PackageReference Include="Umbraco.Commerce.Deploy" Version="13.1.1" />
         <PackageReference Include="Umbraco.Deploy.Cloud" Version="13.1.0" />
         <PackageReference Include="Umbraco.Deploy.Contrib" Version="13.0.0" />
-        <PackageReference Include="Umbraco.Forms" Version="13.1.2" />
+        <PackageReference Include="Umbraco.Forms" Version="13.2.1" />
         <PackageReference Include="Umbraco.Forms.Deploy" Version="13.0.0" />
         <PackageReference Include="Umbraco.Workflow" Version="13.0.2" />
-        <PackageReference Include="Umbraco.Forms.Core.Providers" Version="13.1.2" />
+        <PackageReference Include="Umbraco.Forms.Core.Providers" Version="13.2.1" />
         <PackageReference Update="Roslynator.Analyzers" Version="4.12.2">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
