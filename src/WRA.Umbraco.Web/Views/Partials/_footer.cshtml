@@ -1,0 +1,268 @@
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+
+@{
+    var settings = Umbraco.ContentAtRoot().FirstOrDefault(x => x.ContentType.Alias == "siteSettings");
+}
+
+<footer class="site-footer">
+    @{
+        IPublishedContent siteFooterWidget = Model.Value<IPublishedContent>("siteFooterWidget");
+
+        if (siteFooterWidget != null)
+        {
+            <div class="site-footer__widget-area pb-4 pb-lg-7">
+                <div class="container">
+                    <div class="row gx-5 mt-0 text-center">
+                        @if (siteFooterWidget.ContentType.Alias == "oneColumnSiteFooterWidget")
+                        {
+                            var colorSchemeClasses = "bg-light";
+                            var colorSchemeBtnClasses = "btn-primary";
+                            var colorScheme = siteFooterWidget.Value<string>("colorScheme");
+                            var link = siteFooterWidget.Value<Link>("link");
+
+                            if (colorScheme == "Dark Blue")
+                            {
+                                colorSchemeClasses = "bg-secondary text-white";
+                                colorSchemeBtnClasses = "btn-light";
+                            }
+
+                            <div class="col-12 mt-0">
+                                <div class="site-footer__widget px-6 py-7 @colorSchemeClasses">
+                                    <div class="container container--sm">
+                                        <h2 class="h3">@siteFooterWidget.Value("heading")</h2>
+                                        @if (siteFooterWidget.HasValue("content"))
+                                        {
+                                            @Html.Raw(siteFooterWidget.Value("content"))
+                                        }
+                                        <a class="btn @colorSchemeBtnClasses mt-2" href="@link?.Url" target="@link?.Target">@link?.Name</a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        else if (siteFooterWidget.ContentType.Alias == "twoColumnSiteFooterWidget")
+                        {
+                            var col1ColorSchemeClasses = "bg-light";
+                            var col1ColorSchemeBtnClasses = "btn-primary";
+                            var col1ColorScheme = siteFooterWidget.Value<string>("col1ColorScheme");
+                            var col2ColorSchemeClasses = "bg-light";
+                            var col2ColorSchemeBtnClasses = "btn-primary";
+                            var col2ColorScheme = siteFooterWidget.Value<string>("col2ColorScheme");
+                            var col1Link = siteFooterWidget.Value<Link>("col1Link");
+                            var col2Link = siteFooterWidget.Value<Link>("col2Link");
+
+                            if (col1ColorScheme == "Dark Blue")
+                            {
+                                col1ColorSchemeClasses = "bg-secondary text-white";
+                                col1ColorSchemeBtnClasses = "btn-light";
+                            }
+
+                            if (col2ColorScheme == "Dark Blue")
+                            {
+                                col2ColorSchemeClasses = "bg-secondary text-white";
+                                col2ColorSchemeBtnClasses = "btn-light";
+                            }
+
+                            <div class="col-12 col-md-6 mt-0 mb-4 mb-lg-0">
+                                <div class="site-footer__widget px-6 py-7 @col1ColorSchemeClasses">
+                                    <h2 class="h3">@siteFooterWidget.Value("col1Heading")</h2>
+                                    @if (siteFooterWidget.HasValue("col1Content"))
+                                    {
+                                        @Html.Raw(siteFooterWidget.Value("col1Content"))
+                                    }
+                                    <a class="btn @col1ColorSchemeBtnClasses mt-2" href="@col1Link.Url" target="@col1Link.Target">@col1Link.Name</a>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6 mt-0">
+                                <div class="site-footer__widget px-6 py-7 @col2ColorSchemeClasses">
+                                    <h2 class="h3">@siteFooterWidget.Value("col2Heading")</h2>
+                                    @if (siteFooterWidget.HasValue("col2Content"))
+                                    {
+                                        @Html.Raw(siteFooterWidget.Value("col2Content"))
+                                    }
+                                    <a class="btn @col2ColorSchemeBtnClasses mt-2" href="@col2Link.Url" target="@col2Link.Target">@col2Link.Name</a>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    <div class="py-7 bg-dark overflow-hidden">
+        <div class="container">
+            <div class="row text-white" style="font-family: Poppins, sans-serif;">
+                <div class="col-12 col-lg-4 mt-0">
+                    <div class="mb-5">
+                        <h3 class="h4">WRA Headquarters</h3>
+                        <address class="mb-0">
+                            @settings.Value("hqAddress")@(settings.HasValue("hqSuite") ? ", " + settings.Value("hqSuite") : "")<br>
+                            @settings.Value("hqCity"), @settings.Value("hqState") @settings.Value("hqZip")
+                        </address>
+                        @if (settings.HasValue("hqHours"))
+                        {
+                            @settings.Value("hqHours")
+
+                            <br>
+                        }
+                        @if (settings.HasValue("hqPhone"))
+                        {
+                            <a href="tel:@settings.Value("hqPhone")">@settings.Value("hqPhone")</a>
+
+                            <br>
+                        }
+                        @if (settings.HasValue("hqPhone2"))
+                        {
+                            <a href="tel:@settings.Value("hqPhone2")">@settings.Value("hqPhone2")</a>
+
+                            <br>
+                        }
+                        @if (settings.HasValue("hqEmail"))
+                        {
+                            <a href="mailto:@settings.Value("hqEmail")">@settings.Value("hqEmail")</a>
+                        }
+                    </div>
+                    <div class="mb-5">
+                        <h3 class="h4">WRA Public Affairs Office</h3>
+                        <address class="mb-0">
+                            @settings.Value("paAddress")@(settings.HasValue("paSuite") ? ", " + settings.Value("paSuite") : "")<br>
+                            @settings.Value("paCity"), @settings.Value("paState") @settings.Value("paZip")
+                        </address>
+                        @if (settings.HasValue("paHours"))
+                        {
+                            @settings.Value("paHours")
+
+                            <br>
+                        }
+                        @if (settings.HasValue("paPhone"))
+                        {
+                            <a href="tel:@settings.Value("paPhone")">@settings.Value("paPhone")</a>
+
+                            <br>
+                        }
+                        @if (settings.HasValue("paPhone2"))
+                        {
+                            <a href="tel:@settings.Value("paPhone2")">@settings.Value("paPhone2")</a>
+
+                            <br>
+                        }
+                        @if (settings.HasValue("paEmail"))
+                        {
+                            <a href="mailto:@settings.Value("paEmail")">@settings.Value("paEmail")</a>
+                        }
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4 mt-0">
+                    <div class="mb-5">
+                        @{
+                            var footerLinks = settings.Value<IEnumerable<Link>>("footerNavigation");
+
+                            if (footerLinks.Any())
+                            {
+                                <nav class="mb-2" aria-label="Site footer navigation">
+                                    <ul class="list-unstyled">
+                                        @foreach (var link in footerLinks)
+                                        {
+                                            <li class="pb-3">
+                                                <a href="@link?.Url" target="@link?.Target">@link?.Name</a>
+                                            </li>
+                                        }
+                                    </ul>
+                                </nav>
+                            }
+                        }
+
+                        <h3 class="h4">Follow Us</h3>
+                        <ul class="d-inline-flex gap-3 list-unstyled">
+                            @if (settings.HasValue("facebook"))
+                            {
+                                <li>
+                                    <a href="@settings.Value("facebook")" target="_blank">
+                                        <i class="fab fa-facebook-f fa-lg"></i>
+                                        <span class="visually-hidden">Facebook</span>
+                                    </a>
+                                </li>
+                            }
+                            @if (settings.HasValue("youtube"))
+                            {
+                                <li>
+                                    <a href="@settings.Value("youtube")" target="_blank">
+                                        <i class="fab fa-youtube fa-lg"></i>
+                                        <span class="visually-hidden">YouTube</span>
+                                    </a>
+                                </li>
+                            }
+                            @if (settings.HasValue("twitter"))
+                            {
+                                <li>
+                                    <a href="@settings.Value("twitter")" target="_blank">
+                                        <i class="fa-brands fa-x-twitter fa-lg"></i>
+                                        <span class="visually-hidden">Twitter</span>
+                                    </a>
+                                </li>
+                            }
+                            @if (settings.HasValue("instagram"))
+                            {
+                                <li>
+                                    <a href="@settings.Value("instagram")" target="_blank">
+                                        <i class="fab fa-instagram fa-lg"></i>
+                                        <span class="visually-hidden">Instagram</span>
+                                    </a>
+                                </li>
+                            }
+                            @if (settings.HasValue("linkedin"))
+                            {
+                                <li>
+                                    <a href="@settings.Value("linkedin")" target="_blank">
+                                        <i class="fab fa-linkedin-in fa-lg"></i>
+                                        <span class="visually-hidden">LinkedIn</span>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4 mt-0">
+                    <h3 class="h4">Legal Hotline</h3>
+                    @if (settings.HasValue("lhNotes"))
+                    {
+                        <p class="my-2">@settings.Value("lhNotes")</p>
+                    }
+                    <a href="tel:@settings.Value("lhPhone")">@settings.Value("lhPhone")</a><br>
+                    @if (settings.HasValue("lhPhone2"))
+                    {
+                        <a href="tel:@settings.Value("lhPhone2")">@settings.Value("lhPhone2")</a>
+
+                        <br>
+                    }
+                    @if (settings.HasValue("lhHours"))
+                    {
+                        <p class="my-2">@settings.Value("lhHours")</p>
+                    }
+                </div>
+            </div>
+            <div class="site-footer__bottom mt-5 pt-3 text-white">
+                <a class="site-footer__logo mb-3 mb-lg-0" href="/">
+                    <img src="@(settings?.Value<IPublishedContent>("footerLogo")?.Url() ?? string.Empty)" class="w-100" alt="@(settings?.Value<IPublishedContent>("footerLogo")?.Value("altText") ?? string.Empty)" />
+                </a>
+                <p class="mb-lg-0">&copy; @DateTime.Now.Year @settings?.Value("siteName"). All Rights Reserved.</p>
+                @{
+                    var footerUtilityLinks = settings?.Value<IEnumerable<Link>>("footerUtilityNavigation") ?? [];
+
+                    if (footerUtilityLinks != null && footerUtilityLinks.Any())
+                    {
+                        <nav aria-label="Site footer utility navigation">
+                            <ul class="site-footer__utility-links list-unstyled mb-0">
+                                @foreach (var link in footerUtilityLinks)
+                                {
+                                    <li>
+                                        <a href="@link?.Url" target="@link?.Target">@link?.Name</a>
+                                    </li>
+                                }
+                            </ul>
+                        </nav>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</footer>

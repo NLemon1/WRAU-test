@@ -1,0 +1,74 @@
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using System.Text.RegularExpressions
+@using Azure.Core;
+@using Umbraco.Cms.Core.Models
+@using Microsoft.AspNetCore.Http
+@using Umbraco.Forms.Web
+@using Umbraco.Cms.Core.Security;
+
+@{
+    var settings = Umbraco.ContentAtRoot().FirstOrDefault(x => x.ContentType.Alias == "siteSettings");
+
+    //Model will contain all the data of the current page
+    string metaTitle = Model.HasValue("metaTitle") ? Model.Value<string>
+    ("metaTitle") : Model.Name + " | " + settings?.Value("siteName");
+    string metaDescription = Model.HasValue("metaDescription") ? Model.Value<string>
+        ("metaDescription") : string.Empty;
+
+    string logoStyle = string.Empty;
+
+    if (!String.IsNullOrEmpty(settings?.Value<string>("logoWidth")))
+    {
+        logoStyle += $"--logo-width:{settings.Value("logoWidth")}px;";
+    }
+
+    if (!String.IsNullOrEmpty(settings?.Value<string>("mobileLogoWidth")))
+    {
+        logoStyle += $"--logo-mobile-width:{settings.Value("mobileLogoWidth")}px;";
+    }
+
+    if (!String.IsNullOrEmpty(settings?.Value<string>("footerLogoWidth")))
+    {
+        logoStyle += $"--footer-logo-width:{settings.Value("footerLogoWidth")}px;";
+    }
+
+    if (!String.IsNullOrEmpty(settings?.Value<string>("footerLogoMobileWidth")))
+    {
+        logoStyle += $"--footer-logo-mobile-width:{settings.Value("footerLogoMobileWidth")}px;";
+    }
+}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@metaTitle</title>
+    <meta name="description" content="@metaDescription">
+    @if (Model.HasValue("openGraphImage"))
+    {
+        <meta property="og:image" content="@(Model?.Value<IPublishedContent>("openGraphImage")?.Url(mode:UrlMode.Absolute))">
+    }
+    else if (settings.HasValue("oGImageFallback"))
+    {
+        <meta property="og:image" content="@(settings?.Value<IPublishedContent>("oGImageFallback")?.Url(mode:UrlMode.Absolute))">
+    }
+    <link rel="icon" href="~/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="~/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="~/apple-touch-icon.png" />
+    <link rel="manifest" href="~/manifest.webmanifest" />
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   
+    <script src="https://kit.fontawesome.com/ee0cbe98db.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:ital,wght@0,400;0,500;0,600;0,800;1,400;1,500;1,600;1,800&family=Roboto+Serif:ital,opsz,wght@0,8..144,400;1,8..144,400&display=swap" rel="stylesheet">
+    <style>
+        html {
+        @logoStyle
+        }
+    </style>
+    <link href="/css/dist/global.css" rel="stylesheet" asp-append-version="true"> 
+
+    @Html.RenderUmbracoFormDependencies(Url)
+    @Html.Raw(settings?.Value("headScripts"))
+
+</head>

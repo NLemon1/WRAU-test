@@ -10,17 +10,12 @@
     "~/App_Plugins/CustomBlockView/homeHero.controller.js",
     "~/App_Plugins/CustomBlockView/latestNews.controller.js",
     "~/App_Plugins/CustomBlockView/pageHeader.controller.js",
-    "~/App_Plugins/CustomBlockView/hotTip.controller.js",
     "~/App_Plugins/CustomBlockView/ctaCard.controller.js",
     "~/App_Plugins/CustomBlockView/childPageCard.controller.js",
-    "~/App_Plugins/CustomBlockView/membershipSection.controller.js",
     "~/App_Plugins/CustomBlockView/educationSection.controller.js",
     "~/App_Plugins/CustomBlockView/supportSection.controller.js",
-    "~/App_Plugins/CustomBlockView/tabs.controller.js",
     "~/App_Plugins/CustomBlockView/iconBullet.controller.js",
-    "~/App_Plugins/CustomBlockView/ctaQuickLinks.controller.js",
     "~/App_Plugins/CustomBlockView/overline.controller.js",
-    "~/App_Plugins/CustomBlockView/youtubeEmbed.controller.js",
     "~/App_Plugins/CustomBlockView/missionStatement.controller.js",
     "~/App_Plugins/CustomBlockView/imageTextRow.controller.js",
     "~/App_Plugins/CustomBlockView/imageElement.controller.js",
@@ -33,10 +28,7 @@
     "~/App_Plugins/CustomBlockView/genericCard.controller.js",
     "~/App_Plugins/CustomBlockView/backgroundContainer.controller.js",
     "~/App_Plugins/CustomBlockView/primaryNavMenu.controller.js",
-    "~/App_Plugins/CustomBlockView/spacer.controller.js",
-    "~/App_Plugins/CustomBlockView/calendar.controller.js",
-    "~/App_Plugins/CustomBlockView/membershipWidget.controller.js",
-    "~/App_Plugins/CustomBlockView/adWidget.controller.js"
+    "~/App_Plugins/CustomBlockView/spacer.controller.js"
   ],
   "css": [
     "~/App_Plugins/CustomBlockView/override.css"
