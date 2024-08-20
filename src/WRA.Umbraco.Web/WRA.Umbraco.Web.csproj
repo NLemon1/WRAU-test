@@ -49,6 +49,7 @@
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
         </PackageReference>
+        <PackageReference Include="Umbraco.Cloud.Cms" Version="13.0.0"/>
 
     </ItemGroup>
 
