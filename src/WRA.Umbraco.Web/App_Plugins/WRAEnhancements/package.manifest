@@ -1,0 +1,14 @@
+﻿{
+  "javascript": [
+    "~/App_Plugins/WRAEnhancements/scripts/wra-enhancements.es5.js",
+    "~/App_Plugins/WRAEnhancements/scripts/wra-enhancements.es5.min.js"
+  ],
+  "css": [
+    "~/App_Plugins/WRAEnhancements/styles/wra-enhancements.css",
+    "~/App_Plugins/WRAEnhancements/styles/wra-enhancements.min.css"
+  ],
+  "dashboards": [],
+  "gridEditors": [],
+  "propertyEditors": [],
+  "plugins": []
+}

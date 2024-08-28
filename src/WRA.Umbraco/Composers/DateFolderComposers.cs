@@ -9,6 +9,7 @@ using Umbraco.Cms.Core.Services;
 using System.Globalization;
 using Microsoft.Extensions.Caching.Memory;
 using WRA.Umbraco.Configuration;
+using WRA.Umbraco.Configuration.Settings;
 
 namespace WRA.Umbraco.Composers;
 
@@ -42,7 +43,7 @@ public abstract class DateFoldersBaseNotificationHandler
     protected DateFoldersBaseNotificationHandler(IOptions<DateFolderSettings> options, ILogger logger, IContentService contentService, IMemoryCache cache)
     {
         _options = options.Value;
-        _logger = logger;
+        _logger = logger.ForContext<DateFoldersBaseNotificationHandler>();
         _contentService = contentService;
         _cache = cache;
     }
@@ -66,7 +67,7 @@ public abstract class DateFoldersBaseNotificationHandler
         if (content.ParentId != monthFolderId)
         {
             _contentService.Move(content, monthFolderId);
-            _logger.LogInformation("Moved content {ContentName} to folder {FolderName}", content.Name, monthFolderName);
+            _logger.Information("Moved content {ContentName} to folder {FolderName}", content.Name, monthFolderName);
         }
     }
 
@@ -84,7 +85,7 @@ public abstract class DateFoldersBaseNotificationHandler
             {
                 folder = _contentService.Create(folderName, parentId, folderDocTypeAlias);
                 _contentService.SaveAndPublish(folder);
-                _logger.LogInformation("Created new folder: {FolderName}", folderName);
+                _logger.Information("Created new folder: {FolderName}", folderName);
             }
 
             folderId = folder.Id;
@@ -136,7 +137,7 @@ public abstract class DateFoldersBaseNotificationHandler
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error sorting folders under parent ID {ParentId}.", parentId);
+            _logger.Error(ex, "Error sorting folders under parent ID {ParentId}.", parentId);
         }
     }
 
@@ -176,7 +177,7 @@ public abstract class DateFoldersBaseNotificationHandler
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Failed to find root parent ID for content ID {ContentId}.", content.Id);
+            _logger.Error(ex, "Failed to find root parent ID for content ID {ContentId}.", content.Id);
             return -1;
         }
     }
@@ -199,7 +200,7 @@ public abstract class DateFoldersBaseNotificationHandler
                     // Folder is empty, safe to delete
                     int nextParentId = parentFolder.ParentId;
                     _contentService.Delete(parentFolder);
-                    _logger.LogInformation("Deleted empty folder: {ParentFolderName}", parentFolder.Name);
+                    _logger.Information("Deleted empty folder: {ParentFolderName}", parentFolder.Name);
 
                     parentId = nextParentId; // Move to check the next parent in the hierarchy
                 }
@@ -212,12 +213,12 @@ public abstract class DateFoldersBaseNotificationHandler
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "An error occurred while cleaning up empty folders starting from parent ID {ParentId}.", parentId);
+            _logger.Error(ex, "An error occurred while cleaning up empty folders starting from parent ID {ParentId}.", parentId);
         }
     }
 }
 
-public class DateFoldersContentSavedNotification(IOptions<DateFolderSettings> options, ILogger<DateFoldersContentSavedNotification> logger, IContentService contentService, IMemoryCache cache) : DateFoldersBaseNotificationHandler(options, logger, contentService, cache), INotificationHandler<ContentSavedNotification>
+public class DateFoldersContentSavedNotification(IOptions<DateFolderSettings> options, ILogger logger, IContentService contentService, IMemoryCache cache) : DateFoldersBaseNotificationHandler(options, logger, contentService, cache), INotificationHandler<ContentSavedNotification>
 {
     public void Handle(ContentSavedNotification notification)
     {
@@ -244,13 +245,13 @@ public class DateFoldersContentSavedNotification(IOptions<DateFolderSettings> op
             catch (Exception ex)
             {
                 // Log the error but allow the loop to continue processing other items.
-                _logger.LogError(ex, "An error occurred while processing ContentSavedNotification for content ID {ContentId}.", content.Id);
+                _logger.Error(ex, "An error occurred while processing ContentSavedNotification for content ID {ContentId}.", content.Id);
             }
         }
     }
 }
 
-public class DateFoldersContentMovedToRecycleBinNotification(IOptions<DateFolderSettings> options, ILogger<DateFoldersContentMovedToRecycleBinNotification> logger, IContentService contentService, IMemoryCache cache) : DateFoldersBaseNotificationHandler(options, logger, contentService, cache), INotificationHandler<ContentMovedToRecycleBinNotification>
+public class DateFoldersContentMovedToRecycleBinNotification(IOptions<DateFolderSettings> options, ILogger logger, IContentService contentService, IMemoryCache cache) : DateFoldersBaseNotificationHandler(options, logger, contentService, cache), INotificationHandler<ContentMovedToRecycleBinNotification>
 {
     public void Handle(ContentMovedToRecycleBinNotification notification)
     {
@@ -271,7 +272,7 @@ public class DateFoldersContentMovedToRecycleBinNotification(IOptions<DateFolder
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "An error occurred while processing ContentMovedToRecycleBinNotification for content ID {ContentId}.", item.Entity.Id);
+                _logger.Error(ex, "An error occurred while processing ContentMovedToRecycleBinNotification for content ID {ContentId}.", item.Entity.Id);
 
                 // Continue processing other items despite the error.
             }
@@ -297,13 +298,13 @@ public class DateFoldersContentMovedToRecycleBinNotification(IOptions<DateFolder
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Failed to parse parent ID from original path: {OriginalPath}", originalPath);
+            _logger.Error(ex, "Failed to parse parent ID from original path: {OriginalPath}", originalPath);
             return -1; // Fail gracefully by returning an invalid ID
         }
     }
 }
 
-public class DateFoldersContentDeletedNotification(IOptions<DateFolderSettings> options, ILogger<DateFoldersContentDeletedNotification> logger, IContentService contentService, IMemoryCache cache) : DateFoldersBaseNotificationHandler(options, logger, contentService, cache), INotificationHandler<ContentDeletedNotification>
+public class DateFoldersContentDeletedNotification(IOptions<DateFolderSettings> options, ILogger logger, IContentService contentService, IMemoryCache cache) : DateFoldersBaseNotificationHandler(options, logger, contentService, cache), INotificationHandler<ContentDeletedNotification>
 {
     public void Handle(ContentDeletedNotification notification)
     {
@@ -320,7 +321,7 @@ public class DateFoldersContentDeletedNotification(IOptions<DateFolderSettings> 
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error cleaning up folders after content deletion.");
+                _logger.Error(ex, "Error cleaning up folders after content deletion.");
             }
         }
     }

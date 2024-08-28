@@ -11,5 +11,4 @@ public class MemberDuesDto
     public List<ExternalMemberDuesPaymentHistoryDto> HistoricalPayments { get; set; } = [];
     public ExternalMemberDuesPaymentStrategyDto? PaymentStrategy { get; set; }
     public ExternalMemberDuesInvoiceDto? Invoice { get; set; }
-
 }

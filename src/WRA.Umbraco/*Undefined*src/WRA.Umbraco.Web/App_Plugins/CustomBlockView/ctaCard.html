@@ -1,0 +1,14 @@
+﻿<style>
+    .overline,
+    .card__headline,
+    .rich-text {
+        color: #000;
+    }
+</style>
+
+<div ng-controller="ctaCardController" class="block-cta-card card align-items-center text-center">
+    <p class="overline">{{ block.data.overline }}</p>
+    <h2 class="card__headline card__headline--hairline">{{ block.data.headline }}</h2>
+    <div class="rich-text" ng-bind-html="block.data.content.markup | safe_html"></div>
+    <slot name="area-buttons" part="area-buttons" class="block-col area-zone"></slot>
+</div>

@@ -1,12 +1,11 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.MultimediaItem>
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<WRA.Umbraco.Models.MultimediaItem>
 @using Umbraco.Cms.Core.Models.Blocks
-@using ContentModels = WRA.Umbraco.Models;
+
 @{
     Layout = "~/Views/_Layout.cshtml";
-    var content = (ContentModels.MultimediaItem)Model;
+    var content = Model;
     var image = content.ThumbnailOverride;
-    var sections = content.Value<IEnumerable<BlockGridItem>>("sections");
 
     bool isPlayList = content.Children.Any();//determines if treated as a playlist or single video experience
 

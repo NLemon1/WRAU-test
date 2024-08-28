@@ -21,6 +21,8 @@ import popModal from './components/popmodal';
 import print from './components/print';
 import pageTabs from './components/page-tabs';
 import scrollTop from './components/scroll-top';
+import findRealtor from './components/find-realtor';
+import legalHotlinePost from './components/legal-hotline-post';
 
 expandableTextCards();
 header();
@@ -63,3 +65,11 @@ if (document.querySelector(".js-page-tab")) {
 }
 
 scrollTop();
+
+if (document.querySelector('.js-realtor-form')) {
+    findRealtor();
+}
+
+if (document.querySelector('.hot-tip-question')) {
+    legalHotlinePost();
+}

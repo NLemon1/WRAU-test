@@ -46,16 +46,15 @@ public class Repository<TEntity>(
         return result;
     }
 
-    public TEntity Get<TEntity>(int id)
+    public TEntity Get(int id)
     {
         using var scope = scopeProvider.CreateScope();
         var result = scope.Database.SingleById<TEntity>(id);
         scope.Complete();
         return result;
-
     }
 
-    public IEnumerable<TEntity> GetAll<TEntity>()
+    public IEnumerable<TEntity> GetAll()
     {
         using var scope = scopeProvider.CreateScope();
         var result = scope.Database.Fetch<TEntity>();
@@ -84,5 +83,4 @@ public class Repository<TEntity>(
         var operationStatus = executionResult != null ? OperationResultType.Success : OperationResultType.Failed;
         return new OperationResult(operationStatus, eventMessage);
     }
-
 }

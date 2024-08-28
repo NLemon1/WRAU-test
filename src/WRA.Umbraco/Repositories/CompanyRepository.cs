@@ -176,7 +176,6 @@ public class CompanyRepository(
             logger.LogError(e, "Error deleting company with externalId {ExternalId}", externalId);
             throw;
         }
-
     }
 
     private static void SetCompanyProperties(IContent company, ExternalCompanyDto companyDto)

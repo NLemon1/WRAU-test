@@ -29,5 +29,4 @@ public class MemberSubscription : IEntity
 
     [Column("IsActive")]
     public bool IsActive { get; set; }
-
 }

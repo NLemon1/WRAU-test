@@ -13,7 +13,6 @@ public class CourseMapping(
         IUmbracoMapper mapper)
     {
         mapper.Define<ExternalCourseDto, CourseDto>((_, _) => new CourseDto(), ExternalCourseToCourseDto);
-
     }
 
     private void ExternalCourseToCourseDto(ExternalCourseDto source, CourseDto target, MapperContext _)

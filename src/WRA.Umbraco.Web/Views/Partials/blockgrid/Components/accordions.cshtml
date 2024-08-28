@@ -4,9 +4,9 @@
 
 @{
     var content = (ContentModels.Accordions)Model.Content;
-    bool enableDarkMode = content.Value<bool>("enableDarkMode");
-    bool enableOutsideBorder = content.Value<bool>("enableOutsideBorder");
-    bool enableFAQSchema = content.Value<bool>("enableFAQSchema");
+    bool enableDarkMode = content.EnableDarkMode;
+    bool enableOutsideBorder = content.EnableOutsideBorder;
+    bool enableFAQSchema = content.EnableFaqschema;
 
     var accordions = Model.Areas.FirstOrDefault();
 

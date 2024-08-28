@@ -2,13 +2,12 @@
 @using System.Linq;
 @using Umbraco.Commerce.Extensions;
 @using Umbraco.Cms.Core.Models.Blocks
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.CategoryPage>
-@using ContentModels = WRA.Umbraco.Models;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<WRA.Umbraco.Models.CategoryPage>
 
 @{
     Layout = "~/Views/_Layout.cshtml";
-    var content = (ContentModels.CategoryPage)Model;
-    var sections = content.Value<IEnumerable<BlockGridItem>>("sections");
+    var content = Model;
+    var sections = content.Sections;
     var productSubcategories = Model.Children.Where(p => p.IsVisible() && p.IsPublished() && p.Value<bool>("hideSubcategory") != true).OrderBy(p => p.Name);
 }
 

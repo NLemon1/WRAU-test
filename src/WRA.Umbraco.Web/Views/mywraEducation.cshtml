@@ -3,7 +3,7 @@
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<WRA.Umbraco.Models.MywraEducation>
 @{
     Layout = "~/Views/_Layout.cshtml";
-    var content = (ContentModels.MywraEducation)Model;
+    var content = Model;
     var orders = content.Orders;
 }
 

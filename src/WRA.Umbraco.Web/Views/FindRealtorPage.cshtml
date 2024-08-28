@@ -1,0 +1,294 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<FindRealtorViewModel>
+@using WRA.Umbraco.Models.Custom.ViewModels;
+@using WRA.Umbraco.Models;
+@using WRA.Umbraco.Controllers;
+@using WRA.Umbraco.Web.Controllers
+
+@{
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+<div class="hidden eric-version" style="display:none;">
+    <div class="container pb-5 pb-lg-7 position-relative">
+        <h1 class="mb-4">Find a Realtor</h1>
+
+        @using (Html.BeginUmbracoForm<FindRealtorSurfaceController>(nameof(FindRealtorSurfaceController.SearchAsync), FormMethod.Post, new { @class = "js-eric-realtor-form" }))
+        {
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label asp-for="SearchRequest.LastName" class="form-label mb-1">Last Name</label>
+                    <input asp-for="SearchRequest.LastName" class="form-control" data-property="lastName" autocomplete="off" />
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label asp-for="SearchRequest.FirstName" class="form-label mb-1">First Name</label>
+                    <input asp-for="SearchRequest.FirstName" class="form-control" data-property="firstName" autocomplete="off" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="SearchRequest.CompanyName" class="form-label mb-1">Company</label>
+                    <input asp-for="SearchRequest.CompanyName" class="form-control" data-property="companyName" autocomplete="off" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label asp-for="SearchRequest.City" class="form-label mb-1">City</label>
+                    <input asp-for="SearchRequest.City" class="form-control" data-property="city" autocomplete="off" />
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label asp-for="SearchRequest.State" class="form-label mb-1">State</label>
+                    <select asp-for="SearchRequest.State" asp-items="Model.StateList" class="form-control">
+                        <option value="">(all)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label asp-for="SearchRequest.LocalBoard" class="form-label mb-1">Local Boards</label>
+                    <select asp-for="SearchRequest.LocalBoard" asp-items="Model.BoardList" class="form-control">
+                        <option value="">(all)</option>
+                    </select>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label asp-for="SearchRequest.Language" class="form-label mb-1">Language</label>
+                    <select asp-for="SearchRequest.Language" asp-items="Model.LanguageList" class="form-control">
+                        <option value="">(none selected)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-8 mb-3 mb-lg-4">
+                    <label asp-for="SearchRequest.Designations" class="form-label mb-1">Designations</label>
+                    <select asp-for="SearchRequest.Designations" asp-items="Model.DesignationList" class="form-control" multiple size="6">
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col">
+                    <button type="submit" class="btn btn-primary btn-sm">Search</button>
+                </div>
+            </div>
+        }
+
+        <div class="js-results-container position-relative" hidden>
+
+        </div>
+    </div>
+    @section scripts {
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const form = document.querySelector('.js-eric-realtor-form');
+                if (form) {
+                    form.addEventListener('submit', function(e) {
+                        e.preventDefault();
+            
+                        const formData = new FormData(this);
+            
+                        fetch('@Url.Action(nameof(FindRealtorSurfaceController.SearchAsync), nameof(FindRealtorSurfaceController))', {
+                            method: 'POST',
+                            body: formData
+                        })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok');
+                            }
+                            return response.json();
+                        })
+                        .then(result => {
+                            console.log("Posted successfully", result);
+                            // Handle the result and update the .js-results-container
+                        })
+                        .catch(error => {
+                            console.error("Error occurred: " + error);
+                        });
+                    });
+                }
+            });
+        </script>
+    }
+</div>
+
+
+<header class="page-header mb-5 mb-lg-7">
+    <div class="container">
+        <div class="container--sm pe-7 pe-md-0">
+            <h1 class="mb-0">
+                Find a Realtor
+            </h1>
+        </div>
+    </div>
+</header>
+<div class="container pb-5 pb-lg-7 position-relative">
+
+    <!-- Loading Spinner -->
+    <div class="js-results-loader search-loading" hidden title="Please wait, loading." aria-label="Please wait, loading.">
+        <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+    </div>
+
+    <!-- Find a Realtor Form -->
+    @using (Html.BeginUmbracoForm<FindRealtorSurfaceController>(nameof(FindRealtorSurfaceController.SearchAsync), FormMethod.Post, new { @class = "js-realtor-form" }))
+    {
+
+        <!-- First and Last Name Row -->
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <label asp-for="SearchRequest.LastName" class="form-label mb-1">Last Name</label>
+                <div class="suggest-container">
+                    <input asp-for="SearchRequest.LastName" id="lastName" class="form-control js-suggest" data-property="lastName" autocomplete="nope" />
+                    <ul class="js-suggestion-list suggest-list list-unstyled"></ul>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <label asp-for="SearchRequest.FirstName" class="form-label mb-1">First Name</label>
+                <div class="suggest-container">
+                    <input asp-for="SearchRequest.FirstName" class="form-control js-suggest" data-property="firstName" autocomplete="nope" />
+                    <ul class="js-suggestion-list suggest-list list-unstyled"></ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Company Name Row -->
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label asp-for="SearchRequest.CompanyName" class="form-label mb-1">Company</label>
+                <div class="suggest-container">
+                    <input asp-for="SearchRequest.CompanyName" class="form-control js-suggest" data-property="companyName" autocomplete="nope" />
+                    <ul class="js-suggestion-list suggest-list list-unstyled"></ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- City and State Row -->
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <label asp-for="SearchRequest.City" class="form-label mb-1">City</label>
+                <div class="suggest-container">
+                    <input asp-for="SearchRequest.City" class="form-control js-suggest" data-property="city" autocomplete="nope" />
+                    <ul class="js-suggestion-list suggest-list list-unstyled"></ul>
+                </div>
+            </div>     
+
+            @if (Model.StateList.Any())
+            {
+                <div class="col-md-4 mb-3">
+                    <label asp-for="SearchRequest.State" class="form-label mb-1">State</label>
+                    <select asp-for="SearchRequest.State" asp-items="Model.StateList" class="form-control">
+                        <option value="">(all)</option>
+                    </select>
+                </div>
+            }
+        </div>
+
+        <!-- Local Board and Language Row -->
+        <div class="row">
+            @if (Model.BoardList.Any())
+            {
+                <div class="col-md-4 mb-3">
+                    <label asp-for="SearchRequest.LocalBoard" class="form-label mb-1">Local Boards</label>
+                    <select asp-for="SearchRequest.LocalBoard" asp-items="Model.BoardList" class="form-control">
+                        <option value="">(all)</option>
+                    </select>
+                </div>
+            }
+
+            @if (Model.LanguageList.Any())
+            {
+                <div class="col-md-4 mb-3">
+                    <label asp-for="SearchRequest.Language" class="form-label mb-1">Language</label>
+                    <select asp-for="SearchRequest.Language" asp-items="Model.LanguageList" class="form-control">
+                        <option value="">(none selected)</option>
+                    </select>
+                </div>
+            }
+        </div>
+
+        <!-- Designations Row -->
+        <div class="row">
+            @if(Model.DesignationList.Any()){
+                    <div class="col-md-8 mb-3 mb-lg-4">
+                    <label asp-for="SearchRequest.Designations" class="form-label mb-1">Designations</label>
+                    <select asp-for="SearchRequest.Designations" asp-items="Model.DesignationList" class="form-control" multiple size="6">
+                    </select>
+                </div>
+            }
+        </div>
+
+
+        <div class="row">
+            <div class="col">
+                <button type="submit" class="btn btn-primary btn-sm">Search</button>
+            </div>
+        </div>
+    }
+    <!-- End Find a Realtor Form -->
+
+    <div class="js-results-container position-relative" hidden>
+        <h2 class="h5 mt-4 mt-lg-5 mb-3 text-normal">Results</h2>
+        <div class="w-100 border border-medium rounded mb-5 table-responsive">
+            <table class="table-info w-100 fs-sm overflow-hidden">
+                <thead>
+                    <tr>
+                        <th class="py-2" style="background-color: var(--bs-gray-10)"><button title="Toggle order" class="js-orderby fw-bold border-0" data-sort="ImisId">ID <i class="ms-2 fa-solid fa-sort"></i></button></th>
+                        <th class="py-2" style="background-color: var(--bs-gray-10)"><button title="Toggle order" class="js-orderby fw-bold border-0" data-sort="MemberTypeId">Member Type <i class="ms-2 fa-solid fa-sort"></i></button></th>
+                        <th class="py-2" style="background-color: var(--bs-gray-10)"><button title="Toggle order" class="js-orderby fw-bold border-0" data-sort="LastName">Name <i class="ms-2 fa-solid fa-sort"></i></button></th>
+                        <th class="py-2" style="background-color: var(--bs-gray-10)"><button title="Toggle order" class="js-orderby fw-bold border-0" data-sort="CompanyName">Company <i class="ms-2 fa-solid fa-sort"></i></button></th>
+                        <th class="py-2" style="background-color: var(--bs-gray-10)"><button title="Toggle order" class="js-orderby fw-bold border-0" data-sort="City">City <i class="ms-2 fa-solid fa-sort"></i></button></th>
+                        <th class="py-2" style="background-color: var(--bs-gray-10)"><button title="Toggle order" class="js-orderby fw-bold border-0" data-sort="WorkPhone">Phone <i class="ms-2 fa-solid fa-sort"></i></button></th>
+                    </tr>
+                </thead>
+                <tbody style="color: var(--bs-gray-30)" class="js-realtor-results">
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td class="w-100" colspan="6">
+                            <div class="row m-0 w-100 justify-content-between align-items-center border-top border-medium py-2">
+                                <div class="col-md-4 ps-0">
+                                    <p class="js-result-count fw-600 text-nowrap"></p>
+                                </div>
+                                <div class="col-md-8 d-flex">
+                                    <ol class="js-realtor-pagination search-pagination list-unstyled d-flex flex-row gap-2 text-center mx-2 mb-0"></ol>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+        <div id="realtor_info" class="js-dialog dialog-container" aria-hidden="true">
+            <div class="dialog-overlay" data-a11y-dialog-hide></div>
+            <div class="dialog-content-wrapper" style="max-width: 575px; max-height: 80vh;" role="document">
+                <div class="dialog-content-header px-1 py-2 justify-content-between rounded-top" style="background-color: var(--bs-gray-10)">
+                    <h3 class="js-modal-title h4 mb-0 ps-4"></h3>
+                    <button onclick="return false;" type="button" data-a11y-dialog-hide aria-label="Close dialog">
+                        &times;
+                    </button>
+                </div>
+                <div id="realtorPrintArea" class="dialog-content p-3 p-sm-5 fs-sm">
+                    <div class="printer_area d-flex flex-row justify-content-between">
+                        <div class="w-100 border border-medium rounded">
+                            <div class="p-4">
+                                <div class="js-modal-header row flex-column-reverse flex-sm-row gap-3 gap-sm-0">
+                                </div>
+                            </div>
+                            <ul style="color: var(--bs-gray-30)" class="js-modal-details list-unstyled px-4 mb-0">
+                            </ul>
+                            <div class="p-4">
+                                <button class="btn btn-primary btn-sm js-print" data-printid="realtorPrintArea">
+                                    <i class="fa-solid fa-print me-2"></i> Print
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -8,7 +8,7 @@ public class Startup
 {
     private readonly IWebHostEnvironment _env;
     private readonly IConfiguration _config;
-    private static readonly ILogger _logger = Log.ForContext(typeof(Startup));
+    private readonly ILogger _logger;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Startup" /> class.
@@ -22,7 +22,9 @@ public class Startup
     {
         _env = webHostEnvironment ?? throw new ArgumentNullException(nameof(webHostEnvironment));
         _config = config ?? throw new ArgumentNullException(nameof(config));
-        _logger.Information("Starting up the application: {Environment}", _env.EnvironmentName);
+
+        _logger = Log.ForContext(typeof(Startup));
+        _logger.Information("Starting application: {Environment}", _env.EnvironmentName);
     }
 
     /// <summary>
@@ -35,19 +37,32 @@ public class Startup
     /// </remarks>
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddResponseCompression(options =>
+        // Only add response compression in non-development environments
+        if (!_env.IsDevelopment() && _env.EnvironmentName != "Local")
         {
-            options.EnableForHttps = true;
-        });
+            _logger.Information("Response Compression Enabled.");
+            services.AddResponseCompression(options => options.EnableForHttps = true);
+        }
+
         // umbraco services
-        services.AddUmbraco(_env, _config)
+        IUmbracoBuilder? builder = services.AddUmbraco(_env, _config)
         .AddBackOffice()
         .AddWebsite()
         .AddWraStore()
         .AddDeliveryApi()
         .AddComposers()
-        .AddWraNotifications()
-        .Build();
+        .AddWraNotifications();
+
+        // Enables using 'Async' suffix in action names with nameof.
+        // Necessary because ASP.NET Core MVC strips 'Async' suffix by default.
+        builder.Services.AddMvc(options =>
+        {
+            options.SuppressAsyncSuffixInActionNames = false;
+        });
+
+        // Build the host.
+        builder.Build();
+        _logger.Information("Umbraco Services Built Successfully");
     }
 
     /// <summary>
@@ -65,9 +80,9 @@ public class Startup
         {
             app.UseHttpsRedirection();
             app.UseExceptionHandler("/error");
+            app.UseResponseCompression();
         }
 
-        app.UseResponseCompression();
         app.UseUmbraco()
             .WithMiddleware(u =>
             {
@@ -79,6 +94,20 @@ public class Startup
                 u.UseInstallerEndpoints();
                 u.UseBackOfficeEndpoints();
                 u.UseWebsiteEndpoints();
+
+                LogRoutes(u.EndpointRouteBuilder, _logger);
             });
+
+    }
+
+    private void LogRoutes(IEndpointRouteBuilder endpoints, ILogger logger)
+    {
+        foreach (var endpoint in endpoints.DataSources.SelectMany(src => src.Endpoints))
+        {
+            if (endpoint is RouteEndpoint routeEndpoint && routeEndpoint.RoutePattern.RawText.Contains("umbraco/surface"))
+            {
+                logger.Information("SurfaceController Route: {RoutePattern}", routeEndpoint.RoutePattern.RawText);
+            }
+        }
     }
 }

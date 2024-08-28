@@ -1,0 +1,13 @@
+﻿
+<style>
+
+    .text-dark { color: #050F1E; }
+
+    .text-light { color: #FFF;}
+
+</style>
+
+<div ng-controller="iconBulletController" class="block-bullet-icon d-inline-block fs-lg py-1 {{ className }}">
+    <span aria-hidden="true" class="block-bullet-icon__icon fas {{ block.data.icon }}"></span>
+    {{ block.data.text }}
+</div>

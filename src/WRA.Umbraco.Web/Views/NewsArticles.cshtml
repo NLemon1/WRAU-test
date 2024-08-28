@@ -10,8 +10,8 @@
 @{
     Layout = "~/Views/_Layout.cshtml";
 
-    var content = (ContentModels.NewsArticles)Model;
-    var sections = Model.Value<IEnumerable<BlockGridItem>>("gridSection");
+    var content = Model;
+    var sections = Model.GridSection;
     int pageSize = 15;
 
     IEnumerable<IPublishedContent> newsCategories = Umbraco.ContentAtRoot().DescendantsOrSelfOfType("articleCategory");

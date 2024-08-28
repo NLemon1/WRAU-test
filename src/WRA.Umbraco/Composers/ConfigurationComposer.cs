@@ -1,42 +1,57 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Umbraco.Cms.Core.Composing;
 using WRA.Umbraco.Configuration;
-using WRA.Umbraco.Exceptions;
+using WRA.Umbraco.Configuration.Settings;
+using WRA.Umbraco.Extensions;
 using WRA.Umbraco.Shared.Messaging;
 
 namespace WRA.Umbraco.Composers;
 
+/// <summary>
+/// Binds and Registers settings <see cref="IConfigurationSettings"/> models with DI as singletons.
+/// </summary>
+/// <param name="logger"></param>
 [ComposeBefore(typeof(CustomServiceComposer))]
-public class ConfigurationComposer : IComposer
+public class ConfigurationComposer(ILogger logger) : IComposer
 {
+    private readonly ILogger _logger = logger.ForContext<ConfigurationComposer>();
+
     public void Compose(IUmbracoBuilder builder)
     {
-        // Retrieve messaging settings
-        MessagingSettings messagingSettings = builder.Config.GetSection(nameof(MessagingSettings)).Get<MessagingSettings>() ?? throw new ApplicationConfigurationException(nameof(MessagingSettings));
+        // Register all our settings with the DI container as singletons.
+        // Easy injection to services but for some of these we may way to move to options pattern.
 
-        // Bind messaging settings to a singleton (one per application lifetime)
-        builder.Services.AddSingleton(messagingSettings);
+        // #erictodo - Extract this to this project or move IConfigurationSettings to the shared project
+        RegisterSettings<MessagingSettings>(builder);
 
-        // Retrieve date folder settings
-        DateFolderSettings dateFolderSettings = builder.Config.GetSection(nameof(DateFolderSettings)).Get<DateFolderSettings>() ?? throw new ApplicationConfigurationException(nameof(DateFolderSettings));
+        RegisterSettings<DateFolderSettings>(builder);
+        RegisterSettings<RecurringJobSettings>(builder);
+        RegisterSettings<GatedContentSettings>(builder);
+        RegisterSettings<WraExternalApiSettings>(builder);
+        RegisterSettings<ApiSettings>(builder);
+        RegisterSettings<TaxJarApiSettings>(builder);
+        RegisterSettings<RecurringJobSettings>(builder);
 
-        // Bind date folder settings to a singleton (one per application lifetime)
-        builder.Services.AddSingleton(dateFolderSettings);
+        // Configure some settings so we can change the keys live
+        ConfigureSettings<RecaptchaSettings>(builder);
 
-        // Retrieve gated content settings
-        GatedContentSettings gatedContentSettings = builder.Config.GetSection(nameof(GatedContentSettings)).Get<GatedContentSettings>() ?? throw new ApplicationConfigurationException(nameof(GatedContentSettings));
+    }
 
-        // Bind gated content settings as a singleton (one per application lifetime)
-        builder.Services.AddSingleton(gatedContentSettings);
+    private void RegisterSettings<T>(IUmbracoBuilder builder)
 
-        // Retrieve external API settings
-        WraExternalApiSettings externalApiSettings = builder.Config.GetSection(nameof(WraExternalApiSettings)).Get<WraExternalApiSettings>() ?? throw new ApplicationConfigurationException(nameof(WraExternalApiSettings));
+    // #erictodo - restrict this to IConfigurationSettings once we resolve message settings.
+    where T : class // , IConfigurationSettings
+    {
+        T settings = builder.Config.GetRequiredSection<T>();
+        builder.Services.AddSingleton(settings);
+        _logger.Debug("{SettingsName} settings registered. (Singleton)", typeof(T).Name);
+    }
 
-        TaxJarApiSettings taxJarApiSettings = builder.Config.GetSection(nameof(TaxJarApiSettings)).Get<TaxJarApiSettings>() ?? throw new ApplicationConfigurationException(nameof(TaxJarApiSettings));
-
-        // Bind external API settings as a singleton (one per application lifetime)
-        builder.Services.AddSingleton(externalApiSettings);
-        builder.Services.AddSingleton(taxJarApiSettings);
+    private void ConfigureSettings<T>(IUmbracoBuilder builder)
+    where T : class, IConfigurationSettings
+    {
+        var configurationSection = builder.Config.GetRequiredConfigurationSection<T>();
+        builder.Services.Configure<T>(configurationSection);
+        _logger.Debug("{SettingsName} settings configured. (Options Pattern)", typeof(T).Name);
     }
 }

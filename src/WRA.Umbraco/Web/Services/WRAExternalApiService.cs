@@ -2,6 +2,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using RestSharp;
 using WRA.Umbraco.Configuration;
+using WRA.Umbraco.Configuration.Settings;
 using WRA.Umbraco.Web.Dtos.External;
 
 namespace WRA.Umbraco.Web.Services;
@@ -11,7 +12,6 @@ public class WraExternalApiService(
 {
     public async Task<RestResponse> GetProductCategories()
     {
-
         var options = new RestClientOptions(settings.VersionedBaseUrl);
         var client = new RestClient(options);
         var request = new RestRequest("productcategory");

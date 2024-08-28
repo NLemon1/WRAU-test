@@ -11,10 +11,10 @@
     var content = (ContentModels.MagazineFeatures)Model.Content;
 
     IEnumerable<IPublishedContent> magazineCollections = Umbraco.ContentAtRoot()
-         .DescendantsOrSelfOfType("magazineCollection").Where(x => x.IsVisible()).OrderBy(p => p.Name).Reverse();
+         .DescendantsOrSelfOfType(nameof(MagazineCollection)).Where(x => x.IsVisible()).OrderBy(p => p.Name).Reverse();
 
     var currentCollection = magazineCollections.FirstOrDefault(); //get
-    var currentIssue = currentCollection.Children("newsItems").Where(x => x.IsVisible()).OrderBy(p => p.GetProperty("monthYearTitle").GetSourceValue()).Reverse();
+    var currentIssue = currentCollection.Children().Where(x => x.IsVisible()).OrderBy(p => p.GetProperty("monthYearTitle").GetSourceValue()).Reverse();
     var currentIssueContent = currentIssue.FirstOrDefault();
 
     var imageCurrent = currentIssueContent.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("image");
@@ -125,7 +125,7 @@
 
                                 if (child.HasValue("richTextContent") && !child.HasValue("excerpt"))
                                 {
-                                    cleanContent = HtmlHelperExtensions.ShortenExcerpt(child?.Value("richTextContent").ToString(), 135);
+                                    cleanContent = HtmlHelperExtensions.TruncateExcerpt(child?.Value("richTextContent").ToString(), 135);
                                 }
 
                                 var articleSummary = child.HasValue("excerpt") ? child.Value("excerpt") : cleanContent;

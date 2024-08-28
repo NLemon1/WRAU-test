@@ -36,11 +36,11 @@ public class ProductTasks(
         {
             var categoriesResp = await externalApiService.GetProductCategories();
             string? categoryContent = categoriesResp.Content;
-            if (categoryContent == null ) return false; // no content
+            if (categoryContent == null) return false; // no content
             var categoriesResponse = JsonSerializer.Deserialize<IEnumerable<ExternalProductCategoryDto>>(categoryContent, SerializationOptions);
             foreach (var categoryResponse in categoriesResponse)
             {
-                 categoryRepository.CreateOrUpdate(categoryResponse);
+                categoryRepository.CreateOrUpdate(categoryResponse);
             }
 
             return true; // success

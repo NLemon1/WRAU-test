@@ -6,7 +6,7 @@ namespace WRA.Umbraco.Dtos;
 public record GetProductVariantDto
 {
     [DataMember(Name = "productNodeId")]
-    public int ProductNodeId { get; set; }
+    required public int ProductNodeId { get; set; }
 
     [DataMember(Name = "attributes")]
     public IDictionary<string, string> Attributes { get; set; } = new Dictionary<string, string>();

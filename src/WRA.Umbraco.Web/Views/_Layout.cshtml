@@ -11,9 +11,9 @@
 @{
     MemberIdentityUser currentMember = await _membermanager.GetCurrentMemberAsync();
 
-    var settings = Umbraco.ContentAtRoot().FirstOrDefault(x => x.ContentType.Alias == "siteSettings");
+    var settings = Umbraco.ContentAtRoot().OfTypes(nameof(SiteSettings)).FirstOrDefault();
 
-    IPublishedContent home = Umbraco.ContentAtRoot()?.Where(pc => pc.Name == "Home")?.FirstOrDefault();
+    IPublishedContent home = Umbraco.ContentAtRoot()?.OfTypes(nameof(Home))?.FirstOrDefault();
 
     string alertTimestamp = String.Format("{0:Mdyyyyhmmss}", settings?.Value("timestamp"));//convert to string to write a cookie via data attributes
     int alertExpDays = settings?.Value<int>("expirationDays") ?? 0; //strongly typed int for exp dates, though will be converted to string on FE
@@ -29,7 +29,7 @@
     @Html.Raw(settings?.Value("bodyOpenScripts"))
     <a class="visually-hidden-focusable" href="#content">Skip to content</a>
     
-    @if (settings.HasValue("enableMessage") && settings.Value<bool>("enableMessage") && (Context.Request.Cookies["wra_alert_banner"] != alertTimestamp))
+    @if (settings is not null && settings.HasValue("enableMessage") && settings.Value<bool>("enableMessage") && (Context.Request.Cookies["wra_alert_banner"] != alertTimestamp))
     {
         <div id="site-alert" class="site-alert" data-timestamp="@alertTimestamp" data-expiration="@alertExpDays">
             <div class="container py-2 h-100 d-flex flex-row align-items-center justify-content-center">

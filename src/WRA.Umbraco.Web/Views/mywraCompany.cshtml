@@ -6,7 +6,7 @@
 
 @{
     Layout = "~/Views/_Layout.cshtml";
-    var content = (ContentModels.MywraCompany)Model;
+    var content = Model;
     // get current member
     var currentMemberQuery = await _memberManager.GetCurrentMemberAsync();
     // cast it to a published contnet type

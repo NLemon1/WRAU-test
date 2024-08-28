@@ -194,5 +194,4 @@ public class ContentApiController(
         var subcategories = resultSubCategories.Select(x => x.Name);
         return subcategories.ContainsAny(requestSubcategories);
     }
-
 }

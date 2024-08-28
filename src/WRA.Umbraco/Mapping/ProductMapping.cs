@@ -35,7 +35,6 @@ public class ProductMapping(
         productEvent.ProductTypeId = mappingHelper.GetExternalIdOnParent(content).SafeGuid();
         productEvent.IsShippable = content.GetValue<bool>("isShippable");
         productEvent.IsTaxable = content.GetValue<bool>("isTaxable");
-
     }
 
     private void DtoToEvent(ExternalProductDto source, ProductEvent target, MapperContext _)

@@ -45,10 +45,10 @@ where TUser : MemberIdentityUser
         string? saltString = member.GetValue<string>(_memberSaltPropertyAlias);
         if (string.IsNullOrEmpty(saltString))
         {
-           return base.VerifyHashedPassword(user, hashedPassword, providedPassword);
+            return base.VerifyHashedPassword(user, hashedPassword, providedPassword);
         }
 
-        string? decodedSalt = DecodeHash(saltString);
+        var decodedSalt = DecodeHash(saltString);
         byte[] salt = Encoding.UTF8.GetBytes(decodedSalt);
         string verifyHash = HashPw(providedPassword, salt);
         return verifyHash.Equals(hashedPassword) ?

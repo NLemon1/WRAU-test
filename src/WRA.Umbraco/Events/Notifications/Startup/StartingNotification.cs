@@ -25,7 +25,6 @@ public class StartingNotification(
     ILogger<StartingNotification> logger
     ) : INotificationHandler<UmbracoApplicationStartingNotification>
 {
-
     public void Handle(UmbracoApplicationStartingNotification notification)
     {
         if (runtimeState.Level < RuntimeLevel.Run)

@@ -20,7 +20,6 @@ public class MappingHelper(
         if (contentUdi == null) return null;
         var contentNode = contentQuery.GetById(contentUdi);
         return contentNode;
-
     }
 
     public IPublishedContent? FindRelatedContent(Guid Identifier)

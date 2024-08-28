@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +23,7 @@ public class UpsProvider : ShippingProviderBase<UpsProviderSettings>
         _scopeFactory = scopeFactory;
     }
 
+    // #todolightburn: No await?
     public async override Task<ShippingRatesResult> GetShippingRatesAsync(ShippingProviderContext<UpsProviderSettings> context, CancellationToken cancellationToken = default(CancellationToken))
     {
         var result = new ShippingRatesResult();

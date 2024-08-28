@@ -26,8 +26,7 @@ public class MyWraProfileController(
     MemberCommitteesService memberCommitteesService)
     : RenderController(logger, compositeViewEngine, umbracoContextAccessor)
 {
-
-public override IActionResult Index()
+    public override IActionResult Index()
     {
         var currentMember = memberManager.GetCurrentMemberAsync().GetAwaiter().GetResult();
         if (currentMember != null)
@@ -59,7 +58,7 @@ public override IActionResult Index()
         }
     }
 
-private MemberMarketingSubscriptionPreferencesDto GetMemberMarketingSubscriptions(string externalId)
+    private MemberMarketingSubscriptionPreferencesDto GetMemberMarketingSubscriptions(string externalId)
     {
         var results = new MemberMarketingSubscriptionPreferencesDto();
         results.MemberID = externalId;
@@ -68,7 +67,7 @@ private MemberMarketingSubscriptionPreferencesDto GetMemberMarketingSubscription
         var marketingSubscriptions = memberMarketingSubscriptionService.GetMemberMarketingSubscriptions(externalId).GetAwaiter().GetResult();
         if (marketingSubscriptions != null && marketingSubscriptions.Any())
         {
-            foreach(var subscription in marketingSubscriptions)
+            foreach (var subscription in marketingSubscriptions)
             {
                 var marketingSubscription = new MemberMarketingSubscriptionPreferenceDto();
                 marketingSubscription.IsActive = subscription.IsActive;
@@ -84,15 +83,13 @@ private MemberMarketingSubscriptionPreferencesDto GetMemberMarketingSubscription
                 {
                     results.MagazinePreferences.Add(marketingSubscription);
                 }
-
             }
         }
 
         return results;
-
     }
 
-private List<MemberCommitteeDto> GetMemberCommittees(string externalId)
+    private List<MemberCommitteeDto> GetMemberCommittees(string externalId)
     {
         var results = new List<MemberCommitteeDto>();
         var memberCommittees = memberCommitteesService.GetMemberCommittees(externalId).GetAwaiter().GetResult();
@@ -118,4 +115,3 @@ private List<MemberCommitteeDto> GetMemberCommittees(string externalId)
         return results;
     }
 }
-

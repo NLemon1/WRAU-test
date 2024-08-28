@@ -9,7 +9,7 @@
 
 @{
     Layout = "~/Views/_Layout.cshtml";
-    var content = (ContentModels.MywraDues)Model;
+    var content = Model;
 
     var currentMemberQuery = await _memberManager.GetCurrentMemberAsync();
     // cast it to a published contnet type

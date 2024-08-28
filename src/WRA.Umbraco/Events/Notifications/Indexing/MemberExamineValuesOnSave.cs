@@ -16,7 +16,6 @@ public class MemberExamineValuesOnSave(
     ILogger<MemberExamineValuesOnSave> logger
     ) : INotificationHandler<MemberSavedNotification>
 {
-
     public void Handle(MemberSavedNotification notification)
     {
         try

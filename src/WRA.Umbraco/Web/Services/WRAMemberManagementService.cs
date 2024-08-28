@@ -99,7 +99,6 @@ public class WraMemberManagementService(
         logger.LogInformation("Updated member: {Member} - {Email}", existingMember.Id, existingMember.Email);
         scope.Complete();
         return existingMember;
-
     }
 
     public Task Delete(MemberEvent reqMember)

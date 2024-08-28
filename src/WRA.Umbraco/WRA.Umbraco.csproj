@@ -4,6 +4,23 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <Configurations>Debug;Release;Local</Configurations>
+    
+    <!-- Razor files are needed for the backoffice to work correctly -->
+    <CopyRazorGenerateFilesToPublishDirectory>true</CopyRazorGenerateFilesToPublishDirectory>
+
+
+    <!-- Local Application Settings paths for Core and Web Projects-->
+    <WebLocalAppSettingsPath>$(SolutionDir)src\WRA.Umbraco.Web\appsettings.Local.json</WebLocalAppSettingsPath>
+    <CoreLocalAppSettingsPath>$(SolutionDir)src\WRA.Umbraco\Web\appsettings.Local.json</CoreLocalAppSettingsPath>
+
+   <!-- Check if the files exis in both places-->
+    <CoreLocalAppSettingsExists>$([System.IO.File]::Exists('$(CoreLocalAppSettingsPath)'))</CoreLocalAppSettingsExists>
+    <WebLocalAppSettingsExists>$([System.IO.File]::Exists('$(WebLocalAppSettingsPath)'))</WebLocalAppSettingsExists>
+
+   <!-- Get the last write times for core and web appsettings files. -->
+    <CoreLocalAppSettingsLastWriteTime Condition="'$(CoreLocalAppSettingsExists)' == 'true'">$([System.IO.File]::GetLastWriteTime('$(CoreLocalAppSettingsPath)').Ticks)</CoreLocalAppSettingsLastWriteTime>
+    <WebLocalAppSettingsLastWriteTime Condition="'$(WebLocalAppSettingsExists)' == 'true'">$([System.IO.File]::GetLastWriteTime('$(WebLocalAppSettingsPath)').Ticks)</WebLocalAppSettingsLastWriteTime>
+    <CurrentTime>$([System.DateTime]::UtcNow.ToString("yyyyMMddHHmmss"))</CurrentTime>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Events\ServiceBusSubscriptions\**" />
@@ -13,43 +30,302 @@
     <None Remove="Events\ServiceBusSubscriptions\**" />
     <None Remove="Models\Custom\Events\**" />
   </ItemGroup>
+  <!-- Build the UmbracoBridgeServiceClient using swagger -->
+  <ItemGroup>
+     <OpenApiReference Include="OpenAPIs\UmbracoBridgeService.json" CodeGenerator="NSwagCSharp" Namespace="WRA.UmbracoBridgeServices">
+      <SourceUri>https://app2.wra.org/umbraco/swagger/v1/swagger.json</SourceUri>
+      <ClassName>UmbracoBridgeServiceClient</ClassName>
+      <InterfaceName>IUmbracoBridgeServiceClient</InterfaceName>
+      <GenerateSyncMethods>true</GenerateSyncMethods>
+      <Options> /UseBaseUrl:false /GenerateClientInterfaces:true /OperationGenerationMode:SingleClientFromOperationId</Options>
+      <OutputPath>$(ProjectDir)\Services\UmbracoBridgeServiceClient.generated.cs</OutputPath>
+    </OpenApiReference>
+  </ItemGroup>
   <ItemGroup>
     <!-- CoreCompat is deprecated and unmaintained but is require for the Global Payments SDK /shrug -->
     <!-- <PackageReference Include="Azure.Messaging.ServiceBus" Version="7.17.2" /> -->
+    <PackageReference Include="Arjo.UmbracoBackOfficeEditorView" Version="1.2.0" />
+    <PackageReference Include="Azure.Identity" Version="1.12.0" />
     <PackageReference Include="CoreCompat.System.Drawing" Version="1.0.0-beta006" />
     <PackageReference Include="Cultiv.Hangfire" Version="3.1.2" />
-    <PackageReference Include="Examine.Core" Version="3.2.1" />
-    <PackageReference Include="GlobalPayments.Api" Version="8.0.7" />
-    <PackageReference Include="Hangfire.Core" Version="1.8.5" />
+    <PackageReference Include="Dawoe.OEmbedPickerPropertyEditor" Version="13.0.0" />
+    <PackageReference Include="Diplo.AuditLogViewer" Version="10.1.0" />
+    <PackageReference Include="Diplo.GodMode" Version="13.0.0" />
+    <PackageReference Include="GlobalPayments.Api" Version="8.0.20" />
+    <PackageReference Include="Hangfire" Version="1.8.14" />
+    <PackageReference Include="Hangfire.Core" Version="1.8.14" />
+    <PackageReference Include="Humble.Umbraco.SvgHelpers" Version="13.0.0.1" />
     <PackageReference Include="Mapster" Version="7.4.0" />
-    <PackageReference Include="MassTransit" Version="8.2.1" />
-    <PackageReference Include="MassTransit.Azure.ServiceBus.Core" Version="8.2.1" />
-    <PackageReference Include="MassTransit.Newtonsoft" Version="8.2.0" />
+    <PackageReference Include="MassTransit" Version="8.2.3" />
+    <PackageReference Include="MassTransit.Azure.ServiceBus.Core" Version="8.2.3" />
+    <PackageReference Include="MassTransit.Newtonsoft" Version="8.2.3" />
+    <PackageReference Include="MetaMomentum" Version="2.2.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="8.0.7" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.1" />
     <PackageReference Include="Microsoft.Extensions.ApiDescription.Client" Version="7.0.2" />
-    <PackageReference Include="RestSharp" Version="110.2.0" />
+    <PackageReference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" Version="8.0.0" />
+    <PackageReference Include="NSwag.ApiDescription.Client" Version="14.0.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="NSwag.MSBuild" Version="14.0.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Our.Iconic" Version="12.0.0" />
+    <PackageReference Include="Our.Umbraco.TheDashboard" Version="13.0.1" />
+    <PackageReference Include="RestSharp" Version="111.4.0" />
+    <PackageReference Include="Serilog.Extensions.Logging" Version="8.0.0" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="8.0.2" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="5.0.1" />
+    <PackageReference Include="Serilog.Sinks.Debug" Version="2.0.0" />
+    <PackageReference Include="Serilog.Sinks.Async" Version="1.5.0" />
+    <PackageReference Include="Serilog.Sinks.Seq" Version="7.0.1" />
+    <PackageReference Include="SerilogTracing" Version="1.1.0" />
+    <PackageReference Include="SerilogTracing.Expressions" Version="1.1.0" />
+    <PackageReference Include="SerilogTracing.Instrumentation.AspNetCore" Version="1.1.0" />
+    <PackageReference Include="Skybrud.Umbraco.Redirects" Version="13.0.4" />
+    <PackageReference Include="Skybrud.Umbraco.Redirects.Import" Version="13.0.0" />
+
     <PackageReference Include="System.Drawing.Common" Version="8.0.1" />
+
+    <!-- Need to Pull into Private Fork and fix non scoped CSS -->
+    <!--<PackageReference Include="TagManager" Version="1.0.4" />-->
     <PackageReference Include="TaxJar" Version="4.0.0" />
-    <PackageReference Include="Umbraco.Cms" Version="13.4.0" />
+    <PackageReference Include="uMarketingSuite" Version="2.3.2" />
+    <PackageReference Include="uMarketingSuite.Commerce" Version="2.0.0" />
+    <PackageReference Include="uMarketingSuite.Headless" Version="2.3.2" />
+    <PackageReference Include="uMarketingSuite.UmbracoForms" Version="2.0.0" />
+    <PackageReference Include="Umbraco.Cms" Version="13.4.1" />
     <PackageReference Include="Umbraco.Cms.Imaging.ImageSharp" Version="13.4.1" />
-    <PackageReference Include="Umbraco.Code" Version="2.1.0" />
-    <PackageReference Include="Umbraco.Commerce" Version="13.1.4" />
-    <PackageReference Include="Umbraco.Commerce.Cms" Version=" 13.1.4" />
-    <PackageReference Include="Umbraco.Commerce.Cms.Startup" Version=" 13.1.4" />
-    <PackageReference Include="Umbraco.Commerce.Cms.Web" Version=" 13.1.4" />
-    <PackageReference Include="Umbraco.Commerce.Common" Version=" 13.1.4" />
-    <PackageReference Include="Umbraco.Commerce.Core" Version=" 13.1.4" />
-    <PackageReference Include="Umbraco.Commerce.Infrastructure" Version=" 13.1.4" />
-    <PackageReference Include="Umbraco.Commerce.Persistence.Sqlite" Version="13.1.4" />
-    <PackageReference Include="Umbraco.Commerce.Persistence.SqlServer" Version="13.1.4" />
-    <PackageReference Include="Umbraco.Commerce.Web" Version="13.1.4" />
+    <PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="13.4.1" />
+    <PackageReference Include="Umbraco.Code" Version="2.2.0" />
+    <PackageReference Include="Umbraco.Commerce" Version="13.1.6" />
+    <PackageReference Include="Umbraco.Commerce.Cms" Version=" 13.1.6" />
+    <PackageReference Include="Umbraco.Commerce.Cms.Startup" Version=" 13.1.6" />
+    <PackageReference Include="Umbraco.Commerce.Cms.Web" Version=" 13.1.6" />
+    <PackageReference Include="Umbraco.Commerce.Common" Version="13.1.6" />
+    <PackageReference Include="Umbraco.Commerce.Core" Version=" 13.1.6" />
+    <PackageReference Include="Umbraco.Commerce.Infrastructure" Version=" 13.1.6" />
+    <PackageReference Include="Umbraco.Commerce.Persistence.Sqlite" Version="13.1.6" />
+    <PackageReference Include="Umbraco.Commerce.Persistence.SqlServer" Version="13.1.6" />
+    <PackageReference Include="Umbraco.Commerce.Web" Version="13.1.6" />
+
+
+    <!-- Moved from Web to Core Project (Eric 2020718) -->
+    <PackageReference Include="BouncyCastle.Cryptography" Version="2.4.0" />
+    <PackageReference Include="MimeKit" Version="4.7.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Umbraco.Cloud.Cms.PublicAccess" Version="13.0.0" />
+    <PackageReference Include="Umbraco.Cms.Infrastructure" Version="13.4.1" />
+    <PackageReference Include="Umbraco.Commerce.Deploy" Version="13.1.2" />
+    <PackageReference Include="Umbraco.Community.Contentment" Version="5.0.1" />
+    <PackageReference Include="Umbraco.Deploy.Cloud" Version="13.2.0" />
+    <PackageReference Include="Umbraco.Deploy.Contrib" Version="13.2.0" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="3.1.5" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.0.0" />
+    <PackageReference Include="Umbraco.Forms" Version="13.2.1" />
+    <PackageReference Include="Umbraco.Forms.StaticAssets" Version="13.2.1" />
+    <PackageReference Include="Umbraco.Forms.Web" Version="13.2.1" />
+
+
+    <!-- WRA Custom Nuget packages -->
     <PackageReference Include="WRA.Umbraco.Contracts" Version="12.0.0" />
-    <PackageReference Include="wra.umbraco.shared" Version="8.1.1" />
-    <PackageReference Update="Roslynator.Analyzers" Version="4.12.2">
+    <PackageReference Include="WRA.Umbraco.Shared" Version="8.2.0" />
+
+    <!-- Analyzers -->
+    <PackageReference Update="Roslynator.Analyzers" Version="4.12.4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
+    <PackageReference Update="SonarAnalyzer.CSharp" Version="9.30.0.95878" />
+    
   </ItemGroup>
 
+  <ItemGroup>
+    
+    <!-- MetaMomentum SEO Package -->
+    <MetaMomentumFiles Include="App_Plugins\MetaMomentum\*.*" />
+    <MetaMomentumViews Include="Views\Partials\MetaMomentum\*.*" />
+
+    <!-- Diplo God Mode and Audit Log Viewer Packages -->
+    <DiploGodMode Include="App_Plugins\DiploGodMode\**\*.*" />
+    <DiploAuditLogViewer Include="App_Plugins\DiploAuditLogViewer\**\*.*" />
+
+    <!-- Umbraco Forms -->
+    <UmbracoFormsMain Include="App_Plugins\UmbracoForms\**\*.*" />
+
+    <!-- uMarketingSuite Main Package and License File -->
+    <uMarketingSuiteMain Include="App_Plugins\uMarketingSuite\**\*.*" />
+    <uMarketingSuiteMainViews Include="Views\Partials\uMarketingSuite\**\*.*" />
+    <uMarketingSuiteMainAssets Include="Assets\uMarketingSuite\**\*.*" />
+    <uMarketingSuiteLicenseFile Include="Licenses\uMarketingSuite.License.config" />
+
+    <!-- Umbraco Navigation Hidden Icon Package -->
+    <UmbracoNavigationHiddenIcon Include="App_Plugins\UmbracoNaviHideIcon\**\*.*" />
+
+    <!-- Umbraco AI Content Creator Package -->
+    <UmbracoAIContentCreator Include="App_Plugins\UmContentCreator\**\*.*" />
+
+    <!-- WRA Enhancements Package -->
+    <WRAEnhancements Include="BackOffice\WRAEnhancements\**\*.*" />
+
+    <!-- Custom Block Views -->
+    <CustomBlockViews Include="BackOffice\CustomBlockView\**\*.*" />
+
+    <!-- Contentment Package -->
+    <Contentment Include="App_Plugins\Contentment\**\*.*" />
+
+    <!-- Iconic Package -->
+    <Iconic Include="App_Plugins\Iconic\**\*.*" />
+
+    <!-- WRA Assets -->
+    <CoreWebRoot Include="Web\wwwroot\**\*.*" />
+
+    <!-- Local App Settings -->
+    <LocalAppSettings Include="Web\appsettings.Local.json" />
+
+  </ItemGroup>
+
+
+   <Target Name="CleanPostBuild" AfterTargets="Clean">
+    <Message Text="WRA PostClean: Started" Importance="high" />
+     
+    <!-- Remove MetaMomentum Plugin Files from Web Project -->
+    <Message Text="WRA PostClean: Removing MetaMomentum Plugin Files" Importance="high" />
+    <RemoveDir Directories="$(SolutionDir)src\WRA.Umbraco.Web\App_Plugins\MetaMomentum" ContinueOnError="false" />
+
+    <!-- Remove uMarketingSuite Plugin Files from Web Project -->
+    <Message Text="WRA PostClean: Removing uMarketingSuite Plugin Files" Importance="high" />
+    <RemoveDir Directories="$(SolutionDir)src\WRA.Umbraco.Web\App_Plugins\uMarketingSuite" ContinueOnError="false" />
+
+
+     <!-- Remove WRA Enhancements Plugin Files from Web Project -->
+    <Message Text="WRA PostClean: Removing WRA Enhancement Plugin Files" Importance="high" />
+    <RemoveDir Directories="$(SolutionDir)src\WRA.Umbraco.Web\App_Plugins\WRAEnhancements" ContinueOnError="false" />
+
+    <!-- Remove CustomBlockView Plugin Files from Web Project -->
+    <Message Text="WRA PostClean: Removing CustomBlockView Plugin Files" Importance="high" />
+    <RemoveDir Directories="$(SolutionDir)src\WRA.Umbraco.Web\App_Plugins\CustomBlockView" ContinueOnError="false" />
+
+    <!-- Remove Contentment Plugin Files from Web Project -->
+    <Message Text="WRA PostClean: Removing Contentment Plugin Files" Importance="high" />
+    <RemoveDir Directories="$(SolutionDir)src\WRA.Umbraco.Web\App_Plugins\Contentment" ContinueOnError="false" />
+
+    <!-- Remove Iconic Plugin Files from Web Project -->
+    <Message Text="WRA PostClean: Removing Iconic Plugin Files" Importance="high" />
+    <RemoveDir Directories="$(SolutionDir)src\WRA.Umbraco.Web\App_Plugins\Iconic" ContinueOnError="false" />
+
+    <!-- Log message indicating the end of the clean-up target -->
+    <Message Text="WRA PostClean: Complete" Importance="high" />
+  </Target>
+
+
+  <!-- Wait until after all packages have built and run their post build targets. -->
+  <Target Name="FinalPostBuild" AfterTargets="Build">
+    <Message Text="WRA PostBuild: Started" Importance="high" />
+    
+    <!-- MetaMomentum Plugin Files. -->
+    <Message Text="WRA PostBuild: Copying MetaMomentum Plugin Files" Importance="high" />
+    <Copy SourceFiles="@(MetaMomentumFiles)" DestinationFolder="$(SolutionDir)src\WRA.Umbraco.Web\App_Plugins\MetaMomentum\%(RecursiveDir)" Condition="'%(Extension)' != '.cs'" ContinueOnError="false" />
+
+    <!-- MetaMomentum Partial Views -->
+    <Message Text="WRA PostBuild: Copying MetaMomentum Razor Files" Importance="high" />
+    <Copy SourceFiles="@(MetaMomentumViews)" DestinationFolder="$(SolutionDir)src\WRA.Umbraco.Web\Views\Partials\MetaMomentum\%(RecursiveDir)" Condition="'%(Extension)' != '.cs'" ContinueOnError="false" />
+
+    <!-- Copy Diplo God Mode Plugin Files -->
+    <Message Text="WRA PostBuild: Copying Diplo.GodMode Plugin Files" Importance="high" />
+    <Copy SourceFiles="@(DiploGodMode)" DestinationFolder="$(SolutionDir)src\WRA.Umbraco.Web\App_Plugins\DiploGodMode\%(RecursiveDir)" Condition="'%(Extension)' != '.cs'" ContinueOnError="false" />
+
+    <!-- Copy Diplo Audit Log Viewer Plugin Files -->
+    <Message Text="WRA PostBuild: Copying Diplo.AuditLogViewer Plugin Files" Importance="high" />
+    <Copy SourceFiles="@(DiploAuditLogViewer)" DestinationFolder="$(SolutionDir)src\WRA.Umbraco.Web\App_Plugins\DiploAuditLogViewer\%(RecursiveDir)" Condition="'%(Extension)' != '.cs'" ContinueOnError="false" />
+
+    <!-- Copy Umbraco Forms Plugin Files --><!--
+    <Message Text="WRA PostBuild: Copying UmbracoForms Plugin Files" Importance="high" />
+    <Copy SourceFiles="@(UmbracoFormsMain)" DestinationFolder="$(SolutionDir)src\WRA.Umbraco.Web\App_Plugins\UmbracoForms\%(RecursiveDir)" Condition="'%(Extension)' != '.cs'" ContinueOnError="false" />-->
+
+    <!-- Copy uMarketingSuite Plugin Files -->
+    <Message Text="WRA PostBuild: Copying uMarketingSuite Plugin Files" Importance="high" />
+    <Copy SourceFiles="@(uMarketingSuiteMain)" DestinationFolder="$(SolutionDir)src\WRA.Umbraco.Web\App_Plugins\uMarketingSuite\%(RecursiveDir)" Condition="'%(Extension)' != '.cs'" ContinueOnError="false" />
+
+     <!-- Copy uMarketingSuite Partial Views -->
+    <Message Text="WRA PostBuild: Copying uMarketingSuite Razor Files" Importance="high" />
+    <Copy SourceFiles="@(uMarketingSuiteMainViews)" DestinationFolder="$(SolutionDir)src\WRA.Umbraco.Web\Views\Partials\uMarketingSuite\%(RecursiveDir)" Condition="'%(Extension)' != '.cs'" ContinueOnError="false" />
+
+     <!-- Copy uMarketingSuite Assets -->
+    <Message Text="WRA PostBuild: Copying uMarketingSuite Asset Files" Importance="high" />
+    <Copy SourceFiles="@(uMarketingSuiteMainAssets)" DestinationFolder="$(SolutionDir)src\WRA.Umbraco.Web\Assets\uMarketingSuite\%(RecursiveDir)" Condition="'%(Extension)' != '.cs'" ContinueOnError="false" />
+
+    <!-- Copy uMarketingSuite License File -->
+    <Message Text="WRA PostBuild: Copying uMarketingSuite License File" Importance="high" />
+    <Copy SourceFiles="@(uMarketingSuiteLicenseFile)" DestinationFolder="$(SolutionDir)src\WRA.Umbraco.Web\config\uMarketingSuite\%(RecursiveDir)" Condition="'%(Extension)' != '.cs'" ContinueOnError="false" />
+
+    <!-- Copy uMarketingSuite Umbraco Forms Files -->
+    <Message Text="WRA PostBuild: Copying uMarketingSuite.UmbracoForms Plugin Files" Importance="high" />
+    <Copy SourceFiles="@(uMarketingSuiteUmbracoForms)" DestinationFolder="$(SolutionDir)src\WRA.Umbraco.Web\App_Plugins\uMarketingSuite.UmbracoForms\%(RecursiveDir)" Condition="'%(Extension)' != '.cs'" ContinueOnError="false" />
+
+    <!-- Copy Umbraco Navigation Hidden Icon Package Files -->
+    <Message Text="WRA PostBuild: Copying UmbracoNaviHideIcon Plugin Files" Importance="high" />
+    <Copy SourceFiles="@(UmbracoNavigationHiddenIcon)" DestinationFolder="$(SolutionDir)src\WRA.Umbraco.Web\App_Plugins\UmbracoNaviHideIcon\%(RecursiveDir)" Condition="'%(Extension)' != '.cs'" ContinueOnError="false" />
+
+    <!-- Copy Umbraco AI Content Creator Package Files -->
+    <Message Text="WRA PostBuild: Copying UmContentCreator Plugin Files" Importance="high" />
+    <Copy SourceFiles="@(UmbracoAIContentCreator)" DestinationFolder="$(SolutionDir)src\WRA.Umbraco.Web\App_Plugins\UmContentCreator\%(RecursiveDir)" Condition="'%(Extension)' != '.cs'" ContinueOnError="false" /> 
+
+    <!-- Copy WRA Enhancements Plugin Files -->
+    <Message Text="WRA PostBuild: Copying WRA Enhancements Plugin Files" Importance="high" />
+    <Copy SourceFiles="@(WRAEnhancements)" DestinationFolder="$(SolutionDir)src\WRA.Umbraco.Web\App_Plugins\WRAEnhancements\%(RecursiveDir)" Condition="'%(Extension)' != '.cs'" ContinueOnError="false" />
+
+    <!-- Copy Custom Block View Plugin Files -->
+    <Message Text="WRA PostBuild: Copying Custom Block View Plugin Files" Importance="high" />
+    <Copy SourceFiles="@(CustomBlockViews)" DestinationFolder="$(SolutionDir)src\WRA.Umbraco.Web\App_Plugins\CustomBlockView\%(RecursiveDir)" Condition="'%(Extension)' != '.cs'" ContinueOnError="false" /> 
+
+    <!-- Copy Contentment Plugin Files -->
+    <Message Text="WRA PostBuild: Copying Contentment Plugin Files" Importance="high" />
+    <Copy SourceFiles="@(Contentment)" DestinationFolder="$(SolutionDir)src\WRA.Umbraco.Web\App_Plugins\Contentment\%(RecursiveDir)" Condition="'%(Extension)' != '.cs'" ContinueOnError="false" /> 
+
+    <!-- Copy Contentment Plugin Files -->
+    <Message Text="WRA PostBuild: Copying Iconic Plugin Files" Importance="high" />
+    <Copy SourceFiles="@(Iconic)" DestinationFolder="$(SolutionDir)src\WRA.Umbraco.Web\App_Plugins\Iconic\%(RecursiveDir)" Condition="'%(Extension)' != '.cs'" ContinueOnError="false" /> 
+
+    <!-- Copy WRA Assets wwwroot Files -->
+    <Message Text="WRA PostBuild: Copying Web Root Files" Importance="high" />
+    <Copy SourceFiles="@(CoreWebRoot)" DestinationFolder="$(SolutionDir)src\WRA.Umbraco.Web\wwwroot\%(RecursiveDir)" Condition="'%(Extension)' != '.cs'" ContinueOnError="false" /> 
+
+    <!-- Copy Local Application Settings File -->
+  
+
+
+    
+  </Target>
+
+
+    <!-- Logging properties -->
+  <Target Name="LogProperties" AfterTargets="FinalPostBuild">
+    <Message Text="WebLocalAppSettingsPath: $(WebLocalAppSettingsPath)" Importance="high" />
+    <Message Text="CoreLocalAppSettingsPath: @(LocalAppSettings->'%(FullPath)')" Importance="high" />
+    <Message Text="CoreLocalAppSettingsExists: $(CoreLocalAppSettingsExists)" Importance="high" />
+    <Message Text="WebLocalAppSettingsExists: $(WebLocalAppSettingsExists)" Importance="high" />
+    <Message Text="CoreLocalAppSettingsLastWriteTime: $(CoreLocalAppSettingsLastWriteTime)" Importance="high" />
+    <Message Text="WebLocalAppSettingsLastWriteTime: $(WebLocalAppSettingsLastWriteTime)" Importance="high" />
+    <Message Text="CurrentTime: $(CurrentTime)" Importance="high" />
+  </Target>
+
+
+  <!-- Combined backup and copy operations with logging -->
+  <Target Name="BackupAndCopyLocalAppSettings" AfterTargets="FinalPostBuild">
+    <Exec Command="copy /Y $(WebLocalAppSettingsPath) $(WebLocalAppSettingsPath).bkup-$(CurrentTime).json" Condition="'$(WebLocalAppSettingsExists)' == 'true' AND '$(CoreLocalAppSettingsLastWriteTime)' &gt; '$(WebLocalAppSettingsLastWriteTime)'" />
+    <Message Text="WRA PostBuild: Backup created for appsettings.Local.json in the Web Project: $(WebLocalAppSettingsPath).bkup-$(CurrentTime).json" Condition="'$(WebLocalAppSettingsExists)' == 'true' AND '$(CoreLocalAppSettingsLastWriteTime)' &gt; '$(WebLocalAppSettingsLastWriteTime)'" Importance="high" />
+    <Exec Command="copy /Y $(CoreLocalAppSettingsPath) $(WebLocalAppSettingsPath)" Condition="'$(CoreLocalAppSettingsExists)' == 'true' AND ('$(WebLocalAppSettingsExists)' == 'false' OR '$(CoreLocalAppSettingsLastWriteTime)' &gt; '$(WebLocalAppSettingsLastWriteTime)')" />
+    <Message Text="WRA PostBuild: Copied appsettings.Local.json from Core to Web project" Condition="'$(CoreLocalAppSettingsExists)' == 'true' AND ('$(WebLocalAppSettingsExists)' == 'false' OR '$(CoreLocalAppSettingsLastWriteTime)' &gt; '$(WebLocalAppSettingsLastWriteTime)')" Importance="high" />
+    <Message Text="WRA PostBuild: No copy necessary for appsettings.Local.json" Condition="'$(CoreLocalAppSettingsExists)' == 'false' OR ('$(WebLocalAppSettingsExists)' == 'true' AND '$(CoreLocalAppSettingsLastWriteTime)' &lt;= '$(WebLocalAppSettingsLastWriteTime)')" Importance="high" />
+  </Target>
+  
+
+
+
+ 
   <ItemGroup>
     <Compile Update="Models\Generated\**">
       <NoWarn>1570</NoWarn>

@@ -3,7 +3,7 @@
   "Alias": "boards",
   "AllowedTemplates": [],
   "HistoryCleanup": {},
-  "Icon": "icon-meeting color-amber",
+  "Icon": "icon-meeting color-deep-purple",
   "Thumbnail": "folder.png",
   "IsContainer": true,
   "Permissions": {

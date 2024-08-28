@@ -7,7 +7,7 @@
 
 <div class="hot-tip">
     <div class="hot-tip__header">
-        @content.Value("title")
+        @content.Title
     </div>
     <div class="hot-tip__content">
         @await Html.GetBlockGridItemAreaHtmlAsync(Model, "hot-tip-area")

@@ -27,16 +27,15 @@ public class WraMemberNotifications(
                 var memberCreateEvent = mapper.Map<MemberEvent>(memberNotification);
                 if (memberCreateEvent == null) continue;
                 await memberEventPublisher.Send(memberCreateEvent, EntityEventAction.Create);
-                logger.LogInformation("Message sent for external memberId: {Member} - {Email}", memberCreateEvent.Id,  memberCreateEvent.Email);
+                logger.LogInformation("Message sent for external memberId: {Member} - {Email}", memberCreateEvent.Id, memberCreateEvent.Email);
             }
             else
             {
                 var memberUpdateEvent = mapper.Map<MemberEvent>(memberNotification);
                 if (memberUpdateEvent == null) continue;
                 await memberEventPublisher.Send(memberUpdateEvent, EntityEventAction.Update);
-                logger.LogInformation("Message sent for external memberId: {Member} - {Email}", memberUpdateEvent.Id,  memberUpdateEvent.Email);
+                logger.LogInformation("Message sent for external memberId: {Member} - {Email}", memberUpdateEvent.Id, memberUpdateEvent.Email);
             }
-
         }
     }
 }

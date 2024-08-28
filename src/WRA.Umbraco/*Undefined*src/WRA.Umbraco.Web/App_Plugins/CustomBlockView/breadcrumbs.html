@@ -1,0 +1,10 @@
+﻿<div ng-controller="breadcrumbsController" class="container py-4">
+    <ul class="list-unstyled mb-0 breadcrumbs">
+        <li ng-repeat="parent in parentPages">
+            <a href="#" onclick="event.preventDefault();">{{ parent.name }}</a>
+        </li>
+        <li>
+            <span>{{ currentPage.variants[0].name }}</span>
+        </li>
+    </ul>
+</div>

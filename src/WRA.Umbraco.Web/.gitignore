@@ -482,3 +482,5 @@ appsettings-schema.*.json
 /Smidge
 /App_Plugins/cmsimport/*
 *.db
+
+/App_Plugins/CustomBlockView/*

@@ -4,6 +4,7 @@ using Umbraco.Cms.Api.Common.Attributes;
 using Umbraco.Cms.Web.Common.Controllers;
 using Umbraco.Commerce.Core.Api;
 using Umbraco.Commerce.Extensions;
+using WRA.Umbraco.Attributes;
 
 namespace WRA.Umbraco.Web.Controllers.Api;
 
@@ -14,6 +15,7 @@ public class StoreFrontWrapperController(
     IUmbracoCommerceApi commerceApi,
     ILogger<StoreFrontWrapperController> logger) : UmbracoApiController
 {
+    [ApiKeyRequired]
     [HttpPost]
     [Route("AddToCart")]
     public ProductAddToCartResponseDto AddToCart(Guid orderId, [FromBody] ProductAddToCartDto postModel)

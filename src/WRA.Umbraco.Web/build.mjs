@@ -8,17 +8,23 @@ import purgecss from 'esbuild-plugin-purgecss';
 const prod = (process.argv[2] === 'production');
 
 let ctx = await esbuild.context({
-    entryPoints: { 'js/dist/global': './wwwroot/js/src/global.js', 'css/dist/global': './wwwroot/css/src/global.scss' },
+    entryPoints: {
+        'js/dist/global': './wwwroot/js/src/global.js',
+        'js/dist/backoffice': './wwwroot/js/src/backoffice.js',
+        'js/dist/housing-statistics': './wwwroot/js/src/housing-statistics.js',
+        'css/dist/backoffice': './wwwroot/css/src/backoffice.scss',
+        'css/dist/global': './wwwroot/css/src/global.scss'
+    },
     outdir: './wwwroot',
     bundle: true,
-    minify: prod ? true : false,
-    target: 'es2017',
-    sourcemap: prod ? false : 'external',
+    minify: prod,
+    target: 'es2021',
+    sourcemap: prod ? false : 'inline',
     plugins: [
         sassPlugin({
-            async transform(source, resolveDir) {
-                const { css } = await postcss([autoprefixer]).process(source)
-                return css
+            async transform(source) {
+                const { css } = await postcss([autoprefixer]).process(source);
+                return css;
             }
         }),
         prod && purgecss({
@@ -31,7 +37,7 @@ let ctx = await esbuild.context({
         })
     ].filter(Boolean), // Remove undefined values from plugins array
     define: {
-        "global": 'window',//needed for global vars
+        'global': 'window', // needed for global vars
     }
 })
 

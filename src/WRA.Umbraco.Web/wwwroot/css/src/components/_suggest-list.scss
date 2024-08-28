@@ -1,0 +1,23 @@
+
+.suggest-container {
+    position: relative;
+}
+
+.suggest-list {
+    position: absolute;
+    background: $gray-10;
+    width: 100%;
+    z-index: 99;
+    box-shadow: 1px 3px 4px rgba(100,100,100, 0.42);
+
+    &__item {
+        padding: 0.25rem 1rem;
+        position: relative;
+
+        &.selected,
+        &:hover {
+            color: #FFF;
+            background-color: $blue-medium;
+        }
+    }
+}

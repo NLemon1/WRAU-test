@@ -4,7 +4,7 @@
 @{
     var content = (ContentModels.MiniCard)Model.Content;
 	string className = "block-mini-card mini-card p-2 p-md-4 pb-lg-0 d-flex flex-column";
-	var link = content.Value<Link>("pageUrl");
+	var link = content.PageUrl;
 }
 
 <div class="@Html.Raw(className.Trim())">

@@ -18,7 +18,6 @@ public class OrderEventPublisher(
 {
     public void Send(OrderReadOnly order, EntityEventAction action)
     {
-
         var orderEvent = mapper.Map<UmbracoOrderComplete>(order);
         if (orderEvent != null) _ = Send(orderEvent, action);
     }
@@ -32,31 +31,31 @@ public class OrderEventPublisher(
                 logger.LogError("Cannot send message, topic endpoint null...");
                 return;
             case { Enabled: true }:
-            {
-                logger.LogInformation("Sending order to hub...");
-                var orderEntityEvent = new EntityEvent<UmbracoOrderComplete>(
-                    EntityEventSource.UmbracoCloud,
-                    EntityEventSource.UmbracoCloud,
-                    action,
-                    order,
-                    Guid.NewGuid(),
-                    Guid.NewGuid());
+                {
+                    logger.LogInformation("Sending order to hub...");
+                    var orderEntityEvent = new EntityEvent<UmbracoOrderComplete>(
+                        EntityEventSource.UmbracoCloud,
+                        EntityEventSource.UmbracoCloud,
+                        action,
+                        order,
+                        Guid.NewGuid(),
+                        Guid.NewGuid());
 
-                await publishEndpoint.Publish(
-                    order,
-                    context =>
-                    {
-                        context.InitiatorId = context.MessageId;
-                        context.Headers.Set(MessageHeader.MessageType, typeof(UmbracoOrderComplete).Name);
-                        context.Headers.Set(MessageHeader.Source, orderEntityEvent.Source.ToString());
-                        context.Headers.Set(MessageHeader.Originator, orderEntityEvent.Originator.ToString());
-                        context.Headers.Set(MessageHeader.CorrelationId, orderEntityEvent.CorrelationId.ToString());
-                        context.Headers.Set(MessageHeader.EntityId, orderEntityEvent.EventId);
-                        context.Headers.Set(MessageHeader.Timestamp, DateTime.UtcNow.ToString("o"));
-                    },
-                    new CancellationToken());
-                break;
-            }
+                    await publishEndpoint.Publish(
+                        order,
+                        context =>
+                        {
+                            context.InitiatorId = context.MessageId;
+                            context.Headers.Set(MessageHeader.MessageType, typeof(UmbracoOrderComplete).Name);
+                            context.Headers.Set(MessageHeader.Source, orderEntityEvent.Source.ToString());
+                            context.Headers.Set(MessageHeader.Originator, orderEntityEvent.Originator.ToString());
+                            context.Headers.Set(MessageHeader.CorrelationId, orderEntityEvent.CorrelationId.ToString());
+                            context.Headers.Set(MessageHeader.EntityId, orderEntityEvent.EventId);
+                            context.Headers.Set(MessageHeader.Timestamp, DateTime.UtcNow.ToString("o"));
+                        },
+                        new CancellationToken());
+                    break;
+                }
         }
     }
 }

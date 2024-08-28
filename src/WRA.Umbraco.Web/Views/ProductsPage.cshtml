@@ -3,15 +3,14 @@
 @using WRA.Umbraco.Models;
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ProductsPage>
 @using WRA.Umbraco.Web.Helpers
-@using ContentModels = WRA.Umbraco.Models;
 
 
 @{
-    var content = (ContentModels.ProductsPage)Model;
-    var sections = content.Value<IEnumerable<BlockGridItem>>("gridBlocks");
+    var content = Model;
+    var sections = content.GridBlocks;
 
     IEnumerable<IPublishedContent> classCategories = Umbraco.ContentAtRoot()
-        .DescendantsOrSelfOfType("categoryPage").Where(x => x.IsVisible() && x.Children.Count() > 0).OrderBy(p => p.Name);
+        .DescendantsOrSelfOfType(nameof(CategoryPage)).Where(x => x.IsVisible() && x.Children.Count() > 0).OrderBy(p => p.Name);
 }
 
 <header class="page-header page-header--no-accent">

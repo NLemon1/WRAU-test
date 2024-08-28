@@ -42,6 +42,10 @@ public static class GlobalConstants
         public const string SecondaryLanguage = "secondaryLanguage";
         public const string AreaOfSpecialty = "areaOfSpecialty";
         public const string PrimaryCounties = "PrimaryCounties";
+    }
 
+    public static class Api
+    {
+        public const string ApiKeyHeaderFallbackName = "X-API-KEY";
     }
 }

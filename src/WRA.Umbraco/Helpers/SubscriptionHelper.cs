@@ -33,7 +33,6 @@ public class SubscriptionHelper(
             memberSubscriptionRepository.Create(memberSubscription);
             logger.LogInformation("Created member subscription: {MemberSubscriptionId}", memberSubscription.Id);
             return true;
-
         }
         catch (Exception e)
         {
@@ -55,15 +54,15 @@ public class SubscriptionHelper(
     {
         try
         {
-             var deleteResult = memberSubscriptionRepository.Delete(memberSubscription);
-             if (!deleteResult.Success)
-             {
-                    logger.LogError("Error deleting member subscription: {MemberSubscriptionId}", memberSubscription.Id);
-                    return deleteResult;
-             }
+            var deleteResult = memberSubscriptionRepository.Delete(memberSubscription);
+            if (!deleteResult.Success)
+            {
+                logger.LogError("Error deleting member subscription: {MemberSubscriptionId}", memberSubscription.Id);
+                return deleteResult;
+            }
 
-             logger.LogInformation("Deleted member subscription: {MemberSubscriptionId}", memberSubscription.Id);
-             return deleteResult;
+            logger.LogInformation("Deleted member subscription: {MemberSubscriptionId}", memberSubscription.Id);
+            return deleteResult;
         }
         catch (Exception e)
         {
@@ -76,7 +75,6 @@ public class SubscriptionHelper(
     {
         try
         {
-
             bool subscriptionExists = companySubscriptionRepository
                 .GetQueryable().Any(x => x.ExternalId == companySubscription.ExternalId);
 
@@ -124,7 +122,6 @@ public class SubscriptionHelper(
 
             logger.LogInformation("Deleted company subscription: {CompanySubscriptionId}", companySubscription.Id);
             return deleteResult;
-
         }
         catch (Exception e)
         {

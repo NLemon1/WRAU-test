@@ -9,7 +9,7 @@
     var content = (ContentModels.MembershipSection)Model.Content;
 
     IEnumerable<IPublishedContent> testimonials = Umbraco.ContentAtRoot()
-                                            .DescendantsOrSelfOfType("testimonial")
+                                            .DescendantsOrSelfOfType(nameof(Testimonial))
                                             .OrderBy(n => Guid.NewGuid()) //randomizes
                                             .Take(5);
 

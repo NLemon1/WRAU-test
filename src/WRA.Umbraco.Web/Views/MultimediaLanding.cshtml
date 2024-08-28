@@ -1,6 +1,5 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.MultimediaLanding>
-@using ContentModels = WRA.Umbraco.Models;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<WRA.Umbraco.Models.MultimediaLanding>
 @using Umbraco.Cms.Core.Models.Blocks
 @using System.Text.RegularExpressions;
 @using WRA.Umbraco.Web.Helpers;
@@ -9,8 +8,8 @@
 @{
     Layout = "~/Views/_Layout.cshtml";
 
-    var content = (ContentModels.MultimediaLanding)Model;
-    var sections = content.Value<IEnumerable<BlockGridItem>>("gridSection");
+    var content = Model;
+    var sections = content.GridSection;
     int pageSize = 15;
 
     IPublishedContent featuredVideo = content.FeaturedVideo;

@@ -5,7 +5,7 @@ using Umbraco.Cms.Core.Web;
 using Microsoft.AspNetCore.Mvc;
 using WRA.Umbraco.Web.Services;
 
-namespace UmbracoProject.Controller;
+namespace WRA.Umbraco.Web.Controllers;
 
 public class BasicContentController(
     ILogger<RenderController> logger,

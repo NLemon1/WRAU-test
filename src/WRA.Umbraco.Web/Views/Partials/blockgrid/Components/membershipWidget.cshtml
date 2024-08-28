@@ -3,7 +3,7 @@
 
 @{
     var content = (ContentModels.MembershipWidget)Model.Content;
-    IPublishedContent membershipWidget = content.Value<IPublishedContent>("selectWidget");
+    IPublishedContent membershipWidget = content.SelectWidget;
     
     @if (membershipWidget != null)
     {

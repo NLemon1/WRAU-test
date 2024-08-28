@@ -37,9 +37,9 @@
     <div class="block-home-hero__media">
         @if (content.HasValue("videoMobile") || content.HasValue("videoDesktop"))
         {
-            var videoMobile = content.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("videoMobile");
-            var videoDesktop = content.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("videoDesktop");
-            var imageDesktop = content.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("imageDesktop");
+            var videoMobile = content.VideoMobile;
+            var videoDesktop = content.VideoDesktop;
+            var imageDesktop = content.ImageDesktop;
 
             <video webkit-playsinline="" playsinline="" autoplay="" loop="" muted="" class="block-home-hero__media__video" poster="@imageDesktop.MediaUrl()">
                 <source src="@videoMobile.MediaUrl()" type="video/mp4" media="screen and (max-device-width:767px)">
@@ -48,8 +48,8 @@
         } 
         else
         {
-            var imageDesktop = content.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("imageDesktop");
-            var imageMobile = content.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("imageMobile");
+            var imageDesktop = content.ImageDesktop;
+            var imageMobile = content.ImageMobile;
 
             <img src="@imageDesktop.GetCropUrl(width: 1920, height: 600, furtherOptions:"&format=WebP")" width="1920" height="600" class="block-home-hero__media__img d-none d-lg-block" alt="@imageDesktop.Value("altText")" />
             <img src="@imageMobile.GetCropUrl(width: 540, height: 540, furtherOptions:"&format=WebP")" width="540" height="540" srcset="@imageMobile.GetCropUrl(width: 1080, height: 1080, furtherOptions:"&format=WebP") 2x" class="block-home-hero__media__img d-lg-none" alt="@imageMobile.Value("altText")" />

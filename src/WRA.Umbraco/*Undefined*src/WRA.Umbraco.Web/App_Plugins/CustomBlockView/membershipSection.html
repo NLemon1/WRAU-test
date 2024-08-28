@@ -1,0 +1,38 @@
+<style>
+    .text-white {
+        color: #FFF;
+    }
+</style>
+
+<div class="block-home-membership-section">
+    <div class="block-home-membership-section__top">
+        <div class="container position-relative" style="z-index: 1;">
+            <div class="row g-0">
+                <div class="col-lg-7 m-0 col-xl-6 me-auto text-white">
+                    <div class="py-5 pt-lg-12 pb-lg-10" style="color: white;">
+                        <p class="overline mb-5">
+                            {{ block.data.overline }}
+                        </p>
+                        <h2 class="mb-5 display-1">
+                            {{ block.data.headline }}
+                        </h2>
+                        <div class="rich-text text-white mb-5 fs-xl font-family-2">
+                            {{ block.data.content }}
+                        </div>
+                        <slot name="membership-area" part="membership-area" class="col-12 block-col area-zone"></slot>
+                    </div>
+                </div>
+
+                <div class="col-lg-5 m-0 position-relative block-home-membership-section__testimonial-col">
+                    <div class="block-home-membership-section__testimonial-slider px-4 px-lg-9 pt-5 pt-lg-10 pb-4 pb-lg-6" style="background-color: var(--bs-blue-light);">
+                        <div class="slider-testimonials swiper js-swiper h-100 overflow-visible pt-5">
+                            <svg class="slider-testimonials__slide__icon ms-n1 ms-lg-n3 mt-lg-n2 mb-3" aria-hidden="true" width="75" height="50" viewBox="0 0 75 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M75 36.5471C75 40.284 73.5736 43.4978 70.7207 46.1883C68.018 48.7294 64.6396 50 60.5856 50C55.03 50 50.3754 48.0568 46.6216 44.1704C43.018 40.284 41.2162 35.2765 41.2162 29.148C41.2162 17.9372 45.5706 9.94021 54.2793 5.15695C60.5856 1.71898 65.6907 0 69.5946 0C71.2462 0 72.0721 0.597903 72.0721 1.79372C72.0721 2.84005 71.1712 3.58744 69.3694 4.03587C56.9069 7.32436 50.6757 13.5276 50.6757 22.6457C50.6757 26.6816 51.7267 30.1196 53.8288 32.9596C54.1291 27.8774 57.3574 25.3363 63.5135 25.3363C66.8168 25.3363 69.5195 26.4574 71.6216 28.6996C73.8739 30.7922 75 33.4081 75 36.5471ZM33.5586 36.5471C33.5586 40.284 32.1321 43.4978 29.2793 46.1883C26.5766 48.7294 23.2733 50 19.3694 50C13.6637 50 9.00901 48.0568 5.40541 44.1704C1.8018 40.1345 0 35.0523 0 28.9238C0 17.8625 4.35435 9.94021 13.0631 5.15695C19.3694 1.71898 24.3994 0 28.1532 0C29.8048 0 30.6306 0.597903 30.6306 1.79372C30.6306 2.84005 29.7297 3.58744 27.9279 4.03587C15.6156 7.32436 9.45946 13.6024 9.45946 22.87C9.45946 26.7564 10.5105 30.1196 12.6126 32.9596C12.9129 27.8774 16.0661 25.3363 22.0721 25.3363C25.3754 25.3363 28.0781 26.4574 30.1802 28.6996C32.4324 30.7922 33.5586 33.4081 33.5586 36.5471Z" fill="#2560B9" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

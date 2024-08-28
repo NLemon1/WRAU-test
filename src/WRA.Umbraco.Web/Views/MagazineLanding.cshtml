@@ -1,20 +1,20 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.MagazineLanding>
-@using ContentModels = WRA.Umbraco.Models;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<WRA.Umbraco.Models.MagazineLanding>
 @using Umbraco.Cms.Core.Models.Blocks
 @using System.Text.RegularExpressions;
+@using WRA.Umbraco.Extensions
 @using WRA.Umbraco.Web.Helpers
 
 @{
     Layout = "~/Views/_Layout.cshtml";
 
-    var sections = Model.Value<IEnumerable<BlockGridItem>>("gridSection");
+    var sections = Model.GridSection;
 
     IEnumerable<IPublishedContent> magazineCollections = Umbraco.ContentAtRoot()
-    .DescendantsOrSelfOfType("magazineCollection").Where(x => x.IsVisible()).OrderBy(p => p.Name).Reverse();
+    .DescendantsOrSelfOfType(nameof(MagazineCollection)).Where(x => x.IsVisible()).OrderBy(p => p.Name).Reverse();
 
     var currentCollection = magazineCollections.FirstOrDefault(); //get 
-    var currentIssue = currentCollection.Children("newsItems").Where(x => x.IsVisible()).OrderBy(p => p.GetProperty("monthYearTitle").GetSourceValue()).Reverse();
+    var currentIssue = currentCollection.Children().Where(x => x.IsVisible()).OrderBy(p => p.GetProperty("monthYearTitle").GetSourceValue()).Reverse();
     var content = currentIssue.FirstOrDefault();
 
     var moreArticles = content.Value<IEnumerable<Link>>("moreArticles");
@@ -78,7 +78,7 @@
 
                                             if (child.HasValue("richTextContent") && !child.HasValue("excerpt"))
                                             {
-                                                cleanContent = HtmlHelperExtensions.ShortenExcerpt(child.Value("richTextContent").ToString(), 135);
+                                                cleanContent = HtmlHelperExtensions.TruncateExcerpt(child.Value("richTextContent").ToString(), 135);
                                             }
 
                                             var articleSummary = child.HasValue("excerpt") ? child.Value("excerpt") : cleanContent;

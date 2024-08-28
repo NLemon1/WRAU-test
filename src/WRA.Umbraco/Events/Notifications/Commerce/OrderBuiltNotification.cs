@@ -8,7 +8,6 @@ public class OrderBuiltNotification(
     IServiceScopeFactory serviceScopeFactory
     ) : NotificationEventHandlerBase<OrderCreatingNotification>
 {
-
     public override void Handle(OrderCreatingNotification evt)
     {
         using var scope = serviceScopeFactory.CreateScope();

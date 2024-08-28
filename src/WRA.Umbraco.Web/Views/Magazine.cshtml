@@ -1,19 +1,19 @@
 ﻿@using J2N.Collections.Generic;
 @using Umbraco.Cms.Web.Common.PublishedModels;
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Magazine>
-@using ContentModels = WRA.Umbraco.Models;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<WRA.Umbraco.Models.Magazine>
 @using Umbraco.Cms.Core.Models.Blocks
 @using System.Text.RegularExpressions;
+@using WRA.Umbraco.Extensions
 @using WRA.Umbraco.Web.Helpers
 
 @{
     Layout = "~/Views/_Layout.cshtml";
 
-    var content = (ContentModels.Magazine)Model;
-    var imageCurrent = content.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("image");
+    var content = Model;
+    var imageCurrent = Model.Image;
 
     IEnumerable<IPublishedContent> magazineCollections = Umbraco.ContentAtRoot()
-    .DescendantsOrSelfOfType("magazineCollection").Where(x => x.IsVisible() && x.IsPublished());
+    .DescendantsOrSelfOfType(nameof(MagazineCollection)).Where(x => x.IsVisible() && x.IsPublished());
 
     IEnumerable<IPublishedContent> currentMagazineCollection = content.SiblingsAndSelf();
 
@@ -21,7 +21,7 @@
 
     var articles = content.FeaturedOnlineArticles;
 
-    var moreArticles = content.Value<IEnumerable<Link>>("moreArticles");
+    var moreArticles = content.MoreArticles;
 }
 
 <div class="w-100 bg-white mt-6 mt-lg-8 pb-6 pb-lg-8">
@@ -96,7 +96,7 @@
 
                                         if (child.HasValue("richTextContent") && !child.HasValue("excerpt"))
                                         {
-                                            cleanContent = HtmlHelperExtensions.ShortenExcerpt(child.Value("richTextContent").ToString(), 135);
+                                            cleanContent = HtmlHelperExtensions.TruncateExcerpt(child.Value("richTextContent").ToString(), 135);
                                         }
 
                                         var articleSummary = child.HasValue("excerpt") ? child.Value("excerpt") : cleanContent;

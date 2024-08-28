@@ -4,6 +4,7 @@ using Umbraco.Cms.Core;
 using Umbraco.Cms.Web.Common.Controllers;
 using Umbraco.Commerce.Core.Services;
 using Umbraco.Commerce.Extensions;
+using WRA.Umbraco.Attributes;
 using WRA.Umbraco.Dtos;
 using WRA.Umbraco.Extensions;
 using WRA.Umbraco.Models;
@@ -19,6 +20,8 @@ public class ProductApiController(
     WraProductService wraProductService)
     : UmbracoApiController
 {
+
+    [ApiKeyRequired]
     [HttpPost]
     [Route("GetProducts")]
     public IEnumerable<ProductPageResponseDto> GetProducts([FromBody] ProductsRequestDto request)
@@ -28,6 +31,7 @@ public class ProductApiController(
         return responseItems;
     }
 
+    [ApiKeyRequired]
     [HttpGet]
     [Route("GetProductByExternalID")]
     public ProductPageResponseDto? GetProductByExternalID(string id)
@@ -36,6 +40,7 @@ public class ProductApiController(
         return product?.AsDto();
     }
 
+    [ApiKeyRequired]
     [HttpPost]
     [Route("GetProductVariant")]
     public object? GetProductVariant([FromBody] GetProductVariantDto model)

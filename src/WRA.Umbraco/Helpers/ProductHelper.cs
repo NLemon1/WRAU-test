@@ -123,7 +123,7 @@ public class ProductHelper(
             // category we just got back form the previous query.
             var subcategoryNode = categoryPages.SelectMany(c => c.Children)
                 .Where(sc => sc.ContentType.Alias == SubCategoryPage.ModelTypeAlias &&
-                             sc.Value<Guid>(GlobalConstants.ExternalId) == subCategoryId );
+                             sc.Value<Guid>(GlobalConstants.ExternalId) == subCategoryId);
 
             if (!subcategoryNode.Any())
             {
@@ -135,6 +135,8 @@ public class ProductHelper(
                 x.Parent != null &&
                 x.Parent.Value<Guid>(GlobalConstants.ExternalId) == categoryId);
 
+
+            // #todolightburn - This is unreachable code, as the code above line 128-132 would return on the same condition.
             if (!subcategoryNode.Any())
             {
                 logger.LogCritical("Parent Child mismatch for Category and Subcategory! Category ID {Category}, {SubCategoryID}", categoryId, subCategoryId);
@@ -150,5 +152,4 @@ public class ProductHelper(
             throw;
         }
     }
-
 }

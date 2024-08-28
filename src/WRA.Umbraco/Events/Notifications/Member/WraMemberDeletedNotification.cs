@@ -21,7 +21,7 @@ public class WraMemberDeletedNotification(
             var memberEvent = mapper.Map<MemberEvent>(memberNotification);
             if (memberEvent == null) continue;
             await memberEventPublisher.Send(memberEvent, EntityEventAction.Delete);
-            logger.LogWarning("DELETE message sent for external memberId: {Member} - {Email}", memberEvent.Id,  memberEvent.Email);
+            logger.LogWarning("DELETE message sent for external memberId: {Member} - {Email}", memberEvent.Id, memberEvent.Email);
         }
     }
 }

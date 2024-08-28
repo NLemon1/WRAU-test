@@ -35,14 +35,13 @@ public class MemberSubscriptionRule(
 
         var currentDate = DateTime.Now;
         var memberSubscriptionRepository = scope.ServiceProvider.GetRequiredService<IRepository<MemberSubscription>>();
-        bool validSubscriptionsOnMember = memberSubscriptionRepository.GetAll<MemberSubscription>()
+        bool validSubscriptionsOnMember = memberSubscriptionRepository.GetAll()
             .Any(x =>
                 x.ProductId == discountProduct.Id &&
                 x.MemberId == currentMember.Result.Id.ToInt32() &&
                 x.BeginDate <= currentDate &&
                 x.PaidThruDate >= currentDate);
         return validSubscriptionsOnMember ? Fulfilled(context.ApplicableOrderLines) : Unfulfilled();
-
     }
 }
 

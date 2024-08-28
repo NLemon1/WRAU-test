@@ -3,7 +3,7 @@
 
 @{
     var content = (ContentModels.BasicContentWidget)Model.Content;
-    IPublishedContent basicContentWidget = content.Value<IPublishedContent>("selectWidget");
+    IPublishedContent basicContentWidget = content.SelectWidget;
 
     @if (basicContentWidget != null)
     {

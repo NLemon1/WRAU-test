@@ -8,12 +8,12 @@
 <div class="container">
     <div class="row align-items-center mb-4">
         <div class="col-12 col-sm-6">
-            <h2 class="mb-0">@content.Value("heading")</h2>
+            <h2 class="mb-0">@content.Heading</h2>
         </div>
         <div class="col-12 col-sm-6 d-none d-sm-block text-end">
             @if (content.HasValue("link"))
             {
-                var link = content.Value<Link>("link");
+                var link = content.Link;
 
                 <a class="btn btn-primary" href="@link?.Url" target="@link?.Target">@link?.Name</a>
             }
@@ -24,7 +24,7 @@
             <div class="multimedia-card multimedia-card--lg">
                 <div class="multimedia-card__image">
                     @{
-                        var card1Image = content.Value<MediaWithCrops>("card1Image");
+                        var card1Image = content.Card1Image;
                     }
                     <picture>
                         <source srcset="@card1Image.GetCropUrl(width: 372, furtherOptions: "&format=WebP")" media="(max-width: 768px)" />
@@ -32,13 +32,13 @@
                     </picture>
                 </div>
                 <div class="multimedia-card__content">
-                    <h3>@content.Value("card1Heading")</h3>
+                    <h3>@content.Card1Heading</h3>
                     @if (content.HasValue("card1Content"))
                     {
-                        <p>@content.Value("card1Content")</p>
+                        <p>@content.Card1Content</p>
                     }
                     @{
-                        var card1Link = content.Value<Link>("card1Link");
+                        var card1Link = content.Card1Link;
                         
                         <a class="btn btn-link-arrow stretched-link" href="@card1Link.Url" target="@card1Link.Target">
                             @card1Link.Name
@@ -55,7 +55,7 @@
             <div class="multimedia-card">
                 <div class="multimedia-card__image">
                     @{
-                        var card2Image = content.Value<MediaWithCrops>("card2Image");
+                        var card2Image = content.Card2Image;
                     }
                     <picture>
                         <source srcset="@card2Image.GetCropUrl(width: 372, furtherOptions: "&format=WebP")" media="(max-width: 768px)" />
@@ -63,13 +63,13 @@
                     </picture>
                 </div>
                 <div class="multimedia-card__content">
-                    <h3>@content.Value("card2Heading")</h3>
+                    <h3>@content.Card2Heading</h3>
                     @if (content.HasValue("card2Content"))
                     {
-                        <p>@content.Value("card2Content")</p>
+                        <p>@content.Card2Content</p>
                     }
                     @{
-                        var card2Link = content.Value<Link>("card2Link");
+                        var card2Link = content.Card2Link;
                         
                         <a class="btn btn-link-arrow stretched-link" href="@card2Link.Url" target="@card2Link.Target">
                             @card2Link.Name
@@ -85,7 +85,7 @@
     </div>
     @if (content.HasValue("link"))
     {
-        var link = content.Value<Link>("link");
+        var link = content.Link;
 
         <div class="d-sm-none">
             <a class="btn btn-primary w-100 mt-4" href="@link?.Url" target="@link?.Target">@link?.Name</a>

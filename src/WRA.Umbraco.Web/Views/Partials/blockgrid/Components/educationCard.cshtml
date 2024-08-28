@@ -5,7 +5,7 @@
 @{
 	var content = (ContentModels.EducationCard)Model.Content;
 	string className = "block-education-card card card-hover-effect card-numbered align-items-start text-left";
-	var link = content.Value<Link>("pageLink");
+	var link = content.PageLink;
 }
 
 <div class="@Html.Raw(className.Trim())">

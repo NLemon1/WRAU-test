@@ -4,7 +4,7 @@
 
     var content = (ContentModels.Button)Model.Content;
     string className = "btn mb-2";
-    var link = content.Value<Link>("link");
+    var link = content.Link;
 
     //STYLE
     if (content.HasValue("style"))

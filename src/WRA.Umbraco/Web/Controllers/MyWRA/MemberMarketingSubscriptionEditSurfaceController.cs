@@ -50,7 +50,7 @@ public class MemberMarketingSubscriptionEditSurfaceController(
                 return Redirect("/mywra/profile#tabpanel-subscriptions");
             }
 
-            foreach(var subscriptionToUpdate in emailSubscriptionUpdateModel.Where(m => m.IsActive != m.PreviousValue))
+            foreach (var subscriptionToUpdate in emailSubscriptionUpdateModel.Where(m => m.IsActive != m.PreviousValue))
             {
                 // Update magazine subscription
                 await memberMarketingSubscriptionService.UpdateMarketingSubscription(subscriptionToUpdate);

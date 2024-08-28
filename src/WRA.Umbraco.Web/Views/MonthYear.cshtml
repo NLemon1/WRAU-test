@@ -1,11 +1,10 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.MonthYear>
-@using ContentModels = WRA.Umbraco.Models;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<WRA.Umbraco.Models.MonthYear>
 @using WRA.Umbraco.Web.Helpers;
 
 @{
     Layout = "~/Views/_Layout.cshtml";
-    var content = (ContentModels.MonthYear)Model;
+    var content = Model;
 
     var resultsFiltered = content.Children.Where(p => p.IsVisible()).OrderBy(p => p.Value<DateTime>("date")).Reverse();
     var newsCardFallbackImage = content.Parent?.Value<NewsArticles>("fallbackImage");

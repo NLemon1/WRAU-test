@@ -6,8 +6,8 @@
 
 @{
     var content = (ContentModels.InteriorHero)Model.Content;
-    var imageDesktop = content.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("imageDesktop");
-    var imageMobile = content.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("imageMobile");
+    var imageDesktop = content.ImageDesktop;
+    var imageMobile = content.ImageMobile;
 
 
     string className = "block-interior-hero";

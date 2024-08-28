@@ -197,7 +197,7 @@ public class MemberTasks(
         {
             var productsResp = wraExternalApiService.GetBoards().Result;
             if (productsResp.Content == null) return false;
-            var localBoards = JsonSerializer.Deserialize<List<ExternalMemberBoardDto>>(productsResp.Content, SerializationOptions);
+            var localBoards = JsonSerializer.Deserialize<List<ExternalBoardDto>>(productsResp.Content, SerializationOptions);
 
             foreach (var board in localBoards)
             {
@@ -220,7 +220,7 @@ public class MemberTasks(
             var boardResp = await wraExternalApiService.GetBoardById(externalId);
             if (boardResp.Content == null) return null;
             var board =
-                JsonSerializer.Deserialize<ExternalMemberBoardDto>(boardResp.Content, SerializationOptions);
+                JsonSerializer.Deserialize<ExternalBoardDto>(boardResp.Content, SerializationOptions);
 
             if (board == null) return null;
             var result = boardRepository.CreateOrUpdateBoard(board);
@@ -235,6 +235,7 @@ public class MemberTasks(
 
     public async Task<bool> SyncCompaniesAndBoards()
     {
+        // #todolightburn: No await?
         bool companiesResult = SyncAllCompanies();
         if (!companiesResult) return false;
         bool boardsResult = SyncAllBoards();
@@ -296,18 +297,18 @@ public class MemberTasks(
     {
         try
         {
-           var companySubscriptionsResp = await wraExternalApiService.GetCompanySubscriptions();
-           if (companySubscriptionsResp.Content == null) return false;
-           var companySubscriptions =
-               JsonSerializer.Deserialize<List<ExternalCompanySubscriptionDto>>(
-                   companySubscriptionsResp.Content,
-                   SerializationOptions);
+            var companySubscriptionsResp = await wraExternalApiService.GetCompanySubscriptions();
+            if (companySubscriptionsResp.Content == null) return false;
+            var companySubscriptions =
+                JsonSerializer.Deserialize<List<ExternalCompanySubscriptionDto>>(
+                    companySubscriptionsResp.Content,
+                    SerializationOptions);
 
-           foreach (var companySubDto in companySubscriptions)
-           {
-                 var companySubscription = mapper.Map<CompanySubscription>(companySubDto);
-                 if (companySubscription != null) subscriptionHelper.CreateOrUpdateCompanySubscription(companySubscription);
-           }
+            foreach (var companySubDto in companySubscriptions)
+            {
+                var companySubscription = mapper.Map<CompanySubscription>(companySubDto);
+                if (companySubscription != null) subscriptionHelper.CreateOrUpdateCompanySubscription(companySubscription);
+            }
         }
         catch (Exception e)
         {

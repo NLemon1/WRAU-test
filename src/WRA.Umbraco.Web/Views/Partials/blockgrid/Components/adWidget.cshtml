@@ -3,8 +3,8 @@
 
 @{
     var content = (ContentModels.AdWidget)Model.Content;
-    IPublishedContent adWidget = content.Value<IPublishedContent>("selectAd");
-    var adsFolder = Umbraco.ContentAtRoot().FirstOrDefault(x => x.ContentType.Alias == "adsFolder");
+    IPublishedContent adWidget = content.SelectAd;
+    var adsFolder = Umbraco.ContentAtRoot().OfTypes(nameof(AdsFolder)).FirstOrDefault();
     
     //
     // Note: the client has specifically requested that there's no usage of "ad" or "marketing" in the rendered HTML.

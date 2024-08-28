@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using WRA.Umbraco.BackgroundJobs;
 using WRA.Umbraco.Configuration;
 using WRA.Umbraco.Exceptions;
+using WRA.Umbraco.Configuration.Settings;
 
 namespace WRA.Umbraco.Composers;
 
@@ -98,4 +99,3 @@ public class RecurringJobComposer : IComposer
             Cron.Daily);
     }
 }
-

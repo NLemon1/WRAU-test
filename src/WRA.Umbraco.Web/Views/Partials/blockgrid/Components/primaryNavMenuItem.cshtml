@@ -4,8 +4,8 @@
 
 @{
     var content = (ContentModels.PrimaryNavMenuItem)Model.Content;
-    var link = content.Value<Link>("primaryNavLink");
-    var secondaryLinks = content.Value<IEnumerable<Link>>("secondaryNavLinks");
+    var link = content.PrimaryNavLink;
+    var secondaryLinks = content.SecondaryNavLinks;
 }
 
 <div class="sub-menu__item @(secondaryLinks.Count() == 0 ? "position-relative" : "")">
@@ -19,7 +19,7 @@
 
     @if (content.HasValue("summaryTextOptional"))
     {
-        <p>@content.Value("summaryTextOptional")</p>
+        <p>@content.SummaryTextOptional</p>
     }
     @if (secondaryLinks.Count() > 0 && ViewBag.MobileConfig != true)
     {

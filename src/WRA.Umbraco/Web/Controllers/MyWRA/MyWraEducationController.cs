@@ -22,7 +22,6 @@ public class MyWraEducationController(
     )
     : RenderController(logger, compositeViewEngine, umbracoContextAccessor)
 {
-
     public override IActionResult Index()
     {
         List<OrderHistoryDto> orderHistory;

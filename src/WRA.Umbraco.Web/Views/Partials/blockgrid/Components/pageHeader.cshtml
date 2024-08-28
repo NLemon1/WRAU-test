@@ -11,7 +11,7 @@
             <h1 class="mb-0">
                 @if (content.HasValue("heading"))
                 {
-                    @Html.Raw(content.Value("heading"))
+                    @Html.Raw(content.Heading)
                 }
                 else
                 {
@@ -20,7 +20,7 @@
             </h1>
             @if (content.HasValue("subheading"))
             {
-                <p class="subhead mt-3">@Html.Raw(content.Value("subheading"))</p>
+                <p class="subhead mt-3">@Html.Raw(content.Subheading)</p>
             }
         </div>
     </div>

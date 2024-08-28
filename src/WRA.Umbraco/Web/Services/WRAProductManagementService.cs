@@ -49,7 +49,7 @@ public class WraProductManagementService(
             // maybe exception instead?
             if (collectionPage == null)
             {
-                logger.LogError("No collection match for {ProductType}", productEvent.ProductTypeId);
+                logger.LogError("No collection match for {ProductType}", productEvent.ProductTypeId.SafeGuid());
                 scope.Complete();
                 return null;
             }
@@ -73,7 +73,6 @@ public class WraProductManagementService(
             logger.LogInformation("Product created: {Name} - {Sku}", newProductPage.GetValue(GlobalAliases.Sku), newProductPage.Name);
             scope.Complete();
             return newProductPage;
-
         }
         catch (Exception ex)
         {
@@ -108,7 +107,6 @@ public class WraProductManagementService(
             logger.LogInformation("Updated product: sku - {Sku}", product.Sku);
             scope.Complete();
             return productContent;
-
         }
         catch (Exception e)
         {
@@ -146,7 +144,6 @@ public class WraProductManagementService(
             logger.LogInformation("Deleted product: sku - {Sku}", product.Sku);
             scope.Complete();
             return productContent;
-
         }
         catch (Exception e)
         {
@@ -154,5 +151,4 @@ public class WraProductManagementService(
             throw;
         }
     }
-
 }

@@ -59,9 +59,9 @@ public class WraProductNotifications(
                 logger.LogInformation("Message sent for product: {Product} - {Sku}", productUpdateEvent.Id, productUpdateEvent.Sku);
             }
         }
-        catch (Exception e)
+        catch (Exception ex)
         {
-            logger.LogError(e,"Error handling product event.");
+            logger.LogError(ex, "Error handling product event.");
             throw;
         }
     }

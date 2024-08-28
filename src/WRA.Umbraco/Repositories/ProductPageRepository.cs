@@ -35,7 +35,6 @@ public class ProductPageRepository(
             if (productPage != null) return productPage;
             logger.LogInformation("Product not found: sku - {Sku}", sku);
             return null;
-
         }
         catch (Exception ex)
         {

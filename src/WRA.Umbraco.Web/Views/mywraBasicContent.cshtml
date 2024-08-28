@@ -1,13 +1,12 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.MywraBasicContent>
-@using ContentModels = WRA.Umbraco.Models;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<WRA.Umbraco.Models.MywraBasicContent>
 @using Umbraco.Cms.Core.Models.Blocks
 
 @{
     Layout = "~/Views/_Layout.cshtml";
-    var content = (ContentModels.MywraBasicContent)Model;
+    var content = Model;
 
-    var sections = content.Value<IEnumerable<BlockGridItem>>("sections");
+    var sections = content.Sections;
 
 }
 

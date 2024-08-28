@@ -1,6 +1,168 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.HousingStatistics>
 @using ContentModels = WRA.Umbraco.Models;
+
 @{
-	Layout = null;
+    Layout = "~/Views/_Layout.cshtml";
+    var content = (ContentModels.HousingStatistics)Model;
 }
+
+@section styles {
+    <style>
+        .table th, .table td {width:7.14%}
+        .table .hover{background-color:#f7e78c}
+        .table .hover-cell{background-color:#fffbce;cursor:pointer}
+        .table .click-hover{background-color:#ddd}
+        .btn-tab:hover::before{border-radius:4px}
+        .btn-tab.btn-secondary:hover{color:#fff}
+        .btn-tab.btn-secondary::before{border-color:var(--bs-link-color)}
+        .btn-tab.btn-secondary:hover::before{background-color:var(--bs-link-color)}
+        .btn-tab.btn-primary:focus,.btn-tab.btn-primary:active{color:#fff}
+        .btn-tab.btn-primary:focus::before,.btn-tab.btn-primary:active::before{background-color:var(--bs-link-color);border-color:var(--bs-link-color);border-radius:4px}
+    </style>
+}
+
+@section scripts {
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="/js/dist/housing-statistics.js"></script>
+}
+
+@if (Model.HasValue("title"))
+{
+    <header class="page-header">
+        <div class="container">
+            <div class="container--sm pe-7 pe-md-0">
+                <h1 class="mb-0">@Model.Value("title")</h1>
+                @if (Model.HasValue("subtitle"))
+                {
+                    <p class="subhead mt-3">@Model.Value("subtitle")</p>
+                }                
+            </div>
+        </div>
+    </header>
+}
+
+@await Html.PartialAsync("_breadcrumbs")
+
+<div class="container mt-4 mb-7">
+    <div class="row gy-5">
+        @if (Model.HasValue("introContent"))
+        {
+            <div class="col-lg-10 col-xl-9">
+                @Model.Value("introContent")
+            </div>
+        }
+
+        <div class="col-12">
+            <div class="row gx-3 gy-4">
+                <div class="col-sm-auto">
+                    <label class="form-label" for="regionSelect">Region</label>
+                    <div class="d-flex d-sm-block">
+                        <select class="form-select w-auto flex-grow-1 js-region-select" id="regionSelect">
+                            <option value="WI">Statewide</option>
+                            <option value="Central Region">Central Region</option>
+                            <option value="North Region">North Region</option>
+                            <option value="Northeast Region">Northeast Region</option>
+                            <option value="South Central Region">South Central Region</option>
+                            <option value="Southeast Region">Southeast Region</option>
+                            <option value="West Region">West Region</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-auto" hidden>
+                    <label class="form-label" for="countySelect">County</label>
+                    <div class="d-flex d-sm-block">
+                        <select class="form-select w-auto flex-grow-1 js-county-select" id="countySelect">
+                            <option value="">Please Choose</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-7 js-housing-stats" hidden>
+        <div class="row align-items-center justify-content-center justify-content-sm-start g-3">
+            <div class="col-auto">
+                <h2 class="h5 mb-0 js-housing-stats__heading">Housing Stats by <span>Month</span></h2>
+            </div>
+            <div class="col-auto col-sm">
+                <a class="d-inline-flex align-items-center gap-1 text-decoration-none" href="#">
+                    <i class="fa-solid fa-download"></i> Excel
+                </a>
+            </div>
+            <div class="col-sm-auto">
+                <div class="row g-1">
+                    <div class="col col-sm-auto d-flex d-sm-block">
+                        <button type="button" class="btn btn-primary btn-sm btn-tab flex-grow-1 js-housing-stats__toggle" style="pointer-events:none" data-label="Month">Month</button>
+                    </div>
+                    <div class="col col-sm-auto d-flex d-sm-block">
+                        <button type="button" class="btn btn-secondary btn-sm btn-tab flex-grow-1 js-housing-stats__toggle" data-label="Quarter">Quarter</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <h3 class="h6 text-center">Number of Home Sales</h3>
+            <div class="overflow-auto">
+                <table class="table fs-xs text-center mb-0 js-home-sales-table">
+                    <thead></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="mt-5">
+            <h3 class="h6 text-center">Median Price</h3>
+            <div class="overflow-auto">
+                <table class="table fs-xs text-center mb-0 js-median-price-table">
+                    <thead></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+        <p class="fs-sm fw-bold mt-4">
+            Please Note: Data is updated daily, thus will not reflect the same numbers reported in press releases.
+        </p>
+
+        @* <div>
+            <div id="yearSelector"></div>
+        </div>
+
+        <div id="mpComparison">
+            <div id="mpComparisonChart"></div>
+            <div id="mpComparisonControl"></div>
+        </div>
+
+        <div id="scComparison">
+            <div id="scComparisonChart"></div>
+            <div id="scComparisonControl"></div>
+        </div> *@
+
+        <div id="mpAnnualComparison">
+            <div id="mpAnnualComparisonChart"></div>
+            <div id="mpAnnualComparisonControl"></div>
+        </div>
+
+        <div id="scAnnualComparison">
+            <div id="scAnnualComparisonChart"></div>
+            <div id="scAnnualComparisonControl"></div>
+        </div>
+
+        <div id="dashboard">
+            <div id="chart_div"></div>
+            <div id="mpYearSlider" hidden></div>
+        </div>
+
+        <div id="dashboard2">
+            <div id="sold_count_chart"></div>
+            <div id="mpYearSlider2" hidden></div>
+        </div>
+    </div>
+</div>
+
+<div class="search-loading position-fixed bg-dark js-results-loader" style="--bs-bg-opacity:.7" aria-label="Loading">
+    <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+</div>

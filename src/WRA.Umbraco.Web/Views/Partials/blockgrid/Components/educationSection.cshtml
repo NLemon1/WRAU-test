@@ -5,7 +5,7 @@
 
 @{
     var content = (ContentModels.EducationSection)Model.Content;
-    var image = content.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("image");
+    var image = content.Image;
 
     string className = "block-home-education-section pb-lg-12 overflow-hidden";
     string style = string.Empty;

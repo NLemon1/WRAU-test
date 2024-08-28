@@ -3,7 +3,7 @@
 @using ContentModels = WRA.Umbraco.Models;
 @using Umbraco.Cms.Core.Services;
 @using System.Linq;
-@using WRA.Umbraco.Web.Helpers
+@using WRA.Umbraco.Extensions;
 @using Umbraco.Cms.Core.Models.PublishedContent;
 
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
@@ -14,12 +14,12 @@
 
     IEnumerable<IPublishedContent> newsArticles = content.Category != null ? 
                                                 Umbraco.ContentAtRoot()
-                                                .DescendantsOrSelfOfType("article")
+                                                .DescendantsOrSelfOfType(nameof(Article))
                                                 .Where(p => p.IsVisible() && p.Value<WRA.Umbraco.Models.ArticleCategory>("category").Id == articleCategory.Id)
                                                 .OrderBy(p => p.GetProperty("date").GetSourceValue()).Reverse()
                                                 .Take(3)
                                                 : Umbraco.ContentAtRoot()
-                                                .DescendantsOrSelfOfType("article")
+                                                .DescendantsOrSelfOfType(nameof(Article))
                                                 .OrderBy(p => p.GetProperty("date").GetSourceValue()).Reverse()
                                                 .Take(3);
 

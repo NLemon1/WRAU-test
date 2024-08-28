@@ -4,7 +4,7 @@
 
 @{
     var content = (ContentModels.SupportSection)Model.Content;
-    var image = content.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("backgroundImage");
+    var image = content.BackgroundImage;
 
     string className = "block-home-support-section position-relative overflow-hidden pb-7 pb-lg-12";
     string style = string.Empty;
@@ -31,7 +31,7 @@
 <div @Html.Raw(props.Trim())>
 
     @{
-        var typedMediaPickerSingle = content.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("backgroundImage");
+        var typedMediaPickerSingle = content.BackgroundImage;
         if (typedMediaPickerSingle != null)
         {
             <img src="@typedMediaPickerSingle.GetCropUrl(width: 1280, furtherOptions:"&format=WebP")" srcset="@typedMediaPickerSingle.GetCropUrl(width: 2560, furtherOptions:"&format=WebP") 2x" class="block-home-support-section__img mb-5" loading="lazy" />

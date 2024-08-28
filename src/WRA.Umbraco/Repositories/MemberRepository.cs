@@ -34,4 +34,3 @@ public class MemberRepository(IMemberService memberService)
         return member;
     }
 }
-

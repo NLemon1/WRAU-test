@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Umbraco.Cms.Api.Common.Attributes;
 using Umbraco.Cms.Core.Mapping;
+using WRA.Umbraco.Attributes;
 using WRA.Umbraco.BackgroundJobs;
 using WRA.Umbraco.Contracts;
 using WRA.Umbraco.CustomTables.Subscriptions;
@@ -28,6 +29,7 @@ public class MemberSyncApiController(
     : ApiController
 {
 
+    [ApiKeyRequired]
     [HttpPost]
     [Route("Create")]
     public Task<IActionResult> Create(ExternalMemberDto newMemberRequest)
@@ -46,6 +48,7 @@ public class MemberSyncApiController(
         }
     }
 
+    [ApiKeyRequired]
     [HttpPost]
     [Route("Update")]
     public Task<IActionResult> Update(ExternalMemberDto updateMemberRequest)
@@ -64,6 +67,7 @@ public class MemberSyncApiController(
         }
     }
 
+    [ApiKeyRequired]
     [HttpPost]
     [Route("Delete")]
     public Task<IActionResult> Delete(ExternalMemberDto updateMemberRequest)
@@ -82,6 +86,7 @@ public class MemberSyncApiController(
         }
     }
 
+    [ApiKeyRequired]
     [HttpPost]
     [Route("GetMemberByExternalId")]
     public async Task<IActionResult> GetMemberByExternalId(Guid externalId)
@@ -98,6 +103,7 @@ public class MemberSyncApiController(
         }
     }
 
+    [ApiKeyRequired]
     [HttpPost]
     [Route("SyncMemberByExternalId")]
     public async Task<IActionResult> SyncMemberByExternalId(Guid externalId)
@@ -114,6 +120,7 @@ public class MemberSyncApiController(
         }
     }
 
+    [ApiKeyRequired]
     [HttpPost]
     [Route("CreateMemberGroup")]
     public IActionResult CreateMemberGroup(ExternalMemberGroupDto memberTypeDto)
@@ -130,6 +137,7 @@ public class MemberSyncApiController(
         }
     }
 
+    [ApiKeyRequired]
     [HttpPost]
     [Route("DeleteMemberGroup")]
     public IActionResult DeleteMemberGroup(ExternalMemberGroupDto memberTypeDto)
@@ -146,6 +154,7 @@ public class MemberSyncApiController(
         }
     }
 
+    [ApiKeyRequired]
     [HttpPost]
     [Route("UpdateMemberGroup")]
     public IActionResult UpdateMemberGroup(ExternalMemberGroupDto memberTypeDto)
@@ -162,6 +171,7 @@ public class MemberSyncApiController(
         }
     }
 
+    [ApiKeyRequired]
     [HttpPost]
     [Route("GetBoardByExternalId")]
     public Task<IActionResult> GetBoardByExternalId(Guid Id)
@@ -178,9 +188,10 @@ public class MemberSyncApiController(
         }
     }
 
+    [ApiKeyRequired]
     [HttpPost]
     [Route("CreateOrUpdateBoard")]
-    public Task<IActionResult> CreateOrUpdateBoard(ExternalMemberBoardDto mb)
+    public Task<IActionResult> CreateOrUpdateBoard(ExternalBoardDto mb)
     {
         try
         {
@@ -194,6 +205,7 @@ public class MemberSyncApiController(
         }
     }
 
+    [ApiKeyRequired]
     [HttpPost]
     [Route("SyncBoardByExternalId")]
     public async Task<IActionResult> SyncBoardByExternalId(Guid Id)
@@ -210,6 +222,7 @@ public class MemberSyncApiController(
         }
     }
 
+    [ApiKeyRequired]
     [HttpPost]
     [Route("DeleteBoard")]
     public Task<IActionResult> DeleteBoard(Guid mb)
@@ -226,6 +239,7 @@ public class MemberSyncApiController(
         }
     }
 
+    [ApiKeyRequired]
     [HttpPost]
     [Route("GetExistingCompanyByExternalId")]
     public async Task<IActionResult> GetExistingCompanyByExternalId(Guid Id)
@@ -242,6 +256,7 @@ public class MemberSyncApiController(
         }
     }
 
+    [ApiKeyRequired]
     [HttpPost]
     [Route("CreateOrUpdateCompany")]
     public Task<IActionResult> CreateOrUpdateCompany(ExternalCompanyDto company)
@@ -259,6 +274,7 @@ public class MemberSyncApiController(
         }
     }
 
+    [ApiKeyRequired]
     [HttpPost]
     [Route("DeleteCompany")]
     public Task<IActionResult> DeleteCompany(Guid Id)
@@ -280,6 +296,7 @@ public class MemberSyncApiController(
         }
     }
 
+    [ApiKeyRequired]
     [HttpPost]
     [Route("SyncCompanyByExternalId")]
     public async Task<IActionResult> SyncCompanyByExternalId(Guid Id)
@@ -296,6 +313,7 @@ public class MemberSyncApiController(
         }
     }
 
+    [ApiKeyRequired]
     [HttpPost]
     [Route("CreateOrUpdateMemberSubscription")]
     public async Task<IActionResult> CreateOrUpdateMemberSubscription(ExternalMemberSubscriptionDto memberSubscriptionDto)
@@ -318,6 +336,7 @@ public class MemberSyncApiController(
         }
     }
 
+    [ApiKeyRequired]
     [HttpPost]
     [Route("DeleteMemberSubscription")]
     public Task<IActionResult> DeleteMemberSubscription(Guid externalId)
@@ -334,6 +353,7 @@ public class MemberSyncApiController(
         }
     }
 
+    [ApiKeyRequired]
     [HttpPost]
     [Route("SyncMemberSubscriptionByExternalId")]
     public async Task<IActionResult> SyncMemberSubscriptionByExternalId(Guid Id)
@@ -350,6 +370,7 @@ public class MemberSyncApiController(
         }
     }
 
+    [ApiKeyRequired]
     [HttpPost]
     [Route("CreateOrUpdateCompanySubscription")]
     public Task<IActionResult> CreateOrUpdateCompanySubscription(ExternalCompanySubscriptionDto companySubscriptionDto)
@@ -372,6 +393,7 @@ public class MemberSyncApiController(
         }
     }
 
+    [ApiKeyRequired]
     [HttpPost]
     [Route("SyncCompanySubscriptionByExternalId")]
     public async Task<IActionResult> SyncCompanySubscriptionByExternalId(Guid Id)
@@ -390,13 +412,13 @@ public class MemberSyncApiController(
         }
     }
 
+    [ApiKeyRequired]
     [HttpPost]
     [Route("DeleteCompanySubscription")]
     public async Task<IActionResult> DeleteCompanySubscription(Guid externalId)
     {
         try
         {
-
             var deleteResult = subscriptionHelper.DeleteCompanySubscription(externalId);
             return await (deleteResult.Success ? Task.FromResult<IActionResult>(Ok()) : Task.FromResult<IActionResult>(InternalServerError()));
         }

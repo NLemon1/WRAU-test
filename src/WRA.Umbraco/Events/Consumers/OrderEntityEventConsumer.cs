@@ -32,9 +32,9 @@ public class OrderEntityEventConsumer(
                     break;
             }
         }
-        catch (Exception e)
+        catch (Exception ex)
         {
-            logger.LogError(e,"Error consuming order event.");
+            logger.LogError(ex, "Error consuming order event.");
             throw;
         }
     }

@@ -5,7 +5,7 @@ namespace WRA.Umbraco.Commerce.Adjustments;
 [Serializable]
 public class TaxJarAdjustment : PriceAdjustment<TaxJarAdjustment>
 {
-    public string TaxJarAdjustmentRef { get; set; }
+    public string? TaxJarAdjustmentRef { get; set; }
 
     // A parameterless constructor is required for cloning
     public TaxJarAdjustment()

@@ -4,7 +4,7 @@
 @{
     var query = Context.Request.Query;
     var content = (ContentModels.HotTipLibrary)Model.Content;
-    var categories = UmbracoContext.Content.GetAtRoot().DescendantsOrSelfOfType("hotTipCategory").Where(x => x.IsVisible());
+    var categories = UmbracoContext.Content.GetAtRoot().DescendantsOrSelfOfType(nameof(HotTipCategory)).Where(x => x.IsVisible());
 
     string selectedCategory = query["category"];
     string selectedSubcategory = query["subcategory"];

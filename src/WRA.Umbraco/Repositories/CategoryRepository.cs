@@ -107,7 +107,6 @@ public class CategoryRepository(
             contentService.SaveAndPublish(subCategoryPage);
             scope.Complete();
             return subCategoryPage;
-
         }
         catch (Exception e)
         {

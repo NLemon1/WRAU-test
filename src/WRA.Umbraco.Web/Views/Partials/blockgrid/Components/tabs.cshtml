@@ -5,8 +5,8 @@
 @{
     var content = (ContentModels.Tabs)Model.Content;
 
-    bool isDarkMode = content.Value<bool>("enableDarkMode");
-    bool isVerticalMode = content.Value<bool>("enableVerticalMode");
+    bool isDarkMode = content.EnableDarkMode;
+    bool isVerticalMode = content.EnableVerticalMode;
 
     var tabs = Model.Areas.FirstOrDefault();
 }
@@ -16,11 +16,11 @@
         <div class="text-center">
             @if (content.HasValue("overline"))
             {
-                <p class="overline mb-4">@content.Value("overline")</p>
+                <p class="overline mb-4">@content.Overline</p>
             }
             @if (content.HasValue("heading"))
             {
-                <h2 class="h1 mb-6">@content.Value("heading")</h2>
+                <h2 class="h1 mb-6">@content.Heading</h2>
             }
         </div>
         @if (tabs != null)

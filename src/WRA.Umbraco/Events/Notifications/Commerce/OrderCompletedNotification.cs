@@ -12,7 +12,6 @@ public class OrderCompletedNotification(
     ILogger<OrderCompletedNotification> logger
     ) : NotificationEventHandlerBase<OrderFinalizedNotification>
 {
-
     public override void Handle(OrderFinalizedNotification evt)
     {
         try
@@ -25,6 +24,5 @@ public class OrderCompletedNotification(
         {
             logger.LogError(e, "Error handling OrderCompletedNotification");
         }
-
     }
 }

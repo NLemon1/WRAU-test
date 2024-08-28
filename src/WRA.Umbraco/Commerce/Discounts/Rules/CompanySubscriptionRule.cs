@@ -27,7 +27,7 @@ public class CompanySubscriptionRule(
         // get current member
         var memberManager = scope.ServiceProvider.GetRequiredService<IMemberManager>();
         var currentMember = memberManager.GetCurrentMemberAsync();
-        if(currentMember?.Result == null) return Unfulfilled();
+        if (currentMember?.Result == null) return Unfulfilled();
         var member = memberService.GetByKey(currentMember.Result.Key);
 
         // get company member belongs to
@@ -47,7 +47,7 @@ public class CompanySubscriptionRule(
 
         var currentDate = DateTime.Now;
         var memberSubscriptionRepository = StaticServiceProvider.Instance.GetService<IRepository<CompanySubscription>>();
-        bool validSubscriptionsOnMember = memberSubscriptionRepository.GetAll<CompanySubscription>()
+        bool validSubscriptionsOnMember = memberSubscriptionRepository.GetAll()
             .Any(x =>
                 x.ProductId == discountProduct.Id &&
                 x.CompanyId == companyNode.Id &&

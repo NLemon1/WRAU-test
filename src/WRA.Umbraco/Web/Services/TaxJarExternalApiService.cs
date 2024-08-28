@@ -16,6 +16,7 @@ using WRA.Umbraco.Configuration;
 using WRA.Umbraco.Extensions;
 using WRA.Umbraco.Repositories;
 using WRA.Umbraco.Web.Dtos.External;
+using WRA.Umbraco.Configuration.Settings;
 using static Umbraco.Commerce.Cms.Constants.Trees;
 
 namespace WRA.Umbraco.Web.Services;
@@ -53,7 +54,6 @@ public class TaxJarExternalApiService(TaxJarApiSettings settings, ILogger<TaxJar
         {
             logger.LogError(ex, "Failed to get tax for order.");
             return new TaxResponse();
-
         }
     }
 
@@ -131,5 +131,4 @@ public class TaxJarExternalApiService(TaxJarApiSettings settings, ILogger<TaxJar
 
         return $"TaxJar/.NET ({platform}; {arch}; {framework}) taxjar.net/{version}";
     }
-
 }

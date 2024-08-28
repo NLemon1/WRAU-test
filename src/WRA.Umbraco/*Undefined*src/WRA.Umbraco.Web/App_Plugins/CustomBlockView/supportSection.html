@@ -1,0 +1,33 @@
+<style>
+
+    .block-home-support-section__inner {
+        color: #FFFFFF;
+    }
+
+</style>
+
+<div ng-controller="supportSectionController" class="block-home-support-section position-relative overflow-hidden pb-7 pb-lg-12">
+
+        <img src="{{ imageUrl }}" class="block-home-support-section__img mb-5" />
+
+        <div class="block-home-support-section__inner">
+            <div class="container pt-8 pt-lg-9 pb-lg-9">
+                <div class="row justify-content-center align-items-end text-white pb-4 pb-lg-5">
+                    <div class="col-md-4">
+                        <p class="overline mb-5">
+                            {{ block.data.overline }}
+                        </p>
+                        <h2 class="display-1 mb-0">
+                            {{ block.data.headline }}
+                        </h2>
+                    </div>
+                    <div class="col-md-4">
+                        <p class="mb-0">
+                            {{ block.data.content }}
+                        </p>
+                    </div>
+                </div>
+                <slot name="home-support-cards" part="home-support-cards" class="col-12 block-col area-zone"></slot>
+            </div>
+        </div>
+</div>

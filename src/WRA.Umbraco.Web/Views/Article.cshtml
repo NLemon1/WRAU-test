@@ -1,14 +1,13 @@
-﻿@using ContentModels = WRA.Umbraco.Models;
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<WRA.Umbraco.Models.Article>
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<WRA.Umbraco.Models.Article>
 @using Umbraco.Cms.Core.Models.Blocks;
 @using Microsoft.AspNetCore.Http.Extensions;
-@using WRA.Umbraco.Web.Helpers
+@using WRA.Umbraco.Extensions
 
 @{
     Layout = "~/Views/_Layout.cshtml";
-    var content = (ContentModels.Article)Model;
+    var content = Model;
     var image = content.Image;
-    var sections = content.Value<IEnumerable<BlockGridItem>>("sections");
+    var sections = content.Sections;
 
     string articleTitle = !String.IsNullOrEmpty(content.Title) ? content.Title : content.Name;
     var articleDateReadable = String.Format("{0:MMMM d, yyyy}", content.Date);
@@ -17,13 +16,13 @@
 
     string absUrl = ViewContext.HttpContext.Request.GetEncodedUrl();
 
-    var authors = content.Value<IEnumerable<IPublishedContent>>("Author");
+    var authors = content.Author;
     var parentCrumb = content?.Parent?.Parent?.UrlSegment != "news-updates" ? content?.Parent : content?.Parent?.Parent;
 }
 
 @section scripts {
 
-    @if (content.Author != null && authors != null && !String.IsNullOrEmpty(content.Name))
+    @if (authors != null && !String.IsNullOrEmpty(content.Name))
     {
         var authorCount = authors.Count();
         int authorInt = 1;

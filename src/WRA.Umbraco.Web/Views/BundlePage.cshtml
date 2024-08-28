@@ -1,14 +1,13 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
-@using ContentModels = WRA.Umbraco.Models;
 @using WRA.Umbraco.Controllers;
 @using Umbraco.Cms.Core.Models.Blocks;
 
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.BundlePage>
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<WRA.Umbraco.Models.BundlePage>
 
 @{
     Layout = "~/Views/_Layout.cshtml";
-    var content = (ContentModels.BundlePage)Model;
-    var sections = content.Value<IEnumerable<BlockGridItem>>("blockContent");
+    var content = Model;
+    var sections = content.BlockContent;
 }
 
 <header class="page-header page-header--no-accent">
