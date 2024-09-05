@@ -28,6 +28,7 @@ public static class Program
         // The umbraco application host.
         IHost? host = null;
 
+
         try
         {
             // Get the assembly name for logging purposes.
