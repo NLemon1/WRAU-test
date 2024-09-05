@@ -29,6 +29,7 @@ public static class Program
         IHost? host = null;
 
 
+
         try
         {
             // Get the assembly name for logging purposes.
