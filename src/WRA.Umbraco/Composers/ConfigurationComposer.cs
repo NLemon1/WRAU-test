@@ -7,14 +7,11 @@ using WRA.Umbraco.Shared.Messaging;
 
 namespace WRA.Umbraco.Composers;
 
-/// <summary>
-/// Binds and Registers settings <see cref="IConfigurationSettings"/> models with DI as singletons.
-/// </summary>
-/// <param name="logger"></param>
+
 [ComposeBefore(typeof(CustomServiceComposer))]
-public class ConfigurationComposer(ILogger logger) : IComposer
+public class ConfigurationComposer() : IComposer
 {
-    private readonly ILogger _logger = logger.ForContext<ConfigurationComposer>();
+    private readonly ILogger _logger = Log.Logger.ForContext<ConfigurationComposer>();
 
     public void Compose(IUmbracoBuilder builder)
     {
