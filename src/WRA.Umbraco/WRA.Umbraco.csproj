@@ -8,17 +8,19 @@
     <!-- Razor files are needed for the backoffice to work correctly -->
     <CopyRazorGenerateFilesToPublishDirectory>true</CopyRazorGenerateFilesToPublishDirectory>
 
+    <!-- Define a fallback for solution directory for macs and vscode up two directories from projects -->
+    <SolutionDir Condition=" '$(SolutionDir)' == '' ">$(MSBuildProjectDirectory)\..\..\</SolutionDir>
 
     <!-- Local Application Settings paths for Core and Web Projects-->
     <WebLocalAppSettingsPath>$(SolutionDir)src\WRA.Umbraco.Web\appsettings.Local.json</WebLocalAppSettingsPath>
-    <CoreLocalAppSettingsPath>$(SolutionDir)src\WRA.Umbraco\Web\appsettings.Local.json</CoreLocalAppSettingsPath>
+<!--    <CoreLocalAppSettingsPath>$(SolutionDir)src\WRA.Umbraco\Web\appsettings.Local.json</CoreLocalAppSettingsPath>-->
 
    <!-- Check if the files exis in both places-->
-    <CoreLocalAppSettingsExists>$([System.IO.File]::Exists('$(CoreLocalAppSettingsPath)'))</CoreLocalAppSettingsExists>
+<!--    <CoreLocalAppSettingsExists>$([System.IO.File]::Exists('$(CoreLocalAppSettingsPath)'))</CoreLocalAppSettingsExists>-->
     <WebLocalAppSettingsExists>$([System.IO.File]::Exists('$(WebLocalAppSettingsPath)'))</WebLocalAppSettingsExists>
 
    <!-- Get the last write times for core and web appsettings files. -->
-    <CoreLocalAppSettingsLastWriteTime Condition="'$(CoreLocalAppSettingsExists)' == 'true'">$([System.IO.File]::GetLastWriteTime('$(CoreLocalAppSettingsPath)').Ticks)</CoreLocalAppSettingsLastWriteTime>
+<!--    <CoreLocalAppSettingsLastWriteTime Condition="'$(CoreLocalAppSettingsExists)' == 'true'">$([System.IO.File]::GetLastWriteTime('$(CoreLocalAppSettingsPath)').Ticks)</CoreLocalAppSettingsLastWriteTime>-->
     <WebLocalAppSettingsLastWriteTime Condition="'$(WebLocalAppSettingsExists)' == 'true'">$([System.IO.File]::GetLastWriteTime('$(WebLocalAppSettingsPath)').Ticks)</WebLocalAppSettingsLastWriteTime>
     <CurrentTime>$([System.DateTime]::UtcNow.ToString("yyyyMMddHHmmss"))</CurrentTime>
   </PropertyGroup>
@@ -183,7 +185,6 @@
     <CoreWebRoot Include="Web\wwwroot\**\*.*" />
 
     <!-- Local App Settings -->
-    <LocalAppSettings Include="Web\appsettings.Local.json" />
 
   </ItemGroup>
 
@@ -307,20 +308,20 @@
     <Message Text="CoreLocalAppSettingsPath: @(LocalAppSettings->'%(FullPath)')" Importance="high" />
     <Message Text="CoreLocalAppSettingsExists: $(CoreLocalAppSettingsExists)" Importance="high" />
     <Message Text="WebLocalAppSettingsExists: $(WebLocalAppSettingsExists)" Importance="high" />
-    <Message Text="CoreLocalAppSettingsLastWriteTime: $(CoreLocalAppSettingsLastWriteTime)" Importance="high" />
+<!--    <Message Text="CoreLocalAppSettingsLastWriteTime: $(CoreLocalAppSettingsLastWriteTime)" Importance="high" />-->
     <Message Text="WebLocalAppSettingsLastWriteTime: $(WebLocalAppSettingsLastWriteTime)" Importance="high" />
     <Message Text="CurrentTime: $(CurrentTime)" Importance="high" />
   </Target>
 
 
   <!-- Combined backup and copy operations with logging -->
-  <Target Name="BackupAndCopyLocalAppSettings" AfterTargets="FinalPostBuild">
-    <Exec Command="copy /Y $(WebLocalAppSettingsPath) $(WebLocalAppSettingsPath).bkup-$(CurrentTime).json" Condition="'$(WebLocalAppSettingsExists)' == 'true' AND '$(CoreLocalAppSettingsLastWriteTime)' &gt; '$(WebLocalAppSettingsLastWriteTime)'" />
-    <Message Text="WRA PostBuild: Backup created for appsettings.Local.json in the Web Project: $(WebLocalAppSettingsPath).bkup-$(CurrentTime).json" Condition="'$(WebLocalAppSettingsExists)' == 'true' AND '$(CoreLocalAppSettingsLastWriteTime)' &gt; '$(WebLocalAppSettingsLastWriteTime)'" Importance="high" />
-    <Exec Command="copy /Y $(CoreLocalAppSettingsPath) $(WebLocalAppSettingsPath)" Condition="'$(CoreLocalAppSettingsExists)' == 'true' AND ('$(WebLocalAppSettingsExists)' == 'false' OR '$(CoreLocalAppSettingsLastWriteTime)' &gt; '$(WebLocalAppSettingsLastWriteTime)')" />
-    <Message Text="WRA PostBuild: Copied appsettings.Local.json from Core to Web project" Condition="'$(CoreLocalAppSettingsExists)' == 'true' AND ('$(WebLocalAppSettingsExists)' == 'false' OR '$(CoreLocalAppSettingsLastWriteTime)' &gt; '$(WebLocalAppSettingsLastWriteTime)')" Importance="high" />
-    <Message Text="WRA PostBuild: No copy necessary for appsettings.Local.json" Condition="'$(CoreLocalAppSettingsExists)' == 'false' OR ('$(WebLocalAppSettingsExists)' == 'true' AND '$(CoreLocalAppSettingsLastWriteTime)' &lt;= '$(WebLocalAppSettingsLastWriteTime)')" Importance="high" />
-  </Target>
+<!--  <Target Name="BackupAndCopyLocalAppSettings" AfterTargets="FinalPostBuild">-->
+<!--    <Exec Command="copy /Y $(WebLocalAppSettingsPath) $(WebLocalAppSettingsPath).bkup-$(CurrentTime).json" Condition="'$(WebLocalAppSettingsExists)' == 'true' AND '$(CoreLocalAppSettingsLastWriteTime)' &gt; '$(WebLocalAppSettingsLastWriteTime)'" />-->
+<!--    <Message Text="WRA PostBuild: Backup created for appsettings.Local.json in the Web Project: $(WebLocalAppSettingsPath).bkup-$(CurrentTime).json" Condition="'$(WebLocalAppSettingsExists)' == 'true' AND '$(CoreLocalAppSettingsLastWriteTime)' &gt; '$(WebLocalAppSettingsLastWriteTime)'" Importance="high" />-->
+<!--    <Exec Command="copy /Y $(CoreLocalAppSettingsPath) $(WebLocalAppSettingsPath)" Condition="'$(CoreLocalAppSettingsExists)' == 'true' AND ('$(WebLocalAppSettingsExists)' == 'false' OR '$(CoreLocalAppSettingsLastWriteTime)' &gt; '$(WebLocalAppSettingsLastWriteTime)')" />-->
+<!--    <Message Text="WRA PostBuild: Copied appsettings.Local.json from Core to Web project" Condition="'$(CoreLocalAppSettingsExists)' == 'true' AND ('$(WebLocalAppSettingsExists)' == 'false' OR '$(CoreLocalAppSettingsLastWriteTime)' &gt; '$(WebLocalAppSettingsLastWriteTime)')" Importance="high" />-->
+<!--    <Message Text="WRA PostBuild: No copy necessary for appsettings.Local.json" Condition="'$(CoreLocalAppSettingsExists)' == 'false' OR ('$(WebLocalAppSettingsExists)' == 'true' AND '$(CoreLocalAppSettingsLastWriteTime)' &lt;= '$(WebLocalAppSettingsLastWriteTime)')" Importance="high" />-->
+<!--  </Target>-->
   
 
 

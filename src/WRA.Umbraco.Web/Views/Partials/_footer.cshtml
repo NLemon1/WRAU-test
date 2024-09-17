@@ -4,6 +4,8 @@
     var settings = Umbraco.ContentAtRoot().FirstOrDefault(x => x.ContentType.Alias == "siteSettings");
 }
 
+
+
 <footer class="site-footer">
     @{
         IPublishedContent siteFooterWidget = Model.Value<IPublishedContent>("siteFooterWidget");
@@ -264,5 +266,54 @@
                 }
             </div>
         </div>
-    </div>
+    </div>  
 </footer>
+
+
+
+    @if (settings != null)
+    {
+        <script type="application/ld+json">
+            {
+                "@@context": "https://schema.org",
+                "@@type": "ProfessionalService",
+                "name": "WRA Headquarters",
+                "image": "https://www.wra.org/images/wra_white_retina.png",
+                "@@id": "https://www.wra.org/",
+                "url": "https://www.wra.org/",
+                "telephone": "@(settings.HasValue("hqPhone") ? ", " + settings.Value("hqPhone") : "")",
+                "priceRange": "",
+                "address": {
+                    "@@type": "PostalAddress",
+                    "streetAddress": "@(settings.HasValue("hqAddress") ? ", " + settings.Value("hqAddress") : "")",
+                    "addressLocality": "@(settings.HasValue("hqCity") ? ", " + settings.Value("hqCity") : "")",
+                    "addressRegion": "@(settings.HasValue("hqState") ? ", " + settings.Value("hqState") : "")",
+                    "postalCode": "@(settings.HasValue("hqZip") ? ", " + settings.Value("hqZip") : "")",
+                    "addressCountry": "US"
+                },
+                "geo": {
+                    "@@type": "GeoCoordinates",
+                    "latitude": 43.13796203675589,
+                    "longitude":  -89.30069828465872
+                },
+                "openingHoursSpecification": {
+                    "@@type": "OpeningHoursSpecification",
+                    "dayOfWeek": [
+                        "Monday",
+                        "Tuesday",
+                        "Wednesday",
+                        "Thursday",
+                        "Friday"
+                    ],
+                    "opens": "08:30",
+                    "closes": "17:00"
+                },
+                "sameAs": [
+            "https://www.facebook.com/wisconsinrealtors",
+            "https://www.youtube.com/wisconsinrealtor",
+            "https://x.com/wirealtors",
+            "https://www.instagram.com/wirealtors/"
+                ]
+            }
+        </script>
+    }

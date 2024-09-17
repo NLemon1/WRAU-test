@@ -36,6 +36,35 @@
     {
         logoStyle += $"--footer-logo-mobile-width:{settings.Value("footerLogoMobileWidth")}px;";
     }
+
+    // Get Root Model.
+    var root = Umbraco.ContentAtRoot().FirstOrDefault();
+
+    // Base Address: ex https://www.example.com
+    var domain = root?.Url(mode: UrlMode.Absolute)?.TrimEnd('/') ?? String.Empty;
+
+    // Canonical Link: Current page link and link presented to search engine.
+    // Sometimes you may want multiple pages to present as the same page to search engines.
+    var canonical = domain + Model.Url();
+
+    var seo = Model.Value<MetaMomentum.Models.MetaValues>("seoMetadata");
+
+    // Attempt to get ogsitename the name which should be displayed for the overall site. e.g., "IMDb", "WRA" etc..
+    string ogSiteName = seo?.OGSiteName ?? "WRA";
+
+    // Attempt to get the social image which is used on both facebook, twitter and google
+    string socialImage = seo?.ShareImageUrl ?? "";
+    socialImage = string.IsNullOrEmpty(socialImage) ? "" : $"{Context.Request.Scheme}://{Context.Request.Host}{socialImage}";
+    string socialImageWidth = "1200";
+    string socialImageHeight = "1200";
+    string socialImageBgColor = "white";
+    string socialImageType = $"image/{socialImage.GetFileExtension().Replace(".", "")}";
+
+    // Plain Open Graph Image
+    socialImage = $"{socialImage}?width={socialImageWidth}&height={socialImageHeight}&bgcolor={socialImageBgColor}";
+    string socialImageAlt = "Wisconsin REALTORS® Association";
+
+    string openGraphType = "website";
 }
 
 <head>
@@ -51,13 +80,68 @@
     {
         <meta property="og:image" content="@(settings?.Value<IPublishedContent>("oGImageFallback")?.Url(mode:UrlMode.Absolute))">
     }
-    <link rel="icon" href="~/favicon.ico" sizes="32x32" />
-    <link rel="icon" href="~/icon.svg" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="~/apple-touch-icon.png" />
-    <link rel="manifest" href="~/manifest.webmanifest" />
+
+    <meta property="og:type" content="website" />
+
+    <!-- Open Graph Metadata for SEO and Socials  -->
+    <!-- Documentation: https://ogp.me/#types -->
+    <!-- Resource: https://ahrefs.com/blog/open-graph-meta-tags/ -->
+    <!-- og:type website for most pages, article for articles, others include: book, video, profile -->
+    @if (!string.IsNullOrEmpty(canonical))
+    {
+        <meta property="og:type" content="@openGraphType" />
+    }
+
+    <!--  og:url The canonical URL of the object that will be used as its permanent ID in the graph -->
+    @if (!string.IsNullOrEmpty(canonical))
+    {
+        <meta property="og:url" content="@canonical" />
+    }
+
+    <!--  og:title The title of the object as it should appear within the graph, e.g., "The Rock". -->
+    @if (!string.IsNullOrEmpty(metaTitle))
+    {
+        <meta property="og:title" content="@metaTitle" />
+    }
+
+    <!-- og:description - A one to two sentence description of the object. -->
+    @if (!string.IsNullOrEmpty(metaDescription))
+    {
+        <meta property="og:description" content="@metaDescription" />
+    }
+
+    <!-- og:sitename If your object is part of a larger web site, the name which should be displayed for the overall site. e.g., "IMDb", "WRA" etc.. -->
+    @if (!string.IsNullOrEmpty(ogSiteName))
+    {
+        <meta property="og:sitename" content="@ogSiteName" />
+    }
+
+    <!-- Open Graph Image for Socials -->
+    <meta property="og:image" content="@socialImage">
+    <meta property="og:image:secure_url" content="@socialImage" />
+    <meta property="og:image:type" content="@socialImageType">
+    <meta property="og:image:width" content="@socialImageWidth" />
+    <meta property="og:image:height" content="@socialImageHeight" />
+    <meta property="og:image:alt" content="@socialImageAlt" />
+
+    <link rel="icon" href=@Url.Content("/favicon.ico") sizes="32x32" />
+    <link rel="icon" href=@Url.Content("/icon.svg") type="image/svg+xml" />    
+    <link rel="manifest" href=@Url.Content("/manifest.webmanifest") />
     <link rel="dns-prefetch" href="//cdnjs.cloudflare.com" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Apple Touch Icons -->
+    <link rel="icon" type="image/png" href=@Url.Content("/assets/icons/site/apple-touch-icon.png")>
+    <link rel="apple-touch-icon" sizes="57x57" href=@Url.Content("/assets/icons/site/apple-touch-icon.png?width=57&height=57")>
+    <link rel="apple-touch-icon" sizes="60x60" href=@Url.Content("/assets/icons/site/apple-touch-icon.png?width=60&height=60")>
+    <link rel="apple-touch-icon" sizes="72x72" href=@Url.Content("/assets/icons/site/apple-touch-icon.png?width=72&height=72")>
+    <link rel="apple-touch-icon" sizes="76x76" href=@Url.Content("/assets/icons/site/apple-touch-icon.png?width=76&height=76")>
+    <link rel="apple-touch-icon" sizes="114x114" href=@Url.Content("/assets/icons/site/apple-touch-icon.png?width=114&height=114")>
+    <link rel="apple-touch-icon" sizes="120x120" href=@Url.Content("/assets/icons/site/apple-touch-icon.png?width=120&height=120")>
+    <link rel="apple-touch-icon" sizes="144x144" href=@Url.Content("/assets/icons/site/apple-touch-icon.png?width=144&height=144")>
+    <link rel="apple-touch-icon" sizes="152x152" href=@Url.Content("/assets/icons/site/apple-touch-icon.png?width=152&height=152")>
+    <link rel="apple-touch-icon" sizes="180x180" href=@Url.Content("/assets/icons/site/apple-touch-icon.png?width=180&height=180")>
    
     <script src="https://kit.fontawesome.com/ee0cbe98db.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:ital,wght@0,400;0,500;0,600;0,800;1,400;1,500;1,600;1,800&family=Roboto+Serif:ital,opsz,wght@0,8..144,400;1,8..144,400&display=swap" rel="stylesheet">
@@ -66,7 +150,7 @@
         @logoStyle
         }
     </style>
-    <link href="/css/dist/global.css" rel="stylesheet" asp-append-version="true"> 
+    <link href=@Url.Content("/css/dist/global.css") rel="stylesheet" asp-append-version="true"> 
 
     @Html.RenderUmbracoFormDependencies(Url)
     @Html.Raw(settings?.Value("headScripts"))

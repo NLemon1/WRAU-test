@@ -273,7 +273,7 @@
 
     @RenderSection("scriptsPre", required: false)
     <script src="https://cdn.jsdelivr.net/npm/@@event-calendar/build@2.6.1/event-calendar.min.js"></script>
-    <script src="/js/dist/global.js" asp-append-version="true"></script>
+    <script src=@Url.Content("/js/dist/global.js") asp-append-version="true"></script>
     @RenderSection("scripts", required: false)
     @Html.Raw(settings?.Value("bodyCloseScripts"))
 </body>

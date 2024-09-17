@@ -26,8 +26,87 @@
     var endTime = @String.Format("{0:h:mm tt}", Model.EndDate) ?? string.Empty;
 
     var productType = Model.Parent.Name; //Events, Products, Courses
+    var schemaImage = "";
 
+    if(Model.Images != null && Model.Images.Count() > 0)
+    {
+        schemaImage = Model.Images.FirstOrDefault().ToString();
+    }
+    else if (Model.Collection != null && Model.Collection.HasValue("image"))
+    {
+        schemaImage = Model.Collection.Value<IPublishedContent>("image").ToString();
+    }
+}
 
+@section scripts {
+
+    @if (productType == "Events")
+    {
+        <script type="application/ld+json">
+            {
+              "@@context": "https://schema.org/",
+              "@@type": "Event",              
+              "name": "@Model.Name",
+              "description": "@Model.ShortDescription",
+              "startDate": "@startDate",
+              "location": "",
+              "eventSchedule": {
+                 "@@type": "Schedule",
+                 "startDate": "@startDate",
+                 "endDate": "@endDate",           
+                 "startTime": "@startTime",
+                 "endTime": "@endTime"                 
+              }
+            }
+        </script>
+    }
+
+    @if (productType == "Products")
+    {
+        <script type="application/ld+json">
+            {
+              "@@context": "https://schema.org/",
+              "@@type": "Product",
+              "name": "@Model.Name",
+              "description": "@Model.ShortDescription",
+              "image": "@schemaImage",
+              "offers": {
+                "@@type": "Offer",
+                "priceCurrency": "USD",
+                "price": "@Model.NonMemberPricing.Formatted()"
+              }
+            }
+        </script>
+    }
+
+    @if (productType == "Courses")
+    {        
+        <script type="application/ld+json">
+            {
+              "@@context": "https://schema.org/",
+              "@@type": "Course",
+              "name": "@Model.Name",
+              "description": "Model.ShortDescription",
+              "hasCourseInstance": {
+                "@@type": "CourseInstance",
+                "courseMode": ["",""],
+                "endDate": "@endDate",
+                "startDate": "@startDate",
+                "courseWorkload": ""
+              },
+              "provider": {
+                "@@type": "EducationalOrganization",
+                "name": "WRA",
+              },
+              "offers": {
+                    "@@type": "Offer",
+                    "@Model.NonMemberPricing.Formatted()",
+                    "priceCurrency": "USD",
+                    "category": ""
+                  }
+            }
+        </script>
+    }
 }
 
 <script>
