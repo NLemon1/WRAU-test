@@ -11,6 +11,7 @@ using WRA.Umbraco.Models;
 using WRA.Umbraco.Web.Dtos.External;
 using Umbraco.Extensions;
 
+
 namespace WRA.Umbraco.Helpers;
 
 public class BoardRepository
