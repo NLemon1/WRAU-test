@@ -94,13 +94,13 @@
     <!-- Need to Pull into Private Fork and fix non scoped CSS -->
     <!--<PackageReference Include="TagManager" Version="1.0.4" />-->
     <PackageReference Include="TaxJar" Version="4.0.0" />
-    <PackageReference Include="uMarketingSuite" Version="2.3.2" />
+    <PackageReference Include="uMarketingSuite" Version="2.5.1" />
     <PackageReference Include="uMarketingSuite.Commerce" Version="2.0.0" />
-    <PackageReference Include="uMarketingSuite.Headless" Version="2.3.2" />
+    <PackageReference Include="uMarketingSuite.Headless" Version="2.5.1" />
     <PackageReference Include="uMarketingSuite.UmbracoForms" Version="2.0.0" />
-    <PackageReference Include="Umbraco.Cms" Version="13.4.1" />
-    <PackageReference Include="Umbraco.Cms.Imaging.ImageSharp" Version="13.4.1" />
-    <PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="13.4.1" />
+    <PackageReference Include="Umbraco.Cms" Version="13.5.0" />
+    <PackageReference Include="Umbraco.Cms.Imaging.ImageSharp" Version="13.5.0" />
+    <PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="13.5.0" />
     <PackageReference Include="Umbraco.Code" Version="2.2.0" />
     <PackageReference Include="Umbraco.Commerce" Version="13.1.6" />
     <PackageReference Include="Umbraco.Commerce.Cms" Version=" 13.1.6" />
@@ -119,10 +119,10 @@
     <PackageReference Include="MimeKit" Version="4.7.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Umbraco.Cloud.Cms.PublicAccess" Version="13.0.0" />
-    <PackageReference Include="Umbraco.Cms.Infrastructure" Version="13.4.1" />
+    <PackageReference Include="Umbraco.Cms.Infrastructure" Version="13.5.0" />
     <PackageReference Include="Umbraco.Commerce.Deploy" Version="13.1.2" />
-    <PackageReference Include="Umbraco.Community.Contentment" Version="5.0.1" />
-    <PackageReference Include="Umbraco.Deploy.Cloud" Version="13.2.0" />
+    <PackageReference Include="Umbraco.Community.Contentment" Version="5.0.2" />
+    <PackageReference Include="Umbraco.Deploy.Cloud" Version="13.2.1" />
     <PackageReference Include="Umbraco.Deploy.Contrib" Version="13.2.0" />
     <PackageReference Include="SixLabors.ImageSharp" Version="3.1.5" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.0.0" />
@@ -136,11 +136,11 @@
     <PackageReference Include="WRA.Umbraco.Shared" Version="8.2.0" />
 
     <!-- Analyzers -->
-    <PackageReference Update="Roslynator.Analyzers" Version="4.12.4">
+    <PackageReference Update="Roslynator.Analyzers" Version="4.12.5">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
-    <PackageReference Update="SonarAnalyzer.CSharp" Version="9.30.0.95878" />
+    <PackageReference Update="SonarAnalyzer.CSharp" Version="9.32.0.97167" />
     
   </ItemGroup>
 
