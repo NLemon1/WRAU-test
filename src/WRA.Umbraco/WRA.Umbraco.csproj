@@ -76,7 +76,7 @@
     </PackageReference>
     <PackageReference Include="Our.Iconic" Version="12.0.0" />
     <PackageReference Include="Our.Umbraco.TheDashboard" Version="13.0.1" />
-    <PackageReference Include="RestSharp" Version="111.4.0" />
+    <PackageReference Include="RestSharp" Version="112.0.0" />
     <PackageReference Include="Serilog.Extensions.Logging" Version="8.0.0" />
     <PackageReference Include="Serilog.Settings.Configuration" Version="8.0.2" />
     <PackageReference Include="Serilog.Sinks.Console" Version="5.0.1" />
@@ -114,7 +114,7 @@
     <PackageReference Include="Umbraco.Commerce.Web" Version="13.1.6" />
 
 
-    <!-- Moved from Web to Core Project (Eric 2020718) -->
+    <!-- Moved from Web to Core Project -->
     <PackageReference Include="BouncyCastle.Cryptography" Version="2.4.0" />
     <PackageReference Include="MimeKit" Version="4.7.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
@@ -127,8 +127,13 @@
     <PackageReference Include="SixLabors.ImageSharp" Version="3.1.5" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.0.0" />
     <PackageReference Include="Umbraco.Forms" Version="13.2.2" />
+    <PackageReference Include="Umbraco.Forms.Core" Version="13.2.2" />
     <PackageReference Include="Umbraco.Forms.StaticAssets" Version="13.2.2" />
     <PackageReference Include="Umbraco.Forms.Web" Version="13.2.2" />
+    <PackageReference Include="Umbraco.Forms.Core.Providers" Version="13.2.2" />
+    
+    <!-- Moved from Web to Core Project -->
+    <PackageReference Include="Umbraco.Forms.Deploy" Version="13.0.2" />
 
 
     <!-- WRA Custom Nuget packages -->
