@@ -315,7 +315,10 @@
 
 
     <!-- Remove the App Plugin Directory in WRA.Umbraco in the cloud build. -->
-    <RemoveDir Directories="$(SolutionDir)src\WRA.Umbraco\App_Plugin" Condition=" '$(ASPNETCORE_ENVIRONMENT)' == 'Local' " />
+
+    <!-- Try Ignore First In github cloud ignore.-->
+    <!--<Message Text="Deletting App_Plugins in Cloud Environment: $(ASPNETCORE_ENVIRONMENT)" Importance="high" /> -->
+    <!-- <RemoveDir Directories="$(SolutionDir)src\WRA.Umbraco\App_Plugin" Condition=" '$(ASPNETCORE_ENVIRONMENT)' != 'Local' " /> -->
   </Target>
 
 
