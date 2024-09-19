@@ -1,7 +1,0 @@
-﻿{
-  "javascript": [
-    "~/App_Plugins/uMarketingSuite/polyfills.js",
-    "~/App_Plugins/uMarketingSuite/uMarketingSuite-init.js",
-    "~/App_Plugins/uMarketingSuite/uMarketingSuite-variables.js"
-  ]
-}   

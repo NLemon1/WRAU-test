@@ -200,7 +200,8 @@
     <Message Text="WRA PostClean: Removing MetaMomentum Plugin Files" Importance="high" />
     <RemoveDir Directories="$(SolutionDir)src\WRA.Umbraco.Web\App_Plugins\MetaMomentum" ContinueOnError="false" />
 
-    <!-- Remove uMarketingSuite Plugin Files from Web Project -->
+
+     <!-- Remove uMarketingSuite Plugin Files from Web Project -->
     <Message Text="WRA PostClean: Removing uMarketingSuite Plugin Files" Importance="high" />
     <RemoveDir Directories="$(SolutionDir)src\WRA.Umbraco.Web\App_Plugins\uMarketingSuite" ContinueOnError="false" />
 
@@ -209,19 +210,23 @@
     <Message Text="WRA PostClean: Removing WRA Enhancement Plugin Files" Importance="high" />
     <RemoveDir Directories="$(SolutionDir)src\WRA.Umbraco.Web\App_Plugins\WRAEnhancements" ContinueOnError="false" />
 
-    <!-- Remove CustomBlockView Plugin Files from Web Project -->
+
+
+     <!-- Remove CustomBlockView Plugin Files from Web Project -->
     <Message Text="WRA PostClean: Removing CustomBlockView Plugin Files" Importance="high" />
     <RemoveDir Directories="$(SolutionDir)src\WRA.Umbraco.Web\App_Plugins\CustomBlockView" ContinueOnError="false" />
 
-    <!-- Remove Contentment Plugin Files from Web Project -->
+
+     <!-- Remove Contentment Plugin Files from Web Project -->
     <Message Text="WRA PostClean: Removing Contentment Plugin Files" Importance="high" />
     <RemoveDir Directories="$(SolutionDir)src\WRA.Umbraco.Web\App_Plugins\Contentment" ContinueOnError="false" />
 
-    <!-- Remove Iconic Plugin Files from Web Project -->
+
+     <!-- Remove Iconic Plugin Files from Web Project -->
     <Message Text="WRA PostClean: Removing Iconic Plugin Files" Importance="high" />
     <RemoveDir Directories="$(SolutionDir)src\WRA.Umbraco.Web\App_Plugins\Iconic" ContinueOnError="false" />
 
-    <!-- Log message indicating the end of the clean-up target -->
+     <!-- Log message indicating the end of the clean-up target -->
     <Message Text="WRA PostClean: Complete" Importance="high" />
   </Target>
 
@@ -233,18 +238,22 @@
     <!-- MetaMomentum Plugin Files. -->
     <Message Text="WRA PostBuild: Copying MetaMomentum Plugin Files" Importance="high" />
     <Copy SourceFiles="@(MetaMomentumFiles)" DestinationFolder="$(SolutionDir)src\WRA.Umbraco.Web\App_Plugins\MetaMomentum\%(RecursiveDir)" Condition="'%(Extension)' != '.cs'" ContinueOnError="false" />
-
+    
     <!-- MetaMomentum Partial Views -->
     <Message Text="WRA PostBuild: Copying MetaMomentum Razor Files" Importance="high" />
     <Copy SourceFiles="@(MetaMomentumViews)" DestinationFolder="$(SolutionDir)src\WRA.Umbraco.Web\Views\Partials\MetaMomentum\%(RecursiveDir)" Condition="'%(Extension)' != '.cs'" ContinueOnError="false" />
+    
+
 
     <!-- Copy Diplo God Mode Plugin Files -->
     <Message Text="WRA PostBuild: Copying Diplo.GodMode Plugin Files" Importance="high" />
     <Copy SourceFiles="@(DiploGodMode)" DestinationFolder="$(SolutionDir)src\WRA.Umbraco.Web\App_Plugins\DiploGodMode\%(RecursiveDir)" Condition="'%(Extension)' != '.cs'" ContinueOnError="false" />
 
+
     <!-- Copy Diplo Audit Log Viewer Plugin Files -->
     <Message Text="WRA PostBuild: Copying Diplo.AuditLogViewer Plugin Files" Importance="high" />
     <Copy SourceFiles="@(DiploAuditLogViewer)" DestinationFolder="$(SolutionDir)src\WRA.Umbraco.Web\App_Plugins\DiploAuditLogViewer\%(RecursiveDir)" Condition="'%(Extension)' != '.cs'" ContinueOnError="false" />
+
 
     <!-- Copy Umbraco Forms Plugin Files --><!--
     <Message Text="WRA PostBuild: Copying UmbracoForms Plugin Files" Importance="high" />
@@ -254,7 +263,8 @@
     <Message Text="WRA PostBuild: Copying uMarketingSuite Plugin Files" Importance="high" />
     <Copy SourceFiles="@(uMarketingSuiteMain)" DestinationFolder="$(SolutionDir)src\WRA.Umbraco.Web\App_Plugins\uMarketingSuite\%(RecursiveDir)" Condition="'%(Extension)' != '.cs'" ContinueOnError="false" />
 
-     <!-- Copy uMarketingSuite Partial Views -->
+
+    <!-- Copy uMarketingSuite Partial Views -->
     <Message Text="WRA PostBuild: Copying uMarketingSuite Razor Files" Importance="high" />
     <Copy SourceFiles="@(uMarketingSuiteMainViews)" DestinationFolder="$(SolutionDir)src\WRA.Umbraco.Web\Views\Partials\uMarketingSuite\%(RecursiveDir)" Condition="'%(Extension)' != '.cs'" ContinueOnError="false" />
 
@@ -265,31 +275,34 @@
     <!-- Copy uMarketingSuite License File -->
     <Message Text="WRA PostBuild: Copying uMarketingSuite License File" Importance="high" />
     <Copy SourceFiles="@(uMarketingSuiteLicenseFile)" DestinationFolder="$(SolutionDir)src\WRA.Umbraco.Web\config\uMarketingSuite\%(RecursiveDir)" Condition="'%(Extension)' != '.cs'" ContinueOnError="false" />
-
+    
+    
     <!-- Copy uMarketingSuite Umbraco Forms Files -->
     <Message Text="WRA PostBuild: Copying uMarketingSuite.UmbracoForms Plugin Files" Importance="high" />
     <Copy SourceFiles="@(uMarketingSuiteUmbracoForms)" DestinationFolder="$(SolutionDir)src\WRA.Umbraco.Web\App_Plugins\uMarketingSuite.UmbracoForms\%(RecursiveDir)" Condition="'%(Extension)' != '.cs'" ContinueOnError="false" />
+
 
     <!-- Copy Umbraco Navigation Hidden Icon Package Files -->
     <Message Text="WRA PostBuild: Copying UmbracoNaviHideIcon Plugin Files" Importance="high" />
     <Copy SourceFiles="@(UmbracoNavigationHiddenIcon)" DestinationFolder="$(SolutionDir)src\WRA.Umbraco.Web\App_Plugins\UmbracoNaviHideIcon\%(RecursiveDir)" Condition="'%(Extension)' != '.cs'" ContinueOnError="false" />
 
+
     <!-- Copy Umbraco AI Content Creator Package Files -->
     <Message Text="WRA PostBuild: Copying UmContentCreator Plugin Files" Importance="high" />
     <Copy SourceFiles="@(UmbracoAIContentCreator)" DestinationFolder="$(SolutionDir)src\WRA.Umbraco.Web\App_Plugins\UmContentCreator\%(RecursiveDir)" Condition="'%(Extension)' != '.cs'" ContinueOnError="false" /> 
-
+    
     <!-- Copy WRA Enhancements Plugin Files -->
     <Message Text="WRA PostBuild: Copying WRA Enhancements Plugin Files" Importance="high" />
     <Copy SourceFiles="@(WRAEnhancements)" DestinationFolder="$(SolutionDir)src\WRA.Umbraco.Web\App_Plugins\WRAEnhancements\%(RecursiveDir)" Condition="'%(Extension)' != '.cs'" ContinueOnError="false" />
-
+    
     <!-- Copy Custom Block View Plugin Files -->
     <Message Text="WRA PostBuild: Copying Custom Block View Plugin Files" Importance="high" />
     <Copy SourceFiles="@(CustomBlockViews)" DestinationFolder="$(SolutionDir)src\WRA.Umbraco.Web\App_Plugins\CustomBlockView\%(RecursiveDir)" Condition="'%(Extension)' != '.cs'" ContinueOnError="false" /> 
-
+    
     <!-- Copy Contentment Plugin Files -->
     <Message Text="WRA PostBuild: Copying Contentment Plugin Files" Importance="high" />
     <Copy SourceFiles="@(Contentment)" DestinationFolder="$(SolutionDir)src\WRA.Umbraco.Web\App_Plugins\Contentment\%(RecursiveDir)" Condition="'%(Extension)' != '.cs'" ContinueOnError="false" /> 
-
+    
     <!-- Copy Contentment Plugin Files -->
     <Message Text="WRA PostBuild: Copying Iconic Plugin Files" Importance="high" />
     <Copy SourceFiles="@(Iconic)" DestinationFolder="$(SolutionDir)src\WRA.Umbraco.Web\App_Plugins\Iconic\%(RecursiveDir)" Condition="'%(Extension)' != '.cs'" ContinueOnError="false" /> 
@@ -302,11 +315,7 @@
 
 
     <!-- Remove the App Plugin Directory in WRA.Umbraco in the cloud build. -->
-    <RemoveDir Directories="$(SolutionDir)src\WRA.Umbraco\App_Plugin" Condition=" '$(ASPNETCORE_ENVIRONMENT)' != 'Local' " />
-    
-
-
-    
+    <RemoveDir Directories="$(SolutionDir)src\WRA.Umbraco\App_Plugin" Condition=" '$(ASPNETCORE_ENVIRONMENT)' == 'Local' " />
   </Target>
 
 
