@@ -4,10 +4,14 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <Configurations>Debug;Release;Local</Configurations>
+        <SolutionDir Condition=" '$(SolutionDir)' == '' ">$(MSBuildProjectDirectory)\..\..\</SolutionDir>
+
     </PropertyGroup>
 
 
     <ItemGroup>
+        <!-- Define a fallback for solution directory for macs and vscode up two directories from projects -->
+      
         <PackageReference Include="Azure.Identity" Version="1.12.0" />
         
         <PackageReference Include="CMSImport" Version="13.1.3" />
@@ -39,10 +43,9 @@
 
     </ItemGroup>
 
-  <Target Name="RemoveAppPluginsAfterBuild" AfterTargets="Build" DependsOnTargets="Build">
-    <Message Text="Deleting App_Plugins in Cloud Environment: From Web Project" Importance="high" />
-    <RemoveDir Directories="$(SolutionDir)src\WRA.Umbraco\App_Plugins" />
-  </Target>
+    <Target Name="RemoveAppPluginsAfterBuild" AfterTargets="Build" DependsOnTargets="Build">
+      <RemoveDir Directories="$(SolutionDir)src\WRA.Umbraco\App_Plugin"   />
+    </Target>
 
 
     <ItemGroup>
