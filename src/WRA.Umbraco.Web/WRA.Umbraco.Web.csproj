@@ -51,6 +51,13 @@
         <Folder Include="wwwroot\js\dist\" />
     </ItemGroup>
 
+    <!-- Prevent Conflict Error in Kudu Probably should Move this to the cloud ignore but test here -->
+    <ItemGroup>
+      <Content Remove="App_Plugins\BackOfficeEditorView\**\*" />
+      <Content Remove="App_Plugins\DiploAuditLogViewer\**\*" />
+      <Content Remove="App_Plugins\DiploGodMode\**\*" />
+    </ItemGroup>
+
     <ItemGroup>
         <None Update="cmsimport.lic">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
