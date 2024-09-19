@@ -299,7 +299,11 @@
     <Copy SourceFiles="@(CoreWebRoot)" DestinationFolder="$(SolutionDir)src\WRA.Umbraco.Web\wwwroot\%(RecursiveDir)" Condition="'%(Extension)' != '.cs'" ContinueOnError="false" /> 
 
     <!-- Copy Local Application Settings File -->
-  
+
+
+    <!-- Remove the App Plugin Directory in WRA.Umbraco in the cloud build. -->
+    <RemoveDir Directories="$(SolutionDir)src\WRA.Umbraco\App_Plugin" Condition=" '$(ASPNETCORE_ENVIRONMENT)' != 'Local' " />
+    
 
 
     
