@@ -43,6 +43,8 @@
 
     </ItemGroup>
 
+
+    <!-- Only needed for Umbraco cloud until version 14 -->
     <Target Name="RemoveAppPluginsAfterBuild" AfterTargets="AfterBuild">
       <RemoveDir Directories="$(SolutionDir)src\WRA.Umbraco\App_Plugins" />
     </Target>

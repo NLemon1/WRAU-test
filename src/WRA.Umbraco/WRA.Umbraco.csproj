@@ -193,6 +193,9 @@
   </ItemGroup>
 
 
+    <!-- #erictodo Convert to version 14 package format after upgrade -->
+
+  
    <Target Name="CleanPostBuild" AfterTargets="Clean">
     <Message Text="WRA PostClean: Started" Importance="high" />
      
@@ -318,10 +321,6 @@
     
   </Target>
 
-
-   <!--<Target Name="RemoveAppPluginsAfterBuild" AfterTargets="AfterBuild">
-      <RemoveDir Directories="$(SolutionDir)src\WRA.Umbraco\App_Plugins" />
-    </Target> -->
 
 
     <!-- Logging properties -->
