@@ -16,7 +16,7 @@ public class SubmitHotlineCallWorkflowType : WorkflowType
 
     public SubmitHotlineCallWorkflowType(ILogger logger, IUmbracoBridgeServiceClient bridgeServiceClient, IUmbracoMapper umbracoMapper)
     {
-        Id = UmbracoFormsCustomConstants.PostFormToJsonWorkflowType;
+        Id = UmbracoFormsCustomConstants.SubmitHotlineCallWorkflowType;
         Name = "Post Legal Hotline Call";
         Description = "Creates a call on the legal hotline application from the form request.";
         Icon = "icon-operator";

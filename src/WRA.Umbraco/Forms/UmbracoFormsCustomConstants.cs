@@ -9,9 +9,9 @@ public static class UmbracoFormsCustomConstants
     public static readonly Guid CallbackDateDropdownField = new ("F756E12A-B2F9-40E5-9D74-9EA20AD10CFA");
     public static readonly Guid CallbackDateDropdownDataSource = new ("F856E12A-B2F9-40E5-9D74-9EA20AD10CFA");
     public static readonly Guid PostFormToJsonWorkflowType = new ("F956E12A-B2F9-40E5-9D74-9EA20AD10CFA");
+    public static readonly Guid SubmitHotlineCallWorkflowType = new ("FA56E12A-B2F9-40E5-9D74-9EA20AD10CFA");
 
     // Placeholder for custom fields and sources
-    public static readonly Guid CustomField04 = new ("FA56E12A-B2F9-40E5-9D74-9EA20AD10CFA");
     public static readonly Guid CustomField05 = new ("FB56E12A-B2F9-40E5-9D74-9EA20AD10CFA");
     public static readonly Guid CustomField06 = new ("FC56E12A-B2F9-40E5-9D74-9EA20AD10CFA");
     public static readonly Guid CustomField07 = new ("FD56E12A-B2F9-40E5-9D74-9EA20AD10CFA");
@@ -35,7 +35,7 @@ public static class UmbracoFormsCustomConstants
                 new KeyValuePair<string, Guid>(nameof(CallbackDateDropdownField), CallbackDateDropdownField),
                 new KeyValuePair<string, Guid>(nameof(CallbackDateDropdownDataSource), CallbackDateDropdownDataSource),
                 new KeyValuePair<string, Guid>(nameof(PostFormToJsonWorkflowType), PostFormToJsonWorkflowType),
-                new KeyValuePair<string, Guid>(nameof(CustomField04), CustomField04),
+                new KeyValuePair<string, Guid>(nameof(SubmitHotlineCallWorkflowType), SubmitHotlineCallWorkflowType),
                 new KeyValuePair<string, Guid>(nameof(CustomField05), CustomField05),
                 new KeyValuePair<string, Guid>(nameof(CustomField06), CustomField06),
                 new KeyValuePair<string, Guid>(nameof(CustomField07), CustomField07),

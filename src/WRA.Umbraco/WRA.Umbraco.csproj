@@ -130,7 +130,6 @@
     <PackageReference Include="Umbraco.Forms.Core" Version="13.2.2" />
     <PackageReference Include="Umbraco.Forms.StaticAssets" Version="13.2.2" />
     <PackageReference Include="Umbraco.Forms.Web" Version="13.2.2" />
-    <PackageReference Include="Umbraco.Forms.Core.Providers" Version="13.2.2" />
     
     <!-- Moved from Web to Core Project -->
     <PackageReference Include="Umbraco.Forms.Deploy" Version="13.0.2" />
