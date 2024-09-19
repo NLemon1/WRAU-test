@@ -319,6 +319,11 @@
   </Target>
 
 
+   <!--<Target Name="RemoveAppPluginsAfterBuild" AfterTargets="AfterBuild">
+      <RemoveDir Directories="$(SolutionDir)src\WRA.Umbraco\App_Plugins" />
+    </Target> -->
+
+
     <!-- Logging properties -->
   <Target Name="LogProperties" AfterTargets="FinalPostBuild">
     <Message Text="WebLocalAppSettingsPath: $(WebLocalAppSettingsPath)" Importance="high" />

@@ -1,8 +1,0 @@
-{
-  "dashboards": [{
-    "alias": "uMarketingSuite",
-    "sections": [ "uMarketingSuite" ],
-    "view": "~/App_Plugins/uMarketingSuite/dashboard/uMarketingSuite-dashboard.html"
-  }],
-  "javascript": ["~/App_Plugins/uMarketingSuite/dashboard/uMarketingSuite-dashboard.js"]
-}

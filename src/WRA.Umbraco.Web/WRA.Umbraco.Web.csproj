@@ -43,8 +43,8 @@
 
     </ItemGroup>
 
-    <Target Name="RemoveAppPluginsAfterBuild" AfterTargets="Build" DependsOnTargets="Build">
-      <RemoveDir Directories="$(SolutionDir)src\WRA.Umbraco\App_Plugin"   />
+    <Target Name="RemoveAppPluginsAfterBuild" AfterTargets="AfterBuild">
+      <RemoveDir Directories="$(SolutionDir)src\WRA.Umbraco\App_Plugins" />
     </Target>
 
 
