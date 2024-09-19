@@ -311,14 +311,11 @@
     <Message Text="WRA PostBuild: Copying Web Root Files" Importance="high" />
     <Copy SourceFiles="@(CoreWebRoot)" DestinationFolder="$(SolutionDir)src\WRA.Umbraco.Web\wwwroot\%(RecursiveDir)" Condition="'%(Extension)' != '.cs'" ContinueOnError="false" /> 
 
-    <!-- Copy Local Application Settings File -->
-
 
     <!-- Remove the App Plugin Directory in WRA.Umbraco in the cloud build. -->
-
-    <!-- Try Ignore First In github cloud ignore.-->
-    <!--<Message Text="Deletting App_Plugins in Cloud Environment: $(ASPNETCORE_ENVIRONMENT)" Importance="high" /> -->
-    <!-- <RemoveDir Directories="$(SolutionDir)src\WRA.Umbraco\App_Plugin" Condition=" '$(ASPNETCORE_ENVIRONMENT)' != 'Local' " /> -->
+    <Message Text="Deletting App_Plugins in Cloud Environment From Core Project" Importance="high" />
+    <RemoveDir Directories="$(SolutionDir)src\WRA.Umbraco\App_Plugin"   />
+    
   </Target>
 
 

@@ -416,5 +416,6 @@ healthchecksdb
 
 
 # Plugins that should be ignored so they dont get double built.
-**/WRA.Umbraco/App_Plugins
+**/WRA.Umbraco/App_Plugins/
+**/src/WRA.Umbraco/App_Plugins/
 

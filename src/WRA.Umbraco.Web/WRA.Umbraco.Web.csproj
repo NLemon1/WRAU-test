@@ -39,6 +39,11 @@
 
     </ItemGroup>
 
+  <Target Name="RemoveAppPluginsAfterBuild" AfterTargets="Build" DependsOnTargets="Build">
+    <Message Text="Deleting App_Plugins in Cloud Environment: From Web Project" Importance="high" />
+    <RemoveDir Directories="$(SolutionDir)src\WRA.Umbraco\App_Plugins" />
+  </Target>
+
 
     <ItemGroup>
         <ProjectReference Include="..\WRA.Umbraco\WRA.Umbraco.csproj" />
