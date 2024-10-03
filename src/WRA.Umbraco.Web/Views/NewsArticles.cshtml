@@ -4,8 +4,9 @@
 @using ContentModels = WRA.Umbraco.Models;
 @using Umbraco.Cms.Core.Models.Blocks
 @using System.Text.RegularExpressions;
-@using WRA.Umbraco.Web.Helpers;
+@using WRA.Umbraco.Helpers;
 @using Microsoft.AspNetCore.Http;
+@using WRA.Umbraco.Extensions;
 
 @{
     Layout = "~/Views/_Layout.cshtml";
@@ -109,7 +110,7 @@
 
                 if (featuredArticleObject.HasValue("richTextContent") && !featuredArticleObject.HasValue("excerpt"))
                 {
-                    cleanContent = HtmlHelperExtensions.ShortenExcerpt(featuredArticleObject.Value("richTextContent").ToString(), 135);
+                    cleanContent = HtmlHelperExtensions.TruncateExcerpt(featuredArticleObject.Value("richTextContent").ToString(), 135);
                 }
                 var articleSummary = featuredArticleObject.HasValue("excerpt") ? featuredArticleObject.Value("excerpt") : cleanContent;
                 var articleCategory = featuredArticleObject.Value<WRA.Umbraco.Models.ArticleCategory>("category");
@@ -180,7 +181,7 @@
 
                 if (item.HasValue("richTextContent") && !item.HasValue("excerpt"))
                 {
-                    cleanContent = HtmlHelperExtensions.ShortenExcerpt(item.Value("richTextContent").ToString(), 135);
+                    cleanContent = HtmlHelperExtensions.TruncateExcerpt(item.Value("richTextContent").ToString(), 135);
                 }
                 var articleSummary = item.HasValue("excerpt") ? item.Value("excerpt") : cleanContent;
 

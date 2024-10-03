@@ -2,13 +2,14 @@
   "Name": "Pickup",
   "Alias": "pickup",
   "Sku": "pickup",
+  "TaxClassUdi": "umb://umbraco-commerce-tax-class/51172ffdfd2842a7afd1018facb8b84d",
   "CalculationConfig": {
     "Prices": [
       {
         "CurrencyUdi": "umb://umbraco-commerce-currency/952c300228b84053bc8d018e244a7b6d",
         "CountryUdi": null,
         "RegionUdi": null,
-        "Value": 5.0
+        "Value": 0.0
       }
     ]
   },
@@ -27,6 +28,10 @@
       "Mode": "Exist"
     },
     {
+      "Udi": "umb://umbraco-commerce-tax-class/51172ffdfd2842a7afd1018facb8b84d",
+      "Mode": "Exist"
+    },
+    {
       "Udi": "umb://umbraco-commerce-currency/952c300228b84053bc8d018e244a7b6d",
       "Mode": "Exist"
     },
@@ -36,5 +41,5 @@
     }
   ],
   "__type": "Umbraco.Commerce.Deploy,Umbraco.Commerce.Deploy.Artifacts.ShippingMethodArtifact",
-  "__version": "13.2.1"
+  "__version": "13.1.0"
 }

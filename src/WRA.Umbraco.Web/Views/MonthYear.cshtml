@@ -1,6 +1,7 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<WRA.Umbraco.Models.MonthYear>
-@using WRA.Umbraco.Web.Helpers;
+@using WRA.Umbraco.Helpers;
+@using WRA.Umbraco.Extensions;
 
 @{
     Layout = "~/Views/_Layout.cshtml";
@@ -35,7 +36,7 @@
 
                 if (item.HasValue("richTextContent") && !item.HasValue("excerpt"))
                 {
-                    cleanContent = HtmlHelperExtensions.ShortenExcerpt(item.Value("richTextContent").ToString(), 135);
+                    cleanContent = HtmlHelperExtensions.TruncateExcerpt(item.Value("richTextContent").ToString(), 135);
                 }
                 var articleSummary = item.HasValue("excerpt") ? item.Value("excerpt") : cleanContent;
 
