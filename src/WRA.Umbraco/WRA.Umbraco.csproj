@@ -4,7 +4,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <Configurations>Debug;Release;Local</Configurations>
-    
+
     <!-- Razor files are needed for the backoffice to work correctly -->
     <CopyRazorGenerateFilesToPublishDirectory>true</CopyRazorGenerateFilesToPublishDirectory>
 
@@ -126,11 +126,11 @@
     <PackageReference Include="Umbraco.Deploy.Contrib" Version="13.2.0" />
     <PackageReference Include="SixLabors.ImageSharp" Version="3.1.5" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.0.0" />
-    <PackageReference Include="Umbraco.Forms" Version="13.2.2" />
-    <PackageReference Include="Umbraco.Forms.Core" Version="13.2.2" />
-    <PackageReference Include="Umbraco.Forms.StaticAssets" Version="13.2.2" />
-    <PackageReference Include="Umbraco.Forms.Web" Version="13.2.2" />
-    
+    <PackageReference Include="Umbraco.Forms" Version="13.2.4" />
+    <PackageReference Include="Umbraco.Forms.Core" Version="13.2.4" />
+    <PackageReference Include="Umbraco.Forms.StaticAssets" Version="13.2.4" />
+    <PackageReference Include="Umbraco.Forms.Web" Version="13.2.4" />
+
     <!-- Moved from Web to Core Project -->
     <PackageReference Include="Umbraco.Forms.Deploy" Version="13.0.2" />
 
@@ -145,11 +145,11 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
     <PackageReference Update="SonarAnalyzer.CSharp" Version="9.32.0.97167" />
-    
+
   </ItemGroup>
 
   <ItemGroup>
-    
+
     <!-- MetaMomentum SEO Package -->
     <MetaMomentumFiles Include="App_Plugins\MetaMomentum\*.*" />
     <MetaMomentumViews Include="Views\Partials\MetaMomentum\*.*" />
@@ -195,10 +195,10 @@
 
     <!-- #erictodo Convert to version 14 package format after upgrade -->
 
-  
+
    <Target Name="CleanPostBuild" AfterTargets="Clean">
     <Message Text="WRA PostClean: Started" Importance="high" />
-     
+
     <!-- Remove MetaMomentum Plugin Files from Web Project -->
     <Message Text="WRA PostClean: Removing MetaMomentum Plugin Files" Importance="high" />
     <RemoveDir Directories="$(SolutionDir)src\WRA.Umbraco.Web\App_Plugins\MetaMomentum" ContinueOnError="false" />
@@ -237,15 +237,15 @@
   <!-- Wait until after all packages have built and run their post build targets. -->
   <Target Name="FinalPostBuild" AfterTargets="Build">
     <Message Text="WRA PostBuild: Started" Importance="high" />
-    
+
     <!-- MetaMomentum Plugin Files. -->
     <Message Text="WRA PostBuild: Copying MetaMomentum Plugin Files" Importance="high" />
     <Copy SourceFiles="@(MetaMomentumFiles)" DestinationFolder="$(SolutionDir)src\WRA.Umbraco.Web\App_Plugins\MetaMomentum\%(RecursiveDir)" Condition="'%(Extension)' != '.cs'" ContinueOnError="false" />
-    
+
     <!-- MetaMomentum Partial Views -->
     <Message Text="WRA PostBuild: Copying MetaMomentum Razor Files" Importance="high" />
     <Copy SourceFiles="@(MetaMomentumViews)" DestinationFolder="$(SolutionDir)src\WRA.Umbraco.Web\Views\Partials\MetaMomentum\%(RecursiveDir)" Condition="'%(Extension)' != '.cs'" ContinueOnError="false" />
-    
+
 
 
     <!-- Copy Diplo God Mode Plugin Files -->
@@ -278,8 +278,8 @@
     <!-- Copy uMarketingSuite License File -->
     <Message Text="WRA PostBuild: Copying uMarketingSuite License File" Importance="high" />
     <Copy SourceFiles="@(uMarketingSuiteLicenseFile)" DestinationFolder="$(SolutionDir)src\WRA.Umbraco.Web\config\uMarketingSuite\%(RecursiveDir)" Condition="'%(Extension)' != '.cs'" ContinueOnError="false" />
-    
-    
+
+
     <!-- Copy uMarketingSuite Umbraco Forms Files -->
     <Message Text="WRA PostBuild: Copying uMarketingSuite.UmbracoForms Plugin Files" Importance="high" />
     <Copy SourceFiles="@(uMarketingSuiteUmbracoForms)" DestinationFolder="$(SolutionDir)src\WRA.Umbraco.Web\App_Plugins\uMarketingSuite.UmbracoForms\%(RecursiveDir)" Condition="'%(Extension)' != '.cs'" ContinueOnError="false" />
@@ -292,33 +292,33 @@
 
     <!-- Copy Umbraco AI Content Creator Package Files -->
     <Message Text="WRA PostBuild: Copying UmContentCreator Plugin Files" Importance="high" />
-    <Copy SourceFiles="@(UmbracoAIContentCreator)" DestinationFolder="$(SolutionDir)src\WRA.Umbraco.Web\App_Plugins\UmContentCreator\%(RecursiveDir)" Condition="'%(Extension)' != '.cs'" ContinueOnError="false" /> 
-    
+    <Copy SourceFiles="@(UmbracoAIContentCreator)" DestinationFolder="$(SolutionDir)src\WRA.Umbraco.Web\App_Plugins\UmContentCreator\%(RecursiveDir)" Condition="'%(Extension)' != '.cs'" ContinueOnError="false" />
+
     <!-- Copy WRA Enhancements Plugin Files -->
     <Message Text="WRA PostBuild: Copying WRA Enhancements Plugin Files" Importance="high" />
     <Copy SourceFiles="@(WRAEnhancements)" DestinationFolder="$(SolutionDir)src\WRA.Umbraco.Web\App_Plugins\WRAEnhancements\%(RecursiveDir)" Condition="'%(Extension)' != '.cs'" ContinueOnError="false" />
-    
+
     <!-- Copy Custom Block View Plugin Files -->
     <Message Text="WRA PostBuild: Copying Custom Block View Plugin Files" Importance="high" />
-    <Copy SourceFiles="@(CustomBlockViews)" DestinationFolder="$(SolutionDir)src\WRA.Umbraco.Web\App_Plugins\CustomBlockView\%(RecursiveDir)" Condition="'%(Extension)' != '.cs'" ContinueOnError="false" /> 
-    
+    <Copy SourceFiles="@(CustomBlockViews)" DestinationFolder="$(SolutionDir)src\WRA.Umbraco.Web\App_Plugins\CustomBlockView\%(RecursiveDir)" Condition="'%(Extension)' != '.cs'" ContinueOnError="false" />
+
     <!-- Copy Contentment Plugin Files -->
     <Message Text="WRA PostBuild: Copying Contentment Plugin Files" Importance="high" />
-    <Copy SourceFiles="@(Contentment)" DestinationFolder="$(SolutionDir)src\WRA.Umbraco.Web\App_Plugins\Contentment\%(RecursiveDir)" Condition="'%(Extension)' != '.cs'" ContinueOnError="false" /> 
-    
+    <Copy SourceFiles="@(Contentment)" DestinationFolder="$(SolutionDir)src\WRA.Umbraco.Web\App_Plugins\Contentment\%(RecursiveDir)" Condition="'%(Extension)' != '.cs'" ContinueOnError="false" />
+
     <!-- Copy Contentment Plugin Files -->
     <Message Text="WRA PostBuild: Copying Iconic Plugin Files" Importance="high" />
-    <Copy SourceFiles="@(Iconic)" DestinationFolder="$(SolutionDir)src\WRA.Umbraco.Web\App_Plugins\Iconic\%(RecursiveDir)" Condition="'%(Extension)' != '.cs'" ContinueOnError="false" /> 
+    <Copy SourceFiles="@(Iconic)" DestinationFolder="$(SolutionDir)src\WRA.Umbraco.Web\App_Plugins\Iconic\%(RecursiveDir)" Condition="'%(Extension)' != '.cs'" ContinueOnError="false" />
 
     <!-- Copy WRA Assets wwwroot Files -->
     <Message Text="WRA PostBuild: Copying Web Root Files" Importance="high" />
-    <Copy SourceFiles="@(CoreWebRoot)" DestinationFolder="$(SolutionDir)src\WRA.Umbraco.Web\wwwroot\%(RecursiveDir)" Condition="'%(Extension)' != '.cs'" ContinueOnError="false" /> 
+    <Copy SourceFiles="@(CoreWebRoot)" DestinationFolder="$(SolutionDir)src\WRA.Umbraco.Web\wwwroot\%(RecursiveDir)" Condition="'%(Extension)' != '.cs'" ContinueOnError="false" />
 
 
     <!-- Remove the App Plugin Directory in WRA.Umbraco in the cloud build. -->
     <Message Text="Deletting App_Plugins in Cloud Environment From Core Project" Importance="high" />
     <RemoveDir Directories="$(SolutionDir)src\WRA.Umbraco\App_Plugin"   />
-    
+
   </Target>
 
 
@@ -343,11 +343,11 @@
 <!--    <Message Text="WRA PostBuild: Copied appsettings.Local.json from Core to Web project" Condition="'$(CoreLocalAppSettingsExists)' == 'true' AND ('$(WebLocalAppSettingsExists)' == 'false' OR '$(CoreLocalAppSettingsLastWriteTime)' &gt; '$(WebLocalAppSettingsLastWriteTime)')" Importance="high" />-->
 <!--    <Message Text="WRA PostBuild: No copy necessary for appsettings.Local.json" Condition="'$(CoreLocalAppSettingsExists)' == 'false' OR ('$(WebLocalAppSettingsExists)' == 'true' AND '$(CoreLocalAppSettingsLastWriteTime)' &lt;= '$(WebLocalAppSettingsLastWriteTime)')" Importance="high" />-->
 <!--  </Target>-->
-  
 
 
 
- 
+
+
   <ItemGroup>
     <Compile Update="Models\Generated\**">
       <NoWarn>1570</NoWarn>
