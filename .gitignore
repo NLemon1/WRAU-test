@@ -419,3 +419,5 @@ healthchecksdb
 **/WRA.Umbraco/App_Plugins/
 **/src/WRA.Umbraco/App_Plugins/
 
+**/git-patch.diff
+
