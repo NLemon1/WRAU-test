@@ -64,7 +64,13 @@ public class MemberTasks(
         }
     }
 
-    public bool SyncAllMembers(bool syncOnlyMembers = false, int limit = 10000)
+    public bool SyncAllMembers(bool syncOnlyMembers = false,  int limit = 10000)
+    {
+        Task.Run(() => QueueSyncAllMembers(syncOnlyMembers, limit));
+        return true;
+    }
+
+    public bool QueueSyncAllMembers(bool syncOnlyMembers = false, int limit = 10000)
     {
         try
         {
